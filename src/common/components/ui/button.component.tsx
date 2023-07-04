@@ -7,7 +7,7 @@ export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = (
-  { children, onClick, type = 'submit' }: IButton
+  { children, onClick, type = 'button' }: IButton
 ) => {
   return (
     <button onClick={onClick} type={type}>
