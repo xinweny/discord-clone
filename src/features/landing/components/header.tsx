@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LinkButton } from '@common/components/ui';
 
 export function Header() {
   return (
@@ -8,8 +8,7 @@ export function Header() {
         <a href="">Demo</a>
         <a href="">Source Code</a>
       </div>
-      <Link to="/login">
-      </Link>
+      <LinkButton to="">Login</LinkButton>
     </header>
   );
 }

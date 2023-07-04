@@ -4,6 +4,6 @@ const store = configureStore({
   reducer: {},
 });
 
-export type IRootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 
 export { store };

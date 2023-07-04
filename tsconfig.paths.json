@@ -2,11 +2,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
       "@app": ["app/index.ts"],
       "@app/*": ["app/*"],
       "@common/*": ["common/*"],
-      "@features/*": ["features/*"]
+      "@types": ["common/types/index.ts"],
+      "@features/*": ["features/*"],
+      "@pages": ["pages/index.ts"]
     }
   }
 }

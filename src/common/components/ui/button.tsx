@@ -1,13 +1,13 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
-export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   children: React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'submit' | 'reset';
 }
 
 export const Button = (
-  { children, onClick, type = 'button' }: IButton
+  { children, onClick, type = 'button' }: ButtonProps
 ) => {
   return (
     <button onClick={onClick} type={type}>
