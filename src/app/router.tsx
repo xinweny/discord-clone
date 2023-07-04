@@ -23,7 +23,7 @@ const Router = () => {
           <Route path=":serverId/:roomId" element={<p>Server channel room</p>} />
           <Route index element={<Navigate to="/channels/@me" />} />
         </Route>
-        <Route path="guild-discovery" element={<p>Discover servers</p>} />
+        <Route path="servers" element={<p>Discover servers</p>} />
       </Route>
 
       // Redirection routes
