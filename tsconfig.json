@@ -7,10 +7,10 @@
     "skipLibCheck": true,
 
     /* Aliasing */
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"],
-      "@common/*": ["src/common/*"]
+      "@/*": ["*"],
+      "@common/*": ["common/*"]
     },
 
     /* Bundler mode */
