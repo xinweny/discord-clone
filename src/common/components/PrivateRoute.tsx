@@ -1,3 +1,5 @@
+import { RootState } from '@app/store';
+
 import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
