@@ -1,14 +1,12 @@
-import { RootState } from '@app/store';
+import { IRootState } from '@app/store';
 
 import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const PrivateRoute = () => {
-  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
+export function PrivateRoute() {
+  const auth = useSelector((state: IRootState) => state.auth.isLoggedIn);
 
   if (!auth) return <Navigate to="/login" />
   
   return <Outlet/>;
-};
-
-export { PrivateRoute };
+}
