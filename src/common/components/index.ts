@@ -1,1 +1,1 @@
-export * from './PrivateRoute';
+export * from './private-route.component';

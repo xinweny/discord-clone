@@ -3,8 +3,10 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@common/*": ["common/*"],
+      "@app": ["app/index.ts"],
       "@app/*": ["app/*"],
+      "@common/*": ["common/*"],
+      "@features/*": ["features/*"]
     }
   }
 }
