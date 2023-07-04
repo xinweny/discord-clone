@@ -1,13 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { PrivateRoute } from '@common/components';
+import { PrivateRoute, RestrictedRoute } from '@common/components/routes';
 
 const Router = () => {
   return (
     <Routes>
       // Public routes
       <Route index element={<p>Landing</p>} />
-      <Route path="login" element={<p>Login</p>} />
-      <Route path="register" element={<p>Register</p>} />
+
+      // Restricted routes
+      <Route element={<RestrictedRoute/>}>
+        <Route path="login" element={<p>Login</p>} />
+        <Route path="register" element={<p>Register</p>} />
+      </Route>
 
       // Private routes
       <Route element={<PrivateRoute/>}>

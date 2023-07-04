@@ -4,9 +4,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export function PrivateRoute() {
-  const auth = useSelector((state: IRootState) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state: IRootState) => state.auth.isLoggedIn);
 
-  if (!auth) return <Navigate to="/login" />
+  if (!isLoggedIn) return <Navigate to="/login" />
   
   return <Outlet/>;
 }
