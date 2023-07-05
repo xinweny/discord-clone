@@ -8,16 +8,16 @@ const Router = () => {
   return (
     <Routes>
       // Public routes
-      <Route index element={<LandingPage/>} />
+      <Route index element={<LandingPage />} />
 
       // Restricted routes
-      <Route element={<RestrictedRoute/>}>
+      <Route element={<RestrictedRoute />}>
         <Route path="login" element={<p>Login</p>} />
         <Route path="register" element={<p>Register</p>} />
       </Route>
 
       // Private routes
-      <Route element={<PrivateRoute/>}>
+      <Route element={<PrivateRoute />}>
         <Route path="channels">
           <Route path="@me">
             <Route path=":roomId" element={<p>DM room</p>} />

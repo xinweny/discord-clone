@@ -1,9 +1,11 @@
 import { LinkButton } from '@common/components/ui';
 
-export function Header() {
+import { LandingLogo } from './landing-logo';
+
+export const Header = () => {
   return (
     <header>
-      <img src="" alt="Discord Clone" />
+      <LandingLogo />
       <div>
         <a href="">Demo</a>
         <a href="">Source Code</a>
@@ -11,4 +13,4 @@ export function Header() {
       <LinkButton to="">Login</LinkButton>
     </header>
   );
-}
+};
