@@ -1,9 +1,22 @@
-import { LandingLayout } from '@features/landing';
+import {
+  LandingLayout,
+  Header,
+  HeadlineBanner,
+  BenefitBannerContainer,
+  CTABanner,
+  Footer,
+} from '@features/landing/components';
 
 export const LandingPage = () => {
   return (
     <div>
-      <LandingLayout/>
+      <LandingLayout>
+        <Header />
+        <HeadlineBanner />
+        <BenefitBannerContainer />
+        <CTABanner />
+        <Footer />
+      </LandingLayout>
     </div>
   );
 };

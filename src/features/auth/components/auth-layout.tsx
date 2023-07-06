@@ -1,6 +1,6 @@
 import { LayoutProps } from '@common/types';
 
-export const LandingLayout = ({ children }: LayoutProps) => {
+export const AuthLayout = ({ children }: LayoutProps) => {
   return (
     <>
       {children}

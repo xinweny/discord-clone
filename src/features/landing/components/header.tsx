@@ -10,7 +10,7 @@ export const Header = () => {
         <a href="">Demo</a>
         <a href="">Source Code</a>
       </div>
-      <LinkButton to="">Login</LinkButton>
+      <LinkButton to="/login">Login</LinkButton>
     </header>
   );
 };

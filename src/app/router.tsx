@@ -2,7 +2,10 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { PrivateRoute, RestrictedRoute } from '@common/components/routes';
 
-import { LandingPage } from '@pages';
+import {
+  LandingPage,
+  LoginPage,
+} from '@pages';
 
 const Router = () => {
   return (
@@ -12,7 +15,7 @@ const Router = () => {
 
       // Restricted routes
       <Route element={<RestrictedRoute />}>
-        <Route path="login" element={<p>Login</p>} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<p>Register</p>} />
       </Route>
 
