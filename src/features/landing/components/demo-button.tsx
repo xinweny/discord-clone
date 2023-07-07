@@ -1,6 +1,6 @@
 import { Button } from '@common/components/ui';
 
-export const DemoButton = () => {
+export function DemoButton() {
   const loginDemoAccount = () => {
     console.log('TODO: Login Demo account and redirect to dashboard');
   };
@@ -10,4 +10,4 @@ export const DemoButton = () => {
       Demo
     </Button>
   );
-};
+}

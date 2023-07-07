@@ -6,12 +6,12 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
 }
 
-export const Button = (
+export function Button(
   { children, onClick, type = 'button' }: ButtonProps
-) => {
+) {
   return (
     <button onClick={onClick} type={type}>
       {children}
     </button>
   );
-};
+}

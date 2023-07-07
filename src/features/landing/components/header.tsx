@@ -1,7 +1,7 @@
-import { HeaderButton } from './header-button';
+import { RestrictedLinkButton } from '@common/components/ui';
 import { LandingLogo } from './landing-logo';
 
-export const Header = () => {
+export function Header() {
   return (
     <header>
       <LandingLogo />
@@ -9,7 +9,7 @@ export const Header = () => {
         <a href="">Demo</a>
         <a href="">Source Code</a>
       </div>
-      <HeaderButton />
+      <RestrictedLinkButton to="/login">Login</RestrictedLinkButton>
     </header>
   );
-};
+}

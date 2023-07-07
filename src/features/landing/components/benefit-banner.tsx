@@ -6,7 +6,7 @@ type BenefitBannerProps = {
   };
 };
 
-export const BenefitBanner = ({ benefit }: BenefitBannerProps) => {
+export function BenefitBanner({ benefit }: BenefitBannerProps) {
   const { header, body, img } = benefit;
   const { src, alt } = img;
 
@@ -19,4 +19,4 @@ export const BenefitBanner = ({ benefit }: BenefitBannerProps) => {
       </div>
     </div>
   );
-};
+}

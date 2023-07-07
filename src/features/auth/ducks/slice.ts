@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { ApiErrorResponse } from '@common/types';
 
-import { localStorageService } from '@common/services';
 import { login, refreshAccessToken } from './actions';
 
 interface AuthState {
@@ -31,8 +30,6 @@ const authSlice = createSlice({
         const { userId, accessToken } = action.payload;
 
         state.userId = userId;
-        localStorageService.set('userId', state.userId);
-
         state.token = accessToken;
       })
       .addCase(login.rejected, (state, action) => {

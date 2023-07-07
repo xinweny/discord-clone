@@ -1,6 +1,6 @@
 import { LinkButton } from '@common/components/ui';
 
-export const CTABanner = () => {
+export function CTABanner() {
   return (
     <div>
       <div>
@@ -14,4 +14,4 @@ export const CTABanner = () => {
       </div>
     </div>
   );
-};
+}

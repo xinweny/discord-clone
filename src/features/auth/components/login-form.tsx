@@ -5,7 +5,7 @@ import { useAppDispatch } from '@common/hooks';
 
 import { login } from '../ducks/actions';
 
-export const LoginForm = () => {
+export function LoginForm() {
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -35,4 +35,4 @@ export const LoginForm = () => {
       </form>
     </div>
   )
-};
+}

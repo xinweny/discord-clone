@@ -6,9 +6,9 @@ export interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   children: string;
 }
 
-export const LinkButton = (
+export function LinkButton(
   { to, children }: LinkButtonProps
-) => {
+) {
   const navigate = useNavigate();
 
   return (
@@ -16,4 +16,4 @@ export const LinkButton = (
       {children}
     </button>
   );
-};
+}

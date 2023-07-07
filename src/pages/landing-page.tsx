@@ -7,7 +7,7 @@ import {
   Footer,
 } from '@features/landing/components';
 
-export const LandingPage = () => {
+export function LandingPage() {
   return (
     <div>
       <LandingLayout>
@@ -19,4 +19,4 @@ export const LandingPage = () => {
       </LandingLayout>
     </div>
   );
-};
+}

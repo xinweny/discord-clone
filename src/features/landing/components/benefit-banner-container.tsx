@@ -21,7 +21,7 @@ const BENEFITS = [
   },
 ];
 
-export const BenefitBannerContainer = () => {
+export function BenefitBannerContainer() {
   return (
     <div>
       {BENEFITS.map(

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useAppSelector } from './use-app-selector';
 
 import { dcApi } from '@app/api';
 
 export const useLoggedInCheck = () => {
-  const [pending, setPending] = useState(true);
+  const pending = useAppSelector(state => state.auth.isPending);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -13,7 +14,6 @@ export const useLoggedInCheck = () => {
       const userId = res.data.data;
 
       setIsLoggedIn(!!userId);
-      setPending(false);
     };
 
     verifyRefreshToken();

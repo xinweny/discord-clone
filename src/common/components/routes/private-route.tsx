@@ -9,5 +9,5 @@ export function PrivateRoute() {
   
   return (!isLoggedIn)
     ? <Navigate to="/login" />
-    : <Outlet/>;
+    : <Outlet />;
 }

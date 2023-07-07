@@ -1,5 +1,7 @@
-export const DashboardPage = () => (
+export function DashboardPage() {
+  return (
     <div>
-
+      
     </div>
-);
+  );
+}

@@ -1,3 +1,5 @@
 import { LinkImage } from '@common/components/ui';
 
-export const LandingLogo = () => <LinkImage href="/" src="" alt="Discord Clone" />;
+export function LandingLogo() {
+  return <LinkImage href="/" src="" alt="Discord Clone" />;
+}

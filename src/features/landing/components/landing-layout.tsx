@@ -1,9 +1,9 @@
 import { LayoutProps } from '@common/types';
 
-export const LandingLayout = ({ children }: LayoutProps) => {
+export function LandingLayout({ children }: LayoutProps) {
   return (
     <>
       {children}
     </>
   );
-};
+}

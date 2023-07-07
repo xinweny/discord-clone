@@ -1,7 +1,7 @@
 import { LinkButton } from '@common/components/ui';
 import { DemoButton } from './demo-button';
 
-export const HeadlineBanner = () => {
+export function HeadlineBanner() {
   return (
     <div>
       <h1>Imagine A Place...</h1>
@@ -10,4 +10,4 @@ export const HeadlineBanner = () => {
       <DemoButton />
     </div>
   );
-};
+}
