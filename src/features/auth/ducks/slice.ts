@@ -28,7 +28,8 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isPending = false;
 
-        const { userId, accessToken } = action.payload;
+        const { userId, accessToken } = action.payload.data;
+        console.log(action);
 
         state.userId = userId;
         localStorageService.set('userId', state.userId);
@@ -38,12 +39,11 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isPending = false;
         state.error = action.payload;
-        console.log(state.error);
       })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.isPending = false;
 
-        const { userId, accessToken } = action.payload;
+        const { userId, accessToken } = action.payload.data;
 
         state.userId = userId;
         state.token = accessToken;

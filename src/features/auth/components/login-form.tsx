@@ -1,4 +1,5 @@
 import { FieldValues, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '@common/hooks';
 
@@ -7,8 +8,13 @@ import { login } from '../ducks/actions';
 export const LoginForm = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: FieldValues) => dispatch(login(data));
+  const onSubmit = async (data: FieldValues) => {
+    const res = await dispatch(login(data));
+    
+    if (res.type === 'auth/login/fulfilled') navigate('/channels/@me');
+  };
 
   return (
     <div>

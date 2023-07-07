@@ -7,7 +7,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 type ApiFunction<RequestParams, ResponseSchema> = (
   axiosParams: RequestParams
-) => AxiosPromise<ResponseSchema>;
+) => AxiosPromise<{
+  data: ResponseSchema;
+  message: string;
+}>;
 
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState
@@ -25,9 +28,12 @@ export const createAsyncThunkFromApi = <ResponseSchema, RequestParams = never>(
       try {
         const response = await apiFunction(args);
         
-        return response.data;
+        return response.data.data;
       } catch (err) {
-        const genericErrorMsg = { data: null, message: 'Something went wrong.' };
+        const genericErrorMsg = {
+          data: null,
+          message: 'Oops! Something went wrong - please try again later.'
+        };
 
         return thunkApi.rejectWithValue((err instanceof AxiosError)
           ? err.response?.data || genericErrorMsg
