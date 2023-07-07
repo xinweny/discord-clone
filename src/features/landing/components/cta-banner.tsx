@@ -1,4 +1,4 @@
-import { LinkButton } from '@common/components/ui';
+import { RestrictedLinkButton } from '@common/components/ui';
 
 export function CTABanner() {
   return (
@@ -10,7 +10,7 @@ export function CTABanner() {
       </div>
       <div>
         <h3>Ready to start your journey?</h3>
-        <LinkButton to="/register">Sign Up Now</LinkButton>
+        <RestrictedLinkButton to="/register">Sign Up Now</RestrictedLinkButton>
       </div>
     </div>
   );

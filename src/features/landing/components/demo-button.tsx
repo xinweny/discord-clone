@@ -1,6 +1,14 @@
+import { useOutletContext } from 'react-router-dom';
+
 import { Button } from '@common/components/ui';
 
+type ContextType = { isLoggedIn: boolean };
+
 export function DemoButton() {
+  const { isLoggedIn } = useOutletContext<ContextType>();
+
+  if (isLoggedIn) return null;
+
   const loginDemoAccount = () => {
     console.log('TODO: Login Demo account and redirect to dashboard');
   };

@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { PrivateRoute, RestrictedRoute } from '@common/components/routes';
+import { PublicRoute, PrivateRoute, RestrictedRoute } from '@common/components/routes';
 
 import {
   LandingPage,
@@ -11,7 +11,9 @@ const Router = () => {
   return (
     <Routes>
       // Public routes
-      <Route index element={<LandingPage />} />
+      <Route element={<PublicRoute />}>
+        <Route index element={<LandingPage />} />
+      </Route>
 
       // Restricted routes
       <Route element={<RestrictedRoute />}>

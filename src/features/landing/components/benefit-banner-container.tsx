@@ -29,4 +29,4 @@ export function BenefitBannerContainer() {
       )}
     </div>
   );
-};
+}

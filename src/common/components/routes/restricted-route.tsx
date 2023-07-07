@@ -9,5 +9,5 @@ export function RestrictedRoute() {
   
   return (isLoggedIn)
     ? <Navigate to="/channels/@me" />
-    : <Outlet/>;
+    : <Outlet />;
 }
