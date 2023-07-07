@@ -28,8 +28,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isPending = false;
 
-        const { userId, accessToken } = action.payload.data;
-        console.log(action);
+        const { userId, accessToken } = action.payload;
 
         state.userId = userId;
         localStorageService.set('userId', state.userId);
@@ -43,7 +42,7 @@ const authSlice = createSlice({
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.isPending = false;
 
-        const { userId, accessToken } = action.payload.data;
+        const { userId, accessToken } = action.payload;
 
         state.userId = userId;
         state.token = accessToken;

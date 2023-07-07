@@ -1,8 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '@common/hooks';
+
+import { useLoggedInCheck } from '@common/hooks';
 
 export function PrivateRoute() {
-  const isLoggedIn = useAppSelector(state => !!state.auth.userId);
+  const { pending, isLoggedIn } = useLoggedInCheck();
+
+  if (pending) return null;
 
   if (!isLoggedIn) return <Navigate to="/login" />
   

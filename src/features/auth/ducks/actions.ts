@@ -2,7 +2,7 @@ import { FieldValues } from 'react-hook-form';
 
 import { createAsyncThunkFromApi } from '@common/middleware';
 
-import { dcApi, dcApiWithCreds } from '@app/api';
+import { dcApi } from '@app/api';
 
 type AuthData = {
   userId: string;
@@ -11,12 +11,12 @@ type AuthData = {
 
 const login = createAsyncThunkFromApi<AuthData, FieldValues>(
   'auth/login',
-  async ({ email, password }) => await dcApi.post('/auth/login', { email, password })
+  async ({ email, password }) => await dcApi.post('/auth/login', { email, password }, { withCredentials: true })
 );
 
 const refreshAccessToken = createAsyncThunkFromApi<AuthData, void>(
   `auth/refresh`,
-  async () => await dcApiWithCreds.post('/auth/refresh')
+  async () => await dcApi.post('/auth/refresh', { withCredentials: true })
 );
 
 export {

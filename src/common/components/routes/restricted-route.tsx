@@ -1,10 +1,11 @@
-import { RootState } from '@app/store';
-
 import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+import { useLoggedInCheck } from '@common/hooks';
 
 export function RestrictedRoute() {
-  const isLoggedIn = useSelector((state: RootState) => state.auth.userId);
+  const { pending, isLoggedIn } = useLoggedInCheck();
+
+  if (pending) return null;
 
   if (isLoggedIn) return <Navigate to="/channels/@me" />
   
