@@ -1,5 +1,4 @@
-import { LinkButton } from '@common/components/ui';
-
+import { HeaderButton } from './header-button';
 import { LandingLogo } from './landing-logo';
 
 export const Header = () => {
@@ -10,7 +9,7 @@ export const Header = () => {
         <a href="">Demo</a>
         <a href="">Source Code</a>
       </div>
-      <LinkButton to="/login">Login</LinkButton>
+      <HeaderButton />
     </header>
   );
 };

@@ -6,8 +6,8 @@ export function RestrictedRoute() {
   const { pending, isLoggedIn } = useLoggedInCheck();
 
   if (pending) return null;
-
-  if (isLoggedIn) return <Navigate to="/channels/@me" />
   
-  return <Outlet/>;
+  return (isLoggedIn)
+    ? <Navigate to="/channels/@me" />
+    : <Outlet/>;
 }

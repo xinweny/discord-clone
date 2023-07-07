@@ -6,8 +6,8 @@ export function PrivateRoute() {
   const { pending, isLoggedIn } = useLoggedInCheck();
 
   if (pending) return null;
-
-  if (!isLoggedIn) return <Navigate to="/login" />
   
-  return <Outlet/>;
+  return (!isLoggedIn)
+    ? <Navigate to="/login" />
+    : <Outlet/>;
 }
