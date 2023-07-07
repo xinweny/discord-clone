@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '@common/hooks';
 
@@ -8,7 +8,7 @@ export const LoginForm = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data) => dispatch(login(data));
+  const onSubmit = (data: FieldValues) => dispatch(login(data));
 
   return (
     <div>

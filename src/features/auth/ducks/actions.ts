@@ -1,25 +1,22 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { FieldValues } from 'react-hook-form';
+
+import { createAsyncThunkFromApi } from '@common/middleware';
 
 import { dcApi, dcApiWithCreds } from '@app/api';
 
 const PREFIX = 'auth';
 
-const login = createAsyncThunk(`${PREFIX}/login`, async ({ email, password }, thunkApi) => {
-  try {
-    const res = await dcApi.post('/auth/login', { email, password });
-    console.log(res);
+type AuthData = {
+  userId: string;
+  accessToken: string;
+}
 
-    return res.data;
-  } catch (err) {
-    thunkApi.rejectWithValue(err.response.message);
-  }
-});
+const login = createAsyncThunkFromApi<AuthData, FieldValues>(
+  `${PREFIX}/login`,
+  async ({ email, password }) => await dcApi.post('/auth/login', { email, password })
+);
 
-const refreshAccessToken = createAsyncThunk(`${PREFIX}/refresh`, async () => {
-  const res = await dcApiWithCreds.post('/auth/refresh');
-
-  return res.data;
-});
+const refreshAccessToken = createAsyncThunkFromApi<AuthData, void>(`${PREFIX}/refresh`, async () => await dcApiWithCreds.post('/auth/refresh'));
 
 export {
   login,

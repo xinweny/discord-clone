@@ -1,13 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { ApiErrorResponse } from '@common/types';
+
 import { localStorageService } from '@common/services';
 import { login, refreshAccessToken } from './actions';
 
-const initialState = {
+interface AuthState {
+  userId: string | null;
+  token: string | null;
+  isPending: boolean;
+  error?: ApiErrorResponse | null;
+}
+
+const initialState: AuthState = {
   userId: null,
   token: null,
   isPending: false,
-  error: '',
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -16,9 +25,6 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(login.pending, (state) => {
-        state.isPending = true;
-      })
       .addCase(login.fulfilled, (state, action) => {
         state.isPending = false;
 
@@ -31,7 +37,8 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isPending = false;
-        state.error = action.error.message!;
+        state.error = action.payload;
+        console.log(state.error);
       })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.isPending = false;
