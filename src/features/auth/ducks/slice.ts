@@ -44,7 +44,10 @@ const authSlice = createSlice({
         state.userId = userId;
         state.token = accessToken;
       })
-
+      .addCase(refreshAccessToken.rejected, (state, action) => {
+        state.isPending = false;
+        state.error = action.payload;
+      })
   }
 });
 

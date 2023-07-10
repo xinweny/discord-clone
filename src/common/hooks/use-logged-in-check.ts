@@ -8,11 +8,16 @@ export const useLoggedInCheck = () => {
 
   useEffect(() => {
     const verifyRefreshToken = async () => {
-      const res = await dcApi.get('/auth/whoami', { withCredentials: true });
+      try {
+        const res = await dcApi.get('/auth/whoami', { withCredentials: true });
 
-      const userId = res.data.data;
+        const userId = res.data.data;
 
-      setIsLoggedIn(!!userId);
+        setIsLoggedIn(!!userId);
+      } catch (err) {
+        setIsLoggedIn(false);
+      }
+
       setPending(false);
     };
 

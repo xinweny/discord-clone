@@ -27,13 +27,17 @@ dcApi.interceptors.response.use(
   async (err) => {
     const originalReq = err.config;
 
-    if (err.response.status === 401 && !originalReq._retry) {
+    if (
+      originalReq.url !== '/auth/refresh'
+      && err.response.status === 401
+      && !originalReq._retry
+    ) {
       originalReq._retry = true;
 
       await store.dispatch(refreshAccessToken());
       const accessToken = store.getState().auth.token;
       
-      originalReq.headers.Authorization(`Bearer ${accessToken}`);
+      originalReq.headers.Authorization = accessToken;
 
       return dcApi(originalReq);
     }
