@@ -13,7 +13,7 @@ export function LoginForm() {
   const onSubmit = async (data: FieldValues) => {
     const res = await dispatch(login(data));
     
-    if (res.type === 'auth/login/fulfilled') navigate('/channels/@me');
+    if (res.meta.requestStatus === 'fulfilled') navigate('/channels/@me');
   };
 
   return (

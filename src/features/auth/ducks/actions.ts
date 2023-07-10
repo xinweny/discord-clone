@@ -15,8 +15,8 @@ const login = createAsyncThunkFromApi<AuthData, FieldValues>(
 );
 
 const refreshAccessToken = createAsyncThunkFromApi<AuthData, void>(
-  `auth/refresh`,
-  async () => await dcApi.post('/auth/refresh', { withCredentials: true })
+  'auth/refresh',
+  async () => await dcApi.post('/auth/refresh', undefined, { withCredentials: true })
 );
 
 export {

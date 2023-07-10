@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute, RestrictedRoute } from '@common/components/routes';
+import { WebSocketConnection } from '@features/websocket';
 
 import {
   LandingPage,
@@ -23,15 +24,17 @@ const Router = () => {
 
       // Private routes
       <Route element={<PrivateRoute />}>
-        <Route path="channels">
-          <Route path="@me">
-            <Route path=":roomId" element={<p>DM room</p>} />
-            <Route index element={<p>Dashboard</p>} />
+        <Route element={<WebSocketConnection />}>
+          <Route path="channels">
+            <Route path="@me">
+              <Route path=":roomId" element={<p>DM room</p>} />
+              <Route index element={<p>Dashboard</p>} />
+            </Route>
+            <Route path=":serverId/:roomId" element={<p>Server channel room</p>} />
+            <Route index element={<Navigate to="/channels/@me" />} />
           </Route>
-          <Route path=":serverId/:roomId" element={<p>Server channel room</p>} />
-          <Route index element={<Navigate to="/channels/@me" />} />
+          <Route path="servers" element={<p>Discover servers</p>} />
         </Route>
-        <Route path="servers" element={<p>Discover servers</p>} />
       </Route>
 
       // Redirection routes

@@ -16,7 +16,8 @@ const dcApi = axios.create(DISCORD_CLONE_API_BASE_CONFIG);
 // Attach access token to Authorization header
 dcApi.interceptors.request.use(config => {
   const accessToken = store.getState().auth.token;
-  config.headers.Authorization = accessToken;
+
+  if (accessToken) config.headers.Authorization = accessToken;
 
   return config;
 });
@@ -28,7 +29,7 @@ dcApi.interceptors.response.use(
     const originalReq = err.config;
 
     if (
-      originalReq.url !== '/auth/refresh'
+      (originalReq.url !== '/auth/refresh')
       && err.response.status === 401
       && !originalReq._retry
     ) {
