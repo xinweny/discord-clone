@@ -1,13 +1,14 @@
-import { MainLayout } from '@common/components/layouts/main-layout'
+import { ContentLayout } from '@common/components/layouts';
 
 export function DMPage() {
   return (
     <div>
-      <MainLayout
-        sideBar={<div>dms</div>}
-        mainContent={<div>dm messages</div>}
-        infoTab={<div>contact info</div>}
-      />
+      <ContentLayout
+        header={<div>dm room info</div>}
+        infoTab={<div>contacts info</div>}
+      >
+        <div>DM MESSAGES</div>
+      </ContentLayout>
     </div>
   );
 }

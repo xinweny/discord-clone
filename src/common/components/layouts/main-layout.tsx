@@ -2,14 +2,12 @@ import React from 'react';
 
 interface MainLayoutProps {
   sideBar: React.ReactNode;
-  mainContent: React.ReactNode;
-  infoTab?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function MainLayout({
   sideBar,
-  mainContent,
-  infoTab,
+  children,
 }: MainLayoutProps) {
   return (
     <>
@@ -17,13 +15,8 @@ export function MainLayout({
         {sideBar}
       </div>
       <div>
-        {mainContent}
+        {children}
       </div>
-      {infoTab && (
-        <div>
-          {infoTab}
-        </div>
-      )}
     </>
   );
 }

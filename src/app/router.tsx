@@ -6,7 +6,13 @@ import { WebSocketConnection } from '@features/websocket';
 import {
   LandingPage,
   LoginPage,
+  RegisterPage,
   AppPage,
+  DashboardPage,
+  ContactsPage,
+  DMPage,
+  ChannelPage,
+  PublicServersPage,
 } from '@pages';
 
 const Router = () => {
@@ -20,7 +26,7 @@ const Router = () => {
       // Restricted routes
       <Route element={<RestrictedRoute />}>
         <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<p>Register</p>} />
+        <Route path="register" element={<RegisterPage />} />
       </Route>
 
       // Private routes
@@ -28,14 +34,14 @@ const Router = () => {
         <Route element={<WebSocketConnection />}>
           <Route element={<AppPage />}>
             <Route path="channels">
-              <Route path="@me">
-                <Route path=":roomId" element={<p>DM room</p>} />
-                <Route index element={<p>Dashboard</p>} />
+              <Route path="@me" element={<DashboardPage />}>
+                <Route path="" element={<ContactsPage />} />
+                <Route path=":roomId" element={<DMPage />} />
               </Route>
-              <Route path=":serverId/:roomId" element={<p>Server channel room</p>} />
+              <Route path=":serverId/:roomId" element={<ChannelPage />} />
               <Route index element={<Navigate to="/channels/@me" />} />
             </Route>
-            <Route path="servers" element={<p>Discover servers</p>} />
+            <Route path="servers" element={<PublicServersPage />} />
           </Route>
         </Route>
       </Route>

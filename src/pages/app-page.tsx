@@ -11,10 +11,9 @@ export function AppPage() {
 
   return (
     <div>
-      <AppLayout
-        navBar={<div>nav</div>}
-        mainContent={<Outlet context={user} />}
-      />
+      <AppLayout navBar={<div>nav</div>}>
+        <Outlet context={user} />
+      </AppLayout>
     </div>
   );
 }

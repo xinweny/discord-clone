@@ -2,12 +2,12 @@ import React from 'react';
 
 interface AppLayoutProps {
   navBar: React.ReactNode;
-  mainContent: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export function AppLayout({
   navBar,
-  mainContent,
+  children,
 }: AppLayoutProps) {
   return (
     <>
@@ -15,7 +15,7 @@ export function AppLayout({
         {navBar}
       </div>
       <div>
-        {mainContent}
+        {children}
       </div>
     </>
   );
