@@ -17,7 +17,7 @@ const dcApi = axios.create(DISCORD_CLONE_API_BASE_CONFIG);
 dcApi.interceptors.request.use(config => {
   const accessToken = store.getState().auth.token;
 
-  if (accessToken) config.headers.Authorization = accessToken;
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
   return config;
 });
@@ -38,7 +38,7 @@ dcApi.interceptors.response.use(
       await store.dispatch(refreshAccessToken());
       const accessToken = store.getState().auth.token;
       
-      originalReq.headers.Authorization = accessToken;
+      originalReq.headers.Authorization = `Bearer ${accessToken}`;
 
       return dcApi(originalReq);
     }

@@ -1,4 +1,3 @@
-export * from './landing-layout';
 export * from './header';
 export * from './headline-banner';
 export * from './benefit-banner-container';
