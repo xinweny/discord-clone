@@ -1,4 +1,4 @@
-import { AuthLayout } from '@features/auth/components';
+import { AuthLayout } from '@features/auth';
 
 export function RegisterPage() {
   return (

@@ -1,4 +1,4 @@
-import { ContentLayout } from '@common/components/layouts';
+import { ContentLayout } from '@components/layouts';
 
 export function DMPage() {
   return (

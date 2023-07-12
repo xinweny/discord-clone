@@ -1,8 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { authReducer } from '@features/auth/ducks/slice';
+
+import { dcApi } from '@services/api';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  [dcApi.reducerPath]: dcApi.reducer,
 });
 
 export default rootReducer;

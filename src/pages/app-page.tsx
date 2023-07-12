@@ -1,27 +1,24 @@
 import { Outlet } from 'react-router-dom';
 
-import { useFetch, useAppSelector } from '@common/hooks';
+import {
+  useRefreshTokenQuery,
+  useGetUserSelfQuery,
+} from '@services/api';
 
-import { IServer } from '@features/servers/types';
-
-import { AppLayout } from '@common/components/layouts';
-import { NavBar } from '@common/components/ui';
-
-type UserType = {
-  servers: IServer[];
-}
+import { AppLayout } from '@components/layouts';
+import { NavBar } from '@components/ui';
 
 export function AppPage() {
-  const userId = useAppSelector(state => state.auth.userId);
+  const auth = useRefreshTokenQuery();
 
-  const [user] = useFetch<UserType>(`/users/${userId}`, 'user');
+  const user = useGetUserSelfQuery(auth.data!.userId);
 
-  if (!user) return null;
+  if (user.isLoading) return null;
 
   return (
     <div>
-      <AppLayout navBar={<NavBar servers={user.servers} />}>
-        <Outlet context={user} />
+      <AppLayout navBar={<NavBar servers={user.data?.servers} />}>
+        <Outlet context={user.data} />
       </AppLayout>
     </div>
   );

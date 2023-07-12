@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-import { env } from '@common/config';
+import { env } from '@config';
 
 const URL = env.VITE_API_URL;
 

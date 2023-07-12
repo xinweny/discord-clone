@@ -4,10 +4,14 @@
     "paths": {
       "@app": ["app/index.ts"],
       "@app/*": ["app/*"],
-      "@common/*": ["common/*"],
-      "@types": ["common/types/index.ts"],
+      "@config": ["config/index.ts"],
+      "@services/*": ["services/*"],
+      "@types": ["types/index.ts"],
       "@features/*": ["features/*"],
-      "@pages": ["pages/index.ts"]
+      "@components/*": ["components/*"],
+      "@hooks": ["hooks/index.ts"],
+      "@pages": ["pages/index.ts"],
+      "@utils": ["utils/index.ts"]
     }
   }
 }

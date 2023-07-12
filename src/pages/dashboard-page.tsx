@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { MainLayout } from '@common/components/layouts';
+import { MainLayout } from '@components/layouts';
 
 export function DashboardPage() {
   return (

@@ -4,8 +4,8 @@ import {
   BenefitBannerContainer,
   CTABanner,
   Footer,
-} from '@features/landing/components';
-import { LandingLayout } from '@common/components/layouts';
+} from '@features/landing';
+import { LandingLayout } from '@components/layouts';
 
 export function LandingPage() {
   return (

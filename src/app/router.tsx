@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { PublicRoute, PrivateRoute, RestrictedRoute } from '@common/components/routes';
+import { PublicRoute, PrivateRoute, RestrictedRoute } from '@components/routes';
 
 import { WebSocketConnection } from '@features/websocket';
 
