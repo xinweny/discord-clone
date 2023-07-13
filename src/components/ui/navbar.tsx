@@ -1,7 +1,7 @@
 import type { UserServer } from '@features/user/types';
 
 import { LinkImage } from '.';
-import { CreateServerButton } from '@features/servers/create-server';
+import { CreateServerButton } from '@features/servers/create';
 import { UserServersList } from '@features/user/user-servers';
 
 interface NavBarProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ContentLayoutProps {
-  header: React.ReactNode;
+  header?: React.ReactNode;
   children: React.ReactNode;
   infoTab?: React.ReactNode;
 }
@@ -13,9 +13,11 @@ export function ContentLayout({
 }: ContentLayoutProps) {
   return (
     <>
-      <div>
-        {header}
-      </div>
+      {header && (
+        <div>
+          {header}
+        </div>
+      )}
       <div>
         {children}
       </div>

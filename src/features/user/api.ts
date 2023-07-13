@@ -1,4 +1,4 @@
-import api from './root';
+import api from '../../services/api/root';
 
 import type { UserSelfData } from '@features/user/types';
 
@@ -9,12 +9,13 @@ const userApi = api.injectEndpoints({
         query: (userId) => ({
           url: `/users/${userId}`,
           method: 'get',
-          withCredentials: true,
         })
       }),
     };
   }
 });
+
+export default userApi;
 
 export const {
   useGetUserSelfQuery,

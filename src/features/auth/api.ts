@@ -1,4 +1,4 @@
-import api from './root';
+import api from '@services/api';
 
 import type { FieldValues } from 'react-hook-form';
 
@@ -33,5 +33,6 @@ export default authApi;
 
 export const {
   useLoginQuery,
+  useLazyLoginQuery,
   useRefreshTokenQuery,
 } = authApi;

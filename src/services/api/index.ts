@@ -1,3 +1,3 @@
 export { default } from './root';
 
-export { default as authApi } from './auth';
+export { default as authApi } from '../../features/auth/api';

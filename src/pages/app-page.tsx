@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { useRefreshTokenQuery } from '@services/api/auth';
-import { useGetUserSelfQuery } from '@services/api/user';
+import { useRefreshTokenQuery } from '@features/auth/api';
+import { useGetUserSelfQuery } from '@features/user/api';
 
 import { AppLayout } from '@components/layouts';
 import { NavBar } from '@components/ui';
@@ -14,8 +14,6 @@ export function AppPage() {
   if (user.isLoading) return null;
 
   const servers = user.data?.servers || [];
-
-  console.log(user.data);
 
   return (
     <div>

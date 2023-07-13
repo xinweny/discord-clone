@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-import { useRefreshTokenQuery } from '@services/api/auth';
+import { useRefreshTokenQuery } from '@features/auth/api';
 
 export function RestrictedRoute() {
   const { isLoading, isSuccess } = useRefreshTokenQuery();

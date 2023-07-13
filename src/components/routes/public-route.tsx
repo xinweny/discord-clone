@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { useRefreshTokenQuery } from '@services/api/auth';
+import { useRefreshTokenQuery } from '@features/auth/api';
 
 export function PublicRoute() {
   const { isLoading, isSuccess } = useRefreshTokenQuery();

@@ -1,11 +1,18 @@
-import { ContentLayout } from '@components/layouts'
+import { MainLayout } from '@components/layouts';
+import { SearchQueryWrapper } from '@components/wrappers';
+
+import { DiscoverServersPage, SearchResultServersPage } from '@features/servers/discover';
 
 export function PublicServersPage() {
   return (
     <div>
-      <ContentLayout header={<div>categories</div>}>
-        <div>PUBLIC SERVERS</div>
-      </ContentLayout>
+      <MainLayout sideBar={<div>categories</div>}>
+        <SearchQueryWrapper
+          result={<SearchResultServersPage />}
+        >
+          <DiscoverServersPage />
+        </SearchQueryWrapper>
+      </MainLayout>
     </div>
   );
 }

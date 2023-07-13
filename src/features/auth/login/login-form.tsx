@@ -1,17 +1,17 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import authApi from '@services/api/auth';
+import { useLazyLoginQuery } from '@features/auth/api';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();
-  const [trigger, result] = authApi.endpoints.login.useLazyQuery();
+  const [login, auth] = useLazyLoginQuery();
   const navigate = useNavigate();
 
   const onSubmit = async (data: FieldValues) => {
-    await trigger(data);
+    await login(data).unwrap();
     
-    if (result.isSuccess) navigate('/channels/@me');
+    if (auth.isSuccess) navigate('/channels/@me');
   };
 
   return (
