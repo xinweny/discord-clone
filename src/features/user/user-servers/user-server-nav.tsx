@@ -8,7 +8,7 @@ interface ServerNavProps {
   }
 }
 
-export function ServerNav({ server }: ServerNavProps) {
+export function UserServerNav({ server }: ServerNavProps) {
   const { id, imageUrl } = server;
 
   return (

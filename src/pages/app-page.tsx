@@ -15,9 +15,13 @@ export function AppPage() {
 
   if (user.isLoading) return null;
 
+  const servers = user.data?.servers || [];
+
+  console.log(user.data);
+
   return (
     <div>
-      <AppLayout navBar={<NavBar servers={user.data?.servers} />}>
+      <AppLayout navBar={<NavBar servers={servers} />}>
         <Outlet context={user.data} />
       </AppLayout>
     </div>
