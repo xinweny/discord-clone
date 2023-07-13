@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { dcApi } from '@services/api';
+import api from '@services/api';
 
 const rootReducer = combineReducers({
-  [dcApi.reducerPath]: dcApi.reducer,
+  [api.reducerPath]: api.reducer,
 });
 
 export default rootReducer;

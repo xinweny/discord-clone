@@ -2,16 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import rootReducer from './root-reducer';
 
-import { dcApi } from '@services/api';
+import api from '@services/api';
 
-import { socketMiddleware } from '@features/websocket';
+import { socketMiddleware } from '@middlewares';
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => (
     getDefaultMiddleware()
       .concat([
-        dcApi.middleware,
+        api.middleware,
         socketMiddleware,
       ])
   ),

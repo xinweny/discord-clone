@@ -2,7 +2,7 @@ import { ListenerMiddleware } from '@reduxjs/toolkit';
 
 import { socket, store } from '@app';
 
-import { authApi } from '@services/api/auth';
+import { authApi } from '@services/api';
 
 export const socketMiddleware: ListenerMiddleware = () => (next) => (action) => {
   const { type } = action;

@@ -1,9 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import {
-  useRefreshTokenQuery,
-  useGetUserSelfQuery,
-} from '@services/api';
+import { useRefreshTokenQuery } from '@services/api/auth';
+import { useGetUserSelfQuery } from '@services/api/user';
 
 import { AppLayout } from '@components/layouts';
 import { NavBar } from '@components/ui';

@@ -9,18 +9,18 @@ export const axiosBaseQuery = (): BaseQueryFn<
     method: AxiosRequestConfig['method'];
     data?: AxiosRequestConfig['data'];
     params?: AxiosRequestConfig['params'];
-    withCredentials?: boolean;
+    config?: { withCredentials?: boolean };
   },
   unknown,
   unknown
-> => async ({ url, method, data, params, withCredentials }) => {
+> => async ({ url, method, data, params, config }) => {
   try {
     const result = await dcAxios({
       url,
       method,
       data,
       params,
-      withCredentials,
+      ...config,
     });
 
     return { data: result.data.data };

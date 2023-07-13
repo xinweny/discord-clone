@@ -1,3 +1,3 @@
-export * from './dc.api';
-export * from './auth.api';
-export * from './user.api';
+export { default } from './root';
+
+export { default as authApi } from './auth';

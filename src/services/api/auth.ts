@@ -7,7 +7,7 @@ interface AuthData {
   accessToken: string;
 }
 
-export const authApi = api.injectEndpoints({
+const authApi = api.injectEndpoints({
   endpoints(build) {
     return {
       login: build.query<AuthData, FieldValues>({
@@ -28,6 +28,8 @@ export const authApi = api.injectEndpoints({
     };
   }
 });
+
+export default authApi;
 
 export const {
   useLoginQuery,

@@ -1,7 +1,7 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { authApi } from '@services/api/auth';
+import authApi from '@services/api/auth';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();

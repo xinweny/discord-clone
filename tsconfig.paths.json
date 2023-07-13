@@ -10,6 +10,7 @@
       "@features/*": ["features/*"],
       "@components/*": ["components/*"],
       "@hooks": ["hooks/index.ts"],
+      "@middlewares": ["middlewares/index.ts"],
       "@pages": ["pages/index.ts"],
       "@utils": ["utils/index.ts"]
     }
