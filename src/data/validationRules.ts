@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { body } from 'express-validator';
 
-const VALIDATION_RULES: { [key: string]: RequestHandler } = {
+export const VALIDATION_RULES: { [key: string]: RequestHandler } = {
   email: body('email')
     .notEmpty().withMessage('Email is required.')
     .isEmail().withMessage('Please enter a valid email address.')
@@ -51,5 +51,3 @@ const VALIDATION_RULES: { [key: string]: RequestHandler } = {
     .escape().trim()
     .isLength({ max: 120 }).withMessage('Server description cannot exceed 120 characters.'),
 };
-
-export default VALIDATION_RULES;

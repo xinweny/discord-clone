@@ -1,9 +1,10 @@
 import { RequestHandler } from 'express';
-import VALIDATION_RULES from '../data/validationRules';
 
-import handleValidationErrors from '../helpers/handleValidationErrors';
+import { VALIDATION_RULES } from '@data';
 
-const validateFields = (fields: string[]): RequestHandler[] => {
+import { handleValidationErrors } from '@helpers';
+
+export const validateFields = (fields: string[]): RequestHandler[] => {
   const validator = fields.map((fieldName: string | number) => VALIDATION_RULES[fieldName]);
 
   return [
@@ -11,5 +12,3 @@ const validateFields = (fields: string[]): RequestHandler[] => {
     handleValidationErrors,
   ];
 }
-
-export default validateFields;

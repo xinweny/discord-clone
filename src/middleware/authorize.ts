@@ -1,15 +1,14 @@
 import { RequestHandler } from 'express';
 
-import tryCatch from '../helpers/tryCatch';
-import CustomError from '../helpers/CustomError';
+import { tryCatch, CustomError } from '@helpers';
 
-import serverService from '../services/server.service';
-import serverMemberService from '../services/serverMember.service';
-import channelService from '../services/channel.service';
-import dmService from '../services/dm.service';
-import messageService from '../services/message.service';
-import reactionService from '../services/reaction.service';
-import userService from '../services/user.service';
+import { serverService } from '@api/servers';
+import { serverMemberService } from '@api/servers/serverMembers';
+import { channelService } from '@api/servers/channels';
+import { dmService } from '@api/dms';
+import { messageService } from '@api/messages';
+import { reactionService } from '@api/messages/reactions';
+import { userService } from '@api/users';
 
 const server = (permissionKeys: string | string[] = []) => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
@@ -112,7 +111,7 @@ const message = (action: 'view' | 'send' | 'react') => {
       if (!dm) throw new CustomError(403, 'Unauthorized');
 
       if (dm.participantIds.length === 1) {
-        const participant = await userService.getById(dm.participantIds[0], '+relations');
+        const participant = await userService.getById(dm.participantIds[0], 'relations');
 
         if (participant.relations.find(
           relation => relation.userId.equals(userId) && relation.status === 2
@@ -223,7 +222,7 @@ const dmOwnerOrParticipantSelf: RequestHandler = tryCatch(
   }
 );
 
-export default {
+export const authorize = {
   server,
   serverMember,
   serverOwner,

@@ -2,11 +2,8 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { JwtPayload } from 'jsonwebtoken';
 
-import env from './config/env.config';
-
-import socketIo from './config/socketio.config';
-
-import app from './app';
+import { env } from './config';
+import app, { socketIo } from '@app';
 
 const server = createServer(app);
 

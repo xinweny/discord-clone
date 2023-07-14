@@ -1,6 +1,6 @@
 import { ErrorRequestHandler } from 'express';
 
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   res.status(err.statusCode || 500);
 
   res.json({
@@ -8,5 +8,3 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     message: err.message,
   });
 };
-
-export default errorHandler;

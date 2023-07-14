@@ -1,6 +1,4 @@
-import mailTransporter from '../config/mailer.config';
-
-import env from '../config/env.config';
+import { env, mailTransporter } from '@config';
 
 const sendMail = async (to: string, subject: string, htmlTemplate: string) => {
   const mailOptions = {
@@ -18,6 +16,6 @@ const sendMail = async (to: string, subject: string, htmlTemplate: string) => {
   return mailOptions;
 }
 
-export default {
+export const mailService = {
   sendMail,
 }

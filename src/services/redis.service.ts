@@ -1,4 +1,4 @@
-import redisClient from '../config/redis.config';
+import { redisClient } from '@config';
 
 const get = async (key: string) => {
   const result = await redisClient.get(key);
@@ -30,9 +30,9 @@ const del = async (key: string) => {
   await redisClient.del(key);
 };
 
-export default {
+export const redisService = {
   set,
   get,
   getMany,
   del,
-}
+};

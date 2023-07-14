@@ -6,7 +6,7 @@ interface ErrorData {
 
 type ErrorTypes = ErrorData | ErrorData[] | ValidationError | ValidationError[];
 
-class CustomError extends Error {
+export class CustomError extends Error {
   statusCode: number;
   error: ErrorTypes | null;
 
@@ -22,5 +22,3 @@ class CustomError extends Error {
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 }
-
-export default CustomError;

@@ -5,8 +5,6 @@ type MiddlewareWrapperType = (
   fn2: (req: Request, res: Response, next: NextFunction) => void,
 ) => RequestHandler;
 
-const checkMessageType: MiddlewareWrapperType = (fn1, fn2) => async (req, res, next) => {
+export const checkMessageType: MiddlewareWrapperType = (fn1, fn2) => async (req, res, next) => {
   (req.params.serverId) ? fn1(req, res, next) : fn2(req, res, next);
-}
-
-export default checkMessageType;
+};

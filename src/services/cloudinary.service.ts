@@ -1,8 +1,6 @@
-import cloudinary from '../config/cloudinary.config';
+import { cloudinary } from '@config';
 
-import formatDataUri from '../helpers/formatDataUri';
-
-import getPublicId from '../helpers/getPublicId';
+import { formatDataUri, getPublicId } from '@helpers';
 
 const upload = async (file: Express.Multer.File, folderPath: string, url?: string) => {
   const dataUri = formatDataUri(file.buffer, file.mimetype);
@@ -40,7 +38,7 @@ const deleteByFolder = async (folderPath: string) => {
   return { prefix, folder };
 };
 
-export default {
+export const cloudinaryService = {
   upload,
   deleteByUrl,
   deleteByFolder,

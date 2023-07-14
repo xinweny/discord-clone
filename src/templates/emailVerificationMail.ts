@@ -1,4 +1,4 @@
-const passwordResetMail = (username: string, link: string) => (`
+export const emailVerificationMail = (username: string, link: string) => (`
   <p>Hey ${username},</p>
   <br>
   <p>Welcome to Discord Clone!</p>
@@ -10,5 +10,3 @@ const passwordResetMail = (username: string, link: string) => (`
   <p>Thank you,<p>
   <p>Discord Clone</p>
 `);
-
-export default passwordResetMail;

@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import redisService from './redis.service';
+import { redisService } from '.';
 
 const get = async (userId: string) => {
   const data = await redisService.get(`${userId}_CONNECTION`);
@@ -16,7 +16,7 @@ const remove = async (userId: string) => {
   await redisService.del(`${userId}_CONNECTION`);
 }
 
-export default {
+export const connectionService = {
   get,
   set,
   remove,

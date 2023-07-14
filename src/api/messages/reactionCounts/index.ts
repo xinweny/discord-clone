@@ -1,0 +1,1 @@
+export { reactionCountSchema, IReactionCount } from './ReactionCount.schema';

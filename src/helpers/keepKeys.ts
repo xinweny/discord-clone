@@ -1,6 +1,6 @@
 type objType = { [key: string]: any };
 
-const keepKeys = (obj: objType, incKeys: string[]) => {
+export const keepKeys = (obj: objType, incKeys: string[]) => {
   return Object.keys(obj)
     .filter(k => incKeys.includes(k))
     .reduce((o: objType, k) => {
@@ -8,5 +8,3 @@ const keepKeys = (obj: objType, incKeys: string[]) => {
       return o;
     }, {});
 };
-
-export default keepKeys;

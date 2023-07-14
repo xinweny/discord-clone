@@ -2,7 +2,7 @@ import multer from 'multer';
 
 import path from 'path';
 
-const fileTypeFilter = (fileTypes: RegExp) => {
+export const fileTypeFilter = (fileTypes: RegExp) => {
   return function (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) {
     const extName = fileTypes.test(path.extname(file.originalname));
 
@@ -11,5 +11,3 @@ const fileTypeFilter = (fileTypes: RegExp) => {
     return cb(null, extName && mimeType);
   };
 }
-
-export default fileTypeFilter;

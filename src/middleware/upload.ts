@@ -1,6 +1,6 @@
 import multer from 'multer';
 
-import fileTypeFilter from '../helpers/fileTypeFilter';
+import { fileTypeFilter } from '@helpers';
 
 const emoji = multer({
   storage: multer.memoryStorage(),
@@ -40,7 +40,7 @@ const serverImages = multer({
   { name: 'banner', maxCount: 1 },
 ]);
 
-export default {
+export const upload = {
   emoji,
   attachments,
   avatar,

@@ -1,4 +1,4 @@
-export default function checkEmptyEnv (vars: string[]) {
+export function checkEmptyEnv (vars: string[]) {
   const emptyVars = [];
 
   for (const varName of vars) {
