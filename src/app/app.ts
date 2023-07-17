@@ -3,14 +3,15 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import '@types';
+import '../types/Request';
 
-import { env, apiRateLimiter } from '@config';
+import env from '@config/env';
 import '@config/db';
+import { apiRateLimiter } from '@config/rateLimit';
 
-import { errorHandler } from '@middleware';
+import { errorHandler } from '@middleware/errorHandler';
 
-import { apiRouter } from '@api';
+import { apiRouter } from '@api/router';
 
 const app = express();
 
@@ -33,4 +34,4 @@ app.use('/api/v1', apiRouter);
 app.use('*', (req, res) => res.status(404).json({ message: 'Resource not found.' }));
 app.use(errorHandler);
 
-export default app; 
+export { app }; 

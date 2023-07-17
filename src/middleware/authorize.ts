@@ -1,14 +1,15 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch, CustomError } from '@helpers';
+import { tryCatch } from '@helpers/tryCatch';
+import { CustomError } from '@helpers/CustomError';
 
-import { serverService } from '@api/servers';
-import { serverMemberService } from '@api/servers/serverMembers';
-import { channelService } from '@api/servers/channels';
-import { dmService } from '@api/dms';
-import { messageService } from '@api/messages';
-import { reactionService } from '@api/messages/reactions';
-import { userService } from '@api/users';
+import { serverService } from '@api/servers/service';
+import { serverMemberService } from '@api/servers/serverMembers/service';
+import { channelService } from '@api/servers/channels/service';
+import { dmService } from '@api/dms/service';
+import { messageService } from '@api/messages/service';
+import { reactionService } from '@api/messages/reactions/service';
+import { userService } from '@api/users/service';
 
 const server = (permissionKeys: string | string[] = []) => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {

@@ -1,1 +1,0 @@
-export { attachmentSchema, IAttachment } from './Attachment.schema';

@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { checkEmptyEnv } from '@utils';
+import { checkEmptyEnv } from '@utils/checkEmptyEnv';
 
 const ENVIRONMENT_VARIABLES: string[] = [
   'HOST',
@@ -26,7 +26,9 @@ const ENVIRONMENT_VARIABLES: string[] = [
 
 checkEmptyEnv(ENVIRONMENT_VARIABLES);
 
-export const env: { [key: string]: string } = ENVIRONMENT_VARIABLES.reduce(
+const env: { [key: string]: string } = ENVIRONMENT_VARIABLES.reduce(
   (acc, envVar) =>  ({ ...acc, [envVar]: process.env[envVar] }),
   {},
 );
+
+export default env;

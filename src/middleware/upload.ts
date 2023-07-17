@@ -1,6 +1,6 @@
 import multer from 'multer';
 
-import { fileTypeFilter } from '@helpers';
+import { fileTypeFilter } from '@helpers/fileTypeFilter';
 
 const emoji = multer({
   storage: multer.memoryStorage(),

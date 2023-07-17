@@ -1,25 +1,24 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "ES2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES6",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 
     /* Modules */
-    "module": "commonjs",                                /* Specify what module code is generated. */
+    "module": "commonjs",
+    "moduleResolution": "node",                             /* Specify what module code is generated. */
     "baseUrl": "./src",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
-      "@app": ["app/index.ts"],
-      "@api": ["api/index.ts"],
+      "@app/*": ["app/*"],
       "@api/*": ["api/*"],
-      "@config": ["config/index.ts"],
       "@config/*": ["config/*"],
-      "@data": ["data/index.ts"],
-      "@handlers": ["handlers/index.ts"],
-      "@helpers": ["helpers/index.ts"],
-      "@middleware": ["middleware/index.ts"],
-      "@services": ["services/index.ts"],
-      "@types": ["types/index.ts"],
-      "@utils": ["utils/index.ts"],
-      "@templates": ["templates/index.ts"],
+      "@data/*": ["data/*"],
+      "@handlers/*": ["handlers/*"],
+      "@helpers/*": ["helpers/*"],
+      "@middleware/*": ["middleware/*"],
+      "@services/*": ["services/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+      "@templates/*": ["templates/*"],
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
     "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
