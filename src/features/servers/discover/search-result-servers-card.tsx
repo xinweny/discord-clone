@@ -9,12 +9,13 @@ interface SearchResultServersCardProps {
 export function SearchResultServersCard({
   server,
 }: SearchResultServersCardProps) {
-  const { imageUrl, name, description, memberCount } = server;
+  const { avatarUrl, bannerUrl, name, description, memberCount } = server;
 
   return (
     <div>
-      <img src={imageUrl} alt="" />
+      <img src={bannerUrl} alt="Server banner" />
       <div>
+        <img src={avatarUrl} alt="Server icon" />
         <h3>{name}</h3>
         <p>{description}</p>
         <p>{pluralize('Member', memberCount, true)}</p>

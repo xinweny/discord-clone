@@ -1,14 +1,14 @@
 import type { UserServer } from '@features/user/types';
 
-import { LinkImage } from '.';
+import { LinkImage } from '@components/ui';
 import { CreateServerButton } from '@features/servers/create';
-import { UserServersList } from '@features/user/user-servers';
+import { UserServersList } from '@features/user/servers';
 
-interface NavBarProps {
+interface ServerNavBarProps {
   servers: UserServer[];
 }
 
-export function NavBar({ servers }: NavBarProps) {
+export function ServerNavBar({ servers }: ServerNavBarProps) {
   return (
     <div>
       <LinkImage href="/channels/@me" src="#" alt="Direct Messages" />

@@ -1,9 +1,7 @@
-import { Button } from '@components/ui';
-
 export function CreateServerButton() {
   return (
-    <Button onClick={() => { console.log('TODO: create server modal form') }}>
-      <img src="#" alt="Create Server" />
-    </Button>
+    <button onClick={() => { console.log('TODO: create server modal form') }}>
+      <img src="#" alt="Add a Server" />
+    </button>
   );
 }

@@ -3,8 +3,10 @@ import { Outlet } from 'react-router-dom';
 import { useRefreshTokenQuery } from '@features/auth/api';
 import { useGetUserSelfQuery } from '@features/user/api';
 
+import { ServerNavBar } from '@features/servers/nav';
+
 import { AppLayout } from '@components/layouts';
-import { NavBar } from '@components/ui';
+
 
 export function AppPage() {
   const auth = useRefreshTokenQuery();
@@ -17,7 +19,7 @@ export function AppPage() {
 
   return (
     <div>
-      <AppLayout navBar={<NavBar servers={servers} />}>
+      <AppLayout navBar={<ServerNavBar servers={servers} />}>
         <Outlet context={user.data} />
       </AppLayout>
     </div>

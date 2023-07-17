@@ -1,14 +1,16 @@
-import { ContentLayout } from '@components/layouts';
+import { ContentLayout, MainLayout } from '@components/layouts';
 
 export function ChannelPage() {
   return (
     <div>
-      <ContentLayout
-        header={<div>channel info</div>}
-        infoTab={<div>members list</div>}
-      >
-        <div>CHANNEL MESSAGES</div>
-      </ContentLayout>
+      <MainLayout sideBar={<div>channels</div>}>
+        <ContentLayout
+          header={<div>channel info</div>}
+          infoTab={<div>members list</div>}
+        >
+          <div>CHANNEL MESSAGES</div>
+        </ContentLayout>
+      </MainLayout>
     </div>
   );
 }

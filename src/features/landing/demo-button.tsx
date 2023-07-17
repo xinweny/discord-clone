@@ -1,7 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
 
-import { Button } from '@components/ui';
-
 type ContextType = { isLoggedIn: boolean };
 
 export function DemoButton() {
@@ -14,8 +12,8 @@ export function DemoButton() {
   };
 
   return (
-    <Button onClick={loginDemoAccount}>
+    <button onClick={loginDemoAccount}>
       Demo
-    </Button>
+    </button>
   );
 }

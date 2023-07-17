@@ -8,7 +8,8 @@ export interface PublicServer {
   createdAt: Date;
   memberCount: number;
   description: string;
-  imageUrl: string;
+  avatarUrl: string;
+  bannerUrl: string;
 }
 
 const serverApi = api.injectEndpoints({

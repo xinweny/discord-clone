@@ -1,4 +1,4 @@
-import { LayoutProps } from '@common/types';
+import { LayoutProps } from '../../types';
 
 export function LandingLayout({ children }: LayoutProps) {
   return (
