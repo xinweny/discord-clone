@@ -1,13 +1,16 @@
-interface UserSettingsButtonProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+import { useModal } from '@hooks';
 
-export function UserSettingsButton({
-  onClick
-}: UserSettingsButtonProps) {
+import { UserSettingsModal } from './user-settings-modal';
+
+export function UserSettingsButton() {
+  const [show, toggle] = useModal();
+
   return (
-    <button type="button" onClick={onClick}>
-      <img src="#" alt="User settings" />
-    </button>
-  )
+    <div>
+      <button type="button" onClick={toggle}>
+        <img src="#" alt="User settings" />
+      </button>
+      <UserSettingsModal show={show} toggle={toggle} />
+    </div>
+  );
 }

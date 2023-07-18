@@ -1,19 +1,33 @@
+import { useState } from 'react';
+
+import { SettingsLayout } from '@components/layouts';
+
+import { UserSettingsSidebar } from './user-settings-sidebar';
+
 interface UserSettingsModal {
-  display: boolean;
-  hide: React.ReactEventHandler;
+  show: boolean;
+  toggle: React.ReactEventHandler;
 }
 
 export function UserSettingsModal({
-  display,
-  hide,
+  show,
+  toggle,
 }: UserSettingsModal) {
-  if (!display) return null;
+  const [activeTabId, setActiveTabId] = useState();
+
+  if (!show) return null;
 
   return (
     <div>
-      <button onClick={hide}>
-        <img src="#" alt="x" />
-      </button>
+      <SettingsLayout
+        sidebar={<UserSettingsSidebar
+          activeTabId={activeTabId}
+          setActiveTabId={setActiveTabId}
+        />}
+        toggle={toggle}
+      >
+        <p>{activeTabId}</p>
+      </SettingsLayout>
     </div>
   );
 }

@@ -1,11 +1,32 @@
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import api from '@services/api';
+
+import { useLazyLogoutQuery } from '../api';
 interface LogoutConfirmModalProps {
+  show: boolean;
   onCancel: React.MouseEventHandler<HTMLButtonElement>;
-  onConfirm: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export function LogoutConfirmModal({
-  onCancel, onConfirm,
+  show, onCancel,
 }: LogoutConfirmModalProps) {
+  const [logout] = useLazyLogoutQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onConfirm = async () => {
+    const result = await logout();
+
+    if (result.isSuccess) {
+      navigate('/');
+      dispatch(api.util.resetApiState());
+    }
+  };
+
+  if (!show) return null;
+
   return (
     <div>
       <h2>Log Out</h2>

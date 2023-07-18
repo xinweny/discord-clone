@@ -5,13 +5,13 @@ import { useLazyLoginQuery } from '@features/auth/api';
 
 export function LoginForm() {
   const { register, handleSubmit } = useForm();
-  const [login, auth] = useLazyLoginQuery();
+  const [login] = useLazyLoginQuery();
   const navigate = useNavigate();
 
   const onSubmit = async (data: FieldValues) => {
-    await login(data).unwrap();
+    const result = await login(data);
     
-    if (auth.isSuccess) navigate('/channels/@me');
+    if (result.isSuccess) navigate('/channels/@me');
   };
 
   return (
