@@ -4,10 +4,10 @@ import { SettingsLayout } from '@components/layouts';
 
 import { UserSettingsSidebar } from './user-settings-sidebar';
 
-interface UserSettingsModal {
+type UserSettingsModal = {
   show: boolean;
   toggle: React.ReactEventHandler;
-}
+};
 
 export function UserSettingsModal({
   show,

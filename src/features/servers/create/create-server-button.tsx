@@ -1,7 +1,16 @@
+import { useModal } from '@hooks';
+
+import { CreateServerModal } from './create-server-modal';
+
 export function CreateServerButton() {
+  const [show, toggle] = useModal();
+
   return (
-    <button onClick={() => { console.log('TODO: create server modal form') }}>
-      <img src="#" alt="Add a Server" />
-    </button>
+    <div>
+      <button onClick={toggle}>
+        <img src="#" alt="Add a Server" />
+      </button>
+      <CreateServerModal show={show} />
+    </div>
   );
 }

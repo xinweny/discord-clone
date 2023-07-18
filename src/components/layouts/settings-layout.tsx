@@ -1,8 +1,8 @@
-interface SettingsLayoutProps {
+type SettingsLayoutProps = {
   sidebar: React.ReactNode;
   children: React.ReactNode;
   toggle: React.ReactEventHandler;
-}
+};
 
 export function SettingsLayout({
   sidebar, children, toggle

@@ -1,9 +1,9 @@
 import { UserShortcutsBar } from '@features/user/shortcuts';
 
-interface SidebarLayoutProps {
+type SidebarLayoutProps = {
   top: React.ReactNode;
   children: React.ReactNode;
-}
+};
 
 export function SidebarLayout({
   top, children,

@@ -1,8 +1,8 @@
-interface AvatarProps {
+type AvatarProps = {
   src: string;
   alt?: string;
   notification?: React.ReactNode;
-}
+};
 
 export function Avatar({
   src, alt, notification

@@ -6,7 +6,7 @@ const api = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: 'api',
   endpoints() { return {}; },
-  tagTypes: ['auth'],
+  tagTypes: [],
 });
 
 export default api;

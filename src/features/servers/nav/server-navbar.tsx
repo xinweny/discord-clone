@@ -4,9 +4,9 @@ import { LinkImage } from '@components/ui';
 import { CreateServerButton } from '@features/servers/create';
 import { UserServersList } from '@features/user/servers';
 
-interface ServerNavBarProps {
+type ServerNavBarProps = {
   servers: UserServer[];
-}
+};
 
 export function ServerNavBar({ servers }: ServerNavBarProps) {
   return (

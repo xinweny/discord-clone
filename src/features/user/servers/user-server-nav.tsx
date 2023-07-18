@@ -1,12 +1,12 @@
 import { LinkImage } from '@components/ui';
 
-interface ServerNavProps {
+type ServerNavProps = {
   server: {
     id: string;
     name: string;
     imageUrl: string;
   }
-}
+};
 
 export function UserServerNav({ server }: ServerNavProps) {
   const { id, imageUrl } = server;

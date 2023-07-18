@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface AppLayoutProps {
+type AppLayoutProps = {
   navBar: React.ReactNode;
   children: React.ReactNode;
-}
+};
 
 export function AppLayout({
   navBar,

@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface ContentLayoutProps {
+type ContentLayoutProps = {
   header?: React.ReactNode;
   children: React.ReactNode;
   infoTab?: React.ReactNode;
-}
+};
 
 export function ContentLayout({
   header,

@@ -2,9 +2,9 @@ import type { PublicServer } from '@features/servers/api';
 
 import { SearchResultServersCard } from '@features/servers/discover';
 
-interface SearchResultServersContainerProps {
+type SearchResultServersContainerProps = {
   servers: PublicServer[];
-}
+};
 
 export function SearchResultServersContainer({
   servers,

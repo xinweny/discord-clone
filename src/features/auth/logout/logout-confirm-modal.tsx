@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 import api from '@services/api';
 
 import { useLazyLogoutQuery } from '../api';
-interface LogoutConfirmModalProps {
+
+type LogoutConfirmModalProps = {
   show: boolean;
   onCancel: React.MouseEventHandler<HTMLButtonElement>;
-}
+};
 
 export function LogoutConfirmModal({
   show, onCancel,

@@ -1,6 +1,6 @@
 import { UserRelation, UserDM, UserServer } from '.';
 
-export interface UserSelfData {
+export type UserSelfData = {
   id: string;
   bio: string;
   bannerColor: string;
@@ -12,4 +12,4 @@ export interface UserSelfData {
   relations: UserRelation[];
   dms: UserDM[];
   servers: UserServer[];
-}
+};

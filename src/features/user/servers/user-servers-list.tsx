@@ -2,9 +2,9 @@ import type { UserServer } from '@features/user/types';
 
 import { UserServerNav } from './user-server-nav';
 
-interface UserServersListProps {
+type UserServersListProps = {
   servers: UserServer[];
-}
+};
 
 export function UserServersList(
   { servers }: UserServersListProps

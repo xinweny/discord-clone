@@ -1,7 +1,7 @@
-interface TabGroupProps {
+type TabGroupProps = {
   title?: string;
   children: React.ReactNode;
-}
+};
 
 export function TabGroup({
   title, children

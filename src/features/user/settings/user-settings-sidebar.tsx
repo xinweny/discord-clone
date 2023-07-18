@@ -2,10 +2,10 @@ import { TabGroup } from '@components/ui';
 
 import { LogoutButton } from '@features/auth/logout';
 
-interface UserSettingsSidebarProps {
+type UserSettingsSidebarProps = {
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
 export function UserSettingsSidebar({
   activeTabId, setActiveTabId

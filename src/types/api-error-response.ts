@@ -1,4 +1,4 @@
-export interface ApiErrorResponse {
+export type ApiErrorResponse = {
   data: any;
   message: string;
-}
+};

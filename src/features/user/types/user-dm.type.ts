@@ -1,4 +1,4 @@
-export interface UserDM {
+export type UserDM = {
   id: string;
   name?: string;
   imageUrl: string;
@@ -7,4 +7,4 @@ export interface UserDM {
     id: string;
     displayName: string;
   }[];
-}
+};

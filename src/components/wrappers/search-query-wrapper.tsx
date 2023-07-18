@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 
-interface SearchQueryWrapperProps {
+type SearchQueryWrapperProps = {
   children: React.ReactNode;
   result: React.ReactNode;
-}
+};
 
 export function SearchQueryWrapper({
   children,

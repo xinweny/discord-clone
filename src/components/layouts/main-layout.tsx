@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface MainLayoutProps {
+type MainLayoutProps = {
   sideBar: React.ReactNode;
   children: React.ReactNode;
-}
+};
 
 export function MainLayout({
   sideBar,

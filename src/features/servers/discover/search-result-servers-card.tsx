@@ -2,9 +2,9 @@ import pluralize from 'pluralize';
 
 import type { PublicServer } from '@features/servers/api';
 
-interface SearchResultServersCardProps {
+type SearchResultServersCardProps = {
   server: PublicServer;
-}
+};
 
 export function SearchResultServersCard({
   server,
