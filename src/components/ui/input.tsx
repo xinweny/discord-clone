@@ -1,13 +1,14 @@
 import {
   FC,
+  InputHTMLAttributes,
   forwardRef,
 } from 'react';
 
-export type InputProps = {
-  id: string;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  id?: string;
   name: string;
-  label: string;
-  type?: 'text' | 'email' | 'password';
+  label?: string;
+  type?: 'text' | 'email' | 'password' | 'file';
   className?: string;
   placeholder?: string;
 }
@@ -31,9 +32,9 @@ export const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         name={name}
         type={type}
-        aria-label={label}
         placeholder={placeholder}
         className={className}
+        aria-label={label}
         {...props}
       />
     );

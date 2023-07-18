@@ -1,18 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import type { ModalProps } from '@types';
+
 import api from '@services/api';
 
 import { useLazyLogoutQuery } from '../api';
 
-type LogoutConfirmModalProps = {
-  show: boolean;
-  onCancel: React.MouseEventHandler<HTMLButtonElement>;
-};
-
 export function LogoutConfirmModal({
-  show, onCancel,
-}: LogoutConfirmModalProps) {
+  show, onClose,
+}: ModalProps) {
   const [logout] = useLazyLogoutQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +30,7 @@ export function LogoutConfirmModal({
       <h2>Log Out</h2>
       <p>Are you sure you want to log out?</p>
       <div>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={onClose}>Cancel</button>
         <button type="button" onClick={onConfirm}>Log Out</button>
       </div>
     </div>

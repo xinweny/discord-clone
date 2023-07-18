@@ -1,14 +1,21 @@
-import { FieldValues, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+import { FormInput } from '@components/ui';
 
 import { useLazyLoginQuery } from '@features/auth/api';
 
+type LoginFormFields = {
+  email: string;
+  password: string;
+};
+
 export function LoginForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<LoginFormFields>();
   const [login] = useLazyLoginQuery();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit = async (data: LoginFormFields) => {
     const result = await login(data);
     
     if (result.isSuccess) navigate('/channels/@me');
@@ -21,14 +28,22 @@ export function LoginForm() {
         <p>We're so excited to see you again!</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="email">EMAIL</label>
-          <input type="email" id="email" {...register('email', { required: true })} />
-        </div>
-        <div>
-          <label htmlFor="password">PASSWORD</label>
-          <input type="password" id="password" {...register('password', { required: true })} />
-        </div>
+        <FormInput
+          type="email"
+          id="email"
+          name="email"
+          label="email"
+          register={register}
+          rules={{ required: true }}
+        />
+        <FormInput
+          type="password"
+          id="password"
+          name="password"
+          label="password"
+          register={register}
+          rules={{ required: true }}
+        />
         <button type="submit">Log In</button>
       </form>
     </div>

@@ -1,12 +1,10 @@
 import { CreateServerForm } from './create-server-form';
 
-type CreateServerModalProps = {
-  show: boolean;
-};
+import type { ModalProps } from '@types';
 
 export function CreateServerModal({
-  show
-}: CreateServerModalProps) {
+  show, onClose
+}: ModalProps) {
   if (!show) return null;
 
   return (
@@ -14,6 +12,7 @@ export function CreateServerModal({
       <h2>Create a server</h2>
       <p>Your server is where you and your friends hang out. Make yours and start talking.</p>
       <CreateServerForm />
+      <button type="button" onClick={onClose}>x</button>
     </div>
   );
 }

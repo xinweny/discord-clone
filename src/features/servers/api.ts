@@ -21,6 +21,13 @@ const serverApi = api.injectEndpoints({
           method: 'get',
         }),
       }),
+      createServer: build.mutation({
+        query: ({ name, avatar }) => ({
+          url: '/servers',
+          method: 'post',
+          data: { name, avatar }
+        }),
+      }),
     };
   }
 });
@@ -29,4 +36,5 @@ export default serverApi;
 
 export const {
   useGetPublicServersQuery,
+  useCreateServerMutation,
 } = serverApi;

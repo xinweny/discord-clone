@@ -10,7 +10,7 @@ export function LogoutButton() {
       <button type="button" onClick={toggle}>
         Log Out
       </button>
-      <LogoutConfirmModal show={show} onCancel={toggle} />
+      <LogoutConfirmModal show={show} onClose={toggle} />
     </div>
   );
 }
