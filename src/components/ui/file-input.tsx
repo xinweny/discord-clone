@@ -5,6 +5,7 @@ import { Input, InputProps } from './input';
 import type {
   RegisterOptions,
   UseFormRegister,
+  UseFormSetValue,
   FieldValues,
   Path,
 } from 'react-hook-form';
@@ -14,8 +15,10 @@ export type FileInputProps<
 > = {
   name: Path<TFormValues>;
   accept: string;
+  multiple?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
+  setValue?: UseFormSetValue<TFormValues>;
   children: React.ReactNode;
 } & Omit<InputProps, 'name' | 'type'>;
 
@@ -25,8 +28,10 @@ export function FileInput<TFormValues extends FieldValues>({
   id,
   accept,
   register,
+  setValue,
   label,
   children,
+  multiple = false,
   ...props
 }: FileInputProps<TFormValues>) {
   const { file, fileDataUrl, handleChange } = usePreview();
@@ -42,10 +47,17 @@ export function FileInput<TFormValues extends FieldValues>({
           aria-label={label}
           {...props}
           {...(register && register(name, {
-            onChange: handleChange
+            onChange: (e) => {
+              handleChange(e);
+
+              if (setValue) {
+                const { files } = e.target;
+                setValue(name, multiple ? files : files[0]);
+              }
+            },
           }))}
           hidden
-          multiple={false}
+          multiple={multiple}
         />
         <div>
           {file

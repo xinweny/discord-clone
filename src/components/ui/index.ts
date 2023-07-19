@@ -6,3 +6,4 @@ export * from './tab-group';
 export * from './tab-item';
 export * from './form-input';
 export * from './file-input';
+export * from './error-message';

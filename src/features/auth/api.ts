@@ -2,10 +2,15 @@ import api from '@services/api';
 
 import type { FieldValues } from 'react-hook-form';
 
-interface AuthData {
+type AuthData = {
   userId: string;
   accessToken: string;
-}
+};
+
+type SignatureData = {
+  signature: string;
+  timestamp: number;
+};
 
 const authApi = api.injectEndpoints({
   endpoints(build) {
@@ -32,6 +37,13 @@ const authApi = api.injectEndpoints({
           config: { withCredentials: true },
         }),
       }),
+      signUpload: build.query<SignatureData, FieldValues>({
+        query: ({ folder, filename }) => ({
+          url: '/auth/signature',
+          method: 'get',
+          data: { folder, filename },
+        }),
+      }),
     };
   }
 });
@@ -43,4 +55,5 @@ export const {
   useLazyLoginQuery,
   useRefreshTokenQuery,
   useLazyLogoutQuery,
+  useLazySignUploadQuery,
 } = authApi;
