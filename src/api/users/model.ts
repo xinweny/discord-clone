@@ -1,5 +1,8 @@
 import mongoose, { Types, Schema, Document } from 'mongoose';
 
+import { IServer } from '@api/servers/model';
+import { IDM } from '@api/dms/model';
+
 import { CustomError } from '@helpers/CustomError';
 import { relationSchema, IRelation } from './relations/schema';
 
@@ -14,7 +17,9 @@ export interface IUser extends Document {
   role: string;
   relations: Types.DocumentArray<IRelation>;
   dmIds: Types.ObjectId[];
+  dms?: IDM[],
   serverIds: Types.ObjectId[];
+  servers?: IServer[];
   bio: string;
   bannerColor: string;
   relationTo(userId: Types.ObjectId | string): IRelation | undefined;

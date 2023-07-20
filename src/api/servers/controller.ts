@@ -33,7 +33,7 @@ const getPublicServers: RequestHandler[] = [
       });
     }
   )
-]
+];
 
 const getServer: RequestHandler[] = [
   authenticate,
@@ -53,12 +53,12 @@ const createServer: RequestHandler[] = [
   authenticate,
   tryCatch(
     async (req, res) => {
-      const data = await serverService.create({ ...req.body }, req.user?._id, req.avatar);
+      const server = await serverService.create({ ...req.body }, req.user?._id, req.body.filename);
 
-      if (!data) throw new CustomError(400, 'Bad request');
+      if (!server) throw new CustomError(400, 'Bad request');
 
       res.json({
-        data: data,
+        data: server,
         message: 'Server created successfully.',
       });
     }

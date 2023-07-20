@@ -177,7 +177,7 @@ const unreact: RequestHandler = tryCatch(
   }
 );
 
-const user: RequestHandler = tryCatch(
+const userSelf: RequestHandler = tryCatch(
   (req, res, next) => {
     const { userId } = req.params;
   
@@ -230,7 +230,7 @@ export const authorize = {
   memberSelf,
   message,
   messageSelf,
-  user,
+  userSelf,
   unreact,
   dmMember,
   dmOwnerOrParticipantSelf,

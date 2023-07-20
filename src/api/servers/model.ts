@@ -31,7 +31,7 @@ const serverSchema = new Schema({
   categories: { type: [categorySchema], default: () => ([]) },
   channels: { type: [channelSchema], default: () => ([]) },
   customEmojis: { type: [customEmojiSchema], default: () => ([]) },
-  imageUrl: { type: String, default: '' },
+  avatarUrl: { type: String, default: '' },
   bannerUrl: { type: String, default: '' },
   description: { type: String, default: '' },
   memberCount: { type: Number, required: true, default: 1 },

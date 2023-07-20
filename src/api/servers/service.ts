@@ -52,7 +52,7 @@ const create = async (
     private: boolean,
   },
   userId: Types.ObjectId | string,
-  imgFile?: Express.Multer.File
+  avatarFileName?: string,
 ) => {
   const user = await User.findById(userId);
 
@@ -63,7 +63,7 @@ const create = async (
   const creator = new ServerMember({
     userId,
     serverId,
-    displayName: user.username,
+    displayName: user.displayName,
   });
 
   const query = keepKeys(fields, ['name', 'private']);
@@ -74,11 +74,7 @@ const create = async (
     ...query,
   });
 
-  if (imgFile) {
-    const image = await cloudinaryService.upload(imgFile, `avatars/servers/${serverId}`);
-
-    server.avatarUrl = image.secure_url;
-  }
+  if (avatarFileName) server.avatarUrl = cloudinaryService.generateUrl(avatarFileName, 'avatars/servers', serverId.toString());
 
   // Default channels
   server.categories.push({
@@ -103,7 +99,7 @@ const create = async (
     User.findByIdAndUpdate(userId, { $push: { serverIds: serverId } }),
   ]);
 
-  return { server, creator };
+  return server;
 };
 
 const update = async (id: Types.ObjectId | string, fields: {
@@ -185,7 +181,7 @@ const remove = async (id: Types.ObjectId | string) => {
     (server.avatarUrl) ? cloudinaryService.deleteByUrl(server.avatarUrl) : Promise.resolve(),
     serverInviteService.remove(server._id),
   ]);
-}
+};
 
 export const serverService = {
   getPublic,

@@ -7,6 +7,7 @@ import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
 import { validateFields } from '@middleware/validateFields';
+import { authenticate } from '@middleware/authenticate';
 
 import { passwordResetMail } from '@templates/passwordResetMail';
 import { emailVerificationMail } from '@templates/emailVerificationMail';
@@ -14,6 +15,7 @@ import { emailVerificationMail } from '@templates/emailVerificationMail';
 import { mailService } from '@services/mail';
 import { authService } from '@api/auth/service';
 import { userService } from '@api/users/service';
+import { cloudinaryService } from '@services/cloudinary';
 
 const signup: RequestHandler[] = [
   ...validateFields(['email', 'username', 'password', 'confirmPassword']),

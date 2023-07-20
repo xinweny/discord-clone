@@ -20,14 +20,7 @@ const getUser: RequestHandler[] = [
       const self = selfId.equals(userId);
       
       if (self) {
-        const user = await userService.getById(
-          userId, 
-          '+email +relations -serverIds -dmIds',
-          [
-            { path: 'servers', select: 'name imageUrl' },
-            { path: 'dms', select: 'name imageUrl' },
-          ]
-        );
+        const user = await userService.getById(userId, '+email +relations');
 
         res.json({ data: user });
       } else {
@@ -53,7 +46,7 @@ const updateUser: RequestHandler[] = [
   upload.avatar,
   ...validateFields(['username', 'displayName', 'bio', 'bannerColor', 'customStatus']),
   authenticate,
-  authorize.user,
+  authorize.userSelf,
   tryCatch(
     async (req, res) => {
       const user = await userService.update(req.user?._id, { ...req.body }, req.avatar);

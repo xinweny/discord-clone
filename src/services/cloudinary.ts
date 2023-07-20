@@ -1,7 +1,41 @@
-import { cloudinary } from '@config/cloudinary';
+import path from 'path';
+
+import { cloudinary, cld } from '@config/cloudinary';
+
+import env from '@config/env';
 
 import { formatDataUri } from '@helpers/formatDataUri';
 import { getPublicId } from '@helpers/getPublicId';
+
+const createSignature = (filename: string, folderPath: string, customPublicId?: string) => {
+  const timestamp = new Date().getTime();
+
+  const folder = `discord_clone/${folderPath}`;
+  const { name } = path.parse(filename);
+  const publicId = customPublicId ? customPublicId : name;
+
+  const signature = cloudinary.utils.api_sign_request({
+    timestamp,
+    folder,
+    public_id: publicId,
+  }, env.CLOUDINARY_API_SECRET);
+
+  return { signature, timestamp, folder };
+};
+
+const generateUrl = (filename: string, folder: string, customPublicId?: string) => {
+  const folderPath = `discord_clone/${folder}`;
+
+  const { name, ext } = path.parse(filename);
+
+  const publicId = customPublicId ? customPublicId : name;
+
+  const resource = cld.image(`${folderPath}/${publicId}`);
+
+  const url = resource.toURL().replace(/\?_a=[A-Za-z0-9]+$/, '') + ext;
+
+  return url;
+};
 
 const upload = async (file: Express.Multer.File, folderPath: string, url?: string) => {
   const dataUri = formatDataUri(file.buffer, file.mimetype);
@@ -40,6 +74,8 @@ const deleteByFolder = async (folderPath: string) => {
 };
 
 export const cloudinaryService = {
+  createSignature,
+  generateUrl,
   upload,
   deleteByUrl,
   deleteByFolder,

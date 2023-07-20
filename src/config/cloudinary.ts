@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 import env from './env';
 
@@ -8,4 +9,17 @@ cloudinary.config({
   api_secret: env.CLOUDINARY_API_SECRET,
 });
 
-export { cloudinary };
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: env.CLOUD_NAME,
+    apiKey: env.CLOUDINARY_API_KEY,
+    apiSecret: env.CLOUDINARY_API_SECRET,
+  },
+  url: { secure: true },
+});
+
+const image = cld.image('/avatars/servers/🦊');
+
+console.log(image, image.toURL());
+
+export { cloudinary, cld };
