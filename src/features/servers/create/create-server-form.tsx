@@ -2,12 +2,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 
-import { fileValidator, upload } from '@utils';
+import { fileValidator } from '@utils';
 
 import { FormInput, FileInput, ErrorMessage } from '@components/ui';
 
 import { useCreateServerMutation } from '../api';
-import { useLazySignServerAvatarUploadQuery } from '@features/upload/api';
 
 type CreateServerFields = {
   name: string;
@@ -28,27 +27,13 @@ export function CreateServerForm() {
   } = useForm<CreateServerFields>({
     resolver: zodResolver(serverSchema),
   });
-  const [getSignature] = useLazySignServerAvatarUploadQuery();
   const [createServer] = useCreateServerMutation();
 
   const onSubmit = async (data: CreateServerFields) => {
     const { name, file } = data;
 
     try {
-      const server = await createServer({ name, filename: file?.name }).unwrap();
-
-      if (file) {
-        const serverId = server._id;
-  
-        const { timestamp, signature, folder } = await getSignature({
-          serverId,
-          filename: file.name,
-        }).unwrap();
-  
-        await upload(file, {
-          folder, timestamp, signature
-        }, serverId);
-      }
+      await createServer({ name, file }).unwrap();
     } catch (error) {
       console.log(error);
     }
