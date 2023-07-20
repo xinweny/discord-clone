@@ -7,11 +7,6 @@ type AuthData = {
   accessToken: string;
 };
 
-type SignatureData = {
-  signature: string;
-  timestamp: number;
-};
-
 const authApi = api.injectEndpoints({
   endpoints(build) {
     return {
@@ -37,13 +32,6 @@ const authApi = api.injectEndpoints({
           config: { withCredentials: true },
         }),
       }),
-      signUpload: build.query<SignatureData, FieldValues>({
-        query: ({ folder, filename }) => ({
-          url: '/auth/signature',
-          method: 'get',
-          data: { folder, filename },
-        }),
-      }),
     };
   }
 });
@@ -55,5 +43,4 @@ export const {
   useLazyLoginQuery,
   useRefreshTokenQuery,
   useLazyLogoutQuery,
-  useLazySignUploadQuery,
 } = authApi;

@@ -2,21 +2,21 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 
+import { fileValidator, upload } from '@utils';
+
 import { FormInput, FileInput, ErrorMessage } from '@components/ui';
 
-import { useLazySignUploadQuery } from '@features/auth/api';
+import { useCreateServerMutation } from '../api';
+import { useLazySignServerAvatarUploadQuery } from '@features/upload/api';
 
 type CreateServerFields = {
-  name?: string;
+  name: string;
   file?: File;
 };
 
 const serverSchema = zod.object({
-  name: zod.string(),
-  file: zod.instanceof(File)
-    .refine(file => file.size <= 1024 * 1024, 'Max file size is 1MB')
-    .refine(file => ['jpeg', 'jpg', 'png', 'gif', 'webp'].includes(file.type.split('/')[1]), 'Filetype not supported')
-    .optional(),
+  name: zod.string().min(1),
+  file: fileValidator.avatar,
 });
 
 export function CreateServerForm() {
@@ -28,20 +28,29 @@ export function CreateServerForm() {
   } = useForm<CreateServerFields>({
     resolver: zodResolver(serverSchema),
   });
-  const [getSignature] = useLazySignUploadQuery();
+  const [getSignature] = useLazySignServerAvatarUploadQuery();
+  const [createServer] = useCreateServerMutation();
 
   const onSubmit = async (data: CreateServerFields) => {
     const { name, file } = data;
 
-    const serverId = 1234;
+    try {
+      const server = await createServer({ name, filename: file?.name }).unwrap();
 
-    if (file) {
-      const result = await getSignature({
-        folder: `/avatars/servers/${serverId}`,
-        filename: file.name,
-      });
-
-      console.log(result);
+      if (file) {
+        const serverId = server._id;
+  
+        const { timestamp, signature, folder } = await getSignature({
+          serverId,
+          filename: file.name,
+        }).unwrap();
+  
+        await upload(file, {
+          folder, timestamp, signature
+        }, serverId);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

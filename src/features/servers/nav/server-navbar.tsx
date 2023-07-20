@@ -1,18 +1,16 @@
-import type { UserServer } from '@features/user/types';
-
 import { LinkImage } from '@components/ui';
 import { CreateServerButton } from '@features/servers/create';
-import { UserServersList } from '@features/user/servers';
+import { UserServersList } from '@features/servers/user-servers';
 
 type ServerNavBarProps = {
-  servers: UserServer[];
-};
+  userId: string;
+}
 
-export function ServerNavBar({ servers }: ServerNavBarProps) {
+export function ServerNavBar({ userId }: ServerNavBarProps) {
   return (
     <div>
       <LinkImage href="/channels/@me" src="#" alt="Direct Messages" />
-      <UserServersList servers={servers} />
+      <UserServersList userId={userId} />
       <CreateServerButton />
       <LinkImage href="/servers" src="#" alt="Explore Discoverable Servers" />
     </div>

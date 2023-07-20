@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import rootReducer from './root-reducer';
 
-import api, { cloudinaryApi } from '@services/api';
+import api from '@services/api';
 
 import { socketMiddleware } from '@middlewares';
 
@@ -12,7 +12,6 @@ const store = configureStore({
     getDefaultMiddleware().concat([
       socketMiddleware,
       api.middleware,
-      cloudinaryApi.middleware,
     ])
   ),
 });

@@ -2,18 +2,19 @@ import { LinkImage } from '@components/ui';
 
 type ServerNavProps = {
   server: {
-    id: string;
+    _id: string;
     name: string;
-    imageUrl: string;
+    avatarUrl: string;
   }
 };
 
 export function UserServerNav({ server }: ServerNavProps) {
-  const { id, imageUrl } = server;
+  const { _id: id, avatarUrl, name } = server;
 
   return (
     <div>
-      <LinkImage href={`/${id}`} src={imageUrl} />
+      <LinkImage href={`/channels/${id}`} src={avatarUrl} />
+      <p>{name}</p>
     </div>
   );
 }
