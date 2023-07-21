@@ -14,7 +14,7 @@ export function UserServerNav({ server }: ServerNavProps) {
   return (
     <div>
       <LinkImage href={`/channels/${id}`} src={avatarUrl} />
-      <p>{name}</p>
+      <p>{`${name}`}</p>
     </div>
   );
 }

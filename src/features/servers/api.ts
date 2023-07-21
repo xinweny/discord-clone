@@ -6,7 +6,7 @@ import { sign, upload } from '@services/cloudinary';
 
 import type { ApiPaginationData } from '@types';
 
-export interface Server {
+export interface ServerData {
   _id: string;
   name: string;
   createdAt: Date;
@@ -18,26 +18,32 @@ export interface Server {
   private: boolean;
 }
 
-export type PublicServer = Omit<Server, 'private'>;
-export type UserServer = Pick<Server, '_id' | 'name' | 'avatarUrl'>;
+export type PublicServerData = Omit<ServerData, 'private'>;
+export type UserServerData = Pick<ServerData, '_id' | 'name' | 'avatarUrl'>;
 
 const serverApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getPublicServers: build.query<ApiPaginationData<PublicServer>, string>({
+      getPublicServers: build.query<ApiPaginationData<PublicServerData>, string>({
         query: (query) => ({
           url: `/servers?query=${query}`,
           method: 'get',
         }),
       }),
-      getJoinedServers: build.query<UserServer[], string>({
+      getServer: build.query<ServerData, string>({
+        query: (serverId) => ({
+          url: `/servers/${serverId}`,
+          method: 'get',
+        }),
+      }),
+      getJoinedServers: build.query<UserServerData[], string>({
         query: (userId) => ({
           url: `/users/${userId}/servers`,
           method: 'get',
         }),
         providesTags: ['JoinedServers'],
       }),
-      createServer: build.mutation<Server, FieldValues>({
+      createServer: build.mutation<ServerData, FieldValues>({
         query: ({ name, file }) => ({
           url: '/servers',
           method: 'post',
@@ -69,6 +75,7 @@ export default serverApi;
 
 export const {
   useGetPublicServersQuery,
+  useGetServerQuery,
   useGetJoinedServersQuery,
   useCreateServerMutation,
 } = serverApi;

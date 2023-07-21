@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { PublicRoute, PrivateRoute, RestrictedRoute } from '@components/routes';
 
 import { WebSocketConnection } from '@features/websocket';
+import { ChannelRedirector } from '@features/servers/channels/nav';
 
 import {
   LandingPage,
@@ -12,6 +13,7 @@ import {
   DashboardPage,
   ContactsPage,
   DMPage,
+  ServerPage,
   ChannelPage,
   PublicServersPage,
 } from '@pages';
@@ -39,7 +41,10 @@ const Router = () => {
                 <Route path="" element={<ContactsPage />} />
                 <Route path=":roomId" element={<DMPage />} />
               </Route>
-              <Route path=":serverId/:roomId" element={<ChannelPage />} />
+              <Route path=":serverId" element={<ServerPage />}>
+                <Route path="" element={<ChannelRedirector />} />
+                <Route path=":roomId" element={<ChannelPage />} />
+              </Route>
               <Route index element={<Navigate to="/channels/@me" />} />
             </Route>
             <Route path="servers" element={<PublicServersPage />} />

@@ -9,6 +9,7 @@ export * from './dashboard-page';
 export * from './dm-page';
 export * from './contacts-page';
 
+export * from './server-page';
 export * from './channel-page';
 
 export * from './public-servers-page';
