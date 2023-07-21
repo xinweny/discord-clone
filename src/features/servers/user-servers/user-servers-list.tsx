@@ -1,4 +1,4 @@
-import { UserServerNav } from './user-server-nav';
+import { UserServerLink } from './user-server-link';
 
 import { useGetJoinedServersQuery } from '../api';
 
@@ -14,7 +14,7 @@ export function UserServersList({ userId }: UserServersListProps) {
   return (
     <div>
       {servers.data?.map(
-        server => <UserServerNav key={server._id} server={server} />
+        server => <UserServerLink key={server._id} server={server} />
       )}
     </div>
   );

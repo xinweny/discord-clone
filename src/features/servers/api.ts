@@ -5,34 +5,17 @@ import api from '@services/api';
 import { sign, upload } from '@services/cloudinary';
 
 import type { ApiPaginationData } from '@types';
-
-export interface ServerData {
-  _id: string;
-  name: string;
-  createdAt: Date;
-  memberCount: number;
-  description: string;
-  avatarUrl: string;
-  bannerUrl: string;
-  ownerId: string;
-  private: boolean;
-}
+import type { ServerData } from '@features/server/api';
 
 export type PublicServerData = Omit<ServerData, 'private'>;
 export type UserServerData = Pick<ServerData, '_id' | 'name' | 'avatarUrl'>;
 
-const serverApi = api.injectEndpoints({
+const serversApi = api.injectEndpoints({
   endpoints(build) {
     return {
       getPublicServers: build.query<ApiPaginationData<PublicServerData>, string>({
         query: (query) => ({
           url: `/servers?query=${query}`,
-          method: 'get',
-        }),
-      }),
-      getServer: build.query<ServerData, string>({
-        query: (serverId) => ({
-          url: `/servers/${serverId}`,
           method: 'get',
         }),
       }),
@@ -71,11 +54,10 @@ const serverApi = api.injectEndpoints({
   }
 });
 
-export default serverApi;
+export default serversApi;
 
 export const {
   useGetPublicServersQuery,
-  useGetServerQuery,
   useGetJoinedServersQuery,
   useCreateServerMutation,
-} = serverApi;
+} = serversApi;

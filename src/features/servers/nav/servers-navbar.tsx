@@ -6,7 +6,7 @@ type ServerNavBarProps = {
   userId: string;
 }
 
-export function ServerNavBar({ userId }: ServerNavBarProps) {
+export function ServersNavBar({ userId }: ServerNavBarProps) {
   return (
     <div>
       <LinkImage href="/channels/@me" src="#" alt="Direct Messages" />

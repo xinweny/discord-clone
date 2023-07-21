@@ -1,1 +1,1 @@
-export * from './server-navbar';
+export * from './servers-navbar';

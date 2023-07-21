@@ -8,7 +8,7 @@ type ServerNavProps = {
   }
 };
 
-export function UserServerNav({ server }: ServerNavProps) {
+export function UserServerLink({ server }: ServerNavProps) {
   const { _id: id, avatarUrl, name } = server;
 
   return (

@@ -8,5 +8,5 @@ export function ChannelRedirector() {
 
   if (!activeChannelId) return null;
 
-  return <Navigate to={`/channels/${serverId}/${activeChannelId}`} />
+  return <Navigate to={`/channels/${serverId}/${activeChannelId}`} />;
 }

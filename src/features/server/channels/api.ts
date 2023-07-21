@@ -4,13 +4,14 @@ export type ChannelPermissionsData = {
   private: boolean;
   view: string[];
   message: string[];
-}
+};
 
 export type ChannelData = {
   _id: string;
   name: string;
   type: 'text' | 'voice';
   permissions: ChannelPermissionsData;
+  categoryId?: string;
 };
 
 const channelApi = api.injectEndpoints({
@@ -21,7 +22,7 @@ const channelApi = api.injectEndpoints({
           url: `/servers/${serverId}/channels`,
           method: 'get',
         }),
-      })
+      }),
     };  
   }
 });
