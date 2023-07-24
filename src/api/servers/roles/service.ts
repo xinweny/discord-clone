@@ -4,7 +4,7 @@ import { formatSetQuery } from '@helpers/formatSetQuery';
 import { CustomError } from '@helpers/CustomError';
 
 import { Server } from '@api/servers/model';
-import { ServerMember } from '@api/servers/serverMembers/schema';
+import { ServerMember } from '@api/servers/serverMembers/model';
 
 const get = async (serverId: Types.ObjectId | string, roleId?: Types.ObjectId | string) => {
   const server = await Server.findById(

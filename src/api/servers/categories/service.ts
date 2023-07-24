@@ -46,11 +46,6 @@ const update = async (serverId: Types.ObjectId | string, categoryId: Types.Objec
 const remove = async (serverId: Types.ObjectId | string, categoryId: Types.ObjectId | string) => {
   const server = await Server.findByIdAndUpdate(serverId, {
     $pull: { categories: { _id: categoryId } },
-    $unset: { 'channels.$[c].categoryId': true },
-  }, {
-    arrayFilters: [
-      { 'c.categoryId': categoryId },
-    ],
   });
 
   const category = server?.categories.id(categoryId);
@@ -58,9 +53,31 @@ const remove = async (serverId: Types.ObjectId | string, categoryId: Types.Objec
   return category;
 };
 
+const updateChannel = async (serverId: Types.ObjectId | string, channelId: Types.ObjectId | string, toId?: Types.ObjectId | string) => {
+  const server = await Server.findOneAndUpdate({
+    _id: serverId,
+    'channels._id': channelId,
+    ...(toId && { 'categories._id': toId }),
+  }, {
+    $pull: { 'categories.channelIds': channelId },
+    ...(toId && {
+      $push: { 'categories.$.channelIds': channelId },
+    }),
+    ...(toId
+      ? { $set: { 'channels.$.categoryId': toId } }
+      : { $unset: { 'channels.$.categoryId': '' } }
+    ),
+  });
+
+  const categories = server?.categories;
+
+  return categories;
+};
+
 export const categoryService = {
   get,
   create,
   update,
   remove,
+  updateChannel,
 };

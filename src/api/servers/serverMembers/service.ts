@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
-import { ServerMember } from './schema';
+import { ServerMember } from './model';
 
 const getById = async (id: Types.ObjectId | string) => {
   const member = await ServerMember.findById(id);

@@ -18,8 +18,4 @@ const cld = new Cloudinary({
   url: { secure: true },
 });
 
-const image = cld.image('/avatars/servers/🦊');
-
-console.log(image, image.toURL());
-
 export { cloudinary, cld };

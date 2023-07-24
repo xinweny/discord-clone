@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { Message } from '@api/messages/model';
 import { Server, IServer } from '@api/servers/model';
-import type { IServerMember } from '@api/servers/serverMembers/schema';
+import type { IServerMember } from '@api/servers/serverMembers/model';
 import type { IChannelPermissions } from './schema';
 
 import { cloudinaryService } from '@services/cloudinary';
@@ -53,7 +53,6 @@ const update = async (
   channelId: Types.ObjectId | string,
   fields: {
     name?: string,
-    categoryId?: Types.ObjectId | string,
 }) => {
   const server = await Server.findOneAndUpdate({
     _id: serverId,

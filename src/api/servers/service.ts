@@ -6,7 +6,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Message } from '@api/messages/model';
-import { ServerMember } from './serverMembers/schema';
+import { ServerMember } from './serverMembers/model';
 import { Server } from './model';
 
 import { serverInviteService } from '@api/serverInvites/service';
@@ -83,10 +83,14 @@ const create = async (
 
   server.channels.push({
     $each: [
-      { name: 'general', category: server.categories[0]._id, type: 'text' },
-      { name: 'General', category: server.categories[1]._id, type: 'voice' },
+      { name: 'general', type: 'text', categoryId: server.categories[0].id },
+      { name: 'General', type: 'voice', categoryId: server.categories[1].id },
     ],
   });
+
+  for (const i of [0, 1]) {
+    server.categories[i].channelIds.push(server.channels[i]._id);
+  }
 
   // Default roles
   server.roles.push({ name: '@everyone', color: '#99AAB5' });

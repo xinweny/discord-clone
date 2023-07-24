@@ -11,6 +11,19 @@ import { userService } from '@api/users/service';
 import { serverService } from '@api/servers/service';
 import { serverMemberService } from './service';
 
+const getServerMembers: RequestHandler[] = [
+  authenticate,
+  tryCatch(
+    async (req, res) => {
+      const members = await serverMemberService.getMany({
+        serverId: req.params.serverId,
+      });
+
+      res.json({ data: members });
+    }
+  )
+]
+
 const joinServer: RequestHandler[] = [
   authenticate,
   tryCatch(
@@ -75,6 +88,7 @@ const leaveServer: RequestHandler[] = [
 ];
 
 export const serverMemberController = {
+  getServerMembers,
   joinServer,
   leaveServer,
   editServerProfile,

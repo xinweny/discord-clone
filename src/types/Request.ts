@@ -1,6 +1,6 @@
 import { IReqUser } from '@api/users/model';
 import { IServer } from '@api/servers/model';
-import { IServerMember } from '@api/servers/serverMembers/schema';
+import { IServerMember } from '@api/servers/serverMembers/model';
 import { IDM } from '@api/dms/model';
 import { IReaction } from '@api/messages/reactions/model';
 
