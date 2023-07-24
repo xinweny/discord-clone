@@ -12,6 +12,7 @@ export type ChannelData = {
   type: 'text' | 'voice';
   permissions: ChannelPermissionsData;
   categoryId?: string;
+  description: string;
 };
 
 const channelApi = api.injectEndpoints({

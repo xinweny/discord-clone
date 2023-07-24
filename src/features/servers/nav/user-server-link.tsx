@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { LinkImage } from '@components/ui';
 
 type ServerNavProps = {
@@ -9,12 +11,21 @@ type ServerNavProps = {
 };
 
 export function UserServerLink({ server }: ServerNavProps) {
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+
   const { _id: id, avatarUrl, name } = server;
 
   return (
-    <div>
+    <div
+      onMouseEnter={() => setIsFocus(true)}
+      onMouseLeave={() => setIsFocus(false)}
+    >
       <LinkImage href={`/channels/${id}`} src={avatarUrl} />
-      <p>{`${name}`}</p>
+      {isFocus && (
+        <div>
+          <p>{name}</p>
+        </div>
+      )}
     </div>
   );
 }

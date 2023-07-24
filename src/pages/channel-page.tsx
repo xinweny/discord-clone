@@ -1,11 +1,14 @@
 import { ContentLayout } from '@components/layouts';
 
+import { ChannelInfoHeader } from '@features/server/nav';
+import { ServerMembersList } from '@features/server/members/list';
+
 export function ChannelPage() {
   return (
     <div>
       <ContentLayout
-        header={<div>channel info</div>}
-        infoTab={<div>members list</div>}
+        header={<ChannelInfoHeader />}
+        infoTab={<ServerMembersList />}
       >
         <div>CHANNEL MESSAGES</div>
       </ContentLayout>
