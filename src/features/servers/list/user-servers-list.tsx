@@ -1,4 +1,4 @@
-import { UserServerLink } from './user-server-link';
+import { UserServerLink } from '../nav/user-server-link';
 
 import { useGetJoinedServersQuery } from '../api';
 

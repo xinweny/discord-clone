@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from '@features/server/categories/api';
 import { useGetChannelsQuery } from '../api';
 
 import { CategoryGroup } from '@features/server/categories/nav';
-import { ChannelLink } from './channel-link';
+import { ChannelLink } from '../nav/channel-link';
 
 export function ChannelsList() {
   const { serverId } = useParams();

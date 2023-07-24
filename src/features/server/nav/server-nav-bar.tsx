@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { useGetServerQuery } from '../api';
 
-import { ChannelsList } from '../channels/nav';
+import { ChannelsList } from '../channels/list';
 
 export function ServerNavBar() {
   const { serverId } = useParams();

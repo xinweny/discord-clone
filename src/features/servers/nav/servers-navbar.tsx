@@ -1,6 +1,6 @@
 import { LinkImage } from '@components/ui';
 import { CreateServerButton } from '@features/servers/create';
-import { UserServersList } from '@features/servers/user-servers';
+import { UserServersList } from '@features/servers/list';
 
 type ServerNavBarProps = {
   userId: string;
