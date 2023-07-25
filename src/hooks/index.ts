@@ -1,3 +1,4 @@
 export * from './use-connect';
 export * from './use-modal';
 export * from './use-preview';
+export * from './use-active-channel';

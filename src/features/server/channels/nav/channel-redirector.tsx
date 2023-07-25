@@ -1,12 +1,14 @@
 import { useOutletContext, useParams, Navigate } from 'react-router-dom';
 
-type ContextType = { activeChannelId: string | null };
+import { ChannelData } from '../api';
+
+type ContextType = { activeChannel: ChannelData | null };
 
 export function ChannelRedirector() {
   const { serverId } = useParams();
-  const { activeChannelId } = useOutletContext<ContextType>();
+  const { activeChannel } = useOutletContext<ContextType>();
 
-  if (!activeChannelId) return null;
+  if (!activeChannel) return null;
 
-  return <Navigate to={`/channels/${serverId}/${activeChannelId}`} />;
+  return <Navigate to={`/channels/${serverId}/${activeChannel._id}`} />;
 }

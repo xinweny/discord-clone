@@ -4,20 +4,26 @@ import { Outlet, useParams } from 'react-router-dom';
 
 import { MainLayout } from '@components/layouts';
 
-import { useGetChannelsQuery } from '@features/server/channels/api';
+import { ChannelData, useGetChannelsQuery } from '@features/server/channels/api';
 import { ServerNavBar } from '@features/server/nav';
 
 export function ServerPage() {
   const { serverId, channelId } = useParams();
 
-  const [activeChannelId, setActiveChannelId] = useState<string | null>(null);
+  const [activeChannel, setActiveChannel] = useState<ChannelData | null>(null);
 
-  const { data: channels, isSuccess} = useGetChannelsQuery(serverId!);
+  const { data: channels, isSuccess } = useGetChannelsQuery(serverId!);
 
   useEffect(() => {
-    if (isSuccess && !channelId) setActiveChannelId(channels[0]._id);
-
-    if (channelId) setActiveChannelId(channelId);
+    if (isSuccess) {
+      if (!channelId) {
+        setActiveChannel(channels[0]);
+      } else {
+        setActiveChannel(
+          channels.find(channel => channel._id === channelId)!
+        );
+      }
+    }
   }, [isSuccess, channelId]);
 
   if (!isSuccess) return null;
@@ -26,8 +32,7 @@ export function ServerPage() {
     <div>
       <MainLayout sideBar={<ServerNavBar />}>
         <Outlet context={{
-          activeChannelId,
-          channels,
+          activeChannel,
         }} />
       </MainLayout>
     </div>
