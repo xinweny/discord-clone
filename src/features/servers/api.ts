@@ -2,7 +2,7 @@ import { FieldValues } from 'react-hook-form';
 
 import api from '@services/api';
 
-import { sign, upload } from '@services/cloudinary';
+import { signAndUpload } from '@services/cloudinary';
 
 import type { ApiPaginationData } from '@types';
 import type { ServerData } from '@features/server/api';
@@ -36,13 +36,9 @@ const serversApi = api.injectEndpoints({
           try {
             const { data: server } = await queryFulfilled;
 
-            if (file) {
-              const serverId = server._id;
-        
-              const signature = await sign(`/avatars/servers/${serverId}`, file.name);
-        
-              await upload(file, signature, serverId);
-            }
+            const serverId = server._id;
+
+            await signAndUpload(file, `/avatars/servers/${serverId}`, serverId);
   
             dispatch(api.util.invalidateTags(['JoinedServers']));
           } catch (err) {

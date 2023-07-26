@@ -19,6 +19,14 @@ const uploadApi = api.injectEndpoints({
           data: { filename },
         }),
       }),
+      signAttachmentsUpload: build.query<SignatureData, FieldValues>({
+        query: ({ serverId, roomId, messageId, filenames }) => ({
+          url: `/upload/attachments/${messageId}`,
+          method: 'post',
+          data: { filenames },
+          params: { roomId, serverId },
+        }),
+      }),
     };
   }
 });
@@ -27,4 +35,5 @@ export default uploadApi;
 
 export const {
   useLazySignServerAvatarUploadQuery,
+  useLazySignAttachmentsUploadQuery,
 } = uploadApi;

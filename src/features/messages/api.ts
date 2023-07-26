@@ -1,5 +1,7 @@
 import api from '@services/api';
 
+import { signAndUpload } from '@services/cloudinary';
+
 import { ApiCursorPaginationData } from '@types';
 
 type AttachmentData = {
@@ -27,16 +29,23 @@ export type MessageData = {
   };
 };
 
-type MessageQuery = {
+type GetMessagesQuery = {
   serverId?: string;
   roomId: string;
   next?: string | null;
 };
 
+type CreateMessageQuery = {
+  serverId?: string;
+  roomId: string;
+  body: string;
+  attachments?: FileList;
+};
+
 const messageApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getMessages: build.query<ApiCursorPaginationData<MessageData>, MessageQuery>({
+      getMessages: build.query<ApiCursorPaginationData<MessageData>, GetMessagesQuery>({
         query: ({ serverId, roomId, next }) => {
           const base = serverId ? `/servers/${serverId}/channels` : '/dms';
           const queryParams = next ? `next=${next}` : '';
@@ -53,15 +62,26 @@ const messageApi = api.injectEndpoints({
         },
         forceRefetch: ({ currentArg, previousArg }) => currentArg !== previousArg,
       }),
-      sendMessage: build.mutation({
+      sendMessage: build.mutation<MessageData, CreateMessageQuery>({
         query: ({ serverId, roomId, body, attachments }) => ({
           url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages`,
           method: 'post',
           data: {
             body,
-            attachments,
+            ...(attachments && {
+              filenames: Array.from(attachments).map(file => file.name),
+            }),
           },
         }),
+        onQueryStarted: async ({ attachments }, {  queryFulfilled }) => {
+          try {
+            const { data: message } = await queryFulfilled;
+
+            if (attachments) await signAndUpload(attachments, `/attachments/${message._id}`);
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
     };  
   }

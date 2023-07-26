@@ -1,12 +1,10 @@
 import { cloudinaryAxios } from '@services/axios';
 
+import type { SignData } from '.';
+
 export const upload = async (
   file: File,
-  params: {
-    signature: string,
-    timestamp: number,
-    folder: string,
-  },
+  params: SignData,
   publicId?: string
 ) => {
   const { signature, timestamp, folder } = params;
