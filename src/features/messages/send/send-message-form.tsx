@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form';
 
-import { FormTextArea } from '@components/ui';
+import { usePreviewMulti } from '@hooks';
+
+import { FormTextArea, FileInput } from '@components/ui';
+import { AttachmentsPreview } from './attachments-preview';
 
 type SendMessageFormProps = {
   disable?: boolean;
@@ -8,7 +11,8 @@ type SendMessageFormProps = {
 };
 
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  const { previews, handleChange } = usePreviewMulti();
 
   const onSubmit = () => {
     console.log('Submit MSG');
@@ -20,6 +24,20 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
 
   return (
     <form>
+      <AttachmentsPreview previewData={previews} />
+      <label htmlFor="upload-attachments">
+        <img src="#" alt="Upload attachments" />
+        <FileInput
+          id="upload-attachments"
+          name="attachments"
+          label="Upload"
+          register={register}
+          setValue={setValue}
+          setPreview={handleChange}
+          multiple
+          hidden
+        />
+      </label>
       <FormTextArea
         label="body"
         name="body"

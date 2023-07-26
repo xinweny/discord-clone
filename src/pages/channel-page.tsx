@@ -22,7 +22,7 @@ export function ChannelPage() {
         <MessagesContainer
           welcomeComponent={<RoomWelcome type="channel" name={channel.name} avatarSrc="#" />}
         />
-        <SendMessageForm />
+        <SendMessageForm placeholder={`Message #${channel.name}`} />
       </ContentLayout>
     </div>
   );

@@ -4,7 +4,11 @@ import * as zod from 'zod';
 
 import { fileValidator } from '@utils';
 
+import { usePreviewSingle } from '@hooks';
+
 import { FormInput, FileInput, ErrorMessage } from '@components/ui';
+
+import { ServerAvatarPreview } from './server-avatar-preview';
 
 import { useCreateServerMutation } from '../api';
 
@@ -27,6 +31,8 @@ export function CreateServerForm() {
   } = useForm<CreateServerFields>({
     resolver: zodResolver(serverSchema),
   });
+  const { fileDataUrl, handleChange } = usePreviewSingle();
+
   const [createServer] = useCreateServerMutation();
 
   const onSubmit = async (data: CreateServerFields) => {
@@ -42,15 +48,19 @@ export function CreateServerForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ErrorMessage error={errors.file} />
-      <FileInput
-        name="file"
-        accept="image/*"
-        label="Upload"
-        register={register}
-        setValue={setValue}
-      >
-        <img src="#" alt="Placeholder" />
-      </FileInput>
+      <label htmlFor="upload">
+        <ServerAvatarPreview placeholderSrc="#" previewSrc={fileDataUrl} />
+        <FileInput
+          id="upload"
+          name="file"
+          accept="image/*"
+          label="Upload"
+          register={register}
+          setValue={setValue}
+          setPreview={handleChange}
+          hidden
+        />
+      </label>
       <FormInput
         type="text"
         name="name"

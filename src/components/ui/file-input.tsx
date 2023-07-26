@@ -1,5 +1,3 @@
-import { usePreview } from '@hooks';
-
 import { Input, InputProps } from './input';
 
 import type {
@@ -14,12 +12,13 @@ export type FileInputProps<
   TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
-  accept: string;
+  accept?: string;
   multiple?: boolean;
+  hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
   setValue?: UseFormSetValue<TFormValues>;
-  children: React.ReactNode;
+  setPreview?: React.ChangeEventHandler;
 } & Omit<InputProps, 'name' | 'type'>;
 
 export function FileInput<TFormValues extends FieldValues>({
@@ -30,42 +29,33 @@ export function FileInput<TFormValues extends FieldValues>({
   register,
   setValue,
   label,
-  children,
+  setPreview,
   multiple = false,
+  hidden = false,
   ...props
 }: FileInputProps<TFormValues>) {
-  const { file, fileDataUrl, handleChange } = usePreview();
-
   return (
     <div className={className} aria-live="polite">
-      <label htmlFor={id}>
-        <Input
-          type="file"
-          id={id}
-          name={name}
-          accept={accept}
-          aria-label={label}
-          {...props}
-          {...(register && register(name, {
-            onChange: (e) => {
-              handleChange(e);
+      <Input
+        type="file"
+        id={id}
+        name={name}
+        accept={accept}
+        aria-label={label}
+        {...props}
+        {...(register && register(name, {
+          onChange: (e) => {
+            if (setPreview) setPreview(e);
 
-              if (setValue) {
-                const { files } = e.target;
-                setValue(name, multiple ? files : files[0]);
-              }
-            },
-          }))}
-          hidden
-          multiple={multiple}
-        />
-        <div>
-          {file
-            ? <img src={fileDataUrl} alt="Preview" />
-            : children
-          }
-        </div> 
-      </label>
+            if (setValue) {
+              const { files } = e.target;
+              setValue(name, multiple ? files : files[0]);
+            }
+          },
+        }))}
+        hidden={hidden}
+        multiple={multiple}
+      />
     </div>
   );
 }

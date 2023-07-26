@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePreview = () => {
+export const usePreviewSingle = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileDataUrl, setFileDataUrl] = useState<string>('');
 
@@ -16,8 +16,8 @@ export const usePreview = () => {
   const handleChange = (
   e: React.ChangeEvent<HTMLInputElement>
   ) => {
-  const { files } = e.target;
-  if (files) setFile(files[0]);
+    const { files } = e.target;
+    if (files) setFile(files[0]);
   };
 
   return { file, fileDataUrl, handleChange };
