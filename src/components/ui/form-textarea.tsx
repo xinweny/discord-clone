@@ -5,22 +5,23 @@ import type {
   Path,
 } from 'react-hook-form';
 
-import { Input, InputProps } from './input';
+import { TextArea, TextAreaProps } from './textarea';
 
-export type FormInputProps<
+export type FormTextAreaProps<
   TFormValues extends FieldValues,
   TRef
 > = {
   name: Path<TFormValues>;
   id: string;
-  label?: string;
+  label: string;
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
   innerRef?: React.RefObject<TRef>;
-} & Omit<InputProps, 'name' | 'id' | 'ariaLabel'>;
+  showLabel?: boolean;
+} & Omit<TextAreaProps, 'name' | 'id' | 'ariaLabel'>;
 
-export function FormInput<TFormValues extends FieldValues, TRef>({
+export function FormTextArea<TFormValues extends FieldValues, TRef>({
   className,
   name,
   label,
@@ -28,12 +29,13 @@ export function FormInput<TFormValues extends FieldValues, TRef>({
   register,
   rules,
   innerRef,
+  showLabel = false,
   ...props
-}: FormInputProps<TFormValues, TRef>) {
+}: FormTextAreaProps<TFormValues, TRef>) {
   return (
     <div className={className} aria-live="polite">
-      {label && <label htmlFor={id}>{label.toUpperCase()}</label>}
-      <Input
+      {(label && showLabel) && <label htmlFor={id}>{label.toUpperCase()}</label>}
+      <TextArea
         ref={innerRef}
         name={name}
         id={id}

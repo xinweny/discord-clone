@@ -8,3 +8,4 @@ export * from './form-input';
 export * from './file-input';
 export * from './error-message';
 export * from './room-welcome';
+export * from './form-textarea';

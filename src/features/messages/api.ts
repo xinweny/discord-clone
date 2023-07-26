@@ -53,6 +53,16 @@ const messageApi = api.injectEndpoints({
         },
         forceRefetch: ({ currentArg, previousArg }) => currentArg !== previousArg,
       }),
+      sendMessage: build.mutation({
+        query: ({ serverId, roomId, body, attachments }) => ({
+          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages`,
+          method: 'post',
+          data: {
+            body,
+            attachments,
+          },
+        }),
+      }),
     };  
   }
 });
@@ -61,4 +71,5 @@ export default messageApi;
 
 export const {
   useGetMessagesQuery,
+  useSendMessageMutation,
 } = messageApi;
