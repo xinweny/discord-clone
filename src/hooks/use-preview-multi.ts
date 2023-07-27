@@ -27,5 +27,7 @@ export const usePreviewMulti = () => {
     }
   };
 
-  return { previews, handleChange };
+  const clearPreview = () => { setPreviews([]); };
+
+  return { previews, handleChange, clearPreview };
 };

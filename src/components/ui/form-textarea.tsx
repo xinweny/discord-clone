@@ -8,8 +8,7 @@ import type {
 import { TextArea, TextAreaProps } from './textarea';
 
 export type FormTextAreaProps<
-  TFormValues extends FieldValues,
-  TRef
+  TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
   id: string;
@@ -17,26 +16,23 @@ export type FormTextAreaProps<
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
-  innerRef?: React.RefObject<TRef>;
   showLabel?: boolean;
 } & Omit<TextAreaProps, 'name' | 'id' | 'ariaLabel'>;
 
-export function FormTextArea<TFormValues extends FieldValues, TRef>({
+export function FormTextArea<TFormValues extends FieldValues>({
   className,
   name,
   label,
   id,
   register,
   rules,
-  innerRef,
   showLabel = false,
   ...props
-}: FormTextAreaProps<TFormValues, TRef>) {
+}: FormTextAreaProps<TFormValues>) {
   return (
     <div className={className} aria-live="polite">
       {(label && showLabel) && <label htmlFor={id}>{label.toUpperCase()}</label>}
       <TextArea
-        ref={innerRef}
         name={name}
         id={id}
         {...props}

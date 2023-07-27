@@ -20,5 +20,10 @@ export const usePreviewSingle = () => {
     if (files) setFile(files[0]);
   };
 
-  return { file, fileDataUrl, handleChange };
+  const clearPreview = () => {
+    setFile(null);
+    setFileDataUrl('');
+  };
+
+  return { file, fileDataUrl, handleChange, clearPreview };
 };

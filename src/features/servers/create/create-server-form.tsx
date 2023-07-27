@@ -12,6 +12,10 @@ import { ServerAvatarPreview } from './server-avatar-preview';
 
 import { useCreateServerMutation } from '../api';
 
+type CreateServerFormProps = {
+  closeBtn: HTMLButtonElement | null;
+};
+
 type CreateServerFields = {
   name: string;
   file?: File;
@@ -22,12 +26,13 @@ const serverSchema = zod.object({
   file: fileValidator.avatar,
 });
 
-export function CreateServerForm() {
+export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   const {
     register, 
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm<CreateServerFields>({
     resolver: zodResolver(serverSchema),
   });
@@ -40,6 +45,8 @@ export function CreateServerForm() {
 
     try {
       await createServer({ name, file }).unwrap();
+      reset();
+      if (closeBtn) closeBtn.click();
     } catch (error) {
       console.log(error);
     }

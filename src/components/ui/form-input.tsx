@@ -8,8 +8,7 @@ import type {
 import { Input, InputProps } from './input';
 
 export type FormInputProps<
-  TFormValues extends FieldValues,
-  TRef
+  TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
   id: string;
@@ -17,24 +16,21 @@ export type FormInputProps<
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
-  innerRef?: React.RefObject<TRef>;
 } & Omit<InputProps, 'name' | 'id' | 'ariaLabel'>;
 
-export function FormInput<TFormValues extends FieldValues, TRef>({
+export function FormInput<TFormValues extends FieldValues>({
   className,
   name,
   label,
   id,
   register,
   rules,
-  innerRef,
   ...props
-}: FormInputProps<TFormValues, TRef>) {
+}: FormInputProps<TFormValues>) {
   return (
     <div className={className} aria-live="polite">
       {label && <label htmlFor={id}>{label.toUpperCase()}</label>}
       <Input
-        ref={innerRef}
         name={name}
         id={id}
         {...props}

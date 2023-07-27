@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 
 import { usePreviewMulti } from '@hooks';
 
@@ -11,15 +11,20 @@ type SendMessageFormProps = {
 };
 
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
-  const { register, handleSubmit, setValue } = useForm();
-  const { previews, handleChange } = usePreviewMulti();
+  const { register, handleSubmit, setValue, reset } = useForm();
+  const { previews, handleChange, clearPreview } = usePreviewMulti();
 
-  const onSubmit = () => {
-    console.log('Submit MSG');
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    reset();
   };
 
   const enterSubmit: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) handleSubmit(onSubmit)();
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(onSubmit)();
+      clearPreview();
+    }
   };
 
   return (
