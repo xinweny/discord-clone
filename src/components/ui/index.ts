@@ -6,6 +6,7 @@ export * from './tab-group';
 export * from './tab-item';
 export * from './form-input';
 export * from './file-input';
+export * from './files-input';
 export * from './error-message';
 export * from './room-welcome';
 export * from './form-textarea';

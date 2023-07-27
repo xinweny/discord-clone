@@ -5,13 +5,19 @@ import type { PreviewData } from '@hooks';
 
 type AttachmentCardProps = {
   preview: PreviewData;
+  handleRemove: (id: string) => void;
 };
 
-export function AttachmentCard({ preview }: AttachmentCardProps) {
+export function AttachmentCard({ preview, handleRemove }: AttachmentCardProps) {
   const { file, id, dataUrl } = preview;
 
   const mimetype = file.type;
   const ext = mime.getExtension(mimetype);
+
+  const handleClick: React.MouseEventHandler = (e) => {
+    const id = e.currentTarget.getAttribute('data-id')!;
+    handleRemove(id);
+  };
 
   return (
     <div>
@@ -23,6 +29,7 @@ export function AttachmentCard({ preview }: AttachmentCardProps) {
           />
       }
       <p>{file.name}</p>
+      <button type="button" data-id={id} onClick={handleClick}>x</button>
     </div>
   );
 }

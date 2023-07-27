@@ -48,7 +48,7 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
       reset();
       if (closeBtn) closeBtn.click();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

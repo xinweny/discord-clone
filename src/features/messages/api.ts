@@ -39,7 +39,7 @@ type CreateMessageQuery = {
   serverId?: string;
   roomId: string;
   body: string;
-  attachments?: FileList;
+  attachments: File[];
 };
 
 const messageApi = api.injectEndpoints({
@@ -68,8 +68,8 @@ const messageApi = api.injectEndpoints({
           method: 'post',
           data: {
             body,
-            ...(attachments && {
-              filenames: Array.from(attachments).map(file => file.name),
+            ...(attachments.length > 0 && {
+              filenames: attachments.map(file => file.name),
             }),
           },
         }),
@@ -77,7 +77,7 @@ const messageApi = api.injectEndpoints({
           try {
             const { data: message } = await queryFulfilled;
 
-            if (attachments) await signAndUpload(attachments, `/attachments/${message._id}`);
+            if (attachments.length > 0) await signAndUpload(attachments, `/attachments/${message._id}`);
           } catch (err) {
             console.log(err);
           }

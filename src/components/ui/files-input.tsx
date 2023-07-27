@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { Input, InputProps } from './input';
 
 import type {
@@ -6,14 +8,15 @@ import type {
   UseFormSetValue,
   FieldValues,
   Path,
+  PathValue,
 } from 'react-hook-form';
 
-type FileInputProps<
+type FilesInputProps<
   TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
   accept?: string;
-  files?: File[];
+  files: File[];
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
@@ -21,7 +24,7 @@ type FileInputProps<
   setPreview: React.ChangeEventHandler;
 } & Omit<InputProps, 'name' | 'type'>;
 
-export function FileInput<TFormValues extends FieldValues>({
+export function FilesInput<TFormValues extends FieldValues>({
   className,
   name,
   id,
@@ -30,9 +33,16 @@ export function FileInput<TFormValues extends FieldValues>({
   setValue,
   label,
   setPreview,
+  files,
   hidden = false,
   ...props
-}: FileInputProps<TFormValues>) {
+}: FilesInputProps<TFormValues>) {
+  useEffect(() => {
+    const filesValue = ((files.length > 0) ? files : []) as PathValue<TFormValues, Path<TFormValues>>;
+
+    setValue(name, filesValue);
+  }, [files]);
+
   return (
     <div className={className} aria-live="polite">
       <Input
@@ -43,14 +53,9 @@ export function FileInput<TFormValues extends FieldValues>({
         aria-label={label}
         {...props}
         {...(register && register(name, {
-          onChange: (e) => {
-            setPreview(e);
-
-            const { files } = e.target;
-
-            setValue(name, files[0]);
-          },
+          onChange: (e) => { setPreview(e); },
         }))}
+        multiple
         hidden={hidden}
       />
     </div>

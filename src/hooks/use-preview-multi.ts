@@ -9,6 +9,7 @@ export type PreviewData = {
 
 export const usePreviewMulti = () => {
   const [previews, setPreviews] = useState<PreviewData[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleChange = (
   e: React.ChangeEvent<HTMLInputElement>
@@ -16,18 +17,30 @@ export const usePreviewMulti = () => {
     const { files } = e.target;
 
     if (files) {
-      const fileArr = Array.from(files)
-        .map(file => ({
-          id: uuid(),
-          file,
-          dataUrl: URL.createObjectURL(file)
-        }));
+      const fileArr = Array.from(files);
 
-      setPreviews(fileArr);
+      const previewData = fileArr.map(file => ({
+        id: uuid(),
+        file,
+        dataUrl: URL.createObjectURL(file)
+      }));
+
+      setPreviews(previews => [...previews, ...previewData]);
+      setFiles(f => [...f, ...fileArr]);
     }
   };
 
-  const clearPreview = () => { setPreviews([]); };
+  const clearPreview = () => {
+    setFiles([]);
+    setPreviews([]);
+  };
 
-  return { previews, handleChange, clearPreview };
+  const handleRemove = (id: string) => {
+    const index = previews.findIndex(p => p.id === id);
+
+    setPreviews(previews => previews.filter((_, i) => i !== index));
+    setFiles(files => files.filter((_, i) => i !== index));
+  };
+
+  return { files, previews, handleChange, clearPreview, handleRemove };
 };
