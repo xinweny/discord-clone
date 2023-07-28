@@ -15,15 +15,15 @@ export function MessageCard({
 }: MessageCardProps) {
   return (
     <div>
-      <Avatar src={message.user.avatarUrl} />
+      <Avatar src={message.sender.avatarUrl} />
       <div>
         <div>
-          <p><strong>{message[isDm ? 'user' : 'serverMember']!.displayName}</strong></p>
-          <p>{DateTime.fromISO(message.createdAt).toFormat('dd/MM/YYYY HH:mm')}</p>
+          <p><strong>{message[isDm ? 'sender' : 'serverMember']!.displayName}</strong></p>
+          <p>{DateTime.fromISO(message.createdAt).toFormat('dd/MM/yyyy HH:mm')}</p>
         </div>
         <div>
           <p>{message.body}</p>
-          {message.updatedAt && <p>(edited)</p>}
+          {(message.updatedAt !== message.createdAt) && <p>(edited)</p>}
         </div>
       </div>
     </div>

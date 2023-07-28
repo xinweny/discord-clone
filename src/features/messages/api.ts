@@ -1,3 +1,4 @@
+import { defaultSerializeQueryArgs } from '@reduxjs/toolkit/dist/query';
 import api from '@services/api';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -19,7 +20,7 @@ export type MessageData = {
   attachments: AttachmentData[];
   createdAt: string;
   updatedAt?: string;
-  user: {
+  sender: {
     avatarUrl: string;
     username: string;
     displayName: string;
@@ -54,7 +55,15 @@ const messageApi = api.injectEndpoints({
 
           return { url, method: 'get' };
         },
-        serializeQueryArgs: ({ endpointName }) => endpointName,
+        serializeQueryArgs: ({ queryArgs, endpointDefinition, endpointName }) => {
+          const { serverId, roomId } = queryArgs;
+
+          return defaultSerializeQueryArgs({
+            queryArgs: { serverId, roomId },
+            endpointDefinition,
+            endpointName
+          });
+        },
         merge: (currentCache, newMessages) => {
           currentCache.items.push(...newMessages.items);
 
@@ -73,11 +82,24 @@ const messageApi = api.injectEndpoints({
             }),
           },
         }),
-        onQueryStarted: async ({ attachments }, {  queryFulfilled }) => {
+        onQueryStarted: async ({ attachments }, { dispatch, queryFulfilled }) => {
           try {
             const { data: message } = await queryFulfilled;
 
             if (attachments.length > 0) await signAndUpload(attachments, `/attachments/${message._id}`);
+
+            dispatch(messageApi.util.updateQueryData(
+              'getMessages',
+              {
+                serverId: message.serverId,
+                roomId: message.roomId,
+              },
+              (draftMsgs) => { 
+                console.log(draftMsgs);
+                draftMsgs.items.push(message);
+                return draftMsgs;
+              }
+            ));
           } catch (err) {
             console.log(err);
           }

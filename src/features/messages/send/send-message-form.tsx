@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { useForm, FieldValues } from 'react-hook-form';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +10,7 @@ import { fileValidator } from '@utils';
 import { FormTextArea, FilesInput } from '@components/ui';
 import { AttachmentsPreview } from './attachments-preview';
 
+import { useSendMessageMutation } from '../api';
 
 type SendMessageFormProps = {
   disable?: boolean;
@@ -21,6 +23,8 @@ const messageSchema = zod.object({
 });
 
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
+  const { channelId, serverId } = useParams();
+
   const {
     register,
     handleSubmit,
@@ -40,8 +44,17 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
     handleRemove,
   } = usePreviewMulti();
 
-  const onSubmit = (data: FieldValues) => {
-    console.log('PASSED ZOD', data);
+  const [sendMessage] = useSendMessageMutation();
+
+  const onSubmit = async (data: FieldValues) => {
+    const { body, attachments } = data;
+
+    await sendMessage({
+      roomId: channelId!,
+      serverId,
+      body,
+      attachments,
+    }).unwrap();
     reset();
     clearPreview();
   };
