@@ -1,4 +1,5 @@
 import { defaultSerializeQueryArgs } from '@reduxjs/toolkit/dist/query';
+
 import api from '@services/api';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -82,7 +83,7 @@ const messageApi = api.injectEndpoints({
             }),
           },
         }),
-        onQueryStarted: async ({ attachments }, { dispatch, queryFulfilled }) => {
+        onQueryStarted: async ({ serverId, roomId, attachments }, { dispatch, queryFulfilled }) => {
           try {
             const { data: message } = await queryFulfilled;
 
@@ -90,12 +91,8 @@ const messageApi = api.injectEndpoints({
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              {
-                serverId: message.serverId,
-                roomId: message.roomId,
-              },
-              (draftMsgs) => { 
-                console.log(draftMsgs);
+              { serverId, roomId, next: null },
+              (draftMsgs) => {
                 draftMsgs.items.push(message);
                 return draftMsgs;
               }
