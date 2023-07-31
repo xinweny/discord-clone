@@ -1,4 +1,5 @@
 import { defaultSerializeQueryArgs } from '@reduxjs/toolkit/dist/query';
+import _ from 'lodash';
 
 import api from '@services/api';
 
@@ -70,7 +71,7 @@ const messageApi = api.injectEndpoints({
 
           currentCache.next = newMessages.next;
         },
-        forceRefetch: ({ currentArg, previousArg }) => currentArg !== previousArg,
+        forceRefetch: ({ currentArg, previousArg }) => !(_.isEqual(currentArg, previousArg)),
       }),
       sendMessage: build.mutation<MessageData, CreateMessageQuery>({
         query: ({ serverId, roomId, body, attachments }) => ({

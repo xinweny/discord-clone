@@ -16,6 +16,7 @@
     "bytes": "^3.1.2",
     "cloudinary-build-url": "^0.2.4",
     "dotenv": "^16.3.1",
+    "lodash": "^4.17.21",
     "luxon": "^3.3.0",
     "mime": "^3.0.0",
     "pluralize": "^8.0.0",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/bytes": "^3.1.1",
+    "@types/lodash": "^4.14.196",
     "@types/luxon": "^3.3.1",
     "@types/mime": "^3.0.1",
     "@types/node": "^20.4.0",
