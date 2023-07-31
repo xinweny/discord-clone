@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Gif } from './gif';
 
 type LinkImageProps = {
   href: string;
@@ -9,7 +10,11 @@ type LinkImageProps = {
 export function LinkImage({
   href, src, alt
 }: LinkImageProps) {
-  const img = <img src={src} alt={alt} />;
+  const ext = src.split('.').pop();
+
+  const img = ext === 'gif'
+    ? <Gif src={src} />
+    : <img src={src} alt={alt} />;
 
   return href[0] === '/'
   ? <Link to={href}>{img}</Link>
