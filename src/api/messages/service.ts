@@ -1,4 +1,5 @@
 import { Types } from 'mongoose';
+import mime from 'mime/lite';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -24,36 +25,41 @@ const getMany = async (
     senderId?: Types.ObjectId | string,
     roomId?: Types.ObjectId | string,
   },
-  pagination: { page: number, limit: number },
+  pagination: {
+    next?: string,
+    limit: number,
+  },
   isFromServer: boolean,
   query?: string
 ) => {
-  const { page, limit } = pagination;
+  const { next, limit } = pagination;
 
   const queryObj = {
     ...fields,
     ...(query && { body: { $regex: query, $options: 'i' } }),
+    ...(next && { _id: { $lt: new Types.ObjectId(next) } }),
   };
 
   const populateOptions = [
-    { path: 'sender', select: 'displayName username avatarUrl -_id' }
+    { path: 'sender', select: 'displayName username avatarUrl' }
   ];
 
   if (isFromServer) populateOptions.push({
     path: 'serverMember',
-    select: 'displayName -_id -userId',
+    select: 'displayName -userId',
   });
 
-  const [messages, count] = await Promise.all([
-    Message.find(queryObj)
-    .sort({ createdAt: -1 })
-    .skip((page - 1) * limit)
+  const messages = await Message.find(queryObj)
+    .sort({ _id: 1 })
     .limit(limit)
-    .populate(populateOptions),
-    Message.countDocuments(queryObj)
-  ]);
+    .populate(populateOptions);
 
-  return { messages, count };
+  const lastMessage = messages[0];
+
+  return {
+    messages,
+    next: lastMessage ? lastMessage._id : null,
+  };
 }
 
 const create = async (
@@ -62,29 +68,40 @@ const create = async (
     roomId: Types.ObjectId | string,
     body: string,
   },
-  files: Express.Multer.File[] | undefined | null,
+  attachments: string[],
   serverId?: Types.ObjectId | string) => {
   const message = (serverId)
     ? new MessageChannel({ ...fields, serverId })
     : new MessageDirect(fields);
 
-  const folderPath = `attachments/${serverId ? `${serverId}/` : ''}${fields.roomId}`;
-
-  if (files && files.length > 0) {
-    const attachments = await Promise.all(
-      files.map(file => cloudinaryService.upload(file, folderPath))
-    );
-
-    attachments.forEach((attachment, index) => message.attachments.push({
-      url: attachment.secure_url,
-      mimetype: files[index].mimetype,
-      filename: files[index].originalname,
-    }));
+  if (attachments && attachments.length > 0) {
+    for (const attachment of attachments) {
+      message.attachments.push({
+        url: cloudinaryService.generateUrl(
+          attachment,
+          `attachments/${serverId ? `servers/${serverId}/` : 'dms/'}${fields.roomId}`
+        ),
+        filename: attachment,
+        mimetype: mime.lookup(attachment),
+      })
+    }
   }
 
+  const populateOptions = [
+    { path: 'sender', select: 'displayName username avatarUrl' }
+  ];
+
+  if (serverId) populateOptions.push({
+    path: 'serverMember',
+    select: 'displayName -userId',
+  });
+
   await message.save();
+
+  const populatedMessage = await message
+    .populate(populateOptions);
   
-  return message;
+  return populatedMessage;
 };
 
 const update = async (
@@ -141,6 +158,7 @@ const react = async (
       emojiId: emoji.id,
       url: emoji.url,
       name: emoji.name,
+      custom: true,
     };
 
     emojiExists = message.reactionCounts.some(reaction => reaction.emojiId?.equals(emoji.id));
@@ -151,6 +169,7 @@ const react = async (
     setQuery = {
       emoji,
       name: emojilib[emoji][0].replace(' ', '_'),
+      custom: false,
     };
 
     emojiExists = message.reactionCounts.some(reaction => reaction.emoji === emoji);

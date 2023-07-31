@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { Message } from '@api/messages/model';
 import { Server, IServer } from '@api/servers/model';
-import type { IServerMember } from '@api/servers/serverMembers/model';
+import type { IServerMember } from '@api/serverMembers/model';
 import type { IChannelPermissions } from './schema';
 
 import { cloudinaryService } from '@services/cloudinary';

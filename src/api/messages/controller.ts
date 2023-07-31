@@ -7,7 +7,6 @@ import { CustomError } from '@helpers/CustomError';
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
 import { validateFields } from '@middleware/validateFields';
-import { upload } from '@middleware/upload';
 
 import { messageService } from '@api/messages/service';
 
@@ -29,48 +28,48 @@ const getMessages: RequestHandler[] = [
   authenticate,
   tryCatch(
     async (req, res) => {  
-      const { query } = req.query;
-      const { senderId } = req.body;
+      const { query, senderId } = req.query;
       const { serverId, roomId } = req.params;
 
-      const page = req.query.page ? +req.query.page : 1;
+      const nextId = req.query.next ? req.query.next.toString() : undefined;
       const limit = req.query.limit ? +req.query.limit : 10;
 
-      const { messages, count } = await messageService.getMany(
+      const { messages, next } = await messageService.getMany(
         {
           ...(roomId && { roomId: new Types.ObjectId(roomId) }),
           ...(senderId && { senderId: new Types.ObjectId(roomId) }),
         },
-        { page, limit },
+        { next: nextId, limit },
         !!serverId,
         query ? query.toString() : undefined
       );
   
       res.json({
-        data: messages,
-        totalDocs: count,
-        totalPages: Math.ceil(count / limit),
-        currentPage: page,
+        data: {
+          items: messages,
+          next,
+        }
       });
     }
   )
 ];
 
 const createMessage: RequestHandler[] = [
-  upload.attachments,
   ...validateFields(['body']),
   authenticate,
   authorize.message('send'),
   tryCatch(
     async (req, res) => {
       const { roomId, serverId } = req.params;
+      const { body, attachments } = req.body;
+
       const userId = req.user?._id;
 
       const message = await messageService.create({
-        senderId: (serverId) ? req.member?._id : userId,
+        senderId: userId,
         roomId,
-        body: req.body.body,
-      }, req.attachments, serverId);
+        body,
+      }, attachments, serverId);
 
       res.json({
         data: message,

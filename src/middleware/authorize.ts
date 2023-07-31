@@ -4,7 +4,7 @@ import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
 import { serverService } from '@api/servers/service';
-import { serverMemberService } from '@api/servers/serverMembers/service';
+import { serverMemberService } from '@api/serverMembers/service';
 import { channelService } from '@api/servers/channels/service';
 import { dmService } from '@api/dms/service';
 import { messageService } from '@api/messages/service';

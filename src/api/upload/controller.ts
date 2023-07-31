@@ -24,6 +24,29 @@ const signServerAvatarUpload: RequestHandler[] = [
   )
 ];
 
+const signAttachmentsUpload: RequestHandler[] = [
+  authenticate,
+  authorize.message('send'),
+  tryCatch(
+    async (req, res) => {
+      const { messageId } = req.params;
+      const filenames: string[] = req.body.filenames;
+      const { serverId, roomId } = req.query;
+
+      const dir = `/attachments/${serverId ? `servers/${serverId}/` : 'dms/'}/${roomId}/${messageId}`;
+
+      const signatures = filenames.map(filename =>
+        cloudinaryService.createSignature(filename, dir)
+      );
+  
+      res.json({
+        data: signatures,
+      });
+    }
+  )
+];
+
 export const uploadController = {
   signServerAvatarUpload,
+  signAttachmentsUpload,
 };

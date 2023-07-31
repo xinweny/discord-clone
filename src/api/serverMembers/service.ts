@@ -14,7 +14,8 @@ const getById = async (id: Types.ObjectId | string) => {
 };
 
 const getOne = async (userId: Types.ObjectId | string, serverId: Types.ObjectId | string) => {
-  const member = await ServerMember.findOne({ userId, serverId });
+  const member = await ServerMember
+    .findOne({ userId, serverId });
 
   return member;
 };
@@ -23,7 +24,9 @@ const getMany = async (fields: {
   userId?: Types.ObjectId | string,
   serverId?: Types.ObjectId | string,
 }) => {
-  const members = await ServerMember.find(fields);
+  const members = await ServerMember
+    .find(fields)
+    .populate('user', 'avatarUrl');
 
   return members;
 };

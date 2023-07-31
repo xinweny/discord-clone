@@ -6,7 +6,7 @@ import { channelRouter } from './channels/router';
 import { categoryRouter } from './categories/router';
 import { roleRouter } from './roles/router';
 import { customEmojiRouter } from './customEmojis/router';
-import { serverMemberRouter } from './serverMembers/router';
+import { serverMemberRouter } from '../serverMembers/router';
 import { serverOwnerRouter } from './serverOwner/router';
 import { serverInviteRouter } from '@api/serverInvites/router';
 

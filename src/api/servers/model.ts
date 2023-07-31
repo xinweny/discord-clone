@@ -8,7 +8,7 @@ import { roleSchema, IRole } from './roles/schema';
 import { categorySchema, ICategory } from './categories/schema';
 import { customEmojiSchema, ICustomEmoji } from './customEmojis/schema';
 import { channelSchema, IChannel } from './channels/schema';
-import { IServerMember } from './serverMembers/model';
+import { IServerMember } from '../serverMembers/model';
 
 export interface IServer extends Document {
   ownerId: Types.ObjectId;

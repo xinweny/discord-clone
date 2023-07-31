@@ -11,6 +11,7 @@ export interface IChannel extends Types.Subdocument {
   type: string;
   permissions: IChannelPermissions;
   categoryId: Types.ObjectId;
+  description: string;
 }
 
 const channelSchema = new Schema({
@@ -25,6 +26,7 @@ const channelSchema = new Schema({
     default: {},
   },
   categoryId: { type: Types.ObjectId },
+  description: { type: String, default: '' },
 });
 
 export { channelSchema };

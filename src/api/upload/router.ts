@@ -6,4 +6,6 @@ const uploadRouter = Router();
 
 uploadRouter.post('/avatars/servers/:serverId', uploadController.signServerAvatarUpload);
 
+uploadRouter.post('/attachments/:messageId', uploadController.signAttachmentsUpload);
+
 export { uploadRouter };

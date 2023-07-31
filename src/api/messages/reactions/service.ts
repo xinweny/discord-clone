@@ -35,7 +35,10 @@ const getByMessage = async (messageIds: string) => {
 } 
 
 const create = async (fields: IFields) => {
-  const reaction = new Reaction(fields);
+  const reaction = new Reaction({
+    ...fields,
+    custom: !!fields.emojiId,
+  });
 
   await reaction.save();
 

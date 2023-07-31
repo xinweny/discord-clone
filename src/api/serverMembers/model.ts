@@ -22,6 +22,21 @@ const serverMemberSchema = new Schema({
   collection: 'server_members',
 });
 
+serverMemberSchema.virtual('roles', {
+  ref: 'Server.roles',
+  localField: 'roleIds',
+  foreignField: '_id',
+});
+
+serverMemberSchema.virtual('user', {
+  ref: 'User',
+  localField: 'userId',
+  foreignField: '_id',
+});
+
+serverMemberSchema.set('toJSON', { virtuals: true });
+serverMemberSchema.set('toObject', { virtuals: true });
+
 serverMemberSchema.index({ userId: 1, serverId: 1 }, { unique: true });
 
 export const ServerMember = mongoose.model<IServerMember>('ServerMember', serverMemberSchema);

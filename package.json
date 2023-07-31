@@ -46,6 +46,7 @@
     "express-validator": "^7.0.1",
     "helmet": "^6.1.5",
     "jsonwebtoken": "^9.0.0",
+    "mime": "^3.0.0",
     "module-alias": "^2.2.3",
     "mongoose": "^7.1.0",
     "ms": "^2.1.3",

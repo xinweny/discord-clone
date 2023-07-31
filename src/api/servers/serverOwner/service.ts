@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 
 import { Server } from '@api/servers/model';
-import { ServerMember } from '../serverMembers/model';
+import { ServerMember } from '../../serverMembers/model';
 
 const update = async (serverId: Types.ObjectId | string, memberId: Types.ObjectId | string) => {
   const [server, member] = await Promise.all([
