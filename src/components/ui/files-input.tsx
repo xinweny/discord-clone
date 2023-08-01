@@ -1,14 +1,10 @@
-import { useEffect, useState } from 'react';
-
 import { Input, InputProps } from './input';
 
 import type {
   RegisterOptions,
   UseFormRegister,
-  UseFormSetValue,
   FieldValues,
   Path,
-  PathValue,
 } from 'react-hook-form';
 
 type FilesInputProps<
@@ -19,7 +15,7 @@ type FilesInputProps<
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
-  setValue: UseFormSetValue<TFormValues>;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 } & Omit<InputProps, 'name' | 'type'>;
 
 export function FilesInput<TFormValues extends FieldValues>({
@@ -28,16 +24,11 @@ export function FilesInput<TFormValues extends FieldValues>({
   id,
   accept,
   register,
-  setValue,
+  setFiles,
   label,
   hidden = false,
   ...props
 }: FilesInputProps<TFormValues>) {
-  const [files, setFiles] = useState<File[]>([]);
-
-  useEffect(() => {
-    setValue(name, files as PathValue<TFormValues, Path<TFormValues>>);
-  }, [files]);
 
   return (
     <div className={className} aria-live="polite">

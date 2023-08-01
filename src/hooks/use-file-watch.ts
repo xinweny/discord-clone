@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useWatch, Control } from 'react-hook-form';
+import { useWatch, Control, UseFormSetValue } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 
 type FileWatchOpts = {
   control: Control<any, any>;
   name: string;
 };
+
+type FileWatchOptsMulti = {
+  setValue: UseFormSetValue<any>;
+} & FileWatchOpts;
 
 export type PreviewData = {
   id: string;
@@ -27,28 +31,44 @@ export const useFileWatchSingle = (opts: FileWatchOpts) => {
   return { file, fileDataUrl };
 };
 
-export const useFileWatchMulti = (opts: FileWatchOpts) => {
-  const files = useWatch(opts);
+export const useFileWatchMulti = (
+  opts:  FileWatchOptsMulti,
+) => {
+  const files: File[] = useWatch(opts);
+  const { setValue } = opts;
+
+  const [allFiles, setAllFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<PreviewData[]>([]);
 
   useEffect(() => {
-    if (files && files.length > 0) {
-      const fileArr: File[] = Array.from(files);
-      const previewArr = fileArr.map(file => ({
-        id: uuid(),
-        file,
-        dataUrl: URL.createObjectURL(file),
-      }))
+    setValue(opts.name, allFiles);
+  }, [allFiles]);
 
-      setPreviews(previewArr);
-    }
-  }, [files]);
+  useEffect(() => {
+    const previewArr = allFiles.map(file => ({
+      id: uuid(),
+      file,
+      dataUrl: URL.createObjectURL(file),
+    }));
+
+    setPreviews(previewArr);
+  }, [allFiles]);
 
   const handleRemove = (id: string) => {
-    const index = previews.findIndex(p => p.id === id);
+    const index = previews.findIndex(preview => preview.id === id);
 
-    setPreviews(previews => previews.filter((_, i) => i !== index));
+    const updatedFiles = previews
+      .filter((_, i) => i !== index)
+      .map(preview => preview.file);
+
+    setValue(opts.name, updatedFiles);
+    setAllFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  return { files, previews, handleRemove };
+  return {
+    files,
+    setAllFiles,
+    previews,
+    handleRemove,
+  };
 };

@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { fileValidator } from '@utils';
 
+import { useFileWatchMulti } from '@hooks';
+
 import { FormTextArea, FilesInput } from '@components/ui';
 import { AttachmentsPreview } from './attachments-preview';
 
@@ -40,6 +42,12 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
     defaultValues: { attachments: [], body: '' },
   });
 
+  const { setAllFiles, handleRemove, previews } = useFileWatchMulti({
+    control,
+    name: 'attachments',
+    setValue,
+  });
+
   const [sendMessage] = useSendMessageMutation();
 
   const onSubmit = async (data: FieldValues) => {
@@ -63,7 +71,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
 
   return (
     <form>
-      <AttachmentsPreview control={control} />
+      <AttachmentsPreview previews={previews} handleRemove={handleRemove} />
       <label htmlFor="upload-attachments">
         <img src="#" alt="Upload attachments" />
         <FilesInput
@@ -71,7 +79,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
           name="attachments"
           label="Upload"
           register={register}
-          setValue={setValue}
+          setFiles={setAllFiles}
           hidden
         />
       </label>

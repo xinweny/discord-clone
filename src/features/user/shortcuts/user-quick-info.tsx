@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 
-import type { UserSelfData } from '../types';
+import { useGetUserData } from '@hooks';
 
 import { Avatar } from '@components/ui';
 
 export function UserQuickInfo() {
   const [isFocus, setIsFocus] = useState(false);
-  const { avatarUrl, displayName, username } = useOutletContext<UserSelfData>();
+  const { user } = useGetUserData();
+  const { avatarUrl, displayName, username } = user.data!;
 
   return (
     <div
