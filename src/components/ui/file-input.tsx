@@ -18,7 +18,6 @@ type FileInputProps<
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
   setValue: UseFormSetValue<TFormValues>;
-  setPreview: React.ChangeEventHandler;
 } & Omit<InputProps, 'name' | 'type'>;
 
 export function FileInput<TFormValues extends FieldValues>({
@@ -29,7 +28,6 @@ export function FileInput<TFormValues extends FieldValues>({
   register,
   setValue,
   label,
-  setPreview,
   hidden = false,
   ...props
 }: FileInputProps<TFormValues>) {
@@ -44,8 +42,6 @@ export function FileInput<TFormValues extends FieldValues>({
         {...props}
         {...(register && register(name, {
           onChange: (e) => {
-            setPreview(e);
-
             const { files } = e.target;
 
             setValue(name, files[0]);

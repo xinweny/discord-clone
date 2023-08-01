@@ -1,14 +1,21 @@
+import type { Control } from 'react-hook-form';
+
+import type { CreateServerFields } from './create-server-form';
+
+import { useFileWatchSingle } from '@hooks';
+
 type ServerAvatarPreviewProps = {
-  placeholderSrc: string;
-  previewSrc: string | null | undefined;
+  control: Control<CreateServerFields, any>;
 };
 
-export function ServerAvatarPreview({ placeholderSrc, previewSrc }: ServerAvatarPreviewProps) {
+export function ServerAvatarPreview({ control }: ServerAvatarPreviewProps) {
+  const { fileDataUrl } = useFileWatchSingle({ control, name: 'file' });
+
   return (
     <div>
       <img
-        src={previewSrc || placeholderSrc}
-        alt={previewSrc ? 'Preview' : 'Upload'}
+        src={fileDataUrl || '#'}
+        alt={fileDataUrl ? 'Preview' : 'Upload'}
       />
     </div> 
   )

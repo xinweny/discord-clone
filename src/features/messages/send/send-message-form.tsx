@@ -3,8 +3,6 @@ import { useForm, FieldValues } from 'react-hook-form';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { usePreviewMulti } from '@hooks';
-
 import { fileValidator } from '@utils';
 
 import { FormTextArea, FilesInput } from '@components/ui';
@@ -15,6 +13,11 @@ import { useSendMessageMutation } from '../api';
 type SendMessageFormProps = {
   disable?: boolean;
   placeholder?: string;
+};
+
+export type MessageFields = {
+  attachments: File[];
+  body: string;
 };
 
 const messageSchema = zod.object({
@@ -30,19 +33,12 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
     handleSubmit,
     setValue,
     reset,
+    control,
     formState: { errors },
-  } = useForm({
+  } = useForm<MessageFields>({
     resolver: zodResolver(messageSchema),
     defaultValues: { attachments: [], body: '' },
   });
-
-  const {
-    files,
-    previews,
-    handleChange,
-    clearPreview,
-    handleRemove,
-  } = usePreviewMulti();
 
   const [sendMessage] = useSendMessageMutation();
 
@@ -56,7 +52,6 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
       attachments,
     }).unwrap();
     reset();
-    clearPreview();
   };
 
   const enterSubmit: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
@@ -68,10 +63,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
 
   return (
     <form>
-      <AttachmentsPreview
-        previewData={previews}
-        handleRemove={handleRemove}
-      />
+      <AttachmentsPreview control={control} />
       <label htmlFor="upload-attachments">
         <img src="#" alt="Upload attachments" />
         <FilesInput
@@ -79,9 +71,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
           name="attachments"
           label="Upload"
           register={register}
-          files={files}
           setValue={setValue}
-          setPreview={handleChange}
           hidden
         />
       </label>

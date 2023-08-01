@@ -3,8 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 
-import { usePreviewSingle } from '@hooks';
-
 import { fileValidator } from '@utils';
 
 import { UserSelfData } from '../types';
@@ -39,7 +37,6 @@ export function ProfilesSettingsForm() {
     register,
     handleSubmit,
     setValue,
-    setFocus,
     formState,
     control,
     reset,
@@ -51,8 +48,6 @@ export function ProfilesSettingsForm() {
       bio: user.bio,
     },
   });
-
-  const { fileDataUrl, handleChange, clearPreview } = usePreviewSingle();
 
   return (
     <div>
@@ -74,16 +69,12 @@ export function ProfilesSettingsForm() {
               label="Upload"
               register={register}
               setValue={setValue}
-              setPreview={handleChange}
               hidden
             />
           </label>
           <button
             type="button"
-            onClick={() => {
-              setValue('file', undefined);
-              clearPreview();
-            }}
+            onClick={() => { setValue('file', undefined); }}
           >Remove Avatar</button>
         </div>
         <ColorInput

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Input, InputProps } from './input';
 
@@ -16,12 +16,10 @@ type FilesInputProps<
 > = {
   name: Path<TFormValues>;
   accept?: string;
-  files: File[];
   hidden?: boolean;
   rules?: RegisterOptions;
   register?: UseFormRegister<TFormValues>;
   setValue: UseFormSetValue<TFormValues>;
-  setPreview: React.ChangeEventHandler;
 } & Omit<InputProps, 'name' | 'type'>;
 
 export function FilesInput<TFormValues extends FieldValues>({
@@ -32,15 +30,13 @@ export function FilesInput<TFormValues extends FieldValues>({
   register,
   setValue,
   label,
-  setPreview,
-  files,
   hidden = false,
   ...props
 }: FilesInputProps<TFormValues>) {
-  useEffect(() => {
-    const filesValue = ((files.length > 0) ? files : []) as PathValue<TFormValues, Path<TFormValues>>;
+  const [files, setFiles] = useState<File[]>([]);
 
-    setValue(name, filesValue);
+  useEffect(() => {
+    setValue(name, files as PathValue<TFormValues, Path<TFormValues>>);
   }, [files]);
 
   return (
@@ -53,7 +49,9 @@ export function FilesInput<TFormValues extends FieldValues>({
         aria-label={label}
         {...props}
         {...(register && register(name, {
-          onChange: (e) => { setPreview(e); },
+          onChange: (e) => {
+            setFiles(prev => [...prev, ...e.target.files]);
+          },
         }))}
         multiple
         hidden={hidden}

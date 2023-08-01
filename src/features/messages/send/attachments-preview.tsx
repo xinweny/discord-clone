@@ -1,20 +1,25 @@
-import type { PreviewData } from '@hooks';
+import type { Control } from 'react-hook-form';
+
+import type { MessageFields } from '.';
+
+import { useFileWatchMulti } from '@hooks';
 
 import { AttachmentCard } from './attachment-card';
 
 type AttachmentsPreviewProps = {
-  previewData: PreviewData[];
-  handleRemove: (id: string) => void;
+  control: Control<MessageFields>;
 };
 
 export function AttachmentsPreview({
-  previewData, handleRemove
+  control
 }: AttachmentsPreviewProps) {
-  if (previewData.length === 0) return null;
+  const { previews, handleRemove } = useFileWatchMulti({ control, name: 'attachments' });
+
+  if (previews.length === 0) return null;
 
   return (
     <div>
-      {previewData.map(preview => 
+      {previews.map(preview => 
         <div key={preview.id}>
           <AttachmentCard preview={preview} handleRemove={handleRemove} />
         </div>
