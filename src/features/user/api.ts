@@ -7,6 +7,10 @@ import type { UserSelfData } from '@features/user/types';
 type UpdateUserQuery = {
   userId: string;
   file?: File;
+  username?: string;
+  displayName?: string;
+  bannerColor?: string;
+  bio?: string;
 }
 
 const userApi = api.injectEndpoints({
@@ -17,13 +21,24 @@ const userApi = api.injectEndpoints({
           url: `/users/${userId}`,
           method: 'get',
         }),
+        providesTags: ['User'],
       }),
       updateUser: build.mutation<UserSelfData, UpdateUserQuery>({
-        query: ({ userId, file }) => ({
+        query: ({
+          userId,
+          file,
+          displayName,
+          username,
+          bannerColor,
+          bio,
+        }) => ({
           url: `/users/${userId}`,
-          method: 'post',
-          body: {
-
+          method: 'put',
+          data: {
+            displayName,
+            username,
+            bannerColor,
+            bio,
             filename: file?.name,
           },
         }),
@@ -35,7 +50,7 @@ const userApi = api.injectEndpoints({
 
             if (file) await signAndUpload(file, `/avatars/users/${userId}`, userId);
   
-            dispatch(api.util.invalidateTags([]));
+            dispatch(api.util.invalidateTags(['User']));
           } catch (err) {
             console.log(err);
           }
@@ -49,4 +64,5 @@ export default userApi;
 
 export const {
   useGetUserSelfQuery,
+  useUpdateUserMutation,
 } = userApi;

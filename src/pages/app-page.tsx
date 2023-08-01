@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { useRefreshTokenQuery } from '@features/auth/api';
-import { useGetUserSelfQuery } from '@features/user/api';
+import { useGetUserData } from '@hooks';
 
 import { ServersNavBar } from '@features/servers/nav';
 
@@ -9,9 +8,7 @@ import { AppLayout } from '@components/layouts';
 
 
 export function AppPage() {
-  const auth = useRefreshTokenQuery();
-
-  const user = useGetUserSelfQuery(auth.data!.userId);
+  const { user } = useGetUserData();
 
   if (user.isLoading) return null;
 

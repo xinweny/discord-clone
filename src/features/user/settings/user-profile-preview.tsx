@@ -4,12 +4,12 @@ import { useFileWatchSingle } from '@hooks';
 
 import { Avatar } from '@components/ui';
 
-import type { UserFields } from './profiles-settings-form';
+import type { UserProfileFields } from './profiles-settings-form';
 
 type UserProfilePreviewProps = {
   avatarUrl: string;
   username: string;
-  control: Control<UserFields>;
+  control: Control<UserProfileFields>;
 }
 
 export function UserProfilePreview({

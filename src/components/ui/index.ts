@@ -11,3 +11,4 @@ export * from './files-input';
 export * from './error-message';
 export * from './room-welcome';
 export * from './form-textarea';
+export * from './form-changes-modal';
