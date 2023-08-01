@@ -80,6 +80,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
         name="body"
         id="body"
         register={register}
+        control={control}
         onKeyDown={enterSubmit}
         placeholder={placeholder}
         disabled={disable}

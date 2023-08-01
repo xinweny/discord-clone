@@ -87,9 +87,10 @@ export function ProfilesSettingsForm() {
           name="bio"
           id="bio"
           label="About Me"
-          showLabel
           register={register}
+          control={control}
           maxLength={190}
+          options={{ showLabel: true, showCharCount: true }}
         />
         {formState.isDirty && <div>
           <p>Careful - you have unsaved changes!</p>
