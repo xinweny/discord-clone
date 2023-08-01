@@ -1,4 +1,4 @@
-import { ProfilesSettings } from './profiles-settings';
+import { ProfilesSettingsForm } from './profiles-settings-form';
 
 type UserSettingsProps = {
   activeTabId: string;
@@ -7,7 +7,7 @@ type UserSettingsProps = {
 export function UserSettings({ activeTabId }: UserSettingsProps) {
   return (
     <div>
-      {activeTabId === 'profiles' && <ProfilesSettings />}
+      {activeTabId === 'profiles' && <ProfilesSettingsForm />}
     </div>
   );
 }

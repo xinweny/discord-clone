@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
@@ -7,9 +7,18 @@ import { usePreviewSingle } from '@hooks';
 
 import { fileValidator } from '@utils';
 
-import { FormInput, FileInput, ColorInput, FormTextArea } from '@components/ui';
+import { UserSelfData } from '../types';
 
-type UserFields = {
+import { UserProfilePreview } from './user-profile-preview';
+
+import {
+  FormInput,
+  FileInput,
+  ColorInput,
+  FormTextArea
+} from '@components/ui';
+
+export type UserFields = {
   displayName: string;
   file?: string;
   bannerColor: string;
@@ -23,21 +32,27 @@ const userSchema = zod.object({
   file: fileValidator.avatar,
 });
 
-export function ProfilesSettings() {
-  const inputRef = useRef<HTMLInputElement>(null);
+export function ProfilesSettingsForm() {
+  const user = useOutletContext<UserSelfData>();
 
   const {
-    register, 
+    register,
     handleSubmit,
     setValue,
     setFocus,
     formState,
+    control,
     reset,
   } = useForm<UserFields>({
     resolver: zodResolver(userSchema),
+    defaultValues: {
+      displayName: user.displayName,
+      bannerColor: user.bannerColor,
+      bio: user.bio,
+    },
   });
 
-  const { fileDataUrl, handleChange } = usePreviewSingle();
+  const { fileDataUrl, handleChange, clearPreview } = usePreviewSingle();
 
   return (
     <div>
@@ -65,7 +80,10 @@ export function ProfilesSettings() {
           </label>
           <button
             type="button"
-            onClick={() => setValue('file', undefined)}
+            onClick={() => {
+              setValue('file', undefined);
+              clearPreview();
+            }}
           >Remove Avatar</button>
         </div>
         <ColorInput
@@ -80,6 +98,7 @@ export function ProfilesSettings() {
           label="About Me"
           showLabel
           register={register}
+          maxLength={190}
         />
         {formState.isDirty && <div>
           <p>Careful - you have unsaved changes!</p>
@@ -87,6 +106,14 @@ export function ProfilesSettings() {
           <button type="submit">Save Changes</button>
         </div>}
       </form>
+      <div>
+        <p>PREVIEW</p>
+        <UserProfilePreview
+          control={control}
+          username={user.username}
+          avatarUrl={user.avatarUrl}
+        />
+      </div>
     </div>
   );
 }
