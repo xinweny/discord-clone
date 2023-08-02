@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { MessageData } from '../api';
 
 import { Avatar } from '@components/ui';
+import { AttachmentPreview } from './attachment-preview';
 
 type MessageCardProps = {
   isDm?: boolean;
@@ -27,7 +28,9 @@ export function MessageCard({
         </div>
         {message.attachments.length > 0 && (
           <div>
-            
+            {message.attachments.map(
+              attachment => <AttachmentPreview key={attachment._id} attachment={attachment} />
+            )}
           </div>
         )}
       </div>

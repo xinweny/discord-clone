@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as zod from 'zod';
 
-import { fileValidator } from '@utils';
+import { serverSchema } from './server-schema';
 
 import { FormInput, FileInput, ErrorMessage } from '@components/ui';
 
@@ -18,11 +17,6 @@ export type CreateServerFields = {
   name: string;
   file?: File;
 };
-
-const serverSchema = zod.object({
-  name: zod.string().min(1),
-  file: fileValidator.avatar,
-});
 
 export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   const {

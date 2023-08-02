@@ -3,12 +3,13 @@ import { extractPublicId, buildUrl } from 'cloudinary-build-url';
 
 type GifProps = {
   src: string;
+  alt?: string;
 };
 
-export function Gif({ src }: GifProps) {
+export function Gif({ src, alt }: GifProps) {
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
-  const publicId = extractPublicId(src);
+  const publicId = decodeURIComponent(extractPublicId(src));
   const stillUrl = buildUrl(publicId, {
     transformations: {
       page: 1,
@@ -20,7 +21,7 @@ export function Gif({ src }: GifProps) {
       onMouseEnter={() => { setIsFocus(true); }}
       onMouseLeave={() => { setIsFocus(false); }}
       src={isFocus ? src : stillUrl}
-      alt=""
+      alt={alt}
     />
   );
 }

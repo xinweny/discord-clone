@@ -8,9 +8,11 @@ import { signAndUpload } from '@services/cloudinary';
 import { ApiCursorPaginationData } from '@types';
 
 export type AttachmentData = {
+  _id: string;
   url: string;
   mimetype: string;
   filename: string;
+  bytes: number;
 };
 
 export type MessageData = {

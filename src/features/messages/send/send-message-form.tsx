@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useForm, FieldValues } from 'react-hook-form';
-import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { fileValidator } from '@utils';
+import { messageSchema } from './message-schema';
 
 import { useFileWatchMulti } from '@hooks';
 
@@ -21,11 +20,6 @@ export type MessageFields = {
   attachments: File[];
   body: string;
 };
-
-const messageSchema = zod.object({
-  body: zod.string().trim().min(1),
-  attachments: fileValidator.attachments,
-});
 
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
   const { channelId, serverId } = useParams();
@@ -59,7 +53,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
       body,
       attachments,
     }).unwrap();
-    
+
     reset();
     setAllFiles([]);
   };
