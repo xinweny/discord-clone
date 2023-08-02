@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useGetCategoriesQuery } from '@features/server/categories/api';
 import { useGetChannelsQuery } from '../api';
 
-import { CategoryGroup } from '@features/server/categories/nav';
+import { CategoryGroup } from '@features/server/categories/list';
 import { ChannelLink } from '../nav/channel-link';
 
 export function ChannelsList() {
@@ -23,7 +23,7 @@ export function ChannelsList() {
       )}
       {categories.data.map(
         category => (
-          <CategoryGroup key={category._id} name={category.name}>
+          <CategoryGroup key={category._id} category={category}>
             {channels.data
               .filter(channel => channel.categoryId === category._id)
               .map(channel =>
