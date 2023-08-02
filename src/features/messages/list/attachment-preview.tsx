@@ -26,7 +26,7 @@ export function AttachmentPreview({ attachment }: AttachmentPreviewProps) {
           src={url}
           ext={ext}
           filename={filename}
-          bytes={bytes}
+          size={bytes}
         />
       }
     </div>
