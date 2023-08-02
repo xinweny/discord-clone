@@ -15,9 +15,9 @@ const createSignature = (filename: string, folderPath: string, customPublicId?: 
   const publicId = customPublicId ? customPublicId : name;
 
   const signature = cloudinary.utils.api_sign_request({
-    timestamp,
     folder,
-    public_id: publicId,
+    public_id: encodeURIComponent(publicId),
+    timestamp,
   }, env.CLOUDINARY_API_SECRET);
 
   return { signature, timestamp, folder };
