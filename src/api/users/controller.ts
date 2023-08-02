@@ -5,7 +5,6 @@ import { tryCatch } from '@helpers/tryCatch';
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
 import { validateFields } from '@middleware/validateFields';
-import { upload } from '@middleware/upload';
 
 import { IUser } from './model';
 import { userService } from './service';
@@ -43,13 +42,12 @@ const getUser: RequestHandler[] = [
 ];
 
 const updateUser: RequestHandler[] = [
-  upload.avatar,
   ...validateFields(['username', 'displayName', 'bio', 'bannerColor', 'customStatus']),
   authenticate,
   authorize.userSelf,
   tryCatch(
     async (req, res) => {
-      const user = await userService.update(req.user?._id, { ...req.body }, req.avatar);
+      const user = await userService.update(req.user?._id, { ...req.body }, req.body.filename);
 
       res.json({
         data: user,

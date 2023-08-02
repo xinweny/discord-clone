@@ -64,21 +64,15 @@ const update = async (id: Types.ObjectId | string, fields: {
   bannerColor?: string,
   bio?: string,
   customStatus?: string,
-}, avatarFile?: Express.Multer.File) => {
+}, avatarFileName?: string) => {
   const updateQuery = keepKeys(fields, ['username', 'displayName', 'bannerColor', 'bio', 'customStatus']);
-
-  let avatar;
-
-  if (avatarFile) {
-    const user = await User.findById(id);
-
-    avatar = await cloudinaryService.upload(avatarFile, `avatars/users/${id}`, user?.avatarUrl);
-  }
 
   const user = await User.findByIdAndUpdate(id, {
     $set: {
       ...updateQuery,
-      ...(avatar && { avatarUrl: avatar.secure_url }),
+      ...(avatarFileName && {
+        avatarUrl: cloudinaryService.generateUrl(avatarFileName, 'avatars/users', id.toString()),
+      }),
     },
   }, { new: true });
 

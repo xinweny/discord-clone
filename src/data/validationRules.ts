@@ -32,7 +32,7 @@ export const VALIDATION_RULES: { [key: string]: RequestHandler } = {
     .isLength({ min: 2, max: 32 }).withMessage('Display name must be between 2 and 32 characters long.'),
   bio: body('bio')
     .trim()
-    .isLength({ min: 1, max: 190 }).withMessage('Bio must be between 1 and 190 characters long.'),
+    .isLength({ max: 190 }).withMessage('Bio must be less than 190 characters long.'),
   bannerColor: body('bannerColor')
     .matches(/^#[0-9A-F]{6}$/i)
     .withMessage('Invalid HEX code.'),

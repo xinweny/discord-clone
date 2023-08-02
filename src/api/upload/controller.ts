@@ -24,9 +24,25 @@ const signServerAvatarUpload: RequestHandler[] = [
   )
 ];
 
+const signUserAvatarUpload: RequestHandler[] = [
+  authenticate,
+  authorize.userSelf,
+  tryCatch(
+    async (req, res) => {
+      const { filename } = req.body;
+      const dir = 'avatars/users';
+  
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.userId);
+  
+      res.json({
+        data: { timestamp, signature, folder },
+      });
+    }
+  )
+];
+
 const signAttachmentsUpload: RequestHandler[] = [
   authenticate,
-  authorize.message('send'),
   tryCatch(
     async (req, res) => {
       const { messageId } = req.params;
@@ -48,5 +64,6 @@ const signAttachmentsUpload: RequestHandler[] = [
 
 export const uploadController = {
   signServerAvatarUpload,
+  signUserAvatarUpload,
   signAttachmentsUpload,
 };

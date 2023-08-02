@@ -68,7 +68,11 @@ const create = async (
     roomId: Types.ObjectId | string,
     body: string,
   },
-  attachments: string[],
+  attachments?: {
+    filename: string;
+    bytes: number;
+    mimetype: string;
+  }[],
   serverId?: Types.ObjectId | string) => {
   const message = (serverId)
     ? new MessageChannel({ ...fields, serverId })
@@ -76,14 +80,17 @@ const create = async (
 
   if (attachments && attachments.length > 0) {
     for (const attachment of attachments) {
+      const { filename, mimetype, bytes } = attachment;
+
       message.attachments.push({
         url: cloudinaryService.generateUrl(
-          attachment,
+          filename,
           `attachments/${serverId ? `servers/${serverId}/` : 'dms/'}${fields.roomId}`
         ),
-        filename: attachment,
-        mimetype: mime.lookup(attachment),
-      })
+        filename,
+        mimetype,
+        bytes,
+      });
     }
   }
 
