@@ -25,6 +25,11 @@ export function MessageCard({
           <p>{message.body}</p>
           {(message.updatedAt !== message.createdAt) && <p>(edited)</p>}
         </div>
+        {message.attachments.length > 0 && (
+          <div>
+            
+          </div>
+        )}
       </div>
     </div>
   );

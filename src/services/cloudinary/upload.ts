@@ -11,6 +11,11 @@ export const upload = async (
 
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('folder', folder);
+  formData.append(
+    'public_id',
+    encodeURIComponent(publicId || file.name.replace(/\.[^/.]+$/, '')))
+  ;
 
   const result = await cloudinaryAxios({
     url: '/upload',
@@ -19,8 +24,6 @@ export const upload = async (
     params: {
       signature,
       timestamp,
-      folder,
-      public_id: publicId || file.name.replace(/\.[^/.]+$/, ''),
     },
   });
 

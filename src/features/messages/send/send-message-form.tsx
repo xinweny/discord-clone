@@ -59,7 +59,9 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
       body,
       attachments,
     }).unwrap();
+    
     reset();
+    setAllFiles([]);
   };
 
   const enterSubmit: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {

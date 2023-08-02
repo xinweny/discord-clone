@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App, { store } from '@app';
 
+import './config/cloudinary';
+
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

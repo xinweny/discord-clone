@@ -7,7 +7,7 @@ import { signAndUpload } from '@services/cloudinary';
 
 import { ApiCursorPaginationData } from '@types';
 
-type AttachmentData = {
+export type AttachmentData = {
   url: string;
   mimetype: string;
   filename: string;
@@ -80,7 +80,11 @@ const messageApi = api.injectEndpoints({
           data: {
             body,
             ...(attachments.length > 0 && {
-              filenames: attachments.map(file => file.name),
+              attachments: attachments.map(file => ({
+                filename: file.name,
+                mimetype: file.type,
+                bytes: file.size,
+              })),
             }),
           },
         }),
@@ -88,7 +92,10 @@ const messageApi = api.injectEndpoints({
           try {
             const { data: message } = await queryFulfilled;
 
-            if (attachments.length > 0) await signAndUpload(attachments, `/attachments/${message._id}`);
+            if (attachments.length > 0) await signAndUpload(
+              attachments,
+              `/attachments/${message._id}?${serverId ? `serverId=${serverId}` : ''}&roomId=${roomId}`
+            );
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
