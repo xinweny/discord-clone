@@ -10,7 +10,7 @@ export function UserSettingsButton() {
       <button type="button" onClick={toggle}>
         <img src="#" alt="User settings" />
       </button>
-      <UserSettingsModal show={show} toggle={toggle} />
+      <UserSettingsModal isOpen={show} onClose={toggle} />
     </div>
   );
 }

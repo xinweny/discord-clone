@@ -17,7 +17,7 @@ export function CreateChannelButton({ category, children }: CreateChannelButtonP
       <button onClick={toggle}>
         {children}
       </button>
-      <CreateChannelModal show={show} onClose={toggle} category={category} />
+      <CreateChannelModal isOpen={show} onClose={toggle} category={category} />
     </div>
-  )
+  );
 }

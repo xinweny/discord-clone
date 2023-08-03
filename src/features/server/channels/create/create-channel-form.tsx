@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { FormInput } from '@components/ui';
+import { TextInput, FormGroup } from '@components/ui';
 
 type CreateChannelFormProps = {
   categoryId?: string;
@@ -29,13 +29,15 @@ export function CreateChannelForm({
 
   return (
     <form>
-      <FormInput
-        name="name"
-        label="Channel Name"
-        id="channel-name"
-        placeholder="new-channel"
-        register={register}
-      />
+      <FormGroup label="channel name" htmlFor="channel-name">
+        <TextInput
+          name="name"
+          label="Channel Name"
+          id="channel-name"
+          placeholder="new-channel"
+          register={register}
+        />
+      </FormGroup>
       <div>
         <button
           type="button"

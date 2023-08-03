@@ -1,11 +1,11 @@
 type SettingsLayoutProps = {
   sidebar: React.ReactNode;
   children: React.ReactNode;
-  toggle: React.ReactEventHandler;
+  close: () => void;
 };
 
 export function SettingsLayout({
-  sidebar, children, toggle
+  sidebar, children, close
 }: SettingsLayoutProps) {
   return (
     <>
@@ -13,8 +13,8 @@ export function SettingsLayout({
     <div>
       <div>{children}</div>
     </div>
-    <button onClick={toggle}>
-      <img src="#" alt="x" />
+    <button onClick={close}>
+      <img src="#" alt="Close modal" />
     </button>
     </>
   );

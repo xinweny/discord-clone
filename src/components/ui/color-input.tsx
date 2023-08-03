@@ -22,29 +22,24 @@ export function ColorInput<TFormValues extends FieldValues>({
   name,
   id,
   register,
-  label,
   setPreview,
   hidden = false,
   ...props
 }: ColorInputProps<TFormValues>) {
   return (
     <div className={className} aria-live="polite">
-      <label htmlFor={id}>
-        {label && <p>{label.toUpperCase()}</p>}
-        <Input
-          type="color"
-          id={id}
-          name={name}
-          aria-label={label}
-          {...props}
-          {...(register && register(name, {
-            onChange: (e) => {
-              if (setPreview) setPreview(e.target.value);
-            },
-          }))}
-          hidden={hidden}
-        />
-      </label>
+      <Input
+        type="color"
+        id={id}
+        name={name}
+        {...props}
+        {...(register && register(name, {
+          onChange: (e) => {
+            if (setPreview) setPreview(e.target.value);
+          },
+        }))}
+        hidden={hidden}
+      />
     </div>
   );
 }

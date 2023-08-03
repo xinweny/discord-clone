@@ -10,11 +10,12 @@ import { useUpdateUserMutation } from '../api';
 import { UserProfilePreview } from './user-profile-preview';
 
 import {
-  FormInput,
+  TextInput,
   FileInput,
   ColorInput,
-  FormTextArea,
+  TextAreaInput,
   FormChangesModal,
+  FormGroup,
 } from '@components/ui';
 
 export type UserProfileFields = {
@@ -58,46 +59,53 @@ export function ProfilesSettingsForm() {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput
-          name="displayName"
-          id="displayName"
-          label="Display Name"
-          register={register}
-        />
-        <div>
-          <p>AVATAR</p>
-          <label htmlFor="upload">
-            <div>Change Avatar</div>
-            <FileInput
-              id="upload"
-              name="file"
-              accept="image/*"
-              label="Upload"
-              register={register}
-              setValue={setValue}
-              hidden
-            />
-          </label>
-          <button
-            type="button"
-            onClick={() => { setValue('file', undefined); }}
-          >Remove Avatar</button>
-        </div>
-        <ColorInput
-          name="bannerColor"
-          id="bannerColor"
-          label="Banner Color"
-          register={register}
-        />
-        <FormTextArea
-          name="bio"
-          id="bio"
-          label="About Me"
-          register={register}
-          control={control}
-          maxLength={190}
-          options={{ showLabel: true, showCharCount: true }}
-        />
+        <FormGroup label="display name" htmlFor="displayName">
+          <TextInput
+            name="displayName"
+            id="displayName"
+            label="Display Name"
+            register={register}
+          />
+        </FormGroup>
+        <FormGroup label="avatar">
+          <div>
+            <label htmlFor="upload">
+              <div>Change Avatar</div>
+              <FileInput
+                id="upload"
+                name="file"
+                accept="image/*"
+                label="Upload"
+                register={register}
+                setValue={setValue}
+                hidden
+              />
+            </label>
+            <button
+              type="button"
+              onClick={() => { setValue('file', undefined); }}
+            >Remove Avatar</button>
+          </div>
+        </FormGroup>
+        <FormGroup label="banner color" htmlFor="bannerColor">
+          <ColorInput
+            name="bannerColor"
+            id="bannerColor"
+            label="Banner Color"
+            register={register}
+          />
+        </FormGroup>
+        <FormGroup label="about me" htmlFor="bio">
+          <TextAreaInput
+            name="bio"
+            id="bio"
+            label="About Me"
+            register={register}
+            control={control}
+            maxLength={190}
+            options={{ showCharCount: true }}
+          />
+        </FormGroup>
         <FormChangesModal
           reset={reset}
           isDirty={formState.isDirty}

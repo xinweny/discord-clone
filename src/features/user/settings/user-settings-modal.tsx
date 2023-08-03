@@ -12,21 +12,19 @@ import type { ModalProps } from '@types';
 type UserSettingsModal = ModalProps;
 
 export function UserSettingsModal({
-  show,
+  isOpen,
   onClose,
 }: UserSettingsModal) {
   const [activeTabId, setActiveTabId] = useState<string>('my_account');
 
-  if (!show) return null;
-
   return (
-    <ModalWrapper closeModal={onClose}>
+    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
       <SettingsLayout
         sidebar={<UserSettingsSidebar
           activeTabId={activeTabId}
           setActiveTabId={setActiveTabId}
         />}
-        toggle={onClose}
+        close={onClose}
       >
         <UserSettings activeTabId={activeTabId} />
       </SettingsLayout>

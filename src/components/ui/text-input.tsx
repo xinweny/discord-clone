@@ -18,10 +18,9 @@ export type FormInputProps<
   register?: UseFormRegister<TFormValues>;
 } & Omit<InputProps, 'name' | 'id' | 'ariaLabel'>;
 
-export function FormInput<TFormValues extends FieldValues>({
+export function TextInput<TFormValues extends FieldValues>({
   className,
   name,
-  label,
   id,
   register,
   rules,
@@ -29,7 +28,6 @@ export function FormInput<TFormValues extends FieldValues>({
 }: FormInputProps<TFormValues>) {
   return (
     <div className={className} aria-live="polite">
-      {label && <label htmlFor={id}>{label.toUpperCase()}</label>}
       <Input
         name={name}
         id={id}

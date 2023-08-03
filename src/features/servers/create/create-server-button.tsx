@@ -10,7 +10,7 @@ export function CreateServerButton() {
       <button onClick={toggle}>
         <img src="#" alt="Add a Server" />
       </button>
-      <CreateServerModal show={show} onClose={toggle} />
+      <CreateServerModal isOpen={show} onClose={toggle} />
     </div>
   );
 }

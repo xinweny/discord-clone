@@ -6,7 +6,7 @@ import { messageSchema } from './message-schema';
 
 import { useFileWatchMulti } from '@hooks';
 
-import { FormTextArea, FilesInput } from '@components/ui';
+import { TextAreaInput, FilesInput } from '@components/ui';
 import { AttachmentsPreview } from './attachments-preview';
 
 import { useSendMessageMutation } from '../api';
@@ -79,7 +79,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
           hidden
         />
       </label>
-      <FormTextArea
+      <TextAreaInput
         label="Message body"
         name="body"
         id="body"

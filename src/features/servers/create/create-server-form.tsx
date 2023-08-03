@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { serverSchema } from './server-schema';
 
-import { FormInput, FileInput, ErrorMessage } from '@components/ui';
+import { TextInput, FileInput, ErrorMessage, FormGroup } from '@components/ui';
 
 import { ServerAvatarPreview } from './server-avatar-preview';
 
@@ -58,14 +58,16 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
           hidden
         />
       </label>
-      <FormInput
-        type="text"
-        name="name"
-        id="serverName"
-        label="Server's name"
-        register={register}
-        rules={{ required: true }}
-      />
+      <FormGroup label="server's name" htmlFor="server-name">
+        <TextInput
+          type="text"
+          name="name"
+          id="server-name"
+          label="Server's name"
+          register={register}
+          rules={{ required: true }}
+        />
+      </FormGroup>
       <button type="submit">Create</button>
       <p>{errors.file?.message}</p>
     </form>

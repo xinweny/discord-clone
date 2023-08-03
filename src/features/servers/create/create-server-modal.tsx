@@ -7,14 +7,12 @@ import { CreateServerForm } from './create-server-form';
 import type { ModalProps } from '@types';
 
 export function CreateServerModal({
-  show, onClose
+  isOpen, onClose
 }: ModalProps) {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-  if (!show) return null;
-
   return (
-    <ModalWrapper closeModal={onClose}>
+    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
       <h2>Create a server</h2>
       <p>Your server is where you and your friends hang out. Make yours and start talking.</p>
       <CreateServerForm closeBtn={closeBtnRef.current} />

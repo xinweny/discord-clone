@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { FormInput } from '@components/ui';
+import { TextInput, FormGroup } from '@components/ui';
 
 import { useLazyLoginQuery } from '@features/auth/api';
 
@@ -28,22 +28,26 @@ export function LoginForm() {
         <p>We're so excited to see you again!</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput
-          type="email"
-          id="email"
-          name="email"
-          label="email"
-          register={register}
-          rules={{ required: true }}
-        />
-        <FormInput
-          type="password"
-          id="password"
-          name="password"
-          label="password"
-          register={register}
-          rules={{ required: true }}
-        />
+        <FormGroup label="email" htmlFor="email">
+          <TextInput
+            type="email"
+            id="email"
+            name="email"
+            label="email"
+            register={register}
+            rules={{ required: true }}
+          />
+        </FormGroup>
+        <FormGroup label="password" htmlFor="password">
+          <TextInput
+            type="password"
+            id="password"
+            name="password"
+            label="password"
+            register={register}
+            rules={{ required: true }}
+          />
+        </FormGroup>
         <button type="submit">Log In</button>
       </form>
     </div>

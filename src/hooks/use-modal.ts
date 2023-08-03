@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useModal = (): [boolean, React.MouseEventHandler<HTMLElement>] => {
+export const useModal = (): [boolean, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
