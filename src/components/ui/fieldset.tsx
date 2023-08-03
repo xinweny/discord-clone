@@ -1,12 +1,12 @@
 type FieldSetGroupProps = {
-  name: string;
+  legend: string;
   children: React.ReactNode;
 };
 
-export function FieldsetGroup({ name, children }: FieldSetGroupProps) {
+export function Fieldset({ legend, children }: FieldSetGroupProps) {
   return (
     <fieldset>
-      <legend>{name}</legend>
+      <legend>{legend.toUpperCase()}</legend>
       <div>
         {children}
       </div>

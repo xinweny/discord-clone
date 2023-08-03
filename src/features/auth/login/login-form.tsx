@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { TextInput, FormGroup } from '@components/ui';
+import { TextInput, FormGroup, SubmitButton } from '@components/ui';
 
 import { useLazyLoginQuery } from '@features/auth/api';
 
@@ -11,7 +11,11 @@ type LoginFormFields = {
 };
 
 export function LoginForm() {
-  const { register, handleSubmit } = useForm<LoginFormFields>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty, isValid },
+  } = useForm<LoginFormFields>();
   const [login] = useLazyLoginQuery();
   const navigate = useNavigate();
 
@@ -48,7 +52,7 @@ export function LoginForm() {
             rules={{ required: true }}
           />
         </FormGroup>
-        <button type="submit">Log In</button>
+        <SubmitButton isDirty={isDirty} isValid={isValid}>Log In</SubmitButton>
       </form>
     </div>
   )

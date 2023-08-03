@@ -12,16 +12,14 @@ type CreateChannelModalProps = {
 } & ModalProps;
 
 export function CreateChannelModal({
-  show,
+  isOpen,
   onClose,
   category
 }: CreateChannelModalProps) {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-  if (!show) return null;
-
   return (
-    <ModalWrapper closeModal={onClose}>
+    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
       <div>
         <h2>Create Channel</h2>
         {category && <p>{`in ${category.name}`}</p>}

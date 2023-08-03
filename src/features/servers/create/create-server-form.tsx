@@ -3,7 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { serverSchema } from './server-schema';
 
-import { TextInput, FileInput, ErrorMessage, FormGroup } from '@components/ui';
+import {
+  TextInput,
+  FileInput,
+  ErrorMessage,
+  FormGroup,
+  SubmitButton,
+} from '@components/ui';
 
 import { ServerAvatarPreview } from './server-avatar-preview';
 
@@ -23,7 +29,7 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
     register, 
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     reset,
     control,
   } = useForm<CreateServerFields>({
@@ -68,7 +74,7 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
           rules={{ required: true }}
         />
       </FormGroup>
-      <button type="submit">Create</button>
+      <SubmitButton isDirty={isDirty} isValid={isValid}>Create</SubmitButton>
       <p>{errors.file?.message}</p>
     </form>
   );
