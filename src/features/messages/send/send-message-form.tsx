@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { messageSchema } from './message-schema';
+import { messageSchema } from './schema';
 
 import { useFileWatchMulti } from '@hooks';
 
@@ -24,17 +24,17 @@ export type MessageFields = {
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
   const { channelId, serverId } = useParams();
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    control,
-    formState: { errors },
-  } = useForm<MessageFields>({
+  const methods = useForm<MessageFields>({
     resolver: zodResolver(messageSchema),
     defaultValues: { attachments: [], body: '' },
   });
+  const {
+    control,
+    setValue,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
 
   const { setAllFiles, handleRemove, previews } = useFileWatchMulti({
     control,
@@ -44,7 +44,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
 
   const [sendMessage] = useSendMessageMutation();
 
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit = async (data: MessageFields) => {
     const { body, attachments } = data;
 
     await sendMessage({
@@ -66,31 +66,35 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
   };
 
   return (
-    <form>
-      <AttachmentsPreview previews={previews} handleRemove={handleRemove} />
-      <label htmlFor="upload-attachments">
-        <img src="#" alt="Upload attachments" />
-        <FilesInput
-          id="upload-attachments"
-          name="attachments"
-          label="Upload"
-          register={register}
-          setFiles={setAllFiles}
-          hidden
+    <FormProvider {...methods}>
+      <form>
+        <AttachmentsPreview previews={previews} handleRemove={handleRemove} />
+        <label htmlFor="upload-attachments">
+          <img src="#" alt="Upload attachments" />
+          <FilesInput
+            id="upload-attachments"
+            name="attachments"
+            label="Upload"
+            rules={{ onChange: (e) => {
+              setAllFiles(prev => [...prev, ...e.target.files]);
+            }}}
+            hidden
+          />
+        </label>
+        <TextAreaInput
+          label="Message body"
+          name="body"
+          id="body"
+          onKeyDown={enterSubmit}
+          placeholder={disable ?
+            'You do not have permission to send messages in this channel.'
+            : placeholder
+          }
+          disabled={disable}
         />
-      </label>
-      <TextAreaInput
-        label="Message body"
-        name="body"
-        id="body"
-        register={register}
-        control={control}
-        onKeyDown={enterSubmit}
-        placeholder={placeholder}
-        disabled={disable}
-      />
-      <p>{errors.attachments?.message}</p>
-      <p>{errors.body?.message}</p>
-    </form>
+        <p>{errors.attachments?.message}</p>
+        <p>{errors.body?.message}</p>
+      </form>
+    </FormProvider>
   );
 }

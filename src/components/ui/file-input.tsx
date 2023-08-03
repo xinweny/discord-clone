@@ -1,9 +1,9 @@
+import { useFormContext } from 'react-hook-form';
+
 import { Input, InputProps } from './input';
 
 import type {
   RegisterOptions,
-  UseFormRegister,
-  UseFormSetValue,
   FieldValues,
   Path,
 } from 'react-hook-form';
@@ -16,8 +16,6 @@ type FileInputProps<
   files?: File[];
   hidden?: boolean;
   rules?: RegisterOptions;
-  register?: UseFormRegister<TFormValues>;
-  setValue: UseFormSetValue<TFormValues>;
 } & Omit<InputProps, 'name' | 'type'>;
 
 export function FileInput<TFormValues extends FieldValues>({
@@ -25,20 +23,20 @@ export function FileInput<TFormValues extends FieldValues>({
   name,
   id,
   accept,
-  register,
-  setValue,
+  rules,
   label,
   hidden = false,
   ...props
 }: FileInputProps<TFormValues>) {
+  const { register, setValue } = useFormContext();
+
   return (
     <div className={className} aria-live="polite">
       <Input
         type="file"
         id={id}
-        name={name}
         accept={accept}
-        aria-label={label}
+        label={label}
         {...props}
         {...(register && register(name, {
           onChange: (e) => {
@@ -46,6 +44,7 @@ export function FileInput<TFormValues extends FieldValues>({
 
             setValue(name, files[0]);
           },
+          ...rules,
         }))}
         hidden={hidden}
       />

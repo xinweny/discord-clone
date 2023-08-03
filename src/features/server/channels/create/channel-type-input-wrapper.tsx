@@ -1,20 +1,18 @@
-import { useWatch, Control } from 'react-hook-form';
-
-import type { CreateChannelFields } from './create-channel-form';
+import { useWatch, useFormContext } from 'react-hook-form';
 
 type ChannelTypeInputWrapperProps = {
   value: string;
-  control: Control<CreateChannelFields>;
   radioInput: React.ReactNode;
   children: React.ReactNode;
 };
 
 export function ChannelTypeInputWrapper({
   value,
-  control,
   children,
   radioInput,
 }: ChannelTypeInputWrapperProps) {
+  const { control } = useFormContext();
+
   const val = useWatch({ control, name: 'type' });
 
   return (

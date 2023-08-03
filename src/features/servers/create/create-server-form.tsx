@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { serverSchema } from './server-schema';
+import { serverSchema } from './schema';
 
 import {
   TextInput,
@@ -25,16 +25,15 @@ export type CreateServerFields = {
 };
 
 export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
-  const {
-    register, 
-    handleSubmit,
-    setValue,
-    formState: { errors, isDirty, isValid },
-    reset,
-    control,
-  } = useForm<CreateServerFields>({
+  const methods = useForm<CreateServerFields>({
     resolver: zodResolver(serverSchema),
   });
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = methods;
+
   const [createServer] = useCreateServerMutation();
 
   const onSubmit = async (data: CreateServerFields) => {
@@ -50,32 +49,30 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ErrorMessage error={errors.file} />
-      <label htmlFor="upload">
-        <ServerAvatarPreview control={control} />
-        <FileInput
-          id="upload"
-          name="file"
-          accept="image/*"
-          label="Upload"
-          register={register}
-          setValue={setValue}
-          hidden
-        />
-      </label>
-      <FormGroup label="server's name" htmlFor="server-name">
-        <TextInput
-          type="text"
-          name="name"
-          id="server-name"
-          label="Server's name"
-          register={register}
-          rules={{ required: true }}
-        />
-      </FormGroup>
-      <SubmitButton isDirty={isDirty} isValid={isValid}>Create</SubmitButton>
-      <p>{errors.file?.message}</p>
-    </form>
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ErrorMessage error={errors.file} />
+        <label htmlFor="upload">
+          <ServerAvatarPreview />
+          <FileInput
+            id="upload"
+            name="file"
+            accept="image/*"
+            label="Upload"
+            hidden
+          />
+        </label>
+        <FormGroup label="server's name" htmlFor="server-name">
+          <TextInput
+            type="text"
+            name="name"
+            id="server-name"
+            label="Server's name"
+            rules={{ required: true }}
+          />
+        </FormGroup>
+        <SubmitButton>Create</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

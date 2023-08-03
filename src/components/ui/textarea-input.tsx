@@ -1,11 +1,10 @@
+import { useWatch, useFormContext } from 'react-hook-form';
+
 import type {
   RegisterOptions,
-  UseFormRegister,
   FieldValues,
   Path,
-  Control,
 } from 'react-hook-form';
-import { useWatch } from 'react-hook-form';
 
 import { TextArea, TextAreaProps } from './textarea';
 
@@ -13,7 +12,7 @@ type FormTextAreaOptions = {
   showCharCount?: boolean;
 };
 
-export type FormTextAreaProps<
+export type TextAreaInputProps<
   TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
@@ -21,8 +20,6 @@ export type FormTextAreaProps<
   label: string;
   hidden?: boolean;
   rules?: RegisterOptions;
-  register?: UseFormRegister<TFormValues>;
-  control?: Control<TFormValues>;
   options?: FormTextAreaOptions;
   maxLength?: number;
 } & Omit<TextAreaProps, 'name' | 'id' | 'ariaLabel' | 'maxLength'>;
@@ -31,15 +28,14 @@ export function TextAreaInput<TFormValues extends FieldValues>({
   className,
   name,
   id,
-  register,
-  control,
   rules,
   maxLength,
   options = {
     showCharCount: false,
   },
   ...props
-}: FormTextAreaProps<TFormValues>) {
+}: TextAreaInputProps<TFormValues>) {
+  const { register, control } = useFormContext();
   const text = useWatch({ control, name });
   
   const { showCharCount } = options;
@@ -47,7 +43,6 @@ export function TextAreaInput<TFormValues extends FieldValues>({
   return (
     <div className={className} aria-live="polite">
       <TextArea
-        name={name}
         id={id}
         maxLength={maxLength}
         {...props}

@@ -1,16 +1,16 @@
+import { useFormContext } from 'react-hook-form';
+
 type SubmitButtonProps = {
   className?: string;
-  isDirty: boolean;
-  isValid: boolean;
   children: React.ReactNode;
 };
 
 export function SubmitButton({
   className,
-  isDirty,
-  isValid,
   children,
 }: SubmitButtonProps) {
+  const { formState: { isDirty, isValid } } = useFormContext();
+  
   return (
     <button
       className={className}

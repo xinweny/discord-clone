@@ -1,22 +1,15 @@
-import { Control, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
-import { useFileWatchSingle } from '@hooks';
+import { useFileWatchSingle, useGetUserData } from '@hooks';
 
 import { Avatar } from '@components/ui';
 
-import type { UserProfileFields } from './profiles-settings-form';
+export function UserProfilePreview() {
+  const { user } = useGetUserData();
+  const { avatarUrl, username } = user.data!;
 
-type UserProfilePreviewProps = {
-  avatarUrl: string;
-  username: string;
-  control: Control<UserProfileFields>;
-}
+  const { control } = useFormContext();
 
-export function UserProfilePreview({
-  control,
-  avatarUrl,
-  username,
-}: UserProfilePreviewProps) {
   const displayName = useWatch({ control, name: 'displayName' });
   const bannerColor = useWatch({ control, name: 'bannerColor' });
   const bio = useWatch({ control, name: 'bio' });

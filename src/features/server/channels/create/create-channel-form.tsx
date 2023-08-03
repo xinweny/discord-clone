@@ -1,14 +1,12 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+
+import { SubmitButton } from '@components/ui';
 
 import {
-  TextInput,
-  RadioInput,
-  FormGroup,
-  Fieldset,
-  SubmitButton,
-} from '@components/ui';
-
-import { ChannelTypeInputWrapper } from './channel-type-input-wrapper';
+  ChannelTypeFieldset,
+  ChannelNameInput,
+  PrivateChannelSection,
+} from '.';
 
 type CreateChannelFormProps = {
   categoryId?: string;
@@ -19,76 +17,35 @@ export type CreateChannelFields = {
   name: string;
   type: string;
   categoryId?: string;
+  private: boolean;
 };
 
 export function CreateChannelForm({
   categoryId, closeBtnRef
 }: CreateChannelFormProps) {
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { isDirty, isValid },
-  } = useForm<CreateChannelFields>({
+  const methods = useForm<CreateChannelFields>({
     defaultValues: {
       name: '',
+      type: 'text',
       categoryId,
-    }
+      private: false,
+    },
   });
 
   return (
-    <form>
-      <Fieldset legend="channel type">
-        <ChannelTypeInputWrapper
-          value="text"
-          control={control}
-          radioInput={<RadioInput
-            name="type"
-            value="text"
-            label="Channel Type"
-            register={register}
-          />}
-        >
-          <img src="#" alt="" />
-          <div>
-            <p>Text</p>
-            <p>Send messages, images, GIFs, opinions and puns</p>
-          </div>
-        </ChannelTypeInputWrapper>
-        <ChannelTypeInputWrapper
-          value="voice"
-          control={control}
-          radioInput={<RadioInput
-            name="type"
-            value="voice"
-            label="Channel Type"
-            register={register}
-          />}
-        >
-          <img src="#" alt="" />
-          <div>
-            <p>Voice</p>
-            <p>Hang out together with voice, video and screen share</p>
-          </div>
-        </ChannelTypeInputWrapper>
-      </Fieldset>
-      <FormGroup label="channel name" htmlFor="channel-name">
-        <TextInput
-          name="name"
-          label="Channel Name"
-          id="channel-name"
-          placeholder="new-channel"
-          register={register}
-        />
-      </FormGroup>
-      <div>
-        <button
-          type="button"
-          onClick={() => { closeBtnRef.current?.click(); }}
-        >Cancel</button>
-        <SubmitButton isDirty={isDirty} isValid={isValid}>Create Channel</SubmitButton>
-      </div>
-    </form>
+    <FormProvider {...methods}>
+      <form>
+        <ChannelTypeFieldset />
+        <ChannelNameInput />
+        <PrivateChannelSection />
+        <div>
+          <button
+            type="button"
+            onClick={() => { closeBtnRef.current?.click(); }}
+          >Cancel</button>
+          <SubmitButton>Create Channel</SubmitButton>
+        </div>
+      </form>
+    </FormProvider>
   );
 }

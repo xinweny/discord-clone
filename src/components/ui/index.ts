@@ -18,3 +18,4 @@ export * from './form-group';
 export * from './fieldset';
 export * from './radio-input';
 export * from './submit-button';
+export * from './checkbox-input';

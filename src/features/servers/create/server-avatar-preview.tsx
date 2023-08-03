@@ -1,14 +1,10 @@
-import type { Control } from 'react-hook-form';
-
-import type { CreateServerFields } from './create-server-form';
+import { useFormContext } from 'react-hook-form';
 
 import { useFileWatchSingle } from '@hooks';
 
-type ServerAvatarPreviewProps = {
-  control: Control<CreateServerFields, any>;
-};
+export function ServerAvatarPreview() {
+  const { control } = useFormContext();
 
-export function ServerAvatarPreview({ control }: ServerAvatarPreviewProps) {
   const { fileDataUrl } = useFileWatchSingle({ control, name: 'file' });
 
   return (

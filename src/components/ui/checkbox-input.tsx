@@ -8,37 +8,30 @@ import type {
 
 import { Input, InputProps } from './input';
 
-type FilesInputProps<
+export type CheckboxInputProps<
   TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
-  accept?: string;
-  hidden?: boolean;
+  id: string;
   rules?: RegisterOptions;
-} & Omit<InputProps, 'name' | 'type'>;
+} & Omit<InputProps, 'name' | 'id' | 'type'>;
 
-export function FilesInput<TFormValues extends FieldValues>({
+export function CheckboxInput<TFormValues extends FieldValues>({
   className,
   name,
   id,
-  accept,
   rules,
-  label,
-  hidden = false,
   ...props
-}: FilesInputProps<TFormValues>) {
+}: CheckboxInputProps<TFormValues>) {
   const { register } = useFormContext();
+
   return (
     <div className={className} aria-live="polite">
       <Input
-        type="file"
+        type="checkbox"
         id={id}
-        accept={accept}
-        label={label}
         {...props}
         {...(register && register(name, rules))}
-        multiple
-        hidden={hidden}
       />
     </div>
   );
