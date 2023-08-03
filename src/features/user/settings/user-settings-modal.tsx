@@ -1,35 +1,35 @@
 import { useState } from 'react';
 
 import { SettingsLayout } from '@components/layouts';
+import { ModalWrapper } from '@components/wrappers';
 
 import { UserSettingsSidebar } from './user-settings-sidebar';
 
 import { UserSettings } from './user-settings';
 
-type UserSettingsModal = {
-  show: boolean;
-  toggle: React.ReactEventHandler;
-};
+import type { ModalProps } from '@types';
+
+type UserSettingsModal = ModalProps;
 
 export function UserSettingsModal({
   show,
-  toggle,
+  onClose,
 }: UserSettingsModal) {
   const [activeTabId, setActiveTabId] = useState<string>('my_account');
 
   if (!show) return null;
 
   return (
-    <div>
+    <ModalWrapper closeModal={onClose}>
       <SettingsLayout
         sidebar={<UserSettingsSidebar
           activeTabId={activeTabId}
           setActiveTabId={setActiveTabId}
         />}
-        toggle={toggle}
+        toggle={onClose}
       >
         <UserSettings activeTabId={activeTabId} />
       </SettingsLayout>
-    </div>
+    </ModalWrapper>
   );
 }

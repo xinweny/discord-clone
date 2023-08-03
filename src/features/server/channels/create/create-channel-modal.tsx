@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import type { CategoryData } from '@features/server/categories/api';
 import type { ModalProps } from '@types';
 
+import { ModalWrapper } from '@components/wrappers';
+
 import { CreateChannelForm } from './create-channel-form';
 
 type CreateChannelModalProps = {
@@ -19,13 +21,13 @@ export function CreateChannelModal({
   if (!show) return null;
 
   return (
-    <div>
+    <ModalWrapper closeModal={onClose}>
       <div>
         <h2>Create Channel</h2>
         {category && <p>{`in ${category.name}`}</p>}
       </div>
       <CreateChannelForm categoryId={category?._id} closeBtnRef={closeBtnRef} />
       <button ref={closeBtnRef} type="button" onClick={onClose}>x</button>
-    </div>
+    </ModalWrapper>
   );
 }

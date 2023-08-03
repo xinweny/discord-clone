@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useModal = (): [boolean, React.MouseEventHandler<HTMLElement>] => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+  }, [isOpen]);
 
   const toggle = () => { setIsOpen(!isOpen) };
 

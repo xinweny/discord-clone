@@ -27,8 +27,6 @@ export function CreateChannelForm({
     }
   });
 
-  const closeForm = () => { closeBtnRef.current?.click(); };
-
   return (
     <form>
       <FormInput
@@ -39,7 +37,10 @@ export function CreateChannelForm({
         register={register}
       />
       <div>
-        <button type="button" onClick={closeForm}>Cancel</button>
+        <button
+          type="button"
+          onClick={() => { closeBtnRef.current?.click(); }}
+        >Cancel</button>
         <button type="submit">Create Channel</button>
       </div>
     </form>
