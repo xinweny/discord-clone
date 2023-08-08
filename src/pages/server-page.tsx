@@ -5,6 +5,7 @@ import { Outlet, useParams } from 'react-router-dom';
 import { MainLayout } from '@components/layouts';
 
 import { ChannelData, useGetChannelsQuery } from '@features/server/channels/api';
+
 import { ServerNavBar } from '@features/server/nav';
 
 export function ServerPage() {
@@ -12,21 +13,21 @@ export function ServerPage() {
 
   const [activeChannel, setActiveChannel] = useState<ChannelData | null>(null);
 
-  const { data: channels, isSuccess } = useGetChannelsQuery(serverId!);
+  const channels = useGetChannelsQuery(serverId!);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (channels.isSuccess) {
       if (!channelId) {
-        setActiveChannel(channels[0]);
+        setActiveChannel(channels.data[0]);
       } else {
         setActiveChannel(
-          channels.find(channel => channel._id === channelId)!
+          channels.data.find(channel => channel._id === channelId)!
         );
       }
     }
-  }, [isSuccess, channelId]);
+  }, [channels.isSuccess, channelId]);
 
-  if (!isSuccess) return null;
+  if (!channels.isSuccess) return null;
 
   return (
     <div>

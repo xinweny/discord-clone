@@ -27,7 +27,7 @@ const memberApi = api.injectEndpoints({
           method: 'get',
         }),
       }),
-      getUserServerMember: build.query<ServerMemberData, UserServerMemberQuery>({
+      getServerMember: build.query<ServerMemberData, UserServerMemberQuery>({
         query: ({ userId, serverId }) => ({
           url: `/users/${userId}/servers/${serverId}/member`,
           method: 'get',
@@ -41,5 +41,5 @@ export default memberApi;
 
 export const {
   useGetServerMembersQuery,
-  useGetUserServerMemberQuery,
+  useGetServerMemberQuery,
 } = memberApi;

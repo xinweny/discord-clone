@@ -1,4 +1,4 @@
-import { useModal } from '@hooks';
+import { useModal, useServerAuthorize } from '@hooks';
 
 import type { CategoryData } from '@features/server/categories/api';
 
@@ -11,6 +11,10 @@ type CreateChannelButtonProps = {
 
 export function CreateChannelButton({ category, children }: CreateChannelButtonProps) {
   const [show, toggle] = useModal();
+
+  const authorized = useServerAuthorize('manageChannels');
+
+  if (!authorized) return null;
 
   return (
     <div>
