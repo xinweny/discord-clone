@@ -1,16 +1,28 @@
+import { useEffect } from 'react';
 import { useWatch, useFormContext } from 'react-hook-form';
+
+import { formatTextChannelName } from '@utils';
 
 import { FormGroup, TextInput } from '@components/ui';
 
 export function ChannelNameInput() {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
 
   const type = useWatch({ control, name: 'type' });
+  const name = useWatch({ control, name: 'name' });
+
+  useEffect(() => {
+    if (type === 'text') setValue('name', formatTextChannelName(name));
+  }, [type]);
 
   const formatChannelName = (e: React.FormEvent<HTMLInputElement>) => {
-    const name = e.currentTarget.value;
+    if (type === 'text') {
+      const name = e.currentTarget.value;
+      
+      const formattedName = formatTextChannelName(name);
 
-
+      setValue('name', formattedName);
+    }
   };
 
   return (

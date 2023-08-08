@@ -13,7 +13,7 @@ export const useActiveChannel = () => {
   const [channel, setChannel] = useState(activeChannel);
 
   useEffect(() => {
-    setChannel(activeChannel);
+    if (activeChannel) setChannel(activeChannel);
   }, [activeChannel]);
 
   return channel;

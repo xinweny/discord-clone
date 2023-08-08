@@ -20,6 +20,7 @@ export function ServerPage() {
       if (!channelId) {
         setActiveChannel(channels.data[0]);
       } else {
+        // TODO: Fix undefined bug on nav to newly created channel
         setActiveChannel(
           channels.data.find(channel => channel._id === channelId)!
         );

@@ -35,7 +35,7 @@ export function TextInput<TFormValues extends FieldValues>({
           onChange: e => {
             setValue(
               name,
-              e.target.value.replace(/\s+/g, ' ').trim()
+              e.target.value.replace(/\s+/g, ' ').replace(/^\s/g, '')
             );
           },
           ...rules,

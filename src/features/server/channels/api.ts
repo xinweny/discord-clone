@@ -6,13 +6,22 @@ export type ChannelPermissionsData = {
   message: string[];
 };
 
+export type ChannelTypes = 'text' | 'voice';
+
 export type ChannelData = {
   _id: string;
   name: string;
-  type: 'text' | 'voice';
+  type: ChannelTypes
   permissions: ChannelPermissionsData;
   categoryId?: string;
   description: string;
+};
+
+type CreateChannelQuery = {
+  serverId: string;
+  name: string;
+  type: ChannelTypes;
+  categoryId?: string;
 };
 
 const channelApi = api.injectEndpoints({
@@ -23,6 +32,19 @@ const channelApi = api.injectEndpoints({
           url: `/servers/${serverId}/channels`,
           method: 'get',
         }),
+        providesTags: (res, err, serverId) => [{ type: 'Channels', id: serverId }],
+      }),
+      createChannel: build.mutation<ChannelData, CreateChannelQuery>({
+        query: ({ serverId, name, type, categoryId }) => ({
+          url: `/servers/${serverId}/channels`,
+          method: 'post',
+          data: {
+            name,
+            type,
+            categoryId,
+          },
+        }),
+        invalidatesTags: (res, err, { serverId }) => [{ type: 'Channels', id: serverId }],
       }),
     };  
   }
@@ -32,4 +54,5 @@ export default channelApi;
 
 export const {
   useGetChannelsQuery,
+  useCreateChannelMutation,
 } = channelApi;

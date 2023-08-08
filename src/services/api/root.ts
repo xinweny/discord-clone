@@ -6,7 +6,11 @@ const api = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: 'api',
   endpoints() { return {}; },
-  tagTypes: ['JoinedServers', 'User'],
+  tagTypes: [
+    'JoinedServers',
+    'User',
+    'Channels',
+  ],
 });
 
 export default api;

@@ -1,11 +1,14 @@
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { SubmitButton } from '@components/ui';
 
+import { useCreateChannelMutation } from '../api';
+
 import {
   ChannelTypeFieldset,
   ChannelNameInput,
-  PrivateChannelSection,
 } from '.';
 
 type CreateChannelFormProps = {
@@ -14,8 +17,9 @@ type CreateChannelFormProps = {
 };
 
 export type CreateChannelFields = {
+  serverId: string;
   name: string;
-  type: string;
+  type: 'text' | 'voice';
   categoryId?: string;
   private: boolean;
 };
@@ -23,21 +27,39 @@ export type CreateChannelFields = {
 export function CreateChannelForm({
   categoryId, closeBtnRef
 }: CreateChannelFormProps) {
+  const { serverId } = useParams();
+  const navigate = useNavigate();
+
   const methods = useForm<CreateChannelFields>({
     defaultValues: {
       name: '',
       type: 'text',
       categoryId,
-      private: false,
+      serverId,
     },
   });
 
+  const [createChannel] = useCreateChannelMutation();
+
+  const { handleSubmit, reset } = methods;
+
+  const onSubmit = async (data: CreateChannelFields) => {
+    try {
+      const channel = await createChannel(data).unwrap();
+
+      reset();
+      closeBtnRef.current?.click();
+      navigate(`/channels/${serverId}/${channel._id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <ChannelTypeFieldset />
         <ChannelNameInput />
-        <PrivateChannelSection />
         <div>
           <button
             type="button"

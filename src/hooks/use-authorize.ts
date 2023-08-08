@@ -34,11 +34,17 @@ export const useServerAuthorize = (permission: RolePermissionNames) => {
       if (server.data?.ownerId === member.data?._id) {
         setAuthorized(true);
       } else {
-        member.data?.roleIds.forEach(roleId => {
+        for (const roleId of member.data!.roleIds) {
           const role = roles.data?.find(role => role._id === roleId);
+          const permissions = role?.permissions;
 
-          if (role?.permissions[permission]) setAuthorized(true);
-        });
+          if (
+            permissions && (permissions.administrator || permissions[permission])
+          ) {
+            setAuthorized(true);
+            break;
+          }
+        }
       }
     }
   }, successes);
