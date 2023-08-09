@@ -11,7 +11,7 @@ type UpdateUserQuery = {
   displayName?: string;
   bannerColor?: string;
   bio?: string;
-}
+};
 
 const userApi = api.injectEndpoints({
   endpoints(build) {
