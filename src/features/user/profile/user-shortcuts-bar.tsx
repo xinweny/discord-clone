@@ -6,7 +6,6 @@ export function UserShortcutsBar() {
     <div>
       <UserQuickInfo />
       <UserSettingsButton />
-      
     </div>
   )
 }

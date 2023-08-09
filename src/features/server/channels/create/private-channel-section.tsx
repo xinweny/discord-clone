@@ -1,4 +1,4 @@
-import { CheckboxInput } from '@components/ui';
+import { CheckboxInput } from '@components/ui/forms';
 
 export function PrivateChannelSection() {
   return (

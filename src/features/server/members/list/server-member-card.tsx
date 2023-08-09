@@ -1,6 +1,6 @@
 import type { ServerMemberData } from '../api';
 
-import { Avatar } from '@components/ui';
+import { Avatar } from '@components/ui/media';
 
 type ServerMemberCardProps = {
   member: ServerMemberData;

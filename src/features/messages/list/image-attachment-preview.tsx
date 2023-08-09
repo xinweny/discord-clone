@@ -1,4 +1,4 @@
-import { Gif } from '@components/ui/gif';
+import { Gif } from '@components/ui/media';
 
 type ImageAttachmentPreviewProps = {
   ext: string | null;

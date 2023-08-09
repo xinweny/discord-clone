@@ -3,7 +3,7 @@ import { useWatch, useFormContext } from 'react-hook-form';
 
 import { formatTextChannelName } from '@utils';
 
-import { FormGroup, TextInput } from '@components/ui';
+import { FormGroup, TextInput } from '@components/ui/forms';
 
 export function ChannelNameInput() {
   const { control, setValue } = useFormContext();

@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { SubmitButton } from '@components/ui';
+import { SubmitButton } from '@components/ui/forms';
 
 import { useCreateChannelMutation } from '../api';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useGetUserData } from '@hooks';
 
-import { Avatar } from '@components/ui';
+import { Avatar } from '@components/ui/media';
 
 export function UserQuickInfo() {
   const [isFocus, setIsFocus] = useState(false);

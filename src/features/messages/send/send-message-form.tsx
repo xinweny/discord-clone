@@ -6,7 +6,7 @@ import { messageSchema } from './schema';
 
 import { useFileWatchMulti } from '@hooks';
 
-import { TextAreaInput, FilesInput } from '@components/ui';
+import { TextAreaInput, FilesInput } from '@components/ui/forms';
 import { AttachmentsPreview } from './attachments-preview';
 
 import { useSendMessageMutation } from '../api';

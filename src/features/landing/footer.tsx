@@ -1,4 +1,4 @@
-import { LinkImage } from '@components/ui';
+import { LinkImage } from '@components/ui/links';
 
 import { LandingLogo } from './landing-logo';
 

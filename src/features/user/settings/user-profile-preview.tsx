@@ -2,7 +2,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 
 import { useFileWatchSingle, useGetUserData } from '@hooks';
 
-import { Avatar } from '@components/ui';
+import { Avatar } from '@components/ui/media';
 
 export function UserProfilePreview() {
   const { user } = useGetUserData();

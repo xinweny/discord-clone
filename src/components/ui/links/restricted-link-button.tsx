@@ -1,4 +1,4 @@
-import { LinkButton } from '@components/ui';
+import { LinkButton } from '@components/ui/links';
 import { useOutletContext } from 'react-router-dom';
 
 type ContextType = { isLoggedIn: boolean };

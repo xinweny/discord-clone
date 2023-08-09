@@ -9,7 +9,7 @@ import {
   ErrorMessage,
   FormGroup,
   SubmitButton,
-} from '@components/ui';
+} from '@components/ui/forms';
 
 import { ServerAvatarPreview } from './server-avatar-preview';
 

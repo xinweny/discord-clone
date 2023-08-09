@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 
 import type { ModalProps } from '@types';
 
+import { ConfirmationModal } from '@components/ui/modals';
+
 import api from '@services/api';
 
 import { useLazyLogoutQuery } from '../api';
 
 export function LogoutConfirmModal({
-  show, onClose,
+  isOpen, onClose,
 }: ModalProps) {
   const [logout] = useLazyLogoutQuery();
   const navigate = useNavigate();
@@ -23,16 +25,15 @@ export function LogoutConfirmModal({
     }
   };
 
-  if (!show) return null;
+  if (!isOpen) return null;
 
   return (
-    <div>
-      <h2>Log Out</h2>
-      <p>Are you sure you want to log out?</p>
-      <div>
-        <button type="button" onClick={onClose}>Cancel</button>
-        <button type="button" onClick={onConfirm}>Log Out</button>
-      </div>
-    </div>
-  )
+    <ConfirmationModal
+      title="Log Out"
+      message="Are you sure you want to log out?"
+      isOpen={isOpen}
+      onClose={onClose}
+      onConfirm={onConfirm}
+    />
+  );
 }

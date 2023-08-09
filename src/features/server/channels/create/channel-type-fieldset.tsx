@@ -1,4 +1,4 @@
-import { Fieldset, RadioInput } from '@components/ui';
+import { Fieldset, RadioInput } from '@components/ui/forms';
 
 import { ChannelTypeInputWrapper } from './channel-type-input-wrapper';
 

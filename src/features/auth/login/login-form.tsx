@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { TextInput, FormGroup, SubmitButton } from '@components/ui';
+import { TextInput, FormGroup, SubmitButton } from '@components/ui/forms';
 
 import { useLazyLoginQuery } from '@features/auth/api';
 

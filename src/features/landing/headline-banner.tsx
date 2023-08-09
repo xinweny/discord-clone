@@ -1,4 +1,4 @@
-import { RestrictedLinkButton } from '@components/ui';
+import { RestrictedLinkButton } from '@components/ui/links';
 import { DemoButton } from './demo-button';
 
 export function HeadlineBanner() {

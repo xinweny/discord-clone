@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { TabGroup, TabItem } from '@components/ui';
+import { TabGroupLayout } from '@components/layouts';
 
 import { LogoutButton } from '@features/auth/logout';
 
@@ -19,23 +19,15 @@ export function UserSettingsSidebar({
 }: UserSettingsSidebarProps) {
   return (
     <div>
-      <TabGroup title="USER SETTINGS">
-        {_.map(USER_SETTINGS_TABS,
-          (val, key) => (
-            <TabItem
-              key={key}
-              tabId={key}
-              activeTabId={activeTabId}
-              setActiveTabId={setActiveTabId}
-            >
-              {val}
-            </TabItem>
-          )
-        )}
-      </TabGroup>
-      <TabGroup>
+      <TabGroupLayout
+        title="USER SETTINGS"
+        tabDict={USER_SETTINGS_TABS}
+        activeTabId={activeTabId}
+        setActiveTabId={setActiveTabId}
+      />
+      <TabGroupLayout>
         <LogoutButton />
-      </TabGroup>
+      </TabGroupLayout>
     </div>
   );
 }

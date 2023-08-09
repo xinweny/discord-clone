@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { LinkImage } from '@components/ui';
+import { LinkImage } from '@components/ui/links';
 
 type ServerNavProps = {
   server: {

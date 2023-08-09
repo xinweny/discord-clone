@@ -1,4 +1,5 @@
-import { LinkImage } from '@components/ui';
+import { LinkImage } from '@components/ui/links';
+
 import { CreateServerButton } from '@features/servers/create';
 import { UserServersList } from '@features/servers/list';
 

@@ -16,9 +16,9 @@ import {
   TextInput,
   ColorInput,
   TextAreaInput,
-  FormChangesModal,
+  FormChangesAlert,
   FormGroup,
-} from '@components/ui';
+} from '@components/ui/forms';
 
 export type UserProfileFields = {
   displayName: string;
@@ -86,7 +86,7 @@ export function ProfilesSettingsForm() {
               options={{ showCharCount: true }}
             />
           </FormGroup>
-          <FormChangesModal />
+          <FormChangesAlert />
         </form>
         <div>
           <p>PREVIEW</p>

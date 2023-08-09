@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { FormGroup, FileInput } from '@components/ui';
+import { FormGroup, FileInput } from '@components/ui/forms';
 
 export function ProfileAvatarInput() {
   const { setValue } = useFormContext();

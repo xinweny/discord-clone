@@ -1,4 +1,4 @@
-import { RestrictedLinkButton } from '@components/ui';
+import { RestrictedLinkButton } from '@components/ui/links';
 
 export function CTABanner() {
   return (

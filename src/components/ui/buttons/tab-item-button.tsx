@@ -1,13 +1,13 @@
-type TabItemProps = {
+type TabItemButtonProps = {
   tabId: string;
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
   children: React.ReactNode | string;
 };
 
-export function TabItem({
+export function TabItemButton({
   tabId, activeTabId, setActiveTabId, children
-}: TabItemProps) {
+}: TabItemButtonProps) {
   const className = `tab-item ${activeTabId === tabId ? 'active' : ''}`;
 
   return (

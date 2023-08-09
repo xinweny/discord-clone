@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 
 import { MessageData } from '../api';
 
-import { Avatar } from '@components/ui';
+import { Avatar } from '@components/ui/media';
 import { AttachmentPreview } from './attachment-preview';
 
 type MessageCardProps = {

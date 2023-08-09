@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Gif } from './gif';
+
+import { Gif } from '../media';
 
 type LinkImageProps = {
   href: string;
