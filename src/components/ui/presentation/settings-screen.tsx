@@ -1,21 +1,17 @@
-import _ from 'lodash';
+import type { TabData } from '@utils';
 
 type SettingsScreenProps = {
   activeTabId: string;
-  formDict: {
-    [key: string]: React.FC;
-  };
+  tabs: TabData[];
 };
 
-export function SettingsScreen({ activeTabId, formDict }: SettingsScreenProps) {
+export function SettingsScreen({ activeTabId, tabs }: SettingsScreenProps) {
   return (
     <div>
-      {_.map(
-        formDict,
-        (component, id) => {
-          const SettingsForm = component;
-          return (activeTabId === id)
-            ? <SettingsForm key={id} />
+      {tabs.map(tab => {
+          const SettingsForm = tab.component;
+          return (activeTabId === tab.id)
+            ? <SettingsForm key={tab.id} />
             : null;
         }
       )}

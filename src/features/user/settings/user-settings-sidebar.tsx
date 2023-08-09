@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+import { USER_SETTINGS } from './tabs';
+
 import { TabGroupLayout } from '@components/layouts';
 
 import { LogoutButton } from '@features/auth/logout';
@@ -9,11 +11,6 @@ type UserSettingsSidebarProps = {
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const USER_SETTINGS_TABS = {
-  my_account: 'My Account',
-  profiles: 'Profiles',
-};
-
 export function UserSettingsSidebar({
   activeTabId, setActiveTabId
 }: UserSettingsSidebarProps) {
@@ -21,7 +18,7 @@ export function UserSettingsSidebar({
     <div>
       <TabGroupLayout
         title="USER SETTINGS"
-        tabDict={USER_SETTINGS_TABS}
+        tabs={USER_SETTINGS}
         activeTabId={activeTabId}
         setActiveTabId={setActiveTabId}
       />

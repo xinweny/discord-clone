@@ -1,3 +1,5 @@
+import { USER_SETTINGS } from './tabs';
+
 import { SettingsModal } from '@components/ui/modals';
 
 import type { ModalProps } from '@types';
@@ -15,7 +17,7 @@ export function UserSettingsModal({
     <SettingsModal
       isOpen={isOpen}
       onClose={onClose}
-      initialTabId={'my_account'}
+      initialTabId={USER_SETTINGS[0].id}
       sidebar={UserSettingsSidebar}
       content={UserSettingsScreen}
     />

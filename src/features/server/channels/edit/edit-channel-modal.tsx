@@ -1,10 +1,10 @@
-import { useState } from 'react';
-
 import type { ModalProps } from '@types';
 import type { ChannelData } from '../api';
 
-import { SettingsLayout } from '@components/layouts';
-import { ModalWrapper } from '@components/wrappers';
+import { SettingsModal } from '@components/ui/modals';
+
+import { ChannelSettingsScreen } from './channel-settings-screen';
+import { ChannelSettingsSidebar } from './channel-settings-sidebar';
 
 type UserSettingsModal = {
   channel: ChannelData
@@ -14,16 +14,13 @@ export function EditChannelModal({
   isOpen,
   onClose,
 }: UserSettingsModal) {
-  const [activeTabId, setActiveTabId] = useState<string>('overview');
-
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
-      <SettingsLayout
-        sidebar={<></>}
-        close={onClose}
-      >
-        <UserSettings activeTabId={activeTabId} />
-      </SettingsLayout>
-    </ModalWrapper>
+    <SettingsModal
+      isOpen={isOpen}
+      onClose={onClose}
+      initialTabId="overview"
+      sidebar={ChannelSettingsSidebar}
+      content={ChannelSettingsScreen}
+    />
   );
 }

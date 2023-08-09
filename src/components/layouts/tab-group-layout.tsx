@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { TabData } from '@utils';
 
 import { TabGroup } from '../ui/presentation/tab-group';
 import { TabItemButton } from '../ui/buttons';
@@ -7,9 +7,7 @@ type UserSettingsSidebarProps = {
   title?: string;
   activeTabId?: string;
   setActiveTabId?: React.Dispatch<React.SetStateAction<string>>;
-  tabDict?: {
-    [key: string]: React.ReactNode;
-  };
+  tabs?: TabData[];
   children?: React.ReactNode;
 };
 
@@ -17,23 +15,22 @@ export function TabGroupLayout({
   title,
   activeTabId,
   setActiveTabId,
-  tabDict,
+  tabs,
   children,
 }: UserSettingsSidebarProps) {
   return (
     <TabGroup title={title}>
-      {(tabDict && activeTabId && setActiveTabId) &&
-        _.map(tabDict, (val, key) => (
+      {(tabs && activeTabId && setActiveTabId) &&
+        tabs.map(tab => (
           <TabItemButton
-            key={key}
-            tabId={key}
+            key={tab.id}
+            tabId={tab.id}
             activeTabId={activeTabId}
             setActiveTabId={setActiveTabId}
           >
-            {val}
+            {tab.label}
           </TabItemButton>
-        ))
-      }
+      ))}
       {children}
     </TabGroup>
   );

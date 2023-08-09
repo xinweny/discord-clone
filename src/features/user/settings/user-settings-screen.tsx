@@ -1,4 +1,5 @@
-import { ProfilesSettingsForm } from './profiles-settings-form';
+import { USER_SETTINGS } from './tabs';
+
 import { SettingsScreen } from '@components/ui/presentation';
 
 type UserSettingsProps = {
@@ -9,9 +10,7 @@ export function UserSettingsScreen({ activeTabId }: UserSettingsProps) {
   return (
     <SettingsScreen
       activeTabId={activeTabId}
-      formDict={{
-        profiles: ProfilesSettingsForm,
-      }}
+      tabs={USER_SETTINGS}
     />
   );
 }

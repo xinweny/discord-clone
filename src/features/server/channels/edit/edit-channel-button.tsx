@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+
 import { useModal } from '@hooks';
 
 import type { ChannelData } from '../api';
@@ -8,15 +10,19 @@ type EditChannelButtonProps = {
   channel: ChannelData;
 };
 
+export const ChannelContext = createContext<ChannelData | undefined>(undefined);
+
 export function EditChannelButton({ channel }: EditChannelButtonProps) {
   const [show, toggle] = useModal();
 
   return (
-    <div>
-      <button type="button" onClick={toggle}>
-        <img src="#" alt="Edit channel" />
-      </button>
-      <EditChannelModal isOpen={show} onClose={toggle} channel={channel} />
-    </div>
+    <ChannelContext.Provider value={channel}>
+      <div>
+        <button type="button" onClick={toggle}>
+          <img src="#" alt="Edit channel" />
+        </button>
+        <EditChannelModal isOpen={show} onClose={toggle} channel={channel} />
+      </div>
+    </ChannelContext.Provider>
   );
 }
