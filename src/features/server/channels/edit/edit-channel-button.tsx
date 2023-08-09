@@ -10,7 +10,7 @@ type EditChannelButtonProps = {
   channel: ChannelData;
 };
 
-export const ChannelContext = createContext<ChannelData | undefined>(undefined);
+export const ChannelContext = createContext<ChannelData | null>(null);
 
 export function EditChannelButton({ channel }: EditChannelButtonProps) {
   const [show, toggle] = useModal();

@@ -6,6 +6,8 @@ import { ChannelContext } from './edit-channel-button';
 
 import { TabGroupLayout } from '@components/layouts';
 
+import { DeleteChannelButton } from '../delete/delete-channel-button';
+
 type ChannelSettingsSidebarProps = {
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
@@ -25,6 +27,7 @@ export function ChannelSettingsSidebar({
         setActiveTabId={setActiveTabId}
       />
       <TabGroupLayout>
+        <DeleteChannelButton />
       </TabGroupLayout>
     </div>
   );

@@ -24,7 +24,7 @@ export function ConfirmationModal({
       <p>{message}</p>
       <div>
         <button type="button" onClick={onClose}>Cancel</button>
-        <button type="button" onClick={onConfirm}>Log Out</button>
+        <button type="button" onClick={onConfirm}>{title}</button>
       </div>
     </ModalWrapper>
   );

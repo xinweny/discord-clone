@@ -31,6 +31,11 @@ type EditChannelQuery = {
   description: string;
 };
 
+type DeleteChannelQuery = {
+  channelId: string;
+  serverId: string;
+};
+
 const channelApi = api.injectEndpoints({
   endpoints(build) {
     return {
@@ -64,6 +69,13 @@ const channelApi = api.injectEndpoints({
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'Channels', id: serverId }],
       }),
+      deleteChannel: build.mutation<void, DeleteChannelQuery>({
+        query: ({ serverId, channelId }) => ({
+          url: `/servers/${serverId}/channels/${channelId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Channels', id: serverId }],
+      }),
     };  
   }
 });
@@ -74,4 +86,5 @@ export const {
   useGetChannelsQuery,
   useCreateChannelMutation,
   useEditChannelMutation,
+  useDeleteChannelMutation,
 } = channelApi;

@@ -2,7 +2,9 @@ import { useOutletContext, useParams, Navigate } from 'react-router-dom';
 
 import { ChannelData } from '../api';
 
-type ContextType = { activeChannel: ChannelData | null };
+type ContextType = {
+  activeChannel: ChannelData | null
+};
 
 export function ChannelRedirector() {
   const { serverId } = useParams();
