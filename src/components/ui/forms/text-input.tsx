@@ -4,7 +4,7 @@ import type {
   Path,
 } from 'react-hook-form';
 
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { Input, InputProps } from './input';
 
@@ -24,12 +24,14 @@ export function TextInput<TFormValues extends FieldValues>({
   rules,
   ...props
 }: TextInputProps<TFormValues>) {
-  const { register, setValue } = useFormContext();
+  const { register, setValue, control } = useFormContext();
+  const text = useWatch({ control, name });
 
   return (
     <div className={className} aria-live="polite">
       <Input
         id={id}
+        value={text}
         {...props}
         {...(register && register(name, {
           onChange: e => {

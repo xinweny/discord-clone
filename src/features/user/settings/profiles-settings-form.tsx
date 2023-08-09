@@ -37,13 +37,16 @@ export function ProfilesSettingsForm() {
     bio,
   } = user.data!;
 
+  const defaultValues = {
+    displayName,
+    bannerColor: bannerColor || '#18191c',
+    bio,
+  };
+
   const methods = useForm<UserProfileFields>({
     resolver: zodResolver(userProfileSchema),
-    defaultValues: {
-      displayName,
-      bannerColor: bannerColor || '#18191c',
-      bio,
-    },
+    defaultValues,
+    mode: 'onChange',
   });
   const { reset, handleSubmit } = methods;
 
@@ -86,7 +89,7 @@ export function ProfilesSettingsForm() {
               options={{ showCharCount: true }}
             />
           </FormGroup>
-          <FormChangesAlert />
+          <FormChangesAlert defaultValues={defaultValues} />
         </form>
         <div>
           <p>PREVIEW</p>

@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { CHANNEL_SETTINGS } from './tabs';
+
 import { ChannelContext } from './edit-channel-button';
 
 import { TabGroupLayout } from '@components/layouts';
@@ -7,10 +9,6 @@ import { TabGroupLayout } from '@components/layouts';
 type ChannelSettingsSidebarProps = {
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CHANNEL_SETTINGS_TABS = {
-  overview: 'Overview',
 };
 
 export function ChannelSettingsSidebar({
@@ -22,7 +20,7 @@ export function ChannelSettingsSidebar({
     <div>
       <TabGroupLayout
         title={`#${channel?.name.toUpperCase()}`}
-        tabDict={CHANNEL_SETTINGS_TABS}
+        tabs={CHANNEL_SETTINGS}
         activeTabId={activeTabId}
         setActiveTabId={setActiveTabId}
       />

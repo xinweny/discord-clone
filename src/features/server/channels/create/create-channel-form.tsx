@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
-
 import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { createChannelSchema } from './schema';
 
 import { SubmitButton } from '@components/ui/forms';
 
@@ -8,7 +10,7 @@ import { useCreateChannelMutation } from '../api';
 
 import {
   ChannelTypeFieldset,
-  ChannelNameInput,
+  CreateChannelNameInput,
 } from '.';
 
 type CreateChannelFormProps = {
@@ -37,6 +39,8 @@ export function CreateChannelForm({
       categoryId,
       serverId,
     },
+    resolver: zodResolver(createChannelSchema),
+    mode: 'onChange',
   });
 
   const [createChannel] = useCreateChannelMutation();
@@ -59,7 +63,7 @@ export function CreateChannelForm({
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ChannelTypeFieldset />
-        <ChannelNameInput />
+        <CreateChannelNameInput />
         <div>
           <button
             type="button"

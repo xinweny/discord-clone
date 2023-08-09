@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useWatch, useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { formatTextChannelName } from '@utils';
 
-import { FormGroup, TextInput } from '@components/ui/forms';
+import { ChannelTypes } from '@features/server/channels/api';
 
-export function ChannelNameInput() {
+export const useFormatChannelName = () => {
   const { control, setValue } = useFormContext();
 
   const type = useWatch({ control, name: 'type' });
@@ -25,18 +25,21 @@ export function ChannelNameInput() {
     }
   };
 
-  return (
-    <FormGroup label="channel name" htmlFor="channel-name">
-      <TextInput
-        name="name"
-        label="Channel Name"
-        id="channel-name"
-        placeholder="new-channel"
-        rules={{
-          onChange: formatChannelName,
-        }}
-        maxLength={100}
-      />
-    </FormGroup>
-  )
-}
+  return formatChannelName;
+};
+
+export const useFormatChannelNameEdit = (type: ChannelTypes) => {
+  const { setValue } = useFormContext();
+
+  const formatChannelName = (e: React.FormEvent<HTMLInputElement>) => {
+    if (type === 'text') {
+      const name = e.currentTarget.value;
+      
+      const formattedName = formatTextChannelName(name);
+
+      setValue('name', formattedName);
+    }
+  };
+
+  return formatChannelName;
+};

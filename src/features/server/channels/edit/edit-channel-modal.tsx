@@ -1,6 +1,8 @@
 import type { ModalProps } from '@types';
 import type { ChannelData } from '../api';
 
+import { CHANNEL_SETTINGS } from './tabs';
+
 import { SettingsModal } from '@components/ui/modals';
 
 import { ChannelSettingsScreen } from './channel-settings-screen';
@@ -18,7 +20,7 @@ export function EditChannelModal({
     <SettingsModal
       isOpen={isOpen}
       onClose={onClose}
-      initialTabId="overview"
+      initialTabId={CHANNEL_SETTINGS[0].id}
       sidebar={ChannelSettingsSidebar}
       content={ChannelSettingsScreen}
     />

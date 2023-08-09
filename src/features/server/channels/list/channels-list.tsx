@@ -4,7 +4,8 @@ import { useGetCategoriesQuery } from '@features/server/categories/api';
 import { useGetChannelsQuery } from '../api';
 
 import { CategoryGroup } from '@features/server/categories/list';
-import { ChannelLink } from '../nav/channel-link';
+
+import { ChannelsListItem } from './channels-list-item';
 
 export function ChannelsList() {
   const { serverId } = useParams();
@@ -19,7 +20,11 @@ export function ChannelsList() {
   return (
     <div>
       {uncategorizedChannels.map(channel =>
-        <ChannelLink key={channel._id} channel={channel} serverId={serverId!}/>
+        <ChannelsListItem
+          key={channel._id}
+          channel={channel}
+          serverId={serverId!}
+        />
       )}
       {categories.data.map(
         category => (
@@ -27,7 +32,11 @@ export function ChannelsList() {
             {channels.data
               .filter(channel => channel.categoryId === category._id)
               .map(channel =>
-                <ChannelLink key={channel._id} channel={channel} serverId={serverId!} />
+                <ChannelsListItem
+                  key={channel._id}
+                  channel={channel}
+                  serverId={serverId!}
+                />
               )
             }
           </CategoryGroup>
