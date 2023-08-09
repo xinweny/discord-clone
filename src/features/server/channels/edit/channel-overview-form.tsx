@@ -8,9 +8,11 @@ import { editChannelSchema } from './schema';
 import { ChannelContext } from './edit-channel-button';
 
 import { EditChannelNameInput } from './edit-channel-name-input';
+import { ChannelDescriptionInput } from './channel-description-input';
 
 import { FormChangesAlert } from '@components/ui/forms';
-import { ChannelDescriptionInput } from './channel-description-input';
+
+import { useEditChannelMutation } from '../api';
 
 type EditChannelFields = {
   name: string;
@@ -22,6 +24,8 @@ type EditChannelFields = {
 export function ChannelOverviewForm() {
   const { serverId } = useParams();
   const channel = useContext(ChannelContext);
+
+  const [editChannel] = useEditChannelMutation();
 
   const defaultValues = {
     name: channel?.name || '',
@@ -37,8 +41,16 @@ export function ChannelOverviewForm() {
   });
   const { handleSubmit, reset } = methods;
 
-  const onSubmit = () => {
-    reset();
+  const onSubmit = async (data: EditChannelFields) => {
+    const channel = await editChannel(data).unwrap();
+    const { name, description } = channel;
+    
+    reset({
+      name,
+      description,
+      serverId,
+      channelId: channel._id,
+    });
   };
 
   if (!channel) return null;

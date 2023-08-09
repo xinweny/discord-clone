@@ -24,6 +24,13 @@ type CreateChannelQuery = {
   categoryId?: string;
 };
 
+type EditChannelQuery = {
+  channelId: string;
+  serverId: string;
+  name: string;
+  description: string;
+};
+
 const channelApi = api.injectEndpoints({
   endpoints(build) {
     return {
@@ -32,7 +39,7 @@ const channelApi = api.injectEndpoints({
           url: `/servers/${serverId}/channels`,
           method: 'get',
         }),
-        providesTags: (res, err, serverId) => [{ type: 'Channels', id: serverId }],
+        providesTags: (...[, , serverId]) => [{ type: 'Channels', id: serverId }],
       }),
       createChannel: build.mutation<ChannelData, CreateChannelQuery>({
         query: ({ serverId, name, type, categoryId }) => ({
@@ -44,7 +51,18 @@ const channelApi = api.injectEndpoints({
             categoryId,
           },
         }),
-        invalidatesTags: (res, err, { serverId }) => [{ type: 'Channels', id: serverId }],
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Channels', id: serverId }],
+      }),
+      editChannel: build.mutation<ChannelData, EditChannelQuery>({
+        query: ({ serverId, channelId, name, description }) => ({
+          url: `/servers/${serverId}/channels/${channelId}`,
+          method: 'put',
+          data: {
+            name,
+            description,
+          },
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Channels', id: serverId }],
       }),
     };  
   }
@@ -55,4 +73,5 @@ export default channelApi;
 export const {
   useGetChannelsQuery,
   useCreateChannelMutation,
+  useEditChannelMutation,
 } = channelApi;
