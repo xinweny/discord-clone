@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { PublicRoute, PrivateRoute, RestrictedRoute } from '@components/routes';
 
 import { WebSocketConnection } from '@features/websocket';
-import { ChannelRedirector } from '@features/server/channels/nav';
+import { ChannelRedirector } from '@features/channels/nav';
 
 import {
   LandingPage,

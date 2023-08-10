@@ -5,7 +5,7 @@ import { SidebarLayout } from '@components/layouts';
 import { useGetServerQuery } from '../api';
 
 import { ServerHeader } from './server-header';
-import { ChannelsList } from '../channels/list';
+import { ChannelsList } from '@features/channels/list';
 
 export function ServerNavBar() {
   const { serverId } = useParams();

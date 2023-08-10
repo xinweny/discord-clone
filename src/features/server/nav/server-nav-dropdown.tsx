@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { Dropdown, DropdownItem } from '@components/ui/dropdowns';
-import { CreateChannelButton } from '../channels/create';
+import { CreateChannelButton } from '@features/channels/create';
 import { LabelAndIcon } from '@components/ui/presentation';
 
 export function ServerNavDropdown() {

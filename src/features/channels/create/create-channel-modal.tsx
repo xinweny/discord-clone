@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import type { CategoryData } from '@features/server/categories/api';
+import type { CategoryData } from '@features/categories/api';
 import type { ModalProps } from '@types';
 
 import { ModalWrapper } from '@components/wrappers';

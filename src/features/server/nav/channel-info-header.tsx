@@ -1,6 +1,6 @@
 import { useActiveChannel } from '@hooks';
 
-import { ChannelIcon } from '@features/server/channels/list';
+import { ChannelIcon } from '@features/channels/list';
 
 export function ChannelInfoHeader() {
   const channel = useActiveChannel();

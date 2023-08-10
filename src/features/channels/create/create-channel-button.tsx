@@ -1,6 +1,6 @@
 import { useModal, useServerAuthorize } from '@hooks';
 
-import type { CategoryData } from '@features/server/categories/api';
+import type { CategoryData } from '@features/categories/api';
 
 import { CreateChannelModal } from './create-channel-modal';
 

@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetCategoriesQuery } from '@features/server/categories/api';
+import { useGetCategoriesQuery } from '@features/categories/api';
 import { useGetChannelsQuery } from '../api';
 
-import { CategoryGroup } from '@features/server/categories/list';
+import { CategoryGroup } from '@features/categories/list';
 
 import { ChannelsListItem } from './channels-list-item';
 

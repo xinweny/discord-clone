@@ -1,6 +1,6 @@
 import { CategoryData } from '../api';
 
-import { CreateChannelButton } from '@features/server/channels/create';
+import { CreateChannelButton } from '@features/channels/create';
 import { HoverPopup } from '@components/ui/popups';
 
 type CategoryGroupProps = {

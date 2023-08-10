@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useGetUserData } from './use-get-user-data';
 
 import { useGetServerQuery } from '@features/server/api';
-import { useGetServerMemberQuery } from '@features/server/members/api';
-import { useGetServerRolesQuery } from '@features/server/roles/api';
+import { useGetServerMemberQuery } from '@features/members/api';
+import { useGetServerRolesQuery } from '@features/roles/api';
 
 import { RolePermissionNames } from '@types';
 

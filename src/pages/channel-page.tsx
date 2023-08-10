@@ -3,7 +3,7 @@ import { ContentLayout } from '@components/layouts';
 import { useActiveChannel } from '@hooks';
 
 import { ChannelInfoHeader } from '@features/server/nav';
-import { ServerMembersList } from '@features/server/members/list';
+import { ServerMembersList } from '@features/members/list';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
 import { RoomWelcome } from '@components/ui/displays';
