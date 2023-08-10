@@ -1,8 +1,10 @@
-import { useModal, useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@hooks';
 
 import type { CategoryData } from '@features/categories/api';
 
 import { CreateChannelModal } from './create-channel-modal';
+
+import { ModalButton } from '@components/ui/buttons';
 
 type CreateChannelButtonProps = {
   category?: CategoryData;
@@ -16,18 +18,18 @@ export function CreateChannelButton({
   btnRef,
   ...props
 }: CreateChannelButtonProps) {
-  const [show, toggle] = useModal();
-
   const authorized = useServerAuthorize('manageChannels');
 
   if (!authorized) return null;
 
   return (
-    <div>
-      <button ref={btnRef} onClick={toggle} {...props}>
-        {children}
-      </button>
-      <CreateChannelModal isOpen={show} onClose={toggle} category={category} />
-    </div>
+    <ModalButton
+      modal={CreateChannelModal}
+      modalProps={{ category }}
+      btnRef={btnRef}
+      {...props}
+    >
+      {children}
+    </ModalButton>
   );
 }

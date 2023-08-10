@@ -1,16 +1,13 @@
-import { useModal } from '@hooks';
+import { ModalButton } from '@components/ui/buttons';
 
 import { UserSettingsModal } from './user-settings-modal';
 
 export function UserSettingsButton() {
-  const [show, toggle] = useModal();
-
   return (
-    <div>
-      <button type="button" onClick={toggle}>
-        <img src="#" alt="User settings" />
-      </button>
-      <UserSettingsModal isOpen={show} onClose={toggle} />
-    </div>
+    <ModalButton
+      modal={UserSettingsModal}
+    >
+      <img src="#" alt="User settings" />
+    </ModalButton>
   );
 }
