@@ -75,9 +75,10 @@ const deleteChannel: RequestHandler[] = [
     async (req, res) => {
       const { serverId, channelId } = req.params;
 
-      await channelService.remove(serverId, channelId);
+      const channel = await channelService.remove(serverId, channelId);
 
       res.json({
+        data: channel,
         message: 'Channel successfully deleted.',
       });
     }
