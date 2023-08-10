@@ -1,9 +1,13 @@
 import { Router } from 'express';
 
+import { userMemberRouter } from '../members/router';
+
 import { userServersController } from './controller';
 
-const userServersRouter = Router({ mergeParams: true });
+const userServerRouter = Router({ mergeParams: true });
 
-userServersRouter.get('/', userServersController.getJoinedServers);
+userServerRouter.get('/', userServersController.getJoinedServers);
 
-export { userServersRouter };
+userServerRouter.use('/:serverId/member', userMemberRouter);
+
+export { userServerRouter };

@@ -4,7 +4,7 @@ import { relationRouter } from './relations/router';
 import { mutualsRouter } from './mutuals/router';
 
 import { userController } from './controller';
-import { userServersRouter } from './servers/router';
+import { userServerRouter } from './servers/router';
 
 const userRouter = Router();
 
@@ -12,7 +12,7 @@ userRouter.use('/:userId/relations', relationRouter);
 
 userRouter.use('/:userId/mutuals', mutualsRouter);
 
-userRouter.use('/:userId/servers', userServersRouter);
+userRouter.use('/:userId/servers', userServerRouter);
 
 userRouter.get('/:userId', userController.getUser);
 

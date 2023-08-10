@@ -22,7 +22,7 @@ const getServerMembers: RequestHandler[] = [
       res.json({ data: members });
     }
   )
-]
+];
 
 const joinServer: RequestHandler[] = [
   authenticate,

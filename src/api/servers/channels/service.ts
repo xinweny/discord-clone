@@ -31,7 +31,7 @@ const create = async (serverId: Types.ObjectId | string, fields: {
     message: Types.ObjectId[] | string[],
   },
 }) => {
-  const server = await Server.findById(serverId);
+  const server = await Server.findById(serverId, 'categories channels');
 
   if (!server) throw new CustomError(400, 'Server not found.');
 
@@ -42,6 +42,7 @@ const create = async (serverId: Types.ObjectId | string, fields: {
   server.channels.push(fields);
 
   const channel = server.channels.slice(-1)[0];
+  if (categoryId) server.categories.id(categoryId)?.channelIds.push(channel._id);
 
   await server.save();
 
@@ -53,6 +54,7 @@ const update = async (
   channelId: Types.ObjectId | string,
   fields: {
     name?: string,
+    description?: string,
 }) => {
   const server = await Server.findOneAndUpdate({
     _id: serverId,
@@ -67,7 +69,7 @@ const update = async (
 };
 
 const remove = async (serverId: Types.ObjectId | string, channelId: Types.ObjectId | string) => {
-  const server = await Server.findById(serverId);
+  const server = await Server.findById(serverId).select('channels categories');
 
   if (!server) return null;
 
@@ -75,10 +77,14 @@ const remove = async (serverId: Types.ObjectId | string, channelId: Types.Object
 
   server.channels.pull(channelId);
 
+  const category = server.categories.id(channel?.categoryId);
+
+  if (category) category.channelIds = category.channelIds.filter(id => id !== channelId);
+
   await Promise.all([
     server.save(),
     Message.deleteMany({ roomId: channelId }),
-    cloudinaryService.deleteByFolder(`attachments/${serverId}/${channel?._id.toString()}`)
+    cloudinaryService.deleteByFolder(`attachments/${serverId}/${channel?._id.toString()}`),
   ]);
 
   return channel;

@@ -28,7 +28,7 @@ const generateUrl = (filename: string, folder: string, customPublicId?: string) 
 
   const { name, ext } = path.parse(filename);
 
-  const publicId = customPublicId ? customPublicId : name;
+  const publicId = encodeURIComponent(customPublicId ? customPublicId : name);
 
   const resource = cld.image(`${folderPath}/${publicId}`);
 

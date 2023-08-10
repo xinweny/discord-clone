@@ -10,7 +10,7 @@ import { roleService } from './service';
 
 const getRole: RequestHandler[] = [
   authenticate,
-  authorize.server('manageRoles'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const { serverId, roleId } = req.params
@@ -24,7 +24,7 @@ const getRole: RequestHandler[] = [
 
 const getRoles: RequestHandler[] = [
   authenticate,
-  authorize.server('manageRoles'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const roles = await roleService.get(req.params.serverId);
