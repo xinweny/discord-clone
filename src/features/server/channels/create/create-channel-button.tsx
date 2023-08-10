@@ -7,9 +7,15 @@ import { CreateChannelModal } from './create-channel-modal';
 type CreateChannelButtonProps = {
   category?: CategoryData;
   children?: React.ReactNode;
-};
+  btnRef?: React.RefObject<HTMLButtonElement>;
+} & React.HTMLAttributes<HTMLButtonElement>;
 
-export function CreateChannelButton({ category, children }: CreateChannelButtonProps) {
+export function CreateChannelButton({
+  category,
+  children,
+  btnRef,
+  ...props
+}: CreateChannelButtonProps) {
   const [show, toggle] = useModal();
 
   const authorized = useServerAuthorize('manageChannels');
@@ -18,7 +24,7 @@ export function CreateChannelButton({ category, children }: CreateChannelButtonP
 
   return (
     <div>
-      <button onClick={toggle}>
+      <button ref={btnRef} onClick={toggle} {...props}>
         {children}
       </button>
       <CreateChannelModal isOpen={show} onClose={toggle} category={category} />

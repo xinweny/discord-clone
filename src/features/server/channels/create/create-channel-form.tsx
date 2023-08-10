@@ -38,6 +38,7 @@ export function CreateChannelForm({
       type: 'text',
       categoryId,
       serverId,
+      private: false,
     },
     resolver: zodResolver(createChannelSchema),
     mode: 'onChange',
@@ -48,15 +49,11 @@ export function CreateChannelForm({
   const { handleSubmit, reset } = methods;
 
   const onSubmit = async (data: CreateChannelFields) => {
-    try {
       const channel = await createChannel(data).unwrap();
 
       reset();
       closeBtnRef.current?.click();
       navigate(`/channels/${serverId}/${channel._id}`);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (

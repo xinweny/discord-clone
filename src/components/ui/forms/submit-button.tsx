@@ -15,7 +15,7 @@ export function SubmitButton({
     <button
       className={className}
       type="submit"
-      disabled={!isDirty || !isValid}
+      disabled={!isDirty && !isValid}
     >{children}</button>
   );
 }

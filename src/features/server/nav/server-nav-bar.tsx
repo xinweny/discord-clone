@@ -4,6 +4,7 @@ import { SidebarLayout } from '@components/layouts';
 
 import { useGetServerQuery } from '../api';
 
+import { ServerHeader } from './server-header';
 import { ChannelsList } from '../channels/list';
 
 export function ServerNavBar() {
@@ -15,12 +16,8 @@ export function ServerNavBar() {
 
   return (
     <div>
-      <SidebarLayout top={
-        <div>
-          <h3>{server.name}</h3>
-          <img src={server.bannerUrl} alt="Banner" />
-        </div>
-      }>
+      <SidebarLayout top={<ServerHeader server={server} />}>
+        <img src={server.bannerUrl} alt="Banner" />
         <ChannelsList />
       </SidebarLayout>
     </div>
