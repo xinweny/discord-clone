@@ -6,6 +6,7 @@ import { LabelAndIcon } from '@components/ui/presentation';
 
 export function ServerNavDropdown() {
   const createChannelBtnRef = useRef<HTMLButtonElement>(null);
+  const createCategoryBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div>
@@ -13,9 +14,13 @@ export function ServerNavDropdown() {
         <DropdownItem clickRef={createChannelBtnRef}>
           <LabelAndIcon label="Create Channel" icon="#" />
         </DropdownItem>
+        <DropdownItem clickRef={createCategoryBtnRef}>
+          <LabelAndIcon label="Create Category" icon="#" />
+        </DropdownItem>
       </Dropdown>
-      <div>
-        <CreateChannelButton btnRef={createChannelBtnRef} hidden />
+      <div hidden>
+        <CreateChannelButton btnRef={createChannelBtnRef} />
+        
       </div>
     </div>
   )
