@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 
 import { Dropdown, DropdownItem } from '@components/ui/dropdowns';
-import { CreateChannelButton } from '@features/channels/create';
 import { LabelAndIcon } from '@components/ui/presentation';
+
+import { CreateChannelButton } from '@features/channels/create';
+import { CreateCategoryButton } from '@features/categories/create';
 
 export function ServerNavDropdown() {
   const createChannelBtnRef = useRef<HTMLButtonElement>(null);
@@ -18,9 +20,9 @@ export function ServerNavDropdown() {
           <LabelAndIcon label="Create Category" icon="#" />
         </DropdownItem>
       </Dropdown>
-      <div hidden>
-        <CreateChannelButton btnRef={createChannelBtnRef} />
-        
+      <div>
+        <CreateChannelButton btnRef={createChannelBtnRef} hidden />
+        <CreateCategoryButton btnRef={createCategoryBtnRef} hidden />
       </div>
     </div>
   )

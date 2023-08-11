@@ -1,10 +1,6 @@
 import api from '@services/api';
 
-export type CategoryData = {
-  _id: string;
-  name: string;
-  channelIds: string[];
-};
+import type { CategoryData, CreateCategoryFields } from './types';
 
 const categoryApi = api.injectEndpoints({
   endpoints(build) {
@@ -14,6 +10,17 @@ const categoryApi = api.injectEndpoints({
           url: `/servers/${serverId}/categories`,
           method: 'get',
         }),
+        providesTags: (...[, , serverId]) => [{ type: 'Categories', id: serverId }],
+      }),
+      createCategory: build.mutation<CategoryData, CreateCategoryFields>({
+        query: ({ serverId, name }) => ({
+          url: `/servers/${serverId}/categories`,
+          method: 'post',
+          data: {
+            name,
+          },
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Categories', id: serverId }],
       }),
     };  
   }
@@ -23,4 +30,5 @@ export default categoryApi;
 
 export const {
   useGetCategoriesQuery,
+  useCreateCategoryMutation,
 } = categoryApi;

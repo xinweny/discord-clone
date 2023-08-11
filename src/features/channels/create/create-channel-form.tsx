@@ -2,9 +2,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import type { CreateChannelFields } from '../types';
+
 import { createChannelSchema } from './schema';
 
-import { SubmitButton } from '@components/ui/forms';
+import { ResetSubmitButtons } from '@components/ui/forms';
 
 import { useCreateChannelMutation } from '../api';
 
@@ -16,14 +18,6 @@ import {
 type CreateChannelFormProps = {
   categoryId?: string;
   closeBtnRef: React.RefObject<HTMLButtonElement>;
-};
-
-export type CreateChannelFields = {
-  serverId: string;
-  name: string;
-  type: 'text' | 'voice';
-  categoryId?: string;
-  private: boolean;
 };
 
 export function CreateChannelForm({
@@ -61,13 +55,7 @@ export function CreateChannelForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <ChannelTypeFieldset />
         <CreateChannelNameInput />
-        <div>
-          <button
-            type="button"
-            onClick={() => { closeBtnRef.current?.click(); }}
-          >Cancel</button>
-          <SubmitButton>Create Channel</SubmitButton>
-        </div>
+        <ResetSubmitButtons closeBtnRef={closeBtnRef} submitLabel="Create Channel" />
       </form>
     </FormProvider>
   );

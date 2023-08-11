@@ -1,4 +1,4 @@
-import { ServerData } from '../api';
+import { ServerData } from '../types';
 
 import { ServerNavDropdown } from './server-nav-dropdown';
 

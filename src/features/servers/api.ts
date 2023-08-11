@@ -1,14 +1,14 @@
-import { FieldValues } from 'react-hook-form';
+import type { ApiPaginationData } from '@types';
+import type { ServerData } from '@features/server/types';
+import type {
+  PublicServerData,
+  UserServerData,
+  CreateServerFields,
+} from './types';
 
 import api from '@services/api';
 
 import { signAndUpload } from '@services/cloudinary';
-
-import type { ApiPaginationData } from '@types';
-import type { ServerData } from '@features/server/api';
-
-export type PublicServerData = Omit<ServerData, 'private'>;
-export type UserServerData = Pick<ServerData, '_id' | 'name' | 'avatarUrl'>;
 
 const serversApi = api.injectEndpoints({
   endpoints(build) {
@@ -26,7 +26,7 @@ const serversApi = api.injectEndpoints({
         }),
         providesTags: ['JoinedServers'],
       }),
-      createServer: build.mutation<ServerData, FieldValues>({
+      createServer: build.mutation<ServerData, CreateServerFields>({
         query: ({ name, file }) => ({
           url: '/servers',
           method: 'post',
@@ -38,7 +38,7 @@ const serversApi = api.injectEndpoints({
 
             const serverId = server._id;
 
-            await signAndUpload(file, `/avatars/servers/${serverId}`, serverId);
+            if (file) await signAndUpload(file, `/avatars/servers/${serverId}`, serverId);
   
             dispatch(api.util.invalidateTags(['JoinedServers']));
           } catch (err) {

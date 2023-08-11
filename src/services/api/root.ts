@@ -10,6 +10,7 @@ const api = createApi({
     'JoinedServers',
     'User',
     'Channels',
+    'Categories',
   ],
 });
 

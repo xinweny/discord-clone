@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import type { ChannelData } from '../api';
+import type { ChannelData } from '../types';
 
 import { ModalButton } from '@components/ui/buttons';
 import { EditChannelModal } from './edit-channel-modal';

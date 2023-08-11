@@ -1,4 +1,4 @@
-import { ChannelData } from '../api';
+import type { ChannelData } from '../types';
 
 import { ChannelLink } from '../nav';
 import { EditChannelButton } from '../edit';

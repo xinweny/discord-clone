@@ -35,3 +35,12 @@ export type UserSelfData = {
   dms: UserDMData[];
   servers: UserServerData[];
 };
+
+export type UpdateUserFields = {
+  userId: string;
+  file?: File;
+  username?: string;
+  displayName?: string;
+  bannerColor?: string;
+  bio?: string;
+};

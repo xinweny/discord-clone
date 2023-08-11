@@ -1,6 +1,6 @@
 import { useOutletContext, useParams, Navigate } from 'react-router-dom';
 
-import { ChannelData } from '../api';
+import { ChannelData } from '../types';
 
 type ContextType = {
   activeChannel: ChannelData | null

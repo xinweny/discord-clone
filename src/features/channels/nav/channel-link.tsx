@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { ChannelIcon } from '../list';
 
-import type { ChannelData } from '../api';
+import type { ChannelData } from '../types';
 
 type ChannelLinkProps = {
   channel: ChannelData;

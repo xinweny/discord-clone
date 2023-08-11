@@ -1,6 +1,8 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import type { CreateServerFields } from '../types';
+
 import { serverSchema } from './schema';
 
 import {
@@ -17,11 +19,6 @@ import { useCreateServerMutation } from '../api';
 
 type CreateServerFormProps = {
   closeBtn: HTMLButtonElement | null;
-};
-
-export type CreateServerFields = {
-  name: string;
-  file?: File;
 };
 
 export function CreateServerForm({ closeBtn }: CreateServerFormProps) {

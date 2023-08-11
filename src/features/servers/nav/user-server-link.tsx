@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
+import type { UserServerData } from '../types';
+
 import { LinkImage } from '@components/ui/links';
 
+
 type ServerNavProps = {
-  server: {
-    _id: string;
-    name: string;
-    avatarUrl: string;
-  }
+  server: UserServerData;
 };
 
 export function UserServerLink({ server }: ServerNavProps) {

@@ -1,17 +1,11 @@
 import api from '@services/api';
 
+import type {
+  UserSelfData,
+  UpdateUserFields,
+} from '@features/user/types';
+
 import { signAndUpload } from '@services/cloudinary';
-
-import type { UserSelfData } from '@features/user/types';
-
-type UpdateUserQuery = {
-  userId: string;
-  file?: File;
-  username?: string;
-  displayName?: string;
-  bannerColor?: string;
-  bio?: string;
-};
 
 const userApi = api.injectEndpoints({
   endpoints(build) {
@@ -23,7 +17,7 @@ const userApi = api.injectEndpoints({
         }),
         providesTags: ['User'],
       }),
-      updateUser: build.mutation<UserSelfData, UpdateUserQuery>({
+      updateUser: build.mutation<UserSelfData, UpdateUserFields>({
         query: ({
           userId,
           file,

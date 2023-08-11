@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { EditChannelFields } from '../types';
+
 import { editChannelSchema } from './schema';
 
 import { ChannelContext } from './edit-channel-button';
@@ -13,13 +15,6 @@ import { ChannelDescriptionInput } from './channel-description-input';
 import { FormChangesAlert } from '@components/ui/forms';
 
 import { useEditChannelMutation } from '../api';
-
-type EditChannelFields = {
-  name: string;
-  description: string;
-  channelId: string;
-  serverId: string;
-};
 
 export function ChannelOverviewForm() {
   const { serverId } = useParams();

@@ -1,6 +1,6 @@
 import pluralize from 'pluralize';
 
-import type { PublicServerData } from '@features/servers/api';
+import type { PublicServerData } from '@features/servers/types';
 
 type SearchResultServersCardProps = {
   server: PublicServerData;

@@ -1,4 +1,4 @@
-import type { PublicServerData } from '@features/servers/api';
+import type { PublicServerData } from '@features/servers/types';
 
 import { SearchResultServersCard } from '@features/servers/discover';
 
