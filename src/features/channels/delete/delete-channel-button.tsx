@@ -1,16 +1,18 @@
-import { useModal } from '@hooks';
+import { useServerAuthorize } from '@hooks';
 
+import { ModalButton } from '@components/ui/buttons';
 import { DeleteChannelModal } from './delete-channel-modal';
 
 export function DeleteChannelButton() {
-  const [show, toggle] = useModal();
+  const authorized = useServerAuthorize('manageChannels');
+
+  if (!authorized) return null;
 
   return (
-    <div>
-      <button type="button" onClick={toggle}>
-        Delete Channel
-      </button>
-      <DeleteChannelModal isOpen={show} onClose={toggle} />
-    </div>
+    <ModalButton
+      modal={DeleteChannelModal}
+    >
+      Delete Channel
+    </ModalButton>
   );
 }

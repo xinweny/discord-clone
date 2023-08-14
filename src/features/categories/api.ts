@@ -1,6 +1,11 @@
 import api from '@services/api';
 
-import type { CategoryData, CreateCategoryFields } from './types';
+import type {
+  CategoryData,
+  CreateCategoryFields,
+  EditCategoryFields,
+  DeleteCategoryFields,
+} from './types';
 
 const categoryApi = api.injectEndpoints({
   endpoints(build) {
@@ -16,11 +21,24 @@ const categoryApi = api.injectEndpoints({
         query: ({ serverId, name }) => ({
           url: `/servers/${serverId}/categories`,
           method: 'post',
-          data: {
-            name,
-          },
+          data: { name },
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'Categories', id: serverId }],
+      }),
+      editCategory: build.mutation<CategoryData, EditCategoryFields>({
+        query: ({ serverId, categoryId, name }) => ({
+          url: `/servers/${serverId}/categories/${categoryId}`,
+          method: 'put',
+          data: { name },
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Categories', id: serverId }],
+      }),
+      deleteCategory: build.mutation<CategoryData, DeleteCategoryFields>({
+        query: ({ serverId, categoryId }) => ({
+          url: `/servers/${serverId}/categories/${categoryId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Categories', id: serverId }, { type: 'Channels', id: serverId }],
       }),
     };  
   }
@@ -31,4 +49,6 @@ export default categoryApi;
 export const {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
+  useEditCategoryMutation,
+  useDeleteCategoryMutation,
 } = categoryApi;

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { DropdownContext } from '../dropdowns';
+import { DropdownContext } from '.';
 
 type DropdownButtonProps = {
   children?: React.ReactNode;

@@ -1,7 +1,6 @@
-import { CategoryData } from '../api';
+import type { CategoryData } from '../types';
 
-import { CreateChannelButton } from '@features/channels/create';
-import { HoverPopup } from '@components/ui/popups';
+import { CategoryHeader } from './category-header';
 
 type CategoryGroupProps = {
   category: CategoryData;
@@ -11,20 +10,9 @@ type CategoryGroupProps = {
 export function CategoryGroup({
   category, children,
 }: CategoryGroupProps) {
-
-
   return (
     <div>
-      <div>
-        <p>{category.name.toUpperCase()}</p>
-        <CreateChannelButton category={category}>
-          <HoverPopup
-            popup={<div>Create Channel</div>}
-          >
-            <img src="#" alt="Create Channel" />
-          </HoverPopup>
-        </CreateChannelButton>
-      </div>
+      <CategoryHeader category={category} />
       <div>
         {children}
       </div>

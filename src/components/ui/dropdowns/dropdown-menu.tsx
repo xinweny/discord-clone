@@ -12,9 +12,9 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
 
   return (isOpen && (
     <ClickAwayListener onClickAway={close}>
-      <div>
+      <ul>
         {children}
-      </div>
+      </ul>
     </ClickAwayListener>
   ));
 }

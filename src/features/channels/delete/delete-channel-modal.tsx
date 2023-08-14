@@ -30,8 +30,6 @@ export function DeleteChannelModal({
       channelId: channel._id,
     });
 
-    // TODO: Resolve cloudinary no folder error
-
     if (closeBtnRef) closeBtnRef.current?.click();
     navigate(`/channels/${serverId}/${channel._id}`);
   };

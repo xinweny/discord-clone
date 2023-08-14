@@ -20,8 +20,10 @@ export function DropdownItem({
   }
 
   return (
-    <button onClick={handleClick}>
-      {children}
-    </button>
+    <li>
+      <button onClick={handleClick}>
+        {children}
+      </button>
+    </li>
   );
 }

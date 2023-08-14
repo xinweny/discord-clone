@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { useDropdown } from '@hooks';
 
-import { DropdownButton } from '../buttons';
+import { DropdownButton } from './dropdown-button';
 import { DropdownMenu } from './dropdown-menu';
 
 type DropdownProps = {
@@ -24,10 +24,7 @@ export function Dropdown({ button, children }: DropdownProps) {
   return (
     <DropdownContext.Provider value={{ isOpen, toggle, close }}>
       <div>
-        {button
-          ? <DropdownButton>{button}</DropdownButton>
-          : <DropdownButton />
-        }
+        <DropdownButton>{button}</DropdownButton>
         <DropdownMenu>
           {children}
         </DropdownMenu>
