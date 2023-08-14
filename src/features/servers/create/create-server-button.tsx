@@ -1,16 +1,13 @@
-import { useModal } from '@hooks';
-
 import { CreateServerModal } from './create-server-modal';
 
-export function CreateServerButton() {
-  const [show, toggle] = useModal();
+import { ModalButton } from '@components/ui/buttons';
 
+export function CreateServerButton() {
   return (
-    <div>
-      <button onClick={toggle}>
-        <img src="#" alt="Add a Server" />
-      </button>
-      <CreateServerModal isOpen={show} onClose={toggle} />
-    </div>
+    <ModalButton
+      modal={CreateServerModal}
+    >
+      <img src="#" alt="Add a Server" />
+    </ModalButton>
   );
 }

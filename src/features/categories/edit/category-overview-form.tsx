@@ -7,7 +7,7 @@ import { EditCategoryFields } from '../types';
 
 import { editCategorySchema } from './schema';
 
-import { CategoryContext } from './edit-category-button';
+import { CategoryContext } from '../context';
 
 import {
   FormGroup,

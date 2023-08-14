@@ -1,29 +1,29 @@
 import { useContext } from 'react';
 
-import { CHANNEL_SETTINGS } from './tabs';
+import { SERVER_SETTINGS } from './tabs';
 
-import { ChannelContext } from '../context';
+import { ServerContext } from '../context';
 
 import { TabGroupLayout } from '@components/layouts';
 import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentation';
 
-import { DeleteChannelButton } from '../delete';
+import { DeleteServerButton } from '../delete';
 
-export function ChannelSettingsSidebar({
+export function ServerSettingsSidebar({
   activeTabId, setActiveTabId
 }: SettingsSidebarProps) {
-  const channel = useContext(ChannelContext);
+  const server = useContext(ServerContext);
 
   return (
     <SettingsSidebar>
       <TabGroupLayout
-        title={`#${channel?.name.toUpperCase()}`}
-        tabs={CHANNEL_SETTINGS}
+        title={`${server?.name.toUpperCase()}`}
+        tabs={SERVER_SETTINGS}
         activeTabId={activeTabId}
         setActiveTabId={setActiveTabId}
       />
       <TabGroupLayout>
-        <DeleteChannelButton />
+        <DeleteServerButton />
       </TabGroupLayout>
     </SettingsSidebar>
   );

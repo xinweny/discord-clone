@@ -1,6 +1,6 @@
-import { createContext } from 'react';
-
 import type { ChannelData } from '../types';
+
+import { ChannelContext } from '../context';
 
 import { useServerAuthorize } from '@hooks';
 
@@ -10,8 +10,6 @@ import { EditChannelModal } from './edit-channel-modal';
 type EditChannelButtonProps = {
   channel: ChannelData;
 };
-
-export const ChannelContext = createContext<ChannelData | null>(null);
 
 export function EditChannelButton({ channel }: EditChannelButtonProps) {
   const authorized = useServerAuthorize('manageChannels');

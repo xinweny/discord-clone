@@ -4,14 +4,12 @@ import type { CategoryData } from '../types';
 
 import { useServerAuthorize } from '@hooks';
 
-import { ModalButton } from '@components/ui/buttons';
+import { ModalButton, ModalButtonProps } from '@components/ui/buttons';
 import { DeleteCategoryModal } from './delete-category-modal';
 
 type DeleteCategoryButtonProps = {
   category: CategoryData;
-  children?: React.ReactNode;
-  btnRef?: React.RefObject<HTMLButtonElement>;
-} & React.HTMLAttributes<HTMLButtonElement>;
+} & ModalButtonProps;
 
 export const CategoryContext = createContext<CategoryData | null>(null);
 

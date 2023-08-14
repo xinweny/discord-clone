@@ -1,5 +1,9 @@
 import type { TabData } from '@utils';
 
+export type SettingsScreenWrapperProps = {
+  activeTabId: string;
+};
+
 type SettingsScreenProps = {
   activeTabId: string;
   tabs: TabData[];

@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import type { ModalProps } from '@types';
 
 import { SettingsContext } from '@components/layouts';
-import { ChannelContext } from '../edit';
+import { ChannelContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 

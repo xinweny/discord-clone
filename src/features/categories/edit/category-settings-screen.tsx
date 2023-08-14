@@ -1,12 +1,8 @@
 import { CATEGORY_SETTINGS } from './tabs';
 
-import { SettingsScreen } from '@components/ui/presentation';
+import { SettingsScreen, SettingsScreenWrapperProps } from '@components/ui/presentation';
 
-type CategorySettingsProps = {
-  activeTabId: string;
-};
-
-export function CategorySettingsScreen({ activeTabId }: CategorySettingsProps) {
+export function CategorySettingsScreen({ activeTabId }: SettingsScreenWrapperProps) {
   return (
     <SettingsScreen
       activeTabId={activeTabId}

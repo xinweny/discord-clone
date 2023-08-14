@@ -2,24 +2,20 @@ import { useContext } from 'react';
 
 import { CATEGORY_SETTINGS } from './tabs';
 
-import { CategoryContext } from './edit-category-button';
+import { CategoryContext } from '../context';
 
 import { TabGroupLayout } from '@components/layouts';
+import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentation';
 
 import { DeleteCategoryButton } from '../delete';
 
-type CategorySettingsSidebarProps = {
-  activeTabId: string;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
-};
-
 export function CategorySettingsSidebar({
   activeTabId, setActiveTabId
-}: CategorySettingsSidebarProps) {
+}: SettingsSidebarProps) {
   const category = useContext(CategoryContext);
 
   return (
-    <div>
+    <SettingsSidebar>
       <TabGroupLayout
         title={`${category?.name.toUpperCase()}`}
         tabs={CATEGORY_SETTINGS}
@@ -29,6 +25,6 @@ export function CategorySettingsSidebar({
       <TabGroupLayout>
         <DeleteCategoryButton category={category!}>Delete Category</DeleteCategoryButton>
       </TabGroupLayout>
-    </div>
+    </SettingsSidebar>
   );
 }

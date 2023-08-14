@@ -11,6 +11,7 @@ const api = createApi({
     'User',
     'Channels',
     'Categories',
+    'Server',
   ],
 });
 

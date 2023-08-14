@@ -2,12 +2,15 @@ import { useModal } from '@hooks';
 
 import type { ModalProps } from '@types';
 
-type ModalButtonProps<TModalProps> = {
+export type ModalButtonProps = {
   children?: React.ReactNode;
   btnRef?: React.RefObject<HTMLButtonElement>;
+} & React.HTMLAttributes<HTMLButtonElement>;
+
+type FullModalButtonProps<TModalProps> = {
   modalProps?: TModalProps;
   modal: React.FC<ModalProps>;
-} & React.HTMLAttributes<HTMLButtonElement>;
+} & ModalButtonProps;
 
 export function ModalButton<TModalProps>({
   children,
@@ -15,7 +18,7 @@ export function ModalButton<TModalProps>({
   modal,
   modalProps,
   ...props
-}: ModalButtonProps<TModalProps>) {
+}: FullModalButtonProps<TModalProps>) {
   const [show, toggle] = useModal();
 
   const Modal = modal;

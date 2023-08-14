@@ -7,7 +7,7 @@ import { EditChannelFields } from '../types';
 
 import { editChannelSchema } from './schema';
 
-import { ChannelContext } from './edit-channel-button';
+import { ChannelContext } from '../context';
 
 import { EditChannelNameInput } from './edit-channel-name-input';
 import { ChannelDescriptionInput } from './channel-description-input';

@@ -3,19 +3,15 @@ import _ from 'lodash';
 import { USER_SETTINGS } from './tabs';
 
 import { TabGroupLayout } from '@components/layouts';
+import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentation';
 
 import { LogoutButton } from '@features/auth/logout';
 
-type UserSettingsSidebarProps = {
-  activeTabId: string;
-  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
-};
-
 export function UserSettingsSidebar({
   activeTabId, setActiveTabId
-}: UserSettingsSidebarProps) {
+}: SettingsSidebarProps) {
   return (
-    <div>
+    <SettingsSidebar>
       <TabGroupLayout
         title="USER SETTINGS"
         tabs={USER_SETTINGS}
@@ -25,6 +21,6 @@ export function UserSettingsSidebar({
       <TabGroupLayout>
         <LogoutButton />
       </TabGroupLayout>
-    </div>
+    </SettingsSidebar>
   );
 }

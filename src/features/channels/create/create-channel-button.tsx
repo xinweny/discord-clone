@@ -4,13 +4,11 @@ import type { CategoryData } from '@features/categories/types';
 
 import { CreateChannelModal } from './create-channel-modal';
 
-import { ModalButton } from '@components/ui/buttons';
+import { ModalButton, ModalButtonProps } from '@components/ui/buttons';
 
 type CreateChannelButtonProps = {
   category?: CategoryData;
-  children?: React.ReactNode;
-  btnRef?: React.RefObject<HTMLButtonElement>;
-} & React.HTMLAttributes<HTMLButtonElement>;
+} & ModalButtonProps;
 
 export function CreateChannelButton({
   category,

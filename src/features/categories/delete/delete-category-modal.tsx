@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 import type { CategoryData } from '../types';
+
+import { SettingsContext } from '@components/layouts';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -16,6 +19,8 @@ export function DeleteCategoryModal({
   isOpen,
   onClose,
 }: DeleteCategoryModalProps) {
+  const closeBtnRef = useContext(SettingsContext);
+
   const [deleteCategory] = useDeleteCategoryMutation();
 
   const { serverId } = useParams();
@@ -27,6 +32,8 @@ export function DeleteCategoryModal({
       serverId: serverId!,
       categoryId: category._id,
     });
+
+    if (closeBtnRef) closeBtnRef.current?.click();
   };
 
   return (

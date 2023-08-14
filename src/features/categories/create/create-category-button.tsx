@@ -1,13 +1,8 @@
-import { ModalButton } from '@components/ui/buttons';
+import { ModalButton, ModalButtonProps } from '@components/ui/buttons';
 
 import { CreateCategoryModal } from './create-category-modal';
 
-type CreateCategoryButtonProps = {
-  children?: React.ReactNode;
-  btnRef?: React.RefObject<HTMLButtonElement>;
-} & React.HTMLAttributes<HTMLButtonElement>;
-
-export function CreateCategoryButton({ btnRef, children, ...props }: CreateCategoryButtonProps) {
+export function CreateCategoryButton({ btnRef, children, ...props }: ModalButtonProps) {
   return (
     <ModalButton
       btnRef={btnRef}

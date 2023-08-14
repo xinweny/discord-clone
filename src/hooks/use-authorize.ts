@@ -10,7 +10,9 @@ import { useGetServerRolesQuery } from '@features/roles/api';
 
 import { RolePermissionNames } from '@types';
 
-export const useServerAuthorize = (permission: RolePermissionNames) => {
+export const useServerAuthorize = (
+  permissionName: RolePermissionNames | RolePermissionNames[]
+) => {
   const [authorized, setAuthorized] = useState<boolean>(false);
 
   const params = useParams();
@@ -29,20 +31,31 @@ export const useServerAuthorize = (permission: RolePermissionNames) => {
     roles.isSuccess,
   ];
 
+  const permissionNames = (typeof permissionName === 'string') ? [permissionName] : permissionName;
+
   useEffect(() => {
     if (successes.every(success => success)) {
-      if (server.data?.ownerId === member.data?._id) {
+      if (
+        server.data?.ownerId === member.data?._id
+      ) {
         setAuthorized(true);
       } else {
         for (const roleId of member.data!.roleIds) {
           const role = roles.data?.find(role => role._id === roleId);
-          const permissions = role?.permissions;
+          const rolePermissions = role?.permissions;
 
-          if (
-            permissions && (permissions.administrator || permissions[permission])
-          ) {
+          if (!rolePermissions) break;
+
+          if (rolePermissions.administrator) {
             setAuthorized(true);
             break;
+          }
+
+          for (const pName of permissionNames) {
+            if (rolePermissions[pName]) {
+              setAuthorized(true);
+              break;
+            }
           }
         }
       }

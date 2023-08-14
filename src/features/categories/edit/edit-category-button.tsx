@@ -1,18 +1,14 @@
-import { createContext } from 'react';
-
 import type { CategoryData } from '../types';
 
-import { ModalButton } from '@components/ui/buttons';
+import { CategoryContext } from '../context';
+
+import { ModalButton, ModalButtonProps } from '@components/ui/buttons';
 
 import { EditCategoryModal } from './edit-category-modal';
 
 type EditCategoryButtonProps = {
   category: CategoryData;
-  children?: React.ReactNode;
-  btnRef?: React.RefObject<HTMLButtonElement>;
-} & React.HTMLAttributes<HTMLButtonElement>;
-
-export const CategoryContext = createContext<CategoryData | null>(null);
+} & ModalButtonProps;
 
 export function EditCategoryButton({
   category,

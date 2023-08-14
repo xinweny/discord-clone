@@ -11,3 +11,4 @@ export * from './radio-input';
 export * from './submit-button';
 export * from './checkbox-input';
 export * from './reset-submit-buttons';
+export * from './input';
