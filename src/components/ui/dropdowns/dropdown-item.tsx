@@ -5,11 +5,13 @@ import { DropdownContext } from '.';
 type DropdownItemProps = {
   children: React.ReactNode;
   clickRef: React.RefObject<HTMLButtonElement>;
+  authorized?: boolean;
 };
 
 export function DropdownItem({
   children,
   clickRef,
+  authorized = true,
 }: DropdownItemProps) {
   const { close } = useContext(DropdownContext)!;
 
@@ -18,6 +20,8 @@ export function DropdownItem({
     if (clickRef) clickRef.current?.click();
     close();
   }
+
+  if (!authorized) return null;
 
   return (
     <li>

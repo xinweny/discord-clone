@@ -20,6 +20,7 @@ export function EditChannelNameInput({ type }: EditChannelNameInputProps) {
         rules={{
           onChange: formatChannelName,
         }}
+        maxLength={100}
       />
     </FormGroup>
   );

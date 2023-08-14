@@ -6,7 +6,7 @@ import { ChannelContext } from './edit-channel-button';
 
 import { TabGroupLayout } from '@components/layouts';
 
-import { DeleteChannelButton } from '../delete/delete-channel-button';
+import { DeleteChannelButton } from '../delete';
 
 type ChannelSettingsSidebarProps = {
   activeTabId: string;

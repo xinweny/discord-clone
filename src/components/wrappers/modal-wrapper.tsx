@@ -17,7 +17,8 @@ export function ModalWrapper({
     <div onClick={closeModal}>
       <div
         className={className}
-        onClick={e => { e.stopPropagation(); }}>
+        onClick={e => { e.stopPropagation(); }}
+      >
         {children}
       </div>
     </div>

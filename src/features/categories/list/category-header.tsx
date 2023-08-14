@@ -3,7 +3,7 @@ import type { CategoryData } from '../types';
 import { CreateChannelButton } from '@features/channels/create';
 import { HoverPopup } from '@components/ui/popups';
 
-import { ContextMenuWrapper } from '@components/wrappers';
+import { CategoryContextMenuWrapper } from './category-context-menu-wrapper';
 
 type CategoryHeaderProps = {
   category: CategoryData;
@@ -11,18 +11,7 @@ type CategoryHeaderProps = {
 
 export function CategoryHeader({ category }: CategoryHeaderProps) {
   return (
-    <ContextMenuWrapper
-      options={[
-        {
-          label: 'Edit Category',
-          action: () => { console.log('EDIT') },
-        },
-        {
-          label: 'Delete Category',
-          action: () => { console.log('DELETE') },
-        },
-      ]}
-    >
+    <CategoryContextMenuWrapper category={category}>
       <p>{category.name.toUpperCase()}</p>
       <CreateChannelButton category={category}>
         <HoverPopup
@@ -31,6 +20,6 @@ export function CategoryHeader({ category }: CategoryHeaderProps) {
           <img src="#" alt="Create Channel" />
         </HoverPopup>
       </CreateChannelButton>
-    </ContextMenuWrapper>
+    </CategoryContextMenuWrapper>
   );
 }

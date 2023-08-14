@@ -2,11 +2,11 @@ import { CHANNEL_SETTINGS } from './tabs';
 
 import { SettingsScreen } from '@components/ui/presentation';
 
-type UserSettingsProps = {
+type ChannelSettingsProps = {
   activeTabId: string;
 };
 
-export function ChannelSettingsScreen({ activeTabId }: UserSettingsProps) {
+export function ChannelSettingsScreen({ activeTabId }: ChannelSettingsProps) {
   return (
     <SettingsScreen
       activeTabId={activeTabId}
