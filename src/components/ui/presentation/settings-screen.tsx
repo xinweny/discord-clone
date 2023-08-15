@@ -16,9 +16,9 @@ export function SettingsScreen({ activeTabId, tabs }: SettingsScreenProps) {
           const SettingsForm = tab.component;
           return (activeTabId === tab.id)
             ? (
-              <div>
+              <div key={tab.id}>
                 <h2>{tab.label}</h2>
-                <SettingsForm key={tab.id} />
+                <SettingsForm />
               </div>
             )
             : null;

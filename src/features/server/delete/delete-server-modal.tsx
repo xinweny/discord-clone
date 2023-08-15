@@ -32,7 +32,7 @@ export function DeleteServerModal({
 
   return (
     <ConfirmationModal
-      title="Delete Channel"
+      title="Delete Server"
       message={`Are you sure you want to delete ${server.name}? This cannot be undone.`}
       isOpen={isOpen}
       onClose={onClose}

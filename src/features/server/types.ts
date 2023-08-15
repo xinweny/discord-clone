@@ -9,3 +9,11 @@ export interface ServerData {
   ownerId: string;
   private: boolean;
 }
+
+export type EditServerFields = {
+  serverId: string;
+  name: string;
+  description: string;
+  avatar?: File;
+  banner?: File;
+};

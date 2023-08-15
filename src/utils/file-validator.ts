@@ -29,6 +29,7 @@ const baseValidatorMulti = (maxNum: number, maxSize: string) => zod
 
 const fileValidator = {
   avatar: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
+  banner: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
   attachments: baseValidatorMulti(10, '1MB'),
 };
 

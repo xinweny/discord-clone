@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { CreateServerFields } from '../types';
 
-import { serverSchema } from './schema';
+import { createServerSchema } from './schema';
 
 import {
   TextInput,
@@ -13,7 +13,7 @@ import {
   SubmitButton,
 } from '@components/ui/forms';
 
-import { ServerAvatarPreview } from './server-avatar-preview';
+import { ImagePreview } from '@components/ui/media';
 
 import { useCreateServerMutation } from '../api';
 
@@ -23,7 +23,7 @@ type CreateServerFormProps = {
 
 export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   const methods = useForm<CreateServerFields>({
-    resolver: zodResolver(serverSchema),
+    resolver: zodResolver(createServerSchema),
   });
   const {
     handleSubmit,
@@ -50,7 +50,10 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ErrorMessage error={errors.file} />
         <label htmlFor="upload">
-          <ServerAvatarPreview />
+          <ImagePreview
+            name="file"
+            defaultSrc="#"
+          />
           <FileInput
             id="upload"
             name="file"
