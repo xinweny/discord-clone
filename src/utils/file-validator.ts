@@ -1,11 +1,14 @@
 import * as zod from 'zod';
 import bytes from 'bytes';
 
-const baseValidatorSingle = (maxSize: string, allowedExtensions: string[]) => zod
-  .preprocess(
+const baseValidatorSingle = (maxSize: string, allowedExtensions: string[], optional = true) => {
+  const zodOpt = optional
+    ? zod.instanceof(File).optional()
+    : zod.instanceof(File);
+
+  return zod.preprocess(
     file => (file instanceof(FileList)) ? undefined : file,
-    zod.instanceof(File)
-      .optional()
+      zodOpt
       .refine(
         file => !file || file.size <= bytes.parse(maxSize),
         `Max file size is ${maxSize}`
@@ -15,6 +18,7 @@ const baseValidatorSingle = (maxSize: string, allowedExtensions: string[]) => zo
         `File type must be one of the following: ${allowedExtensions.join(', ')}`
       )
   );
+}
 
 const baseValidatorMulti = (maxNum: number, maxSize: string) => zod
   .array(zod.instanceof(File))
@@ -30,6 +34,7 @@ const baseValidatorMulti = (maxNum: number, maxSize: string) => zod
 const fileValidator = {
   avatar: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
   banner: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
+  emoji: baseValidatorSingle('512KB', ['jpeg', 'jpg', 'png', 'gif'], true),
   attachments: baseValidatorMulti(10, '1MB'),
 };
 

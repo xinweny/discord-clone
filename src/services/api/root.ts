@@ -9,9 +9,10 @@ const api = createApi({
   tagTypes: [
     'JoinedServers',
     'User',
+    'Server',
     'Channels',
     'Categories',
-    'Server',
+    'CustomEmojis',
   ],
 });
 

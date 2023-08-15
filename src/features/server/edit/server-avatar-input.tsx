@@ -46,12 +46,12 @@ export function ServerAvatarInput({
         <label htmlFor="upload-image">
           <div>Change Avatar</div>
           <FileInput
-            id="upload-image"
-            name={name}
-            accept="image/*"
-            label="Upload"
-            hidden
-          />
+          id="upload-image"
+          name={name}
+          accept="image/*"
+          label="Upload"
+          hidden
+        />
         </label>
       </div>
     </div>
