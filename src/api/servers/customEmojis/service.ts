@@ -37,6 +37,26 @@ const create = async (
   return emoji;
 };
 
+const update = async (
+  serverId: Types.ObjectId | string,
+  emojiId: Types.ObjectId | string,
+  fields: { name: string }
+) => {
+  const { name } = fields;
+
+  const server = await Server.findById(serverId, 'customEmojis');
+
+  const emoji = server?.customEmojis.id(emojiId);
+
+  if (!emoji) throw new CustomError(400, 'Emoji not found');
+
+  emoji.name = name;
+
+  await server?.save();
+
+  return emoji;
+};
+
 const remove = async (serverId: Types.ObjectId | string, emojiId: Types.ObjectId | string) => {
   const server = await Server.findById(serverId);
 
@@ -55,5 +75,6 @@ const remove = async (serverId: Types.ObjectId | string, emojiId: Types.ObjectId
 export const customEmojiService = {
   getMany,
   create,
+  update,
   remove,
 };

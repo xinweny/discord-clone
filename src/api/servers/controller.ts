@@ -6,7 +6,6 @@ import { CustomError } from '@helpers/CustomError';
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
 import { validateFields } from '@middleware/validateFields';
-import { upload } from '@middleware/upload';
 
 import { serverService } from './service';
 
@@ -48,7 +47,6 @@ const getServer: RequestHandler[] = [
 ];
 
 const createServer: RequestHandler[] = [
-  upload.avatar,
   ...validateFields(['serverName']),
   authenticate,
   tryCatch(
@@ -66,19 +64,18 @@ const createServer: RequestHandler[] = [
 ];
 
 const updateServer: RequestHandler[] = [
-  upload.serverImages,
   ...validateFields(['serverName', 'description']),
   authenticate,
   authorize.server('manageServer'),
   tryCatch(
     async (req, res) => {
-      const updatedServer = await serverService.update(req.server?._id, { ...req.body }, {
-        avatar: req.avatar,
-        banner: req.banner,
+      const server = await serverService.update(req.server?._id, { ...req.body }, {
+        avatar: req.body.avatarFileName,
+        banner: req.body.bannerFileName,
       });
 
       res.json({
-        data: updatedServer,
+        data: server,
         message: 'Server updated successfully.',
       });
     }
@@ -92,9 +89,10 @@ const deleteServer: RequestHandler[] = [
     async (req, res) => {
       const { serverId } = req.params;
 
-      await serverService.remove(serverId);
+      const server = await serverService.remove(serverId);
 
       res.json({
+        data: server,
         message: 'Server deleted successfully.',
       });
     }

@@ -109,32 +109,21 @@ const create = async (
 const update = async (id: Types.ObjectId | string, fields: {
   name?: string,
   private?: boolean,
-  type?: 'text' | 'voice',
   description?: string,
-}, imgFiles: { avatar?: Express.Multer.File, banner?: Express.Multer.File }) => {
-  const { avatar, banner } = imgFiles;
-
-  const uploadRes: {
-    avatar: UploadApiResponse | null,
-    banner: UploadApiResponse | null,
-  } = { avatar: null, banner: null };
-  
-  if (avatar || banner) {
-    const server = await Server.findById(id, 'avatarUrl bannerUrl');
-
-    if (avatar) uploadRes.avatar = await cloudinaryService.upload(avatar, `avatars/servers/${id}`, server?.avatarUrl);
-    if (banner) uploadRes.banner = await cloudinaryService.upload(banner, `banners/servers/${id}`, server?.bannerUrl);
-  }
+}, imgFileNames: { avatar?: string, banner?: string }) => {
+  const { avatar, banner } = imgFileNames;
 
   const query = keepKeys(fields, ['name', 'private', 'description']);
-  const avatarRes = uploadRes.avatar;
-  const bannerRes = uploadRes.banner;
 
   const server = await Server.findByIdAndUpdate(id, {
     $set: {
       ...query,
-      ...(avatarRes && { avatarUrl: avatarRes.secure_url }),
-      ...(bannerRes && { bannerUrl: bannerRes.secure_url }),
+      ...(avatar && {
+        avatarUrl: cloudinaryService.generateUrl(avatar, 'avatars/servers', id.toString()),
+      }),
+      ...(banner && {
+        bannerUrl: cloudinaryService.generateUrl(banner, 'banners/servers', id.toString()),
+      }),
     },
   }, { new: true, runValidators: true });
 
@@ -166,7 +155,7 @@ const checkPermissions = async (
 const remove = async (id: Types.ObjectId | string) => {
   const [server, members] = await Promise.all([
     Server.findById(id),
-    ServerMember.find({ serverId: id }, 'userId -_id')
+    ServerMember.find({ serverId: id }, 'userId -_id'),
   ]);
 
   if (!server) throw new CustomError(400, 'Server not found.');
@@ -181,10 +170,13 @@ const remove = async (id: Types.ObjectId | string) => {
       { $pull: { serverIds: id } }
     ),
     Message.deleteMany({ roomId: { $in: channelIds } }),
+    serverInviteService.remove(server._id),
     cloudinaryService.deleteByFolder(`attachments/${id.toString()}`),
     (server.avatarUrl) ? cloudinaryService.deleteByUrl(server.avatarUrl) : Promise.resolve(),
-    serverInviteService.remove(server._id),
+    (server.bannerUrl) ? cloudinaryService.deleteByUrl(server.bannerUrl) : Promise.resolve(),
   ]);
+
+  return server;
 };
 
 export const serverService = {

@@ -13,7 +13,24 @@ const signServerAvatarUpload: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;
-      const dir = 'avatars/servers';
+      const dir = 'avatar/servers';
+  
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.serverId);
+  
+      res.json({
+        data: { timestamp, signature, folder },
+      });
+    }
+  )
+];
+
+const signServerBannerUpload: RequestHandler[] = [
+  authenticate,
+  authorize.server('manageServer'),
+  tryCatch(
+    async (req, res) => {
+      const { filename } = req.body;
+      const dir = 'banners/servers';
   
       const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.serverId);
   
@@ -64,6 +81,7 @@ const signAttachmentsUpload: RequestHandler[] = [
 
 export const uploadController = {
   signServerAvatarUpload,
+  signServerBannerUpload,
   signUserAvatarUpload,
   signAttachmentsUpload,
 };

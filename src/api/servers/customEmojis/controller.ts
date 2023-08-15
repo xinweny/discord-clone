@@ -44,6 +44,24 @@ const createEmoji: RequestHandler[] = [
   )
 ];
 
+const editEmoji: RequestHandler[] = [
+  authenticate,
+  authorize.server('manageExpressions'),
+  tryCatch(
+    async (req, res) => {
+      const { serverId, emojiId } = req.params;
+      const { name } = req.body;
+
+      const emoji = await customEmojiService.update(serverId, emojiId, { name });
+
+      res.json({
+        data: emoji,
+        message: 'Emoji successfully edited.',
+      });
+    }
+  )
+];
+
 const deleteEmoji: RequestHandler[] = [
   authenticate,
   authorize.server('manageExpressions'),
@@ -63,5 +81,6 @@ const deleteEmoji: RequestHandler[] = [
 export const customEmojiController = {
   getEmojis,
   createEmoji,
+  editEmoji,
   deleteEmoji,
 };
