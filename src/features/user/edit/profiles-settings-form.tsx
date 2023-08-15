@@ -7,10 +7,8 @@ import { useGetUserData } from '@hooks';
 
 import { useUpdateUserMutation } from '../api';
 
-import {
-  UserProfilePreview,
-  ProfileAvatarInput,
-} from '.';
+import { UserProfilePreview } from './user-profile-preview';
+import { ProfileAvatarInput } from './profile-avatar-input';
 
 import {
   TextInput,

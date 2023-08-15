@@ -1,7 +1,9 @@
 import { generateTabs } from '@utils';
 
-import { AccountSettingsForm } from './account-settings-form';
-import { ProfilesSettingsForm } from './profiles-settings-form';
+import {
+  AccountSettingsForm,
+  ProfilesSettingsForm,
+} from '../edit';
 
 export const USER_SETTINGS = generateTabs({
   'My Account': AccountSettingsForm,
