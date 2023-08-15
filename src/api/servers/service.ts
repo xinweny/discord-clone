@@ -1,5 +1,4 @@
 import { Types } from 'mongoose';
-import type { UploadApiResponse } from 'cloudinary';
 
 import { keepKeys } from '@helpers/keepKeys';
 import { CustomError } from '@helpers/CustomError';

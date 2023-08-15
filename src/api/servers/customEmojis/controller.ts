@@ -1,12 +1,10 @@
 import { RequestHandler } from 'express';
 
 import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
 
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
 import { validateFields } from '@middleware/validateFields';
-import { upload } from '@middleware/upload';
 
 import { customEmojiService } from './service';
 
@@ -23,18 +21,17 @@ const getEmojis: RequestHandler[] = [
 ];
 
 const createEmoji: RequestHandler[] = [
-  upload.emoji,
   ...validateFields(['emojiName']),
   authenticate,
   authorize.server('manageExpressions'),
   tryCatch(
     async (req, res) => {
-      if (!req.emoji) throw new CustomError(400, 'File not found.');
+      const { name, filename } = req.body;
 
-      const emoji = await customEmojiService.create(req.params.serverId, req.emoji, {
+      const emoji = await customEmojiService.create(req.params.serverId, {
         creatorId: req.member!._id,
-        name: req.body.name,
-      });
+        name,
+      }, filename);
 
       res.json({
         data: emoji,

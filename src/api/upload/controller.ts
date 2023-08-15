@@ -66,7 +66,7 @@ const signAttachmentsUpload: RequestHandler[] = [
       const filenames: string[] = req.body.filenames;
       const { serverId, roomId } = req.query;
 
-      const dir = `/attachments/${serverId ? `servers/${serverId}/` : 'dms/'}/${roomId}/${messageId}`;
+      const dir = `attachments/${serverId ? `servers/${serverId}/` : 'dms/'}/${roomId}/${messageId}`;
 
       const signatures = filenames.map(filename =>
         cloudinaryService.createSignature(filename, dir)
@@ -79,9 +79,29 @@ const signAttachmentsUpload: RequestHandler[] = [
   )
 ];
 
+const signEmojiUpload: RequestHandler[] = [
+  authenticate,
+  tryCatch(
+    async (req, res) => {
+      const { emojiId } = req.params;
+      const { serverId } = req.query;
+      const { filename } = req.body;
+
+      const dir = `emojis/${serverId}`;
+  
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, emojiId);
+  
+      res.json({
+        data: { timestamp, signature, folder },
+      });
+    }
+  )
+];
+
 export const uploadController = {
   signServerAvatarUpload,
   signServerBannerUpload,
   signUserAvatarUpload,
   signAttachmentsUpload,
+  signEmojiUpload,
 };

@@ -14,20 +14,21 @@ const getMany = async (serverId: Types.ObjectId | string) => {
 
 const create = async (
   serverId: Types.ObjectId | string,
-  file: Express.Multer.File,
   fields: {
     creatorId: Types.ObjectId | string,
     name: string,
-  }) => {
-  const server = await Server.findById(serverId);
+  },
+  filename: string) => {
+  const server = await Server.findById(serverId, 'customEmojis');
 
   if (!server) return null;
 
-  const cloudRes = await cloudinaryService.upload(file, `emojis/${serverId.toString()}`);
+  const emojiId = new Types.ObjectId();
 
   server.customEmojis.push({
+    _id: emojiId,
     ...fields,
-    url: cloudRes.secure_url,
+    url: cloudinaryService.generateUrl(filename, `emojis/${serverId}`, emojiId.toString()),
   });
 
   const emoji = server.customEmojis.slice(-1)[0];
