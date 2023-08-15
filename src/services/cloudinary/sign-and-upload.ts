@@ -1,7 +1,7 @@
 import { SignData, sign, upload } from './';
 
 export const signAndUpload = async (file: File | File[], apiUrl: string, customId?: string) => {
-  if (file instanceof File) {
+  if (file instanceof File || file instanceof Blob) {
     const signature = await sign(apiUrl, file.name) as SignData;
 
     await upload(file, signature, customId);

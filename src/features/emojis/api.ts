@@ -19,7 +19,7 @@ const emojiApi = api.injectEndpoints({
       }),
       createEmoji: build.mutation<EmojiData, CreateEmojiFields>({
         query: ({ serverId, name, file }) => ({
-          url: `/servers/${serverId}/channels`,
+          url: `/servers/${serverId}/emojis`,
           method: 'post',
           data: {
             name,

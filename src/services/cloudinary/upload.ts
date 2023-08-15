@@ -3,7 +3,7 @@ import { cloudinaryAxios } from '@services/axios';
 import type { SignData } from '.';
 
 export const upload = async (
-  file: File,
+  file: File | Blob,
   params: SignData,
   publicId?: string
 ) => {

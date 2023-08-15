@@ -1,15 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider, useWatch } from 'react-hook-form';
 
 import type { CreateEmojiFields } from '../types';
 
 import { ServerContext } from '@features/server/context';
 
-import { FileInput } from '@components/ui/forms';
+import { EmojiInput } from './emoji-input';
+
+import { useCreateEmojiMutation } from '../api';
 
 export function CreateEmojiForm() {
   const server = useContext(ServerContext);
+
+  const [createEmoji] = useCreateEmojiMutation();
 
   const defaultValues = {
     serverId: server?._id,
@@ -20,25 +24,24 @@ export function CreateEmojiForm() {
   const methods = useForm<CreateEmojiFields>({
     defaultValues,
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, control, reset } = methods;
+
+  const file = useWatch({ control, name: 'file' });
+
+  useEffect(() => {
+    if (file && file instanceof Blob) handleSubmit(onSubmit)();
+  }, [file]);
   
-  const onSubmit = () => {
-    console.log('emoji');
+  const onSubmit = async (data: CreateEmojiFields) => {
+    await createEmoji(data).unwrap();
+
+    reset();
   };
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="emoji">
-          <div>Upload Emoji</div>
-          <FileInput
-            id="emoji"
-            label="emoji"
-            name="file"
-            accept="image/jpg image/jpeg image/png image/gif"
-            hidden
-          />
-        </label>
+        <EmojiInput />
       </form>
     </FormProvider>
   );
