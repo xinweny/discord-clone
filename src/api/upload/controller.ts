@@ -13,7 +13,7 @@ const signServerAvatarUpload: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;
-      const dir = 'avatar/servers';
+      const dir = 'avatars/servers';
   
       const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.serverId);
   

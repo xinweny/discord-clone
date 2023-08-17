@@ -30,7 +30,8 @@ const generateUrl = (filename: string, folder: string, customPublicId?: string) 
 
   const publicId = encodeURIComponent(customPublicId ? customPublicId : name);
 
-  const resource = cld.image(`${folderPath}/${publicId}`);
+  const resource = cld.image(`${folderPath}/${publicId}`)
+    .setVersion(Math.floor(Date.now() / 1000));
 
   const url = resource.toURL().replace(/\?_a=[A-Za-z0-9]+$/, '') + ext;
 
@@ -46,6 +47,7 @@ const upload = async (file: Express.Multer.File, folderPath: string, url?: strin
     folder: `discord_clone/${folderPath}`,
     use_filename: true,
     resource_type: (ext === 'pdf') ? 'raw' : 'auto',
+    overwrite: true,
     ...(url && { public_id: getPublicId(url, ext === 'pdf') }),
   });
 
