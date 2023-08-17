@@ -1,6 +1,6 @@
 import { EmojiUploadGuidelines } from '../create';
 import { CreateEmojiForm } from '../create';
-import { EmojiPreviewTable } from '../list';
+import { EmojiPreviewTable } from './emoji-preview-table';
 
 export function CustomEmojiForm() {
   return (

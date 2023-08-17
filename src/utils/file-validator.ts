@@ -2,9 +2,11 @@ import * as zod from 'zod';
 import bytes from 'bytes';
 
 const baseValidatorSingle = (maxSize: string, allowedExtensions: string[], optional = true) => {
+  const zodFileOrBlob = zod.instanceof(File).or(zod.instanceof(Blob));
+
   const zodOpt = optional
-    ? zod.instanceof(File).optional()
-    : zod.instanceof(File);
+    ? zodFileOrBlob.optional()
+    : zodFileOrBlob;
 
   return zod.preprocess(
     file => (file instanceof(FileList)) ? undefined : file,

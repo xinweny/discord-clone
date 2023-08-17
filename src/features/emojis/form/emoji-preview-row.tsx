@@ -1,18 +1,26 @@
+import { useState } from 'react';
+
 import type { CustomEmojiData } from '../types';
 
 import { Emoji } from '@components/ui/media';
 
 import { EditEmojiButton } from '../edit';
+import { DeleteEmojiButton } from '../delete';
 
 type EmojiPreviewRowProps = {
   emoji: CustomEmojiData;
 };
 
 export function EmojiPreviewRow({ emoji }: EmojiPreviewRowProps) {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
   const { url, creator } = emoji;
 
   return (
-    <tr>
+    <tr
+      onMouseEnter={() => { setIsHovered(true); }}
+      onMouseLeave={() => { setIsHovered(false); }}
+    >
       <td>
         <Emoji src={url} />
       </td>
@@ -28,7 +36,7 @@ export function EmojiPreviewRow({ emoji }: EmojiPreviewRowProps) {
         )}
       </td>
       <td>
-        <button>x</button>
+        <DeleteEmojiButton show={isHovered} emojiId={emoji._id} />
       </td>
     </tr>
   )

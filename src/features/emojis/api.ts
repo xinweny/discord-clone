@@ -5,6 +5,7 @@ import type {
   GetEmojisQuery,
   CreateEmojiFields,
   EditEmojiFields,
+  DeleteEmojiFields,
 } from './types';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -54,6 +55,13 @@ const emojiApi = api.injectEndpoints({
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
       }),
+      deleteEmoji: build.mutation<void, DeleteEmojiFields>({
+        query: ({ serverId, emojiId }) => ({
+          url: `/servers/${serverId}/emojis/${emojiId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
+      }),
     };  
   }
 });
@@ -64,4 +72,5 @@ export const {
   useGetEmojisQuery,
   useCreateEmojiMutation,
   useEditEmojiMutation,
+  useDeleteEmojiMutation,
 } = emojiApi;

@@ -26,3 +26,8 @@ export type EditEmojiFields = {
   name: string;
   serverId: string;
 };
+
+export type DeleteEmojiFields = {
+  emojiId: string;
+  serverId: string;
+};
