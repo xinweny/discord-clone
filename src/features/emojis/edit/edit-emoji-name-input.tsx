@@ -23,10 +23,7 @@ export function EditEmojiNameInput({ onSubmit }: EditEmojiNameInputProps){
   const name = 'name';
 
   const blurOnEnter: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      e.currentTarget.blur();
-    }
+    if (e.key === 'Enter' && !e.shiftKey) e.currentTarget.blur();
   };
 
   return (
@@ -37,6 +34,7 @@ export function EditEmojiNameInput({ onSubmit }: EditEmojiNameInputProps){
       rules={{
         onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
           setValue(name, formatEmojiName(e.target.value));
+
           handleSubmit(onSubmit as SubmitHandler<FieldValues>)();
         },
       }}

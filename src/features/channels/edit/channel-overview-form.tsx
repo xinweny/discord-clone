@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { EditChannelFields } from '../types';
 
-import { editChannelSchema } from './schema';
+import { editChannelSchema } from '../schema';
 
 import { ChannelContext } from '../context';
 

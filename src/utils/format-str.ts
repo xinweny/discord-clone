@@ -5,4 +5,4 @@ export const formatTextChannelName = (str: string) => str
 
 export const formatEmojiName = (str: string) => str
   .replace(/\.[^/.]+$/, '')
-  .replace(/^[a-zA-Z0-9]+$/i, '');
+  .replace(/^[^a-zA-Z0-9]+$/i, '');

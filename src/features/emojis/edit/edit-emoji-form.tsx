@@ -4,12 +4,17 @@ import {
   FormProvider,
   SubmitHandler,
 } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { EditEmojiFields, CustomEmojiData } from '../types';
+
+import { editEmojiSchema } from '../schema';
 
 import { ServerContext } from '@features/server/context';
 
 import { EditEmojiNameInput } from './edit-emoji-name-input';
+
+import { useEditEmojiMutation } from '../api';
 
 type EditEmojiFormProps = {
   emoji: CustomEmojiData;
@@ -20,19 +25,25 @@ export function EditEmojiForm({ emoji, closeForm }: EditEmojiFormProps) {
   const server = useContext(ServerContext);
 
   const defaultValues = {
+    emojiId: emoji._id,
     serverId: server?._id,
     name: emoji.name,
   };
 
   const methods = useForm<EditEmojiFields>({
     defaultValues,
+    resolver: zodResolver(editEmojiSchema),
   });
   const { handleSubmit, reset } = methods;
+
+  const [editEmoji] = useEditEmojiMutation();
 
   const onSubmit: SubmitHandler<EditEmojiFields> = async (data) => {
     const { name } = data;
 
     if (name === emoji.name) return;
+
+    await editEmoji(data).unwrap();
 
     reset({
       name,

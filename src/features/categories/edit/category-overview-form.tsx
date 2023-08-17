@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { EditCategoryFields } from '../types';
 
-import { editCategorySchema } from './schema';
+import { editCategorySchema } from '../schema';
 
 import { CategoryContext } from '../context';
 

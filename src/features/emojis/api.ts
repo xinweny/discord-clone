@@ -48,7 +48,7 @@ const emojiApi = api.injectEndpoints({
       }),
       editEmoji: build.mutation<CustomEmojiData, EditEmojiFields>({
         query: ({ serverId, emojiId, name }) => ({
-          url: `/servers/${serverId}/emojis${emojiId}`,
+          url: `/servers/${serverId}/emojis/${emojiId}`,
           method: 'put',
           data: { name },
         }),
