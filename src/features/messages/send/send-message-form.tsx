@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { messageSchema } from './schema';
+import { sendMessageSchema } from '../schema';
 
 import { useFileWatchMulti } from '@hooks';
 
@@ -25,7 +25,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
   const { channelId, serverId } = useParams();
 
   const methods = useForm<MessageFields>({
-    resolver: zodResolver(messageSchema),
+    resolver: zodResolver(sendMessageSchema),
     defaultValues: { attachments: [], body: '' },
   });
   const {

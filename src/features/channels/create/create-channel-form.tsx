@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { CreateChannelFields } from '../types';
 
-import { createChannelSchema } from './schema';
+import { createChannelSchema } from '../schema';
 
 import { ResetSubmitButtons } from '@components/ui/forms';
 

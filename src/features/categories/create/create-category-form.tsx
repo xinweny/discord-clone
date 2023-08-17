@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { createCategorySchema } from './schema';
+import { createCategorySchema } from '../schema';
 
 import { CreateCategoryFields } from '../types';
 
