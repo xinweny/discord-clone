@@ -16,7 +16,7 @@ export const generateTabs = (tabData: TabInfo): TabData[] => {
     id: uuid(),
     label: key,
     component: fc,
-  }))
+  }));
 
   return tabs;
 };
