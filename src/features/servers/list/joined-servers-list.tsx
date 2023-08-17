@@ -1,12 +1,12 @@
-import { UserServerLink } from '../nav';
+import { JoinedServerLink } from '.';
 
 import { useGetJoinedServersQuery } from '../api';
 
-type UserServersListProps = {
+type JoinedServersListProps = {
   userId: string;
 };
 
-export function UserServersList({ userId }: UserServersListProps) {
+export function JoinedServersList({ userId }: JoinedServersListProps) {
   const servers = useGetJoinedServersQuery(userId);
 
   if (servers.isLoading) return null;
@@ -14,7 +14,7 @@ export function UserServersList({ userId }: UserServersListProps) {
   return (
     <div>
       {servers.data?.map(
-        server => <UserServerLink key={server._id} server={server} />
+        server => <JoinedServerLink key={server._id} server={server} />
       )}
     </div>
   );

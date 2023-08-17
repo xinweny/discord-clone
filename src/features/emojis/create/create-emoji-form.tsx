@@ -1,8 +1,10 @@
 import { useContext, useEffect } from 'react';
-
 import { useForm, FormProvider, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { CreateEmojiFields } from '../types';
+
+import { createEmojiSchema } from '../schema';
 
 import { ServerContext } from '@features/server/context';
 
@@ -23,6 +25,7 @@ export function CreateEmojiForm() {
 
   const methods = useForm<CreateEmojiFields>({
     defaultValues,
+    resolver: zodResolver(createEmojiSchema),
   });
   const { handleSubmit, control, reset } = methods;
 

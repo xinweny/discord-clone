@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { useGetUserData } from '@hooks';
 
-import { ServersNavBar } from '@features/servers/nav';
+import { JoinedServersNavbar } from '@features/servers/list';
 
 import { AppLayout } from '@components/layouts';
 
@@ -14,7 +14,7 @@ export function AppPage() {
 
   return (
     <div>
-      <AppLayout navBar={<ServersNavBar userId={user.data!.id} />}>
+      <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
         <Outlet context={user.data} />
       </AppLayout>
     </div>

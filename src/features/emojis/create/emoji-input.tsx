@@ -2,6 +2,8 @@ import { useFormContext } from 'react-hook-form';
 import Compressor from 'compressorjs';
 import bytes from 'bytes';
 
+import { formatEmojiName } from '@utils';
+
 import { FileInput } from '@components/ui/forms';
 
 export function EmojiInput() {
@@ -19,14 +21,11 @@ export function EmojiInput() {
       maxHeight: 128,
       maxWidth: 128,
       success: (result) => {
-        const baseName = result.name.replace(/\.[^/.]+$/, '');
+        const baseName = formatEmojiName(result.name);
 
         setValue(name, result);
 
-        setValue(
-          'name',
-          /^[a-zA-Z0-9]+$/i.test(baseName) ? baseName : '__'
-        );
+        setValue('name', baseName || '__');
       },
     });
   }

@@ -18,6 +18,6 @@ export function LinkImage({
     : <img src={src} alt={alt} />;
 
   return href[0] === '/'
-  ? <Link to={href}>{img}</Link>
-  : <a href={href}>{img}</a>;
+    ? <Link to={href}>{img}</Link>
+    : <a href={href}>{img}</a>;
 }

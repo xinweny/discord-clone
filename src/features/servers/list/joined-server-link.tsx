@@ -5,11 +5,11 @@ import type { UserServerData } from '../types';
 import { LinkImage } from '@components/ui/links';
 
 
-type ServerNavProps = {
+type JoinedServerLinkProps = {
   server: UserServerData;
 };
 
-export function UserServerLink({ server }: ServerNavProps) {
+export function JoinedServerLink({ server }: JoinedServerLinkProps) {
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   const { _id: id, avatarUrl, name } = server;

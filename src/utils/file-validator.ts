@@ -34,7 +34,7 @@ const baseValidatorMulti = (maxNum: number, maxSize: string) => zod
 const fileValidator = {
   avatar: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
   banner: baseValidatorSingle('1MB', ['jpeg', 'jpg', 'png', 'gif', 'webp']),
-  emoji: baseValidatorSingle('512KB', ['jpeg', 'jpg', 'png', 'gif'], true),
+  emoji: baseValidatorSingle('256KB', ['jpeg', 'jpg', 'png', 'gif'], true),
   attachments: baseValidatorMulti(10, '1MB'),
 };
 

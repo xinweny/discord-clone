@@ -1,8 +1,10 @@
 import api from '@services/api';
 
 import type {
-  EmojiData,
+  CustomEmojiData,
+  GetEmojisQuery,
   CreateEmojiFields,
+  EditEmojiFields,
 } from './types';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -10,14 +12,17 @@ import { signAndUpload } from '@services/cloudinary';
 const emojiApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getEmojis: build.query<EmojiData[], string>({
-        query: (serverId) => ({
+      getEmojis: build.query<CustomEmojiData[], GetEmojisQuery>({
+        query: ({ serverId, getCreators }) => ({
           url: `/servers/${serverId}/emojis`,
           method: 'get',
+          params: {
+            populate: getCreators,
+          },
         }),
-        providesTags: (...[, , serverId]) => [{ type: 'CustomEmojis', id: serverId }],
+        providesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
       }),
-      createEmoji: build.mutation<EmojiData, CreateEmojiFields>({
+      createEmoji: build.mutation<CustomEmojiData, CreateEmojiFields>({
         query: ({ serverId, name, file }) => ({
           url: `/servers/${serverId}/emojis`,
           method: 'post',
@@ -41,6 +46,14 @@ const emojiApi = api.injectEndpoints({
           }
         },
       }),
+      editEmoji: build.mutation<CustomEmojiData, EditEmojiFields>({
+        query: ({ serverId, emojiId, name }) => ({
+          url: `/servers/${serverId}/emojis${emojiId}`,
+          method: 'put',
+          data: { name },
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
+      }),
     };  
   }
 });
@@ -50,4 +63,5 @@ export default emojiApi;
 export const {
   useGetEmojisQuery,
   useCreateEmojiMutation,
+  useEditEmojiMutation,
 } = emojiApi;
