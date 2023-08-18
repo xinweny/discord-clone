@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { useGetUserData } from '@hooks';
 
-import { JoinedServersNavbar } from '@features/servers/list';
+import { JoinedServersNavbar } from '@features/servers/joined';
 
 import { AppLayout } from '@components/layouts';
 
