@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useUpdateCurrentDate } from '@hooks';
+
 import { useGetMessagesQuery } from '../api';
 
 import { MessageCard } from './message-card';
@@ -11,6 +13,7 @@ type MessagesContainerProps = {
 
 export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) {
   const { serverId, channelId } = useParams();
+  const currentDate = useUpdateCurrentDate();
 
   const [next, setNext] = useState<string | null>(null);
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
@@ -37,7 +40,11 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
       {welcomeComponent}
       <div onScroll={handleScroll}>
         {messages.items.map(
-          message => <MessageCard key={message._id} message={message} />
+          message => <MessageCard
+            key={message._id}
+            message={message}
+            currentDate={currentDate}
+          />
         )}
       </div>
     </div>
