@@ -13,6 +13,7 @@ const api = createApi({
     'Channels',
     'Categories',
     'CustomEmojis',
+    'Roles',
   ],
 });
 

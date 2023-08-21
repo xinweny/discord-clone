@@ -1,13 +1,6 @@
 import api from '@services/api';
 
-import type { RolePermissionsData } from '@types';
-
-export type RoleData = {
-  _id: string;
-  name: string;
-  color: string;
-  permissions: RolePermissionsData;
-};
+import type { RoleData } from './types';
 
 const roleApi = api.injectEndpoints({
   endpoints(build) {
@@ -17,6 +10,7 @@ const roleApi = api.injectEndpoints({
           url: `/servers/${serverId}/roles`,
           method: 'get',
         }),
+        providesTags: (...[, , serverId]) => [{ type: 'Roles', id: serverId }],
       }),
     };
   }
