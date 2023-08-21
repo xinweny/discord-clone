@@ -8,6 +8,8 @@ customEmojiRouter.get('/', customEmojiController.getEmojis);
 
 customEmojiRouter.post('/', customEmojiController.createEmoji);
 
+customEmojiRouter.put('/:emojiId', customEmojiController.editEmoji);
+
 customEmojiRouter.delete('/:emojiId', customEmojiController.deleteEmoji);
 
 export { customEmojiRouter };

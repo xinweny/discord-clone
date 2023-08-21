@@ -6,8 +6,12 @@ import { cloudinaryService } from '@services/cloudinary';
 
 import { Server } from '@api/servers/model';
 
-const getMany = async (serverId: Types.ObjectId | string) => {
-  const data = await Server.findById(serverId, 'customEmojis');
+const getMany = async (serverId: Types.ObjectId | string, populate = false) => {
+  const data = populate
+    ? await Server
+      .findById(serverId, 'customEmojis')
+      .populate('customEmojis.creator', 'username avatarUrl')
+    : await Server.findById(serverId, 'customEmojis');
 
   return data?.customEmojis;
 };
@@ -70,7 +74,9 @@ const remove = async (serverId: Types.ObjectId | string, emojiId: Types.ObjectId
       $pull: { customEmojis: { _id: emojiId } },
     }),
     cloudinaryService.deleteByUrl(emoji.url),
-  ])
+  ]);
+
+  return emoji;
 };
 
 export const customEmojiService = {

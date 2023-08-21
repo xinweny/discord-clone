@@ -1,13 +1,16 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
+import { IRole } from '@api/servers/roles/schema';
+
 export interface IServerMember extends Document {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
   serverId: Types.ObjectId;
   displayName: string;
-  roleIds: [Types.ObjectId];
+  roleIds: Types.ObjectId[];
   bio: string;
   bannerColor: string;
+  roles?: IRole[];
 }
 
 const serverMemberSchema = new Schema({
@@ -32,6 +35,7 @@ serverMemberSchema.virtual('user', {
   ref: 'User',
   localField: 'userId',
   foreignField: '_id',
+  justOne: true,
 });
 
 serverMemberSchema.set('toJSON', { virtuals: true });

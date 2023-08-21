@@ -90,7 +90,7 @@ const checkMembership = async (userId: Types.ObjectId | string, memberId: Types.
   if (member && member.userId.equals(userId)) return member;
 
   return null;
-}
+};
 
 export const serverMemberService = {
   getById,

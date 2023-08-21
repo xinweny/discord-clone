@@ -13,7 +13,7 @@ const getEmojis: RequestHandler[] = [
   authorize.serverMember,
   tryCatch(
     async (req, res) => {
-      const emojis = await customEmojiService.getMany(req.params.serverId);
+      const emojis = await customEmojiService.getMany(req.params.serverId, !!req.query.populate);
 
       res.json({ data: emojis });
     }
@@ -29,7 +29,7 @@ const createEmoji: RequestHandler[] = [
       const { name, filename } = req.body;
 
       const emoji = await customEmojiService.create(req.params.serverId, {
-        creatorId: req.member!._id,
+        creatorId: req.user!._id,
         name,
       }, filename);
 
@@ -66,9 +66,10 @@ const deleteEmoji: RequestHandler[] = [
     async (req, res) => {
       const { serverId, emojiId } = req.params;
 
-      await customEmojiService.remove(serverId, emojiId);
+      const emoji = await customEmojiService.remove(serverId, emojiId);
 
       res.json({
+        data: emoji,
         message: 'Emoji successfully removed from server.',
       });
     }
