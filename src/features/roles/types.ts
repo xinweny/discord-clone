@@ -5,7 +5,7 @@ export type RoleData = {
   name: string;
   color: string;
   permissions: RolePermissionsData;
-  memberCount: number;
+  memberCount?: number;
 };
 
 export type ActiveRoleContextData = {
@@ -17,3 +17,11 @@ export type GetRolesQuery = {
   serverId: string;
   withCount?: boolean;
 };
+
+export type EditRoleFields = {
+  roleId: string;
+  serverId: string;
+  name: string;
+  color: string;
+  permissions: RolePermissionsData;
+}

@@ -9,3 +9,4 @@ export * from './use-set-channels';
 export * from './use-dropdown';
 export * from './use-context-menu';
 export * from './use-date';
+export * from './use-tabs';

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-import type { ChannelData } from '@features/server/channels/api';
+import type { ChannelData } from '@features/channels/types';
 
 type ContextType = {
   activeChannel: ChannelData;

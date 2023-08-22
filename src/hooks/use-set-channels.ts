@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { ChannelData, useGetChannelsQuery } from '@features/channels/api';
+import { useGetChannelsQuery } from '@features/channels/api';
+import type { ChannelData } from '@features/channels/types';
 
 export const useSetChannels = () => {
   const { serverId, channelId } = useParams();

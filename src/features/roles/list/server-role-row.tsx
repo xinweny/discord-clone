@@ -12,7 +12,7 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
         <p>{role.name}</p>
       </td>
       <td>
-        <p>{role.memberCount}</p>
+        <p>{role.memberCount || 0}</p>
         <img src="#" />
       </td>
       <td>

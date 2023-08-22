@@ -5,7 +5,7 @@ import { ActiveRoleContext } from '../context';
 
 import { TabItemButton } from '@components/ui/buttons';
 
-import { useGetServerRolesQuery } from '../api';
+import { useGetRolesQuery } from '../api';
 
 export function EditRoleNavbar() {
   const { _id: serverId } = useContext(ServerContext)!;
@@ -13,15 +13,13 @@ export function EditRoleNavbar() {
 
   const [activeRoleId, setActiveRoleId] = useState<string>(activeRole!.data!._id);
 
-  const roles = useGetServerRolesQuery({ serverId, withCount: true });
+  const roles = useGetRolesQuery({ serverId });
 
   useEffect(() => {
-    if (roles.isSuccess) {
-      const nextActiveRole = roles.data.find(role => role._id === activeRoleId)
+    if (roles.isSuccess && activeRoleId !== activeRole!.data!._id) {
+      const nextActiveRole = roles.data.find(role => role._id === activeRoleId);
 
       if (nextActiveRole) activeRole?.set(nextActiveRole);
-
-      console.log(nextActiveRole);
     }
   }, [activeRoleId]);
 

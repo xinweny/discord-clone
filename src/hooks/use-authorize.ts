@@ -6,7 +6,7 @@ import { useGetUserData } from './use-get-user-data';
 
 import { useGetServerQuery } from '@features/server/api';
 import { useGetServerMemberQuery } from '@features/members/api';
-import { useGetServerRolesQuery } from '@features/roles/api';
+import { useGetRolesQuery } from '@features/roles/api';
 
 import { RolePermissionNames } from '@types';
 
@@ -23,7 +23,7 @@ export const useServerAuthorize = (
 
   const server = useGetServerQuery(serverId);
   const member = useGetServerMemberQuery({ userId, serverId });
-  const roles = useGetServerRolesQuery(serverId);
+  const roles = useGetRolesQuery({ serverId });
 
   const successes = [
     server.isSuccess,

@@ -3,13 +3,14 @@ import { useState, useContext } from 'react';
 import { ServerContext } from '@features/server/context';
 import { ActiveRoleContext } from '../context';
 
-import { useGetServerRolesQuery } from '../api';
+import { useGetRolesQuery } from '../api';
 
 import {
   CustomRolesTable,
   DefaultRoleSection,
 } from '../list';
 import { RoleSearchBar } from '../search';
+import { CreateRoleButton } from '../create';
 
 export function ServerRolesSettings() {
   const { _id: serverId } = useContext(ServerContext)!;
@@ -17,7 +18,7 @@ export function ServerRolesSettings() {
   const role = useContext(ActiveRoleContext);
   const [query, setQuery] = useState<string>('');
 
-  const roles = useGetServerRolesQuery({ serverId, withCount: true });
+  const roles = useGetRolesQuery({ serverId, withCount: true });
 
   if (role?.data || !roles.isSuccess) return null;
 
@@ -29,6 +30,7 @@ export function ServerRolesSettings() {
       <DefaultRoleSection role={defaultRole} />
       <div>
         <RoleSearchBar setQuery={setQuery} />
+        <CreateRoleButton>Create Role</CreateRoleButton>
       </div>
       <CustomRolesTable roles={customRoles} searchQuery={query} />
     </div>
