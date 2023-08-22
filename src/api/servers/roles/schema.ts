@@ -6,6 +6,7 @@ export interface IRole extends Types.Subdocument {
   permissions: {
     [key: string]: boolean,
   },
+  memberCount?: number;
 }
 
 const roleSchema = new Schema({
@@ -28,5 +29,16 @@ const roleSchema = new Schema({
     video: { type: Boolean, default: true },
   },
 });
+
+roleSchema.virtual('memberCount', {
+  ref: 'ServerMember',
+  localField: '_id',
+  foreignField: 'roleIds',
+  justOne: false,
+  count: true,
+});
+
+roleSchema.set('toJSON', { virtuals: true });
+roleSchema.set('toObject', { virtuals: true });
 
 export { roleSchema };

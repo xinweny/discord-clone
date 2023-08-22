@@ -6,15 +6,40 @@ import { CustomError } from '@helpers/CustomError';
 import { Server } from '@api/servers/model';
 import { ServerMember } from '@api/serverMembers/model';
 
-const get = async (serverId: Types.ObjectId | string, roleId?: Types.ObjectId | string) => {
-  const server = await Server.findById(
-    serverId,
-    roleId ? { roles: { $elemMatch: { _id: roleId } } } : 'roles'
-  );
+const getById = async (
+  serverId: Types.ObjectId | string,
+  roleId: Types.ObjectId | string,
+  withCount = false,
+) => {
+  const server = (withCount)
+    ? await Server.findById(
+      serverId,
+      { roles: { $elemMatch: { _id: roleId } } }
+    )
+    .populate('roles.memberCount')
+    : await Server.findById(
+      serverId,
+      { roles: { $elemMatch: { _id: roleId } } }
+    );
 
   if (!server) throw new CustomError(400, 'Server not found.');
 
-  return (roleId) ? server.roles[0] : server.roles;
+  return server.roles[0];
+};
+
+const getMany = async (
+  serverId: Types.ObjectId | string,
+  withCount = false,
+) => {
+  const server = (withCount)
+    ? await Server
+      .findById(serverId, 'roles')
+      .populate('roles.memberCount')
+    : await Server.findById(serverId, 'roles');
+
+  if (!server) throw new CustomError(400, 'Server not found.');
+
+  return server.roles;
 };
 
 const create = async (serverId: Types.ObjectId | string, fields: {
@@ -56,12 +81,32 @@ const update = async (
   return role;
 };
 
+const updateMany = async (
+  serverId: Types.ObjectId | string,
+  roles: {
+    _id: string,
+    name: string,
+    color: string,
+    permissions: { [key: string]: boolean },
+  }[]
+) => {
+  const server = await Server.findByIdAndUpdate({
+    _id: serverId,
+  }, {
+    $set: roles,
+  }, { new: true, runValidators: true });
+
+  return server?.roles.map(role => role.toJSON());
+};
+
 const remove = async (serverId: Types.ObjectId | string, roleId: Types.ObjectId | string) => {
   const server = await Server.findById(serverId);
 
   if (!server) return null;
 
   const role = server.roles.id(roleId);
+
+  if (roleId === server.roles[0]._id.toString()) throw new CustomError(400, 'Cannot delete default role.');
 
   server.roles.pull(roleId);
 
@@ -77,8 +122,10 @@ const remove = async (serverId: Types.ObjectId | string, roleId: Types.ObjectId 
 };
 
 export const roleService = {
-  get,
+  getById,
+  getMany,
   create,
   update,
+  updateMany,
   remove,
 };

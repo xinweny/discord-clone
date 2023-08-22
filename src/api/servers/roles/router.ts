@@ -8,6 +8,8 @@ roleRouter.get('/', roleController.getRoles);
 
 roleRouter.post('/', roleController.createRole);
 
+roleRouter.put('/', roleController.updateRoles);
+
 roleRouter.get('/:roleId', roleController.getRole);
 
 roleRouter.put('/:roleId', roleController.updateRole);

@@ -15,7 +15,7 @@ const getMany = async (id: Types.ObjectId | string) => {
 const add = async (id: Types.ObjectId | string, roleId: Types.ObjectId | string) => {
   const member = await ServerMember
     .findByIdAndUpdate(id, {
-      $push: { roleIds: roleId },
+      $addToSet: { roleIds: roleId },
     }, { new: true })
     .populate('roles', 'name color');
 

@@ -13,9 +13,10 @@ const getRole: RequestHandler[] = [
   authorize.serverMember,
   tryCatch(
     async (req, res) => {
-      const { serverId, roleId } = req.params
+      const { serverId, roleId } = req.params;
+      const { withCount } = req.query;
 
-      const role = await roleService.get(serverId, roleId);
+      const role = await roleService.getById(serverId, roleId, withCount === 'true');
 
       res.json({ data: role });
     }
@@ -27,7 +28,8 @@ const getRoles: RequestHandler[] = [
   authorize.serverMember,
   tryCatch(
     async (req, res) => {
-      const roles = await roleService.get(req.params.serverId);
+      const { withCount } = req.query;
+      const roles = await roleService.getMany(req.params.serverId, withCount === 'true');
 
       res.json({ data: roles });
     }
@@ -68,6 +70,23 @@ const updateRole: RequestHandler[] = [
   )
 ];
 
+const updateRoles: RequestHandler[] = [
+  authenticate,
+  authorize.server('manageRoles'),
+  tryCatch(
+    async (req, res) => {
+      const { serverId } = req.params;
+
+      const roles = await roleService.updateMany(serverId, req.body.roles);
+
+      res.json({
+        data: roles,
+        message: 'Role updated successfully.',
+      });
+    }
+  )
+];
+
 const deleteRole: RequestHandler[] = [
   authenticate,
   authorize.server('manageRoles'),
@@ -90,5 +109,6 @@ export const roleController = {
   getRoles,
   createRole,
   updateRole,
+  updateRoles,
   deleteRole,
 };
