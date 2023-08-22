@@ -9,6 +9,11 @@ export type RoleData = {
 };
 
 export type ActiveRoleContextData = {
-  activeRole: RoleData | null;
-  setActiveRole: React.Dispatch<React.SetStateAction<RoleData | null>>;
+  data: RoleData | null;
+  set: React.Dispatch<React.SetStateAction<RoleData | null>>;
+};
+
+export type GetRolesQuery = {
+  serverId: string;
+  withCount?: boolean;
 };
