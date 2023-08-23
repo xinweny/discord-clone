@@ -19,7 +19,7 @@ export function CustomRolesTable({ roles, searchQuery }: CustomRolesTableProps) 
     <table>
       <thead>
         <tr>
-          <th>{`ROLES - ${roles.length}`}</th>
+          <th>{`ROLES - ${filteredRoles.length}`}</th>
           <th>MEMBERS</th>
           <th></th>
           <th></th>

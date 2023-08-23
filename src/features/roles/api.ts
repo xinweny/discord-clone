@@ -3,6 +3,7 @@ import api from '@services/api';
 import type {
   RoleData,
   GetRolesQuery,
+  EditRoleFields,
 } from './types';
 
 const roleApi = api.injectEndpoints({
@@ -27,6 +28,18 @@ const roleApi = api.injectEndpoints({
         }),
         invalidatesTags: (...[, , serverId]) => [{ type: 'Roles', id: serverId }],
       }),
+      editRole: build.mutation<RoleData, EditRoleFields>({
+        query: ({ serverId, roleId, name, color, permissions }) => ({
+          url: `/servers/${serverId}/roles/${roleId}`,
+          method: 'put',
+          data: {
+            name,
+            color,
+            permissions,
+          },
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Roles', id: serverId }],
+      }),
     };
   }
 });
@@ -36,4 +49,5 @@ export default roleApi;
 export const {
   useGetRolesQuery,
   useCreateRoleMutation,
+  useEditRoleMutation,
 } = roleApi;

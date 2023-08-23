@@ -1,6 +1,6 @@
 import { ClickAwayListener } from '@mui/material';
 
-import type { ContextData } from '@hooks';
+import type { AbsStyleData } from '@hooks';
 
 import { ContextMenuItem } from './context-menu-item';
 
@@ -12,14 +12,14 @@ export type ContextMenuOptionsData = {
 type ContextMenuProps = {
   options: ContextMenuOptionsData[];
   contextMenuRef: React.RefObject<HTMLDivElement>;
-  contextData: ContextData;
+  menuStyle: AbsStyleData;
   closeContextMenu: () => void;
 };
 
 export function ContextMenu({
   options,
   contextMenuRef,
-  contextData,
+  menuStyle,
   closeContextMenu,
 }: ContextMenuProps) {
   return (
@@ -27,11 +27,7 @@ export function ContextMenu({
       <div
         ref={contextMenuRef}
         className='contextMenu'
-        style={{
-          display:`${contextData.visible ? 'block' : 'none'}`,
-          left: contextData.posX,
-          top: contextData.posY,
-        }}
+        style={menuStyle}
       >
         <ul>
           {options.map(({ label, action }) => 

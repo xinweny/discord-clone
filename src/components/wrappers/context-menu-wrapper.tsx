@@ -1,35 +1,44 @@
 import { useRef } from 'react';
 
-import { useContextMenu } from '@hooks';
+import { usePosAbsolute } from '@hooks';
 
 import { ContextMenu, ContextMenuOptionsData } from '@components/ui/context-menu';
 
 type ContextMenuWrapperProps = {
   options: ContextMenuOptionsData[];
   children: React.ReactNode;
+  mode?: 'onContextMenu' | 'onClick';
 };
 
 export function ContextMenuWrapper({
-  options, children
+  options,
+  children,
+  mode = 'onContextMenu',
 }: ContextMenuWrapperProps) {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const {
-    openContextMenu,
-    ...contextMenuProps
-  } = useContextMenu(targetRef);
+    openAbsElement,
+    absElementRef,
+    absStyle,
+    closeAbsElement,
+  } = usePosAbsolute(targetRef);
+
+  const handler = { [mode]: openAbsElement };
 
   return (
     <div>
       <div
         ref={targetRef}
-        onContextMenu={openContextMenu}
+        {...handler}
       >
         {children}
       </div>
       <ContextMenu
         options={options}
-        {...contextMenuProps}
+        contextMenuRef={absElementRef}
+        menuStyle={absStyle}
+        closeContextMenu={closeAbsElement}
       />
     </div>
   );

@@ -1,4 +1,7 @@
-import type { RolePermissionNames } from '@types';
+import type {
+  RolePermissionNames,
+  RolePermissionsData,
+} from '@types';
 
 export const PERMISSION_DESCRIPTIONS: {
   [key: string]: {
@@ -6,7 +9,7 @@ export const PERMISSION_DESCRIPTIONS: {
   };
 } = {
   'General Server Permissions': {
-    viewChannels: 'Allows members to view channels by default (excluding private channels)',
+    viewChannels: 'Allows members to view channels by default (excluding private channels).',
     manageChannels: 'Allows members to create, edit or delete channels.',
     manageRoles: 'Allows members to create new roles and edit or delete roles lower than their highest role.',
     manageExpressions: 'Allows members to add custom emojis, stickers and sounds in this server.',
@@ -31,21 +34,24 @@ export const PERMISSION_DESCRIPTIONS: {
   },
 };
 
-export const RESET_PERMISSIONS: {
-  [key in RolePermissionNames]: boolean;
-} = {
-    viewChannels: false,
-    manageChannels: false,
-    manageRoles: false,
-    manageExpressions: false,
-    manageServer: false,
-    createInvite: false,
-    kickMembers: false,
-    sendMessages: false,
-    addReactions: false,
-    manageMessages: false,
-    joinCall: false,
-    speak: false,
-    video: false,
-    administrator: false,
-}
+export const PERMISSION_NAMES: RolePermissionNames[] = [
+  'viewChannels',
+  'manageChannels',
+  'manageRoles',
+  'manageExpressions',
+  'manageServer',
+  'createInvite',
+  'kickMembers',
+  'sendMessages',
+  'addReactions',
+  'manageMessages',
+  'joinCall',
+  'speak',
+  'video',
+  'administrator',
+];
+
+export const RESET_PERMISSIONS: RolePermissionsData = PERMISSION_NAMES.reduce(
+  (o, key) => ({ ...o, [key]: false }),
+  {} as RolePermissionsData
+);

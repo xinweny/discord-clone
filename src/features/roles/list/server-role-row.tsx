@@ -1,3 +1,9 @@
+import { useContext } from 'react';
+
+import { ActiveRoleContext } from '../context';
+
+import { useDisplay } from '@hooks';
+
 import type { RoleData } from '../types';
 
 type ServerRoleRowProps = {
@@ -5,8 +11,14 @@ type ServerRoleRowProps = {
 };
 
 export function ServerRoleRow({ role }: ServerRoleRowProps) {
+  const { visible, hover } = useDisplay();
+
+  const activeRole = useContext(ActiveRoleContext)!;
+
+  const openForm = () => { activeRole.set(role); };
+
   return (
-    <tr>
+    <tr {...hover}>
       <td>
         <img src="#" alt={role.color} />
         <p>{role.name}</p>
@@ -16,7 +28,14 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
         <img src="#" />
       </td>
       <td>
-        <button type="button">Edit</button>
+        {visible && (
+          <button
+            type="button"
+            onClick={openForm}
+          >
+            <img src="#" alt="Edit" />
+          </button>
+        )}
       </td>
       <td>
         <button type="button">
