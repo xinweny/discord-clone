@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useGetUserData } from './use-get-user-data';
 
 import { useGetServerQuery } from '@features/server/api';
-import { useGetServerMemberQuery } from '@features/members/api';
+import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetRolesQuery } from '@features/roles/api';
 
 import { RolePermissionNames } from '@types';
@@ -22,7 +22,7 @@ export const useServerAuthorize = (
   const userId = user.data!.id;
 
   const server = useGetServerQuery(serverId);
-  const member = useGetServerMemberQuery({ userId, serverId });
+  const member = useGetUserServerMemberQuery({ userId, serverId });
   const roles = useGetRolesQuery({ serverId });
 
   const successes = [

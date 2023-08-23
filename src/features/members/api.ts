@@ -1,35 +1,30 @@
 import api from '@services/api';
 
-export type ServerMemberData = {
-  _id: string;
-  userId: string;
-  serverId: string;
-  displayName: string;
-  roleIds: string[];
-  bio: string;
-  bannerColor: string;
-  user: {
-    avatarUrl: string;
-  };
-};
-
-type UserServerMemberQuery = {
-  userId: string;
-  serverId: string;
-};
+import type {
+  ServerMemberData,
+  ServerMemberMainData,
+  GetUserServerMemberQuery,
+  GetServerMemberQuery,
+} from './types';
 
 const memberApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getServerMembers: build.query<ServerMemberData[], string>({
+      getServerMembers: build.query<ServerMemberMainData[], string>({
         query: (serverId) => ({
           url: `/servers/${serverId}/members`,
           method: 'get',
         }),
       }),
-      getServerMember: build.query<ServerMemberData, UserServerMemberQuery>({
+      getUserServerMember: build.query<ServerMemberData, GetUserServerMemberQuery>({
         query: ({ userId, serverId }) => ({
           url: `/users/${userId}/servers/${serverId}/member`,
+          method: 'get',
+        }),
+      }),
+      getServerMember: build.query<ServerMemberData, GetServerMemberQuery>({
+        query: ({ serverId, memberId }) => ({
+          url: `/servers/${serverId}/members/${memberId}`,
           method: 'get',
         }),
       }),
@@ -41,5 +36,6 @@ export default memberApi;
 
 export const {
   useGetServerMembersQuery,
+  useGetUserServerMemberQuery,
   useGetServerMemberQuery,
 } = memberApi;
