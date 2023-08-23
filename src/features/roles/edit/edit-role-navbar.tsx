@@ -5,6 +5,8 @@ import { ActiveRoleContext } from '../context';
 
 import { TabItemButton } from '@components/ui/buttons';
 
+import { CreateRoleButton } from '../create';
+
 import { useGetRolesQuery } from '../api';
 
 export function EditRoleNavbar() {
@@ -32,12 +34,17 @@ export function EditRoleNavbar() {
 
   return (
     <div>
-      <button type="button" onClick={closeSection}>
-        <div>
-          <img src="#" alt="Back" />
-          <p>BACK</p>
-        </div>
-      </button>
+      <div>
+        <button type="button" onClick={closeSection}>
+          <div>
+            <img src="#" alt="Back" />
+            <p>BACK</p>
+          </div>
+        </button>
+        <CreateRoleButton>
+          <img src="#" alt="Create Role" />
+        </CreateRoleButton>
+      </div>
       <div>
         {roles.data.map(role => (
           <TabItemButton
