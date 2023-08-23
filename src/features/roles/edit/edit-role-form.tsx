@@ -15,7 +15,9 @@ export function EditRoleForm() {
 
   return (
     <div>
-      <h3>{`EDIT ROLE - ${role?.name.toUpperCase()}`}</h3>
+      <div>
+        <h3>{`EDIT ROLE - ${role?.name.toUpperCase()}`}</h3>
+      </div>
       <EditRoleTabs state={state} />
       <EditRoleFormSections state={state} />
     </div>
