@@ -14,6 +14,8 @@ const api = createApi({
     'Categories',
     'CustomEmojis',
     'Roles',
+    'MemberRoles',
+    'ServerMember',
   ],
 });
 

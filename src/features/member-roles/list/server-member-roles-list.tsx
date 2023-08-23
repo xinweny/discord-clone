@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import pluralize from 'pluralize';
 
 import { ServerMemberRoleCard } from './server-member-role-card';
+import { AddRolesButton } from '../add';
 
 import { useGetMemberRolesQuery } from '../api';
 
@@ -35,6 +36,7 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
             memberRole={role}
           />
         ))}
+        <AddRolesButton />
       </div>
     </div>
   );

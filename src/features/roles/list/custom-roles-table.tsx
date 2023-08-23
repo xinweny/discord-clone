@@ -5,7 +5,7 @@ import { ServerRoleRow } from './server-role-row';
 type CustomRolesTableProps = {
   roles: RoleData[];
   searchQuery: string;
-}
+};
 
 export function CustomRolesTable({ roles, searchQuery }: CustomRolesTableProps) {
   const filteredRoles = searchQuery

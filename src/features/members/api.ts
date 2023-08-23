@@ -27,6 +27,7 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members/${memberId}`,
           method: 'get',
         }),
+        providesTags: (...[, , { memberId }]) => [{ type: 'ServerMember', id: memberId }],
       }),
     };
   }

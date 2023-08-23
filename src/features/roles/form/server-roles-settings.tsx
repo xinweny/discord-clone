@@ -16,6 +16,7 @@ export function ServerRolesSettings() {
   const { _id: serverId } = useContext(ServerContext)!;
 
   const role = useContext(ActiveRoleContext);
+
   const [query, setQuery] = useState<string>('');
 
   const roles = useGetRolesQuery({ serverId, withCount: true });
@@ -29,7 +30,11 @@ export function ServerRolesSettings() {
     <div>
       <DefaultRoleSection role={defaultRole} />
       <div>
-        <RoleSearchBar setQuery={setQuery} />
+        <RoleSearchBar
+          query={query}
+          setQuery={setQuery}
+          placeholder="Search Roles"
+        />
         <CreateRoleButton>Create Role</CreateRoleButton>
       </div>
       <CustomRolesTable roles={customRoles} searchQuery={query} />

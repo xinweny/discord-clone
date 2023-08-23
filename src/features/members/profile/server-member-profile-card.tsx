@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
+import { ServerMemberContext } from '../context';
+
 import { useGetServerMemberQuery } from '../api';
 
 import { ColorBanner, Avatar } from '@components/ui/media';
@@ -31,23 +33,25 @@ export function ServerMemberProfileCard({
   } = member;
 
   return (
-    <div>
-      <ColorBanner
-        color={bannerColor}
-      />
-      <Avatar src={avatarUrl} />
+    <ServerMemberContext.Provider value={member}>
       <div>
+        <ColorBanner
+          color={bannerColor}
+        />
+        <Avatar src={avatarUrl} />
         <div>
-          <h3>{displayName}</h3>
-          <p>{username}</p>
-          <p>{bio}</p>
+          <div>
+            <h3>{displayName}</h3>
+            <p>{username}</p>
+            <p>{bio}</p>
+          </div>
+          <div>
+            <p><strong>SERVER MEMBER SINCE</strong></p>
+            <p>{DateTime.fromISO(createdAt).toFormat('d LLL yyyy')}</p>
+          </div>
         </div>
-        <div>
-          <p><strong>SERVER MEMBER SINCE</strong></p>
-          <p>{DateTime.fromISO(createdAt).toFormat('d LLL yyyy')}</p>
-        </div>
+        <ServerMemberRolesList memberId={member._id} />
       </div>
-      <ServerMemberRolesList memberId={member._id} />
-    </div>
+    </ServerMemberContext.Provider>
   );
 }
