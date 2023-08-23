@@ -4,6 +4,7 @@ import type {
   RoleData,
   GetRolesQuery,
   EditRoleFields,
+  DeleteRoleFields,
 } from './types';
 
 const roleApi = api.injectEndpoints({
@@ -40,6 +41,13 @@ const roleApi = api.injectEndpoints({
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'Roles', id: serverId }],
       }),
+      deleteRole: build.mutation<RoleData, DeleteRoleFields>({
+        query: ({ serverId, roleId }) => ({
+          url: `/servers/${serverId}/roles/${roleId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [{ type: 'Roles', id: serverId }],
+      }),
     };
   }
 });
@@ -50,4 +58,5 @@ export const {
   useGetRolesQuery,
   useCreateRoleMutation,
   useEditRoleMutation,
+  useDeleteRoleMutation,
 } = roleApi;

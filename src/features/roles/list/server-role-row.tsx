@@ -4,6 +4,8 @@ import { ActiveRoleContext } from '../context';
 
 import { useDisplay } from '@hooks';
 
+import { RoleContextMenuButton } from '.';
+
 import type { RoleData } from '../types';
 
 type ServerRoleRowProps = {
@@ -38,9 +40,11 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
         )}
       </td>
       <td>
-        <button type="button">
-          <img src="#" alt="" />
-        </button>
+        {visible && (
+          <RoleContextMenuButton
+            serverRole={role}
+          />
+        )}
       </td>
     </tr>
   )

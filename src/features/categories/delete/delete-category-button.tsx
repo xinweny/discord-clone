@@ -1,5 +1,3 @@
-import { createContext } from 'react';
-
 import type { CategoryData } from '../types';
 
 import { useServerAuthorize } from '@hooks';
@@ -10,8 +8,6 @@ import { DeleteCategoryModal } from './delete-category-modal';
 type DeleteCategoryButtonProps = {
   category: CategoryData;
 } & ModalButtonProps;
-
-export const CategoryContext = createContext<CategoryData | null>(null);
 
 export function DeleteCategoryButton({
   category,

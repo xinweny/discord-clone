@@ -24,4 +24,9 @@ export type EditRoleFields = {
   name: string;
   color: string;
   permissions: RolePermissionsData;
-}
+};
+
+export type DeleteRoleFields = {
+  roleId: string;
+  serverId: string;
+};
