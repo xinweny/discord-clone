@@ -13,4 +13,10 @@ export type AddMemberRoleField = {
   serverId: string;
   memberId: string;
   roleId: string;
-}
+};
+
+export type RemoveMemberRoleField = {
+  serverId: string;
+  memberId: string;
+  roleId: string;
+};

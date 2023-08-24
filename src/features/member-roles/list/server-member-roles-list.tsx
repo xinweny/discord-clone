@@ -34,6 +34,8 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
           <ServerMemberRoleCard
             key={role._id}
             memberRole={role}
+            serverId={serverId!}
+            memberId={memberId}
           />
         ))}
         <AddRolesButton />

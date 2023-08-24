@@ -4,6 +4,7 @@ import {
   MemberRoleData,
   GetMemberRolesQuery,
   AddMemberRoleField,
+  RemoveMemberRoleField,
 } from './types';
 
 const memberRoleApi = api.injectEndpoints({
@@ -27,6 +28,16 @@ const memberRoleApi = api.injectEndpoints({
           { type: 'ServerMember', id: memberId },
         ],
       }),
+      removeMemberRole: build.mutation<MemberRoleData[], RemoveMemberRoleField>({
+        query: ({ serverId, memberId, roleId }) => ({
+          url: `/servers/${serverId}/members/${memberId}/roles/${roleId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { memberId }]) => [
+          { type: 'MemberRoles', id: memberId },
+          { type: 'ServerMember', id: memberId },
+        ],
+      }),
     };
   }
 });
@@ -36,4 +47,5 @@ export default memberRoleApi;
 export const {
   useGetMemberRolesQuery,
   useAddMemberRoleMutation,
+  useRemoveMemberRoleMutation,
 } = memberRoleApi;
