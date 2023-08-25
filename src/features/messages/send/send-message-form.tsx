@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { sendMessageSchema } from '../schema';
 
-import { useFileWatchMulti } from '@hooks';
+import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
 import { TextAreaInput, FilesInput } from '@components/ui/forms';
 import { AttachmentsPreview } from './attachments-preview';
@@ -58,12 +58,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
     setAllFiles([]);
   };
 
-  const enterSubmit: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(onSubmit)();
-    }
-  };
+  const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));
 
   return (
     <FormProvider {...methods}>

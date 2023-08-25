@@ -1,8 +1,15 @@
-import { MessageData } from '../api';
+import type { MessageData } from '../types';
+
+import { useDisplay, useActiveIds } from '@hooks';
 
 import { Avatar } from '@components/ui/media';
+
+import { EditMessageForm } from '../edit';
+
 import { AttachmentPreview } from './attachment-preview';
-import { MessageDate } from './message-date';
+import { MessageOptionsBar } from './message-options-bar';
+import { MessageBody } from './message-body';
+import { MessageHeader } from './message-header';
 
 type MessageCardProps = {
   isDm?: boolean;
@@ -15,21 +22,25 @@ export function MessageCard({
   message,
   currentDate,
 }: MessageCardProps) {
+  const { visible, hover } = useDisplay();
+  const activeTabState = useActiveIds();
+
   return (
-    <div>
+    <div {...hover}>
       <Avatar src={message.sender.avatarUrl} />
       <div>
-        <div>
-          <p><strong>{message[isDm ? 'sender' : 'serverMember']?.displayName}</strong></p>
-          <MessageDate
-            currentDate={currentDate}
-            messageDate={message.createdAt}
-          />
-        </div>
-        <div>
-          <p>{message.body}</p>
-          {(message.updatedAt !== message.createdAt) && <p>(edited)</p>}
-        </div>
+        <MessageHeader
+          message={message}
+          isDm={isDm}
+          currentDate={currentDate}
+        />
+        {activeTabState.id === 'editMessage'
+          ? <EditMessageForm
+              message={message}
+              closeForm={() => { activeTabState.set(null) }}
+            />
+          : <MessageBody message={message} />
+        }
         {message.attachments.length > 0 && (
           <div>
             {message.attachments.map(
@@ -38,6 +49,10 @@ export function MessageCard({
           </div>
         )}
       </div>
+      <MessageOptionsBar
+        visible={visible}
+        activeTabState={activeTabState}
+      />
     </div>
   );
 }

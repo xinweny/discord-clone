@@ -1,6 +1,6 @@
 import mime from 'mime';
 
-import type { AttachmentData } from '../api';
+import type { AttachmentData } from '../types';
 
 import { ImageAttachmentPreview } from './image-attachment-preview';
 import { FileAttachmentPreview } from './file-attachment-preview';

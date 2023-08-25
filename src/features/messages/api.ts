@@ -7,45 +7,12 @@ import { signAndUpload } from '@services/cloudinary';
 
 import { ApiCursorPaginationData } from '@types';
 
-export type AttachmentData = {
-  _id: string;
-  url: string;
-  mimetype: string;
-  filename: string;
-  bytes: number;
-};
-
-export type MessageData = {
-  _id: string;
-  roomId: string;
-  senderId: string;
-  serverId?: string;
-  body: string;
-  attachments: AttachmentData[];
-  createdAt: string;
-  updatedAt?: string;
-  sender: {
-    avatarUrl: string;
-    username: string;
-    displayName: string;
-  };
-  serverMember?: {
-    displayName: string;
-  };
-};
-
-type GetMessagesQuery = {
-  serverId?: string;
-  roomId: string;
-  next?: string | null;
-};
-
-type CreateMessageQuery = {
-  serverId?: string;
-  roomId: string;
-  body: string;
-  attachments: File[];
-};
+import {
+  MessageData,
+  GetMessagesQuery,
+  CreateMessageFields,
+  EditMessageFields,
+} from './types';
 
 const messageApi = api.injectEndpoints({
   endpoints(build) {
@@ -75,7 +42,7 @@ const messageApi = api.injectEndpoints({
         },
         forceRefetch: ({ currentArg, previousArg }) => !(_.isEqual(currentArg, previousArg)),
       }),
-      sendMessage: build.mutation<MessageData, CreateMessageQuery>({
+      sendMessage: build.mutation<MessageData, CreateMessageFields>({
         query: ({ serverId, roomId, body, attachments }) => ({
           url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages`,
           method: 'post',
@@ -112,6 +79,39 @@ const messageApi = api.injectEndpoints({
           }
         },
       }),
+      editMessage: build.mutation<MessageData, EditMessageFields>({
+        query: ({ serverId, roomId, messageId, body }) => ({
+          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages/${messageId}`,
+          method: 'put',
+          data: { body },
+        }),
+        onQueryStarted: async ({ serverId, roomId }, { dispatch, queryFulfilled }) => {
+          try {
+            const { data: message } = await queryFulfilled;
+
+            dispatch(messageApi.util.updateQueryData(
+              'getMessages',
+              { serverId, roomId, next: null },
+              (draftMsgs) => {
+                const index = draftMsgs.items.findIndex(
+                  msg => msg._id === message._id
+                );
+
+                if (index !== -1) {
+                  draftMsgs.items[index] = {
+                    ...draftMsgs.items[index],
+                    ...message,
+                  };
+                }
+
+                return draftMsgs;
+              }
+            ));
+          } catch (err) {
+            console.log(err);
+          }
+        },
+      }),
     };  
   }
 });
@@ -121,4 +121,5 @@ export default messageApi;
 export const {
   useGetMessagesQuery,
   useSendMessageMutation,
+  useEditMessageMutation,
 } = messageApi;
