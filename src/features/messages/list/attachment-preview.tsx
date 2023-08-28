@@ -7,9 +7,13 @@ import { FileAttachmentPreview } from './file-attachment-preview';
 
 type AttachmentPreviewProps = {
   attachment: AttachmentData;
+  downloadable?: boolean;
 };
 
-export function AttachmentPreview({ attachment }: AttachmentPreviewProps) {
+export function AttachmentPreview({
+  attachment,
+  downloadable = true,
+}: AttachmentPreviewProps) {
   const { mimetype, filename, url, bytes } = attachment;
 
   const ext = mime.getExtension(mimetype);
@@ -27,6 +31,7 @@ export function AttachmentPreview({ attachment }: AttachmentPreviewProps) {
           ext={ext}
           filename={filename}
           size={bytes}
+          downloadable={downloadable}
         />
       }
     </div>

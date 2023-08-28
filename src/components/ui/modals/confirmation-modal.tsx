@@ -13,6 +13,8 @@ type ConfirmationModalProps = {
     value: string;
     label: string;
   };
+  confirmLabel?: string;
+  children?: React.ReactNode;
 } & ModalProps;
 
 export function ConfirmationModal({
@@ -22,6 +24,8 @@ export function ConfirmationModal({
   onClose,
   onConfirm,
   confirmation,
+  confirmLabel,
+  children,
 }: ConfirmationModalProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(!!confirmation);
 
@@ -43,6 +47,7 @@ export function ConfirmationModal({
           />
         </FormGroup>
       )}
+      {children}
       <div>
         <button type="button" onClick={onClose}>Cancel</button>
         <button
@@ -53,7 +58,7 @@ export function ConfirmationModal({
           }}
           disabled={isDisabled}
         >
-          {title}
+          {confirmLabel || title}
         </button>
       </div>
     </ModalWrapper>

@@ -12,6 +12,7 @@ import {
   GetMessagesQuery,
   CreateMessageFields,
   EditMessageFields,
+  DeleteMessageFields,
 } from './types';
 
 const messageApi = api.injectEndpoints({
@@ -112,6 +113,31 @@ const messageApi = api.injectEndpoints({
           }
         },
       }),
+      deleteMessage: build.mutation<MessageData, DeleteMessageFields>({
+        query: ({ serverId, roomId, messageId }) => ({
+          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages/${messageId}`,
+          method: 'delete',
+        }),
+        onQueryStarted: async ({ serverId, roomId, messageId }, { dispatch, queryFulfilled }) => {
+          try {
+            await queryFulfilled;
+
+            dispatch(messageApi.util.updateQueryData(
+              'getMessages',
+              { serverId, roomId, next: null },
+              (draftMsgs) => {
+                draftMsgs.items = draftMsgs.items.filter(
+                  msg => msg._id !== messageId
+                );
+
+                return draftMsgs;
+              }
+            ));
+          } catch (err) {
+            console.log(err);
+          }
+        },
+      }),
     };  
   }
 });
@@ -122,4 +148,5 @@ export const {
   useGetMessagesQuery,
   useSendMessageMutation,
   useEditMessageMutation,
+  useDeleteMessageMutation,
 } = messageApi;

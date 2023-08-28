@@ -23,6 +23,7 @@ export type MessageData = {
   serverMember?: {
     displayName: string;
   };
+  type: 'channel' | 'dm';
 };
 
 export type GetMessagesQuery = {
@@ -43,4 +44,10 @@ export type EditMessageFields = {
   roomId: string;
   messageId: string;
   body: string;
+};
+
+export type DeleteMessageFields = {
+  serverId?: string;
+  roomId: string;
+  messageId: string;
 };
