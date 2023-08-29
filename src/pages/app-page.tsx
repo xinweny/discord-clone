@@ -6,7 +6,6 @@ import { JoinedServersNavbar } from '@features/servers/joined';
 
 import { AppLayout } from '@components/layouts';
 
-
 export function AppPage() {
   const { user } = useGetUserData();
 

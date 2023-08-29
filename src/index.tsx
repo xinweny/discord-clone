@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App, { store } from '@app';
 
 import './config/cloudinary';
+import './config/emoji-mart';
 
 import './index.css';
 
