@@ -16,6 +16,8 @@ import { MessageOptionsBar } from './message-options-bar';
 import { MessageBody } from './message-body';
 import { MessageHeader } from './message-header';
 
+import { MessageReactionCountList } from '@features/reactions/list';
+
 type MessageCardProps = {
   isDm?: boolean;
   message: MessageData;
@@ -56,6 +58,7 @@ export function MessageCard({
               )}
             </div>
           )}
+          <MessageReactionCountList messageId={message._id} />
         </div>
         <MessageOptionsBar
           visible={visible}

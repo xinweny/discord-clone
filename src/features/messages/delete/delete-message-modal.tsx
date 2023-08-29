@@ -11,15 +11,10 @@ import { DeleteMessageProtip } from './delete-message-protip';
 
 import { useDeleteMessageMutation } from '../api';
 
-type DeleteMessageModalProps = {
-  currentDate?: Date,
-} & ModalProps;
-
 export function DeleteMessageModal({
-  currentDate,
   isOpen,
   onClose,
-}: DeleteMessageModalProps) {
+}: ModalProps) {
   const message = useContext(MessageContext);
 
   const [deleteMessage] = useDeleteMessageMutation();
@@ -45,7 +40,7 @@ export function DeleteMessageModal({
       onConfirm={onConfirm}
       confirmLabel="Delete"
     >
-      {currentDate && <DeleteMessagePreview currentDate={currentDate} />}
+      <DeleteMessagePreview />
       <DeleteMessageProtip />
     </ConfirmationModal>
   );

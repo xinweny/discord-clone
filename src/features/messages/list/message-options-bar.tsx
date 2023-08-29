@@ -2,6 +2,7 @@ import { ActiveIdState } from '@hooks';
 
 import { EditMessageButton } from '../edit';
 import { DeleteMessageOptionsButton } from '../delete';
+import { AddNewReactionButton } from '@features/reactions/add';
 
 type MessageOptionsBarProps = {
   visible: boolean;
@@ -16,12 +17,13 @@ export function MessageOptionsBar({
   activeTabState,
   refs,
 }: MessageOptionsBarProps) {
-  const { set } = activeTabState;
+  const { set, id } = activeTabState;
 
-  if (!visible) return null;
+  if (!visible && id !== 'addReaction') return null;
 
   return (
     <div>
+      <AddNewReactionButton set={set} />
       <EditMessageButton set={set} />
       <DeleteMessageOptionsButton
         set={set}

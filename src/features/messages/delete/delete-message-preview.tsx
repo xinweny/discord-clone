@@ -9,13 +9,7 @@ import {
   AttachmentPreview,
 } from '../list';
 
-type DeleteMessagePreviewProps = {
-  currentDate: Date;
-};
-
-export function DeleteMessagePreview({
-  currentDate,
-}: DeleteMessagePreviewProps) {
+export function DeleteMessagePreview() {
   const message = useContext(MessageContext);
 
   if (!message) return null;

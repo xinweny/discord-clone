@@ -1,11 +1,13 @@
 import { defaultSerializeQueryArgs } from '@reduxjs/toolkit/dist/query';
 import _ from 'lodash';
 
+import type { ApiCursorPaginationData } from '@types';
+
 import api from '@services/api';
 
 import { signAndUpload } from '@services/cloudinary';
 
-import { ApiCursorPaginationData } from '@types';
+import { messageBaseUrl } from '@utils';
 
 import {
   MessageData,
@@ -20,12 +22,11 @@ const messageApi = api.injectEndpoints({
     return {
       getMessages: build.query<ApiCursorPaginationData<MessageData>, GetMessagesQuery>({
         query: ({ serverId, roomId, next }) => {
-          const base = serverId ? `/servers/${serverId}/channels` : '/dms';
-          const queryParams = next ? `next=${next}` : '';
-
-          const url =  `${base}/${roomId}/messages?${queryParams}`;
-
-          return { url, method: 'get' };
+          return {
+            url: messageBaseUrl({ serverId, roomId }),
+            method: 'get',
+            params: { next },
+          };
         },
         serializeQueryArgs: ({ queryArgs, endpointDefinition, endpointName }) => {
           const { serverId, roomId } = queryArgs;
@@ -45,7 +46,7 @@ const messageApi = api.injectEndpoints({
       }),
       sendMessage: build.mutation<MessageData, CreateMessageFields>({
         query: ({ serverId, roomId, body, attachments }) => ({
-          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages`,
+          url: messageBaseUrl({ serverId, roomId }),
           method: 'post',
           data: {
             body,
@@ -82,7 +83,7 @@ const messageApi = api.injectEndpoints({
       }),
       editMessage: build.mutation<MessageData, EditMessageFields>({
         query: ({ serverId, roomId, messageId, body }) => ({
-          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages/${messageId}`,
+          url: messageBaseUrl({ serverId, roomId, messageId }),
           method: 'put',
           data: { body },
         }),
@@ -115,7 +116,7 @@ const messageApi = api.injectEndpoints({
       }),
       deleteMessage: build.mutation<MessageData, DeleteMessageFields>({
         query: ({ serverId, roomId, messageId }) => ({
-          url: `${serverId ? `/servers/${serverId}/channels` : '/dms'}/${roomId}/messages/${messageId}`,
+          url: messageBaseUrl({ serverId, roomId, messageId }),
           method: 'delete',
         }),
         onQueryStarted: async ({ serverId, roomId, messageId }, { dispatch, queryFulfilled }) => {
