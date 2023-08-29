@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
-import { reactionController } from './controller';
+import { reactionCountController } from './controller';
 
-const reactionRouter = Router({ mergeParams: true });
+const reactionCountRouter = Router({ mergeParams: true });
 
-reactionRouter.get('/counts', reactionController.getReactionCounts);
+reactionCountRouter.get('/', reactionCountController.getReactionCounts);
+
+export { reactionCountRouter };

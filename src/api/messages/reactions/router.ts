@@ -1,10 +1,12 @@
 import { Router } from 'express';
 
+import { reactionCountRouter } from '../reactionCounts/router';
+
 import { reactionController } from './controller';
 
 const reactionRouter = Router({ mergeParams: true });
 
-reactionRouter.get('/counts', reactionController.getReactionCounts);
+reactionRouter.use('/counts', reactionCountRouter);
 
 reactionRouter.post('/', reactionController.reactToMessage);
 
