@@ -139,73 +139,21 @@ const remove = async (id: string) => {
     message.deleteOne(),
     Reaction.deleteMany({ messageId: id }),
   ]);
+
+  return message;
 };
 
 const react = async (
   messageId: Types.ObjectId | string,
   emoji: string | {
     id: string,
-    url: string,
     name: string,
   }
 ) => {
-  const message = await Message.findById(messageId);
-
-  if (!message) return null;
-
-  const custom = typeof emoji !== 'string';
-
-  let identifier, updateField, emojiExists, setQuery;
-
-  if (custom) {
-    identifier = emoji.id;
-    updateField = 'reactions.emojiId';
-
-    setQuery = {
-      emojiId: emoji.id,
-      url: emoji.url,
-      name: emoji.name,
-      custom: true,
-    };
-
-    emojiExists = message.reactionCounts.some(reaction => reaction.emojiId?.equals(emoji.id));
-  } else {
-    identifier = emoji;
-    updateField = 'reactions.emoji';
-
-    setQuery = {
-      emoji,
-      name: emojilib[emoji][0].replace(' ', '_'),
-      custom: false,
-    };
-
-    emojiExists = message.reactionCounts.some(reaction => reaction.emoji === emoji);
-  }
-
-  const updateQuery = emojiExists
-  ? { $inc: { 'reactions.$.count': 1 } }
-  : {
-      $push: {
-        reactions: {
-          ...setQuery,
-          count: 0,
-        }
-      }
-    };
-
-  const reactedMessage = await Message.findOneAndUpdate(
-    {
-      _id: messageId,
-      ...(emojiExists && { [updateField]: identifier }),
-    },
-    updateQuery,
-    { new: true }
-  );
-
-  return reactedMessage;
+  
 };
 
-const unreact = async (
+/* const unreact = async (
   messageId: string,
   reaction: IReaction,
 ) => {
@@ -237,7 +185,7 @@ const unreact = async (
     }, { new: true });
 
   return unreactedMessage;
-};
+}; */
 
 export const messageService = {
   getOne,
@@ -246,5 +194,5 @@ export const messageService = {
   update,
   remove,
   react,
-  unreact,
+  // unreact,
 };

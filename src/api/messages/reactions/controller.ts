@@ -44,7 +44,7 @@ const reactToMessage: RequestHandler[] = [
   )
 ];
 
-const unreactToMessage: RequestHandler[] = [
+/* const unreactToMessage: RequestHandler[] = [
   authenticate,
   authorize.message('view'),
   authorize.unreact,
@@ -66,9 +66,9 @@ const unreactToMessage: RequestHandler[] = [
       })
     }
   )
-];
+]; */
 
 export const reactionController = {
   reactToMessage,
-  unreactToMessage,
+  // unreactToMessage,
 };

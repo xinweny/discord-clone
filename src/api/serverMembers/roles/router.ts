@@ -8,6 +8,6 @@ serverMemberRoleRouter.get('/', serverMemberRoleController.getRoles);
 
 serverMemberRoleRouter.post('/', serverMemberRoleController.addRole);
 
-serverMemberRoleRouter.delete('/:memberId', serverMemberRoleController.deleteRole);
+serverMemberRoleRouter.delete('/:roleId', serverMemberRoleController.deleteRole);
 
 export { serverMemberRoleRouter };

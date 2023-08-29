@@ -8,14 +8,21 @@ import { Server } from '@api/servers/model';
 import { ServerMember } from './model';
 
 const getById = async (id: Types.ObjectId | string) => {
-  const member = await ServerMember.findById(id);
+  const member = await ServerMember
+    .findById(id)
+    .populate([
+      { path: 'user', select: 'avatarUrl username' },
+    ]);
 
   return member;
 };
 
 const getOne = async (userId: Types.ObjectId | string, serverId: Types.ObjectId | string) => {
   const member = await ServerMember
-    .findOne({ userId, serverId });
+    .findOne({ userId, serverId })
+    .populate([
+      { path: 'user', select: 'avatarUrl username' },
+    ]);
 
   return member;
 };
@@ -26,7 +33,8 @@ const getMany = async (fields: {
 }) => {
   const members = await ServerMember
     .find(fields)
-    .populate('user', 'avatarUrl');
+    .select('userId serverId displayName')
+    .populate('user', 'avatarUrl username');
 
   return members;
 };
@@ -84,12 +92,10 @@ const remove = async (id: Types.ObjectId | string) => {
   return serverMember;
 };
 
-const checkMembership = async (userId: Types.ObjectId | string, memberId: Types.ObjectId | string) => {
-  const member = await ServerMember.findById(memberId);
+const checkMembership = async (serverId: Types.ObjectId | string, userId: Types.ObjectId | string) => {
+  const member = await ServerMember.findOne({ serverId, userId });
 
-  if (member && member.userId.equals(userId)) return member;
-
-  return null;
+  return member;
 };
 
 export const serverMemberService = {

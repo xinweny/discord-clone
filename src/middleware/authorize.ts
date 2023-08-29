@@ -141,16 +141,16 @@ const messageSelf = (action: 'update' | 'delete') => {
       const memberId = message.senderId;
 
       const authorized = (action === 'delete')
-      ? await serverService.checkPermissions(
-        serverId,
-        userId,
-        'manageMessages',
-        memberId
-      )
-      : await serverMemberService.checkMembership(
-        userId,
-        memberId
-      );
+        ? await serverService.checkPermissions(
+          serverId,
+          userId,
+          'manageMessages',
+          memberId
+        )
+        : await serverMemberService.checkMembership(
+          serverId,
+          userId,
+        );
   
       if (!authorized) throw new CustomError(403, 'Unauthorized');
     } else if (!message.senderId.equals(req.user?._id)) {

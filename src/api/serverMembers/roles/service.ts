@@ -3,33 +3,61 @@ import { Types } from 'mongoose';
 import { CustomError } from '@helpers/CustomError';
 
 import { ServerMember } from '../model';
+import { Server } from '@api/servers/model';
 
-const getMany = async (id: Types.ObjectId | string) => {
+const getMany = async (serverId: Types.ObjectId | string, memberId: Types.ObjectId | string) => {
   const member = await ServerMember
-    .findById(id, 'roleIds')
-    .populate('roles', 'name color');
+    .findById(memberId, 'roleIds');
 
-  return member;
+  if (!member) return null;
+
+  const { roleIds } = member;
+
+  const server = await Server.findById(serverId, 'roles');
+
+  const memberRoles = server?.roles.filter(role => roleIds.includes(role._id.toString()));
+
+  return memberRoles;
 };
 
-const add = async (id: Types.ObjectId | string, roleId: Types.ObjectId | string) => {
+const add = async (
+  serverId: Types.ObjectId | string,
+  memberId: Types.ObjectId | string,
+  roleId: Types.ObjectId | string
+) => {
+  const server = await Server.findById(serverId, 'roles');
+
+  const role = server?.roles.find(role => role._id.toString() === roleId.toString());
+
+  if (!role) throw new CustomError(400, 'Server role not found.');
+
   const member = await ServerMember
-    .findByIdAndUpdate(id, {
+    .findByIdAndUpdate(memberId, {
       $addToSet: { roleIds: roleId },
-    }, { new: true })
-    .populate('roles', 'name color');
+    }, { new: true });
 
-  return member?.roles?.slice(0, -1);
+  if (!member) return null;
+
+  return role;
 };
 
-const remove = async (id: Types.ObjectId | string, roleId: Types.ObjectId | string) => {
-  const member = await ServerMember.findById(id);
+const remove = async (
+  serverId: Types.ObjectId | string,
+  memberId: Types.ObjectId | string,
+  roleId: Types.ObjectId | string
+) => {
+  const [server, member] = await Promise.all([
+    Server.findById(serverId, 'roles'),
+    ServerMember.findById(memberId, 'roleIds'),
+  ]);
 
-  if (!member) throw new CustomError(400, 'Server not found.');
+  if (!server || !member) throw new CustomError(400, 'Server not found.');
 
-  const role = (await member.populate('roles', 'name color')).id(roleId);
+  const role = server.roles.id(roleId);
 
-  member.roleIds = member.roleIds.filter(rId => rId !== roleId);
+  if (!role) throw new CustomError(400, 'Role not found');
+
+  member.roleIds = member.roleIds.filter(rId => rId.toString() !== roleId.toString());
 
   await member.save();
 

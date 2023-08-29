@@ -100,9 +100,12 @@ const deleteMessage: RequestHandler[] = [
   authorize.messageSelf('delete'),
   tryCatch(
     async (req, res) => {  
-      await messageService.remove(req.params.messageId);
+      const message = await messageService.remove(req.params.messageId);
   
-      res.json({ message: 'Message deleted successfully.' });
+      res.json({
+        data: message,
+        message: 'Message deleted successfully.'
+      });
     }
   )
 ];

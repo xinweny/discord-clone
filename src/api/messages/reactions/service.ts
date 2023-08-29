@@ -19,21 +19,6 @@ const getOne = async (fields: IFields) => {
  return reaction;
 };
 
-const getByUser = async (reactorId: string, messageIds?: string[]) => {
-  const reactions = await Reaction.find({
-    reactorId,
-    ...(messageIds && { messageId: { $in: messageIds } }),
-  });
-
-  return reactions;
-};
-
-const getByMessage = async (messageIds: string) => {
-  const reactions = await Reaction.find({ messageId: { $in: messageIds } });
-
-  return reactions;
-} 
-
 const create = async (fields: IFields) => {
   const reaction = new Reaction({
     ...fields,
@@ -53,7 +38,5 @@ export const reactionService = {
   create,
   getOne,
   getById,
-  getByUser,
-  getByMessage,
   remove,
 };

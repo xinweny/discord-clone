@@ -12,6 +12,8 @@ serverMemberRouter.post('/', serverMemberController.joinServer);
 
 serverMemberRouter.use('/:memberId/roles', serverMemberRoleRouter);
 
+serverMemberRouter.get('/:memberId', serverMemberController.getServerMember);
+
 serverMemberRouter.put('/:memberId', serverMemberController.editServerProfile);
 
 serverMemberRouter.delete('/:memberId', serverMemberController.leaveServer);

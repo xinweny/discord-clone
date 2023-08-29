@@ -24,6 +24,18 @@ const getServerMembers: RequestHandler[] = [
   )
 ];
 
+const getServerMember: RequestHandler[] = [
+  authenticate,
+  tryCatch(
+    async (req, res) => {
+
+      const member = await serverMemberService.getById(req.params.memberId);
+
+      res.json({ data: member });
+    }
+  )
+];
+
 const joinServer: RequestHandler[] = [
   authenticate,
   tryCatch(
@@ -88,6 +100,7 @@ const leaveServer: RequestHandler[] = [
 ];
 
 export const serverMemberController = {
+  getServerMember,
   getServerMembers,
   joinServer,
   leaveServer,

@@ -25,12 +25,6 @@ const serverMemberSchema = new Schema({
   collection: 'server_members',
 });
 
-serverMemberSchema.virtual('roles', {
-  ref: 'Server.roles',
-  localField: 'roleIds',
-  foreignField: '_id',
-});
-
 serverMemberSchema.virtual('user', {
   ref: 'User',
   localField: 'userId',

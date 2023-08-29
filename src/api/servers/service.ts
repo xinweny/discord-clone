@@ -92,7 +92,26 @@ const create = async (
   }
 
   // Default roles
-  server.roles.push({ name: '@everyone', color: '#99AAB5' });
+  server.roles.push({
+    name: '@everyone',
+    color: '#99AAB5',
+    permissions: {
+      administrator: false,
+      viewChannels: true,
+      manageChannels: false,
+      manageRoles: false,
+      manageExpressions: false,
+      kickMembers: false,
+      manageServer: false,
+      createInvite: true,
+      sendMessages: true,
+      manageMessages: false,
+      addReactions: true,
+      joinCall: true,
+      speak: true,
+      video: true,
+    },
+  });
   creator.roleIds.push(server.roles[0]._id);
 
   await server.save();

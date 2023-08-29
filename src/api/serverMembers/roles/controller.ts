@@ -9,9 +9,9 @@ const getRoles: RequestHandler[] = [
   authenticate,
   authorize.serverMember,
   async (req, res) => {
-    const { memberId } = req.params;
+    const { serverId, memberId } = req.params;
 
-    const roles = await serverMemberRoleService.getMany(memberId);
+    const roles = await serverMemberRoleService.getMany(serverId, memberId);
 
     res.json({ data: roles });
   }
@@ -21,9 +21,10 @@ const addRole: RequestHandler[] = [
   authenticate,
   authorize.server('manageRoles'),
   async (req, res) => {
-    const { memberId, roleId } = req.params;
+    const { serverId, memberId } = req.params;
+    const { roleId } = req.body;
 
-    const role = await serverMemberRoleService.add(memberId, roleId);
+    const role = await serverMemberRoleService.add(serverId, memberId, roleId);
 
     res.json({
       data: role,
@@ -36,14 +37,14 @@ const deleteRole: RequestHandler[] = [
   authenticate,
   authorize.server('manageRoles'),
   async (req, res) => {
-    const { memberId, roleId } = req.params;
+    const { serverId, memberId, roleId } = req.params;
 
-    const role = await serverMemberRoleService.remove(memberId, roleId);
+    const role = await serverMemberRoleService.remove(serverId, memberId, roleId);
 
     res.json({
       data: role,
       message: 'Role removed from member successfully.',
-    })
+    });
   }
 ];
 
