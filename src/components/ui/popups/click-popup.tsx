@@ -6,6 +6,7 @@ type ClickPopupProps = {
   children: React.ReactNode;
   onOpen?: () => void;
   onClose?: () => void;
+  btnRef?: React.RefObject<HTMLButtonElement>;
 };
 
 export function ClickPopup({
@@ -13,15 +14,13 @@ export function ClickPopup({
   children,
   onOpen,
   onClose,
+  btnRef,
 }: ClickPopupProps) {
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if (showPopup) {
-      if (onOpen) onOpen();
-    } else {
-      if (onClose) onClose();
-    }
+    if (showPopup === true && onOpen) onOpen();
+    if (showPopup === false && onClose) onClose();
   }, [showPopup]);
 
   return (
@@ -30,6 +29,7 @@ export function ClickPopup({
         onClick={() => {
           setShowPopup(prev => !prev);
         }}
+        ref={btnRef}
       >
         {children}
       </button>

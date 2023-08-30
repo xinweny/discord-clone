@@ -29,7 +29,7 @@ export function MessageCard({
   message,
   currentDate,
 }: MessageCardProps) {
-  const { visible, hover } = useDisplay();
+  const { visible, hover, hide } = useDisplay();
   const activeTabState = useActiveIds();
 
   const deleteMessageBtnRef = useRef<HTMLButtonElement>(null);
@@ -62,6 +62,7 @@ export function MessageCard({
         </div>
         <MessageOptionsBar
           visible={visible}
+          hide={hide}
           activeTabState={activeTabState}
           refs={{
             deleteMessageBtn: deleteMessageBtnRef,

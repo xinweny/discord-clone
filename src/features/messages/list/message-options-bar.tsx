@@ -6,6 +6,7 @@ import { AddNewReactionButton } from '@features/reactions/add';
 
 type MessageOptionsBarProps = {
   visible: boolean;
+  hide: () => void;
   activeTabState: ActiveIdState;
   refs: {
     deleteMessageBtn: React.RefObject<HTMLButtonElement>;
@@ -14,6 +15,7 @@ type MessageOptionsBarProps = {
 
 export function MessageOptionsBar({
   visible,
+  hide,
   activeTabState,
   refs,
 }: MessageOptionsBarProps) {
@@ -23,7 +25,10 @@ export function MessageOptionsBar({
 
   return (
     <div>
-      <AddNewReactionButton set={set} />
+      <AddNewReactionButton
+        activeTabState={activeTabState}
+        hide={hide}
+      />
       <EditMessageButton set={set} />
       <DeleteMessageOptionsButton
         set={set}

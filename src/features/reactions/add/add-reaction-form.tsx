@@ -10,11 +10,11 @@ import { useGetPickerCustomEmojis } from '../hooks';
 import { useCreateReactionMutation } from '../api';
 
 type AddReactionFormProps = {
-  closeForm: () => void;
+  btnRef: React.RefObject<HTMLButtonElement>;
 };
 
 export function AddReactionForm({
-  closeForm
+  btnRef
 }: AddReactionFormProps) {
   const message = useContext(MessageContext);
 
@@ -23,6 +23,8 @@ export function AddReactionForm({
   const { serverId, roomId } = useGetServerRoomIds();
 
   const [createReaction] = useCreateReactionMutation();
+
+  const closeForm = () => { btnRef.current?.click(); };
 
   const handleClick = async (emoji: any) => {
     if (!message?._id) return;

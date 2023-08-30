@@ -1,20 +1,34 @@
+import { useRef } from 'react';
+
 import { ClickPopup } from '@components/ui/popups';
 import { AddReactionForm } from './add-reaction-form';
 
+import { ActiveIdState } from '@hooks';
+
 type AddNewReactionButtonProps = {
-  set: React.Dispatch<React.SetStateAction<string | null>>;
+  hide: () => void;
+  activeTabState: ActiveIdState;
 };
 
 export function AddNewReactionButton({
-  set
+  activeTabState,
+  hide,
 }: AddNewReactionButtonProps) {
-  const closeForm = () => { set(null); };
+  const { set } = activeTabState;
+
+  const addReactionBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
     <ClickPopup
-      renderPopup={() => <AddReactionForm closeForm={closeForm} />}
+      renderPopup={() => (
+        <AddReactionForm btnRef={addReactionBtnRef} />
+      )}
       onOpen={() => { set('addReaction'); }}
-      onClose={closeForm}
+      onClose={() => {
+        set(null);
+        hide();
+      }}
+      btnRef={addReactionBtnRef}
     >
       <img src="#" alt="Add Reaction" />
     </ClickPopup>
