@@ -163,18 +163,6 @@ const messageSelf = (action: 'update' | 'delete') => {
   return tryCatch(authorizeMiddleware);
 }
 
-const unreact: RequestHandler = tryCatch(
-  async (req, res, next) => {
-    const reaction = await reactionService.getById(req.params.reactionId);
-  
-    if (!reaction) throw new CustomError(400, 'Reaction not found.');
-  
-    if (req.user?._id.toString() !== reaction?.reactorId.toString()) throw new CustomError(403, 'Unauthorized');
-  
-    next();
-  }
-);
-
 const userSelf: RequestHandler = tryCatch(
   (req, res, next) => {
     const { userId } = req.params;
@@ -229,7 +217,6 @@ export const authorize = {
   message,
   messageSelf,
   userSelf,
-  unreact,
   dmMember,
   dmOwnerOrParticipantSelf,
 };

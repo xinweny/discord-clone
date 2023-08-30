@@ -9,7 +9,7 @@ const getReactions: RequestHandler[] = [
   authenticate,
   tryCatch(
     async (req, res) => {
-      const reactions = await reactionService.getByMessage(req.params.messageId);
+      const reactions = await reactionService.getByMessage(req.params.messageId, req.user?._id);
 
       res.json({ data: reactions });
     }
@@ -25,7 +25,7 @@ const createReaction: RequestHandler[] = [
 
       const reaction = await reactionService.create(
         messageId,
-        req.user!.id,
+        req.user?._id,
         emoji,
       );
 
@@ -40,7 +40,7 @@ const react: RequestHandler[] = [
     async (req, res) => {
       const reaction = await reactionService.increment(
         req.params.reactionId,
-        req.user!.id
+        req.user?._id
       );
 
       res.json({ data: reaction });
@@ -54,7 +54,7 @@ const unreact: RequestHandler[] = [
     async (req, res) => {
       const reaction = await reactionService.decrement(
         req.params.reactionId,
-        req.user!.id
+        req.user?._id
       );
 
       res.json({ data: reaction });

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import { reactionSchema, IReaction } from './model';
+import { Reaction, IReaction } from './model';
 
 export interface ICustomCount extends IReaction {
   emojiId: Types.ObjectId;
@@ -12,12 +12,12 @@ export interface IDefaultCount extends IReaction {
   native: string;
 }
 
-reactionSchema.discriminator('custom', new Schema({
+Reaction.discriminator('custom', new Schema({
   emojiId: { type: Types.ObjectId, ref: 'CustomEmoji', required: true },
   url: { type: String, required: true },
 }));
 
-reactionSchema.discriminator('default', new Schema({
+Reaction.discriminator('default', new Schema({
   unified: { type: String, required: true },
   native: { type: String, required: true },
 }));

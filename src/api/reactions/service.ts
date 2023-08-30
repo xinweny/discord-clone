@@ -15,8 +15,23 @@ type CreateReactionFields = {
   native: string;
 });
 
-const getByMessage = async (messageId: string | Types.ObjectId) => {
-  const reactions = await Reaction.find({ messageId: new Types.ObjectId(messageId) });
+const getByMessage = async (
+  messageId: string | Types.ObjectId,
+  userId: string | Types.ObjectId
+) => {
+  const reactions = await Reaction.aggregate([
+    {
+      $match: { messageId: new Types.ObjectId(messageId) },
+    },
+    {
+      $addFields: {
+        userHasReacted: {
+          $cond: { $in: [new Types.ObjectId(userId), '$userIds'] },
+        },
+      },
+    },
+    { $unset: 'userIds' },
+  ]);
 
   return reactions;
 };
