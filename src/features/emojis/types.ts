@@ -31,3 +31,19 @@ export type DeleteEmojiFields = {
   emojiId: string;
   serverId: string;
 };
+
+type PickerCustomEmojiData = {
+  id: string;
+  name: string;
+  skins: { src: string }[];
+};
+
+export type PickerCategoryData = {
+  [key: string]: { src: string };
+};
+
+export type PickerServerEmojisData = {
+  id: string;
+  name: string;
+  emojis: PickerCustomEmojiData[];
+};

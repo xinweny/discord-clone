@@ -16,7 +16,7 @@ const api = createApi({
     'Roles',
     'MemberRoles',
     'ServerMember',
-    'ReactionCounts',
+    'Reactions',
   ],
 });
 

@@ -70,6 +70,7 @@ export default emojiApi;
 
 export const {
   useGetEmojisQuery,
+  useLazyGetEmojisQuery,
   useCreateEmojiMutation,
   useEditEmojiMutation,
   useDeleteEmojiMutation,

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetReactionCountsQuery } from '../api';
+import { useGetReactionsQuery } from '../api';
 
 import { AddToExistingReactionButton } from '../add';
 
@@ -13,20 +13,20 @@ export function MessageReactionCountList({
 }: MessageReactionCountListProps) {
   const { serverId, channelId, roomId } = useParams();
 
-  const { data: counts, isSuccess } = useGetReactionCountsQuery({
+  const { data: reactions, isSuccess } = useGetReactionsQuery({
     serverId: serverId!,
     roomId: (channelId || roomId)!,
     messageId,
   });
 
-  if (!isSuccess || counts.length === 0) return null;
+  if (!isSuccess || reactions.length === 0) return null;
 
   return (
     <div>
-      {counts.map(count => (
+      {reactions.map(reaction => (
         <AddToExistingReactionButton
-          key={count._id}
-          reactionCount={count}
+          key={reaction._id}
+          reaction={reaction}
         />
       ))}
     </div>

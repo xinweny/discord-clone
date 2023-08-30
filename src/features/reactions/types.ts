@@ -1,26 +1,46 @@
-import { CustomEmojiData } from '@features/emojis/types';
+type CustomEmojiReactionData = {
+  type: 'custom';
+  emojiId: string;
+  url: string;
+};
+
+type EmojiReactionData = {
+  type: 'emoji';
+  unified: string;
+  native: string;
+};
 
 export type ReactionData = {
   _id: string;
-  reactorId: string;
   messageId: string;
-} & ({
-  custom: true;
-  emojiId: string;
-} | {
-  custom: false;
-  emoji: string;
-});
-
-export type ReactionCountData = {
-  _id: string;
+  name: string;
+  userHasReacted: boolean;
   count: number;
-  data: ReactionData;
-  customEmoji?: CustomEmojiData;
-};
+} & (CustomEmojiReactionData | EmojiReactionData);
 
 export type GetReactionCountsQuery = {
   serverId?: string;
   roomId: string;
   messageId: string;
+};
+
+export type CreateReactionsFields = {
+  serverId?: string;
+  roomId: string;
+  messageId: string;
+  emoji:  CustomEmojiReactionData | EmojiReactionData;
+};
+
+export type IncrementReactionFields = {
+  serverId?: string;
+  roomId: string;
+  messageId: string;
+  reactionId: string;
+};
+
+export type DecrementReactionFields = {
+  serverId?: string;
+  roomId: string;
+  messageId: string;
+  reactionId: string;
 };

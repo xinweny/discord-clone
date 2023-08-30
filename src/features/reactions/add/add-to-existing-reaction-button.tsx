@@ -1,17 +1,17 @@
-import { ReactionCountData } from '../types';
+import { ReactionData } from '../types';
 
 type AddToExistingReactionButtonProps = {
-  reactionCount: ReactionCountData;
+  reaction: ReactionData;
 };
 
 export function AddToExistingReactionButton({
-  reactionCount
+  reaction
 }: AddToExistingReactionButtonProps) {
-  const { count, customEmoji, data } = reactionCount;
+  const { count, type } = reaction;
 
   return (
     <button>
-      <img src={data.custom ? customEmoji?.url : data.emoji} />
+      <img src={type === 'custom' ? reaction.url : reaction.native} />
       <p>{count}</p>
     </button>
   );
