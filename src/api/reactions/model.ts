@@ -4,7 +4,7 @@ import env from '@config/env';
 export interface IReaction extends Document {
   _id: Types.ObjectId;
   name: string;
-  type: 'custom' | 'default';
+  type: 'custom' | 'emoji';
   userIds: Types.ObjectId[];
   count: number;
 }
