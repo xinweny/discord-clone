@@ -30,15 +30,14 @@ const reactionApi = api.injectEndpoints({
       }),
       incrementReaction: build.mutation<ReactionData, IncrementReactionFields>({
         query: ({ serverId, roomId, messageId, reactionId }) => ({
-          url: `${messageBaseUrl({ serverId, roomId, messageId })}/reactions`,
+          url: `${messageBaseUrl({ serverId, roomId, messageId })}/reactions/${reactionId}`,
           method: 'put',
-          params: { reactionId },
         }),
         invalidatesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
       }),
       decrementReaction: build.mutation<ReactionData, DecrementReactionFields>({
         query: ({ serverId, roomId, messageId, reactionId }) => ({
-          url: `${messageBaseUrl({ serverId, roomId, messageId })}/reactions`,
+          url: `${messageBaseUrl({ serverId, roomId, messageId })}/reactions/${reactionId}`,
           method: 'delete',
           params: { reactionId },
         }),

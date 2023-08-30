@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
+import { useGetServerRoomIds } from '@hooks';
+
+import { ToggleReactionButton } from '../edit';
 
 import { useGetReactionsQuery } from '../api';
-
-import { AddToExistingReactionButton } from '../add';
 
 type MessageReactionCountListProps = {
   messageId: string;
@@ -11,11 +11,11 @@ type MessageReactionCountListProps = {
 export function MessageReactionCountList({
   messageId
 }: MessageReactionCountListProps) {
-  const { serverId, channelId, roomId } = useParams();
+  const { serverId, roomId } = useGetServerRoomIds();
 
   const { data: reactions, isSuccess } = useGetReactionsQuery({
     serverId: serverId!,
-    roomId: (channelId || roomId)!,
+    roomId: roomId!,
     messageId,
   });
 
@@ -24,9 +24,11 @@ export function MessageReactionCountList({
   return (
     <div>
       {reactions.map(reaction => (
-        <AddToExistingReactionButton
+        <ToggleReactionButton
           key={reaction._id}
           reaction={reaction}
+          serverId={serverId}
+          roomId={roomId!}
         />
       ))}
     </div>

@@ -1,0 +1,62 @@
+import type { ReactionData } from '../types';
+
+import { Emoji } from '@components/ui/media';
+
+import {
+  useIncrementReactionMutation,
+  useDecrementReactionMutation,
+} from '../api';
+
+type ToggleReactionButtonProps = {
+  reaction: ReactionData;
+  serverId?: string;
+  roomId: string;
+};
+
+export function ToggleReactionButton({
+  reaction,
+  serverId,
+  roomId,
+}: ToggleReactionButtonProps) {
+  const {
+    __t,
+    _id,
+    count,
+    name,
+    messageId,
+    userHasReacted,
+  } = reaction;
+
+  const custom = __t === 'custom';
+
+  const [increment] = useIncrementReactionMutation();
+  const [decrement] = useDecrementReactionMutation();
+
+  const query = {
+    reactionId: _id,
+    messageId,
+    serverId,
+    roomId,
+  };
+
+  const handleReact = async () => {
+    await increment(query).unwrap();
+  };
+
+  const handleUnreact = async () => {
+    await decrement(query).unwrap();
+  };
+
+  return (
+    <button className={`${userHasReacted ? 'unreact-btn' : 'react-btn'}`}
+      onClick={userHasReacted ? handleUnreact : handleReact}
+    >
+      <Emoji
+        custom={custom}
+        name={name}
+        emoji={custom ? reaction.url : reaction.native}
+      />
+      <p>{count}</p>
+    </button>
+  );
+}
