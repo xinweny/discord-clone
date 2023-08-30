@@ -26,7 +26,7 @@ const getByMessage = async (
     {
       $addFields: {
         userHasReacted: {
-          $cond: { $in: [new Types.ObjectId(userId), '$userIds'] },
+          $in: [new Types.ObjectId(userId), '$userIds'],
         },
       },
     },
