@@ -1,21 +1,29 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import { countSchema } from './counts/schema';
-import { IDefaultCount, ICustomCount } from './counts/discriminators';
+import env from '@config/env';
 export interface IReactionCount extends Document {
   _id: Types.ObjectId;
-  messageId: Types.ObjectId;
-  counts: Types.DocumentArray<IDefaultCount | ICustomCount>;
+  name: string;
+  count: number;
+  type: 'custom' | 'default';
 }
 
-const reactionCountSchema = new Schema({
+export const reactionCountSchema = new Schema({
   messageId: {
     type: Types.ObjectId,
     ref: 'Message',
     required: true,
-    unique: true,
   },
-  counts: { type: [countSchema], default: [] },
+  name: { type: String, required: true },
+  count: { type: Number, default: 1 },
 });
 
 export const ReactionCount = mongoose.model<IReactionCount>('ReactionCount', reactionCountSchema, 'reaction_counts');
+
+if (env.NODE_ENV === 'development') {
+  reactionCountSchema.index({
+    messageId: 1,
+    emojiId: 1,
+    unified: 1,
+  }, { unique: true });
+}

@@ -171,8 +171,6 @@ const unreact: RequestHandler = tryCatch(
   
     if (req.user?._id.toString() !== reaction?.reactorId.toString()) throw new CustomError(403, 'Unauthorized');
   
-    req.reaction = reaction;
-  
     next();
   }
 );

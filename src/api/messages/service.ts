@@ -1,16 +1,15 @@
 import { Types } from 'mongoose';
-import mime from 'mime/lite';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import emojilib from 'emojilib';
 
 import { CustomError } from '@helpers/CustomError';
 
 import { Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
-import { Reaction, IReaction } from './reactions/model';
+import { Reaction } from './reactions/model';
+import { reactionService } from './reactions/service';
+
+import type { ICustomCount, IDefaultCount } from './reactionCounts/discriminators';
+import { reactionCountService } from './reactionCounts/service';
 
 import { cloudinaryService } from '@services/cloudinary';
 
@@ -18,7 +17,7 @@ const getOne = async (id: string) => {
   const message = await Message.findById(id);
 
   return message;
-}
+};
 
 const getMany = async (
   fields: {
@@ -143,19 +142,50 @@ const remove = async (id: string) => {
   return message;
 };
 
-const react = async (
+const reactNew = async (
   messageId: Types.ObjectId | string,
-  emoji: string | {
-    id: string,
-    name: string,
-  }
+  userId: Types.ObjectId | string,
+  emoji: { name: string } & (
+    {
+      custom: true;
+      emojiId: Types.ObjectId;
+      url: string;
+    } | {
+      custom: false;
+      unified: string;
+      native: string;
+    }
+  )
 ) => {
-  
+  const reactionCount = await reactionCountService.createCount(messageId, emoji);
+
+  await reactionService.create({
+    reactorId: userId,
+    countId: reactionCount._id,
+  });
+
+  return reactionCount;
 };
 
-/* const unreact = async (
-  messageId: string,
-  reaction: IReaction,
+const react = async (
+  userId: Types.ObjectId | string,
+  countId: Types.ObjectId | string,
+) => {
+  const reaction = await reactionService.create({
+    reactorId: userId,
+    countId,
+  });
+
+  if (!reaction) return null;
+
+  const reactionCount = await reactionCountService.increment(countId);
+
+  return reactionCount;
+};
+
+const unreact = async (
+  countId: string,
+  
 ) => {
   const message = await Message.findById(messageId);
 
@@ -185,7 +215,7 @@ const react = async (
     }, { new: true });
 
   return unreactedMessage;
-}; */
+};
 
 export const messageService = {
   getOne,
@@ -193,6 +223,7 @@ export const messageService = {
   create,
   update,
   remove,
+  reactNew,
   react,
   // unreact,
 };

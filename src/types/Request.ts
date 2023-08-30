@@ -2,7 +2,6 @@ import { IReqUser } from '@api/users/model';
 import { IServer } from '@api/servers/model';
 import { IServerMember } from '@api/serverMembers/model';
 import { IDM } from '@api/dms/model';
-import { IReaction } from '@api/messages/reactions/model';
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -12,7 +11,6 @@ declare module 'express-serve-static-core' {
     server?: IServer,
     member?: IServerMember,
     dm?: IDM,
-    reaction?: IReaction,
   }
 }
 
