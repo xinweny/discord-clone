@@ -1,4 +1,6 @@
-import { ReactionData } from '../types';
+import type { ReactionData } from '../types';
+
+import { Emoji } from '@components/ui/media';
 
 type AddToExistingReactionButtonProps = {
   reaction: ReactionData;
@@ -7,11 +9,17 @@ type AddToExistingReactionButtonProps = {
 export function AddToExistingReactionButton({
   reaction
 }: AddToExistingReactionButtonProps) {
-  const { count, type } = reaction;
+  const { count, name, __t } = reaction;
+
+  const custom = __t === 'custom';
 
   return (
     <button>
-      <img src={type === 'custom' ? reaction.url : reaction.native} />
+      <Emoji
+        custom={custom}
+        name={name}
+        emoji={custom ? reaction.url : reaction.native}
+      />
       <p>{count}</p>
     </button>
   );

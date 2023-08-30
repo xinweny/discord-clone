@@ -8,11 +8,13 @@ type AddNewReactionButtonProps = {
 export function AddNewReactionButton({
   set
 }: AddNewReactionButtonProps) {
+  const closeForm = () => { set(null); };
+
   return (
     <ClickPopup
-      renderPopup={() => <AddReactionForm />}
+      renderPopup={() => <AddReactionForm closeForm={closeForm} />}
       onOpen={() => { set('addReaction'); }}
-      onClose={() => { set(null); }}
+      onClose={closeForm}
     >
       <img src="#" alt="Add Reaction" />
     </ClickPopup>

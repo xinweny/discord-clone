@@ -1,11 +1,16 @@
+export enum ReactionTypes {
+  CUSTOM_EMOJI = 'custom',
+  EMOJI = 'emoji',
+}
+
 type CustomEmojiReactionData = {
-  type: 'custom';
+  __t: ReactionTypes.CUSTOM_EMOJI;
   emojiId: string;
   url: string;
 };
 
 type EmojiReactionData = {
-  type: 'emoji';
+  __t: ReactionTypes.EMOJI;
   unified: string;
   native: string;
 };
@@ -28,7 +33,15 @@ export type CreateReactionsFields = {
   serverId?: string;
   roomId: string;
   messageId: string;
-  emoji:  CustomEmojiReactionData | EmojiReactionData;
+  emoji: { name: string } & ({
+    custom: false;
+    unified: string;
+    native: string;
+  } | {
+    custom: true;
+    emojiId: string;
+    url: string;
+  });
 };
 
 export type IncrementReactionFields = {

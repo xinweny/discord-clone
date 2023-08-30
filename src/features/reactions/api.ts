@@ -39,7 +39,7 @@ const reactionApi = api.injectEndpoints({
       decrementReaction: build.mutation<ReactionData, DecrementReactionFields>({
         query: ({ serverId, roomId, messageId, reactionId }) => ({
           url: `${messageBaseUrl({ serverId, roomId, messageId })}/reactions`,
-          method: 'put',
+          method: 'delete',
           params: { reactionId },
         }),
         invalidatesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
