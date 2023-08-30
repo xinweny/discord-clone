@@ -1,27 +1,29 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
 import env from '@config/env';
-export interface IReactionCount extends Document {
+export interface IReaction extends Document {
   _id: Types.ObjectId;
   name: string;
-  count: number;
   type: 'custom' | 'default';
+  userIds: Types.ObjectId[];
+  count: number;
 }
 
-export const reactionCountSchema = new Schema({
+export const reactionSchema = new Schema({
   messageId: {
     type: Types.ObjectId,
     ref: 'Message',
     required: true,
   },
   name: { type: String, required: true },
+  userIds: { type: [Types.ObjectId], ref: 'User', required: true },
   count: { type: Number, default: 1 },
 });
 
-export const ReactionCount = mongoose.model<IReactionCount>('ReactionCount', reactionCountSchema, 'reaction_counts');
+export const Reaction = mongoose.model<IReaction>('Reaction', reactionSchema);
 
 if (env.NODE_ENV === 'development') {
-  reactionCountSchema.index({
+  reactionSchema.index({
     messageId: 1,
     emojiId: 1,
     unified: 1,

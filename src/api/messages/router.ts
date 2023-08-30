@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { messageController } from './controller';
 
-import { reactionRouter } from './reactions/router';
+import { reactionRouter } from '../reactions/router';
 
 const messageRouter = Router({ mergeParams: true });
 

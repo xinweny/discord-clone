@@ -8,7 +8,7 @@ import { serverMemberService } from '@api/serverMembers/service';
 import { channelService } from '@api/servers/channels/service';
 import { dmService } from '@api/dms/service';
 import { messageService } from '@api/messages/service';
-import { reactionService } from '@api/messages/reactions/service';
+import { reactionService } from '@api/reactions/service';
 import { userService } from '@api/users/service';
 
 const server = (permissionKeys: string | string[] = []) => {
