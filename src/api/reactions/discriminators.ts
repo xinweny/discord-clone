@@ -17,11 +17,11 @@ Reaction.discriminator('custom', new Schema({
   url: { type: String, required: true },
 }));
 
-Reaction.discriminator('default', new Schema({
+Reaction.discriminator('emoji', new Schema({
   unified: { type: String, required: true },
   native: { type: String, required: true },
 }));
 
 export const CustomEmojiReaction = mongoose.model<ICustomCount>('custom');
 
-export const EmojiReaction = mongoose.model<IDefaultCount>('default');
+export const EmojiReaction = mongoose.model<IDefaultCount>('emoji');
