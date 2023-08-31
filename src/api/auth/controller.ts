@@ -16,14 +16,14 @@ import { authService } from '@api/auth/service';
 import { userService } from '@api/users/service';
 
 const signup: RequestHandler[] = [
-  ...validateFields(['email', 'username', 'password', 'confirmPassword']),
+  ...validateFields(['email', 'username', 'password']),
   tryCatch(
     async (req, res) => {
       const { email, displayName, username, password } = req.body;
 
       const existingUser = await userService.getOne({ email });
 
-      if (existingUser) throw new CustomError(400, 'Email already in use. Please choose a different email.');
+      if (existingUser) throw new CustomError(400, 'Email already in use');
 
       const hashedPassword = await authService.hashPassword(password);
 

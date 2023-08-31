@@ -96,7 +96,7 @@ const checkUsernameAvailable = async (username: string) => {
   const user = await User.findOne({ username });
 
   return !user;
-}
+};
 
 export const userService = {
   getOne,

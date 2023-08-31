@@ -1,5 +1,7 @@
 import mongoose, { Types, Schema, Document } from 'mongoose';
 
+import env from '@config/env';
+
 import { IServer } from '@api/servers/model';
 import { IDM } from '@api/dms/model';
 
@@ -83,5 +85,12 @@ userSchema.method(
     return this.relations.find((relation: IRelation) => relation.userId.equals(userId));
   }
 );
+
+if (env.NODE_ENV === 'development') {
+  userSchema.index({ createdAt: 1 }, {
+    expireAfterSeconds: 60 * 60,
+    partialFilterExpression: { verified: false },
+  });
+}
 
 export const User = mongoose.model<IUser>('User', userSchema);
