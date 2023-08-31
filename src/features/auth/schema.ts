@@ -5,7 +5,7 @@ import { store } from '@app';
 import authApi from './api';
 
 export const registerSchema = zod.object({
-  email: zod.string().email(),
+  email: zod.string(),
   displayName: zod.string()
     .or(zod.literal('')),
   username: zod.string()

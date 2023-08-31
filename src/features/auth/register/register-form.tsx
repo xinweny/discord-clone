@@ -2,9 +2,15 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import type { ErrorResponse } from '@types';
 import type { RegisterFields } from '../types';
 
 import { registerSchema } from '../schema';
+
+import {
+  useRegisterMutation,
+  useLoginMutation,
+} from '../api';
 
 import {
   TextInput,
@@ -27,12 +33,35 @@ export function RegisterForm() {
     mode: 'onChange',
     resolver: zodResolver(registerSchema),
   });
-  const { handleSubmit, setValue } = methods;
+  const {
+    handleSubmit,
+    setValue,
+    setError,
+  } = methods;
+
+  const [register] = useRegisterMutation();
+  const [login] = useLoginMutation();
 
   const navigate = useNavigate();
 
   const onSubmit = async (data: RegisterFields) => {
-    console.log(data);
+    try {
+      const user = await register(data).unwrap();
+
+      if (user) {
+        const { email, password } = data;
+        const auth = await login({ email, password }).unwrap();
+        
+        if (auth) navigate('/channels/@me');
+      }
+    } catch (error) {
+      const err = error as ErrorResponse;
+
+      if (err.status === 400 && err.data.message === 'Email already in use') setError('email', {
+        type: 'custom',
+        message: 'Email is already registered',
+      });
+    }
   };
   
   return (
@@ -40,7 +69,11 @@ export function RegisterForm() {
       <h2>Create an account</h2>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormGroup label="email" htmlFor="email">
+          <FormGroup
+            label="email"
+            htmlFor="email"
+            showError
+          >
             <TextInput
               type="email"
               id="email"
@@ -70,6 +103,7 @@ export function RegisterForm() {
                   setValue('username', e.target.value.toLowerCase());
                 },
               }}
+              maxLength={32}
             />
             <ErrorMessage
               name="username"
@@ -82,7 +116,12 @@ export function RegisterForm() {
               id="password"
               name="password"
               label="password"
-              rules={{ required: true }}
+              rules={{
+                required: true,
+                onChange: () => {
+                  setValue('confirmPassword', '');
+                },
+              }}
               options={{ trim: false }}
             />
             <ErrorMessage name="password" />

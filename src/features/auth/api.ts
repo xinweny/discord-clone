@@ -5,6 +5,7 @@ import type {
   LoginFields,
   RegisterFields,
 } from './types';
+import type { UserSelfData } from '@features/user/types';
 
 const authApi = api.injectEndpoints({
   endpoints(build) {
@@ -17,11 +18,11 @@ const authApi = api.injectEndpoints({
           config: { withCredentials: true },
         }),
       }),
-      register: build.mutation<AuthData, RegisterFields>({
+      register: build.mutation<UserSelfData, RegisterFields>({
         query: ({ email, displayName, username, password }) => ({
           url: '/auth/signup',
           method: 'post',
-          body: {
+          data: {
             email,
             displayName,
             username,
