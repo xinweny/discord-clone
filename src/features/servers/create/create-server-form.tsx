@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { CreateServerFields } from '../types';
 
-import { createServerSchema } from './schema';
+import { createServerSchema } from '../schema';
 
 import {
   TextInput,
@@ -28,7 +28,6 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   const {
     handleSubmit,
     reset,
-    formState: { errors },
   } = methods;
 
   const [createServer] = useCreateServerMutation();
@@ -48,7 +47,7 @@ export function CreateServerForm({ closeBtn }: CreateServerFormProps) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ErrorMessage error={errors.file} />
+        <ErrorMessage name="file" />
         <label htmlFor="upload">
           <ImagePreview
             name="file"

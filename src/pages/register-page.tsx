@@ -1,10 +1,12 @@
 import { AuthLayout } from '@components/layouts';
 
+import { RegisterForm } from '@features/auth/register';
+
 export function RegisterPage() {
   return (
     <div>
       <AuthLayout>
-        <div>REGISTER FORM</div>
+        <RegisterForm />
       </AuthLayout>
     </div>
   );

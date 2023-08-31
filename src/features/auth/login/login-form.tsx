@@ -1,17 +1,14 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
+import type { LoginFields } from '../types';
 
 import { TextInput, FormGroup, SubmitButton } from '@components/ui/forms';
 
-import { useLazyLoginQuery } from '@features/auth/api';
-
-type LoginFormFields = {
-  email: string;
-  password: string;
-};
+import { useLoginMutation } from '@features/auth/api';
 
 export function LoginForm() {
-  const methods = useForm<LoginFormFields>({
+  const methods = useForm<LoginFields>({
     defaultValues: {
       email: '',
       password: '',
@@ -19,14 +16,14 @@ export function LoginForm() {
   });
   const { handleSubmit } = methods;
 
-  const [login] = useLazyLoginQuery();
+  const [login] = useLoginMutation();
 
   const navigate = useNavigate();
 
-  const onSubmit = async (data: LoginFormFields) => {
-    const result = await login(data);
+  const onSubmit = async (data: LoginFields) => {
+    const result = await login(data).unwrap();
     
-    if (result.isSuccess) navigate('/channels/@me');
+    if (result) navigate('/channels/@me');
   };
   
   return (
@@ -58,6 +55,7 @@ export function LoginForm() {
           <SubmitButton>Log In</SubmitButton>
         </form>
       </FormProvider>
+      <p>Need an account? <Link to="/register"><strong>Register</strong></Link></p>
     </div>
-  )
+  );
 }

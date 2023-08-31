@@ -7,19 +7,19 @@ import { ConfirmationModal } from '@components/ui/modals';
 
 import api from '@services/api';
 
-import { useLazyLogoutQuery } from '../api';
+import { useLogoutMutation } from '../api';
 
 export function LogoutConfirmModal({
   isOpen, onClose,
 }: ModalProps) {
-  const [logout] = useLazyLogoutQuery();
+  const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onConfirm = async () => {
-    const result = await logout();
+    const result = await logout().unwrap();
 
-    if (result.isSuccess) {
+    if (result) {
       navigate('/');
       dispatch(api.util.resetApiState());
     }

@@ -1,13 +1,23 @@
-import type { FieldError } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 type ErrorMessageProps = {
-  error?: FieldError
+  name: string;
+  validatedMsg?: string;
 };
 
 export function ErrorMessage({
-  error,
+  name,
+  validatedMsg,
 }: ErrorMessageProps) {
-  return (error)
-    ? <p>{error.message}</p>
+  const { formState, watch } = useFormContext();
+
+  const value = watch(name);
+
+  const error = formState.errors[name];
+
+  if (validatedMsg && value && !error) return <p>{validatedMsg}</p>;
+
+  return (value && error)
+    ? <p>{error.message as string}</p>
     : null;
 }

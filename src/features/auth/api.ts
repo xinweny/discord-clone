@@ -1,21 +1,32 @@
 import api from '@services/api';
 
-import type { FieldValues } from 'react-hook-form';
-
-type AuthData = {
-  userId: string;
-  accessToken: string;
-};
+import type {
+  AuthData,
+  LoginFields,
+  RegisterFields,
+} from './types';
 
 const authApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      login: build.query<AuthData, FieldValues>({
+      login: build.mutation<AuthData, LoginFields>({
         query: ({ email, password }) => ({
           url: '/auth/login',
           method: 'post',
           data: { email, password },
           config: { withCredentials: true },
+        }),
+      }),
+      register: build.mutation<AuthData, RegisterFields>({
+        query: ({ email, displayName, username, password }) => ({
+          url: '/auth/signup',
+          method: 'post',
+          body: {
+            email,
+            displayName,
+            username,
+            password,
+          },
         }),
       }),
       refreshToken: build.query<AuthData, void>({
@@ -25,13 +36,20 @@ const authApi = api.injectEndpoints({
           config: { withCredentials: true },
         }),
       }),
-      logout: build.query<void, void>({
+      logout: build.mutation<AuthData, void>({
         query: () => ({
           url: '/auth/logout',
           method: 'delete',
           config: { withCredentials: true },
         }),
       }),
+      checkUsernameAvailability: build.query<boolean, string>({
+        query: (username) => ({
+          url: '/auth/check',
+          method: 'get',
+          params: { username },
+        }),
+      })
     };
   }
 });
@@ -39,8 +57,8 @@ const authApi = api.injectEndpoints({
 export default authApi;
 
 export const {
-  useLoginQuery,
-  useLazyLoginQuery,
+  useLoginMutation,
+  useRegisterMutation,
   useRefreshTokenQuery,
-  useLazyLogoutQuery,
+  useLogoutMutation,
 } = authApi;

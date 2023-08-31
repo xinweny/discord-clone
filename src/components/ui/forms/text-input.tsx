@@ -15,6 +15,9 @@ export type TextInputProps<
   id: string;
   label?: string;
   rules?: RegisterOptions;
+  options?: {
+    trim?: boolean;
+  };
 } & Omit<InputProps, 'name' | 'id' | 'ariaLabel'>;
 
 export function TextInput<TFormValues extends FieldValues>({
@@ -22,10 +25,15 @@ export function TextInput<TFormValues extends FieldValues>({
   name,
   id,
   rules,
+  options = {
+    trim: true,
+  },
   ...props
 }: TextInputProps<TFormValues>) {
   const { register, setValue, control } = useFormContext();
   const text = useWatch({ control, name });
+
+  const { trim } = options;
 
   return (
     <div className={className} aria-live="polite">
@@ -34,12 +42,12 @@ export function TextInput<TFormValues extends FieldValues>({
         value={text}
         {...props}
         {...(register && register(name, {
-          onChange: e => {
+          onChange: trim ? e => {
             setValue(
               name,
               e.target.value.replace(/\s+/g, ' ').replace(/^\s/g, '')
             );
-          },
+          } : undefined,
           ...rules,
         }))}
       />
