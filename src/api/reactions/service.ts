@@ -31,6 +31,7 @@ const getByMessage = async (
       },
     },
     { $unset: 'userIds' },
+    { $sort: { _id: 1 } },
   ]);
 
   return reactions;
