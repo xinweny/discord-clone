@@ -11,7 +11,12 @@ type LoginFormFields = {
 };
 
 export function LoginForm() {
-  const methods = useForm<LoginFormFields>();
+  const methods = useForm<LoginFormFields>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   const { handleSubmit } = methods;
 
   const [login] = useLazyLoginQuery();
