@@ -20,4 +20,4 @@ const sendMail = async (to: string, subject: string, htmlTemplate: string) => {
 
 export const mailService = {
   sendMail,
-}
+};

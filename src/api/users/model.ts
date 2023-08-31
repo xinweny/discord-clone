@@ -37,7 +37,7 @@ const userSchema = new Schema({
   displayName: { type: String, required: true, length: { max: 32 } },
   password: { type: String, required: true, select: false },
   email: { type: String, required: true, select: false, unique: true },
-  verified: { type: Boolean, default: false, select: false },
+  verified: { type: Boolean, default: true, select: false },
   avatarUrl: { type: String },
   role: {
     type: String,

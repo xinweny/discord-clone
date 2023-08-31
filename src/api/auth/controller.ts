@@ -7,7 +7,6 @@ import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
 import { validateFields } from '@middleware/validateFields';
-import { authenticate } from '@middleware/authenticate';
 
 import { passwordResetMail } from '@templates/passwordResetMail';
 import { emailVerificationMail } from '@templates/emailVerificationMail';
@@ -15,13 +14,12 @@ import { emailVerificationMail } from '@templates/emailVerificationMail';
 import { mailService } from '@services/mail';
 import { authService } from '@api/auth/service';
 import { userService } from '@api/users/service';
-import { cloudinaryService } from '@services/cloudinary';
 
 const signup: RequestHandler[] = [
   ...validateFields(['email', 'username', 'password', 'confirmPassword']),
   tryCatch(
     async (req, res) => {
-      const { email, username, password } = req.body;
+      const { email, displayName, username, password } = req.body;
 
       const existingUser = await userService.getOne({ email });
 
@@ -31,6 +29,7 @@ const signup: RequestHandler[] = [
 
       const newUser = await userService.create({
         email,
+        displayName,
         username,
         password: hashedPassword,
       });
@@ -243,6 +242,18 @@ const checkRefreshToken: RequestHandler = tryCatch(
   }
 );
 
+const checkFields: RequestHandler = tryCatch(
+  async (req, res) => {
+    const { username } = req.params;
+
+    const isAvailable = await userService.checkUsernameAvailable(username);
+
+    res.json({
+      data: isAvailable,
+    });
+  }
+);
+
 export const authController = {
   signup,
   login,
@@ -253,4 +264,5 @@ export const authController = {
   requestEmailVerification,
   verifyEmail,
   checkRefreshToken,
+  checkFields,
 };

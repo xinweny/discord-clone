@@ -36,12 +36,13 @@ const getById = async (
 
 const create = async (fields: {
   email: string,
+  displayName?: string,
   username: string,
   password: string,
 }) => {
   const user = new User({
     ...fields,
-    displayName: fields.username,
+    displayName: fields.displayName || fields.username,
   });
 
   await user.save();
@@ -91,6 +92,12 @@ const remove = async (id: Types.ObjectId | string) => {
   return user;
 };
 
+const checkUsernameAvailable = async (username: string) => {
+  const user = await User.findOne({ username });
+
+  return !user;
+}
+
 export const userService = {
   getOne,
   getById,
@@ -98,4 +105,5 @@ export const userService = {
   update,
   updateSensitive,
   remove,
+  checkUsernameAvailable,
 };
