@@ -15,8 +15,7 @@ import { AttachmentPreview } from './attachment-preview';
 import { MessageOptionsBar } from './message-options-bar';
 import { MessageBody } from './message-body';
 import { MessageHeader } from './message-header';
-
-import { MessageReactionCountList } from '@features/reactions/list';
+import { MessageReactionsBar } from './message-reactions-bar';
 
 type MessageCardProps = {
   isDm?: boolean;
@@ -58,7 +57,7 @@ export function MessageCard({
               )}
             </div>
           )}
-          <MessageReactionCountList messageId={message._id} />
+          <MessageReactionsBar messageId={message._id} />
         </div>
         <MessageOptionsBar
           visible={visible}

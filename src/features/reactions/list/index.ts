@@ -1,1 +1,1 @@
-export * from './message-reaction-count-list';
+export * from './message-reactions-list';

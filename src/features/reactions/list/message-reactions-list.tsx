@@ -4,13 +4,13 @@ import { ToggleReactionButton } from '../edit';
 
 import { useGetReactionsQuery } from '../api';
 
-type MessageReactionCountListProps = {
+type MessageReactionsListProps = {
   messageId: string;
-}
+};
 
-export function MessageReactionCountList({
+export function MessageReactionsList({
   messageId
-}: MessageReactionCountListProps) {
+}: MessageReactionsListProps) {
   const { serverId, roomId } = useGetServerRoomIds();
 
   const { data: reactions, isSuccess } = useGetReactionsQuery({
