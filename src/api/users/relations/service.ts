@@ -16,8 +16,8 @@ type SendFriendRequestFields = {
 
 const getRelations = async (userId: Types.ObjectId | string, status: RelationStatus) => {
   const user = await User
-    .findById(userId)
-    .populate('relations.user', 'displayName username avatarUrl -_id');
+    .findById(userId, 'relations')
+    .populate('relations.user', 'displayName username avatarUrl customStatus');
 
   if (!user) throw new CustomError(400, 'User not found.');
 
