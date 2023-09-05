@@ -10,10 +10,11 @@ export type UserDMData = {
 };
 
 export type UserRelationData = {
-  id: string;
-  userId: string;
-  status: 0 | 1 | 2;
-  updatedAt: Date;
+  _id: string;
+  displayName: string;
+  username: string;
+  avatarUrl: string;
+  customStatus: string;
 };
 
 export type UserServerData = {

@@ -1,3 +1,5 @@
+import { UserRelationData } from '@features/user/types';
+
 export enum RelationStatus {
   PENDING_TO = 'pending_to',
   PENDING_FROM = 'pending_from',
@@ -10,6 +12,7 @@ export type RelationData<T = RelationStatus> = {
   userId: string;
   status: T;
   updatedAt: string;
+  user: UserRelationData;
 };
 
 export type FriendRequestData = RelationData<RelationStatus.PENDING_FROM | RelationStatus.PENDING_TO>;

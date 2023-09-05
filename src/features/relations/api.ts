@@ -3,18 +3,18 @@ import api from '@services/api';
 import type {
   FriendRequestData,
   CreateFriendRequestFields,
+  RelationData,
 } from './types';
 
 const relationApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getFriendRequests: build.query<FriendRequestData[], string>({
+      getRelations: build.query<RelationData[], string>({
         query: (userId) => ({
           url: `/users/${userId}/relations`,
           method: 'get',
-          params: { status: 'request' },
         }),
-        providesTags: (...[, , userId]) => [{ type: 'FriendRequests', id: userId }],
+        providesTags: (...[, , userId]) => [{ type: 'Relations', id: userId }],
       }),
       sendFriendRequest: build.mutation<FriendRequestData, CreateFriendRequestFields>({
         query: ({ senderId, username, recipientId }) => ({
@@ -26,7 +26,7 @@ const relationApi = api.injectEndpoints({
             userId: recipientId,
           },
         }),
-        invalidatesTags: (...[, , { senderId }]) => [{ type: 'FriendRequests', id: senderId }],
+        invalidatesTags: (...[, , { senderId }]) => [{ type: 'Relations', id: senderId }],
       }),
     };
   }
@@ -35,6 +35,6 @@ const relationApi = api.injectEndpoints({
 export default relationApi;
 
 export const {
-  useGetFriendRequestsQuery,
+  useGetRelationsQuery,
   useSendFriendRequestMutation,
 } = relationApi;
