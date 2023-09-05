@@ -17,7 +17,7 @@ export type RelationData<T = RelationStatus> = {
 
 export type FriendRequestData = RelationData<RelationStatus.PENDING_FROM | RelationStatus.PENDING_TO>;
 
-export type CreateFriendRequestFields = {
+export type SendFriendRequestFields = {
   senderId: string;
   username?: string;
   recipientId?: string;

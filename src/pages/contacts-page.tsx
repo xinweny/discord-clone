@@ -4,6 +4,7 @@ import { useActiveIds } from '@hooks';
 
 import { ContactsNavbar } from '@features/relations/nav';
 import { ContactsList } from '@features/relations/list';
+import { SendFriendRequestForm } from '@features/relations/create';
 
 export function ContactsPage() {
   const activeTabState = useActiveIds('online');
@@ -19,7 +20,7 @@ export function ContactsPage() {
         />}
       >
         {id === 'add_friend'
-          ? <form>Add friend</form>
+          ? <SendFriendRequestForm />
           : <ContactsList activeTab={id!} />
         }
       </ContentLayout>

@@ -12,3 +12,4 @@ export * from './submit-button';
 export * from './checkbox-input';
 export * from './reset-submit-buttons';
 export * from './input';
+export * from './submitted-message';

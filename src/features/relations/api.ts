@@ -2,7 +2,7 @@ import api from '@services/api';
 
 import type {
   FriendRequestData,
-  CreateFriendRequestFields,
+  SendFriendRequestFields,
   RelationData,
 } from './types';
 
@@ -16,7 +16,7 @@ const relationApi = api.injectEndpoints({
         }),
         providesTags: (...[, , userId]) => [{ type: 'Relations', id: userId }],
       }),
-      sendFriendRequest: build.mutation<FriendRequestData, CreateFriendRequestFields>({
+      sendFriendRequest: build.mutation<FriendRequestData, SendFriendRequestFields>({
         query: ({ senderId, username, recipientId }) => ({
           url: `/users/${senderId}/relations`,
           method: 'post',
