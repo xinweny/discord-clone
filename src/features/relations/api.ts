@@ -1,11 +1,11 @@
 import api from '@services/api';
 
-import type { 
+import type {
   FriendRequestData,
   CreateFriendRequestFields,
 } from './types';
 
-const friendRequestApi = api.injectEndpoints({
+const relationApi = api.injectEndpoints({
   endpoints(build) {
     return {
       getFriendRequests: build.query<FriendRequestData[], string>({
@@ -32,9 +32,9 @@ const friendRequestApi = api.injectEndpoints({
   }
 });
 
-export default friendRequestApi;
+export default relationApi;
 
 export const {
   useGetFriendRequestsQuery,
   useSendFriendRequestMutation,
-} = friendRequestApi;
+} = relationApi;

@@ -5,8 +5,8 @@ export type ActiveIdState = {
   set: React.Dispatch<React.SetStateAction<string | null>>
 };
 
-export const useActiveIds = (): ActiveIdState => {
-  const [id, setId] = useState<string | null>(null);
+export const useActiveIds = (initialId?: string): ActiveIdState => {
+  const [id, setId] = useState<string | null>(initialId || null);
 
   return {
     id,
