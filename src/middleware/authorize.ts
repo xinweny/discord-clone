@@ -8,8 +8,9 @@ import { serverMemberService } from '@api/serverMembers/service';
 import { channelService } from '@api/servers/channels/service';
 import { dmService } from '@api/dms/service';
 import { messageService } from '@api/messages/service';
-import { reactionService } from '@api/reactions/service';
 import { userService } from '@api/users/service';
+
+import { RelationStatus } from '@api/users/relations/schema';
 
 const server = (permissionKeys: string | string[] = []) => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
@@ -115,7 +116,7 @@ const message = (action: 'view' | 'send' | 'react') => {
         const participant = await userService.getById(dm.participantIds[0], 'relations');
 
         if (participant.relations.find(
-          relation => relation.userId.equals(userId) && relation.status === 2
+          relation => relation.userId.equals(userId) && relation.status === RelationStatus.BLOCKED
         )) throw new CustomError(403, 'Unauthorized');
       }
   

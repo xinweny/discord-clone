@@ -1,19 +1,22 @@
 import { Schema, Types } from 'mongoose';
 
+export enum RelationStatus {
+  PENDING_TO = 'pending_to',
+  PENDING_FROM = 'pending_from',
+  FRIENDS = 'friends',
+  BLOCKED = 'blocked',
+}
+
 export interface IRelation extends Types.Subdocument {
   userId: Types.ObjectId;
-  status: 0 | 1 | 2;
+  status: RelationStatus;
 }
 
 const relationSchema = new Schema({
   userId: { type: Types.ObjectId, ref: 'User', required: true },
   status: {
-    type: Number,
-    enum: [
-      0, // pending
-      1, // friends
-      2, // blocked
-    ],
+    type: String,
+    enum: RelationStatus,
     required: true,
   },
 }, { timestamps: { createdAt: false, updatedAt: true } });

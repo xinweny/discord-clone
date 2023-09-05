@@ -2,6 +2,8 @@ import { Types } from 'mongoose';
 
 import { CustomError } from '@helpers/CustomError';
 
+import { RelationStatus } from '../relations/schema';
+
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
 
@@ -14,7 +16,7 @@ const getFriends = async (userId1: Types.ObjectId | string, userId2: Types.Objec
 
   const friendIds = users.map(user =>
     user.relations
-      .filter(relation => relation.status === 1)
+      .filter(relation => relation.status === RelationStatus.FRIENDS)
       .map(relation => relation.userId.toString())
   );
 

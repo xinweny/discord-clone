@@ -7,6 +7,7 @@ import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
 
 import { relationService } from './service';
+import { RelationStatus } from './schema';
 
 const getRelations: RequestHandler[] = [
   authenticate,
@@ -16,9 +17,7 @@ const getRelations: RequestHandler[] = [
       const userId = req.user?._id;
       const { status } = req.query;
 
-      const relations = (status === '0' || status === '1' || status === '2')
-        ? await relationService.getRelations(userId, +status as 0 | 1 | 2)
-        : await relationService.getRelations(userId);
+      const relations = await relationService.getRelations(userId, status as RelationStatus);
 
       res.json({ data: relations });
     }
@@ -31,17 +30,21 @@ const createRelation: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const senderId = req.user?._id;
-      const { status, userId } = req.body;
+      const { status, userId, username } = req.body;
 
-      if (!(status === '0' || status === '2')) throw new CustomError(400, 'Invalid status');
+      if (!(status === 'request' || status === 'block')) throw new CustomError(400, 'Invalid status');
 
-      const relation = (status === '0')
-        ? await relationService.sendFriendRequest(senderId, userId)
+      const relation = (status === 'request')
+        ? await relationService.sendFriendRequest({
+          senderId,
+          ...(userId && { recipientId: userId }),
+          ...(username && { username }),
+        })
         : await relationService.blockUser(senderId, userId);
 
       res.json({
         data: relation,
-        message: `User successfully ${(status === '0') ? 'friend requested' : 'blocked'}.`,
+        message: `User successfully ${(status === 'request') ? 'friend requested' : 'blocked'}.`,
       });
     }
   )
@@ -56,9 +59,9 @@ const updateRelation: RequestHandler[] = [
       const { relationId } = req.params;
       const { status, userId } = req.body;
 
-      if (!(status === '1' || status === '2')) throw new CustomError(400, 'Invalid status');
+      if (!(status === RelationStatus.FRIENDS || status === RelationStatus.BLOCKED)) throw new CustomError(400, 'Invalid status');
 
-      const relation = (status === '1')
+      const relation = (status === RelationStatus.FRIENDS)
         ? await relationService.acceptFriendRequest(senderId, relationId)
         : await relationService.blockUser(senderId, userId);
 
