@@ -17,6 +17,7 @@ const api = createApi({
     'MemberRoles',
     'ServerMember',
     'Reactions',
+    'FriendRequests',
   ],
 });
 
