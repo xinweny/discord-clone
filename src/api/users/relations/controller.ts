@@ -32,9 +32,9 @@ const createRelation: RequestHandler[] = [
       const senderId = req.user?._id;
       const { status, userId, username } = req.body;
 
-      if (!(status === 'request' || status === 'block')) throw new CustomError(400, 'Invalid status');
+      if (!(status === RelationStatus.PENDING_TO || status === RelationStatus.BLOCKED)) throw new CustomError(400, 'Invalid status');
 
-      const relation = (status === 'request')
+      const relation = (status === RelationStatus.PENDING_TO)
         ? await relationService.sendFriendRequest({
           senderId,
           ...(userId && { recipientId: userId }),
@@ -44,7 +44,7 @@ const createRelation: RequestHandler[] = [
 
       res.json({
         data: relation,
-        message: `User successfully ${(status === 'request') ? 'friend requested' : 'blocked'}.`,
+        message: `User successfully ${(status === RelationStatus.PENDING_TO) ? 'friend requested' : 'blocked'}.`,
       });
     }
   )
@@ -57,17 +57,12 @@ const updateRelation: RequestHandler[] = [
     async (req, res) => {
       const senderId = req.user?._id;
       const { relationId } = req.params;
-      const { status, userId } = req.body;
 
-      if (!(status === RelationStatus.FRIENDS || status === RelationStatus.BLOCKED)) throw new CustomError(400, 'Invalid status');
-
-      const relation = (status === RelationStatus.FRIENDS)
-        ? await relationService.acceptFriendRequest(senderId, relationId)
-        : await relationService.blockUser(senderId, userId);
+      const relation = await relationService.acceptFriendRequest(senderId, relationId);
 
       res.json({
         data: relation,
-        message: `User successfully ${(status === '1') ? 'friended' : 'blocked'}.`,
+        message: `User successfully friended.`,
       });
     }
   )

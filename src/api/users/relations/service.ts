@@ -17,9 +17,15 @@ type SendFriendRequestFields = {
 const getRelations = async (userId: Types.ObjectId | string, status: RelationStatus) => {
   const user = await User
     .findById(userId, 'relations')
-    .populate('relations.user', 'displayName username avatarUrl customStatus');
+    .populate({
+      path: 'relations.user',
+      select: 'displayName username avatarUrl customStatus',
+      options: {
+        sort: [{ displayName: -1 }],
+      },
+    });
 
-  if (!user) throw new CustomError(400, 'User not found.');
+  if (!user) throw new CustomError(400, 'User 4not found.');
 
   const relations = (status)
     ? user.relations.find(
@@ -37,10 +43,12 @@ const sendFriendRequest = async (options: SendFriendRequestFields) => {
     User.findById(senderId, 'relations'),
     'recipientId' in options
       ? User.findById(options.recipientId, 'relations')
-      : User.findOne({ username: options.username }, 'relations')
+      : User.findOne({ username: options.username.toLowerCase() }, 'relations')
   ]);
 
   if (!sender || !recipient) throw new CustomError(400, 'User not found.');
+
+  if (sender._id.equals(recipient._id)) throw new CustomError(400, 'Cannot add self.');
 
   const relations = {
     sender: sender.relations.find(relation => relation.userId.equals(recipient._id)),
