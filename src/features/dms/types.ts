@@ -8,3 +8,7 @@ export type DMData = {
   isGroup: boolean;
   participants: UserBasicData[];
 };
+
+export type CreateDMFields = {
+  participantIds: string[];
+};

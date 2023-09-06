@@ -1,3 +1,5 @@
+import { SearchInput } from '@components/ui/forms';
+
 type ContactsSearchProps = {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -5,11 +7,10 @@ type ContactsSearchProps = {
 
 export function ContactsSearch({ query, setQuery }: ContactsSearchProps) {
   return (
-    <input
-      type="text"
-      value={query}
+    <SearchInput  
+      query={query}
+      setQuery={setQuery}
       placeholder="Search"
-      onChange={(e) => { setQuery(e.target.value); }}
     />
   );
 }

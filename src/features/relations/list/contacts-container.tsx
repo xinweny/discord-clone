@@ -1,14 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import {
   ContactsTabs,
-  RelationData,
   RelationStatus,
 } from '../types';
 
-import { useGetUserData } from '@hooks';
-
-import { useGetRelationsQuery } from '../api';
+import { useContacts } from '../hooks';
 
 import { NoContactsMessage } from './no-contacts-message';
 import { ContactCard } from './contact-card';
@@ -28,42 +25,14 @@ const RELATION_DICT: {
 };
 
 export function ContactsContainer({ query, activeTab }: ContactsContainerProps) {
-  const [contacts, setContacts] = useState<RelationData[]>([]);
-
-  const { user } = useGetUserData();
-
-  const relations = useGetRelationsQuery(user.data!.id);
-
-  useEffect(() => {
-    if (relations.isSuccess) setContacts(relations.data);
-  }, [relations]);
+  const {
+    contacts,
+    filterContactsByStatus,
+  } = useContacts(query);
 
   useEffect(() => {
-    if (relations.isSuccess) {
-      setContacts(
-        relations.data.filter(
-          relation => relation.status.includes(RELATION_DICT[activeTab])
-        )
-      );
-    }
+    filterContactsByStatus(RELATION_DICT[activeTab]);
   }, [activeTab]);
-
-  useEffect(() => {
-    if (query && relations.isSuccess) {
-      const q = query.toLowerCase();
-
-      setContacts((contacts) => {
-        return contacts.filter((relation) => {
-          const { username, displayName } = relation.user;
-          
-          return (
-            username.toLowerCase().includes(q) ||
-            displayName.toLowerCase().includes(q)
-          );
-        })
-      });
-    }
-  }, [query]);
 
   return (
     <div>
