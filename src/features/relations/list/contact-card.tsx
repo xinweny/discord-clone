@@ -9,6 +9,7 @@ import { useDisplay } from '@hooks';
 import { Avatar } from '@components/ui/media';
 
 import { AcceptFriendRequestButton } from '../edit';
+import { RemoveRelationButton } from '../delete';
 
 export type ContactCardProps = {
   contact: RelationData;
@@ -63,6 +64,7 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
         </div>
         {props?.buttons && <div>
           {props.buttons}
+          <RemoveRelationButton relation={contact} />
         </div>}
       </div>
     </div>

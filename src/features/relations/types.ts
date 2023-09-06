@@ -34,3 +34,9 @@ export type AcceptFriendRequestFields = {
   senderId: string;
   relationId: string;
 };
+
+export type RemoveRelationFields = {
+  senderId: string;
+  relationId: string;
+  status: RelationStatus;
+};
