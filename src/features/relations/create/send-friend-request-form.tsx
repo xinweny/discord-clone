@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +23,8 @@ export function SendFriendRequestForm() {
 
   const navigate = useNavigate();
 
+  const [submittedName, setSubmittedName] = useState<string>('');
+
   const defaultValues = {
     senderId: user.data!.id,
     username: '',
@@ -36,7 +39,6 @@ export function SendFriendRequestForm() {
     handleSubmit,
     reset,
     setError,
-    watch,
   } = methods;
 
   const [sendFriendRequest] = useSendFriendRequestMutation();
@@ -44,13 +46,20 @@ export function SendFriendRequestForm() {
   const onSubmit = async (data: SendFriendRequestFields) => {
     try {
       await sendFriendRequest(data).unwrap();
+
+      setSubmittedName(data.username!);
+
       reset(defaultValues);
     } catch (error) {
       const err = error as ErrorResponse;
 
       let errMsg = '';
 
-      if (err.status === 400 && err.data.message === 'User not found.') errMsg = 'Hm, that didn\'t work. Double-check that the username is correct.';
+      if (
+        err.status === 400 &&
+        (err.data.message === 'User not found.' ||
+        err.data.message === 'Cannot add self.')
+      ) errMsg = 'Hm, that didn\'t work. Double-check that the username is correct.';
 
       if (err.status === 400 && err.data.message === 'Relation already exists.') errMsg = 'You have already added/befriended/blocked this user.';
 
@@ -61,8 +70,6 @@ export function SendFriendRequestForm() {
     }
   };
 
-  const username = watch('username');
-
   return (
     <div>
       <div>
@@ -71,18 +78,17 @@ export function SendFriendRequestForm() {
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <TextInput
-              name="username"
-              label="username"
-              id="username"
-              placeholder="You can add friends with their Discord usernames."
-            />
-            <SubmitButton>Send Friend Request</SubmitButton>
-          </div>
+          <TextInput
+            name="username"
+            label="username"
+            id="username"
+            placeholder="You can add friends with their Discord usernames."
+            required
+          />
+          <SubmitButton>Send Friend Request</SubmitButton>
           <SubmittedMessage
             name="username"
-            successMsg={`Success! Your friend request to ${username} was sent.`}
+            successMsg={`Success! Your friend request to ${submittedName} was sent.`}
           />
         </form>
       </FormProvider>

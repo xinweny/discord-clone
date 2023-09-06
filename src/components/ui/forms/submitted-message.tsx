@@ -10,10 +10,11 @@ export function SubmittedMessage({
   successMsg,
 }: SubmittedMessageProps) {
   const { formState } = useFormContext();
+  const { isSubmitSuccessful, isDirty } = formState;
 
   const error = formState.errors[name];
 
-  if (formState.isSubmitSuccessful) return <p>{successMsg}</p>;
+  if (isSubmitSuccessful && !isDirty) return <p>{successMsg}</p>;
 
   if (error) return <p>{error.message as string}</p>
 
