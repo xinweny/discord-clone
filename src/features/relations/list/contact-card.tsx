@@ -8,6 +8,8 @@ import { useDisplay } from '@hooks';
 
 import { Avatar } from '@components/ui/media';
 
+import { AcceptFriendRequestButton } from '../edit';
+
 export type ContactCardProps = {
   contact: RelationData;
   activeTab: ContactsTabs
@@ -17,6 +19,7 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
   const { hover, visible } = useDisplay();
 
   const {
+    _id: relationId,
     status,
     user: {
       avatarUrl,
@@ -36,7 +39,10 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
       case ContactsTabs.ONLINE: return formatProps(customStatus || '');
       case ContactsTabs.ALL: return formatProps(customStatus || '');
       case ContactsTabs.PENDING: return formatProps(
-        `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`
+        `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`,
+        <>
+          {status === RelationStatus.PENDING_FROM && <AcceptFriendRequestButton relationId={relationId} />}
+        </>
       );
       case ContactsTabs.BLOCKED: return formatProps('Blocked');
     }

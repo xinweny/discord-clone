@@ -29,3 +29,8 @@ export type SendFriendRequestFields = {
   username?: string;
   recipientId?: string;
 };
+
+export type AcceptFriendRequestFields = {
+  senderId: string;
+  relationId: string;
+};
