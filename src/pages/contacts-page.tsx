@@ -2,6 +2,8 @@ import { ContentLayout } from '@components/layouts';
 
 import { useActiveIds } from '@hooks';
 
+import { ContactsTabs } from '@features/relations/types';
+
 import { ContactsNavbar } from '@features/relations/nav';
 import { ContactsList } from '@features/relations/list';
 import { SendFriendRequestForm } from '@features/relations/create';
@@ -21,7 +23,7 @@ export function ContactsPage() {
       >
         {id === 'add_friend'
           ? <SendFriendRequestForm />
-          : <ContactsList activeTab={id!} />
+          : <ContactsList activeTab={id! as ContactsTabs} />
         }
       </ContentLayout>
     </div>

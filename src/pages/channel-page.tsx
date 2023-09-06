@@ -2,7 +2,7 @@ import { ContentLayout } from '@components/layouts';
 
 import { useActiveChannel } from '@hooks';
 
-import { ChannelInfoHeader } from '@features/server/nav';
+import { ChannelInfoHeader } from '@features/servers/nav';
 import { ServerMembersList } from '@features/members/list';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 
 import { useDeleteEmojiMutation } from '../api';
 

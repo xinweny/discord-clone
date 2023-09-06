@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { ActiveRoleContext } from '../context';
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 
 import { useCreateRoleMutation } from '../api';
 

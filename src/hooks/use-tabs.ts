@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 
 import type { ActiveRoleContextData, RoleData } from '@features/roles/types';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 import { ActiveRoleContext } from '@features/roles/context';
 
 import { useGetRolesQuery } from '@features/roles/api';

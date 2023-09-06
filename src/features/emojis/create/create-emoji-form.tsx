@@ -6,7 +6,7 @@ import type { CreateEmojiFields } from '../types';
 
 import { createEmojiSchema } from '../schema';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 
 import { EmojiInput } from './emoji-input';
 

@@ -10,7 +10,7 @@ import type { EditEmojiFields, CustomEmojiData } from '../types';
 
 import { editEmojiSchema } from '../schema';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 
 import { EditEmojiNameInput } from './edit-emoji-name-input';
 

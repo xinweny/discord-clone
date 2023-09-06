@@ -4,7 +4,7 @@ import { MainLayout } from '@components/layouts';
 
 import { useSetChannels } from '@hooks';
 
-import { ServerNavBar } from '@features/server/nav';
+import { ServerNavBar } from '@features/servers/nav';
 
 export function ServerPage() {
   const { channels, activeChannel } = useSetChannels();

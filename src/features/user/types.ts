@@ -1,26 +1,13 @@
-export type UserDMData = {
-  id: string;
-  name?: string;
-  imageUrl: string;
-  participantIds: string[];
-  participants?: {
-    id: string;
-    displayName: string;
-  }[];
-};
+import { DMData } from '@features/dms/types';
+import { RelationData } from '@features/relations/types';
+import { ServerBasicData } from '@features/servers/types';
 
-export type UserRelationData = {
+export type UserBasicData = {
   _id: string;
   displayName: string;
   username: string;
   avatarUrl: string;
   customStatus: string;
-};
-
-export type UserServerData = {
-  id: string;
-  name: string;
-  imageUrl: string;
 };
 
 export type UserSelfData = {
@@ -32,9 +19,9 @@ export type UserSelfData = {
   avatarUrl: string;
   email: string;
   password: string;
-  relations: UserRelationData[];
-  dms: UserDMData[];
-  servers: UserServerData[];
+  relations: RelationData[];
+  dms: DMData[];
+  servers: ServerBasicData[];
 };
 
 export type UpdateUserFields = {

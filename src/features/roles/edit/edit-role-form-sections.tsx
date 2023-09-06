@@ -6,7 +6,7 @@ import { editRoleSchema } from '../schema';
 
 import type { EditRoleFields } from '../types';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 
 import type { RoleTabsHookData } from '@hooks';
 

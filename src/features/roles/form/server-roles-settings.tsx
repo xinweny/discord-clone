@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 
-import { ServerContext } from '@features/server/context';
+import { ServerContext } from '@features/servers/context';
 import { ActiveRoleContext } from '../context';
 
 import { useGetRolesQuery } from '../api';
