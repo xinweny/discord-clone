@@ -39,24 +39,20 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
 const update = async (
   dmId: Types.ObjectId | string,
   fields: { name: string },
-  imgFile?: Express.Multer.File
+  filename?: string,
 ) => {
-  let image;
-
   const group = await DM.findOne({ _id: dmId, isGroup: true });
 
   if (!group) throw new CustomError(400, 'Cannot update non-group DM.');
-  
-  if (imgFile) {
-    image = await cloudinaryService.upload(imgFile, `avatars/groups/${dmId}`, group?.imageUrl);
-  }
 
   const query = keepKeys(fields, ['name']);
 
   const dm = await DM.findByIdAndUpdate(dmId, {
     $set: {
       ...query,
-      ...(image && { imageUrl: image.secure_url }),
+      ...(filename && {
+        imageUrl: cloudinaryService.generateUrl(filename, `avatars/groups/${dmId}`, dmId.toString()),
+      }),
     },
   }, { new: true, runValidators: true });
 

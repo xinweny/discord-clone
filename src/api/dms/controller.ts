@@ -4,7 +4,6 @@ import { tryCatch } from '@helpers/tryCatch';
 
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
-import { upload } from '@middleware/upload';
 
 import { dmService } from '@api/dms/service';
 
@@ -37,14 +36,13 @@ const createRoom: RequestHandler[] = [
 ];
 
 const updateRoom: RequestHandler[] = [
-  upload.avatar,
   authenticate,
   authorize.dmMember,
   tryCatch(
     async (req, res) => {
       const { dmId } = req.params;
 
-      const dm = await dmService.update(dmId, req.body, req.file);
+      const dm = await dmService.update(dmId, req.body, req.body.filename);
 
       res.json({
         data: dm,
