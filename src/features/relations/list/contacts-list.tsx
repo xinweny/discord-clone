@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
+import { ContactsTabs } from '../types';
 
 import { ContactsSearch } from './contacts-search';
 import { ContactsContainer } from './contacts-container';
 
 type ContactsListProps = {
-  activeTab: string;
+  activeTab: ContactsTabs;
 };
 
 export function ContactsList({ activeTab }: ContactsListProps) {

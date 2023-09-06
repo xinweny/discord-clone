@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import { RelationData, RelationStatus } from '../types';
+import {
+  ContactsTabs,
+  RelationData,
+  RelationStatus,
+} from '../types';
 
 import { useGetUserData } from '@hooks';
 
@@ -11,11 +15,11 @@ import { ContactCard } from './contact-card';
 
 type ContactsContainerProps = {
   query: string;
-  activeTab: string;
+  activeTab: ContactsTabs;
 };
 
 const RELATION_DICT: {
-  [key: string]: string;
+  [key in ContactsTabs]: string;
 } = {
   online: RelationStatus.FRIENDS,
   all: RelationStatus.FRIENDS,
@@ -68,7 +72,7 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
         ? (
           <div>
             {contacts.map(contact => (
-              <ContactCard key={contact._id} contact={contact} />
+              <ContactCard key={contact._id} contact={contact} activeTab={activeTab} />
             ))}
           </div>
         )

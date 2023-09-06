@@ -1,6 +1,6 @@
 type NullMessageProps = {
   src?: string;
-  header: string;
+  header?: string;
   message: string;
 };
 
@@ -14,7 +14,7 @@ export function NullMessage({
           <img src={src} />
         </div>
       )}
-      <h3>{header.toUpperCase()}</h3>
+      {header && <h3>{header.toUpperCase()}</h3>}
       <p>{message}</p>
     </div>
   )

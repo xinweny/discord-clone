@@ -7,6 +7,13 @@ export enum RelationStatus {
   BLOCKED = 'blocked',
 }
 
+export enum ContactsTabs {
+  ONLINE = 'online',
+  ALL = 'all',
+  PENDING = 'pending',
+  BLOCKED = 'blocked',
+}
+
 export type RelationData<T = RelationStatus> = {
   _id: string;
   userId: string;

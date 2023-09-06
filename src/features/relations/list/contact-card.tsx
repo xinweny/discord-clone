@@ -1,22 +1,48 @@
-import type { RelationData } from '../types';
+import {
+  ContactsTabs,
+  RelationData, 
+  RelationStatus,
+} from '../types';
 
 import { useDisplay } from '@hooks';
 
 import { Avatar } from '@components/ui/media';
 
-type ContactCardProps = {
+export type ContactCardProps = {
   contact: RelationData;
+  activeTab: ContactsTabs
 };
 
-export function ContactCard({ contact }: ContactCardProps) {
+export function ContactCard({ contact, activeTab }: ContactCardProps) {
   const { hover, visible } = useDisplay();
 
   const {
-    avatarUrl,
-    displayName,
-    username,
-    customStatus,
-  } = contact.user;
+    status,
+    user: {
+      avatarUrl,
+      displayName,
+      username,
+      customStatus,
+    }
+  } = contact;
+
+  const renderProps = (tab: ContactsTabs) => {
+    const formatProps = (
+      message = '',
+      buttons = <></>
+    ) => ({ message, buttons });
+
+    switch (tab) {
+      case ContactsTabs.ONLINE: return formatProps(customStatus || '');
+      case ContactsTabs.ALL: return formatProps(customStatus || '');
+      case ContactsTabs.PENDING: return formatProps(
+        `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`
+      );
+      case ContactsTabs.BLOCKED: return formatProps('Blocked');
+    }
+  };
+
+  const props = renderProps(activeTab);
 
   return (
     <div {...hover}>
@@ -27,8 +53,11 @@ export function ContactCard({ contact }: ContactCardProps) {
             <p>{displayName}</p>
             {visible && <p>{username}</p>}
           </div>
-          <p>{customStatus || ''}</p>
+          {props && <p>{props.message}</p>}
         </div>
+        {props?.buttons && <div>
+          {props.buttons}
+        </div>}
       </div>
     </div>
   );

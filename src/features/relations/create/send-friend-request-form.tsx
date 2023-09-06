@@ -78,14 +78,16 @@ export function SendFriendRequestForm() {
       </div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <TextInput
-            name="username"
-            label="username"
-            id="username"
-            placeholder="You can add friends with their Discord usernames."
-            required
-          />
-          <SubmitButton>Send Friend Request</SubmitButton>
+          <div>
+            <TextInput
+              name="username"
+              label="username"
+              id="username"
+              placeholder="You can add friends with their Discord usernames."
+              required
+            />
+            <SubmitButton>Send Friend Request</SubmitButton>
+          </div>
           <SubmittedMessage
             name="username"
             successMsg={`Success! Your friend request to ${submittedName} was sent.`}

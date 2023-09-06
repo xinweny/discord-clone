@@ -2,12 +2,14 @@ import { capitalize } from 'lodash';
 
 import type { ActiveIdState } from '@hooks';
 
+import { ContactsTabs } from '../types';
+
 import { TabButton } from '@components/ui/buttons';
 
 export function ContactsNavbar({
   set, id
 }: ActiveIdState) {
-  const tabs = ['online', 'all', 'pending', 'blocked'];
+  const tabs = Object.values(ContactsTabs);
 
   return (
     <div>
