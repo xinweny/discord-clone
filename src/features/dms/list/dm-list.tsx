@@ -2,6 +2,8 @@ import { useGetUserData } from '@hooks';
 
 import { useGetDmsQuery } from '../api';
 
+import { DmCard } from './dm-card';
+
 export function DmList() {
   const { user } = useGetUserData();
 
@@ -11,6 +13,11 @@ export function DmList() {
 
   return (
     <div>
+      {dms.map(dm => <DmCard
+        key={dm._id}
+        dm={dm}
+        userId={user.data!.id}
+      />)}
     </div>
   );
 }
