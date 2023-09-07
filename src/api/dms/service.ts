@@ -10,7 +10,11 @@ import { User } from '@api/users/model';
 import { DM } from '@api/dms/model';
 
 const getById = async (dmId: Types.ObjectId | string) => {
-  const dm = await DM.findById(dmId);
+  const dm = await DM.findById(dmId)
+    .populate({
+      path: 'participants',
+      select: 'displayName username avatarUrl'
+    });
 
   return dm;
 };

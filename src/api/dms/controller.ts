@@ -12,7 +12,11 @@ const getRoom: RequestHandler[] = [
   authorize.dmMember,
   tryCatch(
     async (req, res) => {
-      res.json({ data: req.dm });
+      const { dmId } = req.params;
+
+      const dm = await dmService.getById(dmId);
+
+      res.json({ data: dm });
     }
   )
 ];
