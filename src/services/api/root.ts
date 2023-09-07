@@ -19,6 +19,7 @@ const api = createApi({
     'Reactions',
     'Relations',
     'DMs',
+    'DM',
   ],
 });
 

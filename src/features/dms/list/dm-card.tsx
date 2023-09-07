@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import pluralize from 'pluralize';
 
 import type { DMData } from '../types';
 
 import { Avatar } from '@components/ui/media';
+import { useDmInfo } from '../hooks';
 
 type DMCardProps = {
   dm: DMData;
@@ -12,29 +12,18 @@ type DMCardProps = {
 
 export function DmCard({ dm, userId }: DMCardProps) {
   const {
-    isGroup,
-    imageUrl,
-  } = dm;
-
-  const participants = dm.participants.filter(participant => participant._id !== userId);
-
-  const avatarUrl = isGroup
-    ? imageUrl || "#"
-    : participants[0].avatarUrl || "#";
+    avatarUrl,
+    name,
+    customStatus,
+  } = useDmInfo(dm, userId);
 
   return (
     <Link to={`/channels/@me/${dm._id}`}>
       <div>
         <Avatar src={avatarUrl} />
         <div>
-          <p>{isGroup
-            ? dm.name || participants.map(participant => participant.displayName).join(', ')
-            : participants[0].displayName
-          }</p>
-          <p>{isGroup
-            ? `${pluralize('Member', participants.length, true)}`
-            : participants[0].customStatus || ''
-          }</p>
+          <p>{name}</p>
+          <p>{customStatus}</p>
         </div>
       </div>
     </Link>

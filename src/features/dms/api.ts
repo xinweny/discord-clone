@@ -15,6 +15,13 @@ const dmApi = api.injectEndpoints({
         }),
         providesTags: ['DMs'],
       }),
+      getDm: build.query<DMData, string>({
+        query: (dmId) => ({
+          url: `/dms/${dmId}`,
+          method: 'get',
+        }),
+        providesTags: ['DM'],
+      }),
       createDm: build.mutation<DMData, CreateDMFields>({
         query: ({ participantIds }) => ({
           url: '/dms',
@@ -31,5 +38,6 @@ export default dmApi;
 
 export const {
   useGetDmsQuery,
+  useGetDmQuery,
   useCreateDmMutation,
 } = dmApi;
