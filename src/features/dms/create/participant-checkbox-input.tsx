@@ -36,6 +36,7 @@ export function ParticipantCheckboxInput({
         name="participantIds"
         id={id}
         label={displayName}
+        value={id}
         rules={{
           onChange: (e) => {
             e.target.checked

@@ -10,5 +10,5 @@ export type DMData = {
 };
 
 export type CreateDMFields = {
-  participantIds: string[];
+  participantIds: { id: string }[];
 };

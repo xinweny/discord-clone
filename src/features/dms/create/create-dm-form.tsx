@@ -37,14 +37,7 @@ export function CreateDmForm() {
   const {
     handleSubmit,
     reset,
-    control,
   } = methods;
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'participantIds',
-    rules: { minLength: 1, maxLength: 9 },
-  });
 
   const onSubmit = async (data: CreateDMFields) => {
     console.log(data.participantIds);
@@ -69,10 +62,10 @@ export function CreateDmForm() {
             setQuery={setQuery}
           />
         </div>
-        {fields.map((field, index) => <ParticipantCheckboxInput
-          key={field.id}
+        {friends.map((friend) => <ParticipantCheckboxInput
+          key={friend._id}
           participant={friend.user}
-          name={`participantIds.${index}.value`}
+          name="participantIds"
         />)}
         <SubmitButton>Create DM</SubmitButton>
       </form>
