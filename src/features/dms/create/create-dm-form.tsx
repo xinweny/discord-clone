@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useForm, FormProvider, useFieldArray } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { createDmSchema } from '../schema';
 
 import type { CreateDMFields } from '../types';
 import { RelationStatus } from '@features/relations/types';
@@ -7,15 +10,24 @@ import { RelationStatus } from '@features/relations/types';
 import { useContacts } from '@features/relations/hooks';
 
 import { SubmitButton } from '@components/ui/forms';
+import { NullMessage } from '@components/ui/displays';
 
 import { CreateDmFormHeader } from './create-dm-form-header';
 import { ParticipantCheckboxInput } from './participant-checkbox-input';
 import { ParticipantSearchInput } from './participant-search-input';
 import { RemoveParticipantButtons } from './remove-participant-buttons';
 
+import { useCreateDmMutation } from '../api';
+
 const MAX_PARTICIPANTS = 10;
 
-export function CreateDmForm() {
+type CreateDMFormProps = {
+  btnRef: React.RefObject<HTMLButtonElement>;
+};
+
+export function CreateDmForm({
+  btnRef
+}: CreateDMFormProps) {
   const [query, setQuery] = useState<string>('');
 
   const {
@@ -33,15 +45,20 @@ export function CreateDmForm() {
 
   const methods = useForm<CreateDMFields>({
     defaultValues,
+    mode: 'onChange',
+    resolver: zodResolver(createDmSchema),
   });
   const {
     handleSubmit,
     reset,
   } = methods;
 
+  const [createDm] = useCreateDmMutation();
+
   const onSubmit = async (data: CreateDMFields) => {
-    console.log(data.participantIds);
+    await createDm(data).unwrap();
     reset(defaultValues);
+    btnRef.current?.click();
   }
 
   return (
@@ -62,11 +79,14 @@ export function CreateDmForm() {
             setQuery={setQuery}
           />
         </div>
-        {friends.map((friend) => <ParticipantCheckboxInput
-          key={friend._id}
-          participant={friend.user}
-          name="participantIds"
-        />)}
+        {friends.length > 0
+            ? friends.map((friend) => <ParticipantCheckboxInput
+            key={friend._id}
+            participant={friend.user}
+            name="participantIds"
+          />)
+          : <NullMessage src="#" message="No friends found." />
+        }
         <SubmitButton>Create DM</SubmitButton>
       </form>
     </FormProvider>

@@ -21,8 +21,7 @@ export const useContacts = (query: string) => {
     if (query && relations.isSuccess) {
       const q = query.toLowerCase();
 
-      setContacts((contacts) => {
-        return contacts.filter((relation) => {
+      setContacts(relations.data.filter((relation) => {
           const { username, displayName } = relation.user;
           
           return (
@@ -30,7 +29,7 @@ export const useContacts = (query: string) => {
             displayName.toLowerCase().includes(q)
           );
         })
-      });
+      );
     }
   }, [query]);
 
