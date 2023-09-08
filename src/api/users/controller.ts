@@ -23,19 +23,9 @@ const getUser: RequestHandler[] = [
 
         res.json({ data: user });
       } else {
-        const user: Partial<IUser> = await userService.getById(
-          userId, '+relations'
-        );
+        const user: Partial<IUser> = await userService.getById(userId, '-dmIds -serverIds');
   
-        const relation = user.relationTo!(selfId);
-        user.relations = undefined;
-  
-        res.json({
-          data: {
-            user,
-            relation: relation || null,
-          }
-        });
+        res.json({ data: user });
       }
     }
   )

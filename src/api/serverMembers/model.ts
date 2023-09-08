@@ -32,6 +32,13 @@ serverMemberSchema.virtual('user', {
   justOne: true,
 });
 
+serverMemberSchema.virtual('server', {
+  ref: 'Server',
+  localField: 'serverId',
+  foreignField: '_id',
+  justOne: true,
+});
+
 serverMemberSchema.set('toJSON', { virtuals: true });
 serverMemberSchema.set('toObject', { virtuals: true });
 

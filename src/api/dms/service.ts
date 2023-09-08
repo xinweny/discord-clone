@@ -22,6 +22,17 @@ const getById = async (dmId: Types.ObjectId | string) => {
 const create = async (participantIds: Types.ObjectId[] | string[]) => {
   if (participantIds.length > 10) throw new CustomError(400, 'Number of group members cannot exceed 10.');
 
+  const dms = await DM.find({
+    $and: [
+      { participantIds: { $all: participantIds } },
+      { participantIds: {
+        $not: { $elemMatch: { $nin: participantIds } } },
+      },
+    ],
+  }).select('_id');
+
+  if (dms.length !== 0) throw new CustomError(400, 'DM already exists.', dms);
+
   const isGroup = participantIds.length > 2;
 
   const dm = new DM({
@@ -68,7 +79,7 @@ const checkMembership = async (userId: string, roomId: string) => {
 
   if (!dm) return false;
 
-  if (dm.participantIds.some((id) => id.toString() === userId)) return dm;
+  if (dm.participantIds.some((id) => id.equals(userId))) return dm;
 
   return false;
 };

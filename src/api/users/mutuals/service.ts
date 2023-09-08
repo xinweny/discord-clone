@@ -6,6 +6,7 @@ import { RelationStatus } from '../relations/schema';
 
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
+import { ServerMember } from '@api/serverMembers/model';
 
 const getFriends = async (userId1: Types.ObjectId | string, userId2: Types.ObjectId | string) => {
   const userIds = [userId1, userId2].map(id => new Types.ObjectId(id.toString()));
@@ -30,21 +31,22 @@ const getFriends = async (userId1: Types.ObjectId | string, userId2: Types.Objec
 };
 
 const getServers = async (userId1: Types.ObjectId | string, userId2: Types.ObjectId | string) => {
-  const userIds = [userId1, userId2].map(id => new Types.ObjectId(id.toString()));
+  const userIds = [userId1, userId2].map(id => new Types.ObjectId(id));
 
-  const users = await User.find({ _id: { $in: userIds } }, 'serverIds');
-  
-  if (users.length < 2) throw new CustomError(400, 'User not found.');
+  const mutualServers = await ServerMember.aggregate([
+    { $match: { userIds: { $in: userIds } } },
+    {
+      $group: {
+        _id: '$serverId',
+        count: { $sum: 1 },
+      },
+    },
+    { $match: { count: 2 } },
+  ]);
 
-  const serverIds = users.map(user => user.serverIds.map(id => id.toString()));
-
-  const mutualIds = [...new Set(serverIds[0].filter(id => serverIds[1].includes(id)))];
-
-  const mutualServers = await Server.find({
-    _id: { $in: mutualIds.map(id => new Types.ObjectId(id)) },
-  }, 'name imageUrl');
-
-  return mutualServers;
+  return await Server.find({
+    _id: { $in: mutualServers.map((group) => group._id) }
+  }, 'name avatarUrl');
 };
 
 export const mutualsService = {
