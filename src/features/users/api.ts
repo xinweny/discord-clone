@@ -3,7 +3,7 @@ import api from '@services/api';
 import type {
   UserSelfData,
   UpdateUserFields,
-} from '@features/user/types';
+} from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
 

@@ -1,5 +1,5 @@
 import { UserQuickInfo } from './user-quick-info';
-import { UserSettingsButton } from '@features/user/settings';
+import { UserSettingsButton } from '@features/users/settings';
 
 export function UserShortcutsBar() {
   return (
