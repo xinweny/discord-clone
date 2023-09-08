@@ -24,6 +24,17 @@ export type UserSelfData = {
   servers: ServerBasicData[];
 };
 
+export type UserData = {
+  _id: string;
+  id: string;
+  bio: string;
+  bannerColor: string;
+  username: string;
+  displayName: string;
+  avatarUrl: string;
+  createdAt: string;
+};
+
 export type UpdateUserFields = {
   userId: string;
   file?: File;

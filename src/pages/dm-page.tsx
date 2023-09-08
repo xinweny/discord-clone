@@ -8,7 +8,10 @@ import { useGetUserData } from '@hooks';
 import { ContentLayout } from '@components/layouts';
 
 import { RoomWelcome } from '@components/ui/displays';
-import { DmHeader } from '@features/dms/list';
+import {
+  DmHeader,
+  DmParticipantsInfo,
+} from '@features/dms/get';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
 
@@ -30,7 +33,10 @@ export function DMPage() {
     <div>
       <ContentLayout
         header={<DmHeader dm={dm} />}
-        infoTab={<div>contacts info</div>}
+        infoTab={<DmParticipantsInfo
+          participants={participants}
+          isGroup={isGroup}
+        />}
       >
         <MessagesContainer
           welcomeComponent={<RoomWelcome

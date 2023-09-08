@@ -1,6 +1,7 @@
 import api from '@services/api';
 
 import type {
+  UserData,
   UserSelfData,
   UpdateUserFields,
 } from '@features/users/types';
@@ -10,12 +11,12 @@ import { signAndUpload } from '@services/cloudinary';
 const userApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getUserSelf: build.query<UserSelfData, string>({
+      getUser: build.query<UserData, string>({
         query: (userId) => ({
           url: `/users/${userId}`,
           method: 'get',
         }),
-        providesTags: ['User'],
+        providesTags: (...[, , userId]) => [{ type: 'User', id: userId }],
       }),
       updateUser: build.mutation<UserSelfData, UpdateUserFields>({
         query: ({
@@ -44,7 +45,7 @@ const userApi = api.injectEndpoints({
 
             if (file) await signAndUpload(file, `/avatars/users/${userId}`, userId);
   
-            dispatch(api.util.invalidateTags(['User']));
+            dispatch(api.util.invalidateTags([{type: 'User', id: userId }]));
           } catch (err) {
             console.log(err);
           }
@@ -57,6 +58,6 @@ const userApi = api.injectEndpoints({
 export default userApi;
 
 export const {
-  useGetUserSelfQuery,
+  useGetUserQuery,
   useUpdateUserMutation,
 } = userApi;
