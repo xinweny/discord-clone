@@ -2,7 +2,14 @@ import pluralize from 'pluralize';
 
 import type { DMData } from './types';
 
-export const useDmInfo = (dm: DMData, userId: string) => {
+export const useDmInfo = (dm: DMData | undefined, userId: string) => {
+  if (!dm) return {
+    avatarUrl: '',
+    participants: [],
+    name: '',
+    customStatus: '',
+  };
+
   const {
     isGroup,
     imageUrl,

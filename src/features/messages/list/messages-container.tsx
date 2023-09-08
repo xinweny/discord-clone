@@ -12,7 +12,7 @@ type MessagesContainerProps = {
 };
 
 export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) {
-  const { serverId, channelId } = useParams();
+  const { serverId, channelId, roomId } = useParams();
   const currentDate = useUpdateCurrentDate();
 
   const [next, setNext] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
 
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
-    roomId: channelId!,
+    roomId: channelId || roomId!,
     next,
   });
 
@@ -44,6 +44,7 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
             key={message._id}
             message={message}
             currentDate={currentDate}
+            isDm={!serverId}
           />
         )}
       </div>

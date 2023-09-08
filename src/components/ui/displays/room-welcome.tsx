@@ -1,18 +1,30 @@
+export enum RoomTypes {
+  DM = 'dm',
+  GROUP = 'group',
+  CHANNEL = 'channel',
+}
+
 type ChannelWelcomeProps = {
-  type: 'dm' | 'group' | 'channel';
+  type: RoomTypes;
   name: string;
   username?: string;
   avatarSrc: string;
 };
 
 type MessageInfo = {
-  [key: string]: {
+  [key in RoomTypes]: {
     heading: string;
     info: string;
+
   }
 };
 
-export function RoomWelcome({ avatarSrc, type, name, username }: ChannelWelcomeProps) {
+export function RoomWelcome({
+  avatarSrc,
+  type,
+  name,
+  username,
+}: ChannelWelcomeProps) {
   const message: MessageInfo = {
     dm: {
       heading: name,

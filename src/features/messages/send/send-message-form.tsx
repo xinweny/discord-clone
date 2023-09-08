@@ -22,7 +22,7 @@ export type MessageFields = {
 };
 
 export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
-  const { channelId, serverId } = useParams();
+  const { channelId, roomId, serverId } = useParams();
 
   const methods = useForm<MessageFields>({
     resolver: zodResolver(sendMessageSchema),
@@ -48,7 +48,7 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
     const { body, attachments } = data;
 
     await sendMessage({
-      roomId: channelId!,
+      roomId: channelId || roomId!,
       serverId,
       body,
       attachments,

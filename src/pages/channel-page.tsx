@@ -1,5 +1,7 @@
 import { ContentLayout } from '@components/layouts';
 
+import { RoomTypes } from '@components/ui/displays';
+
 import { useActiveChannel } from '@hooks';
 
 import { ChannelInfoHeader } from '@features/servers/nav';
@@ -20,7 +22,7 @@ export function ChannelPage() {
         infoTab={<ServerMembersList />}
       >
         <MessagesContainer
-          welcomeComponent={<RoomWelcome type="channel" name={channel.name} avatarSrc="#" />}
+          welcomeComponent={<RoomWelcome type={RoomTypes.CHANNEL} name={channel.name} avatarSrc="#" />}
         />
         <SendMessageForm placeholder={`Message #${channel.name}`} />
       </ContentLayout>
