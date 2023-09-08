@@ -1,4 +1,4 @@
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { ModalButton } from '@components/ui/buttons';
 import { DeleteChannelModal } from './delete-channel-modal';

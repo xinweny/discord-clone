@@ -1,6 +1,6 @@
 import { useRemoveMemberRoleMutation } from '../api';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 type RemoveMemberRoleButtonProps = {
   serverId: string;

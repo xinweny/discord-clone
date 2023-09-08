@@ -2,7 +2,7 @@ import type { ChannelData } from '../types';
 
 import { ChannelContext } from '../context';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { ModalButton } from '@components/ui/buttons';
 import { EditChannelModal } from './edit-channel-modal';

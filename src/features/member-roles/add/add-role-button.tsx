@@ -1,4 +1,6 @@
-import { MemberRoleData } from '../types';
+import type { MemberRoleData } from '../types';
+
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { useAddMemberRoleMutation } from '../api';
 
@@ -17,6 +19,8 @@ export function AddRoleButton({
 
   const [addRole] = useAddMemberRoleMutation();
 
+  const authorized = useServerAuthorize('manageRoles');
+
   const handleClick = async () => {
     await addRole({
       serverId,
@@ -24,6 +28,8 @@ export function AddRoleButton({
       roleId: _id,
     }).unwrap();
   };
+
+  if (!authorized) return null;
 
   return (
     <button onClick={handleClick}>

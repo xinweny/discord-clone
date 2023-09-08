@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { useGetUserData } from './use-get-user-data';
+import { useGetUserData } from '../../hooks/use-get-user-data';
 
 import { useGetServerQuery } from '@features/servers/api';
 import { useGetUserServerMemberQuery } from '@features/members/api';

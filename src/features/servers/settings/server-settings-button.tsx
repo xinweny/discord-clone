@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { ServerContext } from '../context';
 

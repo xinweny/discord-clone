@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { Dropdown, DropdownItem } from '@components/ui/dropdowns';
 import { LabelAndIcon } from '@components/ui/presentation';

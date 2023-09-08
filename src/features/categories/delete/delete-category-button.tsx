@@ -1,6 +1,6 @@
 import type { CategoryData } from '../types';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { ModalButton, ModalButtonProps } from '@components/ui/buttons';
 import { DeleteCategoryModal } from './delete-category-modal';

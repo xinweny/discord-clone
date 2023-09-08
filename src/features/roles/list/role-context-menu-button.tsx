@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import type { RoleData } from '../types';
 
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import { ContextMenuWrapper } from '@components/wrappers';
 

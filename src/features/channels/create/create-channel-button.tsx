@@ -1,4 +1,4 @@
-import { useServerAuthorize } from '@hooks';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 import type { CategoryData } from '@features/categories/types';
 
