@@ -20,6 +20,8 @@ const api = createApi({
     'Relations',
     'DMs',
     'DM',
+    'MutualServers',
+    'MutualFriends',
   ],
 });
 

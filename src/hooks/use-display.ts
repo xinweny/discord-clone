@@ -12,10 +12,13 @@ export const useDisplay = () => {
     onMouseLeave: hide,
   };
 
+  const toggle = () => { setVisible(prev => !prev); };
+
   return {
     visible,
     show,
     hide,
     hover,
+    toggle,
   };
 }

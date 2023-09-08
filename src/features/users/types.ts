@@ -33,6 +33,7 @@ export type UserData = {
   displayName: string;
   avatarUrl: string;
   createdAt: string;
+  customStatus: string;
 };
 
 export type UpdateUserFields = {

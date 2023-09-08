@@ -3,6 +3,7 @@ import type { UserBasicData } from '@features/users/types';
 import { useGetUserQuery } from '@features/users/api';
 
 import { UserShortProfile } from '@features/users/profile';
+import { MutualServersList } from '@features/relations/mutuals';
 
 type DmParticipantsInfoProps = {
   participants: UserBasicData[];
@@ -15,7 +16,10 @@ export function DmParticipantsInfo({ participants, isGroup }: DmParticipantsInfo
   return (
     <div>
       {(!isGroup && isSuccess)
-        ? <UserShortProfile user={participant}/>
+        ? <>
+          <UserShortProfile user={participant}/>
+          <MutualServersList participantId={participant._id} />
+        </>
         : <div>
           <p>{`MEMBERS - ${participants.length}`}</p>
         </div>}

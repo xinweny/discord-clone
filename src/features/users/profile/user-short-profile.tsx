@@ -43,11 +43,15 @@ export function UserShortProfile({
         <div>
           <h3>{displayName}</h3>
           <p>{username}</p>
-          <p>{bio}</p>
+          {'customStatus' in user && <p>{user.customStatus}</p>}
         </div>
         {server
           ? (
             <div>
+              {bio && <div>
+                <p><strong>ABOUT ME</strong></p>
+                <p>{bio}</p>
+              </div>}
               <p><strong>MEMBER SINCE</strong></p>
               <div>
                 <div>
