@@ -4,7 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 
 import type { SendFriendRequestFields } from '../types';
-import type { ErrorResponse } from '@types';
+
+import { handleServerError } from '@utils';
 
 import { sendFriendRequestSchema } from '../schema';
 
@@ -51,17 +52,21 @@ export function SendFriendRequestForm() {
 
       reset(defaultValues);
     } catch (error) {
-      const err = error as ErrorResponse;
-
       let errMsg = '';
 
-      if (
-        err.status === 400 &&
-        (err.data.message === 'User not found.' ||
-        err.data.message === 'Cannot add self.')
-      ) errMsg = 'Hm, that didn\'t work. Double-check that the username is correct.';
+      ['User not found.', 'Cannot add self.'].forEach(message => {
+        handleServerError(error, {
+          status: 400,
+          message,
+        }, () => { errMsg = 'Hm, that didn\'t work. Double-check that the username is correct.' });
+      });
 
-      if (err.status === 400 && err.data.message === 'Relation already exists.') errMsg = 'You have already added/befriended/blocked this user.';
+      handleServerError(error, {
+        status: 400,
+        message: 'Relation already exists.',
+      }, () => {
+        errMsg = 'You have already added/befriended/blocked this user.';
+      });
 
       setError('username', {
         type: 'custom',

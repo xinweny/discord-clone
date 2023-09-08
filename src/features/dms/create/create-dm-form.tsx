@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 import { createDmSchema } from '../schema';
 
 import type { CreateDMFields } from '../types';
+import type { ErrorResponse } from '@types';
 import { RelationStatus } from '@features/relations/types';
+
+import { handleServerError } from '@utils';
 
 import { useContacts } from '@features/relations/hooks';
 
@@ -35,6 +39,8 @@ export function CreateDmForm({
     filterContactsByStatus,
   } = useContacts(query);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     filterContactsByStatus(RelationStatus.FRIENDS);
   }, []);
@@ -56,9 +62,24 @@ export function CreateDmForm({
   const [createDm] = useCreateDmMutation();
 
   const onSubmit = async (data: CreateDMFields) => {
-    await createDm(data).unwrap();
-    reset(defaultValues);
-    btnRef.current?.click();
+    try {
+      const dm = await createDm(data).unwrap();
+
+      reset(defaultValues);
+      btnRef.current?.click();
+      navigate(`/channels/@me/${dm._id}`)
+    } catch (err) {
+      const error = err as ErrorResponse;
+
+      handleServerError(error, {
+        status: 400,
+        message: 'DM already exists.',
+      }, () => {
+        reset(defaultValues);
+        btnRef.current?.click();
+        navigate(`/channels/@me/${error.data.data[0]._id}`);
+      });
+    }
   }
 
   return (

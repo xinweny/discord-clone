@@ -8,7 +8,7 @@ import { useGetUserData } from '@hooks';
 import { ContentLayout } from '@components/layouts';
 
 import { RoomWelcome } from '@components/ui/displays';
-import { DmHeader } from '@features/dms/get';
+import { DmHeader } from '@features/dms/list';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
 

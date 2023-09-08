@@ -35,9 +35,7 @@ export function ServerMemberProfileCard({
   return (
     <ServerMemberContext.Provider value={member}>
       <div>
-        <ColorBanner
-          color={bannerColor}
-        />
+        <ColorBanner color={bannerColor} />
         <Avatar src={avatarUrl} />
         <div>
           <div>
@@ -49,8 +47,8 @@ export function ServerMemberProfileCard({
             <p><strong>SERVER MEMBER SINCE</strong></p>
             <p>{DateTime.fromISO(createdAt).toFormat('d LLL yyyy')}</p>
           </div>
+          <ServerMemberRolesList memberId={member._id} />
         </div>
-        <ServerMemberRolesList memberId={member._id} />
       </div>
     </ServerMemberContext.Provider>
   );
