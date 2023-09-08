@@ -1,5 +1,5 @@
 import { useRefreshTokenQuery } from '@features/auth/api';
-import { useGetUserSelfQuery } from '@features/user/api';
+import { useGetUserSelfQuery } from '@features/users/api';
 
 export const useGetUserData = () => {
   const auth = useRefreshTokenQuery();

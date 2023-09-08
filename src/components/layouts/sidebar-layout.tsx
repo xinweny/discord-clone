@@ -1,4 +1,4 @@
-import { UserShortcutsBar } from '@features/user/profile';
+import { UserShortcutsBar } from '@features/users/profile';
 
 type SidebarLayoutProps = {
   top: React.ReactNode;

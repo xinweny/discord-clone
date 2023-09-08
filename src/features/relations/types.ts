@@ -1,4 +1,4 @@
-import { UserBasicData } from '@features/user/types';
+import { UserBasicData } from '@features/users/types';
 
 export enum RelationStatus {
   PENDING_TO = 'pending_to',

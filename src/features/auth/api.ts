@@ -5,7 +5,7 @@ import type {
   LoginFields,
   RegisterFields,
 } from './types';
-import type { UserSelfData } from '@features/user/types';
+import type { UserSelfData } from '@features/users/types';
 
 const authApi = api.injectEndpoints({
   endpoints(build) {

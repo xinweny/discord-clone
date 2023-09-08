@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import type { UserBasicData } from '@features/user/types';
+import type { UserBasicData } from '@features/users/types';
 
 import { CheckboxInput } from '@components/ui/forms';
 import { Avatar } from '@components/ui/media';
