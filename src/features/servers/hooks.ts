@@ -15,15 +15,16 @@ export const useServerAuthorize = (
 ) => {
   const [authorized, setAuthorized] = useState<boolean>(false);
 
-  const params = useParams();
-  const serverId = params.serverId!;
+  const { serverId } = useParams();
 
   const { user } = useGetUserData();
   const userId = user.data!.id;
 
-  const server = useGetServerQuery(serverId);
-  const member = useGetUserServerMemberQuery({ userId, serverId });
-  const roles = useGetRolesQuery({ serverId });
+  const skip = !serverId;
+
+  const server = useGetServerQuery(serverId!, { skip });
+  const member = useGetUserServerMemberQuery({ userId, serverId: serverId! }, { skip });
+  const roles = useGetRolesQuery({ serverId: serverId! }, { skip });
 
   const successes = [
     server.isSuccess,

@@ -2,7 +2,10 @@ import { useContext } from 'react';
 
 import { MessageContext } from '../context';
 
+import { useMessageAuthorize } from '../hooks';
+
 import { useDeleteMessageMutation } from '../api';
+import { useServerAuthorize } from '@features/servers/hooks';
 
 type DeleteMessageOptionsButtonProps = {
   set: React.Dispatch<React.SetStateAction<string | null>>;
@@ -14,10 +17,12 @@ export function DeleteMessageOptionsButton({
   deleteBtnRef,
 }: DeleteMessageOptionsButtonProps) {
   const message = useContext(MessageContext);
+  const dmAuthorized = useMessageAuthorize();
+  const serverAuthorized = useServerAuthorize('manageMessages');
 
   const [deleteMessage] = useDeleteMessageMutation();
 
-  if (!message) return null;
+  if (!message || !dmAuthorized || !serverAuthorized) return null;
 
   const handleShiftClick = async () => {
     const { serverId, roomId, _id: messageId } = message;
