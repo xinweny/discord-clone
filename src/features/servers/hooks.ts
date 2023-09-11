@@ -35,7 +35,7 @@ export const useServerAuthorize = (
   const permissionNames = (typeof permissionName === 'string') ? [permissionName] : permissionName;
 
   useEffect(() => {
-    if (successes.every(success => success)) {
+    if (successes.every(success => success) && member.data) {
       if (
         server.data?.ownerId === member.data?._id
       ) {

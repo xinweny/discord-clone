@@ -17,6 +17,7 @@ const api = createApi({
     'MemberRoles',
     'ServerMembers',
     'ServerMember',
+    'ServerMemberSelf',
     'Reactions',
     'Relations',
     'DMs',

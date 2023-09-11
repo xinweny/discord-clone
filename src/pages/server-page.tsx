@@ -11,6 +11,7 @@ import { ServerNavBar } from '@features/servers/nav';
 
 import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetServerQuery } from '@features/servers/api';
+import { JoinServerNotice } from '@features/members/create';
 
 export function ServerPage() {
   const { serverId } = useParams();
@@ -32,7 +33,7 @@ export function ServerPage() {
       <ServerMemberContext.Provider value={member.data || null}>
         <div>
           <MainLayout
-            topNotice={member.data && <></>}
+            topNotice={!member.data && <JoinServerNotice server={server.data} />}
             sideBar={<ServerNavBar />}
           >
             <Outlet context={{

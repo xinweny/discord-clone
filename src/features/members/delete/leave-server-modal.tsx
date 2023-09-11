@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 
 import { ServerContext } from '@features/servers/context';
+import { ServerMemberContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -13,8 +15,11 @@ export function LeaveServerModal ({
   onClose,
 }: ModalProps) {
   const server = useContext(ServerContext);
+  const member = useContext(ServerMemberContext);
 
   const [leaveServer] = useLeaveServerMutation();
+
+  const navigate = useNavigate();
 
   if (!server) return null;
 
@@ -22,9 +27,11 @@ export function LeaveServerModal ({
 
   const handleConfirm = async () => {
     await leaveServer({
-      memberId: '',
+      memberId: member!._id,
       serverId: _id,
     }).unwrap();
+  
+    navigate('/channels/@me');
   };
 
   return (

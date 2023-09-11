@@ -2,6 +2,8 @@ import type { ReactionData } from '../types';
 
 import { Emoji } from '@components/ui/media';
 
+import { useServerMemberAuthorize } from '@features/members/hooks';
+
 import {
   useIncrementReactionMutation,
   useDecrementReactionMutation,
@@ -39,6 +41,8 @@ export function ToggleReactionButton({
     roomId,
   };
 
+  const authorized = useServerMemberAuthorize();
+
   const handleReact = async () => {
     await increment(query).unwrap();
   };
@@ -48,8 +52,10 @@ export function ToggleReactionButton({
   };
 
   return (
-    <button className={`${userHasReacted ? 'unreact-btn' : 'react-btn'}`}
+    <button
+      className={`${userHasReacted ? 'unreact-btn' : 'react-btn'}`}
       onClick={userHasReacted ? handleUnreact : handleReact}
+      disabled={!authorized}
     >
       <Emoji
         custom={custom}

@@ -23,6 +23,7 @@ const memberApi = api.injectEndpoints({
           url: `/users/${userId}/servers/${serverId}/member`,
           method: 'get',
         }),
+        providesTags: (...[, , { serverId }]) => [{ type: 'ServerMemberSelf', id: serverId }],
       }),
       getServerMember: build.query<ServerMemberData, GetServerMemberQuery>({
         query: ({ serverId, memberId }) => ({
@@ -40,6 +41,7 @@ const memberApi = api.injectEndpoints({
           'JoinedServers',
           'MutualServers',
           { type: 'ServerMembers', id: serverId },
+          { type: 'ServerMemberSelf', id: serverId },
         ],
       }),
       leaveServer: build.mutation<ServerMemberData, DeleteServerMemberFields>({
@@ -51,6 +53,7 @@ const memberApi = api.injectEndpoints({
           'JoinedServers',
           'MutualServers',
           { type: 'ServerMembers', id: serverId },
+          { type: 'ServerMemberSelf', id: serverId },
         ],
       }),
     };

@@ -12,7 +12,7 @@ import { AttachmentsPreview } from './attachments-preview';
 import { useSendMessageMutation } from '../api';
 
 type SendMessageFormProps = {
-  disable?: boolean;
+  authorized?: boolean;
   placeholder?: string;
 };
 
@@ -21,7 +21,7 @@ export type MessageFields = {
   body: string;
 };
 
-export function SendMessageForm({ disable = false, placeholder }: SendMessageFormProps) {
+export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
   const { channelId, roomId, serverId } = useParams();
 
   const methods = useForm<MessageFields>({
@@ -63,8 +63,8 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
   return (
     <FormProvider {...methods}>
       <form>
-        <AttachmentsPreview previews={previews} handleRemove={handleRemove} />
-        <label htmlFor="upload-attachments">
+        {authorized && <AttachmentsPreview previews={previews} handleRemove={handleRemove} />}
+        {authorized && <label htmlFor="upload-attachments">
           <img src="#" alt="Upload attachments" />
           <FilesInput
             id="upload-attachments"
@@ -75,17 +75,17 @@ export function SendMessageForm({ disable = false, placeholder }: SendMessageFor
             }}}
             hidden
           />
-        </label>
+        </label>}
         <TextAreaInput
           label="Message body"
           name="body"
           id="body"
           onKeyDown={enterSubmit}
-          placeholder={disable ?
+          placeholder={!authorized ?
             'You do not have permission to send messages in this channel.'
             : placeholder
           }
-          disabled={disable}
+          disabled={!authorized}
         />
         <p>{errors.attachments?.message}</p>
         <p>{errors.body?.message}</p>

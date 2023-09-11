@@ -1,10 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import pluralize from 'pluralize';
 
 import type { PublicServerData } from '@features/servers/types';
-
-import { useDisplay } from '@hooks';
-
-import { JoinServerButton } from '../join';
 
 type SearchResultServersCardProps = {
   server: PublicServerData;
@@ -13,12 +10,12 @@ type SearchResultServersCardProps = {
 export function SearchResultServersCard({
   server,
 }: SearchResultServersCardProps) {
-  const { hover, visible } = useDisplay();
+  const navigate = useNavigate();
 
   const { avatarUrl, bannerUrl, name, description, memberCount, _id } = server;
 
   return (
-    <div {...hover}>
+    <button onClick={() => { navigate(`/channels/${_id}`) }}>
       <img src={bannerUrl} alt="Server banner" />
       <div>
         <img src={avatarUrl} alt="Server icon" />
@@ -26,9 +23,6 @@ export function SearchResultServersCard({
         <p>{description}</p>
         <p>{pluralize('Member', memberCount, true)}</p>
       </div>
-      {visible && <JoinServerButton serverId={_id}>
-        Join
-      </JoinServerButton>}
-    </div>
+    </button>
   );
 }

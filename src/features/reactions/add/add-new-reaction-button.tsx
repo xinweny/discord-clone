@@ -4,6 +4,7 @@ import { ClickPopup } from '@components/ui/popups';
 import { AddReactionForm } from './add-reaction-form';
 
 import { ActiveIdState } from '@hooks';
+import { useServerMemberAuthorize } from '@features/members/hooks';
 
 type AddNewReactionButtonProps = {
   hide: () => void;
@@ -17,6 +18,10 @@ export function AddNewReactionButton({
   const { set } = activeTabState;
 
   const addReactionBtnRef = useRef<HTMLButtonElement>(null);
+
+  const authorized = useServerMemberAuthorize();
+
+  if (!authorized) return null;
 
   return (
     <ClickPopup

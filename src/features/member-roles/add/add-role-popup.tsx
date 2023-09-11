@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import { ServerMemberContext } from '@features/members/context';
 
+import { useServerAuthorize } from '@features/servers/hooks';
+
 import { RoleSearchBar } from '@features/roles/search';
+import { AddRoleButton } from './add-role-button';
 
 import { useGetRolesQuery } from '@features/roles/api';
-import { AddRoleButton } from './add-role-button';
 
 export function AddRolePopup() {
   const { serverId } = useParams();
@@ -16,6 +18,8 @@ export function AddRolePopup() {
   const [query, setQuery] = useState<string>('');
 
   const { data: roles, isSuccess } = useGetRolesQuery({ serverId: serverId! });
+
+  const authorized = useServerAuthorize('manageRoles');
 
   if (!isSuccess || !member) return null;
 
@@ -28,6 +32,8 @@ export function AddRolePopup() {
       role => role.name.toLowerCase().includes(query.toLowerCase())
     )
     : customRoles;
+
+  if (!authorized) return null;
 
   return (
     <div>
