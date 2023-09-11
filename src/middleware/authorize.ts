@@ -31,11 +31,16 @@ const server = (permissionKeys: string | string[] = []) => {
 
 const serverMember: RequestHandler = tryCatch(
   async (req, res, next) => {
-    const member = await serverMemberService.getOne(req.user?._id, req.params.serverId);
+    const { serverId } = req.params;
+
+    const [server, member] = await Promise.all([
+      serverService.getById(serverId),
+      serverMemberService.getOne(req.user?._id, req.params.serverId)
+    ]);
   
-    if (!member) throw new CustomError (403, 'Unauthorized');
+    if (server && server.private && !member) throw new CustomError (403, 'Unauthorized');
   
-    req.member = member;
+    if (member) req.member = member;
   
     next();
   }

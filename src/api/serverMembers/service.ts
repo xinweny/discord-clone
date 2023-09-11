@@ -85,9 +85,15 @@ const remove = async (id: Types.ObjectId | string) => {
 
   if (!serverMember) throw new CustomError(400, 'Server member not found.');
 
+  await ServerMember.findByIdAndDelete(id);
+
+  const { userId, serverId } = serverMember;
+
   await Promise.all([
-    ServerMember.findByIdAndDelete(id),
-    User.findByIdAndUpdate(serverMember.userId, { $pull: { serverIds: serverMember.serverId } }),
+    User.findByIdAndUpdate(userId, { $pull: { serverIds: serverId } }),
+    Server.findByIdAndUpdate(serverId, {
+      $inc: { memberCount: -1 },
+    }),
   ]);
 
   return serverMember;

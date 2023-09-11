@@ -8,7 +8,6 @@ import { authorize } from '@middleware/authorize';
 import { validateFields } from '@middleware/validateFields';
 
 import { userService } from '@api/users/service';
-import { serverService } from '@api/servers/service';
 import { serverMemberService } from './service';
 
 const getServerMembers: RequestHandler[] = [
