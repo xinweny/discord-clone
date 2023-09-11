@@ -10,7 +10,7 @@ import { channelService } from './service';
 
 const getChannel: RequestHandler[] = [
   authenticate,
-  authorize.server('manageChannels'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const { serverId, channelId } = req.params
@@ -24,7 +24,7 @@ const getChannel: RequestHandler[] = [
 
 const getChannels: RequestHandler[] = [
   authenticate,
-  authorize.server('manageChannels'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const channels = await channelService.get(req.params.serverId);

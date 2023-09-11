@@ -53,8 +53,9 @@ const create = async (fields: {
 
   const { userId, serverId } = fields;
 
+  await member.save();
+
   await Promise.all([
-    member.save(),
     Server.findByIdAndUpdate(fields.serverId, {
       $inc: { memberCount: 1 },
     }),

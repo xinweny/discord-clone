@@ -42,12 +42,8 @@ const joinServer: RequestHandler[] = [
     async (req, res) => {
       const { serverId } = req.params;
 
-      const [server, user] = await Promise.all([
-        serverService.getById(serverId),
-        userService.getById(req.user?._id),
-      ]);
+      const user = await userService.getById(req.user?._id);
 
-      if (!server) throw new CustomError(500, 'Server not found.');
       if (!user) throw new CustomError(500, 'User not found.');
 
       const member = await serverMemberService.create({
@@ -57,7 +53,7 @@ const joinServer: RequestHandler[] = [
       });
 
       res.json({
-        data: { member, server },
+        data: member,
         message: 'Server joined successfully.',
       });
     }

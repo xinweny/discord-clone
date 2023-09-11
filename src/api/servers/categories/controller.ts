@@ -10,7 +10,7 @@ import { categoryService } from './service';
 
 const getCategory: RequestHandler[] = [
   authenticate,
-  authorize.server('manageChannels'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const { serverId, categoryId } = req.params
@@ -24,7 +24,7 @@ const getCategory: RequestHandler[] = [
 
 const getCategories: RequestHandler[] = [
   authenticate,
-  authorize.server('manageChannels'),
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const categories = await categoryService.get(req.params.serverId);
