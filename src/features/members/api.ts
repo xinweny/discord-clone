@@ -29,6 +29,16 @@ const memberApi = api.injectEndpoints({
         }),
         providesTags: (...[, , { memberId }]) => [{ type: 'ServerMember', id: memberId }],
       }),
+      joinServer: build.mutation<ServerMemberData, string>({
+        query: (serverId) => ({
+          url: `/servers/${serverId}/members`,
+          method: 'post',
+        }),
+        invalidatesTags: [
+          'JoinedServers',
+          'MutualServers',
+        ],
+      }),
     };
   }
 });
@@ -39,4 +49,5 @@ export const {
   useGetServerMembersQuery,
   useGetUserServerMemberQuery,
   useGetServerMemberQuery,
+  useJoinServerMutation,
 } = memberApi;

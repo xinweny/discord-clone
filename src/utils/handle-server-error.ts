@@ -12,7 +12,7 @@ export const handleServerError = (
 ) => {
   const err = error as ErrorResponse;
 
-  if (err.status === cond.status && err.data.message === cond.message) handler();
+  if (err.status === cond.status && err.data.message.includes(cond.message)) handler();
 };
 
 export const handleServerErrorAsync = async (
@@ -22,5 +22,5 @@ export const handleServerErrorAsync = async (
 ) => {
   const err = error as ErrorResponse;
 
-  if (err.status === cond.status && err.data.message === cond.message) await handler();
+  if (err.status === cond.status && err.data.message.includes(cond.message)) await handler();
 };
