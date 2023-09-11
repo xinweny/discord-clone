@@ -15,6 +15,7 @@ const api = createApi({
     'CustomEmojis',
     'Roles',
     'MemberRoles',
+    'ServerMembers',
     'ServerMember',
     'Reactions',
     'Relations',

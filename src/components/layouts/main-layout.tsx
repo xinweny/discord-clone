@@ -4,22 +4,27 @@ type MainLayoutProps = {
   sideBar: React.ReactNode;
   children: React.ReactNode;
   infoTab?: React.ReactNode;
+  topNotice?: React.ReactNode;
 };
 
 export function MainLayout({
   sideBar,
   children,
   infoTab,
+  topNotice,
 }: MainLayoutProps) {
   return (
     <>
+      {topNotice && <div>{topNotice}</div>}
       <div>
-        {sideBar}
+        <div>
+          {sideBar}
+        </div>
+        <div>
+          {children}
+        </div>
+        {infoTab && <div>{infoTab}</div>}
       </div>
-      <div>
-        {children}
-      </div>
-      {infoTab && <div>{infoTab}</div>}
     </>
   );
 }

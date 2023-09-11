@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { handleServerError } from '@utils';
 
-import { useJoinServerMutation } from '@features/members/api';
+import { useJoinServerMutation } from '../api';
 
 type JoinServerButtonProps = {
   children: React.ReactNode;

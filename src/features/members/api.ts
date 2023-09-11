@@ -5,6 +5,7 @@ import type {
   ServerMemberMainData,
   GetUserServerMemberQuery,
   GetServerMemberQuery,
+  DeleteServerMemberFields,
 } from './types';
 
 const memberApi = api.injectEndpoints({
@@ -15,6 +16,7 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members`,
           method: 'get',
         }),
+        providesTags: (...[, , serverId]) => [{ type: 'ServerMembers', id: serverId }],
       }),
       getUserServerMember: build.query<ServerMemberData, GetUserServerMemberQuery>({
         query: ({ userId, serverId }) => ({
@@ -34,9 +36,21 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members`,
           method: 'post',
         }),
-        invalidatesTags: [
+        invalidatesTags: (...[, , serverId]) => [
           'JoinedServers',
           'MutualServers',
+          { type: 'ServerMembers', id: serverId },
+        ],
+      }),
+      leaveServer: build.mutation<ServerMemberData, DeleteServerMemberFields>({
+        query: ({ serverId, memberId }) => ({
+          url: `/servers/${serverId}/members/${memberId}`,
+          method: 'delete',
+        }),
+        invalidatesTags: (...[, , { serverId }]) => [
+          'JoinedServers',
+          'MutualServers',
+          { type: 'ServerMembers', id: serverId },
         ],
       }),
     };
@@ -50,4 +64,5 @@ export const {
   useGetUserServerMemberQuery,
   useGetServerMemberQuery,
   useJoinServerMutation,
+  useLeaveServerMutation,
 } = memberApi;

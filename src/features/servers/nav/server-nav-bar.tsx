@@ -1,18 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { ServerContext } from '../context';
 
 import { SidebarLayout } from '@components/layouts';
-
-import { useGetServerQuery } from '../api';
 
 import { ServerHeader } from './server-header';
 import { ChannelsList } from '@features/channels/list';
 
 export function ServerNavBar() {
-  const { serverId } = useParams();
+  const server = useContext(ServerContext);
 
-  const { data: server, isSuccess } = useGetServerQuery(serverId!);
-
-  if (!isSuccess) return null;
+  if (!server) return null;
 
   return (
     <div>

@@ -24,3 +24,8 @@ export type GetServerMemberQuery = {
   memberId: string;
   serverId: string;
 };
+
+export type DeleteServerMemberFields = {
+  memberId: string;
+  serverId: string;
+};
