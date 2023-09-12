@@ -6,11 +6,11 @@ import { sendMessageSchema } from '../schema';
 
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
-import { TextAreaInput, FilesInput } from '@components/ui/forms';
-import { AttachmentsPreview } from './attachments-preview';
+import { TextAreaInput } from '@components/ui/forms';
 import { MessageOptionsBar } from './message-options-bar';
 
 import { useSendMessageMutation } from '../api';
+import { UploadFileButton } from './upload-file-button';
 
 type SendMessageFormProps = {
   authorized?: boolean;
@@ -36,11 +36,12 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     handleSubmit,
   } = methods;
 
-  const { setAllFiles, handleRemove, previews } = useFileWatchMulti({
+  const fileWatch = useFileWatchMulti({
     control,
     name: 'attachments',
     setValue,
   });
+  const { setAllFiles } = fileWatch;
 
   const [sendMessage] = useSendMessageMutation();
 
@@ -62,20 +63,8 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
 
   return (
     <FormProvider {...methods}>
+      <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
       <form>
-        {authorized && <AttachmentsPreview previews={previews} handleRemove={handleRemove} />}
-        {authorized && <label htmlFor="upload-attachments">
-          <img src="#" alt="Upload attachments" />
-          <FilesInput
-            id="upload-attachments"
-            name="attachments"
-            label="Upload"
-            rules={{ onChange: (e) => {
-              setAllFiles(prev => [...prev, ...e.target.files]);
-            }}}
-            hidden
-          />
-        </label>}
         <TextAreaInput
           label="Message body"
           name="body"
@@ -87,8 +76,8 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           }
           disabled={!authorized}
         />
-        <MessageOptionsBar />
       </form>
+      <MessageOptionsBar />
     </FormProvider>
   );
 }

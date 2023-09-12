@@ -17,6 +17,13 @@ export type PreviewData = {
   dataUrl: string;
 };
 
+export type FileWatchResMulti = {
+  files: File[];
+  setAllFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  handleRemove: (id: string) => void;
+  previews: PreviewData[];
+};
+
 export const useFileWatchSingle = (opts: FileWatchOpts) => {
   const file = useWatch(opts);
   const [fileDataUrl, setFileDataUrl] = useState<string>('');
@@ -33,7 +40,7 @@ export const useFileWatchSingle = (opts: FileWatchOpts) => {
 
 export const useFileWatchMulti = (
   opts:  FileWatchOptsMulti,
-) => {
+): FileWatchResMulti => {
   const files: File[] = useWatch(opts);
   const { setValue } = opts;
 

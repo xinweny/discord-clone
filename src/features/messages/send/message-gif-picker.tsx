@@ -1,22 +1,43 @@
+import { useParams } from 'react-router-dom';
 import GifPicker, { type TenorImage } from 'gif-picker-react';
 import { useIntl } from 'react-intl';
 
+import { useSendMessageMutation } from '../api';
+
 import { env } from '@config';
 
-export function MessageGifPicker() {
+type MessageGifPickerProps = {
+  btnRef: React.RefObject<HTMLButtonElement>;
+};
+
+export function MessageGifPicker({
+  btnRef,
+}: MessageGifPickerProps) {
+  const { channelId, roomId, serverId } = useParams();
+
   const intl = useIntl();
 
-  const handleClick = (gif: TenorImage) => {
-    console.log(gif);
-  };
+  const { locale } = intl;
 
-  console.log(env.VITE_TENOR_API_KEY);
+  const [sendMessage] = useSendMessageMutation();
+
+  const handleClick = async (gif: TenorImage) => {
+    await sendMessage({
+      roomId: channelId || roomId!,
+      serverId,
+      body: gif.tenorUrl,
+      attachments: [],
+    }).unwrap();
+
+    btnRef.current?.click();
+  };
 
   return (
     <GifPicker
       tenorApiKey={env.VITE_TENOR_API_KEY}
       onGifClick={handleClick}
-      locale={intl.locale}
+      country={locale}
+      locale={locale}
     />
   );
 }

@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import type { ActiveIdState } from '@hooks';
 
 import { ClickPopup } from '@components/ui/popups';
@@ -10,13 +12,16 @@ type GifPickerButtonProps = {
 export function GifPickerButton({
   tabState,
 }: GifPickerButtonProps) {
+  const gifPickerBtnRef = useRef<HTMLButtonElement>(null);
+
   const { set } = tabState;
 
   return (
     <ClickPopup
-      renderPopup={() => <MessageGifPicker />}
+      renderPopup={() => <MessageGifPicker btnRef={gifPickerBtnRef} />}
       onOpen={() => { set('gif'); }}
       onClose={() => { set(null); }}
+      btnRef={gifPickerBtnRef}
     >
       <img src="#" alt="GIF" />
     </ClickPopup>
