@@ -21,12 +21,14 @@ type MessageCardProps = {
   isDm?: boolean;
   message: MessageData;
   currentDate: Date;
+  authorized?: boolean;
 };
 
 export function MessageCard({
   isDm = false,
   message,
   currentDate,
+  authorized = true,
 }: MessageCardProps) {
   const { visible, hover, hide } = useDisplay();
   const activeTabState = useActiveIds();
@@ -57,7 +59,7 @@ export function MessageCard({
               )}
             </div>
           )}
-          <MessageReactionsBar messageId={message._id} />
+          <MessageReactionsBar messageId={message._id} authorized={authorized} />
         </div>
         <MessageOptionsBar
           visible={visible}
@@ -66,6 +68,7 @@ export function MessageCard({
           refs={{
             deleteMessageBtn: deleteMessageBtnRef,
           }}
+          authorized={authorized}
         />
       </div>
       <div>

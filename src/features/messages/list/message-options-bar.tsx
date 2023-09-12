@@ -11,6 +11,7 @@ type MessageOptionsBarProps = {
   refs: {
     deleteMessageBtn: React.RefObject<HTMLButtonElement>;
   };
+  authorized: boolean;
 };
 
 export function MessageOptionsBar({
@@ -18,6 +19,7 @@ export function MessageOptionsBar({
   hide,
   activeTabState,
   refs,
+  authorized,
 }: MessageOptionsBarProps) {
   const { set, id } = activeTabState;
 
@@ -26,6 +28,7 @@ export function MessageOptionsBar({
   return (
     <div>
       <AddNewReactionButton
+        authorized={authorized}
         activeTabState={activeTabState}
         hide={hide}
       />

@@ -5,18 +5,18 @@ import { useGetUserData } from '@hooks';
 
 import { useGetUserServerMemberQuery } from './api';
 
-export const useServerMemberAuthorize = () => {
+export const useServerMemberAuthorize = (options?: { skip: boolean }) => {
   const [authorized, setAuthorized] = useState<boolean>(false);
   const { serverId } = useParams();
 
   const { user } = useGetUserData();
   const userId = user.data!.id;
 
-  const { data: member } = useGetUserServerMemberQuery({ userId, serverId: serverId! });
+  const { data: member } = useGetUserServerMemberQuery({ userId, serverId: serverId! }, options);
 
   useEffect(() => {
-    setAuthorized(!!member);
+    setAuthorized((options) ? true : !!member);
   }, [member]);
 
   return authorized;
-}
+};

@@ -5,9 +5,10 @@ import { MessageReactionsList } from '@features/reactions/list';
 
 type MessageReactionsBarProps = {
   messageId: string;
+  authorized: boolean;
 };
 
-export function MessageReactionsBar({ messageId }: MessageReactionsBarProps) {
+export function MessageReactionsBar({ messageId, authorized }: MessageReactionsBarProps) {
   const { hover, visible, hide } = useDisplay();
   const activeTabState = useActiveIds();
 
@@ -16,6 +17,7 @@ export function MessageReactionsBar({ messageId }: MessageReactionsBarProps) {
       <MessageReactionsList messageId={messageId} />
       {(visible || activeTabState.id === 'addReaction') && (
         <AddNewReactionButton
+          authorized={authorized}
           hide={hide}
           activeTabState={activeTabState}
         />

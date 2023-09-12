@@ -26,6 +26,7 @@ export function ClickPopup({
   return (
     <div>
       <button
+        type="button"
         onClick={() => {
           setShowPopup(prev => !prev);
         }}

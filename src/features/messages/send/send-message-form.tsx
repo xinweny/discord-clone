@@ -8,6 +8,7 @@ import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
 import { TextAreaInput, FilesInput } from '@components/ui/forms';
 import { AttachmentsPreview } from './attachments-preview';
+import { MessageOptionsBar } from './message-options-bar';
 
 import { useSendMessageMutation } from '../api';
 
@@ -33,7 +34,6 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     setValue,
     reset,
     handleSubmit,
-    formState: { errors },
   } = methods;
 
   const { setAllFiles, handleRemove, previews } = useFileWatchMulti({
@@ -87,8 +87,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           }
           disabled={!authorized}
         />
-        <p>{errors.attachments?.message}</p>
-        <p>{errors.body?.message}</p>
+        <MessageOptionsBar />
       </form>
     </FormProvider>
   );

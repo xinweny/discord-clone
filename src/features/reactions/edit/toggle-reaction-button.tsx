@@ -2,20 +2,20 @@ import type { ReactionData } from '../types';
 
 import { Emoji } from '@components/ui/media';
 
-import { useServerMemberAuthorize } from '@features/members/hooks';
-
 import {
   useIncrementReactionMutation,
   useDecrementReactionMutation,
 } from '../api';
 
 type ToggleReactionButtonProps = {
+  authorized: boolean;
   reaction: ReactionData;
   serverId?: string;
   roomId: string;
 };
 
 export function ToggleReactionButton({
+  authorized,
   reaction,
   serverId,
   roomId,
@@ -40,8 +40,6 @@ export function ToggleReactionButton({
     serverId,
     roomId,
   };
-
-  const authorized = useServerMemberAuthorize();
 
   const handleReact = async () => {
     await increment(query).unwrap();

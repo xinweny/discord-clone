@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useUpdateCurrentDate } from '@hooks';
+import { useServerMemberAuthorize } from '@features/members/hooks';
 
 import { useGetMessagesQuery } from '../api';
 
@@ -17,6 +18,8 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
 
   const [next, setNext] = useState<string | null>(null);
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
+
+  const authorized = useServerMemberAuthorize({ skip: !serverId });
 
   useEffect(() => {
     if (messages && scrolledToTop) setNext(messages.next);
@@ -45,6 +48,7 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
             message={message}
             currentDate={currentDate}
             isDm={!serverId}
+            authorized={authorized}
           />
         )}
       </div>
