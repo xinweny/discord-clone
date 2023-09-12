@@ -11,6 +11,7 @@ import { MessageOptionsBar } from './message-options-bar';
 
 import { useSendMessageMutation } from '../api';
 import { UploadFileButton } from './upload-file-button';
+import { MessageBodyInput } from './message-body-input';
 
 type SendMessageFormProps = {
   authorized?: boolean;
@@ -65,16 +66,10 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     <FormProvider {...methods}>
       <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
       <form>
-        <TextAreaInput
-          label="Message body"
+        <MessageBodyInput
           name="body"
-          id="body"
+          authorized={authorized}
           onKeyDown={enterSubmit}
-          placeholder={!authorized ?
-            'You do not have permission to send messages in this channel.'
-            : placeholder
-          }
-          disabled={!authorized}
         />
       </form>
       <MessageOptionsBar />

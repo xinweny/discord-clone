@@ -1,7 +1,7 @@
 export const useCustomSubmitHandlers = (
   onSubmit: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
 ) => {
-  const enterSubmit: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+  const enterSubmit: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       onSubmit();

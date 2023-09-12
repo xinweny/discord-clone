@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useFormContext } from 'react-hook-form';
-import GifPicker, { type TenorImage } from 'gif-picker-react';
+import GifPicker, { type TenorImage, Theme } from 'gif-picker-react';
 import { useIntl } from 'react-intl';
 
 import { useSendMessageMutation } from '../api';
@@ -40,6 +40,7 @@ export function MessageGifPicker({
     <GifPicker
       tenorApiKey={env.VITE_TENOR_API_KEY}
       onGifClick={handleClick}
+      theme={Theme.DARK}
       country={locale}
       locale={locale}
     />
