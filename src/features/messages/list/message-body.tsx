@@ -2,21 +2,20 @@ import { MessageData } from '../types';
 
 type MessageBodyProps = {
   message: MessageData;
+  hidden?: boolean;
 };
 
 export function MessageBody({
-  message
+  message,
+  hidden = false,
 }: MessageBodyProps) {
   const { body, updatedAt, createdAt } = message;
 
-  const isTenorGif = body.match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9-]+\.gif$/);
+  if (hidden) return null;
 
   return (
     <div>
-      {isTenorGif
-        ? <img src={body} />
-        : <p>{body}</p>
-      }
+      <p>{body}</p>
       {(updatedAt !== createdAt) && (
         <p><em>(edited)</em></p>
       )}

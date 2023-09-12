@@ -14,7 +14,7 @@ export function MessageReactionsBar({ messageId, authorized }: MessageReactionsB
 
   return (
     <div {...hover}>
-      <MessageReactionsList messageId={messageId} />
+      <MessageReactionsList messageId={messageId} authorized={authorized} />
       {(visible || activeTabState.id === 'addReaction') && (
         <AddNewReactionButton
           authorized={authorized}

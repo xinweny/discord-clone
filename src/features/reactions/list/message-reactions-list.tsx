@@ -6,10 +6,12 @@ import { useGetReactionsQuery } from '../api';
 
 type MessageReactionsListProps = {
   messageId: string;
+  authorized: boolean;
 };
 
 export function MessageReactionsList({
-  messageId
+  messageId,
+  authorized,
 }: MessageReactionsListProps) {
   const { serverId, roomId } = useGetServerRoomIds();
 
@@ -29,6 +31,7 @@ export function MessageReactionsList({
           reaction={reaction}
           serverId={serverId}
           roomId={roomId!}
+          authorized={authorized}
         />
       ))}
     </div>
