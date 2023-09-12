@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useFormContext } from 'react-hook-form';
 import GifPicker, { type TenorImage } from 'gif-picker-react';
 import { useIntl } from 'react-intl';
 
@@ -21,15 +22,18 @@ export function MessageGifPicker({
 
   const [sendMessage] = useSendMessageMutation();
 
+  const { reset } = useFormContext();
+
   const handleClick = async (gif: TenorImage) => {
     await sendMessage({
       roomId: channelId || roomId!,
       serverId,
-      body: gif.tenorUrl,
+      body: gif.url,
       attachments: [],
     }).unwrap();
 
     btnRef.current?.click();
+    reset();
   };
 
   return (

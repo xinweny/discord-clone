@@ -22,7 +22,11 @@ export function DeleteMessageOptionsButton({
 
   const [deleteMessage] = useDeleteMessageMutation();
 
-  if (!message || !dmAuthorized || !serverAuthorized) return null;
+  if (
+    !message ||
+    (!dmAuthorized && !serverAuthorized) ||
+    !dmAuthorized
+  ) return null;
 
   const handleShiftClick = async () => {
     const { serverId, roomId, _id: messageId } = message;
@@ -46,7 +50,7 @@ export function DeleteMessageOptionsButton({
         }
       }}
     >
-      <img src="#" alt="Delete Button" />
+      <img src="#" alt="Delete Message" />
     </button>
   );
 }
