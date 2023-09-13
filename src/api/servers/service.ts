@@ -154,18 +154,18 @@ const checkPermissions = async (
   permissionKeys: string | string[] = [],
   memberId?: Types.ObjectId | string,
 ) => {
-  const [server, member] = await Promise.all([
+  const [server, memberSelf] = await Promise.all([
     Server.findById(serverId),
     ServerMember.findOne({ serverId, userId }),
   ]);
 
-  if (!server || !member) return false;
+  if (!server || !memberSelf) return false;
 
-  if (memberId && member._id.equals(memberId)) return { server, member };
+  if (memberId && memberSelf.userId.equals(memberId)) return { server, member : memberSelf };
 
   const permissions = (typeof permissionKeys === 'string') ? [permissionKeys] : permissionKeys;
 
-  if (server.checkPermissions(member, permissions)) return { server, member };
+  if (server.checkPermissions(memberSelf, permissions)) return { server, member: memberSelf };
 
   return false;
 };
