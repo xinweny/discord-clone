@@ -22,7 +22,7 @@ export type MessageFields = {
   body: string;
 };
 
-export function SendMessageForm({ authorized = true }: SendMessageFormProps) {
+export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
   const { channelId, roomId, serverId } = useParams();
 
   const methods = useForm<MessageFields>({
@@ -68,7 +68,8 @@ export function SendMessageForm({ authorized = true }: SendMessageFormProps) {
         <MessageBodyInput
           name="body"
           authorized={authorized}
-          onKeyDown={enterSubmit}
+          enterSubmit={enterSubmit}
+          placeholder={placeholder}
         />
       </form>
       <MessageOptionsBar />

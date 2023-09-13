@@ -1,23 +1,33 @@
 import { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { createEditor } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
+import { useFormContext, Controller } from 'react-hook-form';
+import {
+  createEditor,
+  Descendant,
+  Node,
+  Transforms,
+  Editor,
+} from 'slate';
+import {
+  Slate,
+  Editable,
+  withReact,
+} from 'slate-react';
 
 type MessageBodyInputProps = {
   name: string;
   authorized: boolean;
-  onKeyDown?: React.KeyboardEventHandler<HTMLDivElement>;
+  enterSubmit: React.KeyboardEventHandler<HTMLDivElement>;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function MessageBodyInput({
   name,
   authorized,
-  onKeyDown,
+  enterSubmit,
   ...props
 }: MessageBodyInputProps) {
   const {
-    register,
     watch,
+    control,
     setValue,
   } = useFormContext();
 
@@ -25,30 +35,54 @@ export function MessageBodyInput({
 
   const [editor] = useState(() => withReact(createEditor()));
 
-  useEffect(() => { register(name); }, []);
-
-  const initialValue = [
+  const initialValue: Descendant[] = [
     {
       type: 'paragraph',
       children: [{ text: body }],
     },
   ];
 
+  useEffect(() => {
+    const text = editor.children.map(node => Node.string(node)).join('');
+
+    setValue(name, text);
+  }, [body]);
+
   const { placeholder } = props;
 
   return (
-    <Slate
-      editor={editor}
-      initialValue={initialValue}
-      place
-    >
-      <Editable
-        placeholder={!authorized
-          ? 'You do not have permission to send messages in this channel.'
-          : placeholder
-        }
-        autoFocus={true}
+      <Controller
+        name={name}
+        control={control}
+        render={({
+          field: { onChange },
+        }) => (
+          <Slate
+            editor={editor}
+            initialValue={initialValue}
+            onChange={onChange}
+          >
+            <Editable
+              placeholder={!authorized
+                ? 'You do not have permission to send messages in this channel.'
+                : placeholder
+              }
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  enterSubmit(e);
+
+                  Transforms.delete(editor, {
+                    at: {
+                      anchor: Editor.start(editor, []),
+                      focus: Editor.end(editor, []),
+                    },
+                  });
+                }
+              }}
+              autoFocus
+            />
+          </Slate>
+        )}
       />
-    </Slate>
   );
 }
