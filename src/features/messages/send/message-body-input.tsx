@@ -12,6 +12,7 @@ import {
   Editable,
   withReact,
 } from 'slate-react';
+import { withHistory } from 'slate-history';
 
 type MessageBodyInputProps = {
   name: string;
@@ -33,7 +34,9 @@ export function MessageBodyInput({
 
   const body = watch(name);
 
-  const [editor] = useState(() => withReact(createEditor()));
+  const [editor] = useState(() => (
+    withReact(withHistory(createEditor()))
+  ));
 
   const initialValue: Descendant[] = [
     {
@@ -77,6 +80,11 @@ export function MessageBodyInput({
                       focus: Editor.end(editor, []),
                     },
                   });
+
+                  editor.history = {
+                    redos: [],
+                    undos: [],
+                  };
                 }
               }}
               autoFocus
