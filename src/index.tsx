@@ -7,6 +7,7 @@ import { IntlProvider } from 'react-intl';
 import App, { store } from '@app';
 
 import './config/cloudinary';
+import './config/slate';
 
 import './index.css';
 

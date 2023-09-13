@@ -6,7 +6,6 @@ import { sendMessageSchema } from '../schema';
 
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
-import { TextAreaInput } from '@components/ui/forms';
 import { MessageOptionsBar } from './message-options-bar';
 
 import { useSendMessageMutation } from '../api';
@@ -23,7 +22,7 @@ export type MessageFields = {
   body: string;
 };
 
-export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
+export function SendMessageForm({ authorized = true }: SendMessageFormProps) {
   const { channelId, roomId, serverId } = useParams();
 
   const methods = useForm<MessageFields>({

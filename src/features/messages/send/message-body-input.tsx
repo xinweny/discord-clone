@@ -1,5 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { createEditor } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
 
 type MessageBodyInputProps = {
   name: string;
@@ -13,9 +15,6 @@ export function MessageBodyInput({
   onKeyDown,
   ...props
 }: MessageBodyInputProps) {
-  const inputRef = useRef<HTMLDivElement>(null);
-  const caretPos = useRef<number>(0);
-
   const {
     register,
     watch,
@@ -24,37 +23,32 @@ export function MessageBodyInput({
 
   const body = watch(name);
 
+  const [editor] = useState(() => withReact(createEditor()));
+
   useEffect(() => { register(name); }, []);
 
-  useEffect(() => { inputRef.current?.focus(); }, []);
-  
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [{ text: body }],
+    },
+  ];
+
   const { placeholder } = props;
 
   return (
-    <div
-      {...props}
-      ref={inputRef}
-      onInput={(e) => {
-        if (inputRef.current) inputRef.current.textContent = e.currentTarget.textContent;
-
-        setValue(
-          name,
-          e.currentTarget.textContent?.trim() || '',
-          {
-            shouldValidate: true,
-            shouldDirty: true,
-          }
-        );
-      }}
-      placeholder={!authorized
-        ? 'You do not have permission to send messages in this channel.'
-        : placeholder
-      }
-      onKeyDown={onKeyDown}
-      contentEditable
-      suppressContentEditableWarning
+    <Slate
+      editor={editor}
+      initialValue={initialValue}
+      place
     >
-      {body}
-    </div>
+      <Editable
+        placeholder={!authorized
+          ? 'You do not have permission to send messages in this channel.'
+          : placeholder
+        }
+        autoFocus={true}
+      />
+    </Slate>
   );
 }
