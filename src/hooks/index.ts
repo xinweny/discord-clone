@@ -14,3 +14,4 @@ export * from './use-active-ids';
 export * from './use-custom-form-handlers';
 export * from './use-get-server-room-ids';
 export * from './use-document-title';
+export * from './use-caret';
