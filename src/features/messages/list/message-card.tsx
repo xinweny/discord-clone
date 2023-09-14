@@ -38,7 +38,7 @@ export function MessageCard({
 
   const deleteMessageBtnRef = useRef<HTMLButtonElement>(null);
 
-  const isTenorGif = !!message.body.match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9]+\/[a-zA-Z0-9-]+\.gif$/);
+  const isTenorGif = !!message.body.match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\.gif$/);
 
   return (
     <MessageContext.Provider value={message}>

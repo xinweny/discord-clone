@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { sendMessageSchema } from '../schema';
 
+import { SendMessageFields } from '../types';
+
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
 import { MessageOptionsBar } from './message-options-bar';
@@ -17,17 +19,19 @@ type SendMessageFormProps = {
   placeholder?: string;
 };
 
-export type MessageFields = {
-  attachments: File[];
-  body: string;
-};
-
 export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
   const { channelId, roomId, serverId } = useParams();
 
-  const methods = useForm<MessageFields>({
+  const defaultValues = {
+    serverId,
+    roomId: channelId || roomId,
+    attachments: [],
+    body: '',
+  };
+
+  const methods = useForm<SendMessageFields>({
+    defaultValues,
     resolver: zodResolver(sendMessageSchema),
-    defaultValues: { attachments: [], body: '' },
   });
   const {
     control,
@@ -45,7 +49,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
 
   const [sendMessage] = useSendMessageMutation();
 
-  const onSubmit = async (data: MessageFields) => {
+  const onSubmit = async (data: SendMessageFields) => {
     const { body, attachments } = data;
 
     await sendMessage({

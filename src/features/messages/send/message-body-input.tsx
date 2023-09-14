@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useFormContext, Controller } from 'react-hook-form';
 import {
   createEditor,
   Descendant,
   Node,
   Transforms,
-  Editor,
 } from 'slate';
 import {
   Slate,
   Editable,
   withReact,
+  ReactEditor,
 } from 'slate-react';
 import { withHistory } from 'slate-history';
+import { resetEditor } from '@utils';
 
 type MessageBodyInputProps = {
   name: string;
@@ -26,6 +28,8 @@ export function MessageBodyInput({
   enterSubmit,
   ...props
 }: MessageBodyInputProps) {
+  const { channelId, roomId } = useParams();
+
   const {
     watch,
     control,
@@ -37,6 +41,12 @@ export function MessageBodyInput({
   const [editor] = useState(() => (
     withReact(withHistory(createEditor()))
   ));
+
+  useEffect(() => {
+    ReactEditor.focus(editor);
+    Transforms.select(editor, { offset: 0, path: [0, 0] });
+    resetEditor(editor);
+  }, [channelId, roomId]);
 
   const initialValue: Descendant[] = [
     {
@@ -74,19 +84,10 @@ export function MessageBodyInput({
                 if (e.key === 'Enter' && !e.shiftKey) {
                   enterSubmit(e);
 
-                  Transforms.delete(editor, {
-                    at: {
-                      anchor: Editor.start(editor, []),
-                      focus: Editor.end(editor, []),
-                    },
-                  });
-
-                  editor.history = {
-                    redos: [],
-                    undos: [],
-                  };
+                  resetEditor(editor);
                 }
               }}
+              readOnly={!authorized}
               autoFocus
             />
           </Slate>

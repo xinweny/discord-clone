@@ -39,6 +39,14 @@ export type CreateMessageFields = {
   attachments: File[];
 };
 
+export type SendMessageFields = {
+  serverId?: string;
+  roomId: string;
+  senderId: string;
+  attachments: File[];
+  body: string;
+};
+
 export type EditMessageFields = {
   serverId?: string;
   roomId: string;
