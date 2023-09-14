@@ -153,7 +153,7 @@ const messageSelf = (action: 'update' | 'delete') => {
           'manageMessages',
           senderId
         )
-        : userId === senderId;
+        : senderId.equals(userId);
   
       if (!authorized) throw new CustomError(403, 'Unauthorized');
     } else if (!message.senderId.equals(req.user?._id)) {
