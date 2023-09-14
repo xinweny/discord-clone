@@ -30,7 +30,7 @@ export function MessageBodyInput({
   enterSubmit,
   ...props
 }: MessageBodyInputProps) {
-  const { channelId, roomId } = useParams();
+  const { roomId } = useParams();
 
   const {
     watch,
@@ -52,10 +52,10 @@ export function MessageBodyInput({
   ));
 
   useEffect(() => {
-    ReactEditor.focus(editor);
+    // ReactEditor.focus(editor);
     Transforms.select(editor, { offset: 0, path: [0, 0] });
     resetEditor(editor);
-  }, [channelId, roomId]);
+  }, [roomId]);
 
   useEffect(() => {
     const text = editor.children.map(node => Node.string(node)).join('');

@@ -43,7 +43,7 @@ const Router = () => {
               </Route>
               <Route path=":serverId" element={<ServerPage />}>
                 <Route path="" element={<ChannelRedirector />} />
-                <Route path=":channelId" element={<ChannelPage />} />
+                <Route path=":roomId" element={<ChannelPage />} />
               </Route>
               <Route index element={<Navigate to="/channels/@me" />} />
             </Route>

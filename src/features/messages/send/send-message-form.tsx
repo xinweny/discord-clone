@@ -20,11 +20,11 @@ type SendMessageFormProps = {
 };
 
 export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
-  const { channelId, roomId, serverId } = useParams();
+  const { roomId, serverId } = useParams();
 
   const defaultValues = {
     serverId,
-    roomId: channelId || roomId,
+    roomId,
     attachments: [],
     body: '',
   };
@@ -53,7 +53,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     const { body, attachments } = data;
 
     await sendMessage({
-      roomId: channelId || roomId!,
+      roomId: roomId!,
       serverId,
       body,
       attachments,

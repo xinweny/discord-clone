@@ -14,7 +14,7 @@ type MessageGifPickerProps = {
 export function MessageGifPicker({
   btnRef,
 }: MessageGifPickerProps) {
-  const { channelId, roomId, serverId } = useParams();
+  const { roomId, serverId } = useParams();
 
   const intl = useIntl();
 
@@ -26,7 +26,7 @@ export function MessageGifPicker({
 
   const handleClick = async (gif: TenorImage) => {
     await sendMessage({
-      roomId: channelId || roomId!,
+      roomId: roomId!,
       serverId,
       body: gif.url,
       attachments: [],

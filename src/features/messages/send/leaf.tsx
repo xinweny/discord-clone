@@ -1,11 +1,18 @@
 import type { RenderLeafProps } from 'slate-react';
 
+type CustomText = {
+  text: string;
+  decoration: string;
+};
+
 export function Leaf ({
   attributes,
   children,
   leaf,
 }: RenderLeafProps) {
-  if (leaf.decoration === 'link') {
+  const { decoration } = leaf as CustomText;
+
+  if (decoration === 'link') {
     children = (
       <a
         style={{ cursor: 'pointer' }}

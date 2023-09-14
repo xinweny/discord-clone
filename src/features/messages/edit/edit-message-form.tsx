@@ -27,11 +27,11 @@ export function EditMessageForm({
 }: EditMessageFormProps) {
   const { _id, body } = message;
 
-  const { serverId, channelId, roomId } = useParams();
+  const { serverId, roomId } = useParams();
 
   const defaultValues = {
     serverId,
-    roomId: channelId || roomId,
+    roomId: roomId,
     messageId: _id,
     body,
   };
