@@ -14,7 +14,9 @@ import {
   ReactEditor,
 } from 'slate-react';
 import { withHistory } from 'slate-history';
-import { resetEditor } from '@utils';
+import { resetEditor, decorator } from '@utils';
+
+import { Leaf } from './leaf';
 
 type MessageBodyInputProps = {
   name: string;
@@ -38,6 +40,13 @@ export function MessageBodyInput({
 
   const body = watch(name);
 
+  const initialValue: Descendant[] = [
+    {
+      type: 'paragraph',
+      children: [{ text: body }],
+    },
+  ];
+
   const [editor] = useState(() => (
     withReact(withHistory(createEditor()))
   ));
@@ -47,13 +56,6 @@ export function MessageBodyInput({
     Transforms.select(editor, { offset: 0, path: [0, 0] });
     resetEditor(editor);
   }, [channelId, roomId]);
-
-  const initialValue: Descendant[] = [
-    {
-      type: 'paragraph',
-      children: [{ text: body }],
-    },
-  ];
 
   useEffect(() => {
     const text = editor.children.map(node => Node.string(node)).join('');
@@ -88,6 +90,8 @@ export function MessageBodyInput({
                 }
               }}
               readOnly={!authorized}
+              renderLeaf={Leaf}
+              decorate={decorator}
               autoFocus
             />
           </Slate>
