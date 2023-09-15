@@ -5,28 +5,27 @@ import {
   Descendant,
   Node,
   Transforms,
-  type BaseEditor,
 } from 'slate';
 import {
   Slate,
   Editable,
   ReactEditor,
 } from 'slate-react';
-import {
-  type HistoryEditor,
-} from 'slate-history';
+
+import type { CustomEditor } from '@config';
 
 import type { MessageData } from '../types';
 
-import { resetEditor, decorator } from '@utils';
+import { resetEditor, decorator } from '../slate';
 
 import { Leaf } from './leaf';
+import { Element } from './element';
 
 type MessageBodyInputProps = {
   name: string;
   authorized: boolean;
   enterSubmit: React.KeyboardEventHandler<HTMLDivElement>;
-  editor: BaseEditor & ReactEditor & HistoryEditor;
+  editor: CustomEditor;
   message?: MessageData;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
@@ -67,7 +66,7 @@ export function MessageBodyInput({
 
     const focusEditor = setTimeout(() => { ReactEditor.focus(editor); });
 
-    return () => { clearTimeout(focusEditor); }
+    return () => { clearTimeout(focusEditor); };
   }, [roomId]);
 
   const { placeholder } = props;
@@ -98,6 +97,7 @@ export function MessageBodyInput({
               }}
               readOnly={!authorized}
               renderLeaf={Leaf}
+              renderElement={(props) => <Element {...props} />}
               decorate={decorator}
               autoFocus
             />

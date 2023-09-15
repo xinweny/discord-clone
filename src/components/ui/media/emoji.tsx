@@ -1,7 +1,7 @@
 import { Twemoji } from './twemoji';
 
-type EmojiProps = {
-  name: string;
+export type EmojiProps = {
+  name?: string;
   custom: boolean;
   emoji: string;
 } & React.HTMLProps<HTMLImageElement>;

@@ -85,7 +85,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           editor={editor}
         />
       </form>
-      <MessageOptionsBar />
+      <MessageOptionsBar editor={editor} />
     </FormProvider>
   );
 }

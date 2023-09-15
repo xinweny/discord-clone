@@ -1,13 +1,18 @@
 import {
   type BaseEditor,
   type NodeEntry,
-  type BaseRange,
   Node,
   Transforms,
   Editor,
 } from 'slate';
-import type { ReactEditor } from 'slate-react';
+import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
+
+import type {
+  CustomEditor,
+  CustomRange,
+  EmojiElement,
+} from '@config';
 
 export const findUrlsInText = (text: string): [string, number][] => {
   const urlRegex =
@@ -43,7 +48,7 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
   editor.history = { redos: [], undos: [] };
 };
 
-export const decorator = (entry: NodeEntry): BaseRange[] => {
+export const decorator = (entry: NodeEntry): CustomRange[] => {
   const [node, path] = entry;
 
   const nodeText = Node.string(node);
@@ -63,4 +68,18 @@ export const decorator = (entry: NodeEntry): BaseRange[] => {
     },
     decoration: 'link',
   }));
+};
+
+export const insertEmoji = (editor: CustomEditor, emoji: any) => {
+  console.log(emoji);
+  ReactEditor.focus(editor);
+
+  const image: EmojiElement = {
+    type: 'emoji',
+    emoji: emoji.src || emoji.native,
+    custom: 'src' in emoji,
+    children: [{ text: '' }],
+  };
+
+  Transforms.insertNodes(editor, image);
 };
