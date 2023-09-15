@@ -29,7 +29,6 @@ export function Emoji({
   return (
     <img
       {...emojiProps}
-      {...props}
       src={emoji}
       alt={name}
     />

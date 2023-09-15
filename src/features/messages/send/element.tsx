@@ -9,11 +9,11 @@ export function Element (props: RenderElementProps) {
 
   switch (element.type) {
     case 'emoji':
-      return <div>
+      return <span {...attributes}>
         <Emoji {...element as EmojiProps} />
         {children}
-      </div>;
+      </span>;
     default:
-      return <p {...attributes}>{children}</p>;
+      return <span {...attributes}>{children}</span>;
   }
 }

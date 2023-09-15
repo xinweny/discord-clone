@@ -41,7 +41,7 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
   Transforms.removeNodes(editor, { at: [0] });
 
   Transforms.insertNodes(editor, [{
-    type: 'paragraph',
+    type: 'text',
     children: [{ text: '' }],
   }]);
 
@@ -71,13 +71,13 @@ export const decorator = (entry: NodeEntry): CustomRange[] => {
 };
 
 export const insertEmoji = (editor: CustomEditor, emoji: any) => {
-  console.log(emoji);
   ReactEditor.focus(editor);
 
   const image: EmojiElement = {
     type: 'emoji',
     emoji: emoji.src || emoji.native,
     custom: 'src' in emoji,
+    shortcode: emoji.shortcodes,
     children: [{ text: '' }],
   };
 

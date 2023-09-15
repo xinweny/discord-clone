@@ -49,7 +49,7 @@ export function MessageBodyInput({
 
   const initialValue: Descendant[] = [
     {
-      type: 'paragraph',
+      type: 'text',
       children: [{ text: message?.body || '' }],
     },
   ];
@@ -70,6 +70,8 @@ export function MessageBodyInput({
   }, [roomId]);
 
   const { placeholder } = props;
+
+  console.log(editor.selection?.anchor);
 
   return (
       <Controller
@@ -97,7 +99,7 @@ export function MessageBodyInput({
               }}
               readOnly={!authorized}
               renderLeaf={Leaf}
-              renderElement={(props) => <Element {...props} />}
+              renderElement={Element}
               decorate={decorator}
               autoFocus
             />

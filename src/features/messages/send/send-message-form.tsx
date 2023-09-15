@@ -60,12 +60,14 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   const onSubmit = async (data: SendMessageFields) => {
     const { body, attachments } = data;
 
-    await sendMessage({
+    console.log(body);
+
+    /* await sendMessage({
       roomId: roomId!,
       serverId,
       body,
       attachments,
-    }).unwrap();
+    }).unwrap(); */
 
     reset();
     setAllFiles([]);

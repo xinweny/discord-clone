@@ -4,10 +4,11 @@ import { ReactEditor } from 'slate-react'
 
 export type CustomText = {
   text: string;
+  decoration?: string;
 };
 
 export type TextElement = {
-  type: 'paragraph';
+  type: 'text';
   children: CustomText[];
 };
 
@@ -23,6 +24,7 @@ export type EmojiElement = {
   type: 'emoji';
   emoji: string;
   custom: boolean;
+  shortcode: string;
   children: EmptyText[];
 };
 

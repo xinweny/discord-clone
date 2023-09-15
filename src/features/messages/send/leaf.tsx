@@ -1,9 +1,6 @@
 import type { RenderLeafProps } from 'slate-react';
 
-type CustomText = {
-  text: string;
-  decoration: string;
-};
+import type { CustomText } from '@config';
 
 export function Leaf ({
   attributes,
