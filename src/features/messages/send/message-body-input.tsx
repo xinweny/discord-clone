@@ -1,19 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFormContext, Controller } from 'react-hook-form';
 import {
-  createEditor,
   Descendant,
   Node,
   Transforms,
+  type BaseEditor,
 } from 'slate';
 import {
   Slate,
   Editable,
-  withReact,
   ReactEditor,
 } from 'slate-react';
-import { withHistory } from 'slate-history';
+import {
+  type HistoryEditor,
+} from 'slate-history';
+
+import type { MessageData } from '../types';
+
 import { resetEditor, decorator } from '@utils';
 
 import { Leaf } from './leaf';
@@ -22,12 +26,16 @@ type MessageBodyInputProps = {
   name: string;
   authorized: boolean;
   enterSubmit: React.KeyboardEventHandler<HTMLDivElement>;
+  editor: BaseEditor & ReactEditor & HistoryEditor;
+  message?: MessageData;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function MessageBodyInput({
   name,
   authorized,
   enterSubmit,
+  editor,
+  message,
   ...props
 }: MessageBodyInputProps) {
   const { roomId } = useParams();
@@ -43,25 +51,24 @@ export function MessageBodyInput({
   const initialValue: Descendant[] = [
     {
       type: 'paragraph',
-      children: [{ text: body }],
+      children: [{ text: message?.body || '' }],
     },
   ];
-
-  const [editor] = useState(() => (
-    withReact(withHistory(createEditor()))
-  ));
-
-  useEffect(() => {
-    // ReactEditor.focus(editor);
-    Transforms.select(editor, { offset: 0, path: [0, 0] });
-    resetEditor(editor);
-  }, [roomId]);
 
   useEffect(() => {
     const text = editor.children.map(node => Node.string(node)).join('');
 
     setValue(name, text);
   }, [body]);
+
+  useEffect(() => {
+    resetEditor(editor);
+    Transforms.select(editor, { offset: 0, path: [0, 0] });
+
+    const focusEditor = setTimeout(() => { ReactEditor.focus(editor); });
+
+    return () => { clearTimeout(focusEditor); }
+  }, [roomId]);
 
   const { placeholder } = props;
 

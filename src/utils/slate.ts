@@ -1,7 +1,10 @@
 import {
   type BaseEditor,
   type NodeEntry,
+  type BaseRange,
   Node,
+  Transforms,
+  Editor,
 } from 'slate';
 import type { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
@@ -20,18 +23,27 @@ export const findUrlsInText = (text: string): [string, number][] => {
 
 export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) => {
   const point = { path: [0, 0], offset: 0 };
-  
-  editor.selection = { anchor: point, focus: point };
 
-  editor.history = { redos: [], undos: [] };
+  Transforms.setSelection(editor, { anchor: point, focus: point });
 
-  editor.children = [{
+  Transforms.delete(editor, {
+    at: {
+      anchor: Editor.start(editor, []),
+      focus: Editor.end(editor, []),
+    },
+  });
+
+  Transforms.removeNodes(editor, { at: [0] });
+
+  Transforms.insertNodes(editor, [{
     type: 'paragraph',
     children: [{ text: '' }],
-  }];
+  }]);
+
+  editor.history = { redos: [], undos: [] };
 };
 
-export const decorator = (entry: NodeEntry) => {
+export const decorator = (entry: NodeEntry): BaseRange[] => {
   const [node, path] = entry;
 
   const nodeText = Node.string(node);

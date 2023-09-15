@@ -46,7 +46,9 @@ export function DMPage() {
             username={isGroup ? undefined : participants[0].username}
           />}
         />
-        <SendMessageForm placeholder={`Message ${isGroup ? '' : '@'}${name}`} />
+        <SendMessageForm
+          placeholder={`Message ${isGroup ? '' : '@'}${name}`}
+        />
       </ContentLayout>
     </div>
   );

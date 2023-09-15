@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
+import { createEditor } from 'slate';
+import { withReact } from 'slate-react';
+import { withHistory } from 'slate-history';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { sendMessageSchema } from '../schema';
@@ -47,6 +51,10 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   });
   const { setAllFiles } = fileWatch;
 
+  const [editor] = useState(
+    () => withReact(withHistory(createEditor()))
+  );
+
   const [sendMessage] = useSendMessageMutation();
 
   const onSubmit = async (data: SendMessageFields) => {
@@ -74,6 +82,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           authorized={authorized}
           enterSubmit={enterSubmit}
           placeholder={placeholder}
+          editor={editor}
         />
       </form>
       <MessageOptionsBar />

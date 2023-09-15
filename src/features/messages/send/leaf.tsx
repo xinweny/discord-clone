@@ -12,19 +12,20 @@ export function Leaf ({
 }: RenderLeafProps) {
   const { decoration } = leaf as CustomText;
 
-  if (decoration === 'link') {
-    children = (
-      <a
-        style={{ cursor: 'pointer' }}
-        href={leaf.text}
-        onClick={() => {
-          window.open(leaf.text, '_blank', 'noopener,noreferrer');
-        }}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return <span {...attributes}>{children}</span>;
+  return (
+    <span {...attributes}>
+      {decoration === 'link'
+        ? <a
+          style={{ cursor: 'pointer' }}
+          href={leaf.text}
+          onClick={() => {
+            window.open(leaf.text, '_blank', 'noopener,noreferrer');
+          }}
+        >
+          {children}
+        </a>
+        : children
+      }
+    </span>
+  );
 }
