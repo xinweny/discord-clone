@@ -10,7 +10,7 @@ export function Leaf ({
   const { decoration } = leaf as CustomText;
 
   return (
-    <span {...attributes}>
+    <div {...attributes}>
       {decoration === 'link'
         ? <a
           style={{ cursor: 'pointer' }}
@@ -23,6 +23,6 @@ export function Leaf ({
         </a>
         : children
       }
-    </span>
+    </div>
   );
 }
