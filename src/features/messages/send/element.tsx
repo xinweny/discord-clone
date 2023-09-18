@@ -7,12 +7,14 @@ import { Emoji } from '@components/ui/media';
 export function Element (props: RenderElementProps) {
   const { attributes, children, element } = props;
 
+  console.log(attributes);
+
   switch (element.type) {
     case 'emoji':
-      return <div {...attributes}>
+      return <span {...attributes}>
         <Emoji {...element as EmojiProps} />
         {children}
-      </div>;
+      </span>;
     default:
       return <div {...attributes}>{children}</div>;
   }

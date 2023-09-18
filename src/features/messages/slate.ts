@@ -12,6 +12,7 @@ import type {
   CustomEditor,
   CustomRange,
   EmojiElement,
+  TextElement,
 } from '@config';
 
 export const findUrlsInText = (text: string): [string, number][] => {
@@ -82,4 +83,22 @@ export const insertEmoji = (editor: CustomEditor, emoji: any) => {
   };
 
   Transforms.insertNodes(editor, image);
+  Transforms.move(editor, { distance: 1 });
+  Transforms.insertText(editor, ' ');
+
+  ReactEditor.focus(editor);
+};
+
+export const withEmojis = (editor: CustomEditor) => {
+  const { isVoid, isInline } = editor;
+
+  editor.isVoid = (element) => element.type === 'emoji'
+    ? true
+    : isVoid(element);
+
+  editor.isInline = (element) => element.type === 'emoji'
+    ? true
+    : isInline(element);
+
+  return editor;
 };

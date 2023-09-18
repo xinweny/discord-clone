@@ -71,8 +71,6 @@ export function MessageBodyInput({
 
   const { placeholder } = props;
 
-  console.log(editor.selection?.anchor);
-
   return (
       <Controller
         name={name}
