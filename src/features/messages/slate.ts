@@ -4,6 +4,7 @@ import {
   Node,
   Transforms,
   Editor,
+  type Descendant,
 } from 'slate';
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
@@ -44,7 +45,7 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
   Transforms.insertNodes(editor, [{
     type: 'text',
     children: [{ text: '' }],
-  }]);
+  } as Descendant]);
 
   editor.history = { redos: [], undos: [] };
 };
@@ -102,3 +103,16 @@ export const withEmojis = (editor: CustomEditor) => {
 
   return editor;
 };
+
+export const serialize = (nodes: Descendant[]) => {
+  return nodes.map(node => {
+    if (!('children' in node)) return '';
+
+    return node.children.map(n => 
+      'type' in n && n.type === 'emoji'
+        ? (n.custom ? n.shortcode : n.emoji)
+        : Node.string(n as Descendant)
+    ).join('');
+  })
+    .join('\n');
+}

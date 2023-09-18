@@ -3,13 +3,14 @@ import { useRef, useState } from 'react';
 import type { MessageData } from '../types';
 
 import { useDisplay, useActiveIds } from '@hooks';
+import { useTenorGif } from '../hooks';
 
 import { MessageContext } from '../context';
 
-import { Avatar } from '@components/ui/media';
-
 import { EditMessageForm } from '../edit';
 import { DeleteMessageButton } from '../delete';
+
+import { Avatar } from '@components/ui/media';
 
 import { AttachmentPreview } from './attachment-preview';
 import { MessageOptionsBar } from './message-options-bar';
@@ -34,11 +35,14 @@ export function MessageCard({
   const { visible, hover, hide } = useDisplay();
   const activeTabState = useActiveIds();
   
-  const [tenorError, setTenorError] = useState<boolean>(false);
+  const {
+    tenorError,
+    setTenorError,
+    url,
+    isTenorGif,
+  } = useTenorGif(message);
 
   const deleteMessageBtnRef = useRef<HTMLButtonElement>(null);
-
-  const isTenorGif = !!message.body.match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\.gif$/);
 
   return (
     <MessageContext.Provider value={message}>
@@ -57,7 +61,7 @@ export function MessageCard({
               />
             : <MessageBody message={message} hidden={isTenorGif && !tenorError} />
           }
-          {(isTenorGif && !tenorError) && <TenorGifPreview url={message.body} setError={setTenorError} />}
+          {(isTenorGif && !tenorError) && <TenorGifPreview url={url} setError={setTenorError} />}
           {message.attachments.length > 0 && (
             <div>
               {message.attachments.map(

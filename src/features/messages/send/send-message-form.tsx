@@ -64,12 +64,12 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
 
     console.log(body);
 
-    /* await sendMessage({
+    await sendMessage({
       roomId: roomId!,
       serverId,
-      body: body.trim(),
+      body,
       attachments,
-    }).unwrap(); */
+    }).unwrap();
 
     reset();
     setAllFiles([]);

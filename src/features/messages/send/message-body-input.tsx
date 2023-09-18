@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useFormContext, Controller } from 'react-hook-form';
 import {
   Descendant,
-  Node,
   Transforms,
 } from 'slate';
 import {
@@ -16,7 +15,7 @@ import type { CustomEditor } from '@config';
 
 import type { MessageData } from '../types';
 
-import { resetEditor, decorator } from '../slate';
+import { resetEditor, decorator, serialize } from '../slate';
 
 import { Leaf } from './leaf';
 import { Element } from './element';
@@ -51,21 +50,11 @@ export function MessageBodyInput({
     {
       type: 'text',
       children: [{ text: message?.body || '' }],
-    },
+    } as Descendant,
   ];
 
   useEffect(() => {
-    const text = editor.children.map(node => {
-      if (!('children' in node)) return '';
-
-      return node.children.map(n => 
-        'type' in n && n.type === 'emoji'
-          ? (n.custom ? n.shortcode : n.emoji)
-          : Node.string(n)
-      ).join('');
-    }).join('\n');
-
-    setValue(name, text);
+    setValue(name, JSON.stringify(editor.children));
   }, [body]);
 
   useEffect(() => {

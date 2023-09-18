@@ -1,15 +1,17 @@
-import { BaseEditor, BaseRange } from 'slate'
+import { BaseEditor, BaseRange, Descendant } from 'slate'
 import { HistoryEditor } from 'slate-history';
 import { ReactEditor } from 'slate-react'
 
 export type CustomText = {
   text: string;
   decoration?: string;
+  children: Descendant[];
 };
 
 export type TextElement = {
   type: 'text';
-  children: CustomText[] | EmojiElement[];
+  text: string;
+  children: Descendant[];
 };
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor & {

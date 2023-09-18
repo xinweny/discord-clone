@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import { useSendMessageMutation } from '../api';
 
-import { env } from '@config';
+import { TextElement, env } from '@config';
 
 type MessageGifPickerProps = {
   btnRef: React.RefObject<HTMLButtonElement>;
@@ -25,10 +25,12 @@ export function MessageGifPicker({
   const { reset } = useFormContext();
 
   const handleClick = async (gif: TenorImage) => {
+    const body = JSON.stringify([{ type: 'text', children: [{ text: gif.url }] }] as TextElement[]);
+
     await sendMessage({
       roomId: roomId!,
       serverId,
-      body: gif.url,
+      body,
       attachments: [],
     }).unwrap();
 
