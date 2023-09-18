@@ -2,16 +2,21 @@ import { ContentLayout } from '@components/layouts';
 
 import { useActiveIds } from '@hooks';
 
+import { setDocumentTitle } from '@utils';
+
 import { ContactsTabs } from '@features/relations/types';
 
 import { ContactsNavbar } from '@features/relations/nav';
 import { ContactsList } from '@features/relations/list';
 import { SendFriendRequestForm } from '@features/relations/create';
 
+
 export function ContactsPage() {
   const activeTabState = useActiveIds('online');
 
   const { set, id } = activeTabState;
+
+  setDocumentTitle(['Friends']);
 
   return (
     <div>

@@ -7,8 +7,6 @@ import { Emoji } from '@components/ui/media';
 export function Element (props: RenderElementProps) {
   const { attributes, children, element } = props;
 
-  console.log(attributes);
-
   switch (element.type) {
     case 'emoji':
       return <span {...attributes}>

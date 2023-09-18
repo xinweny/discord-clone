@@ -5,6 +5,8 @@ import { RoomTypes } from '@components/ui/displays';
 import { useDmInfo } from '@features/dms/hooks';
 import { useGetUserData } from '@hooks';
 
+import { setDocumentTitle } from '@utils';
+
 import { ContentLayout } from '@components/layouts';
 
 import { RoomWelcome } from '@components/ui/displays';
@@ -28,6 +30,8 @@ export function DMPage() {
   if (!isSuccess) return null;
 
   const { isGroup } = dm;
+
+  setDocumentTitle([`${isGroup ? '' : '@'}${name}`]);
 
   return (
     <div>

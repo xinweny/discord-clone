@@ -55,7 +55,15 @@ export function MessageBodyInput({
   ];
 
   useEffect(() => {
-    const text = editor.children.map(node => Node.string(node)).join('');
+    const text = editor.children.map(node => {
+      if (!('children' in node)) return '';
+
+      return node.children.map(n => 
+        'type' in n && n.type === 'emoji'
+          ? (n.custom ? n.shortcode : n.emoji)
+          : Node.string(n)
+      ).join('');
+    }).join('\n');
 
     setValue(name, text);
   }, [body]);

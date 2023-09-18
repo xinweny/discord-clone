@@ -9,7 +9,7 @@ export type CustomText = {
 
 export type TextElement = {
   type: 'text';
-  children: CustomText[];
+  children: CustomText[] | EmojiElement[];
 };
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor & {

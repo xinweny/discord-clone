@@ -7,6 +7,8 @@ import { MainLayout } from '@components/layouts';
 
 import { useSetChannels, useGetUserData } from '@hooks';
 
+import { setDocumentTitle } from '@utils';
+
 import { ServerNavBar } from '@features/servers/nav';
 
 import { useGetUserServerMemberQuery } from '@features/members/api';
@@ -27,6 +29,8 @@ export function ServerPage() {
   });
 
   if (!server.isSuccess || !channels.isSuccess) return null;
+
+  setDocumentTitle([`#${activeChannel?.name}`, server.data.name]);
 
   return (
     <ServerContext.Provider value={server.data}>

@@ -67,7 +67,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     /* await sendMessage({
       roomId: roomId!,
       serverId,
-      body,
+      body: body.trim(),
       attachments,
     }).unwrap(); */
 
