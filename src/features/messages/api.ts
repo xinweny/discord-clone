@@ -12,7 +12,7 @@ import { messageBaseUrl } from '@utils';
 import {
   MessageData,
   GetMessagesQuery,
-  CreateMessageFields,
+  SendMessageFields,
   EditMessageFields,
   DeleteMessageFields,
 } from './types';
@@ -44,12 +44,13 @@ const messageApi = api.injectEndpoints({
         },
         forceRefetch: ({ currentArg, previousArg }) => !(_.isEqual(currentArg, previousArg)),
       }),
-      sendMessage: build.mutation<MessageData, CreateMessageFields>({
-        query: ({ serverId, roomId, body, attachments }) => ({
+      sendMessage: build.mutation<MessageData, SendMessageFields>({
+        query: ({ serverId, roomId, body, emojis, attachments }) => ({
           url: messageBaseUrl({ serverId, roomId }),
           method: 'post',
           data: {
             body,
+            emojis,
             ...(attachments.length > 0 && {
               attachments: attachments.map(file => ({
                 filename: file.name,

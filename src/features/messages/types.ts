@@ -6,6 +6,17 @@ export type AttachmentData = {
   bytes: number;
 };
 
+export type MessageEmojiData = {
+  id: string;
+  shortcode: string;
+  url: string;
+  custom: true;
+} | {
+  id: string;
+  shortcode: string;
+  custom: false;
+};
+
 export type MessageData = {
   _id: string;
   roomId: string;
@@ -13,6 +24,7 @@ export type MessageData = {
   serverId?: string;
   body: string;
   attachments: AttachmentData[];
+  emojis: MessageEmojiData[];
   createdAt: string;
   updatedAt?: string;
   sender: {
@@ -32,19 +44,12 @@ export type GetMessagesQuery = {
   next?: string | null;
 };
 
-export type CreateMessageFields = {
-  serverId?: string;
-  roomId: string;
-  body: string;
-  attachments: File[];
-};
-
 export type SendMessageFields = {
   serverId?: string;
   roomId: string;
-  senderId: string;
   attachments: File[];
   body: string;
+  emojis: MessageEmojiData[];
 };
 
 export type EditMessageFields = {
@@ -52,6 +57,7 @@ export type EditMessageFields = {
   roomId: string;
   messageId: string;
   body: string;
+  emojis: MessageEmojiData[];
 };
 
 export type DeleteMessageFields = {

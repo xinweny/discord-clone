@@ -24,6 +24,7 @@ export type EmptyText = {
 
 export type EmojiElement = {
   type: 'emoji';
+  id: string;
   emoji: string;
   custom: boolean;
   shortcode: string;

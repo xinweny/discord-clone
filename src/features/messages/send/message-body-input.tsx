@@ -12,8 +12,7 @@ import {
 } from 'slate-react';
 
 import type { CustomEditor } from '@config';
-
-import type { MessageData } from '../types';
+import type { MessageData, MessageEmojiData } from '../types';
 
 import { resetEditor, decorator, serialize } from '../slate';
 
@@ -26,6 +25,7 @@ type MessageBodyInputProps = {
   enterSubmit: React.KeyboardEventHandler<HTMLDivElement>;
   editor: CustomEditor;
   message?: MessageData;
+  setEmojis: React.Dispatch<React.SetStateAction<MessageEmojiData[]>>;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function MessageBodyInput({
@@ -34,6 +34,7 @@ export function MessageBodyInput({
   enterSubmit,
   editor,
   message,
+  setEmojis,
   ...props
 }: MessageBodyInputProps) {
   const { roomId } = useParams();
@@ -54,7 +55,10 @@ export function MessageBodyInput({
   ];
 
   useEffect(() => {
-    setValue(name, JSON.stringify(editor.children));
+    const { text, emojis } = serialize(editor.children);
+
+    if (setEmojis) setEmojis(emojis);
+    setValue(name, text);
   }, [body]);
 
   useEffect(() => {

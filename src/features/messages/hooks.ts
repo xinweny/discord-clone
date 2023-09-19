@@ -5,8 +5,6 @@ import type { MessageData } from './types';
 import { MessageContext } from './context';
 
 import { useGetUserData } from '@hooks';
-import type { TextElement } from '@config';
-
 
 export const useMessageAuthorize = () => {
   const { user } = useGetUserData();
@@ -17,12 +15,10 @@ export const useMessageAuthorize = () => {
   return message.senderId === user.data?.id;
 };
 
-export const useTenorGif = (message: MessageData) => {
-  const nodes = JSON.parse(message.body);
-  
+export const useTenorGif = (message: MessageData) => {  
   const [tenorError, setTenorError] = useState<boolean>(false);
 
-  const { text: url } = nodes[0].children[0] as TextElement;
+  const url = message.body;
 
   const isTenorGif = !!url
     .match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\.gif$/);

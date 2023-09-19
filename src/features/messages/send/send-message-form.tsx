@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { sendMessageSchema } from '../schema';
 
-import { SendMessageFields } from '../types';
+import { MessageEmojiData, SendMessageFields } from '../types';
 
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
 
@@ -33,6 +33,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     roomId,
     attachments: [],
     body: '',
+    emojis: [],
   };
 
   const methods = useForm<SendMessageFields>({
@@ -56,18 +57,18 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   const [editor] = useState(
     () => withReact(withEmojis(withHistory(createEditor())))
   );
+  const [emojis, setEmojis] = useState<MessageEmojiData[]>([]);
 
   const [sendMessage] = useSendMessageMutation();
 
   const onSubmit = async (data: SendMessageFields) => {
     const { body, attachments } = data;
 
-    console.log(body);
-
     await sendMessage({
       roomId: roomId!,
       serverId,
       body,
+      emojis,
       attachments,
     }).unwrap();
 
@@ -87,6 +88,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           enterSubmit={enterSubmit}
           placeholder={placeholder}
           editor={editor}
+          setEmojis={setEmojis}
         />
       </form>
       <MessageOptionsBar editor={editor} />

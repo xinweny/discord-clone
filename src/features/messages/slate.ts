@@ -8,6 +8,7 @@ import {
 } from 'slate';
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
+import type { MessageEmojiData } from './types';
 
 import type {
   CustomEditor,
@@ -15,6 +16,7 @@ import type {
   EmojiElement,
   TextElement,
 } from '@config';
+
 
 export const findUrlsInText = (text: string): [string, number][] => {
   const urlRegex =
@@ -77,6 +79,7 @@ export const insertEmoji = (editor: CustomEditor, emoji: any) => {
 
   const image: EmojiElement = {
     type: 'emoji',
+    id: emoji.name,
     emoji: emoji.src || emoji.native,
     custom: 'src' in emoji,
     shortcode: emoji.shortcodes,
@@ -105,14 +108,48 @@ export const withEmojis = (editor: CustomEditor) => {
 };
 
 export const serialize = (nodes: Descendant[]) => {
-  return nodes.map(node => {
+  const emojis: MessageEmojiData[] = [];
+
+  const text = nodes.map(node => {
     if (!('children' in node)) return '';
 
-    return node.children.map(n => 
-      'type' in n && n.type === 'emoji'
-        ? (n.custom ? n.shortcode : n.emoji)
-        : Node.string(n as Descendant)
+    return node.children.map(n => {
+      if ('type' in n && n.type === 'emoji') {
+        const { shortcode, id, emoji } = n;
+
+        if (n.custom) {
+          emojis.push({
+            id,
+            shortcode,
+            url: emoji,
+            custom: true,
+          });
+
+          return `<${shortcode}${id}>`;
+        } else {
+          emojis.push({
+            id: emoji,
+            shortcode,
+            custom: false,
+          });
+
+          return emoji;
+        }
+      } else {
+        return Node.string(n as Descendant);
+      }
+    }
     ).join('');
   })
-    .join('\n');
-}
+    .join('\n')
+    .trim();
+
+  return {
+    text,
+    emojis,
+  };
+};
+
+export const deserialize = (body: string) => {
+  console.log(body);
+};
