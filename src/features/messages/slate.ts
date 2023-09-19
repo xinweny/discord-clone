@@ -11,15 +11,17 @@ import type { HistoryEditor } from 'slate-history';
 import { v4 as uuid } from 'uuid';
 
 import type { MessageEmojiData } from './types';
+import type { MessageData } from './types';
 
 import type {
   CustomEditor,
+  CustomElement,
   CustomRange,
   EmojiElement,
   TextElement,
 } from '@config';
 
-type DeserializeOutput = {
+type DeserializeJSXOutput = {
   id: string;
 } & ({
   text: string;
@@ -140,6 +142,7 @@ export const serialize = (nodes: Descendant[]) => {
             id: emoji,
             shortcode,
             custom: false,
+            url: undefined,
           });
 
           return emoji;
@@ -159,28 +162,85 @@ export const serialize = (nodes: Descendant[]) => {
   };
 };
 
-export const deserialize = (body: string, emojis: MessageEmojiData[]): DeserializeOutput[] => {
-  const strs = body
+export const jsxDeserialize = (message: MessageData): DeserializeJSXOutput[] => {
+  const { body, emojis } = message;
+
+  const nodes = body
     .split(/(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu)
-    .filter(string => !!string);
+    .filter(string => !!string)
+    .map((str: string) => {
+      if (str.match(/<:.+?:[a-z0-9]+>/gu)) {
+        const emoji = emojis.find(emoji =>
+          emoji.id === str.split(':').slice(-1)[0].replace('>', '')
+        ) as MessageEmojiData;
 
-  const nodes = strs.map(str => {
-    if (str.match(/<:.+?:[a-z0-9]+>/gu)) {
-      const emoji = emojis.find(emoji =>
-        emoji.id === str.split(':').slice(-1)[0].replace('>', '')
-      ) as MessageEmojiData;
+        return { id: uuid(), emoji };
+      }
 
-      return { id: uuid(), emoji };
-    }
+      if (str.match(/\p{Emoji_Presentation}/gu)) {
+        const emoji = emojis.find(emoji => emoji.id === str) as MessageEmojiData;
 
-    if (str.match(/\p{Emoji_Presentation}/gu)) {
-      const emoji = emojis.find(emoji => emoji.id === str) as MessageEmojiData;
+        return { id: uuid(), emoji };
+      }
 
-      return { id: uuid(), emoji };
-    }
-
-    return { id: uuid(), text: str };
-  })
+      return { id: uuid(), text: str };
+    });
 
   return nodes;
 };
+
+export const slateDeserialize = (message: MessageData): Descendant[] => {
+  const { body, emojis } = message;
+
+  const nodes: Descendant[] = [];
+  const lines = body.split('\n');
+
+  const emojiRegex = /(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu;
+
+  for (const line of lines) {
+    const lineNode = {
+      type: 'text',
+      children: [] as CustomElement[],
+    } as TextElement;
+
+    const strs = line
+      .split(emojiRegex)
+      .filter(string => !!string);
+
+    const { children } = lineNode;
+
+    if (strs.length === 0) {
+      children.push({ text: '' } as TextElement);
+      nodes.push(lineNode);
+      continue;
+    }
+
+    if (strs[0].match(emojiRegex)) children.push({ text: '' } as TextElement);
+
+    for (const str of strs) {
+      if (str.match(emojiRegex)) {
+        const emoji = emojis.find(emoji =>
+          (emoji.id === str) ||
+          (emoji.id === str.split(':').slice(-1)[0].replace('>', ''))
+        ) as MessageEmojiData;
+
+        const { id, custom, shortcode, url } = emoji;
+
+        children.push({
+          type: 'emoji',
+          id,
+          custom,
+          shortcode,
+          emoji: url || id,
+          children: [{ text: '' }],
+        } as EmojiElement);
+      } else {
+        children.push({ text: str } as TextElement);
+      }
+    }
+
+    nodes.push(lineNode);
+  }
+
+  return nodes;
+}

@@ -1,8 +1,14 @@
 import { useContext, useState } from 'react';
+import { createEditor } from 'slate';
+import { withReact } from 'slate-react';
+import { withHistory } from 'slate-history';
 
 import type { MessageData } from './types';
+import type { MessageEmojiData } from './types';
 
 import { MessageContext } from './context';
+
+import { withEmojis } from './slate';
 
 import { useGetUserData } from '@hooks';
 
@@ -28,5 +34,18 @@ export const useTenorGif = (message: MessageData) => {
     setTenorError,
     url,
     isTenorGif,
+  };
+};
+
+export const useEditor = () => {
+  const [editor] = useState(
+    () => withReact(withEmojis(withHistory(createEditor())))
+  );
+  const [emojis, setEmojis] = useState<MessageEmojiData[]>([]);
+
+  return {
+    editor,
+    emojis,
+    setEmojis,
   };
 };

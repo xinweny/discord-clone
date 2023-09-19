@@ -4,6 +4,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import {
   Descendant,
   Transforms,
+  Editor,
 } from 'slate';
 import {
   Slate,
@@ -14,7 +15,7 @@ import {
 import type { CustomEditor } from '@config';
 import type { MessageData, MessageEmojiData } from '../types';
 
-import { resetEditor, decorator, serialize } from '../slate';
+import { resetEditor, decorator, serialize, slateDeserialize } from '../slate';
 
 import { Leaf } from './leaf';
 import { Element } from './element';
@@ -47,23 +48,28 @@ export function MessageBodyInput({
 
   const body = watch(name);
 
-  const initialValue: Descendant[] = [
-    {
-      type: 'text',
-      children: [{ text: message?.body || '' }],
-    } as Descendant,
-  ];
+  const initialValue: Descendant[] = message
+    ? slateDeserialize(message)
+    : [
+      {
+        type: 'text',
+        children: [{ text: '' }],
+      } as Descendant,
+    ];
 
   useEffect(() => {
-    const { text, emojis } = serialize(editor.children);
+    if (body) {
+      const { text, emojis } = serialize(editor.children);
 
-    if (setEmojis) setEmojis(emojis);
-    setValue(name, text);
+      if (setEmojis) setEmojis(emojis);
+      setValue(name, text);
+    }
   }, [body]);
 
   useEffect(() => {
-    resetEditor(editor);
-    Transforms.select(editor, { offset: 0, path: [0, 0] });
+    Transforms.select(editor, message
+    ? Editor.end(editor, [])
+    : { offset: 0, path: [0, 0] });
 
     const focusEditor = setTimeout(() => { ReactEditor.focus(editor); });
 
@@ -90,9 +96,9 @@ export function MessageBodyInput({
                 : placeholder
               }
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  enterSubmit(e);
+                enterSubmit(e);
 
+                if (e.key === 'Enter' && !e.shiftKey) {
                   resetEditor(editor);
                 }
               }}

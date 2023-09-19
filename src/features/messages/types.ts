@@ -14,6 +14,7 @@ export type MessageEmojiData = {
 } | {
   id: string;
   shortcode: string;
+  url: undefined;
   custom: false;
 };
 

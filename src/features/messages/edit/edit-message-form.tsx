@@ -10,9 +10,10 @@ import {
   useCustomSubmitHandlers,
   useCustomCancelHandlers,
 } from '@hooks';
+import { useEditor } from '../hooks';
 
-import { TextAreaInput } from '@components/ui/forms';
 import { CancelSubmitMessage } from './cancel-submit-message';
+import { MessageBodyInput } from '../send/message-body-input';
 
 import { useEditMessageMutation } from '../api';
 
@@ -25,7 +26,7 @@ export function EditMessageForm({
   message,
   closeForm,
 }: EditMessageFormProps) {
-  const { _id, body } = message;
+  const { _id } = message;
 
   const { serverId, roomId } = useParams();
 
@@ -33,7 +34,8 @@ export function EditMessageForm({
     serverId,
     roomId: roomId,
     messageId: _id,
-    body,
+    body: '',
+    emojis: [],
   };
 
   const methods = useForm<EditMessageFields>({
@@ -43,8 +45,16 @@ export function EditMessageForm({
 
   const [editMessage] = useEditMessageMutation();
 
+  const { editor, emojis, setEmojis } = useEditor();
+
   const onSubmit = async (data: EditMessageFields) => {
-    await editMessage(data).unwrap();
+    await editMessage({
+      serverId: serverId!,
+      roomId: message.roomId,
+      messageId: message._id,
+      body: data.body,
+      emojis: emojis,
+    }).unwrap();
 
     closeForm();
   };
@@ -62,11 +72,13 @@ export function EditMessageForm({
   return (
     <FormProvider {...methods}>
       <form>
-        <TextAreaInput
-          label="Message body"
+        <MessageBodyInput
           name="body"
-          id="body"
-          onKeyDown={(e) => {
+          authorized={true}
+          message={message}
+          editor={editor}
+          setEmojis={setEmojis}
+          enterSubmit={(e) => {
             enterSubmit(e);
             escapeCancel(e);
           }}

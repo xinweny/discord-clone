@@ -1,21 +1,17 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
-import { createEditor } from 'slate';
-import { withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { sendMessageSchema } from '../schema';
 
-import { MessageEmojiData, SendMessageFields } from '../types';
+import { SendMessageFields } from '../types';
 
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
+import { useEditor } from '../hooks';
 
 import { MessageOptionsBar } from './message-options-bar';
 
 import { useSendMessageMutation } from '../api';
-import { withEmojis } from '../slate';
 
 import { UploadFileButton } from './upload-file-button';
 import { MessageBodyInput } from './message-body-input';
@@ -54,10 +50,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   });
   const { setAllFiles } = fileWatch;
 
-  const [editor] = useState(
-    () => withReact(withEmojis(withHistory(createEditor())))
-  );
-  const [emojis, setEmojis] = useState<MessageEmojiData[]>([]);
+  const { editor, emojis, setEmojis } = useEditor();
 
   const [sendMessage] = useSendMessageMutation();
 

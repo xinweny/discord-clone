@@ -20,7 +20,7 @@ export const useCustomSubmitHandlers = (
 }
 
 export const useCustomCancelHandlers = (cancel: () => void) => {
-  const escapeCancel: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+  const escapeCancel: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (e.key === 'Escape') {
       e.preventDefault();
       cancel();

@@ -1,6 +1,6 @@
 import { MessageData } from '../types';
 
-import { deserialize } from '../slate';
+import { jsxDeserialize } from '../slate';
 
 import { Emoji } from '@components/ui/media';
 
@@ -17,7 +17,7 @@ export function MessageBody({
 
   if (hidden) return null;
 
-  const nodes = deserialize(body, message.emojis);
+  const nodes = jsxDeserialize(message);
 
   return (
     <div>
