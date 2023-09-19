@@ -83,10 +83,10 @@ const messageApi = api.injectEndpoints({
         },
       }),
       editMessage: build.mutation<MessageData, EditMessageFields>({
-        query: ({ serverId, roomId, messageId, body }) => ({
+        query: ({ serverId, roomId, messageId, body, emojis }) => ({
           url: messageBaseUrl({ serverId, roomId, messageId }),
           method: 'put',
-          data: { body },
+          data: { body, emojis },
         }),
         onQueryStarted: async ({ serverId, roomId }, { dispatch, queryFulfilled }) => {
           try {

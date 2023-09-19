@@ -7,14 +7,18 @@ import { EmojiPickerButton } from './emoji-picker-button';
 
 type MessageOptionsBarProps = {
   editor: CustomEditor;
+  editMode?: boolean;
 };
 
-export function MessageOptionsBar({ editor }: MessageOptionsBarProps) {
+export function MessageOptionsBar({
+  editor,
+  editMode = false,
+}: MessageOptionsBarProps) {
   const activeTabState = useActiveIds();
 
   return (
     <div>
-      <GifPickerButton tabState={activeTabState} />
+      {!editMode && <GifPickerButton tabState={activeTabState} />}
       <EmojiPickerButton tabState={activeTabState} editor={editor} />
     </div>
   );

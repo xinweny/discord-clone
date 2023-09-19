@@ -14,6 +14,7 @@ import { useEditor } from '../hooks';
 
 import { CancelSubmitMessage } from './cancel-submit-message';
 import { MessageBodyInput } from '../send/message-body-input';
+import { MessageOptionsBar } from '../send/message-options-bar';
 
 import { useEditMessageMutation } from '../api';
 
@@ -88,6 +89,7 @@ export function EditMessageForm({
           submit: clickSubmit,
         }}/>
       </form>
+      <MessageOptionsBar editor={editor} editMode={true} />
     </FormProvider>
   );
 }
