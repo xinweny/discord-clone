@@ -2,7 +2,7 @@ import { Types } from 'mongoose';
 
 import { CustomError } from '@helpers/CustomError';
 
-import { Message } from './model';
+import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
@@ -62,6 +62,7 @@ const create = async (
     senderId: Types.ObjectId | string,
     roomId: Types.ObjectId | string,
     body: string,
+    emojis: IMessageEmoji[] | undefined,
   },
   attachments?: {
     filename: string;
