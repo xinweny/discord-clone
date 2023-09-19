@@ -8,6 +8,8 @@ import {
 } from 'slate';
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
+import { v4 as uuid } from 'uuid';
+
 import type { MessageEmojiData } from './types';
 
 import type {
@@ -17,6 +19,13 @@ import type {
   TextElement,
 } from '@config';
 
+type DeserializeOutput = {
+  id: string;
+} & ({
+  text: string;
+} | {
+  emoji: MessageEmojiData;
+});
 
 export const findUrlsInText = (text: string): [string, number][] => {
   const urlRegex =
@@ -150,6 +159,28 @@ export const serialize = (nodes: Descendant[]) => {
   };
 };
 
-export const deserialize = (body: string) => {
-  console.log(body);
+export const deserialize = (body: string, emojis: MessageEmojiData[]): DeserializeOutput[] => {
+  const strs = body
+    .split(/(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu)
+    .filter(string => !!string);
+
+  const nodes = strs.map(str => {
+    if (str.match(/<:.+?:[a-z0-9]+>/gu)) {
+      const emoji = emojis.find(emoji =>
+        emoji.id === str.split(':').slice(-1)[0].replace('>', '')
+      ) as MessageEmojiData;
+
+      return { id: uuid(), emoji };
+    }
+
+    if (str.match(/\p{Emoji_Presentation}/gu)) {
+      const emoji = emojis.find(emoji => emoji.id === str) as MessageEmojiData;
+
+      return { id: uuid(), emoji };
+    }
+
+    return { id: uuid(), text: str };
+  })
+
+  return nodes;
 };

@@ -1,5 +1,9 @@
 import { MessageData } from '../types';
 
+import { deserialize } from '../slate';
+
+import { Emoji } from '@components/ui/media';
+
 type MessageBodyProps = {
   message: MessageData;
   hidden?: boolean;
@@ -13,9 +17,21 @@ export function MessageBody({
 
   if (hidden) return null;
 
+  const nodes = deserialize(body, message.emojis);
+
   return (
     <div>
-      <p>{body}</p>
+      <div>{nodes.map(node => <span
+        key={node.id}
+        style={{ whiteSpace: 'pre-line' }}
+      >
+        {('emoji' in node)
+          ? <Emoji
+            custom={node.emoji.custom}
+            emoji={node.emoji.custom ? node.emoji.url : node.emoji.id}
+          />
+          : node.text}
+      </span>)}</div>
       {(updatedAt !== createdAt) && (
         <p><em>(edited)</em></p>
       )}
