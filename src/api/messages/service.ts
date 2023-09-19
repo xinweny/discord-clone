@@ -109,10 +109,15 @@ const create = async (
 
 const update = async (
   id: string,
-  body: string,
+  fields: {
+    body: string,
+    emojis: IMessageEmoji[]
+  },
 ) => {
+  const { body, emojis } = fields;
+
   const updatedMessage = await Message.findByIdAndUpdate(id, {
-    $set: { body },
+    $set: { body, emojis },
   }, { new: true });
 
   return updatedMessage;

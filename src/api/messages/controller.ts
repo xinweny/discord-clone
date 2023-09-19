@@ -86,7 +86,7 @@ const updateMessage: RequestHandler[] = [
   authorize.messageSelf('update'),
   tryCatch(
     async (req, res) => {
-      const message = await messageService.update(req.params.messageId, req.body.body);
+      const message = await messageService.update(req.params.messageId, req.body);
 
       res.json({
         data: message,
