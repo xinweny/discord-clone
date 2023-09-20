@@ -18,6 +18,7 @@ declare module 'socket.io' {
 export const io = new Server(server, {
   cors: {
     origin: env.CLIENT_URL,
+    credentials: true,
   },
 });
 
