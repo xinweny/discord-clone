@@ -16,7 +16,7 @@ const getMany = async (keys: string[]) => {
 
 const set = async (
   key: string,
-  value: string | number,
+  value: any,
   expTime?: number
 ) => {
   const opts = expTime ? {

@@ -1,17 +1,16 @@
 import { Socket } from 'socket.io';
 
-import { connectionService } from '@services/connection';
+import { statusHandler } from './users/status/handler';
 
 export const connectionHandler = async (socket: Socket) => {
-  await connectionService.set(socket);
+  socket.join(socket.user._id);
   console.log(`${socket.id} connected`);
 
-  socket.on('join', async (roomName: string | string[]) => {
+  socket.on('join', (roomName: string | string[]) => {
     socket.join(roomName);
   });
 
-  socket.on('disconnect', async () => {
-    await connectionService.remove(socket.user._id);
-    console.log(`${socket.id} disconnected`);
-  });
+  socket.on('disconnect', () => { console.log(`${socket.id} disconnected`); });
+
+  statusHandler(socket);
 };
