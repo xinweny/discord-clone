@@ -8,8 +8,11 @@ import { useDisplay } from '@hooks';
 
 import { Avatar } from '@components/ui/media';
 
+import { UserStatusIcon } from '@features/users/status';
+
 import { AcceptFriendRequestButton } from '../edit';
 import { RemoveRelationButton } from '../delete';
+
 
 export type ContactCardProps = {
   contact: RelationData;
@@ -23,6 +26,7 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
     _id: relationId,
     status,
     user: {
+      _id: userId,
       avatarUrl,
       displayName,
       username,
@@ -54,7 +58,15 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
   return (
     <div {...hover}>
       <div>
-        <Avatar src={avatarUrl} />
+        <Avatar
+          src={avatarUrl}
+          notification={
+            (activeTab === ContactsTabs.ONLINE) ||
+            (activeTab === ContactsTabs.ALL)
+              ? <UserStatusIcon userId={userId} />
+              : undefined
+          }
+        />
         <div>
           <div>
             <p>{displayName}</p>

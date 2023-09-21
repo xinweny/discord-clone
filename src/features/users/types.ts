@@ -44,3 +44,9 @@ export type UpdateUserFields = {
   bannerColor?: string;
   bio?: string;
 };
+
+export enum StatusEvent {
+  Get = 'user:status',
+  Online = 'user:online',
+  Offline = 'user:offline',
+}

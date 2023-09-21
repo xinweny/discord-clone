@@ -1,9 +1,14 @@
 import api from '@services/api';
 
-import type {
-  UserData,
-  UserSelfData,
-  UpdateUserFields,
+import { socket } from '@app';
+
+import { setupSocketListeners, initEvents } from '@utils';
+
+import {
+  type UserData,
+  type UserSelfData,
+  type UpdateUserFields,
+  StatusEvent,
 } from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -51,6 +56,34 @@ const userApi = api.injectEndpoints({
           }
         },
       }),
+      getUserStatus: build.query<boolean, string>({
+        queryFn: () => ({ data: false }),
+        onCacheEntryAdded: async (
+          userId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [StatusEvent.Online]: () => {
+              updateCachedData(() => true);
+            },
+            [StatusEvent.Offline]: () => {
+              updateCachedData(() => false);
+            },
+          };
+
+          setupSocketListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+          
+          initEvents({
+            events: {
+              [StatusEvent.Get]: userId,
+            },
+            rooms: `${userId}_status`,
+          });
+        },
+      }),
     };
   }
 });
@@ -60,4 +93,5 @@ export default userApi;
 export const {
   useGetUserQuery,
   useUpdateUserMutation,
+  useGetUserStatusQuery,
 } = userApi;
