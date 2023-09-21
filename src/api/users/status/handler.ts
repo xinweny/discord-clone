@@ -12,6 +12,12 @@ export const statusHandler = async (socket: Socket) => {
 
   await statusService.set(socket);
 
+  socket.on('user:status', async (uid: string) => {
+    const status = await statusService.getStatus(uid);
+    
+    io.to(userId).emit(`user:${status ? 'online' : 'offline'}`);
+  });
+
   socket.on('disconnect', async () => {
     await statusService.remove(socket);
 

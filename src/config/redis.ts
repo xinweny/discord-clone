@@ -10,4 +10,11 @@ redisClient.on('error', err => console.log('Redis Client Error', err));
 
 redisClient.connect();
 
+const resetRedisCache = async () => {
+  const keys = await redisClient.keys('*_SOCKET');
+  await redisClient.del(keys);
+};
+
+resetRedisCache();
+
 export { redisClient };

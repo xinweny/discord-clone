@@ -26,8 +26,14 @@ const set = async (
   await redisClient.set(key, value, opts);
 };
 
-const del = async (key: string) => {
+const del = async (key: string | string[]) => {
   await redisClient.del(key);
+};
+
+const getKeys = async (pattern: string) => {
+  const keys = await redisClient.keys(pattern);
+
+  return keys;
 };
 
 export const redisService = {
@@ -35,4 +41,5 @@ export const redisService = {
   get,
   getMany,
   del,
+  getKeys,
 };
