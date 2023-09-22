@@ -46,7 +46,14 @@ export type UpdateUserFields = {
 };
 
 export enum StatusEvent {
-  Get = 'user:status',
-  Online = 'user:online',
-  Offline = 'user:offline',
+  Get = 'user_status:get',
 }
+
+export type StatusPayload = {
+  userId: string;
+  status: boolean;
+};
+
+export type UserStatusesData = {
+  [key: string]: boolean;
+};

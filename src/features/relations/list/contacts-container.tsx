@@ -1,9 +1,4 @@
-import { useEffect } from 'react';
-
-import {
-  ContactsTabs,
-  RelationStatus,
-} from '../types';
+import type { ContactsTabs } from '../types';
 
 import { useContacts } from '../hooks';
 
@@ -15,24 +10,8 @@ type ContactsContainerProps = {
   activeTab: ContactsTabs;
 };
 
-const RELATION_DICT: {
-  [key in ContactsTabs]: string;
-} = {
-  online: RelationStatus.FRIENDS,
-  all: RelationStatus.FRIENDS,
-  pending: 'pending',
-  blocked: RelationStatus.BLOCKED,
-};
-
 export function ContactsContainer({ query, activeTab }: ContactsContainerProps) {
-  const {
-    contacts,
-    filterContactsByStatus,
-  } = useContacts(query);
-
-  useEffect(() => {
-    filterContactsByStatus(RELATION_DICT[activeTab]);
-  }, [activeTab]);
+  const { contacts, updateStatus } = useContacts(query, activeTab);
 
   return (
     <div>
@@ -41,7 +20,12 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
         ? (
           <div>
             {contacts.map(contact => (
-              <ContactCard key={contact._id} contact={contact} activeTab={activeTab} />
+              <ContactCard
+                key={contact._id}
+                contact={contact}
+                activeTab={activeTab}
+                updateStatus={updateStatus}
+              />
             ))}
           </div>
         )

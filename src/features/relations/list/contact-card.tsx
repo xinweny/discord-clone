@@ -8,7 +8,7 @@ import { useDisplay } from '@hooks';
 
 import { Avatar } from '@components/ui/media';
 
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIconWithWatch } from '@features/users/status';
 
 import { AcceptFriendRequestButton } from '../edit';
 import { RemoveRelationButton } from '../delete';
@@ -16,10 +16,11 @@ import { RemoveRelationButton } from '../delete';
 
 export type ContactCardProps = {
   contact: RelationData;
-  activeTab: ContactsTabs
+  activeTab: ContactsTabs;
+  updateStatus: (userId: string, isOnline: boolean) => void;
 };
 
-export function ContactCard({ contact, activeTab }: ContactCardProps) {
+export function ContactCard({ contact, activeTab, updateStatus }: ContactCardProps) {
   const { hover, visible } = useDisplay();
 
   const {
@@ -63,7 +64,7 @@ export function ContactCard({ contact, activeTab }: ContactCardProps) {
           notification={
             (activeTab === ContactsTabs.ONLINE) ||
             (activeTab === ContactsTabs.ALL)
-              ? <UserStatusIcon userId={userId} />
+              ? <UserStatusIconWithWatch userId={userId} updateStatus={updateStatus} />
               : undefined
           }
         />

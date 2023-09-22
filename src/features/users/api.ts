@@ -1,7 +1,5 @@
 import api from '@services/api';
 
-import { socket } from '@app';
-
 import { setupSocketListeners, initEvents } from '@utils';
 
 import {
@@ -9,6 +7,7 @@ import {
   type UserSelfData,
   type UpdateUserFields,
   StatusEvent,
+  type StatusPayload,
 } from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -63,11 +62,9 @@ const userApi = api.injectEndpoints({
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
-            [StatusEvent.Online]: () => {
-              updateCachedData(() => true);
-            },
-            [StatusEvent.Offline]: () => {
-              updateCachedData(() => false);
+            [StatusEvent.Get]: ({ status, userId: uid }: StatusPayload) => {
+              console.log('response', status);
+              if (userId === uid) updateCachedData(() => status);
             },
           };
 
@@ -80,7 +77,7 @@ const userApi = api.injectEndpoints({
             events: {
               [StatusEvent.Get]: userId,
             },
-            rooms: `${userId}_status`,
+            rooms: `user_status#${userId}`,
           });
         },
       }),

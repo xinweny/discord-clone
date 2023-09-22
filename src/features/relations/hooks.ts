@@ -1,20 +1,37 @@
 import { useEffect, useState } from 'react';
 
-import type { RelationData } from './types';
+import {
+  RelationData,
+  ContactsTabs,
+  RelationStatus,
+} from './types';
+import { UserStatusesData } from '@features/users/types';
 
 import { useGetUserData } from '@hooks';
 
 import { useGetRelationsQuery } from './api';
 
-export const useContacts = (query: string) => {
+const RELATION_DICT: {
+  [key in ContactsTabs]: string;
+} = {
+  online: RelationStatus.FRIENDS,
+  all: RelationStatus.FRIENDS,
+  pending: 'pending',
+  blocked: RelationStatus.BLOCKED,
+};
+
+export const useContacts = (query: string, tab: ContactsTabs) => {
   const { user } = useGetUserData();
 
   const relations = useGetRelationsQuery(user.data!.id);
 
   const [contacts, setContacts] = useState<RelationData[]>([]);
+  const [statuses, setStatuses] = useState<UserStatusesData>({});
 
   useEffect(() => {
-    if (relations.isSuccess) setContacts(relations.data);
+    if (relations.isSuccess) {
+      setContacts(relations.data);
+    }
   }, [relations]);
 
   useEffect(() => {
@@ -33,17 +50,31 @@ export const useContacts = (query: string) => {
     }
   }, [query]);
 
-  const filterContactsByStatus = (status: string) => {
+  useEffect(() => {
     if (relations.isSuccess) {
-      setContacts(
-        relations.data.filter(
-          relation => relation.status.includes(status)
-        ));
+      const filteredContacts = relations.data.filter(
+        relation => relation.status.includes(RELATION_DICT[tab])
+      );
+
+      setContacts(filteredContacts);
     }
-  }
+  }, [tab]);
+
+  useEffect(() => {
+    if (tab === ContactsTabs.ONLINE) {
+      setContacts(prevContacts => prevContacts.filter(relation => statuses[relation.userId]));
+    }
+  }, [statuses]);
+
+  const updateStatus = (userId: string, isOnline: boolean) => {
+    setStatuses(prevStatuses => ({
+      ...prevStatuses,
+      [userId]: isOnline,
+    }));
+  };
 
   return {
     contacts,
-    filterContactsByStatus,
+    updateStatus,
   };
 };

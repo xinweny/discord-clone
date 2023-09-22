@@ -33,14 +33,14 @@ export const setupSocketListeners = async (
     for (const [event, listener] of Object.entries(socketEvents)) {
       socket.on(event, listener);
     }
-
-    await cacheEntryRemoved;
-
-    for (const event in socketEvents) {
-      socket.off(event);
-    }
   } catch (err) {
     console.log(err);
+  }
+
+  await cacheEntryRemoved;
+
+  for (const event in socketEvents) {
+    socket.off(event);
   }
 };
 
