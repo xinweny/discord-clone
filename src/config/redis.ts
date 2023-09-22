@@ -12,7 +12,8 @@ redisClient.connect();
 
 const resetRedisCache = async () => {
   const keys = await redisClient.keys('*_SOCKET');
-  await redisClient.del(keys);
+
+  if (keys.length > 0) await redisClient.del(keys);
 };
 
 resetRedisCache();
