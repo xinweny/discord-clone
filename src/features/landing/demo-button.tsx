@@ -1,9 +1,9 @@
 import { useOutletContext } from 'react-router-dom';
 
-type ContextType = { isLoggedIn: boolean };
+import type { LoggedInContext } from '@components/routes';
 
 export function DemoButton() {
-  const { isLoggedIn } = useOutletContext<ContextType>();
+  const { isLoggedIn } = useOutletContext<LoggedInContext>();
 
   if (isLoggedIn) return null;
 

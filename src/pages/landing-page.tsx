@@ -5,6 +5,7 @@ import {
   CTABanner,
   Footer,
 } from '@features/landing';
+
 import { LandingLayout } from '@components/layouts';
 
 export function LandingPage() {
