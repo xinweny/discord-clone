@@ -49,7 +49,7 @@ export enum StatusEvent {
   Get = 'user_status:get',
 }
 
-export type StatusPayload = {
+export type StatusEventPayload = {
   userId: string;
   status: boolean;
 };

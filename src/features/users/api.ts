@@ -1,13 +1,13 @@
 import api from '@services/api';
 
-import { setupSocketListeners, initEvents } from '@utils';
+import { setupSocketListeners } from '@utils';
 
 import {
   type UserData,
   type UserSelfData,
   type UpdateUserFields,
   StatusEvent,
-  type StatusPayload,
+  type StatusEventPayload,
 } from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
@@ -61,24 +61,30 @@ const userApi = api.injectEndpoints({
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
+          console.log('cache entry added');
           const events = {
-            [StatusEvent.Get]: ({ status, userId: uid }: StatusPayload) => {
-              console.log('response', status);
-              if (userId === uid) updateCachedData(() => status);
+            [StatusEvent.Get]: ({ status, userId: uid }: StatusEventPayload) => {
+              if (userId !== uid) return;
+
+              console.log(`get status response #${uid}`, status);
+
+              updateCachedData(() => {
+                console.log('updateCacheData', status);
+                return status;
+              });
             },
           };
 
           setupSocketListeners(
             events,
             { cacheDataLoaded, cacheEntryRemoved },
+            {
+              events: {
+                [StatusEvent.Get]: userId,
+              },
+              rooms: `user_status#${userId}`,
+            }
           );
-          
-          initEvents({
-            events: {
-              [StatusEvent.Get]: userId,
-            },
-            rooms: `user_status#${userId}`,
-          });
         },
       }),
     };

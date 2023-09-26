@@ -61,12 +61,17 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
   }, [tab]);
 
   useEffect(() => {
-    if (tab === ContactsTabs.ONLINE) {
-      setContacts(prevContacts => prevContacts.filter(relation => statuses[relation.userId]));
+    if (tab === ContactsTabs.ONLINE && relations.isSuccess) {
+      const friendContacts = relations.data.filter(
+        relation => relation.status === RelationStatus.FRIENDS
+      );
+
+      setContacts(friendContacts.filter(relation => !!statuses[relation.userId]));
     }
   }, [statuses]);
 
   const updateStatus = (userId: string, isOnline: boolean) => {
+    console.log('UPDATE STATUS: ', userId, isOnline)
     setStatuses(prevStatuses => ({
       ...prevStatuses,
       [userId]: isOnline,

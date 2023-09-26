@@ -26,12 +26,25 @@ export type InitEventArgs = {
 export const setupSocketListeners = async (
   socketEvents: SocketEventDict,
   { cacheDataLoaded, cacheEntryRemoved }: CacheArgs,
+  init?: InitEventArgs,
 ) => {
   try {
     await cacheDataLoaded;
 
     for (const [event, listener] of Object.entries(socketEvents)) {
       socket.on(event, listener);
+    }
+
+    if (init) {
+      console.log('INIT EVENTS');
+      const { rooms, events } = init;
+      if (rooms) socket.emit('join', rooms);
+
+      if (events) {
+        for (const [event, payload] of Object.entries(events)) {
+          socket.emit(event, payload);
+        }
+      }
     }
   } catch (err) {
     console.log(err);
@@ -43,14 +56,3 @@ export const setupSocketListeners = async (
     socket.off(event);
   }
 };
-
-export const initEvents = ({ rooms, events }: InitEventArgs) => {
-
-  if (rooms) socket.emit('join', rooms);
-
-  if (!events) return;
-
-  for (const [event, payload] of Object.entries(events)) {
-    socket.emit(event, payload);
-  }
-}
