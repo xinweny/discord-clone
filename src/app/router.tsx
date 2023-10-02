@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { PublicRoute, PrivateRoute, RestrictedRoute } from '@components/routes';
 
-import { WebSocketConnection } from '@features/users/status';
+import { WebSocketConnection } from '@features/auth/connection';
 import { ChannelRedirector } from '@features/channels/nav';
 
 import {

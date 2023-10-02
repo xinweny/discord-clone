@@ -64,7 +64,6 @@ const userApi = api.injectEndpoints({
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
-          console.log('cache entry added');
           const events = {
             [StatusEvent.Get]: ({ status, userId: uid }: StatusEventPayload) => {
               if (userId !== uid) return;
@@ -80,8 +79,6 @@ const userApi = api.injectEndpoints({
             { cacheDataLoaded, cacheEntryRemoved },
             `user_status#${userId}`
           );
-
-          console.log('END SETUP');
         },
       }),
     };

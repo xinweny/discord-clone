@@ -8,8 +8,8 @@ export function WebSocketConnection() {
   useEffect(() => {
     dispatch({ type: 'socket/connect' });
 
-    return () => { dispatch({ type: 'socket/disconnect' }) };
-  });
+    return () => { dispatch({ type: 'socket/disconnect' }); };
+  }, []);
 
   return <Outlet />;
 }
