@@ -2,7 +2,7 @@ import { ContentLayout } from '@components/layouts';
 
 import { RoomTypes } from '@components/ui/displays';
 
-import { useActiveChannel } from '@hooks';
+import { useActiveChannel } from '@features/channels/hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
 
 import { ChannelInfoHeader } from '@features/servers/nav';

@@ -2,7 +2,7 @@ import { FormGroup, TextInput } from '@components/ui/forms';
 
 import type { ChannelTypes } from '../types';
 
-import { useFormatChannelNameEdit } from '@hooks';
+import { useFormatChannelNameEdit } from '../hooks';
 
 type EditChannelNameInputProps = {
   type: ChannelTypes;

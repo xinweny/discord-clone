@@ -5,7 +5,8 @@ import { ServerContext } from '@features/servers/context';
 
 import { MainLayout } from '@components/layouts';
 
-import { useSetChannels, useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
+import { useSetChannels } from '@features/channels/hooks';
 
 import { setDocumentTitle } from '@utils';
 

@@ -7,4 +7,4 @@ export const useGetServerRoomIds = () => {
     serverId,
     roomId,
   };
-}
+};

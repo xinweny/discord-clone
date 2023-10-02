@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { JoinedServersNavbar } from '@features/servers/joined';
 

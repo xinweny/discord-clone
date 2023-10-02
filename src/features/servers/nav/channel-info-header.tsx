@@ -1,4 +1,4 @@
-import { useActiveChannel } from '@hooks';
+import { useActiveChannel } from '@features/channels/hooks';
 
 import { ChannelIcon } from '@features/channels/list';
 

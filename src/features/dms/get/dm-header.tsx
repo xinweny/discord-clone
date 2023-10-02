@@ -1,6 +1,6 @@
 import type { DMData } from '../types';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 import { useDmInfo } from '../hooks';
 
 import { Avatar } from '@components/ui/media';

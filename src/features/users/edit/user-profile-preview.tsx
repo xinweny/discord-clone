@@ -1,6 +1,7 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import { useFileWatchSingle, useGetUserData } from '@hooks';
+import { useFileWatchSingle } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { Avatar } from '@components/ui/media';
 

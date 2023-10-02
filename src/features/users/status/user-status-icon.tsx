@@ -24,7 +24,7 @@ export function UserStatusIconWithWatch({ userId, updateStatus }: UserStatusIcon
   const { data: status, isSuccess } = result;
 
   useEffect(() => {
-    console.log('EFFECT', result);
+    console.log('EFFECT', status);
     if (isSuccess) updateStatus(userId, !!status);
   }, [status]);
 

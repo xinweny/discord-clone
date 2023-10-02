@@ -1,4 +1,4 @@
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { useGetDmsQuery } from '../api';
 

@@ -1,4 +1,4 @@
-import { useFormatChannelName } from '@hooks';
+import { useFormatChannelName } from '../hooks';
 
 import { FormGroup, TextInput } from '@components/ui/forms';
 

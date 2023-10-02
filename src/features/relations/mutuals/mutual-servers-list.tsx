@@ -2,7 +2,7 @@ import pluralize from 'pluralize';
 
 import { useDisplay } from '@hooks';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 import { useGetMutualServersQuery } from '../api';
 import { MutualServerCard } from './mutual-server-card';
 

@@ -7,7 +7,7 @@ import {
 } from './types';
 import { UserStatusesData } from '@features/users/types';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { useGetRelationsQuery } from './api';
 
