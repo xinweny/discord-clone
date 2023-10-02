@@ -1,4 +1,4 @@
-import { useModal } from '@hooks';
+import { useModal } from '@components/hooks';
 
 import type { ModalProps } from '@types';
 

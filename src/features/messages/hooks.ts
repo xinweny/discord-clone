@@ -10,7 +10,7 @@ import { MessageContext } from './context';
 
 import { withEmojis } from './slate';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 export const useMessageAuthorize = () => {
   const { user } = useGetUserData();

@@ -5,7 +5,7 @@ import type {
   PickerServerEmojisData,
 } from '@features/emojis/types';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { useGetJoinedServersQuery } from '@features/servers/api';
 

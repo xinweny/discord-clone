@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { useDropdown } from '@hooks';
+import { useDropdown } from '@components/hooks';
 
 import { DropdownButton } from './dropdown-button';
 import { DropdownMenu } from './dropdown-menu';

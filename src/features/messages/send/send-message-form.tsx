@@ -6,7 +6,7 @@ import { sendMessageSchema } from '../schema';
 
 import { SendMessageFields } from '../types';
 
-import { useFileWatchMulti, useCustomSubmitHandlers } from '@hooks';
+import { useFileWatchMulti, useCustomSubmitHandlers } from '@components/hooks';
 import { useEditor } from '../hooks';
 
 import { MessageOptionsBar } from './message-options-bar';

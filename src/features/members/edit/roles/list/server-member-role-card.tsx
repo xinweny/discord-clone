@@ -1,6 +1,6 @@
 import type { MemberRoleData } from '../types';
 
-import { useDisplay } from '@hooks';
+import { useDisplay } from '@components/hooks';
 
 import { RemoveMemberRoleButton } from '../remove';
 

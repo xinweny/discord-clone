@@ -1,6 +1,6 @@
 import pluralize from 'pluralize';
 
-import { useDisplay } from '@hooks';
+import { useDisplay } from '@components/hooks';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useGetMutualServersQuery } from '../api';

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { RoomTypes } from '@components/ui/displays';
 
 import { useDmInfo } from '@features/dms/hooks';
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { setDocumentTitle } from '@utils';
 

@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import type { MessageData } from '../types';
 
-import { useDisplay, useActiveIds } from '@hooks';
+import { useActiveIds } from '@hooks';
+import { useDisplay } from '@components/hooks';
 import { useTenorGif } from '../hooks';
 
 import { MessageContext } from '../context';

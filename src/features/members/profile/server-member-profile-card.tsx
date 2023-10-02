@@ -4,7 +4,7 @@ import { ServerMemberContext } from '../context';
 
 import { useGetServerMemberQuery } from '../api';
 
-import { ServerMemberRolesList } from '@features/member-roles/list';
+import { ServerMemberRolesList } from '@features/members/edit/roles/list';
 import { UserShortProfile } from '@features/users/profile';
 
 type ServerMemberProfileCardProps = {

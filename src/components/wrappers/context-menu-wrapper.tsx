@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { usePosAbsolute } from '@hooks';
+import { usePosAbsolute } from '../hooks';
 
 import { ContextMenu, ContextMenuOptionsData } from '@components/ui/context-menu';
 

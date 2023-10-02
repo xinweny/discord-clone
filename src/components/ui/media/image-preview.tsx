@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { useFileWatchSingle } from '@hooks';
+import { useFileWatchSingle } from '@components/hooks';
 
 type ImagePreviewProps = {
   name: string;

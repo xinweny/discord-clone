@@ -1,4 +1,4 @@
-import { useTwemoji } from '@hooks';
+import { useTwemoji } from '@components/hooks';
 
 type TwemojiProps = {
   emoji: string;

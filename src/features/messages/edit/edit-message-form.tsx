@@ -9,7 +9,7 @@ import type {
 import {
   useCustomSubmitHandlers,
   useCustomCancelHandlers,
-} from '@hooks';
+} from '@components/hooks';
 import { useEditor } from '../hooks';
 
 import { CancelSubmitMessage } from './cancel-submit-message';

@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import type { ActiveRoleContextData, RoleData } from '@features/roles/types';
+import type { ActiveRoleContextData, RoleData } from './types';
 
 import { ServerContext } from '@features/servers/context';
-import { ActiveRoleContext } from '@features/roles/context';
+import { ActiveRoleContext } from './context';
 
-import { useGetRolesQuery } from '@features/roles/api';
+import { useGetRolesQuery } from './api';
 
 export type TabData = {
   label: string;

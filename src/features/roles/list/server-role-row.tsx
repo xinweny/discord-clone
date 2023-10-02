@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { ActiveRoleContext } from '../context';
 
-import { useDisplay } from '@hooks';
+import { useDisplay } from '@components/hooks';
 
 import { RoleContextMenuButton } from '.';
 

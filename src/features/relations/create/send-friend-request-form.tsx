@@ -9,7 +9,7 @@ import { handleServerError } from '@utils';
 
 import { sendFriendRequestSchema } from '../schema';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import {
   SubmittedMessage,

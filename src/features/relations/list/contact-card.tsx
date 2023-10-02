@@ -4,7 +4,7 @@ import {
   RelationStatus,
 } from '../types';
 
-import { useDisplay } from '@hooks';
+import { useDisplay } from '@components/hooks';
 
 import { Avatar } from '@components/ui/media';
 

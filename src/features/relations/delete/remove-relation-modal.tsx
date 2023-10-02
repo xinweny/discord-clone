@@ -1,7 +1,7 @@
 import { type RelationData, RelationStatus } from '../types';
 import type { ModalProps } from '@types';
 
-import { useGetUserData } from '@hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { ConfirmationModal } from '@components/ui/modals';
 

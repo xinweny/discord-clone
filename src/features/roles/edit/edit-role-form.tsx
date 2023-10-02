@@ -1,4 +1,4 @@
-import { useRoleTabs } from '@hooks';
+import { useRoleTabs } from '../hooks';
 
 import { EditRoleTabs } from './edit-role-tabs';
 import { EditRoleFormSections } from './edit-role-form-sections';

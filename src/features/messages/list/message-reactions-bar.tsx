@@ -1,4 +1,5 @@
-import { useDisplay, useActiveIds } from '@hooks';
+import { useActiveIds } from '@hooks';
+import { useDisplay } from '@components/hooks';
 
 import { AddNewReactionButton } from '@features/reactions/add';
 import { MessageReactionsList } from '@features/reactions/list';
