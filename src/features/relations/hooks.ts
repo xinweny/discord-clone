@@ -31,6 +31,18 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
   useEffect(() => {
     if (relations.isSuccess) {
       setContacts(relations.data);
+
+      const st: UserStatusesData = {};
+
+      const friendContacts = relations.data.filter(
+        relation => relation.status === RelationStatus.FRIENDS
+      );
+
+      for (const friend of friendContacts) {
+        st[friend.user._id] = false;
+      }
+
+      setStatuses(st);
     }
   }, [relations]);
 
@@ -60,18 +72,7 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
     }
   }, [tab]);
 
-  useEffect(() => {
-    if (tab === ContactsTabs.ONLINE && relations.isSuccess) {
-      const friendContacts = relations.data.filter(
-        relation => relation.status === RelationStatus.FRIENDS
-      );
-
-      setContacts(friendContacts.filter(relation => !!statuses[relation.userId]));
-    }
-  }, [statuses]);
-
   const updateStatus = (userId: string, isOnline: boolean) => {
-    console.log('UPDATE STATUS: ', userId, isOnline)
     setStatuses(prevStatuses => ({
       ...prevStatuses,
       [userId]: isOnline,
@@ -80,6 +81,7 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
 
   return {
     contacts,
+    statuses,
     updateStatus,
   };
 };

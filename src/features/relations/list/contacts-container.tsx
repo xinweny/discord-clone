@@ -1,4 +1,4 @@
-import type { ContactsTabs } from '../types';
+import { ContactsTabs } from '../types';
 
 import { useContacts } from '../hooks';
 
@@ -11,11 +11,19 @@ type ContactsContainerProps = {
 };
 
 export function ContactsContainer({ query, activeTab }: ContactsContainerProps) {
-  const { contacts, updateStatus } = useContacts(query, activeTab);
+  const {
+    contacts,
+    statuses,
+    updateStatus,
+  } = useContacts(query, activeTab);
+
+  const numContacts = activeTab === ContactsTabs.ONLINE
+    ? Object.entries(statuses).filter(([, isOnline]) => isOnline).length
+    : contacts.length;
 
   return (
     <div>
-      <p>{`${activeTab.toUpperCase()} - ${contacts.length}`}</p>
+      <p>{`${activeTab.toUpperCase()} - ${numContacts}`}</p>
       {contacts.length > 0
         ? (
           <div>
@@ -25,6 +33,9 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
                 contact={contact}
                 activeTab={activeTab}
                 updateStatus={updateStatus}
+                hidden={activeTab === ContactsTabs.ONLINE
+                ? !statuses[contact.user._id]
+                : false}
               />
             ))}
           </div>

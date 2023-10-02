@@ -68,8 +68,6 @@ const userApi = api.injectEndpoints({
             [StatusEvent.Get]: ({ status, userId: uid }: StatusEventPayload) => {
               if (userId !== uid) return;
 
-              console.log(`get status response #${uid}`, status);
-
               updateCachedData(() => status);
             },
           };

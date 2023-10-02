@@ -18,9 +18,15 @@ export type ContactCardProps = {
   contact: RelationData;
   activeTab: ContactsTabs;
   updateStatus: (userId: string, isOnline: boolean) => void;
+  hidden: boolean;
 };
 
-export function ContactCard({ contact, activeTab, updateStatus }: ContactCardProps) {
+export function ContactCard({
+  contact,
+  activeTab,
+  updateStatus,
+  hidden,
+}: ContactCardProps) {
   const { hover, visible } = useDisplay();
 
   const {
@@ -57,14 +63,20 @@ export function ContactCard({ contact, activeTab, updateStatus }: ContactCardPro
   const props = renderProps(activeTab);
 
   return (
-    <div {...hover}>
+    <div
+      {...hover}
+      hidden={hidden}
+    >
       <div>
         <Avatar
           src={avatarUrl}
           notification={
             (activeTab === ContactsTabs.ONLINE) ||
             (activeTab === ContactsTabs.ALL)
-              ? <UserStatusIconWithWatch userId={userId} updateStatus={updateStatus} />
+              ? <UserStatusIconWithWatch
+                userId={userId}
+                updateStatus={updateStatus}
+              />
               : undefined
           }
         />
