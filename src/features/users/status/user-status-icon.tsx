@@ -20,12 +20,12 @@ export function UserStatusIcon({ userId }: UserStatusIconProps) {
 }
 
 export function UserStatusIconWithWatch({ userId, updateStatus }: UserStatusIconWithWatchProps) {
-  const result = useGetUserStatusQuery(userId, { refetchOnMountOrArgChange: true });
-  const status = result.data;
+  const result = useGetUserStatusQuery(userId);
+  const { data: status, isSuccess } = result;
 
   useEffect(() => {
-    console.log('in effect', status);
-    updateStatus(userId, !!status);
+    console.log('EFFECT', result);
+    if (isSuccess) updateStatus(userId, !!status);
   }, [status]);
 
   return (status

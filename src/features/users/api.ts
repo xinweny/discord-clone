@@ -1,6 +1,6 @@
 import api from '@services/api';
 
-import { emitInitialEvents, setupSocketListeners } from '@utils';
+import { setupSocketListeners } from '@utils';
 
 import {
   type UserData,
@@ -56,15 +56,10 @@ const userApi = api.injectEndpoints({
         },
       }),
       getUserStatus: build.query<boolean, string>({
-        queryFn: (userId) => {
-          emitInitialEvents({
-            events: {
-              [StatusEvent.Get]: userId,
-            },
-            rooms: `user_status#${userId}`,
-          });
-          return { data: false };
-        },
+        query: (userId) => ({
+          url: `users/${userId}/status`,
+          method: 'get',
+        }),
         onCacheEntryAdded: async (
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
@@ -76,17 +71,16 @@ const userApi = api.injectEndpoints({
 
               console.log(`get status response #${uid}`, status);
 
-              updateCachedData(() => {
-                console.log('updateCacheData', status);
-                return status;
-              });
+              updateCachedData(() => status);
             },
           };
 
           setupSocketListeners(
             events,
             { cacheDataLoaded, cacheEntryRemoved },
+            `user_status#${userId}`
           );
+
           console.log('END SETUP');
         },
       }),
