@@ -45,9 +45,11 @@ const getMany = async (
   });
 
   const messages = await Message.find(queryObj)
-    .sort({ _id: 1 })
+    .sort({ _id: -1 })
     .limit(limit)
     .populate(populateOptions);
+
+  messages.reverse();
 
   const lastMessage = messages[0];
 
