@@ -158,6 +158,8 @@ const messageApi = api.injectEndpoints({
                 return draftMsgs;
               }
             ));
+
+            emitEvents({ [MessageEvent.Update]: message });
           } catch (err) {
             console.log(err);
           }
@@ -183,6 +185,8 @@ const messageApi = api.injectEndpoints({
                 return draftMsgs;
               }
             ));
+
+            emitEvents({ [MessageEvent.Delete]: { _id: messageId, roomId } });
           } catch (err) {
             console.log(err);
           }
