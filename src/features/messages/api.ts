@@ -52,7 +52,6 @@ const messageApi = api.injectEndpoints({
             [MessageEvent.Send]: (message: MessageData) => {
               if (message.roomId === roomId) updateCachedData((draft) => {
                 draft.items.push(message);
-                draft.next = message._id;
 
                 return draft;
               });
@@ -120,7 +119,6 @@ const messageApi = api.injectEndpoints({
               { serverId, roomId, next: null },
               (draftMsgs) => {
                 draftMsgs.items.push(message);
-                draftMsgs.next = message._id;
 
                 return draftMsgs;
               }
