@@ -7,6 +7,7 @@ type FileAttachmentPreviewProps = {
   filename: string;
   src: string;
   size: number;
+  mimetype: string;
   downloadable?: boolean;
 };
 
@@ -15,15 +16,21 @@ export function FileAttachmentPreview({
   filename,
   src,
   size,
+  mimetype,
   downloadable = true,
 }: FileAttachmentPreviewProps) {
   const publicId = decodeURIComponent(extractPublicId(src));
 
-  const downloadUrl = buildUrl(publicId, {
+  const filetype = mimetype.split('/')[0];
+
+  const downloadUrl = `${buildUrl(publicId, {
+    cloud: {
+      resourceType: filetype === 'audio' || filetype === 'video' ? 'video' : 'raw',
+    },
     transformations: {
       flags: 'attachment',
     },
-  });
+  })}${ext === 'pdf' ? '' : `.${ext}`}`;
 
   return (
     <div>

@@ -31,6 +31,7 @@ export function AttachmentPreview({
           ext={ext}
           filename={filename}
           size={bytes}
+          mimetype={mimetype}
           downloadable={downloadable}
         />
       }
