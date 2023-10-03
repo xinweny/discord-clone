@@ -6,6 +6,7 @@ import { mutualsRouter } from './mutuals/router';
 import { userController } from './controller';
 import { userServerRouter } from './servers/router';
 import { userDmRouter } from './dms/router';
+import { userStatusRouter } from './status/router';
 
 const userRouter = Router();
 
@@ -16,6 +17,8 @@ userRouter.use('/:userId/mutuals', mutualsRouter);
 userRouter.use('/:userId/servers', userServerRouter);
 
 userRouter.use('/:userId/dms', userDmRouter);
+
+userRouter.use('/:userId/status', userStatusRouter);
 
 userRouter.get('/:userId', userController.getUser);
 

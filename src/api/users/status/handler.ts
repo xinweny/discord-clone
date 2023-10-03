@@ -8,14 +8,18 @@ export const statusHandler = async (socket: Socket) => {
   const userId = socket.user._id;
 
   const isAlreadyOnline = await statusService.getStatus(userId);
-  if (!isAlreadyOnline) io.to(`user_status#${userId}`).emit('user_status:get', { status: true, userId });
+
+  if (!isAlreadyOnline) io
+    .to(`user_status#${userId}`)
+    .emit('user_status:get', { status: true, userId });
 
   await statusService.set(socket);
 
   socket.on('user_status:get', async (uid: string) => {
     const status = await statusService.getStatus(uid);
     
-    io.to(userId).emit('user_status:get', { status, userId: uid });
+    io.to(userId)
+      .emit('user_status:get', { status, userId: uid });
   });
 
   socket.on('disconnect', async () => {
@@ -23,6 +27,8 @@ export const statusHandler = async (socket: Socket) => {
 
     const isStillOnline = await statusService.getStatus(userId);
 
-    if (!isStillOnline) io.to(`user_status#${userId}`).emit('user_status:get', { status: false, userId });
+    if (!isStillOnline) io
+      .to(`user_status#${userId}`)
+      .emit('user_status:get', { status: false, userId });
   });
 };
