@@ -2,20 +2,21 @@ import { defaultSerializeQueryArgs } from '@reduxjs/toolkit/dist/query';
 import _ from 'lodash';
 
 import type { ApiCursorPaginationData } from '@types';
-
-import api from '@services/api';
-
-import { signAndUpload } from '@services/cloudinary';
-
-import { messageBaseUrl } from '@utils';
-
 import {
+  MessageEvent,
   MessageData,
   GetMessagesQuery,
   SendMessageFields,
   EditMessageFields,
   DeleteMessageFields,
 } from './types';
+
+import api from '@services/api';
+
+import { messageBaseUrl } from '@utils';
+
+import { signAndUpload } from '@services/cloudinary';
+import { emitEvents, setupSocketEventListeners } from '@services/websocket';
 
 const messageApi = api.injectEndpoints({
   endpoints(build) {
@@ -43,6 +44,51 @@ const messageApi = api.injectEndpoints({
           currentCache.next = newMessages.next;
         },
         forceRefetch: ({ currentArg, previousArg }) => !(_.isEqual(currentArg, previousArg)),
+        onCacheEntryAdded: async (
+          { roomId },
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [MessageEvent.Send]: (message: MessageData) => {
+              if (message.roomId === roomId) updateCachedData((draft) => {
+                draft.items.push(message);
+                draft.next = message._id;
+
+                return draft;
+              });
+            },
+            [MessageEvent.Update]: (message: MessageData) => {
+              if (message.roomId === roomId) updateCachedData((draft) => {
+                const index = draft.items.findIndex(
+                  msg => msg._id === message._id
+                );
+
+                if (index !== -1) {
+                  draft.items[index] = {
+                    ...draft.items[index],
+                    ...message,
+                  };
+                }
+
+                return draft;
+              });
+            },
+            [MessageEvent.Delete]: (message: MessageData) => {
+              if (message.roomId === roomId) updateCachedData((draft) => {
+                draft.items = draft.items.filter(
+                  msg => msg._id !== message._id
+                );
+
+                return draft;
+              });
+            }
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
       }),
       sendMessage: build.mutation<MessageData, SendMessageFields>({
         query: ({ serverId, roomId, body, emojis, attachments }) => ({
@@ -74,9 +120,13 @@ const messageApi = api.injectEndpoints({
               { serverId, roomId, next: null },
               (draftMsgs) => {
                 draftMsgs.items.push(message);
+                draftMsgs.next = message._id;
+
                 return draftMsgs;
               }
             ));
+
+            emitEvents({ [MessageEvent.Send]: message });
           } catch (err) {
             console.log(err);
           }

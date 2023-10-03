@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 
 import type { DMData } from '../types';
 
-import { Avatar } from '@components/ui/media';
 import { useDmInfo } from '../hooks';
+
+import { Avatar } from '@components/ui/media';
+
+import { UserStatusIcon } from '@features/users/status';
 
 type DMCardProps = {
   dm: DMData;
@@ -11,16 +14,24 @@ type DMCardProps = {
 };
 
 export function DmCard({ dm, userId }: DMCardProps) {
+  const { isGroup } = dm;
+
   const {
     avatarUrl,
     name,
     customStatus,
+    participants,
   } = useDmInfo(dm, userId);
 
   return (
     <Link to={`/channels/@me/${dm._id}`}>
       <div>
-        <Avatar src={avatarUrl} />
+        <Avatar
+          src={avatarUrl}
+          notification={!isGroup && <UserStatusIcon
+            userId={participants[0]._id}
+          />}
+        />
         <div>
           <p>{name}</p>
           <p>{customStatus}</p>

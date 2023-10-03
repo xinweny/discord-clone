@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { RoomTypes } from '@components/ui/displays';
 
+import { useSocketRoomJoin } from '@hooks';
 import { useDmInfo } from '@features/dms/hooks';
 import { useGetUserData } from '@features/auth/hooks';
 
@@ -26,6 +27,8 @@ export function DMPage() {
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);
 
   const { name, avatarUrl, participants } = useDmInfo(dm, user.data!.id);
+
+  useSocketRoomJoin(roomId!);
 
   if (!isSuccess) return null;
 

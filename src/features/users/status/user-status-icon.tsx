@@ -4,26 +4,14 @@ import { useGetUserStatusQuery } from '../api';
 
 type UserStatusIconProps = {
   userId: string;
+  updateStatus?: (userId: string, isOnline: boolean) => void;
 };
 
-type UserStatusIconWithWatchProps = UserStatusIconProps & {
-  updateStatus: (userId: string, isOnline: boolean) => void;
-};
-
-export function UserStatusIcon({ userId }: UserStatusIconProps) {
-  const { data: status } = useGetUserStatusQuery(userId);
-
-  return (status
-    ? <img src="" alt="Online" />
-    : <img src="" alt="Offline" />
-  );
-}
-
-export function UserStatusIconWithWatch({ userId, updateStatus }: UserStatusIconWithWatchProps) {
+export function UserStatusIcon({ userId, updateStatus }: UserStatusIconProps) {
   const { data: status, isSuccess } = useGetUserStatusQuery(userId);
 
   useEffect(() => {
-    if (isSuccess) updateStatus(userId, !!status);
+    if (updateStatus && isSuccess) updateStatus(userId, !!status);
   }, [status]);
 
   return (status

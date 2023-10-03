@@ -1,7 +1,10 @@
+import { useParams } from 'react-router-dom';
+
 import { ContentLayout } from '@components/layouts';
 
 import { RoomTypes } from '@components/ui/displays';
 
+import { useSocketRoomJoin } from '@hooks';
 import { useActiveChannel } from '@features/channels/hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
 
@@ -12,9 +15,13 @@ import { SendMessageForm } from '@features/messages/send';
 import { RoomWelcome } from '@components/ui/displays';
 
 export function ChannelPage() {
+  const { roomId } = useParams();
+
   const channel = useActiveChannel();
 
   const authorized = useServerMemberAuthorize();
+
+  useSocketRoomJoin(roomId!);
 
   if (!channel) return null;
 

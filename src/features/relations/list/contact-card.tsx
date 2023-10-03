@@ -8,7 +8,7 @@ import { useDisplay } from '@components/hooks';
 
 import { Avatar } from '@components/ui/media';
 
-import { UserStatusIconWithWatch } from '@features/users/status';
+import { UserStatusIcon } from '@features/users/status';
 
 import { AcceptFriendRequestButton } from '../edit';
 import { RemoveRelationButton } from '../delete';
@@ -73,7 +73,7 @@ export function ContactCard({
           notification={
             (activeTab === ContactsTabs.ONLINE) ||
             (activeTab === ContactsTabs.ALL)
-              ? <UserStatusIconWithWatch
+              ? <UserStatusIcon
                 userId={userId}
                 updateStatus={updateStatus}
               />

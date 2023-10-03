@@ -66,3 +66,9 @@ export type DeleteMessageFields = {
   roomId: string;
   messageId: string;
 };
+
+export enum MessageEvent {
+  Send = 'message:send',
+  Update = 'message:update',
+  Delete = 'message:delete',
+}
