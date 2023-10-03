@@ -25,12 +25,19 @@ export function FileAttachmentPreview({
 
   const downloadUrl = `${buildUrl(publicId, {
     cloud: {
-      resourceType: filetype === 'audio' || filetype === 'video' ? 'video' : 'raw',
+      resourceType: ext === 'pdf'
+        ? 'image'
+        : (
+          filetype === 'audio' ||
+          filetype === 'video'
+            ? 'video'
+            : 'raw'
+        ),
     },
     transformations: {
       flags: 'attachment',
     },
-  })}${ext === 'pdf' ? '' : `.${ext}`}`;
+  })}.${ext}`;
 
   return (
     <div>
