@@ -1,6 +1,8 @@
 import { Types } from 'mongoose';
 import { RequestHandler } from 'express';
 
+import { io } from '@app/server';
+
 import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
