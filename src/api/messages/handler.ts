@@ -7,4 +7,14 @@ export const messageHandler = async (socket: Socket) => {
     socket.to(message.roomId.toString())
       .emit('message:send', message);
   });
+
+  socket.on('message:update', async (message: IMessage) => {
+    socket.to(message.roomId.toString())
+      .emit('message:update', message);
+  });
+
+  socket.on('message:delete', async (message: IMessage) => {
+    socket.to(message.roomId.toString())
+      .emit('message:delete', message);
+  });
 };

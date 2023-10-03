@@ -32,7 +32,7 @@ const getMessages: RequestHandler[] = [
       const { serverId, roomId } = req.params;
 
       const nextId = req.query.next ? req.query.next.toString() : undefined;
-      const limit = req.query.limit ? +req.query.limit : 10;
+      const limit = req.query.limit ? +req.query.limit : 50;
 
       const { messages, next } = await messageService.getMany(
         {
