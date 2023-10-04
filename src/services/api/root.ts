@@ -24,6 +24,7 @@ const api = createApi({
     'DM',
     'MutualServers',
     'MutualFriends',
+    'WebRTC',
   ],
 });
 

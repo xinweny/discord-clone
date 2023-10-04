@@ -50,7 +50,7 @@ const authApi = api.injectEndpoints({
           method: 'get',
           params: { username },
         }),
-      })
+      }),
     };
   }
 });
