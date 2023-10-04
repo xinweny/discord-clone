@@ -13,7 +13,7 @@ const webRtcApi = api.injectEndpoints({
             roomId,
           },
         }),
-        providesTags: (...[, , { userId }]) => [{ type: 'WebRTC', id: userId }],
+        providesTags: ['WebRTC'],
       }),
     };
   }
@@ -22,5 +22,5 @@ const webRtcApi = api.injectEndpoints({
 export default webRtcApi;
 
 export const {
-  useGetLivekitTokenQuery,
+  useLazyGetLivekitTokenQuery,
 } = webRtcApi;
