@@ -1,11 +1,13 @@
-import { useDisconnectButton } from '@livekit/components-react';
+import { DisconnectButton } from '@livekit/components-react';
 
-export function DisconnectFromRoomButton() {
-  const { buttonProps } = useDisconnectButton({
-    className: 'disconnect-btn',
-  });
+type DisconnectFromRoomButtonProps = {
+  children: React.ReactNode;
+}
 
+export function DisconnectFromRoomButton({
+  children
+}: DisconnectFromRoomButtonProps) {
   return (
-    <button {...buttonProps}></button>
+    <DisconnectButton>{children}</DisconnectButton>
   );
 }

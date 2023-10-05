@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { RoomTypes } from '@components/ui/displays';
 
 import { useSocketRoomJoin } from '@hooks';
-import { useDmInfo } from '@features/dms/hooks';
 import { useGetUserData } from '@features/auth/hooks';
 
 import { setDocumentTitle } from '@utils';
+import { getDmInfo } from '@features/dms/utils';
 
 import { ContentLayout } from '@components/layouts';
 
@@ -26,11 +26,11 @@ export function DMPage() {
   const { user } = useGetUserData();
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);
 
-  const { name, avatarUrl, participants } = useDmInfo(dm, user.data!.id);
-
   useSocketRoomJoin(roomId!);
 
   if (!isSuccess) return null;
+
+  const { name, avatarUrl, participants } = getDmInfo(dm, user.data!.id);
 
   const { isGroup } = dm;
 

@@ -107,6 +107,7 @@ export default serverApi;
 
 export const {
   useGetServerQuery,
+  useLazyGetServerQuery,
   useEditServerMutation,
   useDeleteServerMutation,
   useGetPublicServersQuery,

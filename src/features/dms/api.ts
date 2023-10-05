@@ -39,5 +39,6 @@ export default dmApi;
 export const {
   useGetDmsQuery,
   useGetDmQuery,
+  useLazyGetDmQuery,
   useCreateDmMutation,
 } = dmApi;

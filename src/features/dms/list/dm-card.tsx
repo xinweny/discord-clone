@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import type { DMData } from '../types';
 
-import { useDmInfo } from '../hooks';
+import { getDmInfo } from '../utils';
 
 import { Avatar } from '@components/ui/media';
 
@@ -21,7 +21,7 @@ export function DmCard({ dm, userId }: DMCardProps) {
     name,
     customStatus,
     participants,
-  } = useDmInfo(dm, userId);
+  } = getDmInfo(dm, userId);
 
   return (
     <Link to={`/channels/@me/${dm._id}`}>

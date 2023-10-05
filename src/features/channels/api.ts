@@ -55,6 +55,7 @@ export default channelApi;
 
 export const {
   useGetChannelsQuery,
+  useLazyGetChannelsQuery,
   useCreateChannelMutation,
   useEditChannelMutation,
   useDeleteChannelMutation,

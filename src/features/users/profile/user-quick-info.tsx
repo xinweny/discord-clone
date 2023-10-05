@@ -26,9 +26,7 @@ export function UserQuickInfo() {
           }
         </div>
       </div>
-      <div>
-        <UserSettingsButton />
-      </div>
+      <UserSettingsButton />
     </div>
   );
 }

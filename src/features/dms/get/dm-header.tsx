@@ -1,7 +1,7 @@
 import type { DMData } from '../types';
 
 import { useGetUserData } from '@features/auth/hooks';
-import { useDmInfo } from '../hooks';
+import { getDmInfo } from '../utils';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
 
@@ -14,7 +14,7 @@ type DmHeaderProps = {
 export function DmHeader({ dm }: DmHeaderProps) {
   const { user } = useGetUserData();
 
-  const { avatarUrl, name } = useDmInfo(dm, user.data!.id);
+  const { avatarUrl, name } = getDmInfo(dm, user.data!.id);
 
   return (
     <div>
