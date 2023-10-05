@@ -15,6 +15,7 @@ export type RoomData = {
   url: string;
   name: string;
   serverName: string | undefined;
+  avatarUrl: string | undefined;
 };
 
 export type WebRTCContextData = {
@@ -23,6 +24,7 @@ export type WebRTCContextData = {
   connectToRoom: (roomId: string) => Promise<undefined>;
   notifyDisconnection: () => void;
   isOnCall: boolean;
+  isCurrentRoom: (rId: string) => boolean;
 };
 
 export enum ParticipantsEvent {

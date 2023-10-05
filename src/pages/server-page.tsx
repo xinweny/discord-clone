@@ -7,6 +7,7 @@ import { MainLayout } from '@components/layouts';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useSetChannels } from '@features/channels/hooks';
+import { useSocketRoomJoin } from '@hooks';
 
 import { setDocumentTitle } from '@utils';
 

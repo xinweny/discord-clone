@@ -50,17 +50,19 @@ export const useLivekit = (): WebRTCContextData => {
           url: `/channels/${serverId}/${roomId}`,
           name: channel.name,
           serverName: server.name,
+          avatarUrl: server.avatarUrl,
         });
       } else if (roomId) {
         const dm = await getDm(roomId).unwrap();
         
         if (dm) {
-          const { name } = getDmInfo(dm, user.data!._id);
+          const { name, avatarUrl } = getDmInfo(dm, user.data!._id);
 
           setRoomData({
             url: `/channels/@me/${roomId}`,
             name,
             serverName: undefined,
+            avatarUrl,
           });
         }
       }
@@ -94,11 +96,14 @@ export const useLivekit = (): WebRTCContextData => {
 
   const isOnCall = !!data.token;
 
+  const isCurrentRoom = (rId: string) => data.roomId === rId;
+
   return {
     data,
     roomData,
     connectToRoom,
     notifyDisconnection,
     isOnCall,
+    isCurrentRoom,
   };
 };

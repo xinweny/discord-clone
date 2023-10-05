@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { RoomTypes } from '@components/ui/displays';
+import { WebRTCContext } from '@features/webrtc/context';
 
 import { useSocketRoomJoin } from '@hooks';
 import { useGetUserData } from '@features/auth/hooks';
@@ -10,18 +11,22 @@ import { getDmInfo } from '@features/dms/utils';
 
 import { ContentLayout } from '@components/layouts';
 
-import { RoomWelcome } from '@components/ui/displays';
+import { RoomWelcome, RoomTypes } from '@components/ui/displays';
 import {
   DmHeader,
   DmParticipantsInfo,
 } from '@features/dms/get';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
+import { DmOngoingCall } from '@features/webrtc/get';
 
 import { useGetDmQuery } from '@features/dms/api';
 
+
 export function DMPage() {
   const { roomId } = useParams();
+
+  const livekit = useContext(WebRTCContext);
 
   const { user } = useGetUserData();
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);
@@ -40,11 +45,15 @@ export function DMPage() {
     <div>
       <ContentLayout
         header={<DmHeader dm={dm} />}
-        infoTab={<DmParticipantsInfo
+        infoTab={livekit?.isCurrentRoom(roomId!)
+          ? undefined
+          : <DmParticipantsInfo
           participants={participants}
           isGroup={isGroup}
-        />}
+          />
+        }
       >
+        <DmOngoingCall roomId={dm._id} roomName={name} />
         <MessagesContainer
           welcomeComponent={<RoomWelcome
             type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
