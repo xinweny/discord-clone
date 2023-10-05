@@ -6,6 +6,7 @@ import { useLivekit } from '@features/webrtc/hooks';
 import { WebRTCContext } from '@features/webrtc/context';
 
 import { JoinedServersNavbar } from '@features/servers/joined';
+import { LivekitRoom } from '@features/webrtc/stream';
 
 import { AppLayout } from '@components/layouts';
 
@@ -18,9 +19,11 @@ export function AppPage() {
   return (
     <WebRTCContext.Provider value={livekit}>
       <div>
-        <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
-            <Outlet context={user.data} />
-        </AppLayout>
+        <LivekitRoom>
+          <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
+              <Outlet context={user.data} />
+          </AppLayout>
+        </LivekitRoom>
       </div>
     </WebRTCContext.Provider>
   );

@@ -4,6 +4,8 @@ import { useGetUserData } from '@features/auth/hooks';
 
 import { Avatar } from '@components/ui/media';
 
+import { UserSettingsButton } from '../settings';
+
 export function UserQuickInfo() {
   const [isFocus, setIsFocus] = useState(false);
   const { user } = useGetUserData();
@@ -14,13 +16,18 @@ export function UserQuickInfo() {
       onMouseEnter={() => setIsFocus(true)}
       onMouseLeave={() => setIsFocus(false)}
     >
-      <Avatar src={avatarUrl} />
       <div>
-        <p><strong>{displayName}</strong></p>
-        {isFocus
-          ? <p>{username}</p>
-          : <p>status</p>
-        }
+        <Avatar src={avatarUrl} />
+        <div>
+          <p><strong>{displayName}</strong></p>
+          {isFocus
+            ? <p>{username}</p>
+            : <p>status</p>
+          }
+        </div>
+      </div>
+      <div>
+        <UserSettingsButton />
       </div>
     </div>
   );

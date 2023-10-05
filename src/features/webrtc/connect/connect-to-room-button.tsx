@@ -2,15 +2,15 @@ import { useContext } from 'react';
 
 import { WebRTCContext } from '../context';
 
-type JoinRoomButtonProps = {
+type ConnectToRoomButtonProps = {
   roomId: string;
   children: React.ReactNode;
 }
 
-export function JoinRoomButton({
+export function ConnectToRoomButton({
   roomId,
   children,
-}: JoinRoomButtonProps) {
+}: ConnectToRoomButtonProps) {
   const livekit = useContext(WebRTCContext);
 
   if (!livekit) return null;

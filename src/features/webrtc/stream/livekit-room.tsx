@@ -4,42 +4,46 @@ import { WebRTCContext } from '../context';
 
 import {
   LiveKitRoom,
-  VideoConference,
-  ControlBar,
 } from '@livekit/components-react';
 
 import { env } from '@config';
 
-export function LivekitRoom() {
+type LivekitRoomProps = {
+  children: React.ReactNode;
+};
+
+export function LivekitRoom({ children }: LivekitRoomProps) {
   const livekit = useContext(WebRTCContext);
 
   if (!livekit) return null;
 
   const {
-    lkToken,
+    data: { token },
     isOnCall,
     notifyDisconnection,
   } = livekit;
 
-  if (!isOnCall) return null;
-
   return (
     <LiveKitRoom
-      token={lkToken}
+      token={token}
       serverUrl={env.VITE_WS_URL}
-      connect={!!lkToken}
+      connect={isOnCall}
       onDisconnected={() => { notifyDisconnection(); }}
     >
-      <VideoConference />
-      <ControlBar
-        controls={{
-          microphone: true,
-          camera: true,
-          screenShare: true,
-          leave: true,
-          chat: false,
-        }}
-      />
+      {children}
     </LiveKitRoom>
   );
 }
+
+/* 
+  <VideoConference />
+  <ControlBar
+    controls={{
+      microphone: true,
+      camera: true,
+      screenShare: true,
+      leave: true,
+      chat: false,
+    }}
+  />
+*/

@@ -3,7 +3,7 @@ import type { DMData } from '../types';
 import { useGetUserData } from '@features/auth/hooks';
 import { useDmInfo } from '../hooks';
 
-import { JoinRoomButton } from '@features/webrtc/connect';
+import { ConnectToRoomButton } from '@features/webrtc/connect';
 
 import { Avatar } from '@components/ui/media';
 
@@ -21,9 +21,12 @@ export function DmHeader({ dm }: DmHeaderProps) {
       <Avatar src={avatarUrl} />
       <p>{name}</p>
       <div>
-        <JoinRoomButton roomId={dm._id}>
+        <ConnectToRoomButton roomId={dm._id}>
           <img src="" alt="Start Audio Call" />
-        </JoinRoomButton>
+        </ConnectToRoomButton>
+        <ConnectToRoomButton roomId={dm._id}>
+          <img src="" alt="Start Video Call" />
+        </ConnectToRoomButton>
       </div>
     </div>
   );

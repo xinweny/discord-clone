@@ -3,8 +3,14 @@ export type GetLivekitTokenFields = {
   roomId: string;
 };
 
+export type CallData = {
+  token: string | undefined;
+  roomId: string | undefined;
+  serverId: string | undefined;
+};
+
 export type WebRTCContextData = {
-  lkToken: string | undefined;
+  data: CallData;
   connectToRoom: (roomId: string) => Promise<undefined>;
   notifyDisconnection: () => void;
   isOnCall: boolean;

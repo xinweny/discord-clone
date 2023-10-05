@@ -1,16 +1,24 @@
 import { useState } from 'react';
 
+import type { CallData, WebRTCContextData } from './types';
+
 import { useLazyGetLivekitTokenQuery } from './api';
 import { useGetUserData } from '@features/auth/hooks';
 
-export const useLivekit = () => {
-  const [lkToken, setLkToken] = useState<string | undefined>();
+export const useLivekit = (): WebRTCContextData => {
+  const initialData = {
+    token: undefined,
+    roomId: undefined,
+    serverId: undefined,
+  };
+
+  const [data, setData] = useState<CallData>(initialData);
 
   const { user } = useGetUserData();
 
   const [getLivekitToken] = useLazyGetLivekitTokenQuery();
 
-  const connectToRoom = async (roomId: string) => {
+  const connectToRoom = async (roomId: string, serverId?: string) => {
     if (!user.data?._id) return undefined;
 
     const token = await getLivekitToken({
@@ -18,17 +26,21 @@ export const useLivekit = () => {
       userId: user.data._id,
     }).unwrap();
 
-    setLkToken(token);
+    setData({
+      token,
+      roomId,
+      serverId,
+    });
   };
 
   const notifyDisconnection = () => {
-    setLkToken(undefined);
+    setData(initialData);
   };
 
-  const isOnCall = !!lkToken;
+  const isOnCall = !!data.token;
 
   return {
-    lkToken,
+    data,
     connectToRoom,
     notifyDisconnection,
     isOnCall,

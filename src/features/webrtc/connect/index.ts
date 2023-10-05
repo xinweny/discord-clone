@@ -1,1 +1,1 @@
-export * from './join-room-button';
+export * from './connect-to-room-button';

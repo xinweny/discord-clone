@@ -17,7 +17,6 @@ import {
 } from '@features/dms/get';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
-import { LivekitRoom } from '@features/webrtc/stream';
 
 import { useGetDmQuery } from '@features/dms/api';
 
@@ -46,7 +45,6 @@ export function DMPage() {
           isGroup={isGroup}
         />}
       >
-        <LivekitRoom />
         <MessagesContainer
           welcomeComponent={<RoomWelcome
             type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
