@@ -1,3 +1,5 @@
+import { Participant } from 'livekit-client';
+
 export type GetLivekitTokenFields = {
   userId: string;
   roomId: string;
@@ -21,4 +23,13 @@ export type WebRTCContextData = {
   connectToRoom: (roomId: string) => Promise<undefined>;
   notifyDisconnection: () => void;
   isOnCall: boolean;
+};
+
+export enum ParticipantsEvent {
+  Get = 'participants:get',
+}
+
+export type GetParticipantsEventPayload = {
+  roomId: string;
+  participants: Participant[];
 };

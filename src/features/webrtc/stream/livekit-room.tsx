@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { socket } from '@app';
+
 import { WebRTCContext } from '../context';
 
 import {
@@ -7,6 +9,7 @@ import {
 } from '@livekit/components-react';
 
 import { env } from '@config';
+import { ParticipantsEvent } from '../types';
 
 type LivekitRoomProps = {
   children: React.ReactNode;
@@ -18,7 +21,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
   if (!livekit) return null;
 
   const {
-    data: { token },
+    data: { token, roomId },
     isOnCall,
     notifyDisconnection,
   } = livekit;
@@ -28,7 +31,13 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
       token={token}
       serverUrl={env.VITE_WS_URL}
       connect={isOnCall}
-      onDisconnected={() => { notifyDisconnection(); }}
+      onConnected={() => {
+        socket.emit(ParticipantsEvent.Get, roomId);
+      }}
+      onDisconnected={() => {
+        notifyDisconnection();
+        socket.emit(ParticipantsEvent.Get, roomId);
+      }}
     >
       {children}
     </LiveKitRoom>

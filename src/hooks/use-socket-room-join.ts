@@ -8,4 +8,4 @@ export const useSocketRoomJoin = (roomName: string | string[]) => {
 
     return () => { socket.emit('leave', roomName); };
   }, [roomName]);
-}
+};
