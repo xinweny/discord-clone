@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 
 type FormGroupProps = {
   label: string;
-  htmlFor: string;
+  htmlFor?: string;
   children: React.ReactNode;
   showError?: boolean;
   required?: boolean;
