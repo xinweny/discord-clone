@@ -17,8 +17,20 @@ const generateLivekitToken: RequestHandler[] = [
       res.json({ data: token });
     }
   ),
-]
+];
+
+const getParticipants: RequestHandler[] = [
+  authenticate,
+  tryCatch(
+    async (req, res) => {
+      const participants = await webRtcService.getParticipants(req.params.roomId);
+
+      res.json({ data: participants });
+    }
+  )
+];
 
 export const webRtcController = {
   generateLivekitToken,
+  getParticipants,
 };

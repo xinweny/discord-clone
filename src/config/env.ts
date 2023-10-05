@@ -24,6 +24,7 @@ const ENVIRONMENT_VARIABLES: string[] = [
   'NODE_ENV',
   'LK_API_KEY',
   'LK_API_SECRET',
+  'LK_URL',
 ];
 
 checkEmptyEnv(ENVIRONMENT_VARIABLES);

@@ -2,6 +2,7 @@ import { Socket } from 'socket.io';
 
 import { statusHandler } from './users/status/handler';
 import { messageHandler } from './messages/handler';
+import { webRtcHandler } from './webrtc/handler';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);
@@ -23,4 +24,5 @@ export const connectionHandler = async (socket: Socket) => {
 
   statusHandler(socket);
   messageHandler(socket);
+  webRtcHandler(socket);
 };
