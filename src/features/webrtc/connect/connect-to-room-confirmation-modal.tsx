@@ -11,12 +11,14 @@ import { ConfirmationModal } from '@components/ui/modals';
 
 type ConnectToRoomConfirmationModalProps = {
   newRoomId?: string;
+  newRoomName?: string;
 } & ModalProps;
 
 export function ConnectToRoomConfirmationModal({
   isOpen,
   onClose,
   newRoomId,
+  newRoomName,
 }: ConnectToRoomConfirmationModalProps) {
   const livekit = useContext(WebRTCContext);
 
@@ -24,7 +26,6 @@ export function ConnectToRoomConfirmationModal({
 
   const {
     data: { roomId },
-    roomData: { name },
     connectToRoom,
     notifyDisconnection,
   } = livekit;
@@ -34,7 +35,7 @@ export function ConnectToRoomConfirmationModal({
       isOpen={isOpen}
       onClose={onClose}
       title="You Sure?"
-      message={`Looks like you're in another voice channel. Are you sure you want to switch to ${name}?`}
+      message={`Looks like you're in another voice channel. Are you sure you want to switch to ${newRoomName}?`}
       confirmLabel="Confirm"
       onConfirm={() => {
         notifyDisconnection();

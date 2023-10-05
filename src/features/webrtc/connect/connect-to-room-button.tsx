@@ -7,11 +7,13 @@ import { ConnectToRoomConfirmationModal } from './connect-to-room-confirmation-m
 
 type ConnectToRoomButtonProps = {
   roomId: string;
+  roomName: string;
   children: React.ReactNode;
 }
 
 export function ConnectToRoomButton({
   roomId,
+  roomName,
   children,
 }: ConnectToRoomButtonProps) {
   const livekit = useContext(WebRTCContext);
@@ -24,6 +26,7 @@ export function ConnectToRoomButton({
         modal={ConnectToRoomConfirmationModal}
         modalProps={{
           newRoomId: roomId,
+          newRoomName: roomName,
         }}
       >
         {children}

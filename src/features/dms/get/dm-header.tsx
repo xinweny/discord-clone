@@ -25,7 +25,10 @@ export function DmHeader({ dm }: DmHeaderProps) {
       <Avatar src={avatarUrl} />
       <p>{name}</p>
       <div>
-        <ConnectToRoomButton roomId={dm._id}>
+        <ConnectToRoomButton
+          roomId={dm._id}
+          roomName={name}
+        >
           {participants && participants.length > 0
             ? <img src="" alt="Join Call" />
             : <img src="" alt="Start Call" />
