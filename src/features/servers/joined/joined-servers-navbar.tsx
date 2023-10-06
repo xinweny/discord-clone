@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { WebRTCContext } from '@features/webrtc/context';
 
 import { LinkImage } from '@components/ui/links';
-import { Avatar } from '@components/ui/media';
 
 import { CreateServerButton } from '@features/servers/create';
 import { JoinedServersList } from '.';

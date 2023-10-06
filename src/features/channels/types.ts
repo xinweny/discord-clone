@@ -4,7 +4,10 @@ export type ChannelPermissionsData = {
   message: string[];
 };
 
-export type ChannelTypes = 'text' | 'voice';
+export enum ChannelTypes {
+  TEXT = 'text',
+  VOICE = 'voice',
+}
 
 export type ChannelData = {
   _id: string;

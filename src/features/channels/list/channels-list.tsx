@@ -1,26 +1,28 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetCategoriesQuery } from '@features/categories/api';
-import { useGetChannelsQuery } from '../api';
-
 import { CategoryGroup } from '@features/categories/list';
 
-import { ChannelsListItem } from './channels-list-item';
+import { ChannelListItem } from './channel-list-item';
+
+import { useGetCategoriesQuery } from '@features/categories/api';
+import { useGetServerMembersQuery } from '@features/members/api';
+import { useGetChannelsQuery } from '../api';
 
 export function ChannelsList() {
   const { serverId } = useParams();
 
   const categories = useGetCategoriesQuery(serverId!);
   const channels = useGetChannelsQuery(serverId!);
+  const members = useGetServerMembersQuery(serverId!);
 
-  if (!categories.isSuccess || !channels.isSuccess) return null;
+  if (!categories.isSuccess || !channels.isSuccess || !members.isSuccess) return null;
 
   const uncategorizedChannels = channels.data.filter(channel => !channel.categoryId);
 
   return (
     <div>
       {uncategorizedChannels.map(channel =>
-        <ChannelsListItem
+        <ChannelListItem
           key={channel._id}
           channel={channel}
           serverId={serverId!}
@@ -32,7 +34,7 @@ export function ChannelsList() {
             {channels.data
               .filter(channel => channel.categoryId === category._id)
               .map(channel =>
-                <ChannelsListItem
+                <ChannelListItem
                   key={channel._id}
                   channel={channel}
                   serverId={serverId!}

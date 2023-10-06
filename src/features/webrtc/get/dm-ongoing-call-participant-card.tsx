@@ -4,11 +4,11 @@ import { Avatar } from '@components/ui/media';
 
 import { useGetUserQuery } from '@features/users/api';
 
-type OngoingCallParticipantCardProps = {
+type DmOngoingCallParticipantCardProps = {
   participant: Participant;
 };
 
-export function OngoingCallParticipantCard({ participant }: OngoingCallParticipantCardProps) {
+export function DmOngoingCallParticipantCard({ participant }: DmOngoingCallParticipantCardProps) {
   const { data: user, isSuccess } = useGetUserQuery(participant.identity);
 
   if (!isSuccess) return null;

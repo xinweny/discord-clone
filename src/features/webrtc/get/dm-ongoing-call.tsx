@@ -1,7 +1,7 @@
 import { ConnectToRoomButton } from '../connect';
+import { DmOngoingCallParticipantCard } from './dm-ongoing-call-participant-card';
 
 import { useGetParticipantsQuery } from '../api';
-import { OngoingCallParticipantCard } from './ongoing-call-participant-card';
 
 type DmOngoingCallProps = {
   roomId: string;
@@ -20,7 +20,7 @@ export function DmOngoingCall({
     <div>
       <div>
         {participants.map(participant => 
-          <OngoingCallParticipantCard
+          <DmOngoingCallParticipantCard
             key={participant.identity}
             participant={participant}
           />

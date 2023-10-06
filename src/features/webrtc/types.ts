@@ -21,7 +21,7 @@ export type RoomData = {
 export type WebRTCContextData = {
   data: CallData;
   roomData: RoomData | undefined;
-  connectToRoom: (roomId: string) => Promise<undefined>;
+  connectToRoom: (roomId: string, serverId?: string) => Promise<undefined>;
   notifyDisconnection: () => void;
   isOnCall: boolean;
   isCurrentRoom: (rId: string) => boolean;

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { WebRTCContext } from '../context';
 
@@ -9,18 +10,31 @@ type ConnectToRoomButtonProps = {
   roomId: string;
   roomName: string;
   children: React.ReactNode;
-}
+  serverId?: string;
+};
 
 export function ConnectToRoomButton({
   roomId,
   roomName,
   children,
+  serverId,
 }: ConnectToRoomButtonProps) {
   const livekit = useContext(WebRTCContext);
 
+  const navigate = useNavigate();
+
   if (!livekit) return null;
 
-  return livekit.roomData
+  const {
+    connectToRoom,
+    isCurrentRoom,
+    isOnCall,
+    roomData,
+  } = livekit;
+
+  const isOngoingCurrentRoom = isCurrentRoom(roomId);
+
+  return isOnCall && !isOngoingCurrentRoom
     ? (
       <ModalButton
         modal={ConnectToRoomConfirmationModal}
@@ -35,7 +49,11 @@ export function ConnectToRoomButton({
     : (
       <button
         type="button"
-        onClick={() =>{ livekit.connectToRoom(roomId); }}
+        onClick={() =>{
+          if (isOngoingCurrentRoom && roomData) navigate(roomData.url);
+          
+          connectToRoom(roomId, serverId);
+        }}
       >
         {children}
       </button>
