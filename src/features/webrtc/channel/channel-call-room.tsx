@@ -2,7 +2,8 @@ import type { ChannelData } from '@features/channels/types';
 
 import { useLivekitContext } from '../hooks';
 
-import { useParticipants } from '@livekit/components-react';
+import { ChannelOngoingCall } from './channel-ongoing-call';
+import { ChannelCall } from './channel-call';
 
 type ChannelCallRoomProps = {
   channel: ChannelData;
@@ -16,10 +17,6 @@ export function ChannelCallRoom({ channel }: ChannelCallRoomProps) {
   const { isCurrentRoom } = livekit;
 
   return isCurrentRoom(channel._id)
-    ? (<></>)
-    : (
-      <div>
-
-      </div>
-    );
+    ? (<ChannelCall />)
+    : <ChannelOngoingCall channel={channel} />;
 }

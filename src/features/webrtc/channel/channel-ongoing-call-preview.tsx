@@ -1,5 +1,5 @@
 import { useGetParticipantsQuery } from '../api';
-import { ChannelOngoingCallParticipantCard } from './channel-ongoing-call-participant-card';
+import { ChannelOngoingCallParticipantCardPreview } from './channel-ongoing-call-participant-card-preview';
 
 type ChannelOngoingCallPreviewProps = {
   roomId: string;
@@ -17,7 +17,7 @@ export function ChannelOngoingCallPreview({
   return (
     <div>
       {participants.map(participant =>
-        <ChannelOngoingCallParticipantCard
+        <ChannelOngoingCallParticipantCardPreview
           key={participant.identity}
           participant={participant}
           serverId={serverId}

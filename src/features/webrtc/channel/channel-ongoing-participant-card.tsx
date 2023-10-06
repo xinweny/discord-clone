@@ -2,7 +2,7 @@ import type { Participant } from 'livekit-client';
 
 import { Avatar } from '@components/ui/media';
 
-import { useGetServerMembersQuery } from '@features/members/api';
+import { useServerMemberParticipant } from '../hooks';
 
 type ChannelOngoingCallParticipantCardProps = {
   participant: Participant;
@@ -13,18 +13,19 @@ export function ChannelOngoingCallParticipantCard({
   participant,
   serverId,
 }: ChannelOngoingCallParticipantCardProps) {
-  const { data: members } = useGetServerMembersQuery(serverId);
-
-  if (!members || members.length === 0) return null;
-
-  const member = members.find(member => member.userId === participant.identity);
+  const member = useServerMemberParticipant(participant, serverId);
 
   if (!member) return null;
 
+  const {
+    displayName,
+    user: { avatarUrl },
+  } = member;
+
   return (
     <div>
-      <Avatar src={member.user.avatarUrl} />
-      <p>{member.displayName}</p>
+      <Avatar src={avatarUrl} />
+      <p>{displayName}</p>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { type Participant } from 'livekit-client';
 
 import { LivekitContext } from './context';
 
@@ -17,6 +18,7 @@ import { useLazyGetLivekitTokenQuery } from './api';
 import { useLazyGetServerQuery } from '@features/servers/api';
 import { useLazyGetChannelsQuery } from '@features/channels/api';
 import { useLazyGetDmQuery } from '@features/dms/api';
+import { useGetServerMembersQuery } from '@features/members/api';
 
 export const useLivekit = (): LivekitContextData => {
   const initialData = {
@@ -114,4 +116,14 @@ export const useLivekitContext = () => {
   const livekit = useContext(LivekitContext);
 
   return livekit;
+};
+
+export const useServerMemberParticipant = (participant: Participant, serverId: string) => {
+  const { data: members } = useGetServerMembersQuery(serverId);
+
+  if (!members || members.length === 0) return null;
+
+  const member = members.find(member => member.userId === participant.identity);
+
+  return member || null;
 };
