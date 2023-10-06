@@ -1,11 +1,9 @@
-import { useContext, } from 'react';
-
 import { socket } from '@app';
+
+import { useLivekitContext } from '../hooks';
 
 import type { ModalProps } from '@types';
 import { ParticipantsEvent } from '../types';
-
-import { WebRTCContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -20,7 +18,7 @@ export function ConnectToRoomConfirmationModal({
   newRoomId,
   newRoomName,
 }: ConnectToRoomConfirmationModalProps) {
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   if (!livekit || !livekit.roomData) return null;
 

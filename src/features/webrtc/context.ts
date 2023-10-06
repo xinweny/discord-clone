@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-import { WebRTCContextData } from './types';
+import { LivekitContextData } from './types';
 
-export const WebRTCContext = createContext<WebRTCContextData | null>(null);
+export const LivekitContext = createContext<LivekitContextData | null>(null);

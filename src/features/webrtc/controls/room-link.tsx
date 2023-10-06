@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-
-import { WebRTCContext } from '../context';
-
 import { Link } from 'react-router-dom';
 
+import { useLivekitContext } from '../hooks';
+
 export function RoomLink() {
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   if (!livekit || !livekit.roomData) return null;
 

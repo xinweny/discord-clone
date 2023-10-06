@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { WebRTCContext } from '@features/webrtc/context';
+import { useLivekitContext } from '@features/webrtc/hooks';
 
 import { LinkImage } from '@components/ui/links';
 
@@ -12,7 +10,7 @@ type JoinedServerNavbarProps = {
 }
 
 export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   const { isOnCall, roomData } = { ...livekit };
   const { url, avatarUrl, name } = { ...roomData };

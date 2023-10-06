@@ -5,7 +5,7 @@ import { useDisplay } from '@components/hooks';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
 import { EditChannelButton } from '../edit';
-import { ChannelOngoingCall } from '@features/webrtc/get';
+import { ChannelOngoingCallPreview } from '@features/webrtc/channel';
 
 type VoiceChannelListItemProps = {
   channel: ChannelData;
@@ -29,7 +29,7 @@ export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItem
         </ConnectToRoomButton>
         {visible && <EditChannelButton channel={channel} />}
       </div>
-      <ChannelOngoingCall
+      <ChannelOngoingCallPreview
         serverId={serverId}
         roomId={channel._id}
       />

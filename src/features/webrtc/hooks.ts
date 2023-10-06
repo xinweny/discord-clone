@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { LivekitContext } from './context';
 
 import type {
   RoomData,
   CallData,
-  WebRTCContextData,
+  LivekitContextData,
 } from './types';
 
 import { getDmInfo } from '@features/dms/utils';
@@ -16,7 +18,7 @@ import { useLazyGetServerQuery } from '@features/servers/api';
 import { useLazyGetChannelsQuery } from '@features/channels/api';
 import { useLazyGetDmQuery } from '@features/dms/api';
 
-export const useLivekit = (): WebRTCContextData => {
+export const useLivekit = (): LivekitContextData => {
   const initialData = {
     token: undefined,
     roomId: undefined,
@@ -106,4 +108,10 @@ export const useLivekit = (): WebRTCContextData => {
     isOnCall,
     isCurrentRoom,
   };
+};
+
+export const useLivekitContext = () => {
+  const livekit = useContext(LivekitContext);
+
+  return livekit;
 };

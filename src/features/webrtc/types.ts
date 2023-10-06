@@ -18,7 +18,7 @@ export type RoomData = {
   avatarUrl: string | undefined;
 };
 
-export type WebRTCContextData = {
+export type LivekitContextData = {
   data: CallData;
   roomData: RoomData | undefined;
   connectToRoom: (roomId: string, serverId?: string) => Promise<undefined>;

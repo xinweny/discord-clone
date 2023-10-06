@@ -1,10 +1,8 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { WebRTCContext } from '@features/webrtc/context';
 
 import { useSocketRoomJoin } from '@hooks';
 import { useGetUserData } from '@features/auth/hooks';
+import { useLivekitContext } from '@features/webrtc/hooks';
 
 import { setDocumentTitle } from '@utils';
 import { getDmInfo } from '@features/dms/utils';
@@ -18,7 +16,7 @@ import {
 } from '@features/dms/get';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
-import { DmOngoingCall } from '@features/webrtc/get';
+import { DmOngoingCall } from '@features/webrtc/dm';
 
 import { useGetDmQuery } from '@features/dms/api';
 
@@ -26,7 +24,7 @@ import { useGetDmQuery } from '@features/dms/api';
 export function DMPage() {
   const { roomId } = useParams();
 
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   const { user } = useGetUserData();
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);

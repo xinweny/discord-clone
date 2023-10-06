@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-
 import type { DMData } from '../types';
 
-import { WebRTCContext } from '@features/webrtc/context';
-
 import { useGetUserData } from '@features/auth/hooks';
+import { useLivekitContext } from '@features/webrtc/hooks';
+
 import { getDmInfo } from '../utils';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
@@ -20,7 +18,7 @@ type DmHeaderProps = {
 export function DmHeader({ dm }: DmHeaderProps) {
   const { user } = useGetUserData();
 
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   const { data: participants } = useGetParticipantsQuery(dm._id);
 

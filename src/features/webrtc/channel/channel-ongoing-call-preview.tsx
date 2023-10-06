@@ -1,15 +1,15 @@
 import { useGetParticipantsQuery } from '../api';
 import { ChannelOngoingCallParticipantCard } from './channel-ongoing-call-participant-card';
 
-type ChannelOngoingCallProps = {
+type ChannelOngoingCallPreviewProps = {
   roomId: string;
   serverId: string;
 };
 
-export function ChannelOngoingCall({
+export function ChannelOngoingCallPreview({
   roomId,
   serverId,
-}: ChannelOngoingCallProps) {
+}: ChannelOngoingCallPreviewProps) {
   const { data: participants, isSuccess } = useGetParticipantsQuery(roomId);
 
   if (!isSuccess || participants.length === 0) return null;

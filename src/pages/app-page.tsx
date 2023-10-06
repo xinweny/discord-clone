@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekit } from '@features/webrtc/hooks';
 
-import { WebRTCContext } from '@features/webrtc/context';
+import { LivekitContext } from '@features/webrtc/context';
 
 import { JoinedServersNavbar } from '@features/servers/joined';
 import { LivekitRoom } from '@features/webrtc/stream';
@@ -17,7 +17,7 @@ export function AppPage() {
   if (user.isLoading) return null;
 
   return (
-    <WebRTCContext.Provider value={livekit}>
+    <LivekitContext.Provider value={livekit}>
       <div>
         <LivekitRoom>
           <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
@@ -25,6 +25,6 @@ export function AppPage() {
           </AppLayout>
         </LivekitRoom>
       </div>
-    </WebRTCContext.Provider>
+    </LivekitContext.Provider>
   );
 }

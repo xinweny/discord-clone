@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-
 import { socket } from '@app';
 
-import { WebRTCContext } from '../context';
+import { useLivekitContext } from '../hooks';
 
 import {
   LiveKitRoom,
@@ -16,7 +14,7 @@ type LivekitRoomProps = {
 };
 
 export function LivekitRoom({ children }: LivekitRoomProps) {
-  const livekit = useContext(WebRTCContext);
+  const livekit = useLivekitContext();
 
   if (!livekit) return null;
 
