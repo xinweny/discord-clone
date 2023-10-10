@@ -13,7 +13,10 @@ type ParticipantTileProps = {
 export function ParticipantTile({ serverId }: ParticipantTileProps) {
   const participant = useParticipantContext();
 
-  const { identity: userId } = participant;
+  const {
+    identity: userId,
+    isMicrophoneEnabled,
+  } = participant;
 
   const { data: user } = useGetUserQuery(
     userId,
@@ -38,6 +41,7 @@ export function ParticipantTile({ serverId }: ParticipantTileProps) {
         placeholder={<img src={avatarUrl} />}
       />
       <p>{displayName}</p>
+      {isMicrophoneEnabled || <img src="" alt="Muted" />}
     </div>
   );
 }

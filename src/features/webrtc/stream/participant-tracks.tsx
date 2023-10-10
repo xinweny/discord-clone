@@ -4,6 +4,8 @@ import {
   VideoTrack,
 } from '@livekit/components-react';
 
+import { getParticipantTracks } from '../utils';
+
 type ParticipantTracksProps = {
   placeholder: React.ReactNode;
 };
@@ -13,21 +15,34 @@ export function ParticipantTracks({
 }: ParticipantTracksProps) {
   const participant = useParticipantContext();
 
-  const { tracks } = participant;
-
   const {
     isCameraEnabled,
     isMicrophoneEnabled,
     isScreenShareEnabled,
   } = participant;
 
+  const {
+    cameraTrack,
+    ssTrack,
+    audioTrack,
+    ssAudioTrack,
+  } = getParticipantTracks(participant);
+
   return (
     <div>
       {isCameraEnabled || isScreenShareEnabled
-        ? <></>
+        ? <div>
+          {(isCameraEnabled && cameraTrack) && <VideoTrack
+            trackRef={cameraTrack}
+          />}
+          {(isScreenShareEnabled && ssTrack) && <>
+            <VideoTrack trackRef={ssTrack} />
+            {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
+          </>}
+        </div>
         : placeholder
       }
-      {isMicrophoneEnabled || <img src="" alt="Muted" />}
+      {(isMicrophoneEnabled && audioTrack) && <AudioTrack trackRef={audioTrack} />}
     </div>
   );
 }
