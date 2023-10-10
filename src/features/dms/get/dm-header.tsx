@@ -29,9 +29,9 @@ export function DmHeader({ dm }: DmHeaderProps) {
       <Avatar src={avatarUrl} />
       <p>{name}</p>
       <div>
-        {livekit?.isCurrentRoom(dm._id)
-          ? undefined
-          : <ConnectToRoomButton
+        {livekit?.isCurrentRoom(dm._id) ||
+        <>
+          <ConnectToRoomButton
             roomId={dm._id}
             roomName={name}
           >
@@ -40,6 +40,17 @@ export function DmHeader({ dm }: DmHeaderProps) {
               : <img src="" alt="Start Call" />
             }
           </ConnectToRoomButton>
+          <ConnectToRoomButton
+            roomId={dm._id}
+            roomName={name}
+            withVideo
+          >
+            {participants && participants.length > 0
+              ? <img src="" alt="Join Call with Video" />
+              : <img src="" alt="Start Call with Video" />
+            }
+          </ConnectToRoomButton>
+        </>
         }
       </div>
     </div>

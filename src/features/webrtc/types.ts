@@ -9,6 +9,7 @@ export type CallData = {
   token: string | undefined;
   roomId: string | undefined;
   serverId: string | undefined;
+  initVideo: boolean;
 };
 
 export type RoomData = {
@@ -18,13 +19,19 @@ export type RoomData = {
   avatarUrl: string | undefined;
 };
 
+export type ConnectToRoomOptions = {
+  withVideo: boolean;
+};
+
 export type LivekitContextData = {
   data: CallData;
   roomData: RoomData | undefined;
-  connectToRoom: (roomId: string, serverId?: string) => Promise<undefined>;
+  connectToRoom: (roomId: string, serverId?: string, options?: ConnectToRoomOptions) => Promise<undefined>;
   notifyDisconnection: () => void;
   isOnCall: boolean;
   isCurrentRoom: (rId: string) => boolean;
+  isMuted: boolean;
+  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export enum ParticipantsEvent {

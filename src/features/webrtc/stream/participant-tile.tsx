@@ -1,27 +1,19 @@
 import {
-  AudioTrack,
-  VideoTrack,
-  useTrackRefContext,
+  useParticipantContext,
 } from '@livekit/components-react';
 
 import { useGetUserQuery } from '@features/users/api';
 import { useGetUserServerMemberQuery } from '@features/members/api';
+import { ParticipantTracks } from './participant-tracks';
 
-type CallParticipantTrackProps = {
+type ParticipantTileProps = {
   serverId?: string;
 };
 
-export function CallParticipantTrack({ serverId }: CallParticipantTrackProps) {
-  const track = useTrackRefContext();
+export function ParticipantTile({ serverId }: ParticipantTileProps) {
+  const participant = useParticipantContext();
 
-  const { participant } = track;
-
-  const {
-    identity: userId,
-    isCameraEnabled,
-    isMicrophoneEnabled,
-    isScreenShareEnabled,
-  } = participant;
+  const { identity: userId } = participant;
 
   const { data: user } = useGetUserQuery(
     userId,
@@ -42,14 +34,10 @@ export function CallParticipantTrack({ serverId }: CallParticipantTrackProps) {
 
   return (
     <div>
-      {isCameraEnabled || isScreenShareEnabled
-        ? <VideoTrack
-          trackRef={track}
-        />
-        : <img src={avatarUrl} />
-      }
+      <ParticipantTracks
+        placeholder={<img src={avatarUrl} />}
+      />
       <p>{displayName}</p>
-      {(isMicrophoneEnabled) && <AudioTrack trackRef={track.publication?.audioTrack} />}
     </div>
   );
 }

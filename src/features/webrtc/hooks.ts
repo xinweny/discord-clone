@@ -25,10 +25,12 @@ export const useLivekit = (): LivekitContextData => {
     token: undefined,
     roomId: undefined,
     serverId: undefined,
+    initVideo: false,
   };
 
   const [data, setData] = useState<CallData>(initialData);
   const [roomData, setRoomData] = useState<RoomData | undefined>();
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const { user } = useGetUserData();
 
@@ -79,7 +81,10 @@ export const useLivekit = (): LivekitContextData => {
     }
   }, [data]);
 
-  const connectToRoom = async (roomId: string, serverId?: string) => {
+  const connectToRoom = async (
+    roomId: string,
+    serverId?: string,
+    options = { withVideo: false }) => {
     if (!user.data?._id) return undefined;
 
     const token = await getLivekitToken({
@@ -91,6 +96,7 @@ export const useLivekit = (): LivekitContextData => {
       token,
       roomId,
       serverId,
+      initVideo: options.withVideo,
     });
   };
 
@@ -109,6 +115,8 @@ export const useLivekit = (): LivekitContextData => {
     notifyDisconnection,
     isOnCall,
     isCurrentRoom,
+    isMuted,
+    setIsMuted,
   };
 };
 

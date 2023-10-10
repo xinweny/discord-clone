@@ -6,7 +6,9 @@ export function CallControls() {
     <div>
       <TrackToggle source={Track.Source.Camera} />
       <TrackToggle source={Track.Source.ScreenShare} />
-      <TrackToggle source={Track.Source.Microphone} />
+      <TrackToggle
+        source={Track.Source.Microphone}
+      />
       <DisconnectButton>
         <img src="" alt="Disconnect" />
       </DisconnectButton>

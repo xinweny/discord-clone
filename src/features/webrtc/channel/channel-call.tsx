@@ -1,23 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { useTracks, TrackLoop } from '@livekit/components-react';
-import { Track } from 'livekit-client';
+import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
-import { CallParticipantTrack } from '../stream';
+import { ParticipantTile } from '../stream';
 import { CallControls } from '../controls';
 
 
 export function ChannelCall() {
   const { serverId } = useParams();
 
-  const tracks = useTracks([Track.Source.Camera, Track.Source.ScreenShare]);
+  const participants = useParticipants();
 
   return (
     <div>
-      <TrackLoop tracks={tracks}>
-        <CallParticipantTrack
+      <ParticipantLoop participants={participants}>
+        <ParticipantTile
           serverId={serverId}
         />
-      </TrackLoop>
+      </ParticipantLoop>
       <CallControls />
     </div>
   );

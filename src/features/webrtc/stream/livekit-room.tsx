@@ -16,12 +16,14 @@ type LivekitRoomProps = {
 export function LivekitRoom({ children }: LivekitRoomProps) {
   const livekit = useLivekitContext();
 
+
   if (!livekit) return null;
 
   const {
-    data: { token, roomId },
+    data: { token, roomId, initVideo },
     isOnCall,
     notifyDisconnection,
+    isMuted,
   } = livekit;
 
   return (
@@ -36,6 +38,8 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
         notifyDisconnection();
         socket.emit(ParticipantsEvent.Get, roomId);
       }}
+      audio={!isMuted}
+      video={initVideo}
     >
       {children}
     </LiveKitRoom>
