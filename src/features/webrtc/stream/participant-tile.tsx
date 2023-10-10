@@ -36,12 +36,13 @@ export function ParticipantTile({ serverId }: ParticipantTileProps) {
   const avatarUrl = user?.avatarUrl || member?.user.avatarUrl as string;
 
   return (
-    <div>
+    <>
       <ParticipantTracks
         placeholder={<img src={avatarUrl} />}
+        displayName={displayName}
       />
       <p>{displayName}</p>
       {isMicrophoneEnabled || <img src="" alt="Muted" />}
-    </div>
+    </>
   );
 }

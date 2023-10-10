@@ -4,14 +4,18 @@ import {
   VideoTrack,
 } from '@livekit/components-react';
 
+import { TrackContainer } from '@components/ui/media';
+
 import { getParticipantTracks } from '../utils';
 
 type ParticipantTracksProps = {
   placeholder: React.ReactNode;
+  displayName: string;
 };
 
 export function ParticipantTracks({
-  placeholder
+  placeholder,
+  displayName,
 }: ParticipantTracksProps) {
   const participant = useParticipantContext();
 
@@ -28,21 +32,32 @@ export function ParticipantTracks({
     ssAudioTrack,
   } = getParticipantTracks(participant);
 
+  const trackContainerProps = {
+    label: displayName,
+    isMicrophoneEnabled,
+  };
+
   return (
-    <div>
+    <>
       {isCameraEnabled || isScreenShareEnabled
-        ? <div>
-          {(isCameraEnabled && cameraTrack) && <VideoTrack
-            trackRef={cameraTrack}
-          />}
-          {(isScreenShareEnabled && ssTrack) && <>
-            <VideoTrack trackRef={ssTrack} />
-            {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
-          </>}
-        </div>
+        ? <>
+          {(isScreenShareEnabled && ssTrack) && (
+            <TrackContainer {...trackContainerProps}>
+              <VideoTrack trackRef={ssTrack} />
+              {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
+            </TrackContainer>
+          )}
+          {(isCameraEnabled && cameraTrack) && (
+            <TrackContainer {...trackContainerProps}>
+              <VideoTrack
+                trackRef={cameraTrack}
+              />
+            </TrackContainer>
+          )}
+        </>
         : placeholder
       }
       {(isMicrophoneEnabled && audioTrack) && <AudioTrack trackRef={audioTrack} />}
-    </div>
+    </>
   );
 }
