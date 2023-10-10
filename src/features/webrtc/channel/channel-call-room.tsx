@@ -17,6 +17,6 @@ export function ChannelCallRoom({ channel }: ChannelCallRoomProps) {
   const { isCurrentRoom } = livekit;
 
   return isCurrentRoom(channel._id)
-    ? (<ChannelCall />)
+    ? <ChannelCall />
     : <ChannelOngoingCall channel={channel} />;
 }

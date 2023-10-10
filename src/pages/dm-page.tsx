@@ -16,10 +16,9 @@ import {
 } from '@features/dms/get';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
-import { DmOngoingCall } from '@features/webrtc/dm';
+import { DmOngoingCall, DmCall } from '@features/webrtc/dm';
 
 import { useGetDmQuery } from '@features/dms/api';
-
 
 export function DMPage() {
   const { roomId } = useParams();
@@ -39,11 +38,13 @@ export function DMPage() {
 
   setDocumentTitle([`${isGroup ? '' : '@'}${name}`]);
 
+  const isInCurrentRoomCall = livekit?.isCurrentRoom(roomId!);
+
   return (
     <div>
       <ContentLayout
         header={<DmHeader dm={dm} />}
-        infoTab={livekit?.isCurrentRoom(roomId!)
+        infoTab={isInCurrentRoomCall
           ? undefined
           : <DmParticipantsInfo
           participants={participants}
@@ -51,7 +52,10 @@ export function DMPage() {
           />
         }
       >
-        <DmOngoingCall roomId={dm._id} roomName={name} />
+        {isInCurrentRoomCall
+          ? <DmCall />
+          : <DmOngoingCall roomId={dm._id} roomName={name} />
+        }
         <MessagesContainer
           welcomeComponent={<RoomWelcome
             type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
