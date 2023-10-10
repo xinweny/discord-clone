@@ -5,6 +5,7 @@ import { useGetUserData } from '@features/auth/hooks';
 import { Avatar } from '@components/ui/media';
 
 import { UserSettingsButton } from '../settings';
+import { ToggleMuteButton } from '@features/webrtc/controls';
 
 export function UserQuickInfo() {
   const [isFocus, setIsFocus] = useState(false);
@@ -26,7 +27,10 @@ export function UserQuickInfo() {
           }
         </div>
       </div>
-      <UserSettingsButton />
+      <div>
+        <ToggleMuteButton />
+        <UserSettingsButton />
+      </div>
     </div>
   );
 }
