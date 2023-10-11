@@ -9,7 +9,7 @@ import { serverMemberService } from '@api/serverMembers/service';
 
 const getUserServerMember: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.serverMember,
   tryCatch(
     async (req, res) => {
       const { userId, serverId } = req.params;

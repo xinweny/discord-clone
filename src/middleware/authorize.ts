@@ -69,9 +69,9 @@ const memberSelf: RequestHandler = tryCatch(
   async (req, res, next) => {
     const { memberId } = req.params;
   
-    const member = await serverMemberService.checkMembership(req.user?._id, memberId);
+    const member = await serverMemberService.getById(memberId);
   
-    if (!member) throw new CustomError(403, 'Unauthorized');
+    if (!member || !member._id.equals(req.user?._id)) throw new CustomError(403, 'Unauthorized');
   
     req.member = member;
   
