@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import type { CreateChannelFields } from '../types';
+import { ChannelTypes, type CreateChannelFields } from '../types';
 
 import { createChannelSchema } from '../schema';
 
@@ -29,7 +29,7 @@ export function CreateChannelForm({
   const methods = useForm<CreateChannelFields>({
     defaultValues: {
       name: '',
-      type: 'text',
+      type: ChannelTypes.TEXT,
       categoryId,
       serverId,
       private: false,

@@ -6,6 +6,7 @@ import { DropdownButton } from './dropdown-button';
 import { DropdownMenu } from './dropdown-menu';
 
 type DropdownProps = {
+  dropdownButton?: React.ReactNode;
   button?: React.ReactNode;
   children: React.ReactNode;
 };
@@ -18,13 +19,13 @@ type DropdownContextType = {
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
-export function Dropdown({ button, children }: DropdownProps) {
+export function Dropdown({ button, dropdownButton, children }: DropdownProps) {
   const { isOpen, toggle, close } = useDropdown();
 
   return (
     <DropdownContext.Provider value={{ isOpen, toggle, close }}>
       <div>
-        <DropdownButton>{button}</DropdownButton>
+        {dropdownButton || <DropdownButton>{button}</DropdownButton>}
         <DropdownMenu>
           {children}
         </DropdownMenu>

@@ -8,7 +8,7 @@ import type { EditRoleFields } from '../types';
 
 import { ServerContext } from '@features/servers/context';
 
-import type { RoleTabsHookData } from '@hooks';
+import type { RoleTabsHookData } from '../hooks';
 
 import { FormChangesAlert } from '@components/ui/forms';
 

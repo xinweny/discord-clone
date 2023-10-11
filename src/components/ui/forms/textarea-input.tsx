@@ -17,7 +17,7 @@ export type TextAreaInputProps<
 > = {
   name: Path<TFormValues>;
   id: string;
-  label: string;
+  label?: string;
   hidden?: boolean;
   rules?: RegisterOptions;
   options?: FormTextAreaOptions;

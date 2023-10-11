@@ -7,7 +7,7 @@ import {
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   name: string;
-  label: string;
+  label?: string;
   type?: 'text' | 'email' | 'password' | 'file' | 'color' | 'radio' | 'checkbox';
   className?: string;
   placeholder?: string;
