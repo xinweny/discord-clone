@@ -57,3 +57,8 @@ export type GetStatusEventPayload = {
 export type UserStatusesData = {
   [key: string]: boolean;
 };
+
+export enum ProfileSettingsTabs {
+  USER_PROFILE = 'user_profile',
+  SERVER_PROFILES = 'server_profiles',
+}

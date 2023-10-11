@@ -1,4 +1,4 @@
-import { USER_SETTINGS } from './tabs';
+import { USER_SETTINGS } from '../tabs';
 
 import { SettingsScreen, SettingsScreenWrapperProps } from '@components/ui/presentation';
 

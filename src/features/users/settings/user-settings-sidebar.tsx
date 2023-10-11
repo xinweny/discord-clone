@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { USER_SETTINGS } from './tabs';
+import { USER_SETTINGS } from '../tabs';
 
 import { TabGroupLayout } from '@components/layouts';
 import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentation';
