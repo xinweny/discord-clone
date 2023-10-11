@@ -22,13 +22,12 @@ const messageApi = api.injectEndpoints({
   endpoints(build) {
     return {
       getMessages: build.query<ApiCursorPaginationData<MessageData>, GetMessagesQuery>({
-        query: ({ serverId, roomId, next }) => {
-          return {
-            url: messageBaseUrl({ serverId, roomId }),
-            method: 'get',
-            params: { next },
-          };
-        },
+        query: ({ serverId, roomId, next }) => ({
+          url: messageBaseUrl({ serverId, roomId }),
+          method: 'get',
+          params: { next },
+        }),
+        providesTags: (...[, , { serverId }]) => [{ type: 'Messages', id: serverId }],
         serializeQueryArgs: ({ queryArgs, endpointDefinition, endpointName }) => {
           const { serverId, roomId } = queryArgs;
 

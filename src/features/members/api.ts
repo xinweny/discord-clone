@@ -6,6 +6,7 @@ import type {
   GetUserServerMemberQuery,
   GetServerMemberQuery,
   DeleteServerMemberFields,
+  EditServerMemberFields,
 } from './types';
 
 const memberApi = api.injectEndpoints({
@@ -56,6 +57,22 @@ const memberApi = api.injectEndpoints({
           { type: 'ServerMemberSelf', id: serverId },
         ],
       }),
+      updateServerMember: build.mutation<ServerMemberData, EditServerMemberFields>({
+        query: ({ serverId, memberId, displayName, bio, bannerColor }) => ({
+          url: `/servers/${serverId}/members/${memberId}`,
+          method: 'put',
+          data: {
+            displayName,
+            bio,
+            bannerColor,
+          },
+        }),
+        invalidatesTags: (...[, , { serverId, memberId }]) => [
+          { type: 'ServerMember', id: memberId },
+          { type: 'ServerMemberSelf', id: serverId },
+          { type: 'Messages', id: serverId },
+        ],
+      }),
     };
   }
 });
@@ -68,4 +85,5 @@ export const {
   useGetServerMemberQuery,
   useJoinServerMutation,
   useLeaveServerMutation,
+  useUpdateServerMemberMutation,
 } = memberApi;

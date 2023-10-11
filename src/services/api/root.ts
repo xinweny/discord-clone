@@ -8,6 +8,7 @@ const api = createApi({
   endpoints() { return {}; },
   tagTypes: [
     'JoinedServers',
+    'Messages',
     'User',
     'Server',
     'Channels',

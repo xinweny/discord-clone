@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { userProfileSchema } from './schema';
+import { userProfileSchema } from '../schema';
 
 import { useGetUserData } from '@features/auth/hooks';
 

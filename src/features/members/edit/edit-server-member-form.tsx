@@ -1,6 +1,12 @@
 import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import type { ServerMemberData } from '../types';
+import type {
+  EditServerMemberFields,
+  ServerMemberData
+} from '../types';
+
+import { editServerMemberSchema } from '../schema';
 
 import {
   TextInput,
@@ -10,6 +16,7 @@ import {
   FormChangesAlert,
 } from '@components/ui/forms';
 
+import { useUpdateServerMemberMutation } from '../api';
 
 type EditServerMemberFormProps = {
   member: ServerMemberData;
@@ -19,18 +26,24 @@ export function EditServerMemberForm({
   member,
 }: EditServerMemberFormProps) {
   const defaultValues = {
-    memberId: member?._id,
-    displayName: member?.displayName || '',
-    bio: member?.bio || '',
-    bannerColor: member?.bannerColor || '',
+    memberId: member._id,
+    serverId: member.serverId,
+    displayName: member.displayName,
+    bio: member.bio,
+    bannerColor: member.bannerColor || '#18191c',
   };
 
-  const methods = useForm({
+  const [updateMember] = useUpdateServerMemberMutation();
+
+  const methods = useForm<EditServerMemberFields>({
     defaultValues,
+    mode: 'onChange',
+    resolver: zodResolver(editServerMemberSchema),
   });
   const {
     watch,
     handleSubmit,
+    reset,
   } = methods;
 
   const {
@@ -39,9 +52,15 @@ export function EditServerMemberForm({
     bio,
   } = watch();
 
+  const onSubmit = async (data: EditServerMemberFields) => {
+    await updateMember(data).unwrap();
+
+    reset(data);
+  };
+
   return (
     <FormProvider {...methods}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <FormGroup label="Server Nickname" htmlFor="display-name">
             <TextInput
@@ -63,6 +82,7 @@ export function EditServerMemberForm({
               name="bio"
               value={bio}
               maxLength={190}
+              options={{ showCharCount: true }}
             />
           </FormGroup>
         </div>

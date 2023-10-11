@@ -29,3 +29,11 @@ export type DeleteServerMemberFields = {
   memberId: string;
   serverId: string;
 };
+
+export type EditServerMemberFields = {
+  memberId: string;
+  serverId: string;
+  displayName: string;
+  bio: string;
+  bannerColor: string;
+};
