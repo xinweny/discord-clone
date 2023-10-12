@@ -11,7 +11,7 @@ import { useGetUserData } from '@features/auth/hooks';
 
 import { TextInput } from '@components/ui/forms';
 
-import { useEditDmMutation } from '../api';
+import { useUpdateDmMutation } from '../api';
 
 type EditGroupNameFormProps = {
   dm: DMData
@@ -29,7 +29,7 @@ export function EditGroupNameForm({ dm }: EditGroupNameFormProps) {
     name: name || defaultName,
   };
 
-  const [editDm] = useEditDmMutation();
+  const [editDm] = useUpdateDmMutation();
 
   const methods = useForm({
     defaultValues,
@@ -53,9 +53,7 @@ export function EditGroupNameForm({ dm }: EditGroupNameFormProps) {
           name="name"
           id="name"
           rules={{
-            onBlur: () => {
-              handleSubmit(onSubmit);
-            },
+            onBlur: handleSubmit(onSubmit),
           }}
         />
       </form>

@@ -33,7 +33,7 @@ const dmApi = api.injectEndpoints({
         }),
         invalidatesTags: ['DMs'],
       }),
-      editDm: build.mutation<DMData, EditDMFields>({
+      updateDm: build.mutation<DMData, EditDMFields>({
         query: ({ dmId, name }) => ({
           url: `/dms/${dmId}`,
           method: 'put',
@@ -69,5 +69,5 @@ export const {
   useGetDmQuery,
   useLazyGetDmQuery,
   useCreateDmMutation,
-  useEditDmMutation,
+  useUpdateDmMutation,
 } = dmApi;

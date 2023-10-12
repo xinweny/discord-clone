@@ -9,7 +9,10 @@ import { ConnectToRoomButton } from '@features/webrtc/connect';
 
 import { Avatar } from '@components/ui/media';
 
-import { EditGroupNameForm } from '../edit';
+import {
+  EditGroupAvatarForm,
+  EditGroupNameForm,
+} from '../edit';
 
 import { useGetParticipantsQuery } from '@features/webrtc/api';
 
@@ -26,13 +29,21 @@ export function DmHeader({ dm }: DmHeaderProps) {
 
   const { avatarUrl, name } = getDmInfo(dm, user.data!.id);
 
+  const { isGroup } = dm;
+
   return (
     <div>
-      <Avatar src={avatarUrl} />
-      {dm.isGroup
-        ? <EditGroupNameForm dm={dm} />
-        : <p>{name}</p>
-      }
+      <div>
+      {isGroup
+        ? <>
+          <EditGroupAvatarForm dm={dm} />
+          <EditGroupNameForm dm={dm} />
+        </>
+        : <>
+          <Avatar src={avatarUrl} />
+          <p>{name}</p>
+        </>}
+      </div>
       <div>
         {livekit?.isCurrentRoom(dm._id) ||
         <>
