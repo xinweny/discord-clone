@@ -25,6 +25,8 @@ export function ServerPage() {
 
   const server = useGetServerQuery(serverId!);
 
+  useSocketRoomJoin(serverId!);
+
   const member = useGetUserServerMemberQuery({
     serverId: serverId!,
     userId: user.data!._id,

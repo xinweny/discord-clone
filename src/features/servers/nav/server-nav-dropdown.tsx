@@ -11,12 +11,14 @@ import { CreateChannelButton } from '@features/channels/create';
 import { CreateCategoryButton } from '@features/categories/create';
 import { ServerSettingsButton } from '../settings';
 import { LeaveServerButton } from '@features/members/delete';
+import { InviteFriendsButton } from '@features/members/create';
 
 export function ServerNavDropdown() {
   const createChannelBtnRef = useRef<HTMLButtonElement>(null);
   const createCategoryBtnRef = useRef<HTMLButtonElement>(null);
   const serverSettingsBtnRef = useRef<HTMLButtonElement>(null);
   const leaveServerBtnRef = useRef<HTMLButtonElement>(null);
+  const inviteFriendsBtnRef = useRef<HTMLButtonElement>(null);
 
   const authorized = useServerAuthorize('manageChannels');
   const member = useContext(ServerMemberContext);
@@ -26,6 +28,11 @@ export function ServerNavDropdown() {
   return (
     <div>
       <Dropdown>
+        <DropdownItem
+          clickRef={inviteFriendsBtnRef}
+        >
+          <LabelAndIcon label="Invite People" icon="#" />
+        </DropdownItem>
         <DropdownItem
           clickRef={createChannelBtnRef}
           authorized={authorized}
@@ -50,12 +57,13 @@ export function ServerNavDropdown() {
           <LabelAndIcon label="Leave Server" icon="#" />
         </DropdownItem>
       </Dropdown>
-      <div>
+      <>
         <CreateChannelButton btnRef={createChannelBtnRef} hidden />
         <CreateCategoryButton btnRef={createCategoryBtnRef} hidden />
         <ServerSettingsButton btnRef={serverSettingsBtnRef} hidden />
         <LeaveServerButton btnRef={leaveServerBtnRef} hidden />
-      </div>
+        <InviteFriendsButton btnRef={inviteFriendsBtnRef} hidden />
+      </>
     </div>
   )
 }

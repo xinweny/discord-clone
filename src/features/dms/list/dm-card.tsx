@@ -11,9 +11,14 @@ import { UserStatusIcon } from '@features/users/status';
 type DMCardProps = {
   dm: DMData;
   userId: string;
+  withStatus?: boolean;
 };
 
-export function DmCard({ dm, userId }: DMCardProps) {
+export function DmCard({
+  dm,
+  userId,
+  withStatus = true,
+}: DMCardProps) {
   const { isGroup } = dm;
 
   const {
@@ -28,7 +33,7 @@ export function DmCard({ dm, userId }: DMCardProps) {
       <div>
         <Avatar
           src={avatarUrl}
-          notification={!isGroup && <UserStatusIcon
+          notification={(withStatus && !isGroup) && <UserStatusIcon
             userId={participants[0]._id}
           />}
         />

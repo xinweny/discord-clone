@@ -7,9 +7,9 @@ import { ModalWrapper } from '@components/wrappers';
 
 import { CreateChannelForm } from './create-channel-form';
 
-interface CreateChannelModalProps extends ModalProps {
+type CreateChannelModalProps = {
   category?: CategoryData;
-}
+} & ModalProps;
 
 export function CreateChannelModal({
   isOpen,
