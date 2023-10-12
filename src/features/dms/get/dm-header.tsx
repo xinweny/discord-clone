@@ -9,6 +9,8 @@ import { ConnectToRoomButton } from '@features/webrtc/connect';
 
 import { Avatar } from '@components/ui/media';
 
+import { EditGroupNameForm } from '../edit';
+
 import { useGetParticipantsQuery } from '@features/webrtc/api';
 
 type DmHeaderProps = {
@@ -27,7 +29,10 @@ export function DmHeader({ dm }: DmHeaderProps) {
   return (
     <div>
       <Avatar src={avatarUrl} />
-      <p>{name}</p>
+      {dm.isGroup
+        ? <EditGroupNameForm dm={dm} />
+        : <p>{name}</p>
+      }
       <div>
         {livekit?.isCurrentRoom(dm._id) ||
         <>

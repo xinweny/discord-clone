@@ -12,3 +12,9 @@ export type DMData = {
 export type CreateDMFields = {
   participantIds: { id: string }[];
 };
+
+export type EditDMFields = {
+  dmId: string;
+  name?: string;
+  avatar?: File;
+};

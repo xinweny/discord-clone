@@ -3,7 +3,10 @@ import api from '@services/api';
 import type {
   DMData,
   CreateDMFields,
+  EditDMFields,
 } from './types';
+
+import { signAndUpload } from '@services/cloudinary';
 
 const dmApi = api.injectEndpoints({
   endpoints(build) {
@@ -20,7 +23,7 @@ const dmApi = api.injectEndpoints({
           url: `/dms/${dmId}`,
           method: 'get',
         }),
-        providesTags: ['DM'],
+        providesTags: (...[, , dmId]) => [{ type: 'DM', id: dmId }],
       }),
       createDm: build.mutation<DMData, CreateDMFields>({
         query: ({ participantIds }) => ({
@@ -29,6 +32,31 @@ const dmApi = api.injectEndpoints({
           data: { participantIds },
         }),
         invalidatesTags: ['DMs'],
+      }),
+      editDm: build.mutation<DMData, EditDMFields>({
+        query: ({ dmId, name }) => ({
+          url: `/dms/${dmId}`,
+          method: 'put',
+          data: { name },
+        }),
+        onQueryStarted: async ({ avatar }, { dispatch, queryFulfilled }) => {
+          try {
+            if (avatar) {
+              const { data: dm } = await queryFulfilled;
+
+              const dmId = dm._id;
+  
+              await signAndUpload(avatar, `/avatars/groups/${dmId}`, dmId);
+    
+              dispatch(api.util.invalidateTags([
+                'DMs',
+                { type: 'DM', id: dmId },
+              ]));
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
     };
   }
@@ -41,4 +69,5 @@ export const {
   useGetDmQuery,
   useLazyGetDmQuery,
   useCreateDmMutation,
+  useEditDmMutation,
 } = dmApi;

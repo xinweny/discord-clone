@@ -11,8 +11,8 @@ export const getDmInfo = (dm: DMData, userId: string) => {
   const participants = dm.participants.filter(participant => participant._id !== userId);
 
   const avatarUrl = isGroup
-  ? imageUrl || "#"
-  : participants[0].avatarUrl || "#";
+    ? imageUrl || "#"
+    : participants[0].avatarUrl || "#";
 
   const name = isGroup
     ? dm.name || participants.map(participant => participant.displayName).join(', ')
