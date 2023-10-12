@@ -34,15 +34,16 @@ export function DmHeader({ dm }: DmHeaderProps) {
   return (
     <div>
       <div>
-      {isGroup
-        ? <>
-          <EditGroupAvatarForm dm={dm} />
-          <EditGroupNameForm dm={dm} />
-        </>
-        : <>
-          <Avatar src={avatarUrl} />
-          <p>{name}</p>
-        </>}
+        {isGroup
+          ? <>
+            <EditGroupAvatarForm dm={dm} />
+            <EditGroupNameForm dm={dm} />
+          </>
+          : <>
+            <Avatar src={avatarUrl} />
+            <p>{name}</p>
+          </>
+        }
       </div>
       <div>
         {livekit?.isCurrentRoom(dm._id) ||
