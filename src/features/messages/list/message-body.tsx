@@ -13,7 +13,7 @@ export function MessageBody({
   message,
   hidden = false,
 }: MessageBodyProps) {
-  const { body, updatedAt, createdAt } = message;
+  const { updatedAt, createdAt } = message;
 
   if (hidden) return null;
 
