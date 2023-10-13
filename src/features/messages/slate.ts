@@ -4,6 +4,7 @@ import {
   Node,
   Transforms,
   Editor,
+  Range,
   type Descendant,
 } from 'slate';
 import { ReactEditor } from 'slate-react';
@@ -31,14 +32,6 @@ type DeserializeJSXOutput = {
   emoji: MessageEmojiData;
 });
 
-export const findUrlsInText = (text: string): [string, number][] => {
-  const matches = findUrls(text);
-
-  return matches
-    ? matches.map((m) => [m.trim(), text.indexOf(m.trim())])
-    : [];
-};
-
 export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) => {
   const point = { path: [0, 0], offset: 0 };
 
@@ -61,38 +54,69 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
   editor.history = { redos: [], undos: [] };
 };
 
+export const findUrlsInNode = (node: Node): [string, number][] => {
+  let numPrevChars = 0;
+  const urlMatches = [] as [string, number][];
+
+  const { children } = node;
+
+  if (!children) return urlMatches;
+
+  console.log(children);
+
+  for (const child of children) {
+    console.log(numPrevChars);
+    if ('text' in child) {
+      const { text } = child;
+
+      const matches = findUrls(text);
+
+      if (matches) {
+        matches.forEach((m) => {
+          const trimmed = m.trim();
+  
+          urlMatches.push([
+            trimmed,
+            numPrevChars + text.indexOf(trimmed),
+          ]);
+        });
+      }
+
+      numPrevChars += text.length;
+    }
+  }
+
+  return urlMatches;
+};
+
 export const decorator = (entry: NodeEntry): CustomRange[] => {
   const [node, path] = entry;
 
-  const nodeText = Node.string(node);
+  const nodeText = Node.string(node); 
 
   if (!nodeText) return [];
 
-  const urls = findUrlsInText(nodeText);
+  const urls = findUrlsInNode(node);
 
-  console.log(nodeText, urls.map(([url, index]) => ({
-    anchor: {
-      path,
-      offset: index,
-    },
-    focus: {
-      path,
-      offset: index + url.length,
-    },
-    decoration: 'link',
-  })));
+  const range = urls.map(([url, index]) => {
+    const r = {
+      anchor: {
+        path,
+        offset: index,
+      },
+      focus: {
+        path,
+        offset: index + url.length,
+      },
+    };
 
-  return urls.map(([url, index]) => ({
-    anchor: {
-      path,
-      offset: index,
-    },
-    focus: {
-      path,
-      offset: index + url.length,
-    },
-    decoration: 'link',
-  }));
+    return {
+      ...r,
+      decoration: 'link',
+    };
+  }) as CustomRange[];
+
+  return range;
 };
 
 export const insertEmoji = (editor: CustomEditor, emoji: any) => {

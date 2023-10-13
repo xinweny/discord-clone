@@ -2,18 +2,17 @@ import type { RenderLeafProps } from 'slate-react';
 
 import type { CustomText } from '@config';
 
-import { findUrls } from '@utils';
-
 export function Leaf ({
   attributes,
   children,
   leaf,
 }: RenderLeafProps) {
-  const { decoration, text } = leaf as CustomText;
+  const { decoration } = leaf as CustomText;
+  console.log(attributes);
 
   return (
     <span {...attributes}>
-      {decoration === 'link' && !!findUrls(text)
+      {decoration === 'link'
         ? <a
           style={{ cursor: 'pointer' }}
           href={leaf.text}
