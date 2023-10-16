@@ -60,7 +60,6 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
 };
 
 export const findUrlsInNode = (node: Node): UrlMatchData[] => {
-  let path = 0;
   const urlMatches = [] as UrlMatchData[];
 
   const { children } = node;
@@ -69,7 +68,7 @@ export const findUrlsInNode = (node: Node): UrlMatchData[] => {
 
   if (!children) return urlMatches;
 
-  for (const child of children) {
+  for (const [path, child] of children.entries()) {
     if ('text' in child) {
       const { text } = child;
 
@@ -85,8 +84,6 @@ export const findUrlsInNode = (node: Node): UrlMatchData[] => {
         });
       }
     }
-
-    path += 1;
   }
 
   return urlMatches;
