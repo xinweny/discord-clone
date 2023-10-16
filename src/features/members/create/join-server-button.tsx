@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { handleServerError } from '@utils';
 
+import { useGetUserData } from '@features/auth/hooks';
+
+import { useGetUserServerMemberQuery } from '../api';
 import { useJoinServerMutation } from '../api';
 
 type JoinServerButtonProps = {
@@ -13,7 +16,14 @@ export function JoinServerButton({
   children,
   serverId,
 }: JoinServerButtonProps) {
+  const { user } = useGetUserData();
+
   const [joinServer] = useJoinServerMutation();
+
+  const { data: member } = useGetUserServerMemberQuery({
+    userId: user.data!.id,
+    serverId,
+  });
 
   const navigate = useNavigate();
 
@@ -32,7 +42,7 @@ export function JoinServerButton({
 
   return (
     <button onClick={handleClick}>
-      {children}
+      {member ? 'Joined' : children}
     </button>
   );
 }

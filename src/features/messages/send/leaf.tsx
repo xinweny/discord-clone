@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import type { CustomText } from '@config';
 
+import { getUrlId } from '@features/server-invites/utils';
+
 import { useLazyGetServerInviteQuery } from '@features/server-invites/api';
 
 export function Leaf ({
@@ -38,7 +40,7 @@ export function Leaf ({
             onClick={async (e) => {
               e.preventDefault();
 
-              const urlId = text.split('/').slice(-1)[0];
+              const urlId = getUrlId(text);
 
               const serverInvite = await getServerInvite({ urlId }).unwrap();
 

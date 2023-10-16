@@ -19,6 +19,7 @@ import { MessageBody } from './message-body';
 import { MessageHeader } from './message-header';
 import { MessageReactionsBar } from './message-reactions-bar';
 import { TenorGifPreview } from './tenor-gif-preview';
+import { ServerInviteCards } from '@features/server-invites/list';
 
 type MessageCardProps = {
   isDm?: boolean;
@@ -62,7 +63,10 @@ export function MessageCard({
               />
             : <MessageBody message={message} hidden={isTenorGif && !tenorError} />
           }
-          {(isTenorGif && !tenorError) && <TenorGifPreview url={url} setError={setTenorError} />}
+          {(isTenorGif && !tenorError) && (
+            <TenorGifPreview url={url!} setError={setTenorError} />
+          )}
+          <ServerInviteCards message={message} isDm={isDm} />
           {message.attachments.length > 0 && (
             <div>
               {message.attachments.map(

@@ -14,7 +14,7 @@ const serverInviteApi = api.injectEndpoints({
           params: { serverId, urlId },
           method: 'get',
         }),
-        providesTags: (...[, , { serverId }]) => [{ type: 'ServerInvite', id: serverId }],
+        providesTags: (...[, , { serverId, urlId }]) => [{ type: 'ServerInvite', id: urlId || serverId }],
       }),
     };
   }

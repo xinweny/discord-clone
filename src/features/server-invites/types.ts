@@ -7,4 +7,8 @@ export type ServerInviteData = {
 export type GetServerInviteQuery = {
   serverId?: string;
   urlId?: string;
-}
+};
+
+export type GetServerInvitesQuery = {
+  urlIds: string[];
+};

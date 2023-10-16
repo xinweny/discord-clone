@@ -24,15 +24,15 @@ export const useMessageAuthorize = () => {
 export const useTenorGif = (message: MessageData) => {  
   const [tenorError, setTenorError] = useState<boolean>(false);
 
-  const url = message.body;
+  const { body } = message;
 
-  const isTenorGif = !!url
+  const isTenorGif = !!body
     .match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\.gif$/);
 
   return {
     tenorError,
     setTenorError,
-    url,
+    url: isTenorGif ? body : null,
     isTenorGif,
   };
 };

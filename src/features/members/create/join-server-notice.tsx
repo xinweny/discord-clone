@@ -4,7 +4,6 @@ import type { ServerData } from '@features/servers/types';
 
 import { JoinServerButton } from '.';
 
-
 type JoinServerNoticeProps = {
   server: ServerData;
 };
@@ -19,7 +18,11 @@ export function JoinServerNotice({ server }: JoinServerNoticeProps) {
       <button onClick={() => { navigate('/servers'); }}>Back</button>
       <div>
         <p>You are currently in preview mode. Join this server to start chatting!</p>
-        <JoinServerButton serverId={_id}>{`Join ${name}`}</JoinServerButton>
+        <JoinServerButton
+          serverId={_id}
+        >
+            {`Join ${name}`}
+        </JoinServerButton>
       </div>
     </div>
   );
