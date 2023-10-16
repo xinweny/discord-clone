@@ -29,7 +29,7 @@ export function JoinServerButton({
 
   const handleClick = async () => {
     try {
-      await joinServer(serverId).unwrap();
+      if (!member) await joinServer(serverId).unwrap();
 
       navigate(`/channels/${serverId}`);
     } catch (error) {
