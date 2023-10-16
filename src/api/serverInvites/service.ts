@@ -17,7 +17,15 @@ const getOne = async (fields: {
   });
 
   return invite;
-}
+};
+
+const getMany = async (urlIds: string[]) => {
+  const invites = await ServerInvite.find({
+    url: { $in: urlIds.map(urlId =>  `${env.BASE_SHORT_URL}/${urlId}`) },
+  });
+
+  return invites;
+};
 
 const create = async (serverId: Types.ObjectId | string) => {
   const urlId = nanoid(8);
@@ -52,6 +60,7 @@ const remove = async (serverId: Types.ObjectId | string) => {
 
 export const serverInviteService = {
   getOne,
+  getMany,
   create,
   updateUrlId,
   remove,
