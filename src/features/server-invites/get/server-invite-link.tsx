@@ -9,7 +9,7 @@ type ServerInviteLinkProps = {
 export function ServerInviteLink({ serverId }: ServerInviteLinkProps) {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
-  const { data: serverInvite, isSuccess } = useGetServerInviteQuery(serverId);
+  const { data: serverInvite, isSuccess } = useGetServerInviteQuery({ serverId });
 
   if (!isSuccess) return null;
 

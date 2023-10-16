@@ -8,7 +8,6 @@ import {
 } from 'slate';
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
-import { v4 as uuid } from 'uuid';
 
 import type { MessageEmojiData } from './types';
 import type { MessageData } from './types';
@@ -22,14 +21,7 @@ import type {
 } from '@config';
 
 import { findUrls } from '@utils';
-
-type DeserializeJSXOutput = {
-  id: string;
-} & ({
-  text: string;
-} | {
-  emoji: MessageEmojiData;
-});
+import { isServerInviteLink } from '@features/server-invites/utils';
 
 type UrlMatchData = {
   url: string;
@@ -110,7 +102,7 @@ export const decorator = (entry: NodeEntry): CustomRange[] => {
 
     return {
       ...r,
-      decoration: 'link',
+      decoration: isServerInviteLink(url) ? 'server_invite_link' : 'link',
     };
   }) as CustomRange[];
 
@@ -194,35 +186,6 @@ export const serialize = (nodes: Descendant[]) => {
   };
 };
 
-export const jsxDeserialize = (message: MessageData): DeserializeJSXOutput[] => {
-  const { body, emojis } = message;
-
-  const nodes = body
-    .split(/(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu)
-    .filter(string => !!string)
-    .map((str: string) => {
-      if (str.match(/<:.+?:[a-z0-9]+>/gu)) {
-        const emoji = emojis.find(emoji =>
-          emoji.id === str.split(':').slice(-1)[0].replace('>', '')
-        ) as MessageEmojiData;
-
-        return { id: uuid(), emoji };
-      }
-
-      if (str.match(/\p{Emoji_Presentation}/gu)) {
-        const emoji = emojis.find(emoji => emoji.id === str) as MessageEmojiData;
-
-        return { id: uuid(), emoji };
-      }
-
-      // TODO: Parse links correctly + parse server-invite link
-
-      return { id: uuid(), text: str };
-    });
-
-  return nodes;
-};
-
 export const slateDeserialize = (message: MessageData): Descendant[] => {
   const { body, emojis } = message;
 
@@ -277,4 +240,4 @@ export const slateDeserialize = (message: MessageData): Descendant[] => {
   }
 
   return nodes;
-}
+};

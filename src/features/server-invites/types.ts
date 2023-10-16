@@ -3,3 +3,8 @@ export type ServerInviteData = {
   serverId: string;
   url: string;
 };
+
+export type GetServerInviteQuery = {
+  serverId?: string;
+  urlId?: string;
+}
