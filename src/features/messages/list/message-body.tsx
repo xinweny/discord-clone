@@ -1,8 +1,12 @@
-import { MessageData } from '../types';
+import { Slate, Editable } from 'slate-react';
 
-import { jsxDeserialize } from '../slate';
+import type { MessageData } from '../types';
 
-import { Emoji } from '@components/ui/media';
+import { useEditor } from '../hooks';
+
+import { slateDeserialize, decorator } from '../slate';
+
+import { Leaf, Element } from '../send';
 
 type MessageBodyProps = {
   message: MessageData;
@@ -15,23 +19,23 @@ export function MessageBody({
 }: MessageBodyProps) {
   const { updatedAt, createdAt } = message;
 
-  if (hidden) return null;
+  const { editor } = useEditor();
 
-  const nodes = jsxDeserialize(message);
+  if (hidden) return null;
 
   return (
     <div>
-      <div>{nodes.map(node => <span
-        key={node.id}
-        style={{ whiteSpace: 'pre-line' }}
+      <Slate
+        editor={editor}
+        initialValue={slateDeserialize(message)}
       >
-        {('emoji' in node)
-          ? <Emoji
-            custom={node.emoji.custom}
-            emoji={node.emoji.custom ? node.emoji.url : node.emoji.id}
-          />
-          : node.text}
-      </span>)}</div>
+        <Editable
+          renderLeaf={Leaf}
+          renderElement={Element}
+          decorate={decorator}
+          readOnly
+        />
+      </Slate>
       {(updatedAt !== createdAt) && (
         <p><em>(edited)</em></p>
       )}

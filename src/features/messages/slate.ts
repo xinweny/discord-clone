@@ -64,8 +64,6 @@ export const findUrlsInNode = (node: Node): UrlMatchData[] => {
 
   const { children } = node;
 
-  console.log(children);
-
   if (!children) return urlMatches;
 
   for (const [path, child] of children.entries()) {
