@@ -4,7 +4,6 @@ import {
   Node,
   Transforms,
   Editor,
-  Range,
   type Descendant,
 } from 'slate';
 import { ReactEditor } from 'slate-react';
@@ -32,6 +31,12 @@ type DeserializeJSXOutput = {
   emoji: MessageEmojiData;
 });
 
+type UrlMatchData = {
+  url: string;
+  index: number;
+  path: number;
+};
+
 export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) => {
   const point = { path: [0, 0], offset: 0 };
 
@@ -54,36 +59,34 @@ export const resetEditor = (editor: BaseEditor & ReactEditor & HistoryEditor) =>
   editor.history = { redos: [], undos: [] };
 };
 
-export const findUrlsInNode = (node: Node): [string, number][] => {
-  let numPrevChars = 0;
-  const urlMatches = [] as [string, number][];
+export const findUrlsInNode = (node: Node): UrlMatchData[] => {
+  let path = 0;
+  const urlMatches = [] as UrlMatchData[];
 
   const { children } = node;
 
-  if (!children) return urlMatches;
-
   console.log(children);
 
+  if (!children) return urlMatches;
+
   for (const child of children) {
-    console.log(numPrevChars);
     if ('text' in child) {
       const { text } = child;
 
       const matches = findUrls(text);
 
       if (matches) {
-        matches.forEach((m) => {
-          const trimmed = m.trim();
-  
-          urlMatches.push([
-            trimmed,
-            numPrevChars + text.indexOf(trimmed),
-          ]);
+        matches.forEach((m) => {  
+          urlMatches.push({
+            url: m,
+            index: text.indexOf(m),
+            path,
+          });
         });
       }
-
-      numPrevChars += text.length;
     }
+
+    path += 1;
   }
 
   return urlMatches;
@@ -98,14 +101,14 @@ export const decorator = (entry: NodeEntry): CustomRange[] => {
 
   const urls = findUrlsInNode(node);
 
-  const range = urls.map(([url, index]) => {
+  const range = urls.map(({ url, index, path: p }) => {
     const r = {
       anchor: {
-        path,
+        path: [...path, p],
         offset: index,
       },
       focus: {
-        path,
+        path: [...path, p],
         offset: index + url.length,
       },
     };
