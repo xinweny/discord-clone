@@ -11,8 +11,4 @@ const serverInviteSchema = new mongoose.Schema({
   serverId: { type: Types.ObjectId, ref: 'Server', required: true, unique: true },
 });
 
-serverInviteSchema.virtual('urlId').get(function() {
-  return this.url.split('/').slice(-1)[0];
-});
-
 export const ServerInvite = mongoose.model<IServerInvite>('Url', serverInviteSchema, 'server_invites');

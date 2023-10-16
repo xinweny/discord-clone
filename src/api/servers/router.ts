@@ -8,7 +8,6 @@ import { roleRouter } from './roles/router';
 import { customEmojiRouter } from './customEmojis/router';
 import { serverMemberRouter } from '../serverMembers/router';
 import { serverOwnerRouter } from './serverOwner/router';
-import { serverInviteRouter } from '@api/serverInvites/router';
 
 const serverRouter = Router();
 
@@ -27,8 +26,6 @@ serverRouter.use('/:serverId/roles', roleRouter);
 serverRouter.use('/:serverId/emojis', customEmojiRouter);
 
 serverRouter.use('/:serverId/owner', serverOwnerRouter);
-
-serverRouter.use('/:serverId/invite', serverInviteRouter);
 
 serverRouter.get('/:serverId', serverController.getServer);
 

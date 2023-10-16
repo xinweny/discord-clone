@@ -3,21 +3,18 @@ import { nanoid } from 'nanoid';
 
 import env from '@config/env';
 
-import { keepKeys } from '@helpers/keepKeys';
-import { CustomError } from '@helpers/CustomError';
-
 import { ServerInvite } from './model';
 
 const getOne = async (fields: {
-  inviteId?: string,
-  url?: string,
+  urlId?: string,
   serverId?: string,
 }) => {
-  const query = keepKeys(fields, ['inviteId', 'url', 'serverId']);
+  const { serverId, urlId } = fields;
 
-  if (Object.keys(query).length === 0) throw new CustomError(400, 'Invalid query.');
-
-  const invite = await ServerInvite.findOne(query);
+  const invite = await ServerInvite.findOne({
+    ...(serverId && { serverId }),
+    ...(urlId && { url: `${env.BASE_SHORT_URL}/${urlId}` }),
+  });
 
   return invite;
 }

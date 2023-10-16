@@ -9,11 +9,14 @@ import { serverInviteService } from './service';
 
 const getInvite: RequestHandler[] = [
   authenticate,
-  authorize.server('manageServer'),
   tryCatch(
     async (req, res) => {
-      const { serverId } = req.params;
-      const invite = await serverInviteService.getOne({ serverId })
+      const { serverId, urlId } = req.query;
+      
+      const invite = await serverInviteService.getOne({
+        urlId: urlId as string | undefined,
+        serverId: serverId as string | undefined,
+      });
 
       res.json({ data: invite });
     }

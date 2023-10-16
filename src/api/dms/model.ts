@@ -15,7 +15,7 @@ export interface IDM extends Document {
 const dmSchema = new Schema({
   ownerId: { type: Types.ObjectId, ref: 'User' },
   participantIds: { type: [Types.ObjectId], ref: 'User', required: true },
-  name: { type: String, length: { min: 2, max: 32 }, trim: true },
+  name: { type: String, length: { min: 1, max: 100 }, trim: true },
   imageUrl: { type: String },
   isGroup: { type: Boolean, required: true },
 });
