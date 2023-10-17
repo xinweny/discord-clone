@@ -23,5 +23,6 @@ export const ReadStatus = mongoose.model<IReadStatus>('ReadStatus', readStatusSc
 
 if (env.NODE_ENV === 'development') {
   readStatusSchema.index({ userId: 1 });
+  readStatusSchema.index({ serverId: 1 });
   readStatusSchema.index({ roomId: 1 });
 }
