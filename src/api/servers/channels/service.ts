@@ -5,6 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { Message } from '@api/messages/model';
 import { Server, IServer } from '@api/servers/model';
+import { ReadStatus } from '@api/readStatus/model';
 import type { IServerMember } from '@api/serverMembers/model';
 import type { IChannelPermissions } from './schema';
 
@@ -85,6 +86,7 @@ const remove = async (serverId: Types.ObjectId | string, channelId: Types.Object
     server.save(),
     Message.deleteMany({ roomId: channelId }),
     cloudinaryService.deleteByFolder(`attachments/${serverId}/${channel?._id.toString()}`),
+    ReadStatus.deleteMany({ roomId: channelId }),
   ]);
 
   return channel;

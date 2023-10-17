@@ -8,6 +8,7 @@ import { cloudinaryService } from '@services/cloudinary';
 import { Message } from '@api/messages/model';
 import { User } from '@api/users/model';
 import { DM } from '@api/dms/model';
+import { ReadStatus } from '@api/readStatus/model';
 
 const getById = async (dmId: Types.ObjectId | string) => {
   const dm = await DM.findById(dmId)
@@ -88,6 +89,7 @@ const remove = async (dmId: Types.ObjectId | string) => {
   const [dm, ] = await Promise.all([
     DM.findByIdAndDelete(dmId),
     Message.deleteMany({ roomId: dmId }),
+    ReadStatus.deleteMany({ roomId: dmId }),
   ]);
 
   return dm;

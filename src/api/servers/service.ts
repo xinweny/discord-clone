@@ -5,6 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Message } from '@api/messages/model';
+import { ReadStatus } from '@api/readStatus/model';
 import { ServerMember } from '../serverMembers/model';
 import { Server } from './model';
 
@@ -192,6 +193,7 @@ const remove = async (id: Types.ObjectId | string) => {
     cloudinaryService.deleteByFolder(`attachments/${id.toString()}`),
     (server.avatarUrl) ? cloudinaryService.deleteByUrl(server.avatarUrl) : Promise.resolve(),
     (server.bannerUrl) ? cloudinaryService.deleteByUrl(server.bannerUrl) : Promise.resolve(),
+    ReadStatus.deleteMany({ serverId: id }),
   ]);
 
   return server;

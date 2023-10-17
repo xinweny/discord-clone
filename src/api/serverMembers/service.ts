@@ -5,6 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
+import { ReadStatus } from '@api/readStatus/model';
 import { ServerMember } from './model';
 
 const getById = async (id: Types.ObjectId | string) => {
@@ -94,6 +95,7 @@ const remove = async (id: Types.ObjectId | string) => {
     Server.findByIdAndUpdate(serverId, {
       $inc: { memberCount: -1 },
     }),
+    ReadStatus.deleteMany({ userId, serverId }),
   ]);
 
   return serverMember;

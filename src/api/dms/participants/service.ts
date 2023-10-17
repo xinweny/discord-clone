@@ -4,6 +4,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { DM } from '@api/dms/model';
+import { ReadStatus } from '@api/readStatus/model';
 
 const add = async (
   dmId: string,
@@ -44,7 +45,10 @@ const remove = async (dmId: Types.ObjectId | string, participantId: Types.Object
     )
     .select('participantIds -_id');
   
-  if (dm) await User.findByIdAndUpdate(participantId, { $pull: { dmIds: dm._id } });
+  if (dm) await Promise.all([
+    User.findByIdAndUpdate(participantId, { $pull: { dmIds: dm._id } }),
+    ReadStatus.deleteMany({ userId: participantId, roomId: dmId }),
+  ]);
 
   return dm;
 };
