@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 
-import { useSocketRoomJoin } from '@hooks';
+import { NotificationEvent } from '@features/notifications/types';
+
+import { useSocketRoomJoin, useEmitEvents } from '@hooks';
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
 
@@ -29,6 +31,14 @@ export function DMPage() {
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);
 
   useSocketRoomJoin(roomId!);
+
+  useEmitEvents({
+    [NotificationEvent.UpdateReadStatus]: {
+      userId: user.data?._id,
+      roomId,
+      lastReadAt: Date.now(),
+    },
+  }, [roomId]);
 
   if (!isSuccess) return null;
 

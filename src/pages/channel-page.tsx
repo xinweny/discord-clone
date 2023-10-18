@@ -6,9 +6,10 @@ import { ContentLayout } from '@components/layouts';
 
 import { RoomTypes } from '@components/ui/displays';
 
-import { useSocketRoomJoin } from '@hooks';
+import { useSocketRoomJoin, useEmitEvents } from '@hooks';
 import { useActiveChannel } from '@features/channels/hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
+import { useGetUserData } from '@features/auth/hooks';
 
 import { RoomWelcome } from '@components/ui/displays';
 
@@ -18,14 +19,27 @@ import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';
 import { ChannelCallRoom } from '@features/webrtc/channel';
 
+import { NotificationEvent } from '@features/notifications/types';
+
 export function ChannelPage() {
-  const { roomId } = useParams();
+  const { serverId, roomId } = useParams();
 
   const channel = useActiveChannel();
 
   const authorized = useServerMemberAuthorize();
 
+  const { user } = useGetUserData();
+
   useSocketRoomJoin(roomId!);
+  
+  useEmitEvents({
+    [NotificationEvent.UpdateReadStatus]: {
+      userId: user.data?._id,
+      roomId,
+      serverId,
+      lastReadAt: Date.now(),
+    },
+  }, [roomId]);
 
   if (!channel) return null;
 
