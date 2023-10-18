@@ -10,6 +10,16 @@ export type ReadStatusDict = {
   [roomId: string]: string;
 };
 
+export type UnreadCountData = {
+  roomId: string;
+  count: number;
+};
+
+export type UnreadCountDict = {
+  [roomId: string]: number;
+};
+
 export enum NotificationEvent {
   UpdateReadStatus = 'read_status:update',
+  NewUnreadMessage = 'message:new',
 }
