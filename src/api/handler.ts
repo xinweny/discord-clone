@@ -5,7 +5,7 @@ import env from '@config/env';
 import { statusHandler } from './users/status/handler';
 import { messageHandler } from './messages/handler';
 import { webRtcHandler, roomHandler } from './webrtc/handler';
-import { readStatusHandler } from './users/readStatus/handler';
+import { notificationHandler } from './users/notifications/handler';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);
@@ -20,7 +20,7 @@ export const connectionHandler = async (socket: Socket) => {
 
   webRtcHandler(socket);
   
-  readStatusHandler(socket);
+  notificationHandler(socket);
 
   if (env.NODE_ENV === 'development') socket.on('disconnect', () => { console.log(`${socket.id} disconnected`); });
 };

@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 
-import { readStatusService } from './service';
+import { notificationService } from './service';
 
-export const readStatusHandler = async (socket: Socket) => {
+export const notificationHandler = async (socket: Socket) => {
   socket.on('read_status:update', async (data: {
     roomId: string,
     serverId?: string,
@@ -10,7 +10,7 @@ export const readStatusHandler = async (socket: Socket) => {
   }) => {
     const userId = socket.user._id;
 
-    const readStatus = await readStatusService.update({
+    const readStatus = await notificationService.updateReadStatus({
       userId,
       ...data,
     });

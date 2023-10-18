@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
-import { ReadStatus } from '@api/users/readStatus/model';
+import { ReadStatus } from '@api/users/notifications/model';
 import { ServerMember } from './model';
 
 const getById = async (id: Types.ObjectId | string) => {

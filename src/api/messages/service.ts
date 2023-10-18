@@ -7,7 +7,7 @@ import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
 import { User } from '@api/users/model';
-import { ReadStatus } from '@api/users/readStatus/model';
+import { ReadStatus } from '@api/users/notifications/model';
 
 import { cloudinaryService } from '@services/cloudinary';
 
@@ -177,13 +177,31 @@ export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
       as: 'unreadMessages',
     } },
     { $project: {
-      userId: 1,
       roomId: 1,
       count: { $size: '$unreadMessages' },
     } },
   ]);
 
-  return lastCounts;
+  const unopenedRoomIds = roomIds.filter(
+    id => !lastCounts.map(c => c.roomId).includes(id)
+  );
+
+  const messageCounts = await Message.aggregate([
+    { $match: {
+      $expr: { $in: unopenedRoomIds },
+    } },
+    { $group: {
+      _id: '$roomId',
+      count: { $sum: 1 },
+    } },
+    { $project: {
+      _id: 0,
+      roomId: '$_id',
+      count: 1,
+    } },
+  ]);
+
+  return lastCounts.concat(messageCounts);
 };
 
 export const messageService = {

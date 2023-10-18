@@ -4,7 +4,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { DM } from '@api/dms/model';
-import { ReadStatus } from '@api/users/readStatus/model';
+import { ReadStatus } from '@api/users/notifications/model';
 
 const add = async (
   dmId: string,

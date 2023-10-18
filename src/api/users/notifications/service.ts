@@ -4,13 +4,13 @@ import { keepKeys } from '@helpers/keepKeys';
 
 import { ReadStatus } from './model';
 
-const getMany = async (userId: string | Types.ObjectId) => {
+const getReadStatuses = async (userId: string | Types.ObjectId) => {
   const readStatuses = await ReadStatus.find({ userId: new Types.ObjectId(userId) });
 
   return readStatuses;
 };
 
-const update = async (fields: {
+const updateReadStatus = async (fields: {
   userId: string | Types.ObjectId,
   roomId: string | Types.ObjectId,
   serverId?: string | Types.ObjectId,
@@ -42,8 +42,8 @@ const remove = async (options: {
   await ReadStatus.deleteMany(filter);
 };
 
-export const readStatusService = {
-  getMany,
-  update,
+export const notificationService = {
+  getReadStatuses,
+  updateReadStatus,
   remove,
 };
