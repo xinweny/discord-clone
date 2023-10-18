@@ -2,29 +2,37 @@ import { AccessToken } from 'livekit-server-sdk';
 
 import env from '@config/env';
 
-import { livekitService } from '@services/livekit';
+import { livekitClient } from '@config/livekit';
 
 const createLivekitToken = (roomId: string, userId: string) => {
-  const at = new AccessToken(env.LK_API_KEY, env.LK_API_SECRET, {
-    identity: userId,
-  });
-
-  at.addGrant({
-    roomJoin: true,
-    room: roomId,
-    canPublish: true,
-    canSubscribe: true,
-  });
-
-  const token = at.toJwt();
-
-  return token;
+  try {
+    const at = new AccessToken(env.LK_API_KEY, env.LK_API_SECRET, {
+      identity: userId,
+    });
+  
+    at.addGrant({
+      roomJoin: true,
+      room: roomId,
+      canPublish: true,
+      canSubscribe: true,
+    });
+  
+    const token = at.toJwt();
+  
+    return token;
+  } catch {
+    return undefined;
+  }
 };
 
 const getParticipants = async (roomName: string) => {
-  const participants = await livekitService.listParticipants(roomName);
+  try {
+    const participants = await livekitClient.listParticipants(roomName);
 
-  return participants;
+    return participants;
+  } catch {
+    return [];
+  }
 };
 
 export const webRtcService = {

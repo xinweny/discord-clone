@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import { livekitService } from '@services/livekit';
+import { livekitClient } from '@config/livekit';
 
 export const roomHandler = async (socket: Socket) => {
   socket.on('join', (roomName: string | string[]) => {
@@ -18,7 +18,7 @@ export const roomHandler = async (socket: Socket) => {
 
 export const webRtcHandler = async (socket: Socket) => {
   socket.on('participants:get', async (roomId: string) => {
-    const participants = await livekitService.listParticipants(roomId);
+    const participants = await livekitClient.listParticipants(roomId);
   
     socket.to(roomId)
       .emit('participants:get', {
@@ -26,5 +26,4 @@ export const webRtcHandler = async (socket: Socket) => {
         participants,
       });
   });
-
 };
