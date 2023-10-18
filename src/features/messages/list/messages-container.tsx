@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useUpdateCurrentDate } from '@hooks';
+import { NotificationEvent } from '@features/notifications/types';
+
+import { useUpdateCurrentDate, useEmitEvents } from '@hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
 
 import { useGetMessagesQuery } from '../api';
@@ -21,15 +23,22 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
 
   const authorized = useServerMemberAuthorize({ skip: !serverId });
 
-  useEffect(() => {
-    if (messages && scrolledToTop) setNext(messages.next);
-  }, [scrolledToTop]);
-
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
     roomId: roomId!,
     next,
   });
+
+  useEffect(() => {
+    if (messages && scrolledToTop) setNext(messages.next);
+  }, [scrolledToTop]);
+
+  useEmitEvents({
+    [NotificationEvent.UpdateReadStatus]: {
+      roomId,
+      lastReadAt: Date.now(),
+    },
+  }, [messages]);
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     e.stopPropagation();

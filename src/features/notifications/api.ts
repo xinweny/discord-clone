@@ -50,6 +50,7 @@ const notificationApi = api.injectEndpoints({
           );
         },
       }),
+      getLastMessageTimestamps: build.query({}),
     };  
   }
 });
@@ -58,4 +59,5 @@ export default notificationApi;
 
 export const {
   useGetReadStatusesQuery,
+  useGetLastMessageTimestampsQuery,
 } = notificationApi;
