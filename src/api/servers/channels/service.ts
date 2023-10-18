@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { Message } from '@api/messages/model';
 import { Server, IServer } from '@api/servers/model';
-import { ReadStatus } from '@api/readStatus/model';
+import { ReadStatus } from '@api/users/readStatus/model';
 import type { IServerMember } from '@api/serverMembers/model';
 import type { IChannelPermissions } from './schema';
 

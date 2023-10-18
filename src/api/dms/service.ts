@@ -8,7 +8,7 @@ import { cloudinaryService } from '@services/cloudinary';
 import { Message } from '@api/messages/model';
 import { User } from '@api/users/model';
 import { DM } from '@api/dms/model';
-import { ReadStatus } from '@api/readStatus/model';
+import { ReadStatus } from '@api/users/readStatus/model';
 
 const getById = async (dmId: Types.ObjectId | string) => {
   const dm = await DM.findById(dmId)

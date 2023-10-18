@@ -7,6 +7,7 @@ import { userController } from './controller';
 import { userServerRouter } from './servers/router';
 import { userDmRouter } from './dms/router';
 import { userStatusRouter } from './status/router';
+import { readStatusRouter } from './readStatus/router';
 
 const userRouter = Router();
 
@@ -19,6 +20,8 @@ userRouter.use('/:userId/servers', userServerRouter);
 userRouter.use('/:userId/dms', userDmRouter);
 
 userRouter.use('/:userId/status', userStatusRouter);
+
+userRouter.use('/:userId/read', readStatusRouter)
 
 userRouter.get('/:userId', userController.getUser);
 

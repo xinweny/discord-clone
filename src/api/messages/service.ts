@@ -6,6 +6,8 @@ import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
+import { User } from '@api/users/model';
+import { ReadStatus } from '@api/users/readStatus/model';
 
 import { cloudinaryService } from '@services/cloudinary';
 
@@ -146,9 +148,48 @@ const remove = async (id: string) => {
   return message;
 };
 
+export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
+  const user = await User.findById(userId, 'dmIds serverIds')
+    .populate([{
+      path: 'servers',
+      select: 'channels',
+    }]);
+
+  if (!user) return [];
+
+  const roomIds = user.dmIds.concat(user.servers
+    ? user.servers.flatMap(
+      server => server.channels.map(channel => channel._id)
+    )
+    : []);
+
+  const lastCounts = await ReadStatus.aggregate([
+    { $match: { userId } },
+    { $lookup: {
+      from: 'messages',
+      localField: 'roomId',
+      foreignField: 'roomId',
+      pipeline: [{
+        $match: {
+          createdAt: { $gt: '$lastReadAt' },
+        },
+      }],
+      as: 'unreadMessages',
+    } },
+    { $project: {
+      userId: 1,
+      roomId: 1,
+      count: { $size: '$unreadMessages' },
+    } },
+  ]);
+
+  return lastCounts;
+};
+
 export const messageService = {
   getOne,
   getMany,
+  getUnreadCounts,
   create,
   update,
   remove,

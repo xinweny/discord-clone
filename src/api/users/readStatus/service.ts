@@ -10,17 +10,20 @@ const getMany = async (userId: string | Types.ObjectId) => {
   return readStatuses;
 };
 
-const update = async (
+const update = async (fields: {
   userId: string | Types.ObjectId,
   roomId: string | Types.ObjectId,
   serverId?: string | Types.ObjectId,
-) => {
+  lastReadAt: number,
+}) => {
+  const { userId, roomId, serverId, lastReadAt } = fields;
+
   const readStatus = await ReadStatus.findOneAndUpdate({
     userId,
     roomId,
     serverId,
   },{
-    lastReadAt: new Date(),
+    lastReadAt,
   }, {
     upsert: true,
     new: true,

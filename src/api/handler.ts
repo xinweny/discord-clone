@@ -5,7 +5,7 @@ import env from '@config/env';
 import { statusHandler } from './users/status/handler';
 import { messageHandler } from './messages/handler';
 import { webRtcHandler, roomHandler } from './webrtc/handler';
-import { readStatusHandler } from './readStatus/handler';
+import { readStatusHandler } from './users/readStatus/handler';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);

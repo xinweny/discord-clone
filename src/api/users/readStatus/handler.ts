@@ -4,14 +4,18 @@ import { readStatusService } from './service';
 
 export const readStatusHandler = async (socket: Socket) => {
   socket.on('read_status:update', async (data: {
-    userId: string,
     roomId: string,
     serverId?: string,
+    lastReadAt: number,
   }) => {
-    const { userId, roomId, serverId } = data;
+    const userId = socket.user._id;
 
-    const readStatus = await readStatusService.update(userId, roomId, serverId);
+    const readStatus = await readStatusService.update({
+      userId,
+      ...data,
+    });
 
-    return readStatus;
+    socket.to(userId)
+      .emit('read_status:update', readStatus);
   });
 };

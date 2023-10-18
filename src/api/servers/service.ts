@@ -5,7 +5,7 @@ import { CustomError } from '@helpers/CustomError';
 
 import { User } from '@api/users/model';
 import { Message } from '@api/messages/model';
-import { ReadStatus } from '@api/readStatus/model';
+import { ReadStatus } from '@api/users/readStatus/model';
 import { ServerMember } from '../serverMembers/model';
 import { Server } from './model';
 

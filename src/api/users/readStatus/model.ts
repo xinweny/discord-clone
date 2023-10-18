@@ -7,14 +7,14 @@ export interface IReadStatus extends Document {
   userId: Types.ObjectId;
   serverId?: Types.ObjectId;
   roomId: Types.ObjectId;
-  lastReadAt: Date;
+  lastReadAt: number;
 }
 
 export const readStatusSchema = new Schema({
   userId: { type: Types.ObjectId, ref: 'User', required: true },
   serverId: { type: Types.ObjectId },
   roomId: { type: Types.ObjectId, required: true },
-  lastReadAt: { type: Date, required: true },
+  lastReadAt: { type: Number, required: true },
 }, {
   collection: 'read_statuses',
 });
