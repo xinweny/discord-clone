@@ -6,20 +6,15 @@ export type ReadStatusData = {
   lastReadAt: string;
 };
 
-export type ReadStatusDict = {
-  [roomId: string]: string;
-};
-
-export type UnreadCountData = {
+export type LastTimestampData = {
   roomId: string;
-  count: number;
+  lastAt: string;
 };
 
-export type UnreadCountDict = {
-  [roomId: string]: number;
+export type TimestampDict = {
+  [roomId: string]: string;
 };
 
 export enum NotificationEvent {
   UpdateReadStatus = 'read_status:update',
-  NewUnreadMessage = 'message:new',
 }

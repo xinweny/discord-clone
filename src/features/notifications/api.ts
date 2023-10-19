@@ -2,18 +2,21 @@ import api from '@services/api';
 
 import {
   type ReadStatusData,
-  type ReadStatusDict,
-  type UnreadCountData,
-  type UnreadCountDict,
+  type TimestampDict,
+  type LastTimestampData,
   NotificationEvent,
 } from './types';
+import {
+  type MessageData,
+  MessageEvent,
+} from '@features/messages/types';
 
 import { setupSocketEventListeners } from '@services/websocket';
 
 const notificationApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getReadStatuses: build.query<ReadStatusDict, string>({
+      getReadStatuses: build.query<TimestampDict, string>({
         query: (userId) => ({
           url: `/users/${userId}/notifications/read`,
           method: 'get',
@@ -25,7 +28,7 @@ const notificationApi = api.injectEndpoints({
             result[roomId] = lastReadAt;
 
             return result;
-          }, {} as ReadStatusDict);
+          }, {} as TimestampDict);
 
           return readStatuses;
         },
@@ -51,19 +54,19 @@ const notificationApi = api.injectEndpoints({
           );
         },
       }),
-      getUnreadMessageCounts: build.query<UnreadCountDict, string>({
+      getLastTimestamps: build.query<TimestampDict, string>({
         query: (userId) => ({
           url: `/users/${userId}/notifications/unread`,
           method: 'get',
         }),
-        transformResponse: (response: UnreadCountData[]) => {
+        transformResponse: (response: LastTimestampData[]) => {
           const unreadCounts = response.reduce((result, res) => {
-            const { roomId, count } = res;
+            const { roomId, lastAt } = res;
 
-            result[roomId] = count;
+            result[roomId] = lastAt;
 
             return result;
-          }, {} as UnreadCountDict);
+          }, {} as TimestampDict);
 
           return unreadCounts;
         },
@@ -72,11 +75,11 @@ const notificationApi = api.injectEndpoints({
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
-            [NotificationEvent.NewUnreadMessage]: (unreadCount: UnreadCountData) => {
+            [MessageEvent.Send]: (message: MessageData) => {
               updateCachedData((draft) => {
-                const { roomId, count } = unreadCount;
+                const { roomId, createdAt } = message;
 
-                draft[roomId] = count;
+                draft[roomId] = createdAt;
 
                 return draft;
               });
@@ -97,5 +100,5 @@ export default notificationApi;
 
 export const {
   useGetReadStatusesQuery,
-  useGetUnreadMessageCountsQuery,
+  useGetLastTimestampsQuery,
 } = notificationApi;
