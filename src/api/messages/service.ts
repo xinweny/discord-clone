@@ -163,7 +163,7 @@ export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
     : []);
 
   const lastTimestamps = await Message.aggregate([
-    { $match: { $expr: { $in: roomIds } } },
+    { $match: { roomId: { $in: roomIds } } },
     { $sort: { _id: -1 } },
     { $group: {
       _id: 'roomId',

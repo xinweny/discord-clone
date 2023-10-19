@@ -7,9 +7,7 @@ const get = async (key: string) => {
 };
 
 const getMany = async (keys: string[]) => {
-  const result = await Promise.all(keys.map(
-    key => redisClient.get(key)
-  ));
+  const result = await redisClient.mGet(keys);
 
   return result;
 };
