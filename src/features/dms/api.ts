@@ -5,6 +5,12 @@ import type {
   CreateDMFields,
   EditDMFields,
 } from './types';
+import {
+  MessageEvent,
+  type MessageData,
+} from '@features/messages/types';
+
+import { setupSocketEventListeners } from '@services/websocket';
 
 import { signAndUpload } from '@services/cloudinary';
 
@@ -17,6 +23,27 @@ const dmApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: ['DMs'],
+        onCacheEntryAdded: async (
+          userId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [MessageEvent.Send]: (message: MessageData) => {
+              updateCachedData((draft) => {
+                const index = draft.findIndex(dm => dm._id === message.roomId);
+
+                if (index !== -1) draft.unshift(...draft.splice(index, 1));
+
+                return draft;
+              });
+            }
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
       }),
       getDm: build.query<DMData, string>({
         query: (dmId) => ({
