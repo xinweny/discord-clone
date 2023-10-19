@@ -1,5 +1,10 @@
 import { JoinedServerLink } from '.';
+import { ServerNewMessageNotification } from '@features/notifications/messages';
 
+import {
+  useGetLastTimestampsQuery,
+  useGetReadStatusesQuery,
+} from '@features/notifications/api';
 import { useGetJoinedServersQuery } from '../api';
 
 type JoinedServersListProps = {
@@ -9,12 +14,22 @@ type JoinedServersListProps = {
 export function JoinedServersList({ userId }: JoinedServersListProps) {
   const servers = useGetJoinedServersQuery(userId);
 
-  if (servers.isLoading) return null;
+  const { data: lastTimestamps } = useGetLastTimestampsQuery(userId);
+  const { data: readTimestamps } = useGetReadStatusesQuery(userId);
+
+  if (!servers.isSuccess) return null;
 
   return (
     <div>
       {servers.data?.map(
-        server => <JoinedServerLink key={server._id} server={server} />
+        server => <div key={server._id}>
+          {(lastTimestamps && readTimestamps) && <ServerNewMessageNotification
+            channelIds={server.channels.map(c => c._id)}
+            lastTimestamps={lastTimestamps}
+            readTimestamps={readTimestamps}
+          />}
+          <JoinedServerLink server={server} />
+        </div>
       )}
     </div>
   );
