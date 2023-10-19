@@ -27,7 +27,7 @@ export const useJoinAllRooms = (user: UserData | undefined) => {
     setRoomIds([
       ...channelIds,
       ...dmIds,
-    ])
+    ]);
   }, [servers, dms]);
 
   useSocketRoomJoin(roomIds);

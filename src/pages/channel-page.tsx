@@ -1,12 +1,9 @@
-import { useParams } from 'react-router-dom';
-
 import { ChannelTypes } from '@features/channels/types';
 
 import { ContentLayout } from '@components/layouts';
 
 import { RoomTypes } from '@components/ui/displays';
 
-import { useSocketRoomJoin } from '@hooks';
 import { useActiveChannel } from '@features/channels/hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
 
@@ -19,13 +16,9 @@ import { SendMessageForm } from '@features/messages/send';
 import { ChannelCallRoom } from '@features/webrtc/channel';
 
 export function ChannelPage() {
-  const { roomId } = useParams();
-
   const channel = useActiveChannel();
 
   const authorized = useServerMemberAuthorize();
-
-  useSocketRoomJoin(roomId!);
 
   if (!channel) return null;
 

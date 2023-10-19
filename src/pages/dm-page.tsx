@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
-
-import { useSocketRoomJoin } from '@hooks';
+4
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
 
@@ -27,8 +26,6 @@ export function DMPage() {
 
   const { user } = useGetUserData();
   const { data: dm, isSuccess } = useGetDmQuery(roomId!);
-
-  useSocketRoomJoin(roomId!);
 
   if (!isSuccess) return null;
 
