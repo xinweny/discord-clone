@@ -32,7 +32,7 @@ const updateReadStatus = async (fields: {
   return readStatus;
 };
 
-const remove = async (options: {
+const removeReadStatus = async (options: {
   userId?: string | Types.ObjectId,
   serverId?: string | Types.ObjectId,
   roomId?: string | Types.ObjectId,
@@ -45,5 +45,5 @@ const remove = async (options: {
 export const notificationService = {
   getReadStatuses,
   updateReadStatus,
-  remove,
+  removeReadStatus,
 };

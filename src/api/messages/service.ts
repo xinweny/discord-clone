@@ -7,7 +7,6 @@ import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
 import { User } from '@api/users/model';
-import { ReadStatus } from '@api/users/notifications/model';
 
 import { cloudinaryService } from '@services/cloudinary';
 
@@ -163,45 +162,21 @@ export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
     )
     : []);
 
-  const lastCounts = await ReadStatus.aggregate([
-    { $match: { userId } },
-    { $lookup: {
-      from: 'messages',
-      localField: 'roomId',
-      foreignField: 'roomId',
-      pipeline: [{
-        $match: {
-          createdAt: { $gt: '$lastReadAt' },
-        },
-      }],
-      as: 'unreadMessages',
-    } },
-    { $project: {
-      roomId: 1,
-      count: { $size: '$unreadMessages' },
-    } },
-  ]);
-
-  const unopenedRoomIds = roomIds.filter(
-    id => !lastCounts.map(c => c.roomId).includes(id)
-  );
-
-  const messageCounts = await Message.aggregate([
-    { $match: {
-      $expr: { $in: unopenedRoomIds },
-    } },
+  const lastTimestamps = await Message.aggregate([
+    { $match: { $expr: { $in: roomIds } } },
+    { $sort: { _id: -1 } },
     { $group: {
-      _id: '$roomId',
-      count: { $sum: 1 },
+      _id: 'roomId',
+      lastAt: { $last: '$createdAt' },
     } },
     { $project: {
       _id: 0,
       roomId: '$_id',
-      count: 1,
+      lastAt: 1,
     } },
   ]);
 
-  return lastCounts.concat(messageCounts);
+  return lastTimestamps;
 };
 
 export const messageService = {
