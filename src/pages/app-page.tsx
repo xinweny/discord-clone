@@ -1,20 +1,23 @@
 import { Outlet } from 'react-router-dom';
 
+import { LivekitContext } from '@features/webrtc/context';
+
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekit } from '@features/webrtc/hooks';
+import { useJoinAllRooms } from '@features/notifications/hooks';
 
-import { LivekitContext } from '@features/webrtc/context';
+import { AppLayout } from '@components/layouts';
 
 import { JoinedServersNavbar } from '@features/servers/joined';
 import { LivekitRoom } from '@features/webrtc/stream';
-
-import { AppLayout } from '@components/layouts';
 
 export function AppPage() {
   const { user } = useGetUserData();
   const livekit = useLivekit();
 
-  if (user.isLoading) return null;
+  useJoinAllRooms(user.data);
+
+  if (!user.isSuccess) return null;
 
   return (
     <LivekitContext.Provider value={livekit}>

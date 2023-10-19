@@ -1,3 +1,5 @@
+import { ChannelData } from '@features/channels/types';
+
 export interface ServerData {
   _id: string;
   name: string;
@@ -8,6 +10,7 @@ export interface ServerData {
   bannerUrl: string;
   ownerId: string;
   private: boolean;
+  channels: ChannelData[];
 }
 
 export type ServerBasicData = {
@@ -18,7 +21,7 @@ export type ServerBasicData = {
 
 export type PublicServerData = Omit<ServerData, 'private'>;
 
-export type UserServerData = Pick<ServerData, '_id' | 'name' | 'avatarUrl'>;
+export type UserServerData = Pick<ServerData, '_id' | 'name' | 'avatarUrl' | 'channels'>;
 
 export type CreateServerFields = {
   name: string;

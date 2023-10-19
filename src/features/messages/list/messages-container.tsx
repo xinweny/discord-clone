@@ -36,7 +36,7 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
   useEmitEvents({
     [NotificationEvent.UpdateReadStatus]: {
       roomId,
-      lastReadAt: Date.now(),
+      lastReadAt: new Date(),
     },
   }, [messages]);
 
