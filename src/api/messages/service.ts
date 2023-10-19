@@ -160,6 +160,7 @@ export const getUnreadTimestamps = async (userId: string | Types.ObjectId) => {
     { $project: {
       _id: 0,
       roomId: '$_id',
+      lastAt: 1,
     } },
   ]);
 

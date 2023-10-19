@@ -27,7 +27,7 @@ const updateReadStatus = async (fields: {
   }, {
     upsert: true,
     new: true,
-  })
+  });
 
   return readStatus;
 };
