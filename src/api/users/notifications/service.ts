@@ -14,7 +14,7 @@ const updateReadStatus = async (fields: {
   userId: string | Types.ObjectId,
   roomId: string | Types.ObjectId,
   serverId?: string | Types.ObjectId,
-  lastReadAt: number,
+  lastReadAt: Date,
 }) => {
   const { userId, roomId, serverId, lastReadAt } = fields;
 

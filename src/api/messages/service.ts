@@ -6,9 +6,9 @@ import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
-import { User } from '@api/users/model';
 
 import { cloudinaryService } from '@services/cloudinary';
+import { userRoomService } from '@api/users/rooms/service';
 
 const getOne = async (id: string) => {
   const message = await Message.findById(id);
@@ -147,32 +147,19 @@ const remove = async (id: string) => {
   return message;
 };
 
-export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
-  const user = await User.findById(userId, 'dmIds serverIds')
-    .populate([{
-      path: 'servers',
-      select: 'channels',
-    }]);
-
-  if (!user) return [];
-
-  const roomIds = user.dmIds.concat(user.servers
-    ? user.servers.flatMap(
-      server => server.channels.map(channel => channel._id)
-    )
-    : []);
+export const getUnreadTimestamps = async (userId: string | Types.ObjectId) => {
+  const roomIds = await userRoomService.getAllRoomIds(userId);
 
   const lastTimestamps = await Message.aggregate([
     { $match: { roomId: { $in: roomIds } } },
     { $sort: { _id: -1 } },
     { $group: {
-      _id: 'roomId',
+      _id: '$roomId',
       lastAt: { $last: '$createdAt' },
     } },
     { $project: {
       _id: 0,
       roomId: '$_id',
-      lastAt: 1,
     } },
   ]);
 
@@ -182,7 +169,7 @@ export const getUnreadCounts = async (userId: string | Types.ObjectId) => {
 export const messageService = {
   getOne,
   getMany,
-  getUnreadCounts,
+  getUnreadTimestamps,
   create,
   update,
   remove,

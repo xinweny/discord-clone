@@ -21,7 +21,7 @@ const getUnreadMessageCounts: RequestHandler[] = [
   authenticate,
   tryCatch(
     async (req, res) => {
-      const unreadCounts = await messageService.getUnreadCounts(req.user!.id);
+      const unreadCounts = await messageService.getUnreadTimestamps(req.user!.id);
 
       res.json({ data: unreadCounts });
     }

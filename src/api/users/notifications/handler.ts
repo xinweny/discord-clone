@@ -6,7 +6,7 @@ export const notificationHandler = async (socket: Socket) => {
   socket.on('read_status:update', async (data: {
     roomId: string,
     serverId?: string,
-    lastReadAt: number,
+    lastReadAt: Date,
   }) => {
     const userId = socket.user._id;
 
