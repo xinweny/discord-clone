@@ -62,7 +62,7 @@ export function CreateDmForm({
 
       reset(defaultValues);
       btnRef.current?.click();
-      navigate(`/channels/@me/${dm._id}`)
+      navigate(`/channels/@me/${dm._id}`, { state: dm })
     } catch (err) {
       const error = err as ErrorResponse;
 

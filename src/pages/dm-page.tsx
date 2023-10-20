@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 4
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
@@ -21,11 +21,12 @@ import { useGetDmQuery } from '@features/dms/api';
 
 export function DMPage() {
   const { roomId } = useParams();
+  const { state: preDm } = useLocation();
 
   const livekit = useLivekitContext();
 
   const { user } = useGetUserData();
-  const { data: dm, isSuccess } = useGetDmQuery(roomId!);
+  const { data: dm, isSuccess } = useGetDmQuery({ dmId: roomId!, dm: preDm });
 
   if (!isSuccess) return null;
 

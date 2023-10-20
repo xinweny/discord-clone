@@ -4,6 +4,7 @@ import type {
   DMData,
   CreateDMFields,
   EditDMFields,
+  GetDMQuery,
 } from './types';
 import {
   MessageEvent,
@@ -45,12 +46,13 @@ const dmApi = api.injectEndpoints({
           );
         },
       }),
-      getDm: build.query<DMData, string>({
-        query: (dmId) => ({
+      getDm: build.query<DMData, GetDMQuery>({
+        query: ({ dmId, dm }) => ({
           url: `/dms/${dmId}`,
           method: 'get',
+          params: { dm: JSON.stringify(dm) },
         }),
-        providesTags: (...[, , dmId]) => [{ type: 'DM', id: dmId }],
+        providesTags: (...[, , { dmId }]) => [{ type: 'DM', id: dmId }],
       }),
       createDm: build.mutation<DMData, CreateDMFields>({
         query: ({ participantIds }) => ({
