@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { createDmSchema } from '../schema';
 
 import type { CreateDMFields } from '../types';
 import type { ErrorResponse } from '@types';
-import { RelationStatus } from '@features/relations/types';
+import { ContactsTabs } from '@features/relations/types';
 
 import { handleServerError } from '@utils';
 
@@ -36,14 +36,9 @@ export function CreateDmForm({
 
   const {
     contacts: friends,
-    filterContactsByStatus,
-  } = useContacts(query);
+  } = useContacts(query, ContactsTabs.ALL);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    filterContactsByStatus(RelationStatus.FRIENDS);
-  }, []);
 
   const defaultValues = {
     participantIds: [],

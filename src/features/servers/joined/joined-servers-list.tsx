@@ -1,5 +1,5 @@
 import { JoinedServerLink } from '.';
-import { ServerNewMessageNotification } from '@features/notifications/messages';
+import { ServerNewMessageNotification } from '@features/notifications/message';
 
 import {
   useGetLastTimestampsQuery,
