@@ -6,6 +6,10 @@ import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
+import { User } from '@api/users/model';
+import { DM, IDM } from '@api/dms/model';
+
+import { keepKeys } from '@helpers/keepKeys';
 
 import { cloudinaryService } from '@services/cloudinary';
 import { userRoomService } from '@api/users/rooms/service';
@@ -66,6 +70,7 @@ const create = async (
     roomId: Types.ObjectId | string,
     body: string,
     emojis: IMessageEmoji[] | undefined,
+    dm?: IDM,
   },
   attachments?: {
     filename: string;
@@ -73,9 +78,12 @@ const create = async (
     mimetype: string;
   }[],
   serverId?: Types.ObjectId | string) => {
+    const { dm } = fields;
+    const query = keepKeys(fields, ['senderId', 'roomId', 'body', 'emojis']);
+
   const message = (serverId)
-    ? new MessageChannel({ ...fields, serverId })
-    : new MessageDirect(fields);
+    ? new MessageChannel({ ...query, serverId })
+    : new MessageDirect(query);
 
   if (attachments && attachments.length > 0) {
     for (const attachment of attachments) {
@@ -101,6 +109,19 @@ const create = async (
     path: 'serverMember',
     select: 'displayName -userId',
   });
+
+  if (dm) {
+    const directMessage = new DM(dm);
+
+    const { _id, participantIds } = directMessage;
+
+    await Promise.all([
+      directMessage.save(),
+      User.updateMany({ _id: { $in: participantIds } }, {
+        $push: { dmIds: _id },
+      }),
+    ]);
+  }
 
   await message.save();
 

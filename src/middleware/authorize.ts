@@ -3,6 +3,8 @@ import { RequestHandler } from 'express';
 import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
+import { DM } from '@api/dms/model';
+
 import { serverService } from '@api/servers/service';
 import { serverMemberService } from '@api/serverMembers/service';
 import { channelService } from '@api/servers/channels/service';
@@ -182,11 +184,11 @@ const dmMember: RequestHandler = tryCatch(
 
     const dm = await dmService.getById(dmId);
 
-    if (!dm) throw new CustomError(400, 'DM not found.');
+    if (dm) {
+      if (!dm.participantIds.find(id => id.equals(req.user?._id))) throw new CustomError(403, 'Unauthorized');
 
-    if (!dm.participantIds.find(id => id.equals(req.user?._id))) throw new CustomError(403, 'Unauthorized');
-
-    req.dm = dm;
+      req.dm = dm;
+    }
 
     next();
   }

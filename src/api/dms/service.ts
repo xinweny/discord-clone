@@ -6,18 +6,27 @@ import { CustomError } from '@helpers/CustomError';
 import { cloudinaryService } from '@services/cloudinary';
 
 import { Message } from '@api/messages/model';
+import { DM, IDM } from '@api/dms/model';
 import { User } from '@api/users/model';
-import { DM } from '@api/dms/model';
 import { ReadStatus } from '@api/users/notifications/model';
 
-const getById = async (dmId: Types.ObjectId | string) => {
-  const dm = await DM.findById(dmId)
-    .populate({
-      path: 'participants',
-      select: 'displayName username avatarUrl'
-    });
+const getById = async (dmId: Types.ObjectId | string, dm?: IDM) => {
+  const populateOptions = {
+    path: 'participants',
+    select: 'displayName username avatarUrl'
+  };
 
-  return dm;
+  const directMessage = await DM.findById(dmId)
+    .populate(populateOptions);
+
+  if (!directMessage && dm) {
+    const preDm = await (new DM(dm))
+    .populate(populateOptions);
+
+    return preDm;
+  }
+
+  return directMessage;
 };
 
 const create = async (participantIds: Types.ObjectId[] | string[]) => {
@@ -37,12 +46,13 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
   const isGroup = participantIds.length > 2;
 
   const dm = new DM({
+    _id: new Types.ObjectId(),
     ...(isGroup && { ownerId: participantIds[0] }),
     participantIds,
     isGroup,
   });
 
-  await Promise.all([
+  if (isGroup) await Promise.all([
     dm.save(),
     User.updateMany({ _id: { $in: participantIds } }, {
       $push: { dmIds: dm._id },

@@ -13,8 +13,9 @@ const getRoom: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { dmId } = req.params;
+      const { dm: preDm } = req.query;
 
-      const dm = await dmService.getById(dmId);
+      const dm = await dmService.getById(dmId, JSON.parse(preDm as string));
 
       res.json({ data: dm });
     }
