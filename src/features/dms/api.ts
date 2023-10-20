@@ -60,11 +60,16 @@ const dmApi = api.injectEndpoints({
           method: 'post',
           data: { participantIds },
         }),
+        invalidatesTags: (...[, , { participantIds }]) => {
+          return participantIds.length > 1
+            ? ['DMs']
+            : [];
+        },
         onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
           try {
             const { data: dm } = await queryFulfilled;
             
-            const { participantIds } = dm;
+            const { participantIds, _id } = dm;
 
             dispatch(dmApi.util.updateQueryData(
               'getDms',
@@ -74,6 +79,11 @@ const dmApi = api.injectEndpoints({
 
                 return draft;
               }
+            ));
+            await dispatch(dmApi.util.upsertQueryData(
+              'getDm',
+              { dmId: _id, dm: null },
+              dm,
             ));
           } catch (err) {
             console.log(err);

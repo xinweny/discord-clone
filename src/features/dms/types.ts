@@ -11,7 +11,7 @@ export type DMData = {
 
 export type GetDMQuery = {
   dmId: string;
-  dm?: DMData;
+  dm?: DMData | null;
 }
 
 export type CreateDMFields = {
