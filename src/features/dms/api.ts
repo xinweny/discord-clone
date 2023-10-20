@@ -60,7 +60,25 @@ const dmApi = api.injectEndpoints({
           method: 'post',
           data: { participantIds },
         }),
-        invalidatesTags: ['DMs'],
+        onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+          try {
+            const { data: dm } = await queryFulfilled;
+            
+            const { participantIds } = dm;
+
+            dispatch(dmApi.util.updateQueryData(
+              'getDms',
+              participantIds[0],
+              (draft) => {
+                if (dm) draft.unshift(dm);
+
+                return draft;
+              }
+            ));
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
       updateDm: build.mutation<DMData, EditDMFields>({
         query: ({ dmId, name }) => ({
