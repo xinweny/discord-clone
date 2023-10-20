@@ -59,7 +59,12 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
     }),
   ]);
 
-  return dm;
+  const populatedDm = await dm.populate({
+    path: 'participants',
+    select: 'displayName username avatarUrl'
+  });
+
+  return populatedDm;
 };
 
 const update = async (
