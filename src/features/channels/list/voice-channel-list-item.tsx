@@ -1,6 +1,6 @@
 import type { ChannelData } from '../types';
 
-import { useSocketRoomJoin } from '@hooks';
+import { useSocketRoomJoin } from '@services/websocket/hooks';
 import { useDisplay } from '@components/hooks';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';

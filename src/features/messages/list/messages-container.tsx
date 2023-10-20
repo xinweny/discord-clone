@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 
 import { NotificationEvent } from '@features/notifications/types';
 
-import { useUpdateCurrentDate, useEmitEvents } from '@hooks';
+import { useUpdateCurrentDate } from '@hooks';
 import { useServerMemberAuthorize } from '@features/members/hooks';
+import { emitEvents } from '@services/websocket';
 
 import { useGetMessagesQuery } from '../api';
 
@@ -33,11 +34,13 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
     if (messages && scrolledToTop) setNext(messages.next);
   }, [scrolledToTop]);
 
-  useEmitEvents({
-    [NotificationEvent.UpdateReadStatus]: {
-      roomId,
-      lastReadAt: new Date(),
-    },
+  useEffect(() => {
+    if (messages) emitEvents({
+      [NotificationEvent.UpdateReadStatus]: {
+        roomId,
+        lastReadAt: new Date(),
+      },
+    });
   }, [messages]);
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {

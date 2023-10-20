@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import type { UserData } from '@features/users/types';
 
-import { useSocketRoomJoin } from '@hooks';
+import { useSocketRoomJoin } from '@services/websocket/hooks';
 
 import { useGetJoinedServersQuery } from '@features/servers/api';
 import { useGetDmsQuery } from '@features/dms/api';

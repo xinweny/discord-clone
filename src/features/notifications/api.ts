@@ -38,6 +38,7 @@ const notificationApi = api.injectEndpoints({
         ) => {
           const events = {
             [NotificationEvent.UpdateReadStatus]: (readStatus: ReadStatusData) => {
+              console.log('NEW READ: ', readStatus);
               updateCachedData((draft) => {
                 const { roomId, lastReadAt } = readStatus;
 
