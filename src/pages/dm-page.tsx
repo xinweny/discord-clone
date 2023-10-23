@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 4
 import { useGetUserData } from '@features/auth/hooks';
@@ -26,12 +27,15 @@ export function DMPage() {
   const livekit = useLivekitContext();
 
   const { user } = useGetUserData();
-  const { data: dm, isSuccess } = useGetDmQuery({ dmId: roomId! });
+  const { data: dm, isLoading, isSuccess } = useGetDmQuery({ dmId: roomId!, userId: user.data!.id });
 
-  if (!isSuccess) {
-    navigate('/channels/@me');
-    return null;
-  }
+  useEffect(() => {
+    if (!isLoading && !isSuccess) {
+      navigate('/channels/@me');
+    }
+  }, [isSuccess, isLoading]);
+
+  if (!dm) return null;
 
   const { name, avatarUrl, participants } = getDmInfo(dm, user.data!.id);
 

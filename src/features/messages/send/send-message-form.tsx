@@ -10,11 +10,10 @@ import { useFileWatchMulti, useCustomSubmitHandlers } from '@components/hooks';
 import { useEditor } from '../hooks';
 
 import { MessageOptionsBar } from './message-options-bar';
-
-import { useSendMessageMutation } from '../api';
-
 import { UploadFileButton } from './upload-file-button';
 import { MessageBodyInput } from './message-body-input';
+
+import { useGetMessagesQuery, useSendMessageMutation } from '../api';
 
 type SendMessageFormProps = {
   authorized?: boolean;
@@ -23,6 +22,8 @@ type SendMessageFormProps = {
 
 export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
   const { roomId, serverId } = useParams();
+  
+  const { data: messages } = useGetMessagesQuery({ roomId: roomId!, serverId });
 
   const defaultValues = {
     serverId,
@@ -63,6 +64,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
       body,
       emojis,
       attachments,
+      ...((messages?.items && messages.items.length === 0) && { isFirst: true }),
     }).unwrap();
 
     reset();
@@ -70,6 +72,8 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   };
 
   const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));
+
+  if (!messages) return false;
 
   return (
     <FormProvider {...methods}>

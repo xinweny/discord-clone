@@ -51,6 +51,7 @@ export type SendMessageFields = {
   attachments: File[];
   body: string;
   emojis: MessageEmojiData[];
+  isFirst?: boolean;
 };
 
 export type EditMessageFields = {

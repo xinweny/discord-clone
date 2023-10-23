@@ -21,7 +21,7 @@ export type EditDMFields = {
 
 export type GetDMQuery = {
   dmId: string;
-  userId?: string;
+  userId: string;
 };
 
 export enum DMEvent {

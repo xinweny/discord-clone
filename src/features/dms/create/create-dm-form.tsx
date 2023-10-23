@@ -72,7 +72,7 @@ export function CreateDmForm({
       }, () => {
         reset(defaultValues);
         btnRef.current?.click();
-        navigate(`/channels/@me/${error.data.data[0]._id}`);
+        navigate(`/channels/@me/${error.data.data._id}`);
       });
     }
   }

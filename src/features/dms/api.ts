@@ -32,9 +32,7 @@ const dmApi = api.injectEndpoints({
         ) => {
           const events = {
             [MessageEvent.Send]: (message: MessageData) => {
-              updateCachedData((draft) => {
-                if (message.type !== 'dm') return draft;
-
+              if (message.type === 'dm') updateCachedData((draft) => {
                 const { roomId: dmId } = message;
 
                 const index = draft.findIndex(dm => dm._id === dmId);
@@ -69,7 +67,7 @@ const dmApi = api.injectEndpoints({
         onQueryStarted: async ({ dmId, userId }, { queryFulfilled, dispatch }) => {
           const { data: dm } = await queryFulfilled;
 
-          if (userId) dispatch(dmApi.util.updateQueryData(
+          dispatch(dmApi.util.updateQueryData(
             'getDms',
             userId,
             (draft) => {
@@ -88,7 +86,6 @@ const dmApi = api.injectEndpoints({
           method: 'post',
           data: { participantIds },
         }),
-        invalidatesTags: ['DMs'],
         onQueryStarted: async (args, { queryFulfilled }) => {
           const { data: dm } = await queryFulfilled;
 
