@@ -7,7 +7,7 @@ import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
 import { User } from '@api/users/model';
-import { DM, IDM } from '@api/dms/model';
+import { DM } from '@api/dms/model';
 
 import { keepKeys } from '@helpers/keepKeys';
 
@@ -70,15 +70,14 @@ const create = async (
     roomId: Types.ObjectId | string,
     body: string,
     emojis: IMessageEmoji[] | undefined,
-    dm?: IDM,
   },
   attachments?: {
     filename: string;
     bytes: number;
     mimetype: string;
   }[],
-  serverId?: Types.ObjectId | string) => {
-    const { dm } = fields;
+  serverId?: Types.ObjectId | string,
+  isFirst = false) => {
     const query = keepKeys(fields, ['senderId', 'roomId', 'body', 'emojis']);
 
   const message = (serverId)
@@ -110,23 +109,23 @@ const create = async (
     select: 'displayName -userId',
   });
 
-  if (dm) {
-    const directMessage = new DM(dm);
+  const [populatedMessage] = await Promise.all([
+    message.populate(populateOptions),
+    message.save(),
+    (message.type === 'dm' && isFirst)
+      ? async () => {
+        const dm = await DM.findById(message.roomId);
+    
+        if (dm) await User.updateMany({
+          _id: { $in: dm.participantIds },
+        }, {
+          $addToSet: { dmIds: dm._id },
+        });
+      }
+      : Promise.resolve(),
+  ]);
 
-    const { _id, participantIds } = directMessage;
-
-    await Promise.all([
-      directMessage.save(),
-      User.updateMany({ _id: { $in: participantIds } }, {
-        $push: { dmIds: _id },
-      }),
-    ]);
-  }
-
-  await message.save();
-
-  const populatedMessage = await message
-    .populate(populateOptions);
+  
   
   return populatedMessage;
 };

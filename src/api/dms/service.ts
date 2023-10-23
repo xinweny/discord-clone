@@ -6,11 +6,11 @@ import { CustomError } from '@helpers/CustomError';
 import { cloudinaryService } from '@services/cloudinary';
 
 import { Message } from '@api/messages/model';
-import { DM, IDM } from '@api/dms/model';
+import { DM } from '@api/dms/model';
 import { User } from '@api/users/model';
 import { ReadStatus } from '@api/users/notifications/model';
 
-const getById = async (dmId: Types.ObjectId | string, dm?: IDM) => {
+const getById = async (dmId: Types.ObjectId | string) => {
   const populateOptions = {
     path: 'participants',
     select: 'displayName username avatarUrl'
@@ -18,13 +18,6 @@ const getById = async (dmId: Types.ObjectId | string, dm?: IDM) => {
 
   const directMessage = await DM.findById(dmId)
     .populate(populateOptions);
-
-  if (!directMessage && dm) {
-    const preDm = await (new DM(dm))
-    .populate(populateOptions);
-
-    return preDm;
-  }
 
   return directMessage;
 };
@@ -41,28 +34,23 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
     ],
   }).select('_id');
 
-  if (dms.length !== 0) throw new CustomError(400, 'DM already exists.', dms);
+  if (dms.length !== 0) throw new CustomError(400, 'DM already exists.', dms[0]);
 
   const isGroup = participantIds.length > 2;
 
   const dm = new DM({
-    _id: new Types.ObjectId(),
     ...(isGroup && { ownerId: participantIds[0] }),
     participantIds,
     isGroup,
   });
 
-  if (isGroup) await Promise.all([
-    dm.save(),
-    User.updateMany({ _id: { $in: participantIds } }, {
-      $push: { dmIds: dm._id },
+  const [populatedDm] = await Promise.all([
+    dm.populate({
+      path: 'participants',
+      select: 'displayName username avatarUrl'
     }),
+    dm.save(),
   ]);
-
-  const populatedDm = await dm.populate({
-    path: 'participants',
-    select: 'displayName username avatarUrl'
-  });
 
   return populatedDm;
 };

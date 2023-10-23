@@ -1,34 +1,15 @@
 import { Socket } from 'socket.io';
 
-import { io } from '@app/server';
+import { IDM } from './model';
 
-export class DmHandler {
-  userId: string;
-  socket: Socket;
+export const messageHandler = async (socket: Socket) => {
+  socket.on('dm:new', async (dm: IDM) => {
+    const userId = socket.user._id;
+    const participantIds = dm.participantIds
+      .filter(id => id.toString() !== userId)
+      .map(id => id.toString());
 
-  constructor(socket: Socket) {
-    this.socket = socket;
-    this.userId = socket.user._id;
-  }
-
-  async subscribe(payload: {
-    roomId: string,
-    participantIds: string[],
-  }) {
-    const { roomId, participantIds } = payload;
-
-    const sessions = await Promise.all(
-      participantIds.map(id => id) // TODO: get sessions
-    );
-    
-    const sockets = sessions
-      .filter(session => session !== null)
-      .map(socketId => io.sockets.sockets.get(socketId as string));
-
-    sockets.push(this.socket);
-
-    for (const socket of sockets) {
-      if (socket) socket.join(roomId);
-    }
-  }
-}
+    socket.to(participantIds)
+      .emit('dm:new', dm);
+  });
+};

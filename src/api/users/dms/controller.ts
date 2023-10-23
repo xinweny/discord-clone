@@ -17,7 +17,7 @@ const getMyDms: RequestHandler[] = [
       res.json({ data: dms });
     }
   )
-]
+];
 
 export const userDmsController = {
   getMyDms,

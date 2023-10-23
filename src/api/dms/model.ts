@@ -4,6 +4,7 @@ import env from '@config/env';
 
 import { CustomError } from '@helpers/CustomError';
 export interface IDM extends Document {
+  _id: Types.ObjectId;
   ownerId?: Types.ObjectId;
   participantIds: Types.ObjectId[];
   name?: string;
@@ -12,7 +13,6 @@ export interface IDM extends Document {
 }
 
 const dmSchema = new Schema({
-  _id: { type: Types.ObjectId, required: true },
   ownerId: { type: Types.ObjectId, ref: 'User' },
   participantIds: { type: [Types.ObjectId], ref: 'User', required: true },
   name: { type: String, length: { min: 1, max: 100 }, trim: true },

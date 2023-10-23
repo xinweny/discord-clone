@@ -5,13 +5,13 @@ import { io } from '@app/server';
 import { notificationService } from './service';
 
 export const notificationHandler = async (socket: Socket) => {
+  const userId = socket.user._id;
+
   socket.on('read_status:update', async (data: {
     roomId: string,
     serverId?: string,
     lastReadAt: Date,
   }) => {
-    const userId = socket.user._id;
-
     const readStatus = await notificationService.updateReadStatus({
       userId,
       ...data,

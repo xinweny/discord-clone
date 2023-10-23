@@ -61,16 +61,21 @@ const createMessage: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { roomId, serverId } = req.params;
-      const { body, attachments, emojis } = req.body;
+      const { body, attachments, emojis, isFirst } = req.body;
 
       const userId = req.user?._id;
 
-      const message = await messageService.create({
-        senderId: userId,
-        roomId,
-        body,
-        emojis,
-      }, attachments, serverId);
+      const message = await messageService.create(
+        {
+          senderId: userId,
+          roomId,
+          body,
+          emojis,
+        },
+        attachments,
+        serverId,
+        isFirst
+      );
 
       res.json({
         data: message,

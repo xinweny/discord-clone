@@ -19,6 +19,7 @@ export interface IMessage extends Document {
   attachments: Types.DocumentArray<IAttachment>;
   createdAt: Date;
   updatedAt?: Date;
+  type: 'channel' | 'dm';
 }
 
 const emojiSchema = new Schema({
