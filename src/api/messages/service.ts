@@ -112,7 +112,7 @@ const create = async (
   const [populatedMessage] = await Promise.all([
     message.populate(populateOptions),
     message.save(),
-    (message.type === 'dm' && isFirst)
+    (!serverId && isFirst)
       ? async () => {
         const dm = await DM.findById(message.roomId);
     

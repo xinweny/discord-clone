@@ -7,10 +7,10 @@ Message.discriminator('channel', new Schema({
   serverId: { type: Types.ObjectId, required: true, ref: 'Server' }
 }));
 
-Message.discriminator('direct', new Schema({
+Message.discriminator('dm', new Schema({
   roomId: { type: Types.ObjectId, required: true, ref: 'DM' },
 }));
 
 export const MessageChannel = mongoose.model<IMessage>('channel');
 
-export const MessageDirect = mongoose.model<IMessage>('direct');
+export const MessageDirect = mongoose.model<IMessage>('dm');

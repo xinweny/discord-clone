@@ -25,6 +25,11 @@ const getById = async (dmId: Types.ObjectId | string) => {
 const create = async (participantIds: Types.ObjectId[] | string[]) => {
   if (participantIds.length > 10) throw new CustomError(400, 'Number of group members cannot exceed 10.');
 
+  const populateOptions = {
+    path: 'participants',
+    select: 'displayName username avatarUrl'
+  };
+
   const dms = await DM.find({
     $and: [
       { participantIds: { $all: participantIds } },
@@ -32,9 +37,13 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
         $not: { $elemMatch: { $nin: participantIds } } },
       },
     ],
-  }).select('_id');
+  });
 
-  if (dms.length !== 0) throw new CustomError(400, 'DM already exists.', dms[0]);
+  if (dms.length !== 0) {
+    const existingDm = await dms[0].populate(populateOptions);
+
+    return existingDm;
+  }
 
   const isGroup = participantIds.length > 2;
 
@@ -45,10 +54,7 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
   });
 
   const [populatedDm] = await Promise.all([
-    dm.populate({
-      path: 'participants',
-      select: 'displayName username avatarUrl'
-    }),
+    dm.populate(populateOptions),
     dm.save(),
   ]);
 
