@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 4
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
@@ -21,14 +21,17 @@ import { useGetDmQuery } from '@features/dms/api';
 
 export function DMPage() {
   const { roomId } = useParams();
-  const { state: preDm } = useLocation();
+  const navigate = useNavigate();
 
   const livekit = useLivekitContext();
 
   const { user } = useGetUserData();
-  const { data: dm, isSuccess } = useGetDmQuery({ dmId: roomId!, dm: preDm });
+  const { data: dm, isSuccess } = useGetDmQuery({ dmId: roomId! });
 
-  if (!isSuccess) return null;
+  if (!isSuccess) {
+    navigate('/channels/@me');
+    return null;
+  }
 
   const { name, avatarUrl, participants } = getDmInfo(dm, user.data!.id);
 

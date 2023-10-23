@@ -9,11 +9,6 @@ export type DMData = {
   participants: UserBasicData[];
 };
 
-export type GetDMQuery = {
-  dmId: string;
-  dm?: DMData | null;
-}
-
 export type CreateDMFields = {
   participantIds: { id: string }[];
 };
@@ -23,3 +18,12 @@ export type EditDMFields = {
   name?: string;
   avatar?: File;
 };
+
+export type GetDMQuery = {
+  dmId: string;
+  userId?: string;
+};
+
+export enum DMEvent {
+  New = 'dm:new',
+}

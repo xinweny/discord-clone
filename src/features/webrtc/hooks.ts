@@ -59,7 +59,7 @@ export const useLivekit = (): LivekitContextData => {
           avatarUrl: server.avatarUrl,
         });
       } else if (roomId) {
-        const dm = await getDm(roomId).unwrap();
+        const dm = await getDm({ dmId: roomId }).unwrap();
         
         if (dm) {
           const { name, avatarUrl } = getDmInfo(dm, user.data!._id);

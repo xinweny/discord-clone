@@ -1,9 +1,10 @@
 import api from '@services/api';
 
-import type {
-  DMData,
-  CreateDMFields,
-  EditDMFields,
+import {
+  type DMData,
+  type CreateDMFields,
+  type EditDMFields,
+  DMEvent,
   GetDMQuery,
 } from './types';
 import {
@@ -11,9 +12,10 @@ import {
   type MessageData,
 } from '@features/messages/types';
 
-import { setupSocketEventListeners } from '@services/websocket';
+import { joinRooms, setupSocketEventListeners } from '@services/websocket';
 
 import { signAndUpload } from '@services/cloudinary';
+import { emitEvents } from '@services/websocket';
 
 const dmApi = api.injectEndpoints({
   endpoints(build) {
@@ -26,18 +28,30 @@ const dmApi = api.injectEndpoints({
         providesTags: ['DMs'],
         onCacheEntryAdded: async (
           userId,
-          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }
         ) => {
           const events = {
             [MessageEvent.Send]: (message: MessageData) => {
               updateCachedData((draft) => {
-                const index = draft.findIndex(dm => dm._id === message.roomId);
+                if (message.type !== 'dm') return draft;
 
-                if (index !== -1) draft.unshift(...draft.splice(index, 1));
+                const { roomId: dmId } = message;
+
+                const index = draft.findIndex(dm => dm._id === dmId);
+
+                index !== -1
+                  ? draft.unshift(draft.splice(index, 1)[0])
+                  : dispatch(dmApi.endpoints.getDm.initiate({
+                    dmId,
+                    userId,
+                  }));
 
                 return draft;
               });
-            }
+            },
+            [DMEvent.New]: (dm: DMData) => {
+              joinRooms(dm._id);
+            },
           };
 
           setupSocketEventListeners(
@@ -47,12 +61,26 @@ const dmApi = api.injectEndpoints({
         },
       }),
       getDm: build.query<DMData, GetDMQuery>({
-        query: ({ dmId, dm }) => ({
+        query: ({ dmId }) => ({
           url: `/dms/${dmId}`,
           method: 'get',
-          params: { dm: JSON.stringify(dm) },
         }),
         providesTags: (...[, , { dmId }]) => [{ type: 'DM', id: dmId }],
+        onQueryStarted: async ({ dmId, userId }, { queryFulfilled, dispatch }) => {
+          const { data: dm } = await queryFulfilled;
+
+          if (userId) dispatch(dmApi.util.updateQueryData(
+            'getDms',
+            userId,
+            (draft) => {
+              const i = draft.findIndex(dm => dm._id === dmId);
+
+              if (i === -1) draft.unshift(dm);
+
+              return draft;
+            }
+          ));
+        }
       }),
       createDm: build.mutation<DMData, CreateDMFields>({
         query: ({ participantIds }) => ({
@@ -60,34 +88,11 @@ const dmApi = api.injectEndpoints({
           method: 'post',
           data: { participantIds },
         }),
-        invalidatesTags: (...[, , { participantIds }]) => {
-          return participantIds.length > 1
-            ? ['DMs']
-            : [];
-        },
-        onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
-          try {
-            const { data: dm } = await queryFulfilled;
-            
-            const { participantIds, _id } = dm;
+        invalidatesTags: ['DMs'],
+        onQueryStarted: async (args, { queryFulfilled }) => {
+          const { data: dm } = await queryFulfilled;
 
-            dispatch(dmApi.util.updateQueryData(
-              'getDms',
-              participantIds[0],
-              (draft) => {
-                if (dm) draft.unshift(dm);
-
-                return draft;
-              }
-            ));
-            await dispatch(dmApi.util.upsertQueryData(
-              'getDm',
-              { dmId: _id, dm: null },
-              dm,
-            ));
-          } catch (err) {
-            console.log(err);
-          }
+          emitEvents({ [DMEvent.New]: dm });
         },
       }),
       updateDm: build.mutation<DMData, EditDMFields>({

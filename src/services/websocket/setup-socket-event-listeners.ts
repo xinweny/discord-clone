@@ -24,4 +24,6 @@ export const setupSocketEventListeners = async (
   for (const event in socketEvents) {
     socket.off(event);
   }
+
+  if (rooms) socket.emit('leave', rooms);
 };
