@@ -89,7 +89,7 @@ const messageApi = api.injectEndpoints({
         },
       }),
       sendMessage: build.mutation<MessageData, SendMessageFields>({
-        query: ({ serverId, roomId, body, emojis, attachments, isFirst }) => ({
+        query: ({ serverId, roomId, body, emojis, attachments }) => ({
           url: messageBaseUrl({ serverId, roomId }),
           method: 'post',
           data: {
@@ -102,7 +102,6 @@ const messageApi = api.injectEndpoints({
                 bytes: file.size,
               })),
             }),
-            ...(isFirst && { isFirst }),
           },
         }),
         onQueryStarted: async ({ serverId, roomId, attachments }, { dispatch, queryFulfilled }) => {

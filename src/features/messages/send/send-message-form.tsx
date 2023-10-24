@@ -13,7 +13,7 @@ import { MessageOptionsBar } from './message-options-bar';
 import { UploadFileButton } from './upload-file-button';
 import { MessageBodyInput } from './message-body-input';
 
-import { useGetMessagesQuery, useSendMessageMutation } from '../api';
+import { useSendMessageMutation } from '../api';
 
 type SendMessageFormProps = {
   authorized?: boolean;
@@ -22,8 +22,6 @@ type SendMessageFormProps = {
 
 export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
   const { roomId, serverId } = useParams();
-  
-  const { data: messages } = useGetMessagesQuery({ roomId: roomId!, serverId });
 
   const defaultValues = {
     serverId,
@@ -64,7 +62,6 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
       body,
       emojis,
       attachments,
-      ...((messages?.items && messages.items.length === 0) && { isFirst: true }),
     }).unwrap();
 
     reset();
@@ -72,8 +69,6 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   };
 
   const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));
-
-  if (!messages) return false;
 
   return (
     <FormProvider {...methods}>
