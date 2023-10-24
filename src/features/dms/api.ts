@@ -3,6 +3,7 @@ import api from '@services/api';
 import {
   type DMData,
   type DMIdData,
+  type UserDMData,
   type CreateDMFields,
   type EditDMFields,
   DMEvent,
@@ -27,6 +28,12 @@ const dmApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: ['DMs'],
+        transformResponse: (response: UserDMData[]) => {
+          return response.map(res => ({
+            ...res.dm,
+            updatedAt: res.updatedAt,
+          }));
+        },
         onCacheEntryAdded: async (
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }

@@ -32,7 +32,5 @@ export const useJoinAllRooms = (user: UserData | undefined) => {
 
   useSocketRoomJoin(roomIds);
 
-  if (roomIds.length > 0) console.log(roomIds);
-
   return roomIds;
 };

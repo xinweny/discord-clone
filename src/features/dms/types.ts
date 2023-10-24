@@ -7,10 +7,16 @@ export type DMData = {
   participantIds: string[];
   isGroup: boolean;
   participants: UserBasicData[];
+  updatedAt: string;
 };
 
 export type DMIdData = {
   _id: string;
+};
+
+export type UserDMData = {
+  dm: DMData;
+  updatedAt: string;
 };
 
 export type CreateDMFields = {
