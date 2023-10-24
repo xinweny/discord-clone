@@ -7,6 +7,8 @@ import { participantRouter } from '@api/dms/participants/router';
 
 const dmRouter = Router();
 
+dmRouter.get('/', dmController.getRooms);
+
 dmRouter.post('/', dmController.createRoom);
 
 dmRouter.use('/:roomId/messages', messageRouter);

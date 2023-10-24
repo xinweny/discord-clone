@@ -168,15 +168,17 @@ const messageSelf = (action: 'update' | 'delete') => {
   return tryCatch(authorizeMiddleware);
 }
 
-const userSelf: RequestHandler = tryCatch(
-  (req, res, next) => {
-    const { userId } = req.params;
+const userSelf = (type: 'params' | 'body' | 'query') => {
+  const authorizeMiddleware: RequestHandler = (req, res, next) => {
+    const { userId } = req[type];
   
     if (!req.user?._id.equals(userId)) throw new CustomError(403, 'Unauthorized');
   
     next();
-  }
-);
+  };
+
+  return tryCatch(authorizeMiddleware)
+}
 
 const dmMember: RequestHandler = tryCatch(
   async (req, res, next) => {

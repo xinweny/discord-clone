@@ -43,7 +43,7 @@ const signServerBannerUpload: RequestHandler[] = [
 
 const signUserAvatarUpload: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;

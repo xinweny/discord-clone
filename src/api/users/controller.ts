@@ -34,7 +34,7 @@ const getUser: RequestHandler[] = [
 const updateUser: RequestHandler[] = [
   ...validateFields(['username', 'displayName', 'bio', 'bannerColor', 'customStatus']),
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const user = await userService.update(req.user?._id, { ...req.body }, req.body.filename);

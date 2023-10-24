@@ -9,7 +9,7 @@ import { userServersService } from './service';
 
 const getJoinedServers: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const servers = await userServersService.getJoined(req.params.userId);

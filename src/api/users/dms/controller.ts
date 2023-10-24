@@ -9,7 +9,7 @@ import { userDmsService } from './service';
 
 const getMyDms: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const dms = await userDmsService.getDms(req.params.userId);

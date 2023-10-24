@@ -7,7 +7,6 @@ import { cloudinaryService } from '@services/cloudinary';
 
 import { Message } from '@api/messages/model';
 import { DM } from '@api/dms/model';
-import { User } from '@api/users/model';
 import { ReadStatus } from '@api/users/notifications/model';
 
 const getById = async (dmId: Types.ObjectId | string) => {
@@ -20,6 +19,22 @@ const getById = async (dmId: Types.ObjectId | string) => {
     .populate(populateOptions);
 
   return directMessage;
+};
+
+const getMany = async (fields: {
+  userId: Types.ObjectId | string,
+}) => {
+  const { userId } = fields;
+  
+  const dms = await DM.find({
+    participantIds: new Types.ObjectId(userId),
+  })
+    .populate({
+      path: 'participants',
+      select: 'displayName username avatarUrl'
+    });
+
+  return dms;
 };
 
 const create = async (participantIds: Types.ObjectId[] | string[]) => {
@@ -106,6 +121,7 @@ const remove = async (dmId: Types.ObjectId | string) => {
 
 export const dmService = {
   getById,
+  getMany,
   create,
   update,
   remove,

@@ -9,7 +9,7 @@ import { mutualsService } from './service';
 
 const getMutualFriends: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const userId1 = req.params.userId;
@@ -24,7 +24,7 @@ const getMutualFriends: RequestHandler[] = [
 
 const getMutualServers: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const userId1 = req.params.userId;

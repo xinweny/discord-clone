@@ -11,7 +11,7 @@ import { RelationStatus } from './schema';
 
 const getRelations: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const userId = req.user?._id;
@@ -26,7 +26,7 @@ const getRelations: RequestHandler[] = [
 
 const createRelation: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const senderId = req.user?._id;
@@ -52,7 +52,7 @@ const createRelation: RequestHandler[] = [
 
 const updateRelation: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const senderId = req.user?._id;
@@ -70,7 +70,7 @@ const updateRelation: RequestHandler[] = [
 
 const deleteRelation: RequestHandler[] = [
   authenticate,
-  authorize.userSelf,
+  authorize.userSelf('params'),
   tryCatch(
     async (req, res) => {
       const { relationId } = req.params;
