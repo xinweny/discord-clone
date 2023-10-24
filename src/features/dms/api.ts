@@ -38,6 +38,14 @@ const dmApi = api.injectEndpoints({
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }
         ) => {
+          updateCachedData((draft) => {
+            draft.sort((a, b) => {
+              return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+            });
+
+            return draft;
+          });
+
           const events = {
             [MessageEvent.Send]: (message: MessageData) => {
               if (message.type === 'dm') updateCachedData((draft) => {
