@@ -61,7 +61,7 @@ const createMessage: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { roomId, serverId } = req.params;
-      const { body, attachments, emojis, isFirst } = req.body;
+      const { body, attachments, emojis } = req.body;
 
       const userId = req.user?._id;
 
@@ -74,7 +74,6 @@ const createMessage: RequestHandler[] = [
         },
         attachments,
         serverId,
-        isFirst
       );
 
       res.json({

@@ -76,8 +76,8 @@ const create = async (
     bytes: number;
     mimetype: string;
   }[],
-  serverId?: Types.ObjectId | string,
-  isFirst = false) => {
+  serverId?: Types.ObjectId | string
+) => {
     const query = keepKeys(fields, ['senderId', 'roomId', 'body', 'emojis']);
 
   const message = (serverId)
@@ -112,17 +112,20 @@ const create = async (
   const [populatedMessage] = await Promise.all([
     message.populate(populateOptions),
     message.save(),
-  ]);
+    async () => {
+      if (!serverId) {
+        const dm = await DM.findById(message.roomId);
+        
+        if (dm) await User.updateMany({
+          _id: { $in: dm.participantIds },
+        }, {
+          $addToSet: { dmIds: dm._id },
+        });
+      }
 
-  if (!serverId && isFirst) {
-    const dm = await DM.findById(message.roomId);
-    
-    if (dm) await User.updateMany({
-      _id: { $in: dm.participantIds },
-    }, {
-      $addToSet: { dmIds: dm._id },
-    });
-  }
+      return Promise.resolve();
+    }
+  ]);
   
   return populatedMessage;
 };
