@@ -38,8 +38,6 @@ const dmApi = api.injectEndpoints({
 
                 const index = draft.findIndex(dm => dm._id === dmId);
 
-                console.log('NEW MSG', index);
-
                 index !== -1
                   ? draft.unshift(draft.splice(index, 1)[0])
                   : dispatch(dmApi.endpoints.getDm.initiate({
