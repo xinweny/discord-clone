@@ -30,7 +30,7 @@ const getRooms: RequestHandler[] = [
 
       const dms = await dmService.getMany({ userId: userId as string });
 
-      return dms;
+      res.json({ data: dms });
     }
   )
 ]

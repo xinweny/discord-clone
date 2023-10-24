@@ -28,11 +28,7 @@ const getMany = async (fields: {
   
   const dms = await DM.find({
     participantIds: new Types.ObjectId(userId),
-  })
-    .populate({
-      path: 'participants',
-      select: 'displayName username avatarUrl'
-    });
+  });
 
   return dms;
 };

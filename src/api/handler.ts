@@ -6,6 +6,7 @@ import { statusHandler } from './users/status/handler';
 import { messageHandler } from './messages/handler';
 import { webRtcHandler, roomHandler } from './webrtc/handler';
 import { notificationHandler } from './users/notifications/handler';
+import { dmHandler } from './dms/handler';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);
@@ -17,6 +18,8 @@ export const connectionHandler = async (socket: Socket) => {
   statusHandler(socket);
 
   messageHandler(socket);
+
+  dmHandler(socket);
 
   webRtcHandler(socket);
   

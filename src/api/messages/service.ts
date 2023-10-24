@@ -112,20 +112,17 @@ const create = async (
   const [populatedMessage] = await Promise.all([
     message.populate(populateOptions),
     message.save(),
-    (!serverId && isFirst)
-      ? async () => {
-        const dm = await DM.findById(message.roomId);
-    
-        if (dm) await User.updateMany({
-          _id: { $in: dm.participantIds },
-        }, {
-          $addToSet: { dmIds: dm._id },
-        });
-      }
-      : Promise.resolve(),
   ]);
 
-  
+  if (!serverId && isFirst) {
+    const dm = await DM.findById(message.roomId);
+    
+    if (dm) await User.updateMany({
+      _id: { $in: dm.participantIds },
+    }, {
+      $addToSet: { dmIds: dm._id },
+    });
+  }
   
   return populatedMessage;
 };
