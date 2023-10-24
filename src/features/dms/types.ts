@@ -9,6 +9,10 @@ export type DMData = {
   participants: UserBasicData[];
 };
 
+export type DMIdData = {
+  _id: string;
+};
+
 export type CreateDMFields = {
   participantIds: { id: string }[];
 };

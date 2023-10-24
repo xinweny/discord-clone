@@ -5,7 +5,7 @@ import type { UserData } from '@features/users/types';
 import { useSocketRoomJoin } from '@services/websocket/hooks';
 
 import { useGetJoinedServersQuery } from '@features/servers/api';
-import { useGetDmsQuery } from '@features/dms/api';
+import { useGetAllUserDmsQuery } from '@features/dms/api';
 
 export const useJoinAllRooms = (user: UserData | undefined) => {
   const [roomIds, setRoomIds] = useState<string[]>([]);
@@ -14,7 +14,7 @@ export const useJoinAllRooms = (user: UserData | undefined) => {
   const skip = { skip: !user }
 
   const { data: servers } = useGetJoinedServersQuery(userId, skip);
-  const { data: dms } = useGetDmsQuery(userId, skip);
+  const { data: dms } = useGetAllUserDmsQuery(userId, skip);
 
   useEffect(() => {
     const channelIds = servers
@@ -31,4 +31,6 @@ export const useJoinAllRooms = (user: UserData | undefined) => {
   }, [servers, dms]);
 
   useSocketRoomJoin(roomIds);
+
+  return roomIds;
 };

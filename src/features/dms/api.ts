@@ -2,6 +2,7 @@ import api from '@services/api';
 
 import {
   type DMData,
+  type DMIdData,
   type CreateDMFields,
   type EditDMFields,
   DMEvent,
@@ -12,7 +13,7 @@ import {
   type MessageData,
 } from '@features/messages/types';
 
-import { joinRooms, setupSocketEventListeners } from '@services/websocket';
+import { setupSocketEventListeners } from '@services/websocket';
 
 import { signAndUpload } from '@services/cloudinary';
 import { emitEvents } from '@services/websocket';
@@ -37,6 +38,8 @@ const dmApi = api.injectEndpoints({
 
                 const index = draft.findIndex(dm => dm._id === dmId);
 
+                console.log('NEW MSG', index);
+
                 index !== -1
                   ? draft.unshift(draft.splice(index, 1)[0])
                   : dispatch(dmApi.endpoints.getDm.initiate({
@@ -47,8 +50,31 @@ const dmApi = api.injectEndpoints({
                 return draft;
               });
             },
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
+      }),
+      getAllUserDms: build.query<DMIdData[], string>({
+        query: (userId) => ({
+          url: '/dms',
+          params: { userId },
+          method: 'get',
+        }),
+        onCacheEntryAdded: async (
+          userId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
             [DMEvent.New]: (dm: DMData) => {
-              joinRooms(dm._id);
+              updateCachedData((draft) => {
+                draft.push({ _id: dm._id });
+
+                return draft;
+              });
             },
           };
 
@@ -125,6 +151,7 @@ export default dmApi;
 
 export const {
   useGetDmsQuery,
+  useGetAllUserDmsQuery,
   useGetDmQuery,
   useLazyGetDmQuery,
   useCreateDmMutation,
