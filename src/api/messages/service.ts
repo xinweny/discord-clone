@@ -6,13 +6,12 @@ import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
-import { User } from '@api/users/model';
-import { DM } from '@api/dms/model';
 
 import { keepKeys } from '@helpers/keepKeys';
 
 import { cloudinaryService } from '@services/cloudinary';
 import { userRoomService } from '@api/users/rooms/service';
+import { userDmsService } from '@api/users/dms/service';
 
 const getOne = async (id: string) => {
   const message = await Message.findById(id);
@@ -112,19 +111,9 @@ const create = async (
   const [populatedMessage] = await Promise.all([
     message.populate(populateOptions),
     message.save(),
-    async () => {
-      if (!serverId) {
-        const dm = await DM.findById(message.roomId);
-        
-        if (dm) await User.updateMany({
-          _id: { $in: dm.participantIds },
-        }, {
-          $addToSet: { dmIds: dm._id },
-        });
-      }
-
-      return Promise.resolve();
-    }
+    !serverId
+      ? userDmsService.upsertDm(message.roomId)
+      : Promise.resolve(),
   ]);
   
   return populatedMessage;

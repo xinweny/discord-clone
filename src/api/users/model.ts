@@ -1,4 +1,4 @@
-import mongoose, { Types, Schema, Document } from 'mongoose';
+import mongoose, { Types, Schema, Document, Model } from 'mongoose';
 
 import env from '@config/env';
 
@@ -18,8 +18,10 @@ export interface IUser extends Document {
   customStatus?: string;
   role: string;
   relations: Types.DocumentArray<IRelation>;
-  dmIds: Types.ObjectId[];
-  dms?: IDM[],
+  dms: {
+    dm: Types.ObjectId | IDM;
+    updatedAt: Date;
+  }[];
   serverIds: Types.ObjectId[];
   servers?: IServer[];
   bio: string;
@@ -49,7 +51,13 @@ const userSchema = new Schema({
     select: false,
   },
   relations: { type: [relationSchema], default: [], select: false },
-  dmIds: { type: [Types.ObjectId], ref: 'DM', default: [] },
+  dms: {
+    type: [{
+      dm: { type: Types.ObjectId, ref: 'DM', required: true },
+      updatedAt: { type: Date, required: true },
+    }],
+    default: [],
+},
   serverIds: { type: [Types.ObjectId], ref: 'Server', default: [] },
   bio: { type: String, default: '', length: { max: 190 } },
   customStatus: { type: String, length: { max: 128 } },
@@ -62,12 +70,6 @@ userSchema.pre('save', function (next) {
   if ((new Set(userIds)).size !== userIds.length) throw new CustomError(400, 'Duplicate user IDs not allowed.');
 
   next();
-});
-
-userSchema.virtual('dms', {
-  ref: 'DM',
-  localField: 'dmIds',
-  foreignField: '_id',
 });
 
 userSchema.virtual('servers', {

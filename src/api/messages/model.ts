@@ -1,7 +1,5 @@
 import mongoose, { Schema, Types, Document } from 'mongoose';
 
-import env from '@config/env';
-
 import { attachmentSchema, IAttachment  } from './attachments/schema';
 
 export interface IMessageEmoji extends Document {

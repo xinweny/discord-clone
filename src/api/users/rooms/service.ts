@@ -2,7 +2,7 @@ import { Types } from 'mongoose';
 import { User } from '../model';
 
 const getAllRoomIds = async (userId: string | Types.ObjectId) => {
-  const user = await User.findById(userId, 'dmIds serverIds')
+  const user = await User.findById(userId, 'dms serverIds')
     .populate([{
       path: 'servers',
       select: 'channels',
@@ -10,7 +10,9 @@ const getAllRoomIds = async (userId: string | Types.ObjectId) => {
 
   if (!user) return [];
 
-  const roomIds = user.dmIds.concat(user.servers
+  const dmIds = user.dms.map(dm => dm.dm);
+
+  const roomIds = dmIds.concat(user.servers
     ? user.servers.flatMap(
       server => server.channels.map(channel => channel._id)
     )
