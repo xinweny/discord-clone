@@ -3,8 +3,7 @@
 .headlineBanner {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
+  justify-content: space-around;
   background: url('@assets/static/cta-background.svg') colors.$blue;
   background-position: bottom;
   color: white;
@@ -21,4 +20,3 @@
     gap: 24px;
   }
 }
-
