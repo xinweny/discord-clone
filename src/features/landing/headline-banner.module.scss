@@ -1,0 +1,14 @@
+.headlineBannerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.headlineBanner {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}

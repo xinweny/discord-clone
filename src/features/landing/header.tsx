@@ -1,9 +1,11 @@
 import { RestrictedLinkButton } from '@components/ui/links';
 import { LandingLogo } from './landing-logo';
 
+import styles from './header.module.scss';
+
 export function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <LandingLogo />
       <div>
         <a href="">Demo</a>

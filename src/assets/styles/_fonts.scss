@@ -1,72 +1,70 @@
-%whitney-font {
-  font-family: Whitney sans-serif;
-}
+$whitney-font: 'Whitney' sans-serif;
 
-@mixin font-url($name, $ext: 'woff2') {
-  src: url(../fonts/${name}.${ext}) format($ext);
+@mixin font-url($name, $ext) {
+  src: url('../fonts/${name}.${ext}') format($ext);
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_light);
+  font-family: $whitney-font;
+  @include font-url('whitney_light', 'woff2');
   font-weight: 300;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_light_italic);
+  font-family: $whitney-font;
+  @include font-url('whitney_light_italic', 'woff2');
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_book);
+  font-family: $whitney-font;
+  @include font-url('whitney_book', 'woff2');
   font-weight: 400;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_book_italic);
+  font-family: $whitney-font;
+  @include font-url('whitney_book_italic', 'woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_medium);
+  font-family: $whitney-font;
+  @include font-url('whitney_medium', 'woff2');
   font-weight: 500;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_medium_italic);
+  font-family: $whitney-font;
+  @include font-url('whitney_medium_italic', 'woff2');
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_semibold);
+  font-family: $whitney-font;
+  @include font-url('whitney_semibold', 'woff2');
   font-weight: 600;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_semibold_italic);
+  font-family: $whitney-font;
+  @include font-url('whitney_semibold_italic', 'woff2');
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_bold);
+  font-family: $whitney-font;
+  @include font-url('whitney_bold', 'woff2');
   font-weight: bold;
 }
 
 @font-face {
-  @extend %whitney-font;
-  @include font-url(whitney_bold_italic);
+  font-family: $whitney-font;
+  @include font-url('whitney_bold_italic', 'woff2');
   font-weight: bold;
   font-style: italic;
 }
