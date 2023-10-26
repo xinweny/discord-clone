@@ -6,16 +6,16 @@ type LinkImageProps = {
   href: string;
   src: string;
   alt?: string;
-};
+} & React.ImgHTMLAttributes<HTMLImageElement>;
 
 export function LinkImage({
-  href, src, alt
+  href, src, alt, ...props
 }: LinkImageProps) {
   const ext = src.split('.').pop();
 
   const img = ext === 'gif'
-    ? <Gif src={src} />
-    : <img src={src} alt={alt} />;
+    ? <Gif {...props} src={src} />
+    : <img {...props} src={src} alt={alt} />;
 
   return href[0] === '/'
     ? <Link to={href}>{img}</Link>

@@ -1,8 +1,15 @@
+@use '@styles/colors';
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 16px;
+  background-color: colors.$blue;
+
+  a {
+    color: white;
+  }
 }
 
 .headerLinks {

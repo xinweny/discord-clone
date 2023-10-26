@@ -12,6 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@assets': path.join(__dirname, './src/assets'),
+      '@styles': path.join(__dirname, './src/assets/styles'),
     },
   },
 });

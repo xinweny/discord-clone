@@ -4,9 +4,9 @@ import { extractPublicId, buildUrl } from 'cloudinary-build-url';
 type GifProps = {
   src: string;
   alt?: string;
-};
+} & React.ImgHTMLAttributes<HTMLImageElement>;
 
-export function Gif({ src, alt }: GifProps) {
+export function Gif({ src, alt, ...props }: GifProps) {
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   const publicId = decodeURIComponent(extractPublicId(src));
@@ -22,6 +22,7 @@ export function Gif({ src, alt }: GifProps) {
       onMouseLeave={() => { setIsFocus(false); }}
       src={isFocus ? src : stillUrl}
       alt={alt}
+      {...props}
     />
   );
 }

@@ -1,8 +1,17 @@
+@use '@styles/colors';
+
 .headlineBanner {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  background: url('@assets/static/cta-background.svg') colors.$blue;
+  background-position: bottom;
+  color: white;
+
+  h1 {
+    font-size: 56px;
+  }
 
   > div {
     width: 50%;
