@@ -1,3 +1,3 @@
 export * from './store';
 export * from './socket';
-export { default } from './App';
+export { default } from './app';

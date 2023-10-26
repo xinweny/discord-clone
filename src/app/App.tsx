@@ -1,9 +1,21 @@
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+
+import { store } from './store';
+
 import Router from './router';
 
-import './App.css';
+import './app.scss';
 
 const App = () => (
- <Router/>
+  <IntlProvider locale={navigator.language}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Provider>
+  </IntlProvider>
 );
 
 export default App;
