@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className={styles.header}>
       <LandingLogo />
-      <div>
+      <div className={styles.headerLinks}>
         <a href="">Demo</a>
         <a href="">Source Code</a>
       </div>

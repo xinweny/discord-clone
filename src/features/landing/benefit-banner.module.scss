@@ -1,0 +1,32 @@
+@use '@assets/styles/sizes';
+
+%benefitBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 24px;
+    flex-wrap: wrap;
+    max-width: sizes.$page-max-width;
+
+    .description {
+      > h2 {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
+.left {
+  @extend %benefitBanner;
+}
+
+.right {
+  @extend %benefitBanner;
+  flex-direction: row-reverse;
+}
