@@ -1,0 +1,22 @@
+@use '@assets/styles/sizes';
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: sizes.$page-max-width;
+    width: 100%;
+  }
+
+  .footerInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}
