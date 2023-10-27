@@ -7,7 +7,7 @@ const BENEFITS = [
     id: 0,
     header: 'Create an invite-only place where you belong',
     body: 'Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.',
-    img: { src: '#', alt: '#' },
+    img: { src: '', alt: '#' },
     className: styles.left,
   },
   {

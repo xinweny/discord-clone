@@ -1,9 +1,7 @@
 @use '@styles/colors';
 
 .headlineBanner {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  position: relative;
   background: url('@assets/static/cta-background.svg') colors.$blue;
   background-position: bottom;
   color: white;
@@ -18,5 +16,10 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
+  }
+
+  svg {
+    display: absolute;
+    bottom: 0;
   }
 }
