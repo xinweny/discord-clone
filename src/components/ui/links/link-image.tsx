@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { Gif } from '../media';
 
+import styles from './link-image.module.scss';
+
 type LinkImageProps = {
   href: string;
   src: string;
@@ -18,6 +20,6 @@ export function LinkImage({
     : <img {...props} src={src} alt={alt} />;
 
   return href[0] === '/'
-    ? <Link to={href}>{img}</Link>
-    : <a href={href}>{img}</a>;
+    ? <Link className={styles.linkImage} to={href}>{img}</Link>
+    : <a className={styles.linkImage} href={href}>{img}</a>;
 }

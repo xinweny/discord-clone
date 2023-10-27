@@ -1,10 +1,17 @@
 @use '@styles/sizes';
+@use '@styles/colors';
 
 .footer {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px 16px;
+  background-color: colors.$not-quite-black;
+  color: white;
+
+  a {
+    color: white;
+  }
 
   > div {
     display: flex;

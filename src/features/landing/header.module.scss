@@ -1,14 +1,36 @@
 @use '@styles/colors';
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 16px;
   background-color: colors.$blue;
+  position: relative;
+  z-index: 2;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px;
+  }
 
   a {
     color: white;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    background-color: white;
+    color: black;
+    border-radius: 24px;
+    padding: 8px 16px;
+
+    &:hover {
+      color: colors.$blue;
+    }
   }
 }
 

@@ -1,18 +1,17 @@
-import { ButtonHTMLAttributes } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export interface LinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type LinkButtonProps = {
   to: string;
   children: string;
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function LinkButton(
-  { to, children }: LinkButtonProps
+  { to, children, ...props }: LinkButtonProps
 ) {
   const navigate = useNavigate();
 
   return (
-    <button type="button" onClick={() => navigate(to)}>
+    <button type="button" onClick={() => navigate(to)} {...props}>
       {children}
     </button>
   );

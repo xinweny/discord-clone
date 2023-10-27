@@ -6,12 +6,14 @@ import styles from './header.module.scss';
 export function Header() {
   return (
     <header className={styles.header}>
-      <LandingLogo />
-      <div className={styles.headerLinks}>
-        <a href="">Demo</a>
-        <a href="">Source Code</a>
-      </div>
-      <RestrictedLinkButton to="/login">Login</RestrictedLinkButton>
+      <nav>
+        <LandingLogo />
+        <div className={styles.headerLinks}>
+          <a href="">Demo</a>
+          <a href="">Source Code</a>
+        </div>
+        <RestrictedLinkButton to="/login">Login</RestrictedLinkButton>
+      </nav>
     </header>
   );
 }
