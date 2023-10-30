@@ -11,6 +11,8 @@ import { AppLayout } from '@components/layouts';
 import { JoinedServersNavbar } from '@features/servers/joined';
 import { LivekitRoom } from '@features/webrtc/stream';
 
+import styles from './app-page.module.scss';
+
 export function AppPage() {
   const { user } = useGetUserData();
   const livekit = useLivekit();
@@ -21,13 +23,13 @@ export function AppPage() {
 
   return (
     <LivekitContext.Provider value={livekit}>
-      <div>
         <LivekitRoom>
-          <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
-              <Outlet context={user.data} />
-          </AppLayout>
+          <div className={styles.page}>
+            <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
+                <Outlet context={user.data} />
+            </AppLayout>
+          </div>
         </LivekitRoom>
-      </div>
     </LivekitContext.Provider>
   );
 }

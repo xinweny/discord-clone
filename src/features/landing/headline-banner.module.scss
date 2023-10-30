@@ -1,7 +1,7 @@
 @use '@styles/colors';
 @use '@styles/sizes';
 
-.headlineBanner {
+.container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   }
 }
 
-.information {
+.content {
   max-width: sizes.$page-max-width;
   display: flex;
   justify-content: center;
@@ -45,7 +45,7 @@
   }
 }
 
-.bannerImages {
+.images {
   img {
     position: absolute;
     left: 50%;

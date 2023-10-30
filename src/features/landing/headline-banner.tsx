@@ -9,8 +9,8 @@ import styles from './headline-banner.module.scss';
 
 export function HeadlineBanner() {
   return (
-    <div className={styles.headlineBanner}>
-      <div className={styles.information}>
+    <div className={styles.container}>
+      <div className={styles.content}>
         <div>
           <div>
             <h1>IMAGINE A PLACE...</h1>
@@ -22,7 +22,7 @@ export function HeadlineBanner() {
           </div>
         </div>
       </div>
-      <div className={styles.bannerImages}>
+      <div className={styles.images}>
         <img className={styles.background} src={backgroundImage} alt="" />
         <img className={styles.foregroundLeft} src={leftForeground} alt="" />
         <img className={styles.foregroundRight} src={rightForeground} alt="" />

@@ -15,7 +15,9 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
     <HoverPopup
       popup={<p>{name}</p>}
     >
-      <LinkImage href={`/channels/${id}`} src={avatarUrl} alt={name} />
+      <li>
+        <LinkImage href={`/channels/${id}`} src={avatarUrl} alt={name} />
+      </li>
     </HoverPopup>
   );
 }

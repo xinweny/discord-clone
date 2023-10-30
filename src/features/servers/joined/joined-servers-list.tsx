@@ -20,7 +20,7 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
   if (!servers.isSuccess) return null;
 
   return (
-    <div>
+    <ul>
       {servers.data?.map(
         server => <div key={server._id}>
           {(lastTimestamps && readTimestamps) && <ServerNewMessageNotification
@@ -31,6 +31,6 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
           <JoinedServerLink server={server} />
         </div>
       )}
-    </div>
+    </ul>
   );
 }

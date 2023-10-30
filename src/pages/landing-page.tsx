@@ -12,7 +12,7 @@ import styles from './landing-page.module.scss';
 
 export function LandingPage() {
   return (
-    <div className={styles.landingPage}>
+    <div className={styles.page}>
       <LandingLayout>
         <Header />
         <HeadlineBanner />

@@ -1,7 +1,7 @@
 @use '@styles/sizes';
 @use '@styles/colors';
 
-.ctaBanner {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
   }
 }
 
-.benefit {
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@
   }
 }
 
-.finalMessage {
+.last {
   position: relative;
   display: flex;
   align-items: center;
