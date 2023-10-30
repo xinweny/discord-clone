@@ -3,13 +3,11 @@ import { useLivekitContext } from '@features/webrtc/hooks';
 import { LinkImage } from '@components/ui/links';
 import { Acronym, Gif } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
-import { Svg } from '@components/ui/media/svg';
 
-import { CreateServerButton } from '@features/servers/create';
+import { ServersButtons } from '../nav';
 import { JoinedServersList } from '.';
 
 import DiscordIcon from '@assets/icons/discord.svg?react';
-import CompassIcon from '@assets/icons/compass.svg?react';
 
 import styles from './joined-servers-navbar.module.scss';
 
@@ -27,7 +25,9 @@ export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
     <nav className={styles.container}>
       <div className={styles.listItem}>
         <LinkImage href="/channels/@me">
-          <Svg><DiscordIcon width="30" /></Svg>
+          <div className={styles.center}>
+            <DiscordIcon width="30" />
+          </div>
         </LinkImage>
       </div>
       <Separator className={styles.separator} />
@@ -38,12 +38,7 @@ export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
       </LinkImage>}
       <JoinedServersList userId={userId} />
       <Separator className={styles.separator} />
-      <CreateServerButton />
-      <div className={`${styles.listItem} ${styles.greenButton}`}>
-        <LinkImage href="/servers">
-          <Svg><CompassIcon width="24" /></Svg>
-        </LinkImage>
-      </div>
+      <ServersButtons />
     </nav>
   );
 }3

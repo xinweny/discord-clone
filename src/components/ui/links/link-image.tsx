@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { Svg } from '../media/svg';
+import { Svg } from '../../wrappers/svg';
 
 import styles from './link-image.module.scss';
 

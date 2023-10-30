@@ -15,7 +15,7 @@ export function Acronym({
 
   return (
     <div {...props} className={`${props.className || ''} ${styles.acronym}`}>
-      <h3>{acronym}</h3>
+      <p>{acronym}</p>
     </div>
   );
 }

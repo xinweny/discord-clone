@@ -2,6 +2,8 @@ import { useModal } from '@components/hooks';
 
 import type { ModalProps } from '@types';
 
+import styles from './modal-button.module.scss';
+
 export type ModalButtonProps = {
   children?: React.ReactNode;
   btnRef?: React.RefObject<HTMLButtonElement>;
@@ -24,11 +26,16 @@ export function ModalButton<TModalProps>({
   const Modal = modal;
 
   return (
-    <div>
-      <button ref={btnRef} onClick={toggle} {...props}>
+    <>
+      <button
+        ref={btnRef}
+        onClick={toggle}
+        {...props}
+        className={`${props.className || ''} ${styles.modalButton}`}
+      >
         {children}
       </button>
       <Modal isOpen={show} onClose={toggle} {...modalProps} />
-    </div>
+    </>
   );
 }

@@ -1,0 +1,19 @@
+@use '@styles/colors';
+
+.container {
+  .listItem {
+    svg, svg * {
+      fill: colors.$green;
+      stroke: colors.$green;
+    }
+  
+    &:hover {
+      background-color: colors.$green;
+  
+      svg, svg * {
+        fill: white;
+        stroke: white;
+      }
+    }
+  }
+}

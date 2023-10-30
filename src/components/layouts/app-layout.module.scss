@@ -4,8 +4,9 @@
   overflow: hidden;
   position: relative;
   display: flex;
+}
 
-  .nav {
-    overflow-y: scroll;
-  }
+.nav {
+  min-height: 100%;
+  overflow-y: scroll;
 }
