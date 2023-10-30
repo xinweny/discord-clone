@@ -5,10 +5,13 @@ import styles from './landing-logo.module.scss';
 import logo from '@assets/static/discord-logo-white.png';
 
 export function LandingLogo() {
-  return <LinkImage
-    className={styles.logo}
-    href="/"
-    src={logo}
-    alt="Discord Clone"
-  />;
+  return (
+    <LinkImage href="/">
+      <img
+        className={styles.logo}
+        src={logo}
+        alt="Discord Clone"
+      />
+    </LinkImage>
+  );
 }

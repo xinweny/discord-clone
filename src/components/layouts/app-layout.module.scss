@@ -3,4 +3,9 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
+  display: flex;
+
+  .nav {
+    overflow-y: scroll;
+  }
 }

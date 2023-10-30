@@ -4,3 +4,4 @@ export * from './image-preview';
 export * from './emoji';
 export * from './color-banner';
 export * from './track-container';
+export * from './acronym';

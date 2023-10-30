@@ -27,3 +27,8 @@ button {
     cursor: pointer;
   }
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

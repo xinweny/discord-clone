@@ -1,25 +1,18 @@
 import { Link } from 'react-router-dom';
 
-import { Gif } from '../media';
-
 import styles from './link-image.module.scss';
 
 type LinkImageProps = {
   href: string;
-  src: string;
-  alt?: string;
-} & React.ImgHTMLAttributes<HTMLImageElement>;
+  children: React.ReactNode;
+} & React.HTMLAttributes<HTMLAnchorElement>;
 
 export function LinkImage({
-  href, src, alt, ...props
+  href, children, ...props
 }: LinkImageProps) {
-  const ext = src.split('.').pop();
-
-  const img = ext === 'gif'
-    ? <Gif {...props} src={src} />
-    : <img {...props} src={src} alt={alt} />;
+  const className = `${styles.linkImage} ${props.className || ''}`;
 
   return href[0] === '/'
-    ? <Link className={styles.linkImage} to={href}>{img}</Link>
-    : <a className={styles.linkImage} href={href}>{img}</a>;
+    ? <Link {...props} className={className} to={href}>{children}</Link>
+    : <a {...props} className={className} href={href}>{children}</a>;
 }

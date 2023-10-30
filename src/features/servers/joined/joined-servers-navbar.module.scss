@@ -1,5 +1,28 @@
 @use '@styles/colors';
 
-.serversNav {
+.container {
+  min-height: 100%;
+  overflow-y: scroll;
   background-color: colors.$tertiary;
+  padding: 12px;
+
+  .listItem {
+    width: 48px;
+    height: 48px;
+    background-color: colors.$primary;
+    color: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      border-radius: 12px;
+      background-color: colors.$blurple;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 }

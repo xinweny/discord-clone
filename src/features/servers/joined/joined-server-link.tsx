@@ -1,8 +1,10 @@
 import type { UserServerData } from '../types';
 
 import { HoverPopup } from '@components/ui/popups';
-
 import { LinkImage } from '@components/ui/links';
+import { Acronym, Gif } from '@components/ui/media';
+
+import parentStyles from './joined-servers-navbar.module.scss';
 
 type JoinedServerLinkProps = {
   server: UserServerData;
@@ -15,8 +17,16 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
     <HoverPopup
       popup={<p>{name}</p>}
     >
-      <li>
-        <LinkImage href={`/channels/${id}`} src={avatarUrl} alt={name} />
+      <li className={parentStyles.listItem}>
+        {avatarUrl
+          ? <LinkImage href={`/channels/${id}`}>
+              <Gif src={avatarUrl} alt={name} />
+          </LinkImage>
+          : <Acronym
+              name={name}
+              className={parentStyles.childContainer}
+            />
+        }
       </li>
     </HoverPopup>
   );

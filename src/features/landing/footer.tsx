@@ -15,7 +15,9 @@ export function Footer() {
         <LandingLogo />
         <div className={styles.content}>
           <p>Made by <strong><a href={ghUrl}>xinweny</a></strong> in 2023</p>
-          <LinkImage href={`${ghUrl}/discord-clone-frontend`} src={githubLogo} alt="Source code" />
+          <LinkImage href={`${ghUrl}/discord-clone-frontend`}>
+            <img src={githubLogo} alt="Source code" />
+          </LinkImage>
         </div>
       </div>
     </footer>

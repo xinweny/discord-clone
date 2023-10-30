@@ -9,6 +9,14 @@ type GifProps = {
 export function Gif({ src, alt, ...props }: GifProps) {
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
+  const ext = src.split('.').slice(-1)[0];
+
+  if (ext.toLowerCase() !== 'gif') return <img
+    src={src}
+    alt={alt}
+    {...props}
+  />;
+
   const publicId = decodeURIComponent(extractPublicId(src));
   const stillUrl = buildUrl(publicId, {
     transformations: {

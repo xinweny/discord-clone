@@ -7,6 +7,8 @@ import {
 } from '@features/notifications/api';
 import { useGetJoinedServersQuery } from '../api';
 
+import styles from './joined-servers-list.module.scss';
+
 type JoinedServersListProps = {
   userId: string;
 };
@@ -20,7 +22,7 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
   if (!servers.isSuccess) return null;
 
   return (
-    <ul>
+    <ul className={styles.container}>
       {servers.data?.map(
         server => <div key={server._id}>
           {(lastTimestamps && readTimestamps) && <ServerNewMessageNotification
