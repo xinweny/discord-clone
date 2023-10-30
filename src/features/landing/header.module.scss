@@ -30,6 +30,7 @@
 
     &:hover {
       color: colors.$blue;
+      filter: brightness(100%) !important;
     }
   }
 }

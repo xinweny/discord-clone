@@ -8,9 +8,11 @@ import {
 
 import { LandingLayout } from '@components/layouts';
 
+import styles from './landing-page.module.scss';
+
 export function LandingPage() {
   return (
-    <div>
+    <div className={styles.landingPage}>
       <LandingLayout>
         <Header />
         <HeadlineBanner />
