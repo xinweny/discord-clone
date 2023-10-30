@@ -4,7 +4,7 @@ import { LandingLogo } from './landing-logo';
 
 import styles from './footer.module.scss';
 
-import githubLogo from '@assets/icons/github-white.svg';
+import GithubIcon from '@assets/icons/github.svg?react';
 
 export function Footer() {
   const ghUrl = 'https://github.com/xinweny';
@@ -16,7 +16,7 @@ export function Footer() {
         <div className={styles.content}>
           <p>Made by <strong><a href={ghUrl}>xinweny</a></strong> in 2023</p>
           <LinkImage href={`${ghUrl}/discord-clone-frontend`}>
-            <img src={githubLogo} alt="Source code" />
+            <GithubIcon />
           </LinkImage>
         </div>
       </div>

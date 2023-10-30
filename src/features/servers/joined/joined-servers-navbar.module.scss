@@ -5,24 +5,50 @@
   overflow-y: scroll;
   background-color: colors.$tertiary;
   padding: 12px;
+}
 
-  .listItem {
-    width: 48px;
-    height: 48px;
-    background-color: colors.$primary;
-    color: white;
-    border-radius: 24px;
-    overflow: hidden;
-    transition: all 0.15s ease-out;
+.listItem {
+  width: 48px;
+  height: 48px;
+  background-color: colors.$primary;
+  color: white;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.15s ease-out;
+
+  &:hover {
+    border-radius: 12px;
+    background-color: colors.$blurple;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  svg * {
+    fill: white;
+  }
+
+  &.greenButton {
+    svg * {
+      fill: colors.$green;
+    }
 
     &:hover {
-      border-radius: 12px;
-      background-color: colors.$blurple;
-    }
+      background-color: colors.$green;
 
-    img {
-      max-width: 100%;
-      max-height: 100%;
+      svg * {
+        fill: white;
+      }
     }
   }
+}
+
+.separator {
+  margin: 6px auto;
+  height: 2px;
+  width: 32px;
+  border-radius: 1px;
+  background-color: colors.$primary;
 }
