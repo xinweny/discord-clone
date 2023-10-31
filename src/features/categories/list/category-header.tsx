@@ -1,7 +1,7 @@
 import type { CategoryData } from '../types';
 
 import { CreateChannelButton } from '@features/channels/create';
-import { HoverPopup } from '@components/ui/popups';
+import { Tooltip } from '@components/ui/popups';
 
 import { CategoryContextMenuWrapper } from './category-context-menu-wrapper';
 
@@ -14,11 +14,12 @@ export function CategoryHeader({ category }: CategoryHeaderProps) {
     <CategoryContextMenuWrapper category={category}>
       <p>{category.name.toUpperCase()}</p>
       <CreateChannelButton category={category}>
-        <HoverPopup
-          popup={<div>Create Channel</div>}
+        <Tooltip
+          text="Create Channel"
+          direction="top"
         >
           <img src="#" alt="Create Channel" />
-        </HoverPopup>
+        </Tooltip>
       </CreateChannelButton>
     </CategoryContextMenuWrapper>
   );

@@ -1,2 +1,2 @@
-export * from './hover-popup';
+export * from './tooltip';
 export * from './click-popup';

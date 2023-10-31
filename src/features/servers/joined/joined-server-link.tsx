@@ -1,6 +1,6 @@
 import type { UserServerData } from '../types';
 
-import { HoverPopup } from '@components/ui/popups';
+import { Tooltip } from '@components/ui/popups';
 import { LinkImage } from '@components/ui/links';
 import { Acronym, Gif } from '@components/ui/media';
 
@@ -14,8 +14,8 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
   const { _id: id, avatarUrl, name } = server;
 
   return (
-    <HoverPopup
-      popup={<p>{name}</p>}
+    <Tooltip
+      text={name}
       direction="right"
     >
       <li className={parentStyles.listItem}>
@@ -29,6 +29,6 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
             />
         }
       </li>
-    </HoverPopup>
+    </Tooltip>
   );
 }

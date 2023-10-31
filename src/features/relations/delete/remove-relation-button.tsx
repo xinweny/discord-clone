@@ -1,6 +1,6 @@
 import { RelationData, RelationStatus } from '../types';
 
-import { HoverPopup } from '@components/ui/popups';
+import { Tooltip } from '@components/ui/popups';
 import { ModalButton } from '@components/ui/buttons';
 import { RemoveRelationModal } from './remove-relation-modal';
 
@@ -25,13 +25,16 @@ export function RemoveRelationButton({
   };
 
   return (
-    <HoverPopup popup={<div>{label(status)}</div>}>
+    <Tooltip
+      text={label(status)}
+      direction="top"
+    >
       <ModalButton
         modal={RemoveRelationModal}
         modalProps={{ relation }}
       >
         <img src={src || ''} alt={label(status)} />
       </ModalButton>
-    </HoverPopup>
+    </Tooltip>
   );
 }
