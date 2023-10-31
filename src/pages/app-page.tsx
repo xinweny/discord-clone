@@ -21,11 +21,11 @@ export function AppPage() {
 
   return (
     <LivekitContext.Provider value={livekit}>
-        <LivekitRoom>
-          <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
-              <Outlet context={user.data} />
-          </AppLayout>
-        </LivekitRoom>
+      <LivekitRoom>
+        <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
+            <Outlet context={user.data} />
+        </AppLayout>
+      </LivekitRoom>
     </LivekitContext.Provider>
   );
 }

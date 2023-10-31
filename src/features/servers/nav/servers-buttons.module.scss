@@ -1,11 +1,17 @@
 @use '@styles/colors';
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
   .listItem {
     svg, svg * {
       fill: colors.$green;
       stroke: colors.$green;
     }
+
+    height: 1000px;
   
     &:hover {
       background-color: colors.$green;

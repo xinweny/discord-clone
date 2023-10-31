@@ -1,12 +1,22 @@
-.page {
+.layout {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  .overflowWrapper {
+    position: relative;
+    
+  }
 }
 
 .nav {
-  min-height: 100%;
+  min-height: 100vh;
   overflow-y: scroll;
+  z-index: 2;
+}
+
+.content {
+  z-index: 1;
 }

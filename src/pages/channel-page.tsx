@@ -23,24 +23,22 @@ export function ChannelPage() {
   if (!channel) return null;
 
   return (
-    <div>
-      <ContentLayout
-        header={<ChannelInfoHeader />}
-        infoTab={<ServerMembersList />}
-      >
-        {channel.type === ChannelTypes.TEXT
-          ? <>
-            <MessagesContainer
-              welcomeComponent={<RoomWelcome type={RoomTypes.CHANNEL} name={channel.name} avatarSrc="#" />}
-            />
-            <SendMessageForm
-              placeholder={`Message #${channel.name}`}
-              authorized={authorized}
-            />
-          </>
-          : <ChannelCallRoom channel={channel} />
-        }
-      </ContentLayout>
-    </div>
+    <ContentLayout
+      header={<ChannelInfoHeader />}
+      infoTab={<ServerMembersList />}
+    >
+      {channel.type === ChannelTypes.TEXT
+        ? <>
+          <MessagesContainer
+            welcomeComponent={<RoomWelcome type={RoomTypes.CHANNEL} name={channel.name} avatarSrc="#" />}
+          />
+          <SendMessageForm
+            placeholder={`Message #${channel.name}`}
+            authorized={authorized}
+          />
+        </>
+        : <ChannelCallRoom channel={channel} />
+      }
+    </ContentLayout>
   );
 }

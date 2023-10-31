@@ -12,7 +12,7 @@ export function AppLayout({
   children,
 }: AppLayoutProps) {
   return (
-    <div className={styles.page}>
+    <div className={styles.layout}>
       <div className={styles.nav}>
         {navBar}
       </div>

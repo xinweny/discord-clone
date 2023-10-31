@@ -16,6 +16,7 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
   return (
     <HoverPopup
       popup={<p>{name}</p>}
+      direction="right"
     >
       <li className={parentStyles.listItem}>
         {avatarUrl

@@ -6,10 +6,8 @@ import { DmsNavBar } from '@features/dms/nav';
 
 export function DashboardPage() {
   return (
-    <div>
-      <MainLayout sideBar={<DmsNavBar />}>
-        <Outlet />
-      </MainLayout>
-    </div>
+    <MainLayout sideBar={<DmsNavBar />}>
+      <Outlet />
+    </MainLayout>
   );
 }

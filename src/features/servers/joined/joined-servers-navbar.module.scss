@@ -2,7 +2,7 @@
 
 .container {
   min-height: calc(100% - (12px * 2));
-  overflow-y: scroll;
+  overflow-x: visible;
   background-color: colors.$tertiary;
   padding: 12px;
 }

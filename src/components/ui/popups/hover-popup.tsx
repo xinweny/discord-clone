@@ -1,26 +1,18 @@
-import { useState } from 'react';
+import styles from './hover-popup.module.scss';
 
 type HoverPopupProps = {
-  popup: React.ReactNode;
+  popup: React.ReactNode | string;
   children: React.ReactNode;
+  direction: 'left' | 'right' | 'top' | 'bottom';
 };
 
-export function HoverPopup({ popup, children }: HoverPopupProps) {
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-
+export function HoverPopup({ popup, children, direction }: HoverPopupProps) {
   return (
-    <div>
-      <div
-        onMouseEnter={() => { setShowPopup(true); }}
-        onMouseLeave={() => { setShowPopup(false); }}
-      >
-        {children}
+    <div className={styles.wrapper}>
+      {children}
+      <div className={`${styles.popup} ${styles[direction] || ''}`}>
+        {popup}
       </div>
-      {showPopup && (
-        <div>
-          {popup}
-        </div>
-      )}
     </div>
   );
 }

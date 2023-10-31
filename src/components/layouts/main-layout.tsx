@@ -14,7 +14,7 @@ export function MainLayout({
   topNotice,
 }: MainLayoutProps) {
   return (
-    <>
+    <div>
       {topNotice && <div>{topNotice}</div>}
       <div>
         <div>
@@ -25,6 +25,6 @@ export function MainLayout({
         </div>
         {infoTab && <div>{infoTab}</div>}
       </div>
-    </>
+    </div>
   );
 }

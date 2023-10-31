@@ -46,33 +46,31 @@ export function DMPage() {
   const isInCurrentRoomCall = livekit?.isCurrentRoom(roomId!);
 
   return (
-    <div>
-      <ContentLayout
-        header={<DmHeader dm={dm} />}
-        infoTab={isInCurrentRoomCall
-          ? undefined
-          : <DmParticipantsInfo
-          participants={participants}
-          isGroup={isGroup}
-          />
-        }
-      >
-        {isInCurrentRoomCall
-          ? <DmCall />
-          : <DmOngoingCall roomId={dm._id} roomName={name} />
-        }
-        <MessagesContainer
-          welcomeComponent={<RoomWelcome
-            type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
-            name={name}
-            avatarSrc={avatarUrl}
-            username={isGroup ? undefined : participants[0].username}
-          />}
+    <ContentLayout
+      header={<DmHeader dm={dm} />}
+      infoTab={isInCurrentRoomCall
+        ? undefined
+        : <DmParticipantsInfo
+        participants={participants}
+        isGroup={isGroup}
         />
-        <SendMessageForm
-          placeholder={`Message ${isGroup ? '' : '@'}${name}`}
-        />
-      </ContentLayout>
-    </div>
+      }
+    >
+      {isInCurrentRoomCall
+        ? <DmCall />
+        : <DmOngoingCall roomId={dm._id} roomName={name} />
+      }
+      <MessagesContainer
+        welcomeComponent={<RoomWelcome
+          type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
+          name={name}
+          avatarSrc={avatarUrl}
+          username={isGroup ? undefined : participants[0].username}
+        />}
+      />
+      <SendMessageForm
+        placeholder={`Message ${isGroup ? '' : '@'}${name}`}
+      />
+    </ContentLayout>
   );
 }

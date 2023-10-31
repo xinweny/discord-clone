@@ -12,7 +12,7 @@ export function ContentLayout({
   infoTab,
 }: ContentLayoutProps) {
   return (
-    <>
+    <div>
       {header && (
         <div>
           {header}
@@ -26,6 +26,6 @@ export function ContentLayout({
           {infoTab}
         </div>
       )}
-    </>
+    </div>
   );
 }

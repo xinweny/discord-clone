@@ -1,0 +1,56 @@
+$gap: 24px;
+
+%horizontal-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+%vertical-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+
+  .popup {
+    position: absolute;
+    display: none;
+    font-weight: bold;
+    background-color: red;
+    font-size: 12px;
+    color: white;
+    white-space: nowrap;
+    padding: 6px 8px;
+    z-index: 2;
+  }
+
+  &:hover {
+    .popup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+      &.top {
+        top: $gap;
+        @extend %horizontal-center;
+      }
+    
+      &.bottom {
+        top: calc(100% + $gap);
+        @extend %horizontal-center;
+      }
+    
+      &.left {
+        left: $gap;
+        @extend %vertical-center;
+      }
+    
+      &.right {
+        left: calc(100%);
+        @extend %vertical-center;
+      }
+    }
+  }
+}

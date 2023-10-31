@@ -19,18 +19,16 @@ export function ContactsPage() {
   setDocumentTitle(['Friends']);
 
   return (
-    <div>
-      <ContentLayout
-        header={<ContactsNavbar
-          set={set}
-          id={id}
-        />}
-      >
-        {id === 'add_friend'
-          ? <SendFriendRequestForm />
-          : <ContactsList activeTab={id! as ContactsTabs} />
-        }
-      </ContentLayout>
-    </div>
-  )
+    <ContentLayout
+      header={<ContactsNavbar
+        set={set}
+        id={id}
+      />}
+    >
+      {id === 'add_friend'
+        ? <SendFriendRequestForm />
+        : <ContactsList activeTab={id! as ContactsTabs} />
+      }
+    </ContentLayout>
+  );
 }
