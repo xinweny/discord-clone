@@ -17,6 +17,7 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
     <Tooltip
       text={name}
       direction="right"
+      options={{ gap: '16px' }}
     >
       <li className={parentStyles.listItem}>
         {avatarUrl

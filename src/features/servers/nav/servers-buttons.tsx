@@ -1,4 +1,5 @@
 import { LinkImage } from '@components/ui/links';
+import { Tooltip } from '@components/ui/popups';
 
 import { CreateServerButton } from '@features/servers/create';
 
@@ -12,18 +13,28 @@ export function ServersButtons() {
 
   return (
     <div className={styles.container}>
-      <div className={itemClassName}>
-        <div className={parentStyles.center}>
-          <CreateServerButton />
-        </div>
-      </div>
-      <div className={itemClassName}>
-        <LinkImage href="/servers">
+      <Tooltip
+        text="Add a Server"
+        direction="right"
+      >
+        <div className={itemClassName}>
           <div className={parentStyles.center}>
-            <CompassIcon width="24" />
+            <CreateServerButton />
           </div>
-        </LinkImage>
-      </div>
+        </div>
+      </Tooltip>
+      <Tooltip
+        text="Explore Servers"
+        direction="right"
+      >
+        <div className={itemClassName}>
+          <LinkImage href="/servers">
+            <div className={parentStyles.center}>
+              <CompassIcon width="24" />
+            </div>
+          </LinkImage>
+        </div>
+      </Tooltip>
     </div>
   )
 }

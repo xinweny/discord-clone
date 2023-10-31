@@ -46,42 +46,35 @@
       }
     }
 
-    $g: &;
+    &[data-flow="top"], &:not([data-flow]) {
+      &::before, &::after {
+        left: 50%;
+        -webkit-transform: translate(-50%, calc(-1 * var(--gap)));
+        transform: translate(-50%, calc(-1 * var(--gap)));
+      }
 
-    &[data-flow="top"] {
-      @at-root {
-        &::before,
-        &::after,
-        #{$g}:not([data-flow])::before,
-        #{$g}:not([data-flow])::after {
-          left: 50%;
-          -webkit-transform: translate(-50%, -4px);
-          transform: translate(-50%, -4px);
-        }
-        
-        &::before, #{$g}:not([data-flow])::before {
-          bottom: 100%;
-          border-bottom-width: 0;
-          border-top-color: black;
-        }
+      &::before {
+        bottom: 100%;
+        border-bottom-width: 0;
+        border-top-color: black;
+      }
 
-        &::after, #{$g}:not([data-flow])::after {
-          bottom: calc(100% + 5px);
-        }
+      &::after {
+        bottom: calc(100% + 5px);
       }
     }
 
     &[data-flow="bottom"] {
       &::before, &::after {
         left: 50%;
-        -webkit-transform: translate(-50%, 8px);
-        transform: translate(-50%, 8px);
+        -webkit-transform: translate(-50%, var(--gap));
+        transform: translate(-50%, var(--gap));
       }
 
       &::before {
         top: 100%;
-      border-top-width: 0;
-      border-bottom-color: black;
+        border-top-width: 0;
+        border-bottom-color: black;
       }
 
       &::after {
@@ -95,15 +88,15 @@
         border-right-width: 0;
         border-left-color: black;
         left: calc(0em - 5px);
-        -webkit-transform: translate(-8px, -50%);
-                transform: translate(-8px, -50%);
+        -webkit-transform: translate(calc(-1 * var(--gap)), -50%);
+        transform: translate(calc(-1 * var(--gap)), -50%);
       }
 
       &::after {
         top: 50%;
         right: calc(100% + 5px);
-        -webkit-transform: translate(-8px, -50%);
-        transform: translate(-8px, -50%);
+        -webkit-transform: translate(calc(-1 * var(--gap)), -50%);
+        transform: translate(calc(-1 * var(--gap)), -50%);
       }
     }
 
@@ -113,15 +106,15 @@
         border-left-width: 0;
         border-right-color: black;
         right: calc(0em - 5px);
-        -webkit-transform: translate(8px, -50%);
-        transform: translate(8px, -50%);
+        -webkit-transform: translate(var(--gap), -50%);
+        transform: translate(var(--gap), -50%);
       }
 
       &::after {
         top: 50%;
         left: calc(100% + 5px);
-        -webkit-transform: translate(8px, -50%);
-        transform: translate(8px, -50%);
+        -webkit-transform: translate(var(--gap), -50%);
+        transform: translate(var(--gap), -50%);
       }
     }
   }
