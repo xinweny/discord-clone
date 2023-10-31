@@ -16,6 +16,7 @@ export function ServersButtons() {
       <Tooltip
         text="Add a Server"
         direction="right"
+        options={{ gap: '16px' }}
       >
         <div className={itemClassName}>
           <div className={parentStyles.center}>
@@ -26,6 +27,7 @@ export function ServersButtons() {
       <Tooltip
         text="Explore Servers"
         direction="right"
+        options={{ gap: '16px' }}
       >
         <div className={itemClassName}>
           <LinkImage href="/servers">

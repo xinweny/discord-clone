@@ -27,8 +27,6 @@
     &:after {
       content: attr(data-tooltip);
       text-align: center;
-      min-width: 3em;
-      max-width: 21em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
