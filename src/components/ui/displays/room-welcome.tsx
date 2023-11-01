@@ -8,14 +8,13 @@ type ChannelWelcomeProps = {
   type: RoomTypes;
   name: string;
   username?: string;
-  avatarSrc: string;
+  avatarSrc: string | undefined;
 };
 
 type MessageInfo = {
   [key in RoomTypes]: {
     heading: string;
     info: string;
-
   }
 };
 

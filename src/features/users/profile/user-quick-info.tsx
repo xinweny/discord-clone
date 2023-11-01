@@ -6,6 +6,7 @@ import { Avatar } from '@components/ui/media';
 
 import { UserSettingsButton } from '../settings';
 import { ToggleMuteButton } from '@features/webrtc/controls';
+import { UserStatusIcon } from '../status';
 
 export function UserQuickInfo() {
   const [isFocus, setIsFocus] = useState(false);
@@ -18,7 +19,12 @@ export function UserQuickInfo() {
       onMouseLeave={() => setIsFocus(false)}
     >
       <div>
-        <Avatar src={avatarUrl} />
+        <Avatar
+          src={avatarUrl}
+          notification={<UserStatusIcon
+            userId={user.data!._id}
+          />}
+        />
         <div>
           <p><strong>{displayName}</strong></p>
           {isFocus

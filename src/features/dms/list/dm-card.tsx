@@ -8,6 +8,8 @@ import { Avatar } from '@components/ui/media';
 
 import { UserStatusIcon } from '@features/users/status';
 
+import defaultGroupAvatar from '@assets/static/default-group-avatar.png';
+
 type DMCardProps = {
   dm: DMData;
   userId: string;
@@ -32,7 +34,10 @@ export function DmCard({
     <Link to={`/channels/@me/${dm._id}`}>
       <div>
         <Avatar
-          src={avatarUrl}
+          src={isGroup && !avatarUrl
+            ? defaultGroupAvatar
+            : avatarUrl
+          }
           notification={(withStatus && !isGroup) && <UserStatusIcon
             userId={participants[0]._id}
           />}

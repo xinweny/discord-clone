@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.online {
+  path {
+    fill: colors.$green;
+  }
+}
+
+.offline {
+  path {
+    fill: #80848e;
+  }
+}

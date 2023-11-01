@@ -1,9 +1,11 @@
 import { Gif } from './gif';
 
+import defaultAvatar from '@assets/static/default-user-avatar.png';
+
 import styles from './avatar.module.scss';
 
 type AvatarProps = {
-  src: string;
+  src: string | undefined;
   alt?: string;
   notification?: React.ReactNode;
   placeholder?: string;
@@ -12,21 +14,24 @@ type AvatarProps = {
 export function Avatar({
   src, alt, notification, placeholder
 }: AvatarProps) {
-  if (!src) return (
-    <div>
-      <img src={placeholder} alt="" />
-      {notification}
-    </div>
-  );
+  const renderImg = (src: string | undefined) => {
+    const className = styles.withNotification;
+    
+    if (!src) return <img
+      className={className}
+      src={placeholder || defaultAvatar}
+    />;
 
-  const ext = src.split('.').pop();
+    const ext = src.split('.').pop();
+
+    return ext === 'gif'
+      ? <Gif className={className} src={src} alt={alt} />
+      : <img className={className} src={src} alt={alt} />;
+  };
 
   return (
     <div className={styles.avatar}>
-      {ext === 'gif'
-        ? <Gif src={src} />
-        : <img src={src} alt={alt || ''} />
-      }
+      {renderImg(src)}
       <div className={styles.notification}>
         {notification}
       </div>
