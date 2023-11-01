@@ -12,7 +12,7 @@
   width: 48px;
   height: 48px;
   background-color: colors.$primary;
-  color: white;
+  color: colors.$white;
   border-radius: 24px;
   overflow: hidden;
   transition: all 0.15s ease-out;
@@ -28,7 +28,7 @@
   }
 
   svg, svg * {
-    fill: white;
+    fill: colors.$white;
   }
 }
 

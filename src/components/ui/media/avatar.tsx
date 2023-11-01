@@ -1,5 +1,7 @@
 import { Gif } from './gif';
 
+import styles from './avatar.module.scss';
+
 type AvatarProps = {
   src: string;
   alt?: string;
@@ -20,12 +22,14 @@ export function Avatar({
   const ext = src.split('.').pop();
 
   return (
-    <div>
+    <div className={styles.avatar}>
       {ext === 'gif'
         ? <Gif src={src} />
         : <img src={src} alt={alt || ''} />
       }
-      {notification}
+      <div className={styles.notification}>
+        {notification}
+      </div>
     </div>
   );
 }

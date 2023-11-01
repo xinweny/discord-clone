@@ -6,14 +6,15 @@ import { CreateDmHeader } from '../create';
 
 export function DmsNavBar() {
   return (
-    <nav>
-      <SidebarLayout
-        top={<button>Find or start a conversation</button>}
-      >
-        <FriendsLink />
-        <CreateDmHeader />
-        <DmList />
-      </SidebarLayout>
-    </nav>
+    <SidebarLayout
+      top={<input
+        type="text"
+        placeholder="Find or start a conversation"
+      />}
+    >
+      <FriendsLink />
+      <CreateDmHeader />
+      <DmList />
+    </SidebarLayout>
   );
 }

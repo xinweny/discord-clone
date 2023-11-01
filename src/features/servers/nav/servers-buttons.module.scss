@@ -15,8 +15,8 @@
       background-color: colors.$green;
   
       svg, svg * {
-        fill: white;
-        stroke: white;
+        fill: colors.$white;
+        stroke: colors.$white;
       }
     }
   }

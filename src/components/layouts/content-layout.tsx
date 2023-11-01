@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './content-layout.module.scss';
+
 type ContentLayoutProps = {
   header?: React.ReactNode;
   children: React.ReactNode;
@@ -12,17 +14,17 @@ export function ContentLayout({
   infoTab,
 }: ContentLayoutProps) {
   return (
-    <div>
+    <div className={styles.layout}>
       {header && (
-        <div>
+        <div className={styles.header}>
           {header}
         </div>
       )}
-      <div>
+      <div className={styles.content}>
         {children}
       </div>
       {infoTab && (
-        <div>
+        <div className={styles.panel}>
           {infoTab}
         </div>
       )}

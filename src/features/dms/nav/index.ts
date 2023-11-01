@@ -1,1 +1,1 @@
-export * from './dms-navbar';
+export * from './dms-nav-bar';

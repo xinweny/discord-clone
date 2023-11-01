@@ -1,3 +1,5 @@
+@use '@styles/colors';
+
 .wrapper {
   position: relative;
   z-index: 1;
@@ -32,8 +34,8 @@
       text-overflow: ellipsis;
       padding: 8px 8px;
       border-radius: 4px;
-      background: black;
-      color: white;
+      background: colors.$black;
+      color: colors.$white;
       z-index: 1;
     }
 
@@ -54,7 +56,7 @@
       &::before {
         bottom: 100%;
         border-bottom-width: 0;
-        border-top-color: black;
+        border-top-color: colors.$black;
       }
 
       &::after {
@@ -72,7 +74,7 @@
       &::before {
         top: 100%;
         border-top-width: 0;
-        border-bottom-color: black;
+        border-bottom-color: colors.$black;
       }
 
       &::after {
@@ -84,7 +86,7 @@
       &::before {
         top: 50%;
         border-right-width: 0;
-        border-left-color: black;
+        border-left-color: colors.$black;
         left: calc(0em - 5px);
         -webkit-transform: translate(calc(-1 * var(--gap)), -50%);
         transform: translate(calc(-1 * var(--gap)), -50%);
@@ -102,7 +104,7 @@
       &::before {
         top: 50%;
         border-left-width: 0;
-        border-right-color: black;
+        border-right-color: colors.$black;
         right: calc(0em - 5px);
         -webkit-transform: translate(var(--gap), -50%);
         transform: translate(var(--gap), -50%);

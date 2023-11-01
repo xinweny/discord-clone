@@ -1,5 +1,7 @@
 @use 'sass:math';
 
+$saturation-factor: 1;
+
 $blue: #404EED;
 $blurple: #5865F2;
 $green: #248046;
@@ -10,7 +12,7 @@ $white: #FFFFFF;
 $black: #000000;
 $off-white: #F6F6F6;
 $not-quite-black: #23272A;
-$primary: hsl(223, calc(1 * 6.7%), math.div(20.6%, 1));
-$secondary: hsl(220, calc(1 * 6.5%), math.div(18%, 1));
-$secondary-alt: hsl(228, calc(1 * 6.7%), math.div(14.7%, 1));
-$tertiary: hsl(225, calc(1 * 6.3%), math.div(12.5%,1));
+$primary: hsl(223, calc($saturation-factor * 6.7%), math.div(20.6%, 1));
+$secondary: hsl(220, calc($saturation-factor * 6.5%), math.div(18%, 1));
+$secondary-alt: hsl(228, calc($saturation-factor * 6.7%), math.div(14.7%, 1));
+$tertiary: hsl(225, calc($saturation-factor * 6.3%), math.div(12.5%,1));

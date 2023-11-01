@@ -10,14 +10,12 @@ export function PublicServersPage() {
   setDocumentTitle(['Find your community']);
 
   return (
-    <div>
-      <MainLayout sideBar={<div>categories</div>}>
-        <SearchQueryWrapper
-          result={<SearchResultServersPage />}
-        >
-          <DiscoverServersPage />
-        </SearchQueryWrapper>
-      </MainLayout>
-    </div>
+    <MainLayout sideBar={<div>categories</div>}>
+      <SearchQueryWrapper
+        result={<SearchResultServersPage />}
+      >
+        <DiscoverServersPage />
+      </SearchQueryWrapper>
+    </MainLayout>
   );
 }

@@ -13,11 +13,9 @@ export function ServerNavBar() {
   if (!server) return null;
 
   return (
-    <div>
-      <SidebarLayout top={<ServerHeader server={server} />}>
-        <img src={server.bannerUrl} alt="Banner" />
-        <ChannelsList />
-      </SidebarLayout>
-    </div>
+    <SidebarLayout top={<ServerHeader server={server} />}>
+      <img src={server.bannerUrl} alt="Banner" />
+      <ChannelsList />
+    </SidebarLayout>
   );
 }

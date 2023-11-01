@@ -39,16 +39,14 @@ export function ServerPage() {
   return (
     <ServerContext.Provider value={server.data}>
       <ServerMemberContext.Provider value={member.data || null}>
-        <div>
-          <MainLayout
-            topNotice={!member.data && <JoinServerNotice server={server.data} />}
-            sideBar={<ServerNavBar />}
-          >
-            <Outlet context={{
-              activeChannel,
-            }} />
-          </MainLayout>
-        </div>
+        <MainLayout
+          topNotice={!member.data && <JoinServerNotice server={server.data} />}
+          sideBar={<ServerNavBar />}
+        >
+          <Outlet context={{
+            activeChannel,
+          }} />
+        </MainLayout>
       </ServerMemberContext.Provider>
     </ServerContext.Provider>
   );
