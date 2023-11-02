@@ -21,17 +21,19 @@ export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
   const { isOnCall, roomData } = { ...livekit };
   const { url, avatarUrl, name } = { ...roomData };
 
+  const separator = <Separator className={styles.separator} />;
+
   return (
     <nav className={styles.container}>
       <DmLinkButton />
-      <Separator className={styles.separator} />
+      {separator}
       {(isOnCall && roomData) && <LinkImage href={url!}>
         {avatarUrl
           ? <Gif src={avatarUrl} alt={`Ongoing call with ${name}`} />
           : <Acronym name={name!} />}
       </LinkImage>}
       <JoinedServersList userId={userId} />
-      <Separator className={styles.separator} />
+      {separator}
       <ServersButtons />
     </nav>
   );
