@@ -21,7 +21,7 @@ export function ModalWrapper({
   return createPortal((
     <div className={styles.container}>
       <ClickAwayListener onClickAway={closeModal}>
-        <div>
+        <div className={styles.modal}>
           {children}
         </div>
       </ClickAwayListener>
