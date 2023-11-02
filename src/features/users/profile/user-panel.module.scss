@@ -1,0 +1,28 @@
+@use '@styles/colors';
+
+.container {
+  background-color: colors.$secondary-alt;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  
+  
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 4px 8px;
+
+    p {
+      font-size: 12px;
+    }
+
+    .displayName {
+      font-size: 14px;
+    }
+  }
+}

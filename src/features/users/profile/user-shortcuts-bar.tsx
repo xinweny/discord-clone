@@ -1,11 +1,11 @@
-import { UserQuickInfo } from './user-quick-info';
+import { UserPanel } from './user-panel';
 import { CallShortcuts } from '@features/webrtc/stream';
 
 export function UserShortcutsBar() {
   return (
     <div>
       <CallShortcuts />
-      <UserQuickInfo />
+      <UserPanel />
     </div>
   );
 }

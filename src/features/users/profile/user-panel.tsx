@@ -8,17 +8,20 @@ import { UserSettingsButton } from '../settings';
 import { ToggleMuteButton } from '@features/webrtc/controls';
 import { UserStatusIcon } from '../status';
 
-export function UserQuickInfo() {
+import styles from './user-panel.module.scss';
+
+export function UserPanel() {
   const [isFocus, setIsFocus] = useState(false);
   const { user } = useGetUserData();
   const { avatarUrl, displayName, username } = user.data!;
 
   return (
     <div
+      className={styles.container}
       onMouseEnter={() => setIsFocus(true)}
       onMouseLeave={() => setIsFocus(false)}
     >
-      <div>
+      <div className={styles.content}>
         <Avatar
           src={avatarUrl}
           notification={<UserStatusIcon
@@ -26,14 +29,14 @@ export function UserQuickInfo() {
           />}
         />
         <div>
-          <p><strong>{displayName}</strong></p>
+          <p className={styles.displayName}>{displayName}</p>
           {isFocus
             ? <p>{username}</p>
-            : <p>status</p>
+            : <p>Online</p>
           }
         </div>
       </div>
-      <div>
+      <div className={styles.buttons}>
         <ToggleMuteButton />
         <UserSettingsButton />
       </div>

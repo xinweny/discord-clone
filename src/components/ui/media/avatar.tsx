@@ -14,6 +14,8 @@ type AvatarProps = {
 export function Avatar({
   src, alt, notification, placeholder
 }: AvatarProps) {
+  const size = '32';
+
   const renderImg = (src: string | undefined) => {
     const className = styles.avatar;
     
@@ -31,9 +33,9 @@ export function Avatar({
 
   return (
     <svg
-      width="40"
-      height="40"
-      viewBox="0 0 40 40"
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
       className={styles.mask}
       aria-hidden
     >
