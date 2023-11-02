@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ClickAwayListener } from '@mui/material';
 
+import styles from './click-popup.module.scss';
+
 type ClickPopupProps = {
   renderPopup: () => React.ReactElement;
   children: React.ReactNode;
@@ -24,7 +26,7 @@ export function ClickPopup({
   }, [showPopup]);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <button
         type="button"
         onClick={() => {
@@ -38,7 +40,7 @@ export function ClickPopup({
         <ClickAwayListener
           onClickAway={() => { setShowPopup(false); }}
         >
-          <div>
+          <div className={styles.popup}>
             {renderPopup()}
           </div>
         </ClickAwayListener>

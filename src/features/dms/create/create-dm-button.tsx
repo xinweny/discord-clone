@@ -3,7 +3,11 @@ import { useRef } from 'react';
 import { ClickPopup } from '@components/ui/popups';
 import { CreateDmForm } from './create-dm-form';
 
-export function CreateDmButton() {
+type CreateDmButtonProps = {
+  children: React.ReactNode;
+}
+
+export function CreateDmButton({ children }: CreateDmButtonProps) {
   const createDmBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -11,7 +15,7 @@ export function CreateDmButton() {
       renderPopup={() => <CreateDmForm btnRef={createDmBtnRef} />}
       btnRef={createDmBtnRef}
     >
-      <img src="#" alt="Create DM" />
+      {children}
     </ClickPopup>
   );
 }

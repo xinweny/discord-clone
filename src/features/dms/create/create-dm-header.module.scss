@@ -1,0 +1,25 @@
+@use '@styles/colors';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: colors.$text-muted;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 18px 8px 4px 8px;
+
+  path {
+    stroke: colors.$text-muted;
+  }
+
+  svg:hover {
+    path {
+      stroke: colors.$text-primary;
+    }
+  }
+
+  &:hover {
+    color: colors.$text-primary;
+  }
+}
