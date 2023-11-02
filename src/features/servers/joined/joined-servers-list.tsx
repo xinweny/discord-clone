@@ -1,4 +1,4 @@
-import { JoinedServerLink } from '.';
+import { JoinedServerCard } from './joined-server-card';
 import { ServerNewMessageNotification } from '@features/notifications/message';
 
 import {
@@ -22,7 +22,7 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
   if (!servers.isSuccess) return null;
 
   return (
-    <ul className={styles.container}>
+    <div className={styles.container}>
       {servers.data?.map(
         server => <div key={server._id}>
           {(lastTimestamps && readTimestamps) && <ServerNewMessageNotification
@@ -30,9 +30,9 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
             lastTimestamps={lastTimestamps}
             readTimestamps={readTimestamps}
           />}
-          <JoinedServerLink server={server} />
+          <JoinedServerCard server={server} />
         </div>
       )}
-    </ul>
+    </div>
   );
 }

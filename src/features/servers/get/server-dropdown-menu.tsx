@@ -13,7 +13,7 @@ import { ServerSettingsButton } from '../settings';
 import { LeaveServerButton } from '@features/members/delete';
 import { InviteFriendsButton } from '@features/members/create';
 
-export function ServerNavDropdown() {
+export function ServerDropdownMenu() {
   const createChannelBtnRef = useRef<HTMLButtonElement>(null);
   const createCategoryBtnRef = useRef<HTMLButtonElement>(null);
   const serverSettingsBtnRef = useRef<HTMLButtonElement>(null);

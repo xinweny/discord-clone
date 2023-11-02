@@ -8,7 +8,7 @@ import { useJoinAllRooms } from '@features/notifications/hooks';
 
 import { AppLayout } from '@components/layouts';
 
-import { JoinedServersNavbar } from '@features/servers/joined';
+import { ServersNavbar } from '@features/servers/nav';
 import { LivekitRoom } from '@features/webrtc/stream';
 
 export function AppPage() {
@@ -22,7 +22,7 @@ export function AppPage() {
   return (
     <LivekitContext.Provider value={livekit}>
       <LivekitRoom>
-        <AppLayout navBar={<JoinedServersNavbar userId={user.data!.id} />}>
+        <AppLayout navBar={<ServersNavbar userId={user.data!.id} />}>
             <Outlet context={user.data} />
         </AppLayout>
       </LivekitRoom>

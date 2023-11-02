@@ -1,0 +1,17 @@
+@use '@styles/colors';
+
+.container {
+  min-height: calc(100% - (12px * 2));
+  overflow-x: visible;
+  background-color: colors.$bg-tertiary;
+  padding: 12px;
+  pointer-events: all;
+}
+
+.separator {
+  margin: 6px auto;
+  height: 2px;
+  width: 32px;
+  border-radius: 1px;
+  background-color: colors.$bg-primary;
+}

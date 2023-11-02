@@ -31,7 +31,7 @@ export function ModalButton<TModalProps>({
         ref={btnRef}
         onClick={toggle}
         {...props}
-        className={`${props.className || ''} ${styles.modalButton}`}
+        className={`${styles.modalButton} ${props.className || ''}`}
       >
         {children}
       </button>

@@ -9,7 +9,7 @@ import { useServerMemberAuthorize } from '@features/members/hooks';
 
 import { RoomWelcome } from '@components/ui/displays';
 
-import { ChannelInfoHeader } from '@features/servers/nav';
+import { ChannelInfoHeader } from '@features/channels/get';
 import { ServerMembersList } from '@features/members/list';
 import { MessagesContainer } from '@features/messages/list';
 import { SendMessageForm } from '@features/messages/send';

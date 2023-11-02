@@ -11,7 +11,7 @@ import { useSocketRoomJoin } from '@services/websocket/hooks';
 
 import { setDocumentTitle } from '@utils';
 
-import { ServerNavBar } from '@features/servers/nav';
+import { ChannelsNavbar } from '@features/channels/nav';
 
 import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetServerQuery } from '@features/servers/api';
@@ -41,7 +41,7 @@ export function ServerPage() {
       <ServerMemberContext.Provider value={member.data || null}>
         <MainLayout
           topNotice={!member.data && <JoinServerNotice server={server.data} />}
-          sideBar={<ServerNavBar />}
+          sideBar={<ChannelsNavbar />}
         >
           <Outlet context={{
             activeChannel,

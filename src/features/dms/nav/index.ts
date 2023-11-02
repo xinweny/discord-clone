@@ -1,2 +1,2 @@
 export * from './dms-nav-bar';
-export * from './dm-link-button';
+export * from './dms-link-button';

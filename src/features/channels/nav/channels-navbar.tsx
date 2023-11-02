@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 
-import { ServerContext } from '../context';
+import { ServerContext } from '../../servers/context';
 
 import { SidebarLayout } from '@components/layouts';
 
-import { ServerHeader } from './server-header';
+import { ServerHeader } from '@features/servers/get/server-header';
 import { ChannelsList } from '@features/channels/list';
 
-export function ServerNavBar() {
+export function ChannelsNavbar() {
   const server = useContext(ServerContext);
 
   if (!server) return null;

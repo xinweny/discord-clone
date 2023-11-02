@@ -1,3 +1,3 @@
-export * from './server-nav-bar';
-export * from './channel-info-header';
 export * from './servers-buttons';
+export * from './servers-navbar';
+export * from './servers-navbar-item';

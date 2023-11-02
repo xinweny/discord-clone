@@ -4,18 +4,18 @@ import { LinkImage } from '@components/ui/links';
 import { Acronym, Gif } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
 
-import { DmLinkButton } from '@features/dms/nav';
+import { DmsLinkButton } from '@features/dms/nav';
 
-import { ServersButtons } from '../nav';
-import { JoinedServersList } from '.';
+import { ServersButtons } from '.';
+import { JoinedServersList } from '../joined';
 
-import styles from './joined-servers-navbar.module.scss';
+import styles from './servers-navbar.module.scss';
 
-type JoinedServerNavbarProps = {
+type ServersNavbarProps = {
   userId: string;
 };
 
-export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
+export function ServersNavbar({ userId }: ServersNavbarProps) {
   const livekit = useLivekitContext();
 
   const { isOnCall, roomData } = { ...livekit };
@@ -25,7 +25,7 @@ export function JoinedServersNavbar({ userId }: JoinedServerNavbarProps) {
 
   return (
     <nav className={styles.container}>
-      <DmLinkButton />
+      <DmsLinkButton />
       {separator}
       {(isOnCall && roomData) && <LinkImage href={url!}>
         {avatarUrl
