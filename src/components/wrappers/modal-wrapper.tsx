@@ -1,3 +1,5 @@
+import { createPortal } from 'react-dom';
+
 type ModalWrapperProps = {
   className?: string;
   isOpen: boolean;
@@ -11,9 +13,11 @@ export function ModalWrapper({
   closeModal,
   children
 }: ModalWrapperProps) {
-  if (!isOpen) return null;
+  const modalRootNode = document.getElementById('modal-root');
+  
+  if (!isOpen || !modalRootNode) return null;
 
-  return (
+  return createPortal((
     <div onClick={closeModal}>
       <div
         className={className}
@@ -22,5 +26,5 @@ export function ModalWrapper({
         {children}
       </div>
     </div>
-  );
+  ), modalRootNode);
 }

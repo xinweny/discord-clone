@@ -9,13 +9,16 @@
 
 .content {
   display: flex;
-  
+  min-width: 120px;
+  border-radius: 4px;
+  padding: 4px 2px;
   
   > div {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 4px 8px;
+    padding-right: 0px;
 
     p {
       font-size: 12px;
@@ -23,6 +26,42 @@
 
     .displayName {
       font-size: 14px;
+    }
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: start;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      
+      path {
+        fill: colors.$interactive-normal;
+      }
+    }
+
+    &:hover {
+      background-color: colors.$bg-modifier-hover;
+
+      path {
+        fill: colors.$interactive-hover;
+      }
     }
   }
 }

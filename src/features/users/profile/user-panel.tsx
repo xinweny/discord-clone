@@ -36,7 +36,7 @@ export function UserPanel() {
           }
         </div>
       </div>
-      <div className={styles.buttons}>
+      <div className={styles.buttonsContainer}>
         <ToggleMuteButton />
         <UserSettingsButton />
       </div>

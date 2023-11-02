@@ -3,6 +3,11 @@ import { Track } from 'livekit-client';
 
 import { useLivekitContext } from '../hooks';
 
+import UnmutedIcon from '@assets/icons/microphone.svg?react';
+import MutedIcon from '@assets/icons/microphone-mute.svg?react';
+
+import styles from './toggle-mute-button.module.scss';
+
 export function ToggleMuteButton() {
   const livekit = useLivekitContext();
 
@@ -23,12 +28,13 @@ export function ToggleMuteButton() {
       initialState={!isMuted}
     />
     : <button
+      className={`${styles.button} ${isMuted ? styles.muted : styles.unmuted}`}
       type="button"
       onClick={() => { setIsMuted(muted => !muted); }}
     >
       {isMuted
-        ? <img src="" alt="Muted" />
-        : <img src="" alt="Unmuted" />
+        ? <MutedIcon />
+        : <UnmutedIcon />
       }
     </button>;
 }

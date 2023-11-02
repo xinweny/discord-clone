@@ -11,7 +11,7 @@ import './app.scss';
 import styles from './app.module.scss';
 
 const App = () => (
-  <div id="app" className={styles.app}>
+  <div id="app-root" className={styles.app}>
     <SvgMasks />
     <IntlProvider locale={navigator.language}>
       <Provider store={store}>
@@ -20,6 +20,7 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
+    <div id="modal-root"></div>
   </div>
 );
 
