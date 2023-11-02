@@ -29,6 +29,8 @@ $bg-secondary: $primary-630;
 $bg-secondary-alt: $primary-660;
 $bg-tertiary: $primary-700;
 
+$bg-modal: rgba(0, 0, 0, 0.85);
+
 $bg-modifier-active: lighten($bg-primary, 12%);
 $bg-modifier-hover: lighten($bg-primary, 5%);
 $bg-modifier-selected: lighten($bg-primary, 30%);
@@ -43,3 +45,4 @@ $text-muted: $primary-360;
 
 $interactive-normal: $primary-300;
 $interactive-hover: $primary-230;
+

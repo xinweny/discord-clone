@@ -20,7 +20,7 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
-    <div id="modal-root"></div>
+    <div id="modal-root" className={styles.modalContainer}></div>
   </div>
 );
 

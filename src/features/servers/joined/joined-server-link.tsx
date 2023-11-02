@@ -15,8 +15,6 @@ type JoinedServerLinkProps = {
 export function JoinedServerLink({ server }: JoinedServerLinkProps) {
   const { serverId } = useParams();
 
-  console.log(serverId);
-
   const { _id: id, avatarUrl, name } = server;
 
   return (

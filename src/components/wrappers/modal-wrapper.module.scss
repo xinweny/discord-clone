@@ -1,0 +1,10 @@
+@use '@styles/colors';
+
+.container {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: all;
+  display: flex;
+  background-color: colors.$bg-modal;
+}
