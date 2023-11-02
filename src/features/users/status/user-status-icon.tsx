@@ -2,11 +2,6 @@ import { useEffect } from 'react';
 
 import { useGetUserStatusQuery } from '../api';
 
-import CircleIcon from '@assets/icons/circle.svg?react';
-import RingIcon from '@assets/icons/ring.svg?react';
-
-import styles from './user-status-icon.module.scss';
-
 type UserStatusIconProps = {
   userId: string;
   updateStatus?: (userId: string, isOnline: boolean) => void;
@@ -19,8 +14,18 @@ export function UserStatusIcon({ userId, updateStatus }: UserStatusIconProps) {
     if (updateStatus && isSuccess) updateStatus(userId, !!status);
   }, [status]);
 
-  return (status
-    ? <CircleIcon className={`${styles.icon} ${styles.online}`} />
-    : <RingIcon className={`${styles.icon} ${styles.offline}`} />
+  const props = {
+    fill: status ? '#23a55a' : '#80848e',
+    mask: `url(#svg-mask-status-${status ? 'online' : 'offline'})`,
+  };
+
+  return (
+    <rect
+      width="10"
+      height="10"
+      x="22"
+      y="22"
+      {...props}
+    ></rect>
   );
 }

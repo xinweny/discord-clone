@@ -15,7 +15,7 @@ export function Avatar({
   src, alt, notification, placeholder
 }: AvatarProps) {
   const renderImg = (src: string | undefined) => {
-    const className = styles.withNotification;
+    const className = styles.avatar;
     
     if (!src) return <img
       className={className}
@@ -30,11 +30,25 @@ export function Avatar({
   };
 
   return (
-    <div className={styles.avatar}>
-      {renderImg(src)}
-      <div className={styles.notification}>
-        {notification}
-      </div>
-    </div>
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      className={styles.mask}
+      aria-hidden
+    >
+      <foreignObject
+        x="0"
+        y="0"
+        width="32"
+        height="32"
+        mask={`url(#svg-mask-${notification ? 'avatar-status' : 'avatar-default'})`}
+      >
+        <div className={styles.wrapper}>
+          {renderImg(src)}
+        </div>
+      </foreignObject>
+      {notification}
+    </svg>
   );
 }

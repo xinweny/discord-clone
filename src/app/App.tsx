@@ -5,17 +5,22 @@ import { IntlProvider } from 'react-intl';
 import { store } from './store';
 
 import Router from './router';
+import { SvgMasks } from '@components/svg';
 
 import './app.scss';
+import styles from './app.module.scss';
 
 const App = () => (
-  <IntlProvider locale={navigator.language}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </Provider>
-  </IntlProvider>
+  <div id="app" className={styles.app}>
+    <SvgMasks />
+    <IntlProvider locale={navigator.language}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </Provider>
+    </IntlProvider>
+  </div>
 );
 
 export default App;

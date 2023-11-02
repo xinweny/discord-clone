@@ -6,13 +6,13 @@
 }
 
 .online {
-  path {
+  circle {
     fill: colors.$green;
   }
 }
 
 .offline {
   path {
-    fill: #80848e;
+    stroke: #80848e;
   }
 }
