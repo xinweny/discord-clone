@@ -14,8 +14,10 @@ $black: #000000;
 $off-white: #F6F6F6;
 $not-quite-black: #23272A;
 
+$primary-130: hsl(220 calc($saturation-factor * 13%) 95.5%);
 $primary-230: hsl(10 calc($saturation-factor * 9.1%) 87.1%);
 $primary-300: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
+$primary-330: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
 $primary-360: hsl(214 calc($saturation-factor * 8.1%) 61.2%);
 $primary-600: hsl(223 calc($saturation-factor * 6.7%) 20.6%);
 $primary-630: hsl(220 calc($saturation-factor * 6.5%) 18%);
@@ -31,7 +33,12 @@ $bg-modifier-active: lighten($bg-primary, 12%);
 $bg-modifier-hover: lighten($bg-primary, 5%);
 $bg-modifier-selected: lighten($bg-primary, 30%);
 
-$text-normal: $primary-230;
+$header-primary: $primary-130;
+$header-secondary: $primary-330;
+$header-muted: $primary-360;
+
+$text-primary: $primary-230;
+$text-secondary: $primary-330;
 $text-muted: $primary-360;
 
 $interactive-normal: $primary-300;

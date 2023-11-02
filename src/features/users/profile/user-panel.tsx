@@ -29,7 +29,7 @@ export function UserPanel() {
           />}
         />
         <div>
-          <p className={styles.displayName}>{displayName}</p>
+          <p className={styles.header}>{displayName}</p>
           {isFocus
             ? <p>{username}</p>
             : <p>Online</p>
