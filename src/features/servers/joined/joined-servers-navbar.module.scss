@@ -17,9 +17,9 @@
   overflow: hidden;
   transition: all 0.15s ease-out;
 
-  &:hover {
-    border-radius: 12px;
+  &.active, &:hover {
     background-color: colors.$blurple;
+    border-radius: 16px;
   }
 
   img {

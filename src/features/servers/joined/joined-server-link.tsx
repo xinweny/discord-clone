@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+
 import type { UserServerData } from '../types';
 
 import { Tooltip } from '@components/ui/popups';
@@ -11,6 +13,10 @@ type JoinedServerLinkProps = {
 };
 
 export function JoinedServerLink({ server }: JoinedServerLinkProps) {
+  const { serverId } = useParams();
+
+  console.log(serverId);
+
   const { _id: id, avatarUrl, name } = server;
 
   return (
@@ -19,16 +25,16 @@ export function JoinedServerLink({ server }: JoinedServerLinkProps) {
       direction="right"
       options={{ gap: '16px' }}
     >
-      <li className={parentStyles.listItem}>
-        {avatarUrl
-          ? <LinkImage href={`/channels/${id}`}>
-              <Gif src={avatarUrl} alt={name} />
-          </LinkImage>
-          : <Acronym
+      <li className={`${parentStyles.listItem} ${(serverId === id) && parentStyles.active}`}>
+        <LinkImage href={`/channels/${id}`}>
+          {avatarUrl
+            ? <Gif src={avatarUrl} alt={name} />
+            : <Acronym
               name={name}
               className={parentStyles.childContainer}
             />
-        }
+          }
+        </LinkImage>
       </li>
     </Tooltip>
   );
