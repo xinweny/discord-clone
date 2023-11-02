@@ -6,5 +6,7 @@
   height: 100vh;
   pointer-events: all;
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: colors.$bg-modal;
 }
