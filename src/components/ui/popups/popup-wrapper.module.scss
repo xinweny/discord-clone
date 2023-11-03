@@ -1,0 +1,9 @@
+.container {
+  pointer-events: none;
+  position: relative;
+  
+  > div {
+    position: absolute;
+    pointer-events: all;
+  }
+}

@@ -12,8 +12,8 @@ export function DropdownMenu({ children }: DropdownMenuProps) {
   const ref = useClickAway<HTMLUListElement>(close);
 
   return (isOpen && (
-      <ul ref={ref}>
-        {children}
-      </ul>
+    <ul ref={ref}>
+      {children}
+    </ul>
   ));
 }

@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-import { PortalWrapper } from '@components/wrappers';
-
-import styles from './click-popup.module.scss';
+import { PopupWrapper } from '.';
 
 type ClickPopupProps = {
   renderPopup: () => React.ReactElement;
@@ -10,6 +8,11 @@ type ClickPopupProps = {
   onOpen?: () => void;
   onClose?: () => void;
   btnRef?: React.RefObject<HTMLButtonElement>;
+  position?: {
+    direction: 'top' | 'bottom' | 'left' | 'right';
+    align: 'start' | 'end' | 'center';
+    gap: number;
+  }
 };
 
 export function ClickPopup({
@@ -18,38 +21,60 @@ export function ClickPopup({
   onOpen,
   onClose,
   btnRef,
+  position = {
+    direction: 'left',
+    align: 'start',
+    gap: 0
+  },
 }: ClickPopupProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
+  const [style, setStyle] = useState<React.CSSProperties>({});
+
+  const defaultRef = useRef(null);
+  const buttonRef = btnRef || defaultRef;
+
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showPopup) return;
+    if (!buttonRef.current || !popupRef.current) return;
+
+    const btnRect = buttonRef.current.getBoundingClientRect();
+    const popupRect = popupRef.current.getBoundingClientRect();
+
+    const { direction, align, gap } = position;
+
+    setStyle({
+      top: `${btnRect.top + btnRect.height}px`,
+      left: `${btnRect.left}px`,
+    });
+  }, [showPopup]);
 
   useEffect(() => {
     if (showPopup === true && onOpen) onOpen();
     if (showPopup === false && onClose) onClose();
   }, [showPopup]);
 
-  const popupButton = <button
-    type="button"
-    onClick={() => {
-      setShowPopup(prev => !prev);
-    }}
-    ref={btnRef}
-  >
-    {children}
-  </button>;
-
   return (
     <>
-      {popupButton}
-      <PortalWrapper
-        rootId="popup-root"
-        isOpen={!!showPopup}
-        close={() => { setShowPopup(false); }}
-        className={styles.container}
-        style={{
-
+      <button
+        type="button"
+        onClick={() => {
+          setShowPopup(prev => !prev);
         }}
+        ref={buttonRef}
       >
-        {renderPopup()}
-      </PortalWrapper>
+        {children}
+      </button>
+      <PopupWrapper
+        isOpen={!!showPopup}
+        closePopup={() => { setShowPopup(false); }}
+        style={style}
+      >
+        <div ref={popupRef}>
+          {renderPopup()}
+        </div>
+      </PopupWrapper>
     </>
   );
 }

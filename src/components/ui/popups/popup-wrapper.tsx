@@ -2,23 +2,25 @@ import { PortalWrapper } from '@components/wrappers';
 
 import styles from './popup-wrapper.module.scss';
 
-type ModalWrapperProps = {
+type PopupWrapperProps = {
   isOpen: boolean;
   closePopup: () => void;
   children: React.ReactNode;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
-export function ModalWrapper({
+export function PopupWrapper({
   isOpen,
   closePopup,
-  children
-}: ModalWrapperProps) {
+  children,
+  ...props
+}: PopupWrapperProps) {
   return (
     <PortalWrapper
-      rootId="modal-root"
+      rootId="popup-root"
       isOpen={isOpen}
       close={closePopup}
       className={styles.container}
+      {...props}
     >
       {children}
     </PortalWrapper>
