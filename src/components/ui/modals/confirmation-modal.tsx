@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import type { ModalProps } from '@types';
 
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '.';
 import { FormGroup, Input } from '../forms';
 
 type ConfirmationModalProps = {

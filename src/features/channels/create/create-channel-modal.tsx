@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import type { CategoryData } from '@features/categories/types';
 import type { ModalProps } from '@types';
 
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '@components/ui/modals';
 
 import { CreateChannelForm } from './create-channel-form';
 

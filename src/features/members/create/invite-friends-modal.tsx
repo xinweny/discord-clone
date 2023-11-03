@@ -10,7 +10,7 @@ import { useGetUserData } from '@features/auth/hooks';
 
 import { getDmInfo } from '@features/dms/utils';
 
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '@components/ui/modals';
 import { SearchInput } from '@components/ui/forms';
 
 import { ServerInviteLink } from '@features/server-invites/get';

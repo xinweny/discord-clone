@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { SettingsLayout } from '@components/layouts';
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '.';
 
 import type { ModalProps } from '@types';
 

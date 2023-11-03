@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '@components/ui/modals';
 
 import { CreateServerForm } from './create-server-form';
 

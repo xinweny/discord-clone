@@ -20,7 +20,8 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
-    <div id="modal-root" className={styles.modalContainer}></div>
+    <div id="modal-root" className={styles.container}></div>
+    <div id="popup-root" className={styles.container}></div>
   </div>
 );
 

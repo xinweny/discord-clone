@@ -9,4 +9,11 @@
 
 .content {
   overflow: hidden scroll;
+  margin-right: -200px;
+  padding-right: 200px;
+  pointer-events: none;
+
+  > div {
+    pointer-events: all;
+  }
 }

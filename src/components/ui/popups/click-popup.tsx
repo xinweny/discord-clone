@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ClickAwayListener } from '@mui/material';
 
 import styles from './click-popup.module.scss';
@@ -26,7 +27,7 @@ export function ClickPopup({
   }, [showPopup]);
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <button
         type="button"
         onClick={() => {
@@ -45,6 +46,6 @@ export function ClickPopup({
           </div>
         </ClickAwayListener>
       )}
-    </div>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import type { ModalProps } from '@types';
 
-import { ModalWrapper } from '@components/wrappers';
+import { ModalWrapper } from '@components/ui/modals';
 
 import { CreateCategoryForm } from './create-category-form';
 
