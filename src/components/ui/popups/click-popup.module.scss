@@ -1,13 +1,7 @@
-.wrapper {
-  position: relative;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .popup {
-    position: absolute;
+.container {
+  pointer-events: none;
+  
+  > div {
+    pointer-events: all;
   }
 }

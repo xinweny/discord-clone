@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ClickAwayListener } from '@mui/material';
+import { useClickAway } from '@uidotdev/usehooks';
 
 import { DropdownContext } from '.';
 
@@ -9,12 +9,11 @@ type DropdownMenuProps = {
 
 export function DropdownMenu({ children }: DropdownMenuProps) {
   const { isOpen, close } = useContext(DropdownContext)!;
+  const ref = useClickAway<HTMLUListElement>(close);
 
   return (isOpen && (
-    <ClickAwayListener onClickAway={close}>
-      <ul>
+      <ul ref={ref}>
         {children}
       </ul>
-    </ClickAwayListener>
   ));
 }

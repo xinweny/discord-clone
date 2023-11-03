@@ -1,6 +1,7 @@
-import { ClickAwayListener } from '@mui/material';
+import { useRef } from 'react';
+import { useClickAway } from '@uidotdev/usehooks';
 
-import type { AbsStyleData } from '@hooks';
+import type { AbsStyleData } from '@components/hooks';
 
 import { ContextMenuItem } from './context-menu-item';
 
@@ -22,24 +23,24 @@ export function ContextMenu({
   menuStyle,
   closeContextMenu,
 }: ContextMenuProps) {
+  const clickAwayRef = useClickAway<HTMLUListElement>(closeContextMenu);
+
+
   return (
-    <ClickAwayListener onClickAway={closeContextMenu}>
-      <div
-        ref={contextMenuRef}
-        className='contextMenu'
-        style={menuStyle}
-      >
-        <ul>
-          {options.map(({ label, action }) => 
-            <ContextMenuItem
-              key={label}
-              label={label}
-              action={action}
-              closeMenu={closeContextMenu}
-            />
-          )}
-        </ul>
-      </div>
-    </ClickAwayListener>
+    <div
+      ref={contextMenuRef}
+      style={menuStyle}
+    >
+      <ul ref={clickAwayRef}>
+        {options.map(({ label, action }) => 
+          <ContextMenuItem
+            key={label}
+            label={label}
+            action={action}
+            closeMenu={closeContextMenu}
+          />
+        )}
+      </ul>
+    </div>
   );
 }

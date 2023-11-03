@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { ClickAwayListener } from '@mui/material';
+import { useClickAway } from '@uidotdev/usehooks';
 
 import styles from './portal-wrapper.module.scss';
 
@@ -19,15 +19,15 @@ export function PortalWrapper({
 }: PortalWrapperProps) {
   const rootNode = document.getElementById(rootId);
 
+  const ref = useClickAway(close) as React.RefObject<HTMLDivElement>;
+
   if (!isOpen || !rootNode) return null;
 
   return createPortal((
     <div {...props} className={`${styles.wrapper} ${props.className || ''}`}>
-      <ClickAwayListener onClickAway={close}>
-        <div>
-          {children}
-        </div>
-      </ClickAwayListener>
+      <div ref={ref}>
+        {children}
+      </div>
     </div>
   ), rootNode);
 }

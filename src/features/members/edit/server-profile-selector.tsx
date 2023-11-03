@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ClickAwayListener } from '@mui/material';
+import { useClickAway } from '@uidotdev/usehooks';
 
 import { useDropdown } from '@components/hooks';
 
@@ -22,6 +22,8 @@ export function ServerProfileSelector({
 
   const { isOpen, toggle, close } = useDropdown();
 
+  const ref = useClickAway<HTMLDivElement>(close);
+
   const activeServer = joinedServers.find(server => server._id === id);
 
   useEffect(() => {
@@ -39,48 +41,46 @@ export function ServerProfileSelector({
   }, [activeServerId]);
 
   return (
-    <ClickAwayListener onClickAway={() => { close(); }}>
-      <div>
-        <button
-          type="button"
-          onClick={() => { toggle(); }}
-        >{isOpen
-          ? <input
-            type="text"
-            value={query}
-            onChange={(e) => { setQuery(e.target.value); }}
-            autoFocus
-          />
-          : <div>
-            <img src={activeServer?.avatarUrl} />
-            <p>{activeServer?.name || ''}</p>
-          </div>
-        }</button>
-        {isOpen &&
-          <ul>{filteredServers.length > 0
-            ? filteredServers.map(server => <li key={server._id}>
-              <button onClick={() => {
-                set(server._id);
-                close();
-              }}>
-                <div>
-                  <img src={server.avatarUrl} />
-                  <p>{server.name}</p>
-                  {id === server._id && <img src="" alt="Selected" />}
-                </div>
-              </button>
-            </li>)
-            : <button
-              type="button"
-              onClick={() => {
-                close();
-                setQuery('');
-              }}
-            >No results found.</button>
-          }
-        </ul>
+    <div ref={ref}>
+      <button
+        type="button"
+        onClick={() => { toggle(); }}
+      >{isOpen
+        ? <input
+          type="text"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); }}
+          autoFocus
+        />
+        : <div>
+          <img src={activeServer?.avatarUrl} />
+          <p>{activeServer?.name || ''}</p>
+        </div>
+      }</button>
+      {isOpen &&
+        <ul>{filteredServers.length > 0
+          ? filteredServers.map(server => <li key={server._id}>
+            <button onClick={() => {
+              set(server._id);
+              close();
+            }}>
+              <div>
+                <img src={server.avatarUrl} />
+                <p>{server.name}</p>
+                {id === server._id && <img src="" alt="Selected" />}
+              </div>
+            </button>
+          </li>)
+          : <button
+            type="button"
+            onClick={() => {
+              close();
+              setQuery('');
+            }}
+          >No results found.</button>
         }
-      </div>
-    </ClickAwayListener>
+      </ul>
+      }
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { ClickAwayListener } from '@mui/material';
+
+import { PortalWrapper } from '@components/wrappers';
 
 import styles from './click-popup.module.scss';
 
@@ -26,26 +26,30 @@ export function ClickPopup({
     if (showPopup === false && onClose) onClose();
   }, [showPopup]);
 
+  const popupButton = <button
+    type="button"
+    onClick={() => {
+      setShowPopup(prev => !prev);
+    }}
+    ref={btnRef}
+  >
+    {children}
+  </button>;
+
   return (
     <>
-      <button
-        type="button"
-        onClick={() => {
-          setShowPopup(prev => !prev);
+      {popupButton}
+      <PortalWrapper
+        rootId="popup-root"
+        isOpen={!!showPopup}
+        close={() => { setShowPopup(false); }}
+        className={styles.container}
+        style={{
+
         }}
-        ref={btnRef}
       >
-        {children}
-      </button>
-      {showPopup && (
-        <ClickAwayListener
-          onClickAway={() => { setShowPopup(false); }}
-        >
-          <div className={styles.popup}>
-            {renderPopup()}
-          </div>
-        </ClickAwayListener>
-      )}
+        {renderPopup()}
+      </PortalWrapper>
     </>
   );
 }
