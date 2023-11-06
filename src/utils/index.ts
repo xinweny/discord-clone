@@ -6,3 +6,4 @@ export * from './handle-server-error';
 export * from './set-document-title';
 export * from './find-urls';
 export * from './css-value';
+export * from './merge-refs';

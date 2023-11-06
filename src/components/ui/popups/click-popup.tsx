@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { PositionData, usePopupPos } from '@components/hooks';
+
 import { PopupWrapper } from '.';
 
 type ClickPopupProps = {
@@ -8,11 +10,7 @@ type ClickPopupProps = {
   onOpen?: () => void;
   onClose?: () => void;
   btnRef?: React.RefObject<HTMLButtonElement>;
-  position?: {
-    direction: 'top' | 'bottom' | 'left' | 'right';
-    align: 'start' | 'end' | 'center';
-    gap: number;
-  }
+  position?: PositionData;
 };
 
 export function ClickPopup({
@@ -24,31 +22,22 @@ export function ClickPopup({
   position = {
     direction: 'left',
     align: 'start',
-    gap: 0
+    gap: 0,
   },
 }: ClickPopupProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
-  const [style, setStyle] = useState<React.CSSProperties>({});
 
   const defaultRef = useRef(null);
   const buttonRef = btnRef || defaultRef;
 
   const popupRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!showPopup) return;
-    if (!buttonRef.current || !popupRef.current) return;
-
-    const btnRect = buttonRef.current.getBoundingClientRect();
-    const popupRect = popupRef.current.getBoundingClientRect();
-
-    const { direction, align, gap } = position;
-
-    setStyle({
-      top: `${btnRect.top + btnRect.height}px`,
-      left: `${btnRect.left}px`,
-    });
-  }, [showPopup]);
+  const style = usePopupPos({
+    show: !!showPopup,
+    btnRef: buttonRef,
+    popupRef,
+    position,
+  });
 
   useEffect(() => {
     if (showPopup === true && onOpen) onOpen();
@@ -69,11 +58,12 @@ export function ClickPopup({
       <PopupWrapper
         isOpen={!!showPopup}
         closePopup={() => { setShowPopup(false); }}
-        style={style}
+        popupOpts={{
+          style,
+          ref: popupRef,
+        }}
       >
-        <div ref={popupRef}>
-          {renderPopup()}
-        </div>
+        {renderPopup()}
       </PopupWrapper>
     </>
   );
