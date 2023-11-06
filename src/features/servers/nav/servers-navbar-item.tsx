@@ -19,7 +19,7 @@ export function ServersNavbarItem({
     <Tooltip
       text={tooltipText}
       direction="right"
-      options={{ gap: '16px' }}
+      options={{ gap: 16 }}
     >
       <div className={`${styles.item} ${isActive ? styles.active : ''} ${className || ''}`}>
         {children}

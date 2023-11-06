@@ -9,11 +9,27 @@
 
 .content {
   overflow: hidden scroll;
-  margin-right: -200px;
-  padding-right: 200px;
   pointer-events: none;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: transparent;
+    background-clip: padding-box;
+    border-right: 2px transparent solid;
+    border-left: 2px transparent solid;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: colors.$bg-tertiary;
+  }
 
   > div {
     pointer-events: all;
+    padding-right: 0px;
   }
 }

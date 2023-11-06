@@ -16,8 +16,8 @@ export function CreateDmButton({ children }: CreateDmButtonProps) {
       btnRef={createDmBtnRef}
       position={{
         direction: 'left',
-        align: 'start',
-        gap: 24,
+        align: 'center',
+        gap: -24,
       }}
     >
       {children}

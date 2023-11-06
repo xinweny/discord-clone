@@ -15,7 +15,7 @@ export type ChildOptions = {
 type PortalWrapperProps = {
   rootId: string;
   isOpen: boolean;
-  close: () => void;
+  close?: () => void;
   children: React.ReactNode;
   childOpts?: ChildOptions;
 } & React.HTMLAttributes<HTMLDivElement>;
@@ -30,7 +30,9 @@ export function PortalWrapper({
 }: PortalWrapperProps) {
   const rootNode = document.getElementById(rootId);
 
-  const clickAwayRef = useClickAway(close) as React.RefObject<HTMLDivElement>;
+  const clickAwayRef = useClickAway(() => {
+    close && close();
+  }) as React.RefObject<HTMLDivElement>;
 
   if (!isOpen || !rootNode) return null;
 

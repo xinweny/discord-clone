@@ -1,127 +1,59 @@
 @use '@styles/colors';
 
 .wrapper {
+  pointer-events: none !important;
+}
+
+.container {
+  position: absolute;
+}
+
+.tooltip {
   position: relative;
-  z-index: 1;
-  pointer-events: all;
+  
+  background: colors.$black;
+  color: colors.$text-primary;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 4px;
 
-  &[data-tooltip] {
-    position: relative;
-    cursor: pointer;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 8px solid transparent;
+    width: 0;
+    height: 0;
+    z-index: 1;
+    pointer-events: none;
 
-    &:before, &:after {
-      line-height: 1;
-      font-size: 12px;
-      font-weight: bold;
-      pointer-events: none;
-      position: absolute;
-      box-sizing: border-box;
-      display: none;
-      opacity: 0;
+    &.top {
+      margin-left: -8px;
+      top: 100%;
+      left: 50%;
+      border-top-color: colors.$black colors.$black;
     }
 
-    &:before {
-      content: "";
-      border: 5px solid transparent;
-      z-index: 2;
+    &.left {
+      margin-top: -8px;
+      top: 50%;
+      left: 100%;
+      border-left-color: colors.$black;
     }
 
-    &:after {
-      content: attr(data-tooltip);
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 8px 8px;
-      border-radius: 4px;
-      background: colors.$black;
-      color: colors.$text-primary;
-      z-index: 1;
+    &.bottom {
+      margin-left: -8px;
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: colors.$black;
     }
 
-    &:hover {
-      &:before, &:after {
-        display: block;
-        opacity: 1;
-      }
-    }
-
-    &[data-flow="top"], &:not([data-flow]) {
-      &::before, &::after {
-        left: 50%;
-        -webkit-transform: translate(-50%, calc(-1 * var(--gap)));
-        transform: translate(-50%, calc(-1 * var(--gap)));
-      }
-
-      &::before {
-        bottom: 100%;
-        border-bottom-width: 0;
-        border-top-color: colors.$black;
-      }
-
-      &::after {
-        bottom: calc(100% + 5px);
-      }
-    }
-
-    &[data-flow="bottom"] {
-      &::before, &::after {
-        left: 50%;
-        -webkit-transform: translate(-50%, var(--gap));
-        transform: translate(-50%, var(--gap));
-      }
-
-      &::before {
-        top: 100%;
-        border-top-width: 0;
-        border-bottom-color: colors.$black;
-      }
-
-      &::after {
-        top: calc(100% + 5px);
-      }
-    }
-
-    &[data-flow="left"] {
-      &::before {
-        top: 50%;
-        border-right-width: 0;
-        border-left-color: colors.$black;
-        left: calc(0em - 5px);
-        -webkit-transform: translate(calc(-1 * var(--gap)), -50%);
-        transform: translate(calc(-1 * var(--gap)), -50%);
-      }
-
-      &::after {
-        top: 50%;
-        right: calc(100% + 5px);
-        -webkit-transform: translate(calc(-1 * var(--gap)), -50%);
-        transform: translate(calc(-1 * var(--gap)), -50%);
-      }
-    }
-
-    &[data-flow="right"] {
-      &::before {
-        top: 50%;
-        border-left-width: 0;
-        border-right-color: colors.$black;
-        right: calc(0em - 5px);
-        -webkit-transform: translate(var(--gap), -50%);
-        transform: translate(var(--gap), -50%);
-      }
-
-      &::after {
-        top: 50%;
-        left: calc(100% + 5px);
-        -webkit-transform: translate(var(--gap), -50%);
-        transform: translate(var(--gap), -50%);
-      }
-    }
-  }
-
-  &[data-tooltip=""] {
-    &::after, &::before {
-      display: none !important;
+    &.right {
+      margin-top: -8px;
+      top: 50%;
+      right: 100%;
+      border-right-color: colors.$black;
     }
   }
 }

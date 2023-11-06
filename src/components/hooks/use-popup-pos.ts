@@ -16,32 +16,49 @@ export type PositionData = {
 const getPosStyle = (position: PositionData, btnRect: DOMRect, popupRect: DOMRect) => {
   const { direction, align, gap } = position;
 
-  const posStyles = {
-    opacity: 1,
+  let posStyles = {
     top: 0,
     left: 0,
   };
 
   switch (direction) {
     case 'top': {
-      console.log(popupRect);
-      posStyles.top = btnRect.top - popupRect.height - gap;
-      posStyles.left = btnRect.left - (align === 'start' ? 0 : popupRect.width - btnRect.width);
-
+      posStyles = {
+        top: btnRect.top - popupRect.height - gap,
+        left: btnRect.left + (align === 'center'
+          ? (btnRect.width - popupRect.width) / 2
+          : align === 'start' ? 0 : popupRect.width - btnRect.width
+        ),
+      }; break;
+    }
+    case 'bottom': {
+      posStyles = {
+        top: btnRect.bottom + gap,
+        left: btnRect.left + (align === 'center'
+          ? (btnRect.width - popupRect.width) / 2
+          : align === 'start' ? 0 : btnRect.width - popupRect.width
+        ),
+      }; break;
+    }
+    case 'left': {
+      posStyles = {
+        top: btnRect.top + (align === 'center'
+          ? (btnRect.height - popupRect.height) / 2
+          : align === 'start' ? 0 : btnRect.height - popupRect.height
+        ),
+        left: btnRect.left - gap,
+      }; break;
+    }
+    case 'right': {
+      posStyles = {
+        top: btnRect.top + (align === 'center'
+          ? (btnRect.height - popupRect.height) / 2
+          : align === 'start' ? 0 : btnRect.height - popupRect.height
+        ),
+        left: btnRect.right + gap,
+      };
       break;
     }
-    case 'bottom': return {
-      top: btnRect.top + btnRect.height + gap,
-      left: btnRect.left - (align === 'start' ? 0 : popupRect.width - btnRect.width),
-    };
-    case 'left': return {
-      top: btnRect.top - (align === 'start' ? 0 : popupRect.height - btnRect.height),
-      left: btnRect.left + btnRect.width + gap,
-    };
-    case 'right': return {
-      top: btnRect.top - (align === 'start' ? 0 : popupRect.height - btnRect.height),
-      left: btnRect.left + gap,
-    };
     default: break;
   }
 

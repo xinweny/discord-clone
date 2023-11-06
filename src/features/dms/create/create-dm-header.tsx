@@ -12,7 +12,7 @@ export function CreateDmHeader() {
       <Tooltip
         text="Create DM"
         direction="top"
-        options={{ gap: '4px' }}
+        options={{ gap: 4 }}
       >
         <CreateDmButton>
           <PlusIcon width="18px" height="18px" />

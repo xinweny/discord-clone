@@ -4,7 +4,7 @@ import { fileValidator } from '@utils';
 
 export const createDmSchema = zod.object({
   participantIds: zod.string().array()
-    .refine(ids => ids.length > 0, 'You must add at least 1 friend.')
+    .refine(ids => ids.length > 0, 'You can add 9 more friends.')
     .refine(ids => ids.length <= 9, 'This group has a limit of 10 members.'),
 });
 
