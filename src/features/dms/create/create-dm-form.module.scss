@@ -1,0 +1,12 @@
+@use '@styles/colors';
+
+.form {
+  background-color: colors.$bg-primary;
+  border-radius: 4px;
+  border: 1px solid colors.$bg-tertiary;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 440px;
+  max-height: 720px;
+  min-height: 200px;
+}

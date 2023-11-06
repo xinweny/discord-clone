@@ -23,6 +23,8 @@ import { RemoveParticipantButtons } from './remove-participant-buttons';
 
 import { useCreateDmMutation } from '../api';
 
+import styles from './create-dm-form.module.scss';
+
 const MAX_PARTICIPANTS = 10;
 
 type CreateDMFormProps = {
@@ -79,12 +81,11 @@ export function CreateDmForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <CreateDmFormHeader
           name="participantIds"
           maxMembers={MAX_PARTICIPANTS}
-        />
-        <div>
+        >
           <RemoveParticipantButtons
             friends={friends}
             name="participantIds"
@@ -94,15 +95,17 @@ export function CreateDmForm({
             query={query}
             setQuery={setQuery}
           />
+        </CreateDmFormHeader>
+        <div>
+          {friends.length > 0
+              ? friends.map((friend) => <ParticipantCheckboxInput
+              key={friend._id}
+              participant={friend.user}
+              name="participantIds"
+            />)
+            : <NullMessage src="#" message="No friends found." />
+          }
         </div>
-        {friends.length > 0
-            ? friends.map((friend) => <ParticipantCheckboxInput
-            key={friend._id}
-            participant={friend.user}
-            name="participantIds"
-          />)
-          : <NullMessage src="#" message="No friends found." />
-        }
         <SubmitButton>Create DM</SubmitButton>
       </form>
     </FormProvider>

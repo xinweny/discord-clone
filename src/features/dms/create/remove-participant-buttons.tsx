@@ -2,6 +2,10 @@ import { useFormContext } from 'react-hook-form';
 
 import type { RelationData } from '@features/relations/types';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+
+import styles from './remove-participant-buttons.module.scss';
+
 type RemoveParticipantButtonsProps = {
   friends: RelationData[];
   name: string;
@@ -20,18 +24,19 @@ export function RemoveParticipantButtons({
   );
 
   return (
-    <div>
+    <>
       {participants.map(({ user }) => (
         <button
           key={user._id}
           onClick={() => {
             setValue(name, participantIds.filter((i: string) => i !== user._id));
           }}
+          className={styles.button}
         >
           <p>{user.displayName}</p>
-          <p>x</p>
+          <CrossIcon />
         </button>
       ))}
-    </div>
+    </>
   );
 }

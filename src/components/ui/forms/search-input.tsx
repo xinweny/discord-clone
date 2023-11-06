@@ -1,6 +1,8 @@
+import styles from './search-input.module.scss';
+
 type SearchInputProps = {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  query?: string;
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
   showButton?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -11,19 +13,19 @@ export function SearchInput({
   ...props
 }: SearchInputProps) {
   return (
-    <div>
+    <div className={styles.input}>
       <input
         type="text"
         {...props}
-        onChange={(e) => { setQuery(e.target.value); }}
+        onChange={(e) => { setQuery && setQuery(e.target.value); }}
         value={query}
       />
       {showButton && <button
         type="button"
-        onClick={() => { setQuery(''); }}
-        disabled={query.length === 0}
+        onClick={() => { setQuery && setQuery(''); }}
+        disabled={query?.length === 0}
       >
-        {query.length > 0
+        {query && query.length > 0
           ? <img src="#" alt="Reset" />
           : <img src="#" alt="Search" />
         }

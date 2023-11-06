@@ -14,6 +14,11 @@ export function CreateDmButton({ children }: CreateDmButtonProps) {
     <ClickPopup
       renderPopup={() => <CreateDmForm btnRef={createDmBtnRef} />}
       btnRef={createDmBtnRef}
+      position={{
+        direction: 'left',
+        align: 'start',
+        gap: 24,
+      }}
     >
       {children}
     </ClickPopup>

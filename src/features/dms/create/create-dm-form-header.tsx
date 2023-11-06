@@ -3,14 +3,18 @@ import pluralize from 'pluralize';
 
 import { ErrorMessage } from '@components/ui/forms';
 
+import styles from './create-dm-form-header.module.scss';
+
 type CreateDmFormHeaderProps = {
   name: string;
   maxMembers: number;
+  children: React.ReactNode;
 };
 
 export function CreateDmFormHeader({
   name,
   maxMembers,
+  children,
 }: CreateDmFormHeaderProps) {
   const {  watch } = useFormContext();
 
@@ -19,8 +23,8 @@ export function CreateDmFormHeader({
   const limitMsg = `This group has a limit of ${maxMembers} members.`;
 
   return (
-    <div>
-      <h3>Select Friends</h3>
+    <div className={styles.header}>
+      <h1>Select Friends</h1>
       <ErrorMessage
         name={name}
         validatedMsg={(participantIds.length === maxMembers)
@@ -32,6 +36,9 @@ export function CreateDmFormHeader({
           )}.`
         }
       />
+      <div className={styles.search}>
+        {children}
+      </div>
     </div>
   );
 }

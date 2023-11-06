@@ -3,6 +3,8 @@ import { useFormContext } from 'react-hook-form';
 
 import { SearchInput } from '@components/ui/forms';
 
+import styles from './participant-search-input.module.scss';
+
 type ParticipantSearchInputProps = {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -25,6 +27,7 @@ export function ParticipantSearchInput({
       query={query}
       setQuery={setQuery}
       placeholder="Type the username of a friend"
+      className={styles.input}
     />
   );
 }
