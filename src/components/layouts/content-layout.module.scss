@@ -20,7 +20,7 @@
 }
 
 .content {
-  overflow-y: scroll;
+  overflow: hidden;
   grid-row: 2 / 3;
   grid-column: 1 / 2;
 }

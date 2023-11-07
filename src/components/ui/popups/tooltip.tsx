@@ -26,7 +26,7 @@ export function Tooltip({
   children,
   direction,
   options = {
-    gap: 12,
+    gap: 0,
     arrow: 6,
   }
 }: TooltipProps) {

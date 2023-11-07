@@ -1,5 +1,7 @@
 import { ActiveIdState } from '@hooks';
 
+import styles from './tab-button.module.scss';
+
 type TabButtonProps = {
   tab: string;
   children: React.ReactNode;
@@ -11,7 +13,7 @@ export function TabButton({
 }: TabButtonProps) {
   return (
     <button
-      className={`${className || ''} ${id === tab ? 'active' : ''}`}
+      className={`${styles.button} ${id === tab ? styles.active : ''} ${className || ''}`}
       onClick={() => { set(tab); }}
     >
       {children}

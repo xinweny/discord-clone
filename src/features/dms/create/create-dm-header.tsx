@@ -14,7 +14,13 @@ export function CreateDmHeader() {
         direction="top"
         options={{ gap: 4 }}
       >
-        <CreateDmButton>
+        <CreateDmButton
+          position={{
+            direction: 'right',
+            align: 'start',
+            gap: -24,
+          }}
+        >
           <PlusIcon width="18px" height="18px" />
         </CreateDmButton>
       </Tooltip>

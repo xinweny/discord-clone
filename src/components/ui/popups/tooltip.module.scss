@@ -28,9 +28,10 @@ $arrow-offset-double: calc(2 * $arrow-offset);
   color: colors.$text-primary;
   font-size: 12px;
   font-weight: bold;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 4px;
   box-sizing: border-box;
+  text-align: center;
 
   &.top:after {
     @extend %arrow;

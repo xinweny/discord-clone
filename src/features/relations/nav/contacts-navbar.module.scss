@@ -1,8 +1,10 @@
 @use '@styles/colors';
 
 .header {
-  display: flex;
+  display: grid;
   align-items: center;
+
+  grid-template-columns: auto 1fr auto;
   padding: 8px;
   width: 100%;
 
@@ -18,12 +20,29 @@
     }
 
     svg {
-      width: 24px;
-      height: 24px;
+      margin-left: 8px;
+    }
 
-      g > path:first-child {
-        fill: colors.$text-muted;
-      }
+    g > path:first-child {
+      fill: colors.$text-muted;
     }
   }
+
+  > div:last-child {
+    path {
+      fill: colors.$text-muted;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  margin: 0px 8px;
+  background-color: colors.$bg-modifier-accent;
 }
