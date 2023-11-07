@@ -24,13 +24,13 @@
 
     p:first-child {
       color: colors.$text-primary;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     p:last-child {
       color: colors.$text-muted;
-      font-size: 12px;
+      font-size: 14px;
     }
   }
 }

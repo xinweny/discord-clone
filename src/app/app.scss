@@ -37,3 +37,14 @@ strong em, em strong {
   font-weight: bold;
   font-style: italic;
 }
+
+input::placeholder {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+textarea, input {
+  &:focus {
+    outline: none;
+  }
+}
