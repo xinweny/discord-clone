@@ -1,4 +1,5 @@
 @use '@styles/colors';
+@use '@styles/mixins';
 
 .layout {
   height: 100vh;
@@ -8,28 +9,9 @@
 }
 
 .content {
-  overflow: hidden scroll;
-  pointer-events: none;
-
-  &::-webkit-scrollbar {
-    background-color: transparent;
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: transparent;
-    background-clip: padding-box;
-    border-right: 2px transparent solid;
-    border-left: 2px transparent solid;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: colors.$bg-tertiary;
-  }
+  @include mixins.scroller();
 
   > div {
-    pointer-events: all;
     padding-right: 0px;
   }
 }

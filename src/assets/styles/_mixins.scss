@@ -1,0 +1,25 @@
+@use '@styles/colors';
+
+@mixin scroller(
+  $selector: '&',
+  $thumb-color: colors.$bg-tertiary
+) {
+  overflow: hidden scroll;
+
+  #{$selector}::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
+
+  #{$selector}::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: transparent;
+    background-clip: padding-box;
+    border-right: 2px transparent solid;
+    border-left: 2px transparent solid;
+  }
+
+  #{$selector}:hover::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+  }
+}
