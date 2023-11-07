@@ -1,13 +1,11 @@
-@use '@styles/fonts';
-
 body {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
 }
 
-* {
-  font-family: Whitney;
+html * {
+  font-family: Whitney !important;
 }
 
 a {
@@ -25,4 +23,17 @@ button {
   &:hover {
     cursor: pointer;
   }
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+strong em, em strong {
+  font-weight: bold;
+  font-style: italic;
 }

@@ -36,6 +36,8 @@ export function ContactsNavbar({
           {capitalize(tab)}
         </TabButton>)}
         <TabButton
+          className={styles.greenButton}
+          activeClassName={styles.active}
           id={id}
           tab="add_friend"
           set={set}

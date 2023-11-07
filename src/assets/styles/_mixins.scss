@@ -1,5 +1,18 @@
 @use '@styles/colors';
 
+@mixin font-face(
+  $family,
+  $name,
+  $ext,
+  $weight,
+  $style
+) {
+  font-family: $family;
+  src: url('../fonts/#{$name}.#{$ext}') format($ext);
+  font-weight: $weight;
+  font-style: $style;
+}
+
 @mixin scroller(
   $selector: '&',
   $thumb-color: colors.$bg-tertiary

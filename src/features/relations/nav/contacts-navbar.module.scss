@@ -15,8 +15,8 @@
 
     h2 {
       color: colors.$white;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     svg {
@@ -37,6 +37,20 @@
   svg {
     width: 24px;
     height: 24px;
+  }
+
+  nav {
+    button {
+      &.greenButton {
+        background-color: colors.$green;
+        color: colors.$white;
+    
+        &.active {
+          color: colors.$green;
+          background-color: transparent;
+        }
+      }
+    }
   }
 }
 

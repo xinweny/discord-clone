@@ -6,14 +6,22 @@ type TabButtonProps = {
   tab: string;
   children: React.ReactNode;
   className?: string;
+  activeClassName?: string;
 } & ActiveIdState;
 
 export function TabButton({
-  set, id, tab, children, className
+  set,
+  id,
+  tab,
+  children,
+  className,
+  activeClassName,
 }: TabButtonProps) {
   return (
     <button
-      className={`${styles.button} ${id === tab ? styles.active : ''} ${className || ''}`}
+      className={`${styles.button} ${id === tab
+        ? (activeClassName || styles.active)
+        : ''} ${className || ''}`}
       onClick={() => { set(tab); }}
     >
       {children}

@@ -8,6 +8,8 @@ import Router from './router';
 import { SvgMasks } from '@components/svg';
 
 import './app.scss';
+import '@assets/styles/typography.scss';
+
 import styles from './app.module.scss';
 
 const App = () => (
