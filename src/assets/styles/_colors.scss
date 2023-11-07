@@ -16,6 +16,7 @@ $not-quite-black: #23272A;
 
 $brand-360: hsl(235 calc($saturation-factor * 86.1%) 77.5%);
 $brand-500: hsl(235 calc($saturation-factor * 85.6%) 64.7%);
+$brand-560: hsl(235 calc($saturation-factor * 51.4%) 52.4%);
 
 $primary-130: hsl(220 calc($saturation-factor * 13%) 95.5%);
 $primary-230: hsl(10 calc($saturation-factor * 9.1%) 87.1%);
@@ -38,6 +39,7 @@ $bg-modal: rgba(0, 0, 0, 0.85);
 $bg-modifier-active: lighten($bg-primary, 12%);
 $bg-modifier-hover: lighten($bg-primary, 5%);
 $bg-modifier-selected: lighten($bg-primary, 10%);
+$bg-modifier-accent: $bg-modifier-active;
 
 $header-primary: $primary-130;
 $header-secondary: $primary-330;

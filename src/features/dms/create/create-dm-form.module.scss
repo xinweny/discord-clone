@@ -18,3 +18,26 @@
   padding: 8px;
   padding-right: 0px;
 }
+
+.submitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  padding: 20px 12px;
+  margin: 0px 8px;
+  border-top: 1px solid colors.$bg-modifier-accent;
+
+  button {
+    width: 100%;
+    color: colors.$white;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px 16px;
+    background-color: colors.$blurple;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: colors.$brand-560;
+    }
+  }
+}

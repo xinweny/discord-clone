@@ -106,7 +106,9 @@ export function CreateDmForm({
             : <NullMessage src="#" message="No friends found." />
           }
         </div>
-        <SubmitButton>Create DM</SubmitButton>
+        <div className={styles.submitContainer}>
+          <SubmitButton>Create DM</SubmitButton>
+        </div>
       </form>
     </FormProvider>
   );
