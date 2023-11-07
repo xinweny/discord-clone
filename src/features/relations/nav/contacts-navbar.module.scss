@@ -1,0 +1,29 @@
+@use '@styles/colors';
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  width: 100%;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+      color: colors.$white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+
+      g > path:first-child {
+        fill: colors.$text-muted;
+      }
+    }
+  }
+}

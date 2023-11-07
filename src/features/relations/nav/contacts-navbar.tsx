@@ -6,18 +6,22 @@ import { ContactsTabs } from '../types';
 
 import { TabButton } from '@components/ui/buttons';
 
+import FriendsIcon from '@assets/icons/friends.svg?react';
+
+import styles from './contacts-navbar.module.scss';
+
 export function ContactsNavbar({
   set, id
 }: ActiveIdState) {
   const tabs = Object.values(ContactsTabs);
 
   return (
-    <div>
+    <div className={styles.header}>
       <div>
-        <img src="#" />
-        <p><strong>Friends</strong></p>
+        <FriendsIcon />
+        <h2>Friends</h2>
       </div>
-      <div>
+      <nav>
         {tabs.map(tab => <TabButton
           key={tab}
           tab={tab}
@@ -31,7 +35,7 @@ export function ContactsNavbar({
           tab="add_friend"
           set={set}
         >Add Friend</TabButton>
-      </div>
+      </nav>
     </div>
   );
 }
