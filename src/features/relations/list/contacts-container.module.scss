@@ -1,0 +1,8 @@
+@use '@styles/colors';
+
+.header {
+  margin: 16px 20px 8px 0px;
+  color: colors.$header-muted;
+  font-size: 12px;
+  font-weight: 600;
+}

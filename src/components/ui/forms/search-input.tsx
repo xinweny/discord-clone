@@ -1,3 +1,6 @@
+import CrossIcon from '@assets/icons/cross.svg?react';
+import SearchIcon from '@assets/icons/search.svg?react';
+
 import styles from './search-input.module.scss';
 
 type SearchInputProps = {
@@ -26,8 +29,8 @@ export function SearchInput({
         disabled={query?.length === 0}
       >
         {query && query.length > 0
-          ? <img src="#" alt="Reset" />
-          : <img src="#" alt="Search" />
+          ? <CrossIcon />
+          : <SearchIcon />
         }
       </button>}
     </div>

@@ -5,6 +5,8 @@ import { ContactsTabs } from '../types';
 import { ContactsSearch } from './contacts-search';
 import { ContactsContainer } from './contacts-container';
 
+import styles from './contacts-list.module.scss';
+
 type ContactsListProps = {
   activeTab: ContactsTabs;
 };
@@ -15,7 +17,7 @@ export function ContactsList({ activeTab }: ContactsListProps) {
   useEffect(() => { setQuery('') }, [activeTab]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <ContactsSearch query={query} setQuery={setQuery} />
       <ContactsContainer query={query} activeTab={activeTab} />
     </div>

@@ -5,6 +5,8 @@ import { useContacts } from '../hooks';
 import { NoContactsMessage } from './no-contacts-message';
 import { ContactCard } from './contact-card';
 
+import styles from './contacts-container.module.scss';
+
 type ContactsContainerProps = {
   query: string;
   activeTab: ContactsTabs;
@@ -22,8 +24,10 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
     : contacts.length;
 
   return (
-    <div>
-      <p>{`${activeTab.toUpperCase()} - ${numContacts}`}</p>
+    <div className={styles.content}>
+      <div className={styles.header}>
+        <p>{`${activeTab.toUpperCase()}${activeTab === ContactsTabs.ALL ? ' FRIENDS' : ''} — ${numContacts}`}</p>
+      </div>
       {contacts.length > 0
         ? (
           <div>

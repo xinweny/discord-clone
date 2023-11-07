@@ -38,11 +38,6 @@ strong em, em strong {
   font-style: italic;
 }
 
-input::placeholder {
-  font-size: 14px;
-  font-weight: 500;
-}
-
 textarea, input {
   &:focus {
     outline: none;
