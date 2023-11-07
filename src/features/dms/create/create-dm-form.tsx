@@ -96,7 +96,7 @@ export function CreateDmForm({
             setQuery={setQuery}
           />
         </CreateDmFormHeader>
-        <div className={styles.itemList}>
+        <div className={styles.list}>
           {friends.length > 0
               ? friends.map((friend) => <ParticipantCheckboxInput
               key={friend._id}

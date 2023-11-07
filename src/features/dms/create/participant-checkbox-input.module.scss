@@ -1,0 +1,58 @@
+@use '@styles/colors';
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+  }
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  > div {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+
+    p:first-child {
+      color: colors.$text-primary;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    p:last-child {
+      color: colors.$text-muted;
+      font-size: 12px;
+    }
+  }
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border: 1px solid colors.$primary-400;
+  border-radius: 6px;
+  
+  svg {
+    display: none;
+  }
+
+  &.checked {
+    border-color: colors.$brand-360;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      fill: colors.$brand-500;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
+import styles from './checkbox-input.module.scss';
+
 import type {
   RegisterOptions,
   FieldValues,
@@ -14,6 +16,7 @@ export type CheckboxInputProps<
   name: Path<TFormValues>;
   id: string;
   rules?: RegisterOptions;
+  children: React.ReactNode;
 } & Omit<InputProps, 'name' | 'id' | 'type'>;
 
 export function CheckboxInput<TFormValues extends FieldValues>({
@@ -21,18 +24,22 @@ export function CheckboxInput<TFormValues extends FieldValues>({
   name,
   id,
   rules,
+  children,
   ...props
 }: CheckboxInputProps<TFormValues>) {
   const { register } = useFormContext();
 
   return (
-    <div className={className} aria-live="polite">
+    <div className={`${styles.input} ${className}`} aria-live="polite">
       <Input
         type="checkbox"
         id={id}
         {...props}
         {...(register && register(name, rules))}
       />
+      <div className={styles.checkmark}>
+        {children}
+      </div>
     </div>
   );
 }

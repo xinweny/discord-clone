@@ -12,6 +12,9 @@
   min-height: 200px;
 }
 
-.itemList {
+.list {
   @include mixins.scroller();
+  
+  padding: 8px;
+  padding-right: 0px;
 }
