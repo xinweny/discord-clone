@@ -86,7 +86,7 @@ export const usePopupPos = (args: ArgsData) => {
       const popupRect = popupRef.current.getBoundingClientRect();
 
       setStyle(getPosStyle(position, btnRect, popupRect));
-    }, 60);
+    }, 0);
     
     return () => { clearTimeout(timeoutId); };
   }, [show]);

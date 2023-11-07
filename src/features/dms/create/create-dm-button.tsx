@@ -15,8 +15,8 @@ export function CreateDmButton({ children }: CreateDmButtonProps) {
       renderPopup={() => <CreateDmForm btnRef={createDmBtnRef} />}
       btnRef={createDmBtnRef}
       position={{
-        direction: 'left',
-        align: 'center',
+        direction: 'right',
+        align: 'start',
         gap: -24,
       }}
     >
