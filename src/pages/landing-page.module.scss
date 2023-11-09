@@ -1,4 +1,11 @@
 .page {
+  height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   button {
     transition: all 0.2s ease-in-out;
 
