@@ -3,6 +3,7 @@ import {
   RelationData, 
   RelationStatus,
 } from '../types';
+import type { UserStatusesData } from '@features/users/types';
 
 import { useDisplay } from '@components/hooks';
 
@@ -20,11 +21,13 @@ import styles from './contact-card.module.scss';
 import ChatBubbleIcon from '@assets/icons/chat-bubble.svg?react';
 import CrossIcon from '@assets/icons/cross.svg?react';
 
+
 export type ContactCardProps = {
   contact: RelationData;
   activeTab: ContactsTabs;
   updateStatus: (userId: string, isOnline: boolean) => void;
   hidden: boolean;
+  userStatuses: UserStatusesData
 };
 
 export function ContactCard({
@@ -32,6 +35,7 @@ export function ContactCard({
   activeTab,
   updateStatus,
   hidden,
+  userStatuses,
 }: ContactCardProps) {
   const { hover, visible } = useDisplay();
 
@@ -61,13 +65,15 @@ export function ContactCard({
       </Tooltip>
     );
 
+    const friendStatus = customStatus || (userStatuses[userId] ? 'Online' : 'Offline');
+
     switch (tab) {
       case ContactsTabs.ONLINE: return formatProps(
-        customStatus || '',
+        friendStatus,
         messageBtn
       );
       case ContactsTabs.ALL: return formatProps(
-        customStatus || '',
+        friendStatus,
         messageBtn
       );
       case ContactsTabs.PENDING: return formatProps(

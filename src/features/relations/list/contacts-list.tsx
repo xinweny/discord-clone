@@ -42,6 +42,7 @@ export function ContactsList({ query, activeTab }: ContactsListProps) {
                 hidden={activeTab === ContactsTabs.ONLINE
                   ? !statuses[contact.user._id]
                   : false}
+                userStatuses={statuses}
               />
             ))}
           </div>
