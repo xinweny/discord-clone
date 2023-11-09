@@ -13,18 +13,17 @@
   font-style: $style;
 }
 
-@mixin scroller(
-  $selector: '&',
+@mixin hover-scroller(
   $thumb-color: colors.$bg-tertiary
 ) {
   overflow: hidden scroll;
 
-  #{$selector}::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     background-color: transparent;
     width: 8px;
   }
 
-  #{$selector}::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: transparent;
     background-clip: padding-box;
@@ -32,7 +31,30 @@
     border-left: 2px transparent solid;
   }
 
-  #{$selector}:hover::-webkit-scrollbar-thumb {
+  &:hover::-webkit-scrollbar-thumb {
     background-color: $thumb-color;
+  }
+}
+
+@mixin scroller(
+  $bg-color: colors.$bg-secondary,
+  $thumb-color: colors.$bg-tertiary,
+  $width,
+  $margin-x,
+) {
+  overflow: hidden scroll;
+
+  &::-webkit-scrollbar {
+    background-color: $bg-color;
+    width: $width;
+    border-radius: $width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $width;
+    background-color: transparent;
+    background-clip: padding-box;
+    border-right: $margin-x transparent solid;
+    border-left: $margin-x transparent solid;
   }
 }

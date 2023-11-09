@@ -60,17 +60,17 @@ export function DMPage() {
         ? <DmCall />
         : <DmOngoingCall roomId={dm._id} roomName={name} />
       }
-      <MessagesContainer
-        welcomeComponent={<RoomWelcome
-          type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
-          name={name}
-          avatarSrc={avatarUrl}
-          username={isGroup ? undefined : participants[0].username}
-        />}
-      />
-      <SendMessageForm
-        placeholder={`Message ${isGroup ? '' : '@'}${name}`}
-      />
+        <MessagesContainer
+          welcomeComponent={<RoomWelcome
+            type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
+            name={name}
+            avatarSrc={avatarUrl}
+            username={isGroup ? undefined : participants[0].username}
+          />}
+        />
+        <SendMessageForm
+          placeholder={`Message ${isGroup ? '' : '@'}${name}`}
+        />
     </ContentLayout>
   );
 }

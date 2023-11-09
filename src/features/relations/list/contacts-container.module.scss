@@ -1,8 +1,27 @@
 @use '@styles/colors';
+@use '@styles/mixins';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 .header {
   margin: 16px 20px 8px 0px;
   color: colors.$header-muted;
   font-size: 12px;
   font-weight: 600;
+}
+
+.list {
+  @include mixins.scroller(
+    colors.$bg-secondary,
+    colors.$bg-tertiary,
+    12px,
+    4px,
+  );
+
+  flex-grow: 1;
+  margin: 4px 0px;
 }

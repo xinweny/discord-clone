@@ -13,7 +13,7 @@
 }
 
 .list {
-  @include mixins.scroller();
+  @include mixins.hover-scroller();
   
   padding: 8px;
   padding-right: 0px;

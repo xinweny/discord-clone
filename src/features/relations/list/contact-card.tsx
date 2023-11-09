@@ -67,31 +67,29 @@ export function ContactCard({
       {...hover}
       hidden={hidden}
     >
+      <Avatar
+        src={avatarUrl}
+        notification={
+          (activeTab === ContactsTabs.ONLINE) ||
+          (activeTab === ContactsTabs.ALL)
+            ? <UserStatusIcon
+              userId={userId}
+              updateStatus={updateStatus}
+            />
+            : undefined
+        }
+      />
       <div>
-        <Avatar
-          src={avatarUrl}
-          notification={
-            (activeTab === ContactsTabs.ONLINE) ||
-            (activeTab === ContactsTabs.ALL)
-              ? <UserStatusIcon
-                userId={userId}
-                updateStatus={updateStatus}
-              />
-              : undefined
-          }
-        />
         <div>
-          <div>
-            <p>{displayName}</p>
-            {visible && <p>{username}</p>}
-          </div>
-          {props && <p>{props.message}</p>}
+          <p>{displayName}</p>
+          {visible && <p>{username}</p>}
         </div>
-        {props?.buttons && <div>
-          {props.buttons}
-          <RemoveRelationButton relation={contact} />
-        </div>}
+        {props && <p>{props.message}</p>}
       </div>
+      {props?.buttons && <div>
+        {props.buttons}
+        <RemoveRelationButton relation={contact} />
+      </div>}
     </div>
   );
 }

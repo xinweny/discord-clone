@@ -28,9 +28,11 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
       <div className={styles.header}>
         <p>{`${activeTab.toUpperCase()}${activeTab === ContactsTabs.ALL ? ' FRIENDS' : ''} — ${numContacts}`}</p>
       </div>
-      {contacts.length > 0
-        ? (
-          <div>
+        {(activeTab === ContactsTabs.ONLINE
+          ? !Object.values(statuses).includes(true)
+          : contacts.length > 0
+        )
+          ? <div className={styles.list}>
             {contacts.map(contact => (
               <ContactCard
                 key={contact._id}
@@ -38,19 +40,16 @@ export function ContactsContainer({ query, activeTab }: ContactsContainerProps) 
                 activeTab={activeTab}
                 updateStatus={updateStatus}
                 hidden={activeTab === ContactsTabs.ONLINE
-                ? !statuses[contact.user._id]
-                : false}
+                  ? statuses[contact.user._id]
+                  : false}
               />
             ))}
           </div>
-        )
-        : (
-          <NoContactsMessage
+          : <NoContactsMessage
             activeTab={activeTab}
             query={query}
           />
-        )
-      }
+        }
     </div>
   )
 }

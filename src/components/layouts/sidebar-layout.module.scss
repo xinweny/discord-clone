@@ -9,7 +9,7 @@
 }
 
 .content {
-  @include mixins.scroller();
+  @include mixins.hover-scroller();
 
   > div {
     padding-right: 0px;
