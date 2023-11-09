@@ -40,7 +40,6 @@
   $bg-color: colors.$bg-secondary,
   $thumb-color: colors.$bg-tertiary,
   $width,
-  $margin-x,
 ) {
   overflow: hidden scroll;
 
@@ -52,9 +51,6 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: $width;
-    background-color: transparent;
-    background-clip: padding-box;
-    border-right: $margin-x transparent solid;
-    border-left: $margin-x transparent solid;
+    background-color: $thumb-color;
   }
 }
