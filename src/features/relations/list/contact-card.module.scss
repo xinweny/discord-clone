@@ -20,6 +20,10 @@
 
   &:hover {
     background-color: colors.$bg-modifier-hover;
+
+    & .buttons > * {
+      background-color: colors.$bg-tertiary;
+    }
   }
 
   &:after {
@@ -62,7 +66,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 18px;
-    background-color: colors.$bg-tertiary;
+    background-color: colors.$bg-secondary-alt;
   }
 
   button {

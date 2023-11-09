@@ -18,6 +18,7 @@ import { RemoveRelationButton } from '../delete';
 import styles from './contact-card.module.scss';
 
 import ChatBubbleIcon from '@assets/icons/chat-bubble.svg?react';
+import CrossIcon from '@assets/icons/cross.svg?react';
 
 export type ContactCardProps = {
   contact: RelationData;
@@ -79,6 +80,16 @@ export function ContactCard({
     }
   };
 
+  const labelRemove = (param: string) => {
+    switch (param) {
+      case RelationStatus.FRIENDS: return 'Remove Friend';
+      case RelationStatus.PENDING_FROM: return 'Reject';
+      case RelationStatus.PENDING_TO: return 'Cancel';
+      case RelationStatus.BLOCKED: return 'Unblock';
+      default: return '';
+    }
+  };
+
   const props = renderProps(activeTab);
 
   return (
@@ -110,7 +121,11 @@ export function ContactCard({
       </div>
       {props?.buttons && <div className={styles.buttons}>
         {props.buttons}
-        <RemoveRelationButton relation={contact} />
+        <Tooltip text={labelRemove(status)} direction="top" options={{ gap: 4 }}>
+          <RemoveRelationButton relation={contact}>
+            <CrossIcon />
+          </RemoveRelationButton>
+        </Tooltip>
       </div>}
     </div>
   );
