@@ -7,9 +7,8 @@ import { setDocumentTitle } from '@utils';
 import { ContactsTabs } from '@features/relations/types';
 
 import { ContactsNavbar } from '@features/relations/nav';
-import { ContactsList } from '@features/relations/list';
+import { ContactsContainer } from '@features/relations/list';
 import { SendFriendRequestForm } from '@features/relations/create';
-
 
 export function ContactsPage() {
   const activeTabState = useActiveIds('online');
@@ -27,7 +26,7 @@ export function ContactsPage() {
     >
       {id === 'add_friend'
         ? <SendFriendRequestForm />
-        : <ContactsList activeTab={id! as ContactsTabs} />
+        : <ContactsContainer activeTab={id! as ContactsTabs} />
       }
     </ContentLayout>
   );

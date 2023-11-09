@@ -1,55 +1,25 @@
+import { useState, useEffect } from 'react';
+
 import { ContactsTabs } from '../types';
 
-import { useContacts } from '../hooks';
-
-import { NoContactsMessage } from './no-contacts-message';
-import { ContactCard } from './contact-card';
+import { ContactsSearch } from './contacts-search';
+import { ContactsList } from './contacts-list';
 
 import styles from './contacts-container.module.scss';
 
 type ContactsContainerProps = {
-  query: string;
   activeTab: ContactsTabs;
 };
 
-export function ContactsContainer({ query, activeTab }: ContactsContainerProps) {
-  const {
-    contacts,
-    statuses,
-    updateStatus,
-  } = useContacts(query, activeTab);
+export function ContactsContainer({ activeTab }: ContactsContainerProps) {
+  const [query, setQuery] = useState<string>('');
 
-  const numContacts = activeTab === ContactsTabs.ONLINE
-    ? Object.entries(statuses).filter(([, isOnline]) => isOnline).length
-    : contacts.length;
+  useEffect(() => { setQuery('') }, [activeTab]);
 
   return (
-    <div className={styles.content}>
-      <div className={styles.header}>
-        <p>{`${activeTab.toUpperCase()}${activeTab === ContactsTabs.ALL ? ' FRIENDS' : ''} — ${numContacts}`}</p>
-      </div>
-        {(activeTab === ContactsTabs.ONLINE
-          ? !Object.values(statuses).includes(true)
-          : contacts.length > 0
-        )
-          ? <div className={styles.list}>
-            {contacts.map(contact => (
-              <ContactCard
-                key={contact._id}
-                contact={contact}
-                activeTab={activeTab}
-                updateStatus={updateStatus}
-                hidden={activeTab === ContactsTabs.ONLINE
-                  ? statuses[contact.user._id]
-                  : false}
-              />
-            ))}
-          </div>
-          : <NoContactsMessage
-            activeTab={activeTab}
-            query={query}
-          />
-        }
+    <div className={styles.container}>
+      <ContactsSearch query={query} setQuery={setQuery} />
+      <ContactsList query={query} activeTab={activeTab} />
     </div>
-  )
+  );
 }

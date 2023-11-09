@@ -7,12 +7,17 @@ import {
 import { useDisplay } from '@components/hooks';
 
 import { Avatar } from '@components/ui/media';
+import { Tooltip } from '@components/ui/popups';
 
 import { UserStatusIcon } from '@features/users/status';
+import { DmMessageButton } from '@features/dms/create';
 
 import { AcceptFriendRequestButton } from '../edit';
 import { RemoveRelationButton } from '../delete';
 
+import styles from './contact-card.module.scss';
+
+import ChatBubbleIcon from '@assets/icons/chat-bubble.svg?react';
 
 export type ContactCardProps = {
   contact: RelationData;
@@ -47,9 +52,23 @@ export function ContactCard({
       buttons = <></>
     ) => ({ message, buttons });
 
+    const messageBtn = (
+      <Tooltip text="Message" direction="top" options={{ gap: 4 }}>
+        <DmMessageButton userId={userId}>
+          <ChatBubbleIcon />
+        </DmMessageButton>
+      </Tooltip>
+    );
+
     switch (tab) {
-      case ContactsTabs.ONLINE: return formatProps(customStatus || '');
-      case ContactsTabs.ALL: return formatProps(customStatus || '');
+      case ContactsTabs.ONLINE: return formatProps(
+        customStatus || '',
+        messageBtn
+      );
+      case ContactsTabs.ALL: return formatProps(
+        customStatus || '',
+        messageBtn
+      );
       case ContactsTabs.PENDING: return formatProps(
         `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`,
         <>
@@ -66,27 +85,30 @@ export function ContactCard({
     <div
       {...hover}
       hidden={hidden}
+      className={styles.item}
     >
-      <Avatar
-        src={avatarUrl}
-        notification={
-          (activeTab === ContactsTabs.ONLINE) ||
-          (activeTab === ContactsTabs.ALL)
-            ? <UserStatusIcon
-              userId={userId}
-              updateStatus={updateStatus}
-            />
-            : undefined
-        }
-      />
-      <div>
+      <div className={styles.userInfo}>
+        <Avatar
+          src={avatarUrl}
+          notification={
+            (activeTab === ContactsTabs.ONLINE) ||
+            (activeTab === ContactsTabs.ALL)
+              ? <UserStatusIcon
+                userId={userId}
+                updateStatus={updateStatus}
+              />
+              : undefined
+          }
+        />
         <div>
-          <p>{displayName}</p>
-          {visible && <p>{username}</p>}
+          <div className={styles.userNames}>
+            <p>{displayName}</p>
+            {visible && <p className={styles.username}>{username}</p>}
+          </div>
+          {props && <p>{props.message}</p>}
         </div>
-        {props && <p>{props.message}</p>}
       </div>
-      {props?.buttons && <div>
+      {props?.buttons && <div className={styles.buttons}>
         {props.buttons}
         <RemoveRelationButton relation={contact} />
       </div>}

@@ -4,6 +4,8 @@ import { Tooltip } from '@components/ui/popups';
 import { ModalButton } from '@components/ui/buttons';
 import { RemoveRelationModal } from './remove-relation-modal';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+
 type RemoveRelationButtonProps = {
   src?: string;
   relation: RelationData;
@@ -33,7 +35,7 @@ export function RemoveRelationButton({
         modal={RemoveRelationModal}
         modalProps={{ relation }}
       >
-        <img src={src || ''} alt={label(status)} />
+        <CrossIcon />
       </ModalButton>
     </Tooltip>
   );

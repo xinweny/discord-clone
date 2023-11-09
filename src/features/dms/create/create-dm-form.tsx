@@ -77,7 +77,7 @@ export function CreateDmForm({
         navigate(`/channels/@me/${error.data.data._id}`);
       });
     }
-  }
+  };
 
   return (
     <FormProvider {...methods}>

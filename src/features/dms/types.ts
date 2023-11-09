@@ -20,7 +20,7 @@ export type UserDMData = {
 };
 
 export type CreateDMFields = {
-  participantIds: { id: string }[];
+  participantIds: string[];
 };
 
 export type EditDMFields = {
