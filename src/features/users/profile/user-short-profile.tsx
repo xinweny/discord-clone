@@ -1,77 +1,53 @@
 import { DateTime } from 'luxon';
-import { useParams } from 'react-router-dom';
 
-import type { ServerMemberData } from '@features/members/types';
 import type { UserData } from '../types';
 
-import { useGetServerQuery } from '@features/servers/api';
+import { ColorBanner, Avatar } from '@components/ui/media';
 
-import { ColorBanner } from '@components/ui/media';
-import { Avatar } from '@components/ui/media';
+import { UserStatusIcon } from '../status';
+
+import styles from './user-short-profile.module.scss';
 
 type UserShortProfileProps = {
   children?: React.ReactNode;
-  user: UserData | ServerMemberData;
+  user: UserData;
 };
 
 export function UserShortProfile({
   user,
   children,
 }: UserShortProfileProps) {
-  const { serverId } = useParams();
-
-  const { data: server } = useGetServerQuery(serverId!, { skip: !serverId });
-
   const {
+    _id,
     bannerColor,
     displayName,
-    bio,
     createdAt,
   } = user;
 
-  const { avatarUrl, username } = ('user' in user)
-    ? user.user
-    : user;
+  const { avatarUrl, username } = user;
 
   const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL yyyy');
 
   return (
     <div>
-      <ColorBanner color={bannerColor} />
-      <Avatar src={avatarUrl} />
-      <div>
+      <ColorBanner className={styles.banner} color={bannerColor || '#5C64F3'}>
+        <div className={styles.wrapper}>
+          <Avatar
+            src={avatarUrl}
+            notification={<UserStatusIcon userId={_id} />}
+          />
+        </div>
+      </ColorBanner>
+      <div className={styles.content}>
         <div>
           <h3>{displayName}</h3>
           <p>{username}</p>
           {'customStatus' in user && <p>{user.customStatus}</p>}
         </div>
-        {server
-          ? (
-            <div>
-              {bio && <div>
-                <p><strong>ABOUT ME</strong></p>
-                <p>{bio}</p>
-              </div>}
-              <p><strong>MEMBER SINCE</strong></p>
-              <div>
-                <div>
-                  <img src="#" alt="Discord Clone" />
-                  <p>{joinedDate(user.createdAt)}</p>
-                </div>
-                <div>
-                  <Avatar src={server.avatarUrl} alt={server.name} />
-                  <p>{joinedDate(createdAt)}</p>
-                </div>
-              </div>
-            </div>
-          )
-          : (
-            <div>
-              <p><strong>DISCORD MEMBER SINCE</strong></p>
-              <p>{joinedDate(user.createdAt)}</p>
-            </div>
-          )
-        }
+        <div>
+          <p><strong>DISCORD MEMBER SINCE</strong></p>
+          <p>{joinedDate(createdAt)}</p>
+        </div>
         {children}
       </div>
     </div>

@@ -5,13 +5,13 @@ import styles from './content-layout.module.scss';
 type ContentLayoutProps = {
   header?: React.ReactNode;
   children: React.ReactNode;
-  infoTab?: React.ReactNode;
+  panel?: React.ReactNode;
 };
 
 export function ContentLayout({
   header,
   children,
-  infoTab,
+  panel,
 }: ContentLayoutProps) {
   return (
     <div className={styles.layout}>
@@ -22,7 +22,7 @@ export function ContentLayout({
         {children}
       </div>
       <div className={styles.panel}>
-        {infoTab}
+        {panel}
       </div>
     </div>
   );

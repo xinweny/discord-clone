@@ -17,7 +17,7 @@ export function ChannelPage() {
   return (
     <ContentLayout
       header={<ChannelInfoHeader />}
-      infoTab={<ServerMembersList />}
+      panel={<ServerMembersList />}
     >
       <ChannelContainer channel={channel} serverId={serverId} />
     </ContentLayout>

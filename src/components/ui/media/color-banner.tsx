@@ -3,10 +3,11 @@ type ColorBannerProps = {
   className?: string;
   height?: number;
   width?: number;
+  children?: React.ReactNode;
 };
 
 export function ColorBanner({
-  color, className, height, width
+  color, className, height, width, children
 }: ColorBannerProps) {
   return (
     <div
@@ -17,6 +18,7 @@ export function ColorBanner({
       }}
       className={className || ''}
     >
+      {children}
     </div>
   )
 }

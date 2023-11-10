@@ -14,7 +14,7 @@ import { ContentLayout } from '@components/layouts';
 import {
   DmContainer,
   DmHeader,
-  DmParticipantsInfo,
+  DmParticipantsPanel,
 } from '@features/dms/get';
 
 import { useGetDmQuery } from '@features/dms/api';
@@ -51,7 +51,7 @@ export function DMPage() {
     <DmPanelContext.Provider value={panelState}>
       <ContentLayout
         header={<DmHeader dm={dm} />}
-        infoTab={<DmParticipantsInfo
+        panel={<DmParticipantsPanel
           participants={participants}
           isGroup={isGroup}
           show={showPanel && !isInCurrentRoomCall}

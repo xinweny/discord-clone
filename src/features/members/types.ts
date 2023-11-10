@@ -9,6 +9,7 @@ export type ServerMemberData = {
   user: {
     avatarUrl: string;
     username: string;
+    createdAt: string;
   };
   createdAt: string;
 };
