@@ -42,3 +42,8 @@ export enum DMEvent {
 export type DMHeaderContextData = {
   tooltipProps: Omit<TooltipProps, 'text' | 'children'>,
 };
+
+export type DMPanelContextData = [
+  boolean,
+  React.Dispatch<React.SetStateAction<boolean>>,
+];

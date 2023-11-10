@@ -4,7 +4,7 @@ import type { DMData } from '../types';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
-import { useDmHeaderContext } from '../hooks';
+import { useDmHeaderContext, useDmPanelContext } from '../hooks';
 
 import { getDmInfo } from '../utils';
 
@@ -16,6 +16,7 @@ import { useGetParticipantsQuery } from '@features/webrtc/api';
 
 import VoiceCallIcon from '@assets/icons/voice-call.svg?react';
 import VideoCallIcon from '@assets/icons/video-call.svg?react';
+import UserProfileIcon from '@assets/icons/user-profile.svg?react';
 
 import styles from './dm-header-buttons.module.scss';
 
@@ -33,12 +34,15 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
   const { user } = useGetUserData();
 
   const { tooltipProps } = useDmHeaderContext()!;
+  const [showPanel, setShowPanel] = useDmPanelContext()!;
 
   useEffect(() => {
     if (participants) setHasOngoingCall(participants.length > 0);
   }, [participants]);
 
   const { name } = getDmInfo(dm, user.data!.id);
+
+  const isInOngoingCall = livekit?.isCurrentRoom(dm._id);
 
   return (
     <div className={styles.container}>
@@ -75,6 +79,21 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
         </Tooltip>
       </>
       }
+      <Tooltip
+        text={isInOngoingCall
+          ? 'Show User Profile (Unavailable)'
+          : showPanel ? 'Hide User Profile' : 'Show User Profile'
+        }
+        {...tooltipProps}
+      >
+        <button
+          onClick={() => setShowPanel(prev => !prev)}
+          disabled={isInOngoingCall}
+          className={showPanel ? styles.active : undefined}
+        >
+          <UserProfileIcon />
+        </button>
+      </Tooltip>
     </div>
   );
 }

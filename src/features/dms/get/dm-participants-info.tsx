@@ -8,10 +8,13 @@ import { MutualServersList } from '@features/relations/mutuals';
 type DmParticipantsInfoProps = {
   participants: UserBasicData[];
   isGroup: boolean;
+  show: boolean;
 };
 
-export function DmParticipantsInfo({ participants, isGroup }: DmParticipantsInfoProps) {
+export function DmParticipantsInfo({ participants, isGroup, show }: DmParticipantsInfoProps) {
   const { data: participant, isSuccess } = useGetUserQuery(participants[0]._id, { skip: isGroup });
+
+  if (!show) return null;
 
   return (
     <div>

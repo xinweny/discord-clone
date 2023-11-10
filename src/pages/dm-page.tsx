@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
+import { DmPanelContext } from '@features/dms/context';
 4
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
@@ -9,14 +11,11 @@ import { getDmInfo } from '@features/dms/utils';
 
 import { ContentLayout } from '@components/layouts';
 
-import { RoomWelcome, RoomTypes } from '@components/ui/displays';
 import {
+  DmContainer,
   DmHeader,
   DmParticipantsInfo,
 } from '@features/dms/get';
-import { MessagesContainer } from '@features/messages/list';
-import { SendMessageForm } from '@features/messages/send';
-import { DmOngoingCall, DmCall } from '@features/webrtc/dm';
 
 import { useGetDmQuery } from '@features/dms/api';
 
@@ -25,6 +24,9 @@ export function DMPage() {
   const navigate = useNavigate();
 
   const livekit = useLivekitContext();
+
+  const panelState = useState<boolean>(true);
+  const [showPanel] = panelState;
 
   const { user } = useGetUserData();
   const { data: dm, isLoading, isSuccess } = useGetDmQuery({ dmId: roomId!, userId: user.data!.id });
@@ -37,7 +39,7 @@ export function DMPage() {
 
   if (!dm) return null;
 
-  const { name, avatarUrl, participants } = getDmInfo(dm, user.data!.id);
+  const { name, participants } = getDmInfo(dm, user.data!.id);
 
   const { isGroup } = dm;
 
@@ -46,31 +48,20 @@ export function DMPage() {
   const isInCurrentRoomCall = livekit?.isCurrentRoom(roomId!);
 
   return (
-    <ContentLayout
-      header={<DmHeader dm={dm} />}
-      infoTab={isInCurrentRoomCall
-        ? undefined
-        : <DmParticipantsInfo
+    <DmPanelContext.Provider value={panelState}>
+      <ContentLayout
+        header={<DmHeader dm={dm} />}
+        infoTab={<DmParticipantsInfo
           participants={participants}
           isGroup={isGroup}
+          show={showPanel && !isInCurrentRoomCall}
+        />}
+      >
+        <DmContainer
+          dm={dm}
+          isInCurrentRoomCall={!!isInCurrentRoomCall}
         />
-      }
-    >
-      {isInCurrentRoomCall
-        ? <DmCall />
-        : <DmOngoingCall roomId={dm._id} roomName={name} />
-      }
-        <MessagesContainer
-          welcomeComponent={<RoomWelcome
-            type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
-            name={name}
-            avatarSrc={avatarUrl}
-            username={isGroup ? undefined : participants[0].username}
-          />}
-        />
-        <SendMessageForm
-          placeholder={`Message ${isGroup ? '' : '@'}${name}`}
-        />
-    </ContentLayout>
+      </ContentLayout>
+    </DmPanelContext.Provider>
   );
 }
