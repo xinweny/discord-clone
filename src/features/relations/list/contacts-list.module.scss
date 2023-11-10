@@ -16,11 +16,7 @@
 }
 
 .list {
-  @include mixins.scroller(
-    colors.$bg-secondary,
-    colors.$bg-tertiary,
-    8px,
-  );
+  @include mixins.scroller();
 
   flex-grow: 1;
   margin: 4px 0px;

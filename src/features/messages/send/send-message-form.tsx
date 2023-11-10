@@ -9,6 +9,7 @@ import { SendMessageFields } from '../types';
 import { useFileWatchMulti, useCustomSubmitHandlers } from '@components/hooks';
 import { useEditor } from '../hooks';
 
+import { AttachmentsPreview } from './attachments-preview';
 import { MessageOptionsBar } from './message-options-bar';
 import { UploadFileButton } from './upload-file-button';
 import { MessageBodyInput } from './message-body-input';
@@ -72,18 +73,21 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
 
   return (
     <FormProvider {...methods}>
-      <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
-      <form>
-        <MessageBodyInput
-          name="body"
-          authorized={authorized}
-          enterSubmit={enterSubmit}
-          placeholder={placeholder}
-          editor={editor}
-          setEmojis={setEmojis}
-        />
-      </form>
-      <MessageOptionsBar editor={editor} />
+      <div>
+        <AttachmentsPreview fileWatch={fileWatch} />
+        <form>
+          <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
+          <MessageBodyInput
+            name="body"
+            authorized={authorized}
+            enterSubmit={enterSubmit}
+            placeholder={placeholder}
+            editor={editor}
+            setEmojis={setEmojis}
+          />
+          <MessageOptionsBar editor={editor} />
+        </form>
+      </div>
     </FormProvider>
   );
 }

@@ -4,25 +4,31 @@ import { useParams } from 'react-router-dom';
 import { NotificationEvent } from '@features/notifications/types';
 
 import { useUpdateCurrentDate } from '@hooks';
-import { useServerMemberAuthorize } from '@features/members/hooks';
 import { emitEvents } from '@services/websocket';
+
+import { SendMessageForm } from '../send';
+import { MessageCard } from './message-card';
 
 import { useGetMessagesQuery } from '../api';
 
-import { MessageCard } from './message-card';
+import styles from './messages-container.module.scss';
 
 type MessagesContainerProps = {
   welcomeComponent: React.ReactNode;
+  formPlaceholder: string;
+  authorized: boolean;
 };
 
-export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) {
+export function MessagesContainer({
+  welcomeComponent,
+  formPlaceholder,
+  authorized,
+}: MessagesContainerProps) {
   const { serverId, roomId } = useParams();
   const currentDate = useUpdateCurrentDate();
 
   const [next, setNext] = useState<string | null>(null);
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
-
-  const authorized = useServerMemberAuthorize({ skip: !serverId });
 
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
@@ -51,9 +57,9 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
   if (!isSuccess) return null;
 
   return (
-    <div>
-      {welcomeComponent}
-      <div onScroll={handleScroll}>
+    <div className={styles.container}>
+      <div onScroll={handleScroll} className={styles.content}>
+        {welcomeComponent}
         {messages.items.map(
           message => <MessageCard
             key={message._id}
@@ -64,6 +70,10 @@ export function MessagesContainer({ welcomeComponent }: MessagesContainerProps) 
           />
         )}
       </div>
+      <SendMessageForm
+        placeholder={formPlaceholder}
+        authorized={authorized}
+      />
     </div>
   );
 }

@@ -1,24 +1,16 @@
-import { ChannelTypes } from '@features/channels/types';
+import { useParams } from 'react-router-dom';
 
 import { ContentLayout } from '@components/layouts';
 
-import { RoomTypes } from '@components/ui/displays';
-
 import { useActiveChannel } from '@features/channels/hooks';
-import { useServerMemberAuthorize } from '@features/members/hooks';
 
-import { RoomWelcome } from '@components/ui/displays';
-
-import { ChannelInfoHeader } from '@features/channels/get';
+import { ChannelContainer, ChannelInfoHeader } from '@features/channels/get';
 import { ServerMembersList } from '@features/members/list';
-import { MessagesContainer } from '@features/messages/list';
-import { SendMessageForm } from '@features/messages/send';
-import { ChannelCallRoom } from '@features/webrtc/channel';
 
 export function ChannelPage() {
-  const channel = useActiveChannel();
+  const { serverId } = useParams();
 
-  const authorized = useServerMemberAuthorize();
+  const channel = useActiveChannel();
 
   if (!channel) return null;
 
@@ -27,18 +19,7 @@ export function ChannelPage() {
       header={<ChannelInfoHeader />}
       infoTab={<ServerMembersList />}
     >
-      {channel.type === ChannelTypes.TEXT
-        ? <>
-          <MessagesContainer
-            welcomeComponent={<RoomWelcome type={RoomTypes.CHANNEL} name={channel.name} avatarSrc="#" />}
-          />
-          <SendMessageForm
-            placeholder={`Message #${channel.name}`}
-            authorized={authorized}
-          />
-        </>
-        : <ChannelCallRoom channel={channel} />
-      }
+      <ChannelContainer channel={channel} serverId={serverId} />
     </ContentLayout>
   );
 }

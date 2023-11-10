@@ -1,3 +1,5 @@
+import styles from './room-welcome.module.scss';
+
 export enum RoomTypes {
   DM = 'dm',
   GROUP = 'group',
@@ -9,6 +11,7 @@ type ChannelWelcomeProps = {
   name: string;
   username?: string;
   avatarSrc: string | undefined;
+  component?: React.ReactNode;
 };
 
 type MessageInfo = {
@@ -23,6 +26,7 @@ export function RoomWelcome({
   type,
   name,
   username,
+  component,
 }: ChannelWelcomeProps) {
   const message: MessageInfo = {
     dm: {
@@ -40,11 +44,14 @@ export function RoomWelcome({
   };
 
   return (
-    <div>
-      <img src={avatarSrc} alt="" />
-      <h1>{message[type].heading}</h1>
-      {type === 'dm' && username && <h2>{username}</h2>}
+    <div className={styles.container}>
+      <img src={avatarSrc} />
+      <h3>{message[type].heading}</h3>
+      {type === 'dm' && username && <h4>{username}</h4>}
       <p>{message[type].info}</p>
+      <div>
+        {component}
+      </div>
     </div>
   );
 }

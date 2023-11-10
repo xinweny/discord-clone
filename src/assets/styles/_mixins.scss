@@ -39,7 +39,7 @@
 @mixin scroller(
   $bg-color: colors.$bg-secondary,
   $thumb-color: colors.$bg-tertiary,
-  $width,
+  $width: 8px,
 ) {
   overflow: hidden scroll;
 

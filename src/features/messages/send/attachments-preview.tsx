@@ -1,15 +1,13 @@
 import { AttachmentCard } from './attachment-card';
-import { PreviewData } from '@hooks';
+import type { FileWatchResMulti } from '@components/hooks';
 
 type AttachmentsPreviewProps = {
-  previews: PreviewData[];
-  handleRemove: (id: string) => void;
+  fileWatch: FileWatchResMulti;
 };
 
-export function AttachmentsPreview({
-  previews,
-  handleRemove
-}: AttachmentsPreviewProps) {
+export function AttachmentsPreview({ fileWatch }: AttachmentsPreviewProps) {
+  const { previews, handleRemove } = fileWatch;
+
 
   if (previews.length === 0) return null;
 
