@@ -51,8 +51,8 @@ export function DMPage() {
       infoTab={isInCurrentRoomCall
         ? undefined
         : <DmParticipantsInfo
-        participants={participants}
-        isGroup={isGroup}
+          participants={participants}
+          isGroup={isGroup}
         />
       }
     >

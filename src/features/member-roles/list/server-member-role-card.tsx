@@ -1,6 +1,6 @@
-import type { MemberRoleData } from '../types';
+import { useHover } from '@uidotdev/usehooks';
 
-import { useDisplay } from '@components/hooks';
+import type { MemberRoleData } from '../types';
 
 import { RemoveMemberRoleButton } from '../remove';
 
@@ -15,14 +15,14 @@ export function ServerMemberRoleCard({
 }: ServerMemberRoleCardProps) {
   const { color, name } = memberRole;
 
-  const { visible, hover } = useDisplay();
+  const [hoverRef, isHovered] = useHover();
 
   return (
-    <div {...hover}>
+    <div ref={hoverRef}>
       <div style={{
         backgroundColor: color,
       }}>
-        {visible && <RemoveMemberRoleButton
+        {isHovered && <RemoveMemberRoleButton
           serverId={serverId}
           memberId={memberId}
           roleId={memberRole._id}

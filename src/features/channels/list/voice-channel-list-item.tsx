@@ -1,7 +1,8 @@
+import { useHover } from '@uidotdev/usehooks';
+
 import type { ChannelData } from '../types';
 
 import { useSocketRoomJoin } from '@services/websocket/hooks';
-import { useDisplay } from '@components/hooks';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
 import { EditChannelButton } from '../edit';
@@ -13,13 +14,13 @@ type VoiceChannelListItemProps = {
 };
 
 export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItemProps) {
-  const { hover, visible } = useDisplay();
+  const [hoverRef, isHovered] = useHover();
 
   useSocketRoomJoin(channel._id);
 
   return (
     <div>
-      <div {...hover}>
+      <div ref={hoverRef}>
         <ConnectToRoomButton
           roomId={channel._id}
           roomName={channel.name}
@@ -27,7 +28,7 @@ export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItem
         >
           {channel.name}
         </ConnectToRoomButton>
-        {visible && <EditChannelButton channel={channel} />}
+        {isHovered && <EditChannelButton channel={channel} />}
       </div>
       <ChannelOngoingCallPreview
         serverId={serverId}

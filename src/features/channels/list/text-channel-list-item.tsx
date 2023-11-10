@@ -1,6 +1,6 @@
-import type { ChannelData } from '../types';
+import { useHover } from '@uidotdev/usehooks';
 
-import { useDisplay } from '@components/hooks';
+import type { ChannelData } from '../types';
 
 import { ChannelLink } from '../nav';
 import { EditChannelButton } from '../edit';
@@ -11,12 +11,12 @@ type TextChannelListItemProps = {
 };
 
 export function TextChannelListItem({ channel, serverId }: TextChannelListItemProps) {
-  const { hover, visible } = useDisplay();
+  const [hoverRef, isHovered] = useHover();
 
   return (
-    <div {...hover}>
+    <div ref={hoverRef}>
       <ChannelLink channel={channel} serverId={serverId} />
-      {visible && <EditChannelButton channel={channel} />}
+      {isHovered && <EditChannelButton channel={channel} />}
     </div>
   );
 }

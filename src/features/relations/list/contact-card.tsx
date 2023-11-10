@@ -1,11 +1,11 @@
+import { useHover } from '@uidotdev/usehooks';
+
 import {
   ContactsTabs,
   RelationData, 
   RelationStatus,
 } from '../types';
 import type { UserStatusesData } from '@features/users/types';
-
-import { useDisplay } from '@components/hooks';
 
 import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';
@@ -37,7 +37,7 @@ export function ContactCard({
   hidden,
   userStatuses,
 }: ContactCardProps) {
-  const { hover, visible } = useDisplay();
+  const [hoverRef, isHovered] = useHover();
 
   const {
     _id: relationId,
@@ -100,7 +100,7 @@ export function ContactCard({
 
   return (
     <div
-      {...hover}
+      ref={hoverRef}
       hidden={hidden}
       className={styles.item}
     >
@@ -120,7 +120,7 @@ export function ContactCard({
         <div>
           <div className={styles.userNames}>
             <p>{displayName}</p>
-            {visible && <p className={styles.username}>{username}</p>}
+            {isHovered && <p className={styles.username}>{username}</p>}
           </div>
           {props && <p>{props.message}</p>}
         </div>

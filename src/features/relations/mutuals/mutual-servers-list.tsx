@@ -1,6 +1,5 @@
 import pluralize from 'pluralize';
-
-import { useDisplay } from '@components/hooks';
+import { useToggle } from '@uidotdev/usehooks';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useGetMutualServersQuery } from '../api';
@@ -13,7 +12,7 @@ type MutualServersListProps = {
 export function MutualServersList({
   participantId
 }: MutualServersListProps) {
-  const { visible, toggle } = useDisplay();
+  const [on, toggle] = useToggle(false);
 
   const { user } = useGetUserData();
 
@@ -28,8 +27,8 @@ export function MutualServersList({
 
   return (
     <div>
-      <button onClick={toggle}>{pluralize('Mutual Server', length, true)}</button>
-      {visible && <div>
+      <button onClick={() => toggle(!on)}>{pluralize('Mutual Server', length, true)}</button>
+      {on && <div>
         {mutualServers.map(server => <MutualServerCard
           key={server._id}
           server={server}

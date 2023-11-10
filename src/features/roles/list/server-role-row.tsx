@@ -1,8 +1,7 @@
 import { useContext } from 'react';
+import { useHover } from '@uidotdev/usehooks';
 
 import { ActiveRoleContext } from '../context';
-
-import { useDisplay } from '@components/hooks';
 
 import { RoleContextMenuButton } from '.';
 
@@ -13,14 +12,14 @@ type ServerRoleRowProps = {
 };
 
 export function ServerRoleRow({ role }: ServerRoleRowProps) {
-  const { visible, hover } = useDisplay();
+  const [hoverRef, isHovered] = useHover();
 
   const activeRole = useContext(ActiveRoleContext)!;
 
   const openForm = () => { activeRole.set(role); };
 
   return (
-    <tr {...hover}>
+    <tr ref={hoverRef}>
       <td>
         <img src="#" alt={role.color} />
         <p>{role.name}</p>
@@ -30,7 +29,7 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
         <img src="#" />
       </td>
       <td>
-        {visible && (
+        {isHovered && (
           <button
             type="button"
             onClick={openForm}
@@ -40,7 +39,7 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
         )}
       </td>
       <td>
-        {visible && (
+        {isHovered && (
           <RoleContextMenuButton
             serverRole={role}
           />
