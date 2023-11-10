@@ -1,0 +1,16 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0px 4px;
+
+  svg {
+    color: colors.$text-muted;
+
+    &:hover {
+      color: colors.$text-primary;
+    }
+  }
+}

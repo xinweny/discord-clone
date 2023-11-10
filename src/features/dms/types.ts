@@ -1,4 +1,5 @@
 import { UserBasicData } from '@features/users/types';
+import { TooltipProps } from '@components/ui/popups';
 
 export type DMData = {
   _id: string;
@@ -37,3 +38,7 @@ export type GetDMQuery = {
 export enum DMEvent {
   New = 'dm:new',
 }
+
+export type DMHeaderContextData = {
+  tooltipProps: Omit<TooltipProps, 'text' | 'children'>,
+};

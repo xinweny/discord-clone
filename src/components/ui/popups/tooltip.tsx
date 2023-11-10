@@ -9,7 +9,7 @@ import { PortalWrapper } from '@components/wrappers';
 
 import styles from './tooltip.module.scss';
 
-type TooltipProps = {
+export type TooltipProps = {
   text: string;
   children: React.ReactNode;
   direction: 'left' | 'right' | 'top' | 'bottom';

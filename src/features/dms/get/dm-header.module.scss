@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
