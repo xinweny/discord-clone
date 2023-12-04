@@ -1,6 +1,6 @@
 import { ContactsTabs } from '../types';
 
-import styles from './no-contacts-message.module.scss';
+import { NullMessage } from '@components/ui/displays';
 
 import wumpus1 from '@assets/static/wumpus_1.svg';
 import wumpus2 from '@assets/static/wumpus_2.svg';
@@ -41,12 +41,12 @@ export function NoContactsMessage({ activeTab, query }: NoContactsMessageProps) 
   const { src, message } = switchProps(activeTab);
 
   return (
-    <div className={styles.container}>
-      <img src={src || wumpus1} />
-      <p>{query
+    <NullMessage
+      src={src}
+      message={query
         ? 'Wumpus looked, but couldn\'t find anyone with that name.'
         : message
-      }</p>
-    </div>
+      }
+    />
   );
 }

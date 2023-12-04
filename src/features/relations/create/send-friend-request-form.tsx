@@ -16,8 +16,15 @@ import {
   SubmitButton,
   TextInput
 } from '@components/ui/forms';
+import { NullMessage } from '@components/ui/displays';
 
 import { useSendFriendRequestMutation } from '../api';
+
+import wumpus2 from '@assets/static/wumpus_2.svg';
+import CompassIcon from '@assets/icons/compass.svg?react';
+import RightArrowIcon from '@assets/icons/right-arrow.svg?react';
+
+import styles from './send-friend-request.module.scss';
 
 export function SendFriendRequestForm() {
   const { user } = useGetUserData();
@@ -40,6 +47,7 @@ export function SendFriendRequestForm() {
     handleSubmit,
     reset,
     setError,
+    formState: { isValid },
   } = methods;
 
   const [sendFriendRequest] = useSendFriendRequestMutation();
@@ -76,43 +84,45 @@ export function SendFriendRequestForm() {
   };
 
   return (
-    <div>
-      <div>
+    <div className={styles.content}>
+      <div className={styles.form}>
         <h3>ADD FRIEND</h3>
-        <p>You can add friends with their Discord usernames.</p>
+        <p>You can add friends with their Discord username.</p>
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={`${styles.input} ${!isValid ? styles.withError : ''}`}>
+              <TextInput
+                name="username"
+                label="username"
+                id="username"
+                placeholder="You can add friends with their Discord username."
+                required
+              />
+              <SubmitButton>Send Friend Request</SubmitButton>
+            </div>
+            <div className={`${styles.message} ${!isValid ? styles.withError : ''}`}>
+              <SubmittedMessage
+                name="username"
+                successMsg={`Success! Your friend request to ${submittedName} was sent.`}
+              />
+            </div>
+          </form>
+        </FormProvider>
       </div>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <TextInput
-              name="username"
-              label="username"
-              id="username"
-              placeholder="You can add friends with their Discord usernames."
-              required
-            />
-            <SubmitButton>Send Friend Request</SubmitButton>
-          </div>
-          <SubmittedMessage
-            name="username"
-            successMsg={`Success! Your friend request to ${submittedName} was sent.`}
-          />
-        </form>
-      </FormProvider>
-      <div>
+      <div className={styles.footer}>
         <h3>OTHER PLACES TO MAKE FRIENDS</h3>
         <button onClick={() => { navigate('/servers'); }}>
           <div>
-            <img src="#" alt="#" />
-            <p>Explore Discoverable Servers</p>
+            <CompassIcon />
           </div>
-          <img src="#" alt="#" />
+          <p>Explore Discoverable Servers</p>
+          <RightArrowIcon />
         </button>
-        <div>
-          <img src="#" alt="#" />
-          <p>Wumpus is waiting on friends. You don't have to, though!</p>
-        </div>
       </div>
+      <NullMessage
+        src={wumpus2}
+        message="Wumpus is waiting on friends. You don't have to, though!"
+      />
     </div>
   );
 }

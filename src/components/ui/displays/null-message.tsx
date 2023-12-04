@@ -1,3 +1,5 @@
+import styles from './null-message.module.scss';
+
 type NullMessageProps = {
   src?: string;
   header?: string;
@@ -8,7 +10,7 @@ export function NullMessage({
   header, message, src
 }: NullMessageProps) {
   return (
-    <div>
+    <div className={styles.container}>
       {src && (
         <div>
           <img src={src} />
