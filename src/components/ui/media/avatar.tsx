@@ -9,10 +9,11 @@ type AvatarProps = {
   alt?: string;
   notification?: React.ReactNode;
   placeholder?: string;
+  className?: string;
 };
 
 export function Avatar({
-  src, alt, notification, placeholder
+  src, alt, notification, placeholder, className
 }: AvatarProps) {
   const size = '32';
 
@@ -36,7 +37,7 @@ export function Avatar({
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
-      className={styles.mask}
+      className={`${styles.mask} ${className || ''}`}
       aria-hidden
     >
       <foreignObject

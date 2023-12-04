@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { DateTime } from 'luxon';
 
 import type { MessageData } from '../types';
 
@@ -21,11 +22,14 @@ import { MessageReactionsBar } from './message-reactions-bar';
 import { TenorGifPreview } from './tenor-gif-preview';
 import { ServerInviteCards } from '@features/server-invites/list';
 
+import styles from './message-card.module.scss';
+
 type MessageCardProps = {
   isDm?: boolean;
   message: MessageData;
   currentDate: Date;
   authorized?: boolean;
+  prev: MessageData | undefined;
 };
 
 export function MessageCard({
@@ -33,6 +37,7 @@ export function MessageCard({
   message,
   currentDate,
   authorized = true,
+  prev,
 }: MessageCardProps) {
   const { visible, hover, hide } = useDisplay();
   const activeTabState = useActiveIds();
@@ -46,16 +51,25 @@ export function MessageCard({
 
   const deleteMessageBtnRef = useRef<HTMLButtonElement>(null);
 
+  const isGrouped = prev &&
+    prev.senderId === message.senderId &&
+    new Date(message.createdAt).getTime() - new Date(prev.createdAt).getTime() <= 25200;
+
   return (
     <MessageContext.Provider value={message}>
-      <div {...hover}>
-        <Avatar src={message.sender.avatarUrl} />
-        <div>
-          <MessageHeader
+      <div className={`${styles.card} ${!isGrouped ? styles.headMessage : ''}`} {...hover}>
+        <div className={styles.avatar}>
+          {isGrouped
+            ? (visible && <p>{DateTime.fromISO(message.createdAt).toFormat('h:mm a')}</p>)
+            : <Avatar src={message.sender.avatarUrl} />
+          }
+        </div>
+        <div className={styles.content}>
+          {!isGrouped && <MessageHeader
             message={message}
             isDm={isDm}
             currentDate={currentDate}
-          />
+          />}
           {activeTabState.id === 'editMessage'
             ? <EditMessageForm
                 message={message}

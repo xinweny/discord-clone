@@ -42,6 +42,7 @@ $bg-modifier-active: lighten($bg-primary, 8%);
 $bg-modifier-hover: lighten($bg-primary, 4%);
 $bg-modifier-selected: lighten($bg-primary, 6%);
 $bg-modifier-accent: $bg-modifier-active;
+$bg-modifier-darken: darken($bg-primary, 2%);
 
 $header-primary: $primary-130;
 $header-secondary: $primary-330;

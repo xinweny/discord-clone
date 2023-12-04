@@ -21,6 +21,6 @@ export function MessageDate({ messageDate, currentDate }: MessageDateProps) {
   }
 
   return (
-    <p>{`${dateStr} at ${start.toFormat('HH:mm')}`}</p>
+    <p>{`${dateStr} at ${start.toFormat('h:mm a')}`}</p>
   );
 }

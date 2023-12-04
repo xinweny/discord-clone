@@ -61,12 +61,13 @@ export function MessagesContainer({
       <div onScroll={handleScroll} className={styles.content}>
         {welcomeComponent}
         {messages.items.map(
-          message => <MessageCard
+          (message, index) => <MessageCard
             key={message._id}
             message={message}
             currentDate={currentDate}
             isDm={!serverId}
             authorized={authorized}
+            prev={messages.items[index - 1]}
           />
         )}
       </div>

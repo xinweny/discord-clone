@@ -1,0 +1,33 @@
+@use '@styles/colors';
+
+.card {
+  position: relative;
+  display: flex;
+  margin-right: 4px;
+
+  &:hover {
+    background-color: colors.$bg-modifier-darken;
+  }
+
+  &.headMessage {
+    margin-top: 18px;
+  }
+}
+
+.avatar {
+  width: 72px;
+  display: flex;
+  justify-content: center;
+
+  > svg {
+    margin-top: 2px;
+    width: 40px;
+    height: 40px;
+  }
+
+  p {
+    align-self: center;
+    color: colors.$text-muted;
+    font-size: 10px;
+  }
+}
