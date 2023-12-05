@@ -84,12 +84,12 @@ export function EditMessageForm({
             escapeCancel(e);
           }}
         />
-        <CancelSubmitMessage clickHandlers={{
-          cancel: clickCancel,
-          submit: clickSubmit,
-        }}/>
+        <MessageOptionsBar editor={editor} editMode={true} />
       </form>
-      <MessageOptionsBar editor={editor} editMode={true} />
+      <CancelSubmitMessage clickHandlers={{
+        cancel: clickCancel,
+        submit: clickSubmit,
+      }}/>
     </FormProvider>
   );
 }

@@ -50,7 +50,7 @@ export function MessageOptionsBar({
         </AddNewReactionButton>
       </Tooltip>
       <Tooltip text="Edit Message" {...tooltipProps}>
-        <EditMessageButton set={set}>
+        <EditMessageButton set={set} id={id}>
           <PencilIcon />
         </EditMessageButton>
       </Tooltip>
