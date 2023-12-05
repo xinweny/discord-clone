@@ -4,6 +4,8 @@ import { EditMessageButton } from '../edit';
 import { DeleteMessageOptionsButton } from '../delete';
 import { AddNewReactionButton } from '@features/reactions/add';
 
+import styles from './message-options-bar.module.scss';
+
 type MessageOptionsBarProps = {
   visible: boolean;
   hide: () => void;
@@ -26,7 +28,7 @@ export function MessageOptionsBar({
   if (!visible && id !== 'addReaction') return null;
 
   return (
-    <div>
+    <div className={styles.container}>
       <AddNewReactionButton
         authorized={authorized}
         activeTabState={activeTabState}

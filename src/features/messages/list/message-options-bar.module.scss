@@ -1,0 +1,20 @@
+@use '@styles/colors';
+
+.container {
+  position: absolute;
+  overflow: hidden;
+  height: 32px;
+  display: flex;
+  align-items: stretch;
+  top: -16px;
+  right: 12px;
+  background-color: colors.$bg-primary;
+  border: 1px solid colors.$bg-secondary-alt;
+  border-radius: 4px;
+
+  > button {
+    &:hover {
+      background-color: colors.$bg-modifier-hover;
+    }
+  }
+}

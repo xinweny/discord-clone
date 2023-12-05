@@ -9,18 +9,18 @@ export function MessageDate({ messageDate, currentDate }: MessageDateProps) {
   const start = DateTime.fromISO(messageDate);
   const end = DateTime.fromJSDate(currentDate);
 
-  let diffInDays = Math.floor(end.diff(start, 'days').days);
-  diffInDays = diffInDays < 0 ? 0 : diffInDays;
+  const getRelativeDate = (start: DateTime, end: DateTime) => {
+    const hoursSinceMidnight = end.diff(end.startOf('day'), 'hours').hours;
 
-  let dateStr = '';
+    const diffInHours = Math.floor(end.diff(start, 'hours').hours);
 
-  switch (diffInDays) {
-    case 0: dateStr = 'Today'; break;
-    case 1: dateStr = 'Yesterday'; break;
-    default: dateStr = start.toFormat('dd/MM/yyyy'); break;
-  }
+    if (diffInHours < hoursSinceMidnight) return 'Today';
+    if (diffInHours < hoursSinceMidnight + 24) return 'Yesterday';
+
+    return start.toFormat('dd/MM/yyyy');
+  };
 
   return (
-    <p>{`${dateStr} at ${start.toFormat('h:mm a')}`}</p>
+    <p>{`${getRelativeDate(start, end)} at ${start.toFormat('h:mm a')}`}</p>
   );
 }
