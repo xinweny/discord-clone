@@ -12,9 +12,28 @@
   border: 1px solid colors.$bg-secondary-alt;
   border-radius: 4px;
 
-  > button {
+  > * {
+    &, button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     &:hover {
       background-color: colors.$bg-modifier-hover;
+
+      path {
+        fill: colors.$text-primary;
+      }
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    path {
+      fill: colors.$text-muted;
     }
   }
 }

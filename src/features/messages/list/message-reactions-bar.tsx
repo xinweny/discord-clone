@@ -4,6 +4,8 @@ import { useDisplay } from '@components/hooks';
 import { AddNewReactionButton } from '@features/reactions/add';
 import { MessageReactionsList } from '@features/reactions/list';
 
+import AddReactionIcon from '@assets/icons/add-reaction.svg?react';
+
 type MessageReactionsBarProps = {
   messageId: string;
   authorized: boolean;
@@ -21,7 +23,9 @@ export function MessageReactionsBar({ messageId, authorized }: MessageReactionsB
           authorized={authorized}
           hide={hide}
           activeTabState={activeTabState}
-        />
+        >
+          <AddReactionIcon />
+        </AddNewReactionButton>
       )}
     </div>
   );

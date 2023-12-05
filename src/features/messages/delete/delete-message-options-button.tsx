@@ -10,11 +10,13 @@ import { useServerAuthorize } from '@features/servers/hooks';
 type DeleteMessageOptionsButtonProps = {
   set: React.Dispatch<React.SetStateAction<string | null>>;
   deleteBtnRef: React.RefObject<HTMLButtonElement>;
+  children: React.ReactNode;
 };
 
 export function DeleteMessageOptionsButton({
   set,
   deleteBtnRef,
+  children
 }: DeleteMessageOptionsButtonProps) {
   const message = useContext(MessageContext);
   const dmAuthorized = useMessageAuthorize();
@@ -50,7 +52,7 @@ export function DeleteMessageOptionsButton({
         }
       }}
     >
-      <img src="#" alt="Delete Message" />
+      {children}
     </button>
   );
 }

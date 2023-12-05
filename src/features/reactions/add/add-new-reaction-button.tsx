@@ -9,12 +9,14 @@ type AddNewReactionButtonProps = {
   hide: () => void;
   activeTabState: ActiveIdState;
   authorized: boolean;
+  children: React.ReactNode;
 };
 
 export function AddNewReactionButton({
   activeTabState,
   hide,
   authorized,
+  children,
 }: AddNewReactionButtonProps) {
   const { set } = activeTabState;
 
@@ -34,7 +36,7 @@ export function AddNewReactionButton({
       }}
       btnRef={addReactionBtnRef}
     >
-      <img src="#" alt="Add Reaction" />
+      {children}
     </ClickPopup>
   );  
 }

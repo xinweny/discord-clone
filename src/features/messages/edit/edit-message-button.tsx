@@ -2,10 +2,11 @@ import { useMessageAuthorize } from '../hooks';
 
 type EditMessageButtonProps = {
   set: React.Dispatch<React.SetStateAction<string | null>>;
+  children: React.ReactNode;
 };
 
 export function EditMessageButton({
-  set
+  set, children
 }: EditMessageButtonProps) {
   const authorized = useMessageAuthorize();
 
@@ -13,7 +14,7 @@ export function EditMessageButton({
 
   return (
     <button onClick={() => { set('editMessage'); }}>
-      <img src="#" alt="Edit Message" />
+      {children}
     </button>
   );
 }
