@@ -58,7 +58,7 @@ export function ContactCard({
     ) => ({ message, buttons });
 
     const messageBtn = (
-      <Tooltip text="Message" direction="top" options={{ gap: 4 }}>
+      <Tooltip text="Message" direction="top" gap={4}>
         <DmMessageButton userId={userId}>
           <ChatBubbleIcon />
         </DmMessageButton>
@@ -127,7 +127,7 @@ export function ContactCard({
       </div>
       {props?.buttons && <div className={styles.buttons}>
         {props.buttons}
-        <Tooltip text={labelRemove(status)} direction="top" options={{ gap: 4 }}>
+        <Tooltip text={labelRemove(status)} direction="top" gap={4}>
           <RemoveRelationButton relation={contact}>
             <CrossIcon />
           </RemoveRelationButton>

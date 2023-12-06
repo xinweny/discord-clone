@@ -10,7 +10,7 @@ export function UserSettingsButton() {
     <Tooltip
       text="User Settings"
       direction="top"
-      options={{ gap: 4 }}
+      gap={4}
     >
       <ModalButton
         modal={UserSettingsModal}

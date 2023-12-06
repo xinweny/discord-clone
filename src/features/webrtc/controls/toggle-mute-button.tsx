@@ -25,7 +25,7 @@ export function ToggleMuteButton() {
     <Tooltip
       text={isMuted ? 'Unmute' : 'Mute'}
       direction="top"
-      options={{ gap: 4 }}
+      gap={4}
     >
       {isOnCall
       ? <TrackToggle

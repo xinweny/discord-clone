@@ -13,10 +13,8 @@ export type TooltipProps = {
   text: string;
   children: React.ReactNode;
   direction: 'left' | 'right' | 'top' | 'bottom';
-  options?: {
-    gap: number;
-    arrow?: number;
-  }
+  gap?: number;
+  arrow?: number;
 };
 
 const ARROW_WIDTH = 6;
@@ -25,17 +23,13 @@ export function Tooltip({
   text,
   children,
   direction,
-  options = {
-    gap: 0,
-    arrow: 6,
-  }
+  gap = 0,
+  arrow = 6,
 }: TooltipProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const [hoverRef, isHovered] = useHover();
-
-  const { gap, arrow } = options;
 
   const arrowWidth = typeof arrow === 'number'
     ? arrow

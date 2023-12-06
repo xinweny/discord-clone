@@ -12,7 +12,7 @@ export function CreateDmHeader() {
       <Tooltip
         text="Create DM"
         direction="top"
-        options={{ gap: 4 }}
+        gap={4}
       >
         <CreateDmButton
           position={{

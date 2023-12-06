@@ -35,7 +35,7 @@ export function MessageOptionsBar({
 
   const tooltipProps = {
     direction: 'top' as const,
-    options: { gap: 4 },
+    gap: 4,
   };
 
   return (

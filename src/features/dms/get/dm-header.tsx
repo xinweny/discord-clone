@@ -15,7 +15,7 @@ export function DmHeader({ dm }: DmHeaderProps) {
   const contextData = {
     tooltipProps: {
       direction: 'bottom' as const,
-      options: { gap: 2 },
+      gap: 2,
     },
   };
 
