@@ -2,8 +2,12 @@
 
 .form {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   background-color: colors.$bg-textarea;
   margin: 0px 16px 24px 16px;
   border-radius: 8px;
+
+  & > div:not(:nth-child(2)) {
+    flex-shrink: 0;
+  }
 }
