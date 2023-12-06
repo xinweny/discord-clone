@@ -2,6 +2,8 @@ import type { FileWatchResMulti } from '@components/hooks';
 
 import { FilesInput } from '@components/ui/forms';
 
+import PlusIcon from '@assets/icons/plus.svg?react';
+
 import styles from './upload-file-button.module.scss';
 
 type UploadFileButtonProps = {
@@ -20,7 +22,7 @@ export function UploadFileButton({
   return (
     <div role="button" className={styles.button}>
       <label htmlFor="upload-attachments">
-        <img src="#" alt="Upload attachments" />
+        <PlusIcon />
         <FilesInput
           id="upload-attachments"
           name="attachments"
