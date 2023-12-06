@@ -1,0 +1,14 @@
+.container {
+  margin: 12px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  > button {
+    height: 22px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

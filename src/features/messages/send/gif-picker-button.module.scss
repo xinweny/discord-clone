@@ -1,0 +1,13 @@
+@use '@styles/colors';
+
+.icon {  
+  path {
+    fill: colors.$text-secondary;
+  }
+
+  &:hover {
+    path {
+      fill: colors.$text-primary;
+    }
+  }
+}

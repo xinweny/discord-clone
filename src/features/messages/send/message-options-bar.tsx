@@ -5,6 +5,8 @@ import { useActiveIds } from '@hooks';
 import { GifPickerButton } from './gif-picker-button';
 import { EmojiPickerButton } from './emoji-picker-button';
 
+import styles from './message-options-bar.module.scss';
+
 type MessageOptionsBarProps = {
   editor: CustomEditor;
   editMode?: boolean;
@@ -23,7 +25,7 @@ export function MessageOptionsBar({
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {!editMode && <GifPickerButton
         tabState={activeTabState}
         position={popupPosition}

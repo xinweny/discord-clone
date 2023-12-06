@@ -6,6 +6,10 @@ import type { PositionData } from '@components/hooks';
 import { ClickPopup } from '@components/ui/popups';
 import { MessageGifPicker } from './message-gif-picker';
 
+import GifIcon from '@assets/icons/gif.svg?react';
+
+import styles from './gif-picker-button.module.scss';
+
 type GifPickerButtonProps = {
   tabState: ActiveIdState;
   position: PositionData;
@@ -27,7 +31,7 @@ export function GifPickerButton({
       btnRef={gifPickerBtnRef}
       position={position}
     >
-      <img src="#" alt="GIF" />
+      <GifIcon className={styles.icon} />
     </ClickPopup>
   );
 }
