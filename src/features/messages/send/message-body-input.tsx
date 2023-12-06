@@ -96,8 +96,18 @@ export function MessageBodyInput({
               className={styles.input}
               placeholder={!authorized
                 ? 'You do not have permission to send messages in this channel.'
-                : placeholder
-              }
+                : placeholder}
+              renderPlaceholder={({ children, attributes }) => {
+                const style = attributes.style;
+                style.top = '50%';
+                style.transform = 'translateY(-50%)';
+
+                return (
+                  <div {...attributes}>
+                    <span>{children}</span>
+                  </div>
+                );
+              }}
               onKeyDown={(e) => {
                 enterSubmit(e);
 
