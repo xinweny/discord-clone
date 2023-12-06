@@ -1,0 +1,63 @@
+@use '@styles/colors';
+
+.card {
+  padding: 8px;
+  border-radius: 4px;
+  background-color: colors.$bg-secondary;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+
+    svg {
+      height: 80px;
+    }
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 200px;
+      max-height: 174px;
+      border-radius: 4px;
+      background-color: colors.$bg-modifier-accent;
+      overflow: none;
+    }
+  }
+
+  p {
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    margin-top: 8px;
+    font-size: 14px;
+    color: colors.$text-primary;
+    overflow: hidden;
+  }
+
+  > div:last-child {
+    position: absolute;
+    top: 0;
+    right: -16px;
+  }
+
+  button {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: colors.$bg-secondary;
+    border: 1px solid colors.$bg-tertiary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    path {
+      fill: colors.$red;
+    }
+  }
+}

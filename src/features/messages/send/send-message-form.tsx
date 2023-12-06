@@ -74,7 +74,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));
 
   return (
-    <div>
+    <div className={styles.container}>
       <FormProvider {...methods}>
         <AttachmentsPreview fileWatch={fileWatch} />
         <form className={styles.form}>

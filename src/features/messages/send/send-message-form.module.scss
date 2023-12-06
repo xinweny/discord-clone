@@ -1,12 +1,14 @@
 @use '@styles/colors';
 
-.form {
-  display: grid;
-  display: flex;
+.container {
   background-color: colors.$bg-textarea;
-  margin: 0px 16px 24px 16px;
   border-radius: 8px;
+  margin: 0px 16px 24px 16px;
+}
 
+.form {
+  display: flex;
+  
   & > div:not(:nth-child(2)) {
     flex-shrink: 0;
   }
