@@ -16,10 +16,23 @@ export function MessageOptionsBar({
 }: MessageOptionsBarProps) {
   const activeTabState = useActiveIds();
 
+  const popupPosition = {
+    direction: 'top' as const,
+    align: 'end' as const,
+    gap: 20,
+  };
+
   return (
     <div>
-      {!editMode && <GifPickerButton tabState={activeTabState} />}
-      <EmojiPickerButton tabState={activeTabState} editor={editor} />
+      {!editMode && <GifPickerButton
+        tabState={activeTabState}
+        position={popupPosition}
+      />}
+      <EmojiPickerButton
+        tabState={activeTabState}
+        editor={editor}
+        position={popupPosition}
+      />
     </div>
   );
 }

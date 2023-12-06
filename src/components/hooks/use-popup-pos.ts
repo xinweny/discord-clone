@@ -27,7 +27,7 @@ const getPosStyle = (position: PositionData, btnRect: DOMRect, popupRect: DOMRec
         top: btnRect.top - popupRect.height - gap,
         left: btnRect.left + (align === 'center'
           ? (btnRect.width - popupRect.width) / 2
-          : align === 'start' ? 0 : popupRect.width - btnRect.width
+          : align === 'start' ? 0 : btnRect.width - popupRect.width
         ),
       }; break;
     }
