@@ -20,6 +20,8 @@ import { resetEditor, decorator, serialize, slateDeserialize } from '../slate';
 import { Leaf } from './leaf';
 import { Element } from './element';
 
+import styles from './message-body-input.module.scss';
+
 type MessageBodyInputProps = {
   name: string;
   authorized: boolean;
@@ -91,6 +93,7 @@ export function MessageBodyInput({
             onChange={onChange}
           >
             <Editable
+              className={styles.input}
               placeholder={!authorized
                 ? 'You do not have permission to send messages in this channel.'
                 : placeholder

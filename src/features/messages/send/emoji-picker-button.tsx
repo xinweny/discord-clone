@@ -30,6 +30,11 @@ export function EmojiPickerButton({
       onOpen={() => { set('emoji'); }}
       onClose={() => { set(null); }}
       btnRef={emojiPickerBtnRef}
+      position={{
+        direction: 'top',
+        align: 'end',
+        gap: 16,
+      }}
     >
       <img src="#" alt="Emoji" />
     </ClickPopup>

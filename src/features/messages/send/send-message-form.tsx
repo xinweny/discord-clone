@@ -16,6 +16,8 @@ import { MessageBodyInput } from './message-body-input';
 
 import { useSendMessageMutation } from '../api';
 
+import styles from './send-message-form.module.scss';
+
 type SendMessageFormProps = {
   authorized?: boolean;
   placeholder?: string;
@@ -72,10 +74,10 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
   const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));
 
   return (
-    <FormProvider {...methods}>
-      <div>
+    <div>
+      <FormProvider {...methods}>
         <AttachmentsPreview fileWatch={fileWatch} />
-        <form>
+        <form className={styles.form}>
           <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
           <MessageBodyInput
             name="body"
@@ -87,7 +89,7 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
           />
           <MessageOptionsBar editor={editor} />
         </form>
-      </div>
-    </FormProvider>
+      </FormProvider>
+    </div>
   );
 }

@@ -24,6 +24,7 @@ $primary-300: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
 $primary-330: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
 $primary-360: hsl(214 calc($saturation-factor * 8.1%) 61.2%);
 $primary-400: hsl(223 calc($saturation-factor * 5.8%) 52.9%);
+$primary-560: hsl(225 calc($saturation-factor * 6.7%) 23.5%);
 $primary-600: hsl(223 calc($saturation-factor * 6.7%) 20.6%);
 $primary-630: hsl(220 calc($saturation-factor * 6.5%) 18%);
 $primary-660: hsl(228 calc($saturation-factor * 6.7%) 14.7%);
@@ -37,6 +38,7 @@ $bg-tertiary: $primary-700;
 
 $bg-modal: rgba(0, 0, 0, 0.85);
 $bg-floating: $primary-800;
+$bg-textarea: $primary-560;
 
 $bg-modifier-active: lighten($bg-primary, 8%);
 $bg-modifier-hover: lighten($bg-primary, 4%);

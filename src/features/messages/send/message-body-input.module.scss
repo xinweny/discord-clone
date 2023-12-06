@@ -1,0 +1,17 @@
+@use '@styles/colors';
+
+.input {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 0px;
+  caret-color: colors.$white;
+  color: colors.$text-primary;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.375rem;
+
+  &:focus, &:focus-visible {
+    outline: none;
+  }
+}
