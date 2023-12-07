@@ -25,7 +25,7 @@ export function EmojiPickerButton({
   editor,
   position,
 }: EmojiPickerButtonProps) {
-  const icons = data.categories[0].emojis.slice(0, 104);
+  const icons = data.categories[1].emojis.slice(0, 104);
 
   const [currentEmoji, setCurrentEmoji] = useState<string>(icons[0]);
   const [spriteUrl, setSpriteUrl] = useState<string>('');

@@ -18,6 +18,8 @@ import { MessageOptionsBar } from '../send/message-options-bar';
 
 import { useEditMessageMutation } from '../api';
 
+import styles from './edit-message-form.module.scss';
+
 type EditMessageFormProps = {
   message: MessageData;
   closeForm: () => void;
@@ -72,7 +74,7 @@ export function EditMessageForm({
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form className={styles.form}>
         <MessageBodyInput
           name="body"
           authorized={true}
