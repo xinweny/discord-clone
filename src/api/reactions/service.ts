@@ -17,20 +17,11 @@ type CreateReactionFields = {
 
 const getByMessage = async (
   messageId: string | Types.ObjectId,
-  userId: string | Types.ObjectId
 ) => {
   const reactions = await Reaction.aggregate([
     {
       $match: { messageId: new Types.ObjectId(messageId) },
     },
-    {
-      $addFields: {
-        userHasReacted: {
-          $in: [new Types.ObjectId(userId), '$userIds'],
-        },
-      },
-    },
-    { $unset: 'userIds' },
     { $sort: { _id: 1 } },
   ]);
 

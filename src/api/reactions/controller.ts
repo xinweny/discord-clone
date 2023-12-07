@@ -9,7 +9,7 @@ const getReactions: RequestHandler[] = [
   authenticate,
   tryCatch(
     async (req, res) => {
-      const reactions = await reactionService.getByMessage(req.params.messageId, req.user?._id);
+      const reactions = await reactionService.getByMessage(req.params.messageId);
 
       res.json({ data: reactions });
     }
