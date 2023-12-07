@@ -84,7 +84,7 @@ const decrement = async (
   reactionId: string | Types.ObjectId,
   userId: string | Types.ObjectId
 ) => {
-  const reactionCount = await Reaction.updateOne({
+  const reactionCount = await Reaction.findOneAndUpdate({
     _id: new Types.ObjectId(reactionId),
     userIds: userId,
   }, {
