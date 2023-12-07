@@ -57,3 +57,9 @@ export type DecrementReactionFields = {
   messageId: string;
   reactionId: string;
 };
+
+export enum ReactionEvent {
+  Create = 'reaction:create',
+  Increment = 'reaction:increment',
+  Decrement = 'reaction:decrement',
+}

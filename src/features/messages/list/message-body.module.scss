@@ -1,0 +1,14 @@
+@use '@styles/colors';
+
+.container {
+  > * {
+    display: inline-block;
+  }
+
+  > p {
+    margin-left: 4px;
+    color: colors.$text-muted;
+    font-size: 10px;
+    user-select: none;
+  }
+}

@@ -8,6 +8,8 @@ import { slateDeserialize, decorator } from '../slate';
 
 import { Leaf, Element } from '../send';
 
+import styles from './message-body.module.scss';
+
 type MessageBodyProps = {
   message: MessageData;
   hidden?: boolean;
@@ -24,7 +26,7 @@ export function MessageBody({
   if (hidden) return null;
 
   return (
-    <div>
+    <div className={styles.container}>
       <Slate
         editor={editor}
         initialValue={slateDeserialize(message)}
@@ -37,7 +39,7 @@ export function MessageBody({
         />
       </Slate>
       {(updatedAt !== createdAt) && (
-        <p><em>(edited)</em></p>
+        <p className={styles.edited}>(edited)</p>
       )}
     </div>
   );

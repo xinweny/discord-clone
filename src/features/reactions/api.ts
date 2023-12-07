@@ -1,14 +1,17 @@
 import api from '@services/api';
 
-import {
+import type {
   ReactionData,
   GetReactionCountsQuery,
   CreateReactionsFields,
   IncrementReactionFields,
   DecrementReactionFields,
 } from './types';
+import { ReactionEvent } from './types';
 
 import { messageBaseUrl } from '@utils';
+
+import { setupSocketEventListeners, emitEvents } from '@services/websocket';
 
 const reactionApi = api.injectEndpoints({
   endpoints(build) {
@@ -19,6 +22,49 @@ const reactionApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
+        onCacheEntryAdded: async (
+          args,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [ReactionEvent.Create]: (reaction: ReactionData) => {
+              updateCachedData((draft) => {
+                draft.push(reaction);
+
+                return draft;
+              });
+            },
+            [ReactionEvent.Increment]: (reaction: ReactionData) => {
+              updateCachedData((draft) => {
+                const i = draft.findIndex(r => r._id === reaction._id);
+
+                if (i === -1) return draft;
+
+                draft[i].count = reaction.count;
+
+                return draft;
+              });
+            },
+            [ReactionEvent.Decrement]: (reaction: ReactionData) => {
+              updateCachedData((draft) => {
+                const i = draft.findIndex(r => r._id === reaction._id);
+
+                if (i === -1) return draft;
+
+                reaction.count === 0
+                  ? draft.splice(i, 1)
+                  : draft[i].count = reaction.count;
+
+                return draft;
+              });
+            }
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
       }),
       createReaction: build.mutation<ReactionData, CreateReactionsFields>({
         query: ({ serverId, roomId, messageId, emoji }) => ({
@@ -27,6 +73,15 @@ const reactionApi = api.injectEndpoints({
           data: emoji,
         }),
         invalidatesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
+        onQueryStarted: async ({ roomId }, { queryFulfilled }) => {
+          try {
+            const { data: reaction } = await queryFulfilled;
+
+            emitEvents({ [ReactionEvent.Create]: { reaction, roomId } });
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
       incrementReaction: build.mutation<ReactionData, IncrementReactionFields>({
         query: ({ serverId, roomId, messageId, reactionId }) => ({
@@ -34,6 +89,15 @@ const reactionApi = api.injectEndpoints({
           method: 'put',
         }),
         invalidatesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
+        onQueryStarted: async ({ roomId }, { queryFulfilled }) => {
+          try {
+            const { data: reaction } = await queryFulfilled;
+
+            emitEvents({ [ReactionEvent.Increment]: { reaction, roomId } });
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
       decrementReaction: build.mutation<ReactionData, DecrementReactionFields>({
         query: ({ serverId, roomId, messageId, reactionId }) => ({
@@ -42,6 +106,15 @@ const reactionApi = api.injectEndpoints({
           params: { reactionId },
         }),
         invalidatesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
+        onQueryStarted: async ({ roomId }, { queryFulfilled }) => {
+          try {
+            const { data: reaction } = await queryFulfilled;
+            
+            emitEvents({ [ReactionEvent.Decrement]: { reaction, roomId } });
+          } catch (err) {
+            console.log(err);
+          }
+        },
       }),
     };
   }
