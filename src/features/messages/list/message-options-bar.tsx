@@ -45,6 +45,11 @@ export function MessageOptionsBar({
           authorized={authorized}
           activeTabState={activeTabState}
           hide={hide}
+          position={{
+            direction: 'left',
+            align: 'start',
+            gap: 4,
+          }}
         >
           <AddReactionIcon />
         </AddNewReactionButton>

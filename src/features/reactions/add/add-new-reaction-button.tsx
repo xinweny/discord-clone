@@ -3,13 +3,15 @@ import { useRef } from 'react';
 import { ClickPopup } from '@components/ui/popups';
 import { AddReactionForm } from './add-reaction-form';
 
-import { ActiveIdState } from '@hooks';
+import type { ActiveIdState } from '@hooks';
+import type { PositionData } from '@components/hooks';
 
 type AddNewReactionButtonProps = {
   hide: () => void;
   activeTabState: ActiveIdState;
   authorized: boolean;
   children: React.ReactNode;
+  position: PositionData
 };
 
 export function AddNewReactionButton({
@@ -17,6 +19,7 @@ export function AddNewReactionButton({
   hide,
   authorized,
   children,
+  position,
 }: AddNewReactionButtonProps) {
   const { set } = activeTabState;
 
@@ -35,6 +38,7 @@ export function AddNewReactionButton({
         hide();
       }}
       btnRef={addReactionBtnRef}
+      position={position}
     >
       {children}
     </ClickPopup>

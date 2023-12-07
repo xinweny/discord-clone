@@ -46,7 +46,7 @@ const getPosStyle = (position: PositionData, btnRect: DOMRect, popupRect: DOMRec
           ? (btnRect.height - popupRect.height) / 2
           : align === 'start' ? 0 : btnRect.height - popupRect.height
         ),
-        left: btnRect.left - gap,
+        left: btnRect.left - popupRect.width - gap,
       }; break;
     }
     case 'right': {

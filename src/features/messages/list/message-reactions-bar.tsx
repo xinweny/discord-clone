@@ -29,6 +29,11 @@ export function MessageReactionsBar({ messageId, authorized }: MessageReactionsB
               authorized={authorized}
               hide={hide}
               activeTabState={activeTabState}
+              position={{
+                direction: 'right',
+                align: 'center',
+                gap: 2,
+              }}
             >
               <SmileyIcon />
             </AddNewReactionButton>
