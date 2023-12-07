@@ -1,3 +1,5 @@
+import styles from './cancel-submit-message.module.scss';
+
 type CancelSubmitMessageProps = {
   clickHandlers: {
     cancel: React.MouseEventHandler;
@@ -11,6 +13,6 @@ export function CancelSubmitMessage({
   const { cancel, submit } = clickHandlers;
 
   return (
-    <p>escape to <button type="button" onClick={cancel}>cancel</button>·enter to <button type="button" onClick={submit}>save</button></p>
+    <p className={styles.message}>escape to <button type="button" onClick={cancel}>cancel</button> · enter to <button type="button" onClick={submit}>save</button></p>
   );
 }

@@ -19,7 +19,6 @@ $not-quite-black: #23272A;
 $brand-360: hsl(235 calc($saturation-factor * 86.1%) 77.5%);
 $brand-500: hsl(235 calc($saturation-factor * 85.6%) 64.7%);
 $brand-560: hsl(235 calc($saturation-factor * 51.4%) 52.4%);
-
 $brand-15a: functions.hslac($brand-500, 0.15);
 
 $primary-130: hsl(220 calc($saturation-factor * 13%) 95.5%);
@@ -35,6 +34,8 @@ $primary-630: hsl(220 calc($saturation-factor * 6.5%) 18%);
 $primary-660: hsl(228 calc($saturation-factor * 6.7%) 14.7%);
 $primary-700: hsl(225 calc($saturation-factor * 6.3%) 12.5%);
 $primary-800: hsl(220 calc($saturation-factor * 8.1%) 7.3%);
+
+$blue-345: hsl(200 calc($saturation-factor * 100%) 49.4%);
 
 $bg-primary: $primary-600;
 $bg-secondary: $primary-630;
@@ -58,6 +59,7 @@ $header-muted: $primary-360;
 $text-primary: $primary-230;
 $text-secondary: $primary-330;
 $text-muted: $primary-360;
+$text-link: $blue-345;
 
 $interactive-normal: $primary-330;
 $interactive-hover: $primary-230;
