@@ -22,6 +22,7 @@ export function UserShortProfile({
     bannerColor,
     displayName,
     createdAt,
+    bio,
   } = user;
 
   const { avatarUrl, username } = user;
@@ -45,8 +46,14 @@ export function UserShortProfile({
           {'customStatus' in user && <p>{user.customStatus}</p>}
         </div>
         <div>
-          <p><strong>DISCORD MEMBER SINCE</strong></p>
-          <p>{joinedDate(createdAt)}</p>
+          {bio && <div>
+            <h5>ABOUT ME</h5>
+            <p>{bio}</p>
+          </div>}
+          <div>
+            <h5>DISCORD MEMBER SINCE</h5>
+            <p>{joinedDate(createdAt)}</p>
+          </div>
         </div>
         {children}
       </div>
