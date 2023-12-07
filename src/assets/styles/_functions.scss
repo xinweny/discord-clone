@@ -1,0 +1,3 @@
+@function hslac($hsl, $a) {
+  @return hsla(hue($hsl), saturation($hsl), lightness($hsl), $a);
+}

@@ -2,10 +2,14 @@ import type { ReactionData } from '../types';
 
 import { Emoji } from '@components/ui/media';
 
+import { useGetUserData } from '@features/auth/hooks';
+
 import {
   useIncrementReactionMutation,
   useDecrementReactionMutation,
 } from '../api';
+
+import styles from './toggle-reaction-button.module.scss';
 
 type ToggleReactionButtonProps = {
   authorized: boolean;
@@ -26,13 +30,15 @@ export function ToggleReactionButton({
     count,
     name,
     messageId,
-    userHasReacted,
+    userIds,
   } = reaction;
 
   const custom = __t === 'custom';
 
   const [increment] = useIncrementReactionMutation();
   const [decrement] = useDecrementReactionMutation();
+
+  const { user } = useGetUserData();
 
   const query = {
     reactionId: _id,
@@ -49,9 +55,11 @@ export function ToggleReactionButton({
     await decrement(query).unwrap();
   };
 
+  const userHasReacted = userIds.includes(user.data!._id);
+
   return (
     <button
-      className={`${userHasReacted ? 'unreact-btn' : 'react-btn'}`}
+      className={`${styles.reaction} ${userHasReacted ? styles.unreactButton : styles.reactButton}`}
       onClick={userHasReacted ? handleUnreact : handleReact}
       disabled={!authorized}
     >

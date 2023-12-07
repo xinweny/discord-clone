@@ -19,8 +19,8 @@ export type ReactionData = {
   _id: string;
   messageId: string;
   name: string;
-  userHasReacted: boolean;
   count: number;
+  userIds: string[];
 } & (CustomEmojiReactionData | EmojiReactionData);
 
 export type GetReactionCountsQuery = {
