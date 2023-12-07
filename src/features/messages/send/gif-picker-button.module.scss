@@ -2,12 +2,12 @@
 
 .icon {  
   path {
-    fill: colors.$text-secondary;
+    fill: colors.$interactive-normal;
   }
 
   &:hover {
     path {
-      fill: colors.$text-primary;
+      fill: colors.$interactive-hover;
     }
   }
 }

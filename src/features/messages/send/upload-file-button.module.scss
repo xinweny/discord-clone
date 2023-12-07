@@ -8,7 +8,7 @@
   width: 20px;
   height: 20px;
   border-radius: 12px;
-  background-color: colors.$text-secondary;
+  background-color: colors.$interactive-normal;
   margin: 13px 16px;
   cursor: pointer;
 
@@ -29,6 +29,6 @@
   }
 
   &:hover {
-    background-color: colors.$text-primary;
+    background-color: colors.$interactive-hover;
   }
 }

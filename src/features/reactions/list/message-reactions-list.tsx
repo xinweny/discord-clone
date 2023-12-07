@@ -4,6 +4,8 @@ import { ToggleReactionButton } from '../edit';
 
 import { useGetReactionsQuery } from '../api';
 
+import styles from './message-reactions-list.module.scss';
+
 type MessageReactionsListProps = {
   messageId: string;
   authorized: boolean;
@@ -24,7 +26,7 @@ export function MessageReactionsList({
   if (!isSuccess || reactions.length === 0) return null;
 
   return (
-    <div>
+    <div className={styles.list}>
       {reactions.map(reaction => (
         <ToggleReactionButton
           key={reaction._id}

@@ -1,0 +1,30 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .button {
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      
+      path {
+        fill: colors.$interactive-normal;
+      }
+
+      &:hover {
+        path {
+          fill: colors.$interactive-hover;
+        }
+      }
+    }
+  }
+}

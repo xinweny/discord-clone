@@ -7,10 +7,10 @@
   margin: 0px 4px;
 
   svg {
-    color: colors.$text-muted;
+    color: colors.$interactive-normal;
 
     &:hover {
-      color: colors.$text-primary;
+      color: colors.$interactive-hover;
     }
   }
 }

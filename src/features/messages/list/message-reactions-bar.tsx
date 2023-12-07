@@ -1,10 +1,14 @@
 import { useActiveIds } from '@hooks';
 import { useDisplay } from '@components/hooks';
 
+import { Tooltip } from '@components/ui/popups';
+
 import { AddNewReactionButton } from '@features/reactions/add';
 import { MessageReactionsList } from '@features/reactions/list';
 
-import AddReactionIcon from '@assets/icons/add-reaction.svg?react';
+import SmileyIcon from '@assets/icons/smiley.svg?react';
+
+import styles from './message-reactions-bar.module.scss';
 
 type MessageReactionsBarProps = {
   messageId: string;
@@ -16,16 +20,20 @@ export function MessageReactionsBar({ messageId, authorized }: MessageReactionsB
   const activeTabState = useActiveIds();
 
   return (
-    <div {...hover}>
+    <div {...hover} className={styles.container}>
       <MessageReactionsList messageId={messageId} authorized={authorized} />
       {(visible || activeTabState.id === 'addReaction') && (
-        <AddNewReactionButton
-          authorized={authorized}
-          hide={hide}
-          activeTabState={activeTabState}
-        >
-          <AddReactionIcon />
-        </AddNewReactionButton>
+        <div className={styles.button}>
+          <Tooltip text="Add Reaction" direction="top" gap={2}>
+            <AddNewReactionButton
+              authorized={authorized}
+              hide={hide}
+              activeTabState={activeTabState}
+            >
+              <SmileyIcon />
+            </AddNewReactionButton>
+          </Tooltip>
+        </div>
       )}
     </div>
   );

@@ -24,18 +24,18 @@
     }
 
     g > path:first-child {
-      fill: colors.$text-muted;
+      fill: colors.$icon-primary;
     }
   }
 
   > div:last-child {
     path {
-      fill: colors.$text-muted;
+      fill: colors.$interactive-normal;
     }
 
     &:hover {
       path {
-        fill: colors.$text-primary;
+        fill: colors.$interactive-hover;
       }
     }
   }

@@ -23,7 +23,7 @@
       background-color: colors.$bg-modifier-hover;
 
       path {
-        fill: colors.$text-primary;
+        fill: colors.$interactive-hover;
       }
     }
   }
@@ -33,7 +33,7 @@
     height: 20px;
 
     path {
-      fill: colors.$text-muted;
+      fill: colors.$interactive-normal;
     }
   }
 }
