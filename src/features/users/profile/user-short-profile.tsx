@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import type { UserData } from '../types';
 
 import { ColorBanner, Avatar } from '@components/ui/media';
+import { Separator } from '@components/ui/displays';
 
 import { UserStatusIcon } from '../status';
 
@@ -27,7 +28,7 @@ export function UserShortProfile({
 
   const { avatarUrl, username } = user;
 
-  const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL yyyy');
+  const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('LLL d, yyyy');
 
   return (
     <div>
@@ -40,18 +41,19 @@ export function UserShortProfile({
         </div>
       </ColorBanner>
       <div className={styles.content}>
-        <div>
-          <h3>{displayName}</h3>
-          <p>{username}</p>
+        <div className={styles.header}>
+          <h2>{displayName}</h2>
+          <h3>{username}</h3>
           {'customStatus' in user && <p>{user.customStatus}</p>}
         </div>
-        <div>
+        <Separator className={styles.separator} />
+        <div className={styles.info}>
           {bio && <div>
-            <h5>ABOUT ME</h5>
+            <h4>ABOUT ME</h4>
             <p>{bio}</p>
           </div>}
           <div>
-            <h5>DISCORD MEMBER SINCE</h5>
+            <h4>DISCORD MEMBER SINCE</h4>
             <p>{joinedDate(createdAt)}</p>
           </div>
         </div>

@@ -3,7 +3,7 @@ import type { UserBasicData } from '@features/users/types';
 import { useGetUserQuery } from '@features/users/api';
 
 import { UserShortProfile } from '@features/users/profile';
-import { MutualServersList } from '@features/relations/mutuals';
+import { MutualsLists } from '@features/relations/mutuals';
 
 import styles from './dm-participants-panel.module.scss';
 
@@ -22,8 +22,8 @@ export function DmParticipantsPanel({ participants, isGroup, show }: DmParticipa
     <div className={styles.container}>
       {(!isGroup && isSuccess)
         ? <>
-          <UserShortProfile user={participant}/>
-          <MutualServersList participantId={participant._id} />
+          <UserShortProfile user={participant} />
+          <MutualsLists participantId={participant._id} />
         </>
         : <>
           <p>{`MEMBERS - ${participants.length}`}</p>
