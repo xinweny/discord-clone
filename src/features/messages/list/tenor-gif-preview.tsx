@@ -1,3 +1,5 @@
+import styles from './tenor-gif-preview.module.scss';
+
 type TenorGifPreviewProps = {
   url: string;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -5,6 +7,11 @@ type TenorGifPreviewProps = {
 
 export function TenorGifPreview({ url, setError }: TenorGifPreviewProps) {
   return (
-    <img src={url} alt="GIF" onError={() => { setError(true); }} />
+    <img
+      className={styles.gif}
+      src={url}
+      alt="GIF"
+      onError={() => { setError(true); }}
+    />
   );
 }

@@ -6,7 +6,7 @@ import { Avatar } from '@components/ui/media';
 import {
   MessageHeader,
   MessageBody,
-  AttachmentPreview,
+  AttachmentsPreview,
 } from '../list';
 
 export function DeleteMessagePreview() {
@@ -27,17 +27,7 @@ export function DeleteMessagePreview() {
           currentDate={new Date()}
         />
         <MessageBody message={message} />
-        {message.attachments.length > 0 && (
-          <div>
-            {message.attachments.map(
-              attachment => <AttachmentPreview
-                key={attachment._id}
-                attachment={attachment}
-                downloadable={false}
-              />
-            )}
-          </div>
-        )}
+        <AttachmentsPreview attachments={message.attachments} downloadable={false} />
       </div>
     </div>
   );

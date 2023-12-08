@@ -14,7 +14,7 @@ import { DeleteMessageButton } from '../delete';
 
 import { Avatar } from '@components/ui/media';
 
-import { AttachmentPreview } from './attachment-preview';
+import { AttachmentsPreview } from './attachments-preview';
 import { MessageOptionsBar } from './message-options-bar';
 import { MessageBody } from './message-body';
 import { MessageHeader } from './message-header';
@@ -81,13 +81,7 @@ export function MessageCard({
             <TenorGifPreview url={url!} setError={setTenorError} />
           )}
           <ServerInviteCards message={message} isDm={isDm} />
-          {message.attachments.length > 0 && (
-            <div>
-              {message.attachments.map(
-                attachment => <AttachmentPreview key={attachment._id} attachment={attachment} />
-              )}
-            </div>
-          )}
+          <AttachmentsPreview attachments={message.attachments} />
           <MessageReactionsBar messageId={message._id} authorized={authorized} />
         </div>
         <MessageOptionsBar
