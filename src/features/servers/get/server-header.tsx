@@ -1,5 +1,7 @@
 import { ServerData } from '../types';
 
+import styles from './server-header.module.scss';
+
 import { ServerDropdownMenu } from './server-dropdown-menu';
 
 type ServerHeaderProps = {
@@ -8,8 +10,8 @@ type ServerHeaderProps = {
 
 export function ServerHeader({ server }: ServerHeaderProps) {
   return (
-    <div>
-      <h3>{server.name}</h3>
+    <div className={styles.container}>
+      <h2>{server.name}</h2>
       <ServerDropdownMenu />
     </div>
   );
