@@ -30,4 +30,4 @@ export function PopupWrapper({
       {children}
     </PortalWrapper>
   );
-  }
+}

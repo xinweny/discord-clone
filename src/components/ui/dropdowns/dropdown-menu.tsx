@@ -1,19 +1,21 @@
 import { useContext } from 'react';
-import { useClickAway } from '@uidotdev/usehooks';
 
 import { DropdownContext } from '.';
+
+import styles from './dropdown-menu.module.scss';
 
 type DropdownMenuProps = {
   children: React.ReactNode;
 };
 
 export function DropdownMenu({ children }: DropdownMenuProps) {
-  const { isOpen, close } = useContext(DropdownContext)!;
-  const ref = useClickAway<HTMLUListElement>(close);
+  const { isOpen } = useContext(DropdownContext)!;
 
-  return (isOpen && (
-    <ul ref={ref}>
+  if (!isOpen) return null;
+
+  return (
+    <ul className={styles.menu}>
       {children}
     </ul>
-  ));
+  );
 }

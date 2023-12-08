@@ -11,6 +11,7 @@ type ClickPopupProps = {
   onClose?: () => void;
   btnRef?: React.RefObject<HTMLButtonElement>;
   position?: PositionData;
+  toggleComponent?: React.ReactNode;
 };
 
 export function ClickPopup({
@@ -24,6 +25,7 @@ export function ClickPopup({
     align: 'start',
     gap: 0,
   },
+  toggleComponent,
 }: ClickPopupProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
 
@@ -53,7 +55,10 @@ export function ClickPopup({
         }}
         ref={buttonRef}
       >
-        {children}
+        {!showPopup
+          ? children
+          : (toggleComponent || children)
+        }
       </button>
       <PopupWrapper
         isOpen={!!showPopup}
