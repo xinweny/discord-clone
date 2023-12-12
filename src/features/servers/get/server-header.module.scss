@@ -1,8 +1,20 @@
 .container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 240px;
   height: 48px;
+
+  .bannerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  h2 {
+    display: block;
+    z-index: 2;
+  }
 }
