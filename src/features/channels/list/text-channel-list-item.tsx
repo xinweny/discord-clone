@@ -1,8 +1,9 @@
 import { useHover } from '@uidotdev/usehooks';
+import { Link } from 'react-router-dom';
 
 import type { ChannelData } from '../types';
 
-import { ChannelLink } from '../nav';
+import { ChannelLabel } from './channel-label';
 import { EditChannelButton } from '../edit';
 
 type TextChannelListItemProps = {
@@ -15,7 +16,9 @@ export function TextChannelListItem({ channel, serverId }: TextChannelListItemPr
 
   return (
     <div ref={hoverRef}>
-      <ChannelLink channel={channel} serverId={serverId} />
+      <Link to={`/channels/${serverId}/${channel._id}`}>
+        <ChannelLabel channel={channel} />
+      </Link>
       {isHovered && <EditChannelButton channel={channel} />}
     </div>
   );

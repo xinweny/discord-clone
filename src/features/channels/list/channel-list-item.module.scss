@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.wrapper {
+  border-radius: 4px;
+  padding: 8px;
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+    
+    p, button, svg path {
+      color: colors.$text-primary;
+    }
+  }
+
+  > div {
+    width: 100%;
+  }
+}

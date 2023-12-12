@@ -4,6 +4,8 @@ import type { ChannelData } from '../types';
 
 import { useSocketRoomJoin } from '@services/websocket/hooks';
 
+import { ChannelLabel } from './channel-label';
+
 import { ConnectToRoomButton } from '@features/webrtc/connect';
 import { EditChannelButton } from '../edit';
 import { ChannelOngoingCallPreview } from '@features/webrtc/channel';
@@ -26,7 +28,7 @@ export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItem
           roomName={channel.name}
           serverId={serverId}
         >
-          {channel.name}
+          <ChannelLabel channel={channel} />
         </ConnectToRoomButton>
         {isHovered && <EditChannelButton channel={channel} />}
       </div>

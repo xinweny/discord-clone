@@ -19,5 +19,11 @@
   h2 {
     display: block;
     z-index: 2;
+    color: colors.$white;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
