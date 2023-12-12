@@ -1,3 +1,5 @@
+@use '@styles/colors';
+
 .container {
   position: relative;
   display: flex;
@@ -6,6 +8,7 @@
   gap: 8px;
   width: 240px;
   height: 48px;
+  border-bottom: 1px solid colors.$bg-tertiary;
 
   .bannerContainer {
     position: absolute;

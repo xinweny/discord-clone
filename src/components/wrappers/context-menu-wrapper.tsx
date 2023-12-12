@@ -8,12 +8,14 @@ type ContextMenuWrapperProps = {
   options: ContextMenuOptionsData[];
   children: React.ReactNode;
   mode?: 'onContextMenu' | 'onClick';
+  className?: string;
 };
 
 export function ContextMenuWrapper({
   options,
   children,
   mode = 'onContextMenu',
+  className,
 }: ContextMenuWrapperProps) {
   const targetRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +33,7 @@ export function ContextMenuWrapper({
       <div
         ref={targetRef}
         {...handler}
+        className={className}
       >
         {children}
       </div>

@@ -8,6 +8,8 @@ import { useGetCategoriesQuery } from '@features/categories/api';
 import { useGetServerMembersQuery } from '@features/members/api';
 import { useGetChannelsQuery } from '../api';
 
+import styles from './channels-list.module.scss';
+
 export function ChannelsList() {
   const { serverId } = useParams();
 
@@ -20,7 +22,7 @@ export function ChannelsList() {
   const uncategorizedChannels = channels.data.filter(channel => !channel.categoryId);
 
   return (
-    <div>
+    <div className={styles.list}>
       {uncategorizedChannels.map(channel =>
         <ChannelListItem
           key={channel._id}

@@ -10,11 +10,13 @@ import { DeleteCategoryButton } from '../delete';
 type CategoryContextMenuWrapperProps = {
   category: CategoryData;
   children: React.ReactNode;
+  className?: string;
 };
 
 export function CategoryContextMenuWrapper({
   category,
   children,
+  className,
 }: CategoryContextMenuWrapperProps) {
   const editBtnRef = useRef<HTMLButtonElement>(null);
   const deleteBtnRef = useRef<HTMLButtonElement>(null);
@@ -36,7 +38,7 @@ export function CategoryContextMenuWrapper({
 
   return (
     <>
-      <ContextMenuWrapper options={options}>
+      <ContextMenuWrapper options={options} className={className}>
         {children}
       </ContextMenuWrapper>
       <div>

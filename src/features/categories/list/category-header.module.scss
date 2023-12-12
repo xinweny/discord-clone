@@ -1,0 +1,33 @@
+@use '@styles/colors';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    font-weight: 600;
+    font-size: 12px;
+
+    &:hover {
+      color: colors.$text-primary;
+    }
+  }
+}
+
+.createButton {
+  svg {
+    width: 18px;
+    height: 18px;
+
+    path {
+      color: colors.$text-muted;
+    }
+
+    &:hover {
+      path {
+        color: colors.$text-primary;
+      }
+    }
+  }
+}
