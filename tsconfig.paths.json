@@ -13,7 +13,8 @@
       "@middlewares": ["middlewares/index.ts"],
       "@pages": ["pages/index.ts"],
       "@utils": ["utils/index.ts"],
-      "@assets": ["assets/*"]
+      "@assets": ["assets/*"],
+      "@context": ["context/index.ts"],
     }
   }
 }

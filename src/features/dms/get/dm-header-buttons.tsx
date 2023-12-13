@@ -4,7 +4,9 @@ import type { DMData } from '../types';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
-import { useDmHeaderContext, useDmPanelContext } from '../hooks';
+import { useDmHeaderContext } from '../hooks';
+
+import { useStateContext } from '@context';
 
 import { getDmInfo } from '../utils';
 
@@ -34,7 +36,7 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
   const { user } = useGetUserData();
 
   const { tooltipProps } = useDmHeaderContext()!;
-  const [showPanel, setShowPanel] = useDmPanelContext()!;
+  const [showPanel, setShowPanel] = useStateContext()!;
 
   useEffect(() => {
     if (participants) setHasOngoingCall(participants.length > 0);
@@ -87,7 +89,7 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
         {...tooltipProps}
       >
         <button
-          onClick={() => setShowPanel(prev => !prev)}
+          onClick={() => setShowPanel((prev: boolean) => !prev)}
           disabled={isInOngoingCall}
           className={showPanel ? styles.active : undefined}
         >

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { DmPanelContext } from '@features/dms/context';
+import { StateContext } from '@context';
 4
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
@@ -48,7 +48,7 @@ export function DMPage() {
   const isInCurrentRoomCall = livekit?.isCurrentRoom(roomId!);
 
   return (
-    <DmPanelContext.Provider value={panelState}>
+    <StateContext.Provider value={panelState}>
       <ContentLayout
         header={<DmHeader dm={dm} />}
         panel={<DmParticipantsPanel
@@ -62,6 +62,6 @@ export function DMPage() {
           isInCurrentRoomCall={!!isInCurrentRoomCall}
         />
       </ContentLayout>
-    </DmPanelContext.Provider>
+    </StateContext.Provider>
   );
 }
