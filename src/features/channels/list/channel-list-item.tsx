@@ -1,5 +1,7 @@
 import { type ChannelData, ChannelTypes } from '../types';
 
+import { Tooltip } from '@components/ui/popups';
+
 import { EditChannelButton } from '../edit';
 import { TextChannelListItem } from './text-channel-list-item';
 import { VoiceChannelListItem } from './voice-channel-list-item';
@@ -30,7 +32,9 @@ export function ChannelListItem({ channel, serverId, activeId }: ChannelListItem
         />
       }
       <EditChannelButton channel={channel} className={styles.editButton}>
-        <GearIcon />
+        <Tooltip text="Edit Channel" direction="top" gap={4}>
+          <GearIcon />
+        </Tooltip>
       </EditChannelButton>
     </div>
   );
