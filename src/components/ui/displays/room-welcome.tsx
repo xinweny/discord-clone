@@ -10,8 +10,9 @@ type ChannelWelcomeProps = {
   type: RoomTypes;
   name: string;
   username?: string;
-  avatarSrc: string | undefined;
+  avatarSrc?: string;
   component?: React.ReactNode;
+  imgComponent?: React.ReactNode;
 };
 
 type MessageInfo = {
@@ -27,6 +28,7 @@ export function RoomWelcome({
   name,
   username,
   component,
+  imgComponent,
 }: ChannelWelcomeProps) {
   const message: MessageInfo = {
     dm: {
@@ -45,7 +47,9 @@ export function RoomWelcome({
 
   return (
     <div className={styles.container}>
-      <img src={avatarSrc} />
+      <div className={styles.avatar}>
+        {imgComponent || <img src={avatarSrc} />}
+      </div>
       <h3>{message[type].heading}</h3>
       {type === 'dm' && username && <h4>{username}</h4>}
       <p>{message[type].info}</p>

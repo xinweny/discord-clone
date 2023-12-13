@@ -10,6 +10,8 @@ import { ChannelCallRoom } from '@features/webrtc/channel';
 
 import styles from './channel-container.module.scss';
 
+import HashIcon from '@assets/icons/hash.svg?react';
+
 type ChannelContainerProps = {
   serverId: string | undefined;
   channel: ChannelData;
@@ -22,7 +24,11 @@ export function ChannelContainer({ serverId, channel }: ChannelContainerProps) {
     <div className={styles.container}>
       {channel.type === ChannelTypes.TEXT
         ? <MessagesContainer
-            welcomeComponent={<RoomWelcome type={RoomTypes.CHANNEL} name={channel.name} avatarSrc="#" />}
+            welcomeComponent={<RoomWelcome
+              type={RoomTypes.CHANNEL}
+              name={channel.name}
+              imgComponent={<HashIcon />}
+            />}
             formPlaceholder={`Message #${channel.name}`}
             authorized={authorized}
           />
