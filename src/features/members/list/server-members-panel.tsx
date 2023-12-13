@@ -39,21 +39,23 @@ export function ServerMembersPanel() {
   if (!isSuccess) return null;
 
   return (
-    <div hidden={!showPanel} className={styles.container}>
-      <div>
-        <span>{`ONLINE — ${online.length}`}</span>
-        <div className={styles.list}>
-          {online.map(
-            member => <ServerMemberCard key={member._id} member={member} />
-          )}
+    <div hidden={!showPanel} className={styles.scroller}>
+      <div className={styles.container}>
+        <div>
+          <span>{`ONLINE — ${online.length}`}</span>
+          <div className={styles.list}>
+            {online.map(
+              member => <ServerMemberCard key={member._id} member={member} />
+            )}
+          </div>
         </div>
-      </div>
-      <div>
-        <span>{`OFFLINE — ${offline.length}`}</span>
-        <div className={styles.list}>
-          {offline.map(
-            member => <ServerMemberCard key={member._id} member={member} />
-          )}
+        <div>
+          <span>{`OFFLINE — ${offline.length}`}</span>
+          <div className={styles.list}>
+            {offline.map(
+              member => <ServerMemberCard key={member._id} member={member} />
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,30 @@
+@use '@styles/colors';
+
+.card {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 40px;
+  padding: 2px 8px;
+  border-radius: 4px;
+
+  > *:first-child {
+    margin-right: 12px;
+  }
+
+  > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 500;
+    color: colors.$text-muted;
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+
+    > p {
+      color: colors.$text-primary;
+    }
+  }
+}

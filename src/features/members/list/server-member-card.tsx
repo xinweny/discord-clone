@@ -6,6 +6,8 @@ import { Avatar } from '@components/ui/media';
 
 import { ServerMemberProfileCard } from '../profile';
 
+import styles from './server-member-card.module.scss';
+
 type ServerMemberCardProps = {
   member: ServerMemberMainData;
 };
@@ -18,8 +20,13 @@ export function ServerMemberCard({
       renderPopup={
         () => <ServerMemberProfileCard memberId={member._id} />
       }
+      position={{
+        direction: 'left',
+        align: 'center',
+        gap: 4,
+      }}
     >
-      <div>
+      <div className={styles.card}>
         <Avatar src={member.user.avatarUrl} />
         <p>{member.displayName}</p>
       </div>

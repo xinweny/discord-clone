@@ -1,5 +1,4 @@
 @use '@styles/colors';
-@use '@styles/mixins';
 
 .layout {
   height: 100vh;
@@ -26,10 +25,8 @@
 }
 
 .panel {
-  @include mixins.hover-scroller();
-
-  width: 240px;
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   background-color: colors.$bg-secondary;
+  overflow: hidden;
 }
