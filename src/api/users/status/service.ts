@@ -1,6 +1,7 @@
 import { Socket } from 'socket.io';
 
-import { redisService } from '../../../services/redis';
+import { redisService } from '@services/redis';
+import { serverMemberService } from '@api/serverMembers/service';
 
 const getSockets = async (userId: string) => {
   const res = await redisService.get(`${userId}_SOCKET`);

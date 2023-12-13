@@ -3,6 +3,7 @@ import { Socket } from 'socket.io';
 import env from '@config/env';
 
 import { statusHandler } from './users/status/handler';
+import { memberStatusHandler } from './serverMembers/status/handler';
 import { messageHandler } from './messages/handler';
 import { webRtcHandler, roomHandler } from './webrtc/handler';
 import { notificationHandler } from './users/notifications/handler';
@@ -17,6 +18,8 @@ export const connectionHandler = async (socket: Socket) => {
   roomHandler(socket);
 
   statusHandler(socket);
+
+  memberStatusHandler(socket);
 
   messageHandler(socket);
 

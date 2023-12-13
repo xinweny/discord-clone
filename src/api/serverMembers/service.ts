@@ -8,6 +8,8 @@ import { Server } from '@api/servers/model';
 import { ReadStatus } from '@api/users/notifications/model';
 import { ServerMember } from './model';
 
+import { redisService } from '@services/redis';
+
 const getById = async (id: Types.ObjectId | string) => {
   const member = await ServerMember
     .findById(id)
@@ -28,14 +30,22 @@ const getOne = async (userId: Types.ObjectId | string, serverId: Types.ObjectId 
   return member;
 };
 
-const getMany = async (fields: {
-  userId?: Types.ObjectId | string,
-  serverId?: Types.ObjectId | string,
-}) => {
-  const members = await ServerMember
-    .find(fields)
-    .select('userId serverId displayName')
-    .populate('user', 'avatarUrl username');
+const getMany = async (
+  fields: {
+    userId?: Types.ObjectId | string,
+    serverId?: Types.ObjectId | string,
+  },
+  select = 'userId serverId displayName',
+  withPopulate = true,
+) => {
+  const members = withPopulate
+    ? await ServerMember
+      .find(fields)
+      .select(select)
+      .populate('user', 'avatarUrl username')
+    : await ServerMember
+      .find(fields)
+      .select(select);
 
   return members;
 };
@@ -107,6 +117,22 @@ const checkMembership = async (serverId: Types.ObjectId | string, userId: Types.
   return member;
 };
 
+const getStatuses = async (serverId: string) => {
+  const members = await serverMemberService.getMany({ serverId }, 'userId', false);
+
+  const statuses: { [key: string]: boolean } = {};
+
+  const userIds = members.map(member => member.userId.toString());
+
+  const res = await redisService.getMany(userIds);
+
+  for (const [index, id] of userIds.entries()) {
+    statuses[id] = !!res[index];
+  }
+
+  return statuses;
+}
+
 export const serverMemberService = {
   getById,
   getOne,
@@ -115,4 +141,5 @@ export const serverMemberService = {
   update,
   remove,
   checkMembership,
+  getStatuses,
 };

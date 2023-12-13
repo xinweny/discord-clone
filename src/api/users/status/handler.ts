@@ -9,9 +9,11 @@ export const statusHandler = async (socket: Socket) => {
 
   const isAlreadyOnline = await statusService.getStatus(userId);
 
-  if (!isAlreadyOnline) io
-    .to(`user_status#${userId}`)
-    .emit('user_status:get', { status: true, userId });
+  if (!isAlreadyOnline) {
+    io
+      .to(`user_status#${userId}`)
+      .emit('user_status:get', { status: true, userId });
+  }
 
   await statusService.set(socket);
 
