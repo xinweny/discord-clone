@@ -1,1 +1,1 @@
-export * from './server-members-list';
+export * from './server-members-panel';

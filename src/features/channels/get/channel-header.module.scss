@@ -16,6 +16,12 @@
     }
   }
 
+  .text {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
   h1 {
     font-size: 16px;
     font-weight: 600;
@@ -23,7 +29,6 @@
   }
 
   p {
-    flex-grow: 1;
     overflow: hidden;
     text-overflow: ellipsis;
   }

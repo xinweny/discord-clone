@@ -1,0 +1,26 @@
+@use '@styles/colors';
+
+.container {
+  svg {
+    width: 24px;
+    height: 24px;
+
+    path {
+      fill: colors.$interactive-normal;
+    }
+  }
+
+  button:hover {
+    path {
+      fill: colors.$interactive-hover;
+    }
+  }
+
+  .active {
+    svg {
+      path {
+        fill: colors.$interactive-hover;
+      }
+    }
+  }
+}
