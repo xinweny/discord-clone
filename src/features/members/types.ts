@@ -38,3 +38,16 @@ export type EditServerMemberFields = {
   bio: string;
   bannerColor: string;
 };
+
+export type ServerMemberStatusesData = {
+  [key: string]: boolean;
+};
+
+export enum MemberStatusEvent {
+  Update = 'member_status:update',
+}
+
+export type UpdateMemberStatusPayload = {
+  userId: string;
+  status: boolean;
+};

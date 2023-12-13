@@ -57,7 +57,7 @@ const userApi = api.injectEndpoints({
       }),
       getUserStatus: build.query<boolean, string>({
         query: (userId) => ({
-          url: `users/${userId}/status`,
+          url: `/users/${userId}/status`,
           method: 'get',
         }),
         onCacheEntryAdded: async (

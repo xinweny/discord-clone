@@ -7,7 +7,12 @@ import type {
   GetServerMemberQuery,
   DeleteServerMemberFields,
   EditServerMemberFields,
+  ServerMemberStatusesData,
+  UpdateMemberStatusPayload,
 } from './types';
+import { MemberStatusEvent } from './types';
+
+import { setupSocketEventListeners } from '@services/websocket';
 
 const memberApi = api.injectEndpoints({
   endpoints(build) {
@@ -73,6 +78,31 @@ const memberApi = api.injectEndpoints({
           { type: 'Messages', id: serverId },
         ],
       }),
+      getServerMemberStatuses: build.query<ServerMemberStatusesData, string>({
+        query: (serverId) => ({
+          url: `/servers/${serverId}/members/statuses`,
+          method: 'get',
+        }),
+        onCacheEntryAdded: async (
+          serverId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [MemberStatusEvent.Update]: ({ status, userId }: UpdateMemberStatusPayload) => {
+              updateCachedData((draft) => {
+                draft[userId] = status;
+
+                return draft;
+              });
+            },
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
+      }),
     };
   }
 });
@@ -86,4 +116,5 @@ export const {
   useJoinServerMutation,
   useLeaveServerMutation,
   useUpdateServerMemberMutation,
+  useGetServerMemberStatusesQuery,
 } = memberApi;
