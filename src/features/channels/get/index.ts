@@ -1,2 +1,2 @@
-export * from './channel-info-header';
+export * from './channel-header';
 export * from './channel-container';

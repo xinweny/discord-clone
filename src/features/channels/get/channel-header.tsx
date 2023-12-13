@@ -2,21 +2,19 @@ import { useActiveChannel } from '@features/channels/hooks';
 
 import { ChannelIcon } from '@features/channels/list';
 
-export function ChannelInfoHeader() {
+import styles from './channel-header.module.scss';
+
+export function ChannelHeader() {
   const channel = useActiveChannel();
 
   if (!channel) return null;
 
   return (
-    <div>
-      <div>
-        <ChannelIcon type={channel.type} />
-        <h4>{channel.name}</h4>
-      </div>
+    <div className={styles.header}>
+      <ChannelIcon type={channel.type} />
+      <h1>{channel.name}</h1>
       {channel.description && (
-        <div>
-          <p>{channel.description}</p>
-        </div>
+        <p>{channel.description}</p>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { ContentLayout } from '@components/layouts';
 
 import { useActiveChannel } from '@features/channels/hooks';
 
-import { ChannelContainer, ChannelInfoHeader } from '@features/channels/get';
+import { ChannelContainer, ChannelHeader } from '@features/channels/get';
 import { ServerMembersList } from '@features/members/list';
 
 export function ChannelPage() {
@@ -16,7 +16,7 @@ export function ChannelPage() {
 
   return (
     <ContentLayout
-      header={<ChannelInfoHeader />}
+      header={<ChannelHeader />}
       panel={<ServerMembersList />}
     >
       <ChannelContainer channel={channel} serverId={serverId} />

@@ -1,0 +1,30 @@
+@use '@styles/colors';
+
+.header {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    margin: 0px 8px;
+
+    path {
+      fill: colors.$text-muted;
+    }
+  }
+
+  h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: colors.$header-primary;
+  }
+
+  p {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
