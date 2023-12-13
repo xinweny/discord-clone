@@ -1,0 +1,23 @@
+@use '@styles/colors';
+
+.container {
+  min-height: 100%;
+  padding-left: 8px;
+
+  > div {
+    margin-top: 24px;
+
+    > span {
+      font-size: 12px;
+      font-weight: 600;
+      color: colors.$header-muted;
+      margin-left: 8px;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}

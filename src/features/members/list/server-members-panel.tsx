@@ -12,6 +12,8 @@ import {
   useGetServerMemberStatusesQuery,
 } from '../api';
 
+import styles from './server-members-panel.module.scss';
+
 export function ServerMembersPanel() {
   const { serverId } = useParams();
 
@@ -37,18 +39,22 @@ export function ServerMembersPanel() {
   if (!isSuccess) return null;
 
   return (
-    <div hidden={!showPanel}>
+    <div hidden={!showPanel} className={styles.container}>
       <div>
-        <p>{`ONLINE - ${online.length}`}</p>
-        {online.map(
-          member => <ServerMemberCard key={member._id} member={member} />
-        )}
+        <span>{`ONLINE — ${online.length}`}</span>
+        <div className={styles.list}>
+          {online.map(
+            member => <ServerMemberCard key={member._id} member={member} />
+          )}
+        </div>
       </div>
       <div>
-        <p>{`OFFLINE - ${offline.length}`}</p>
-        {offline.map(
-          member => <ServerMemberCard key={member._id} member={member} />
-        )}
+        <span>{`OFFLINE — ${offline.length}`}</span>
+        <div className={styles.list}>
+          {offline.map(
+            member => <ServerMemberCard key={member._id} member={member} />
+          )}
+        </div>
       </div>
     </div>
   );
