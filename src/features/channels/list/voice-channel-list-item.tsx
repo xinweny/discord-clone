@@ -7,8 +7,9 @@ import { useSocketRoomJoin } from '@services/websocket/hooks';
 import { ChannelLabel } from './channel-label';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
-import { EditChannelButton } from '../edit';
 import { ChannelOngoingCallPreview } from '@features/webrtc/channel';
+
+import styles from './voice-channel-list-item.module.scss';
 
 type VoiceChannelListItemProps = {
   channel: ChannelData;
@@ -16,22 +17,18 @@ type VoiceChannelListItemProps = {
 };
 
 export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItemProps) {
-  const [hoverRef, isHovered] = useHover();
 
   useSocketRoomJoin(channel._id);
 
   return (
-    <div>
-      <div ref={hoverRef}>
-        <ConnectToRoomButton
-          roomId={channel._id}
-          roomName={channel.name}
-          serverId={serverId}
-        >
-          <ChannelLabel channel={channel} />
-        </ConnectToRoomButton>
-        {isHovered && <EditChannelButton channel={channel} />}
-      </div>
+    <div className={styles.button}>
+      <ConnectToRoomButton
+        roomId={channel._id}
+        roomName={channel.name}
+        serverId={serverId}
+      >
+        <ChannelLabel channel={channel} />
+      </ConnectToRoomButton>
       <ChannelOngoingCallPreview
         serverId={serverId}
         roomId={channel._id}

@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { CategoryGroup } from '@features/categories/list';
-
 import { ChannelListItem } from './channel-list-item';
 
 import { useGetCategoriesQuery } from '@features/categories/api';
@@ -11,7 +10,7 @@ import { useGetChannelsQuery } from '../api';
 import styles from './channels-list.module.scss';
 
 export function ChannelsList() {
-  const { serverId } = useParams();
+  const { serverId, roomId } = useParams();
 
   const categories = useGetCategoriesQuery(serverId!);
   const channels = useGetChannelsQuery(serverId!);
@@ -28,6 +27,7 @@ export function ChannelsList() {
           key={channel._id}
           channel={channel}
           serverId={serverId!}
+          activeId={roomId}
         />
       )}
       {categories.data.map(
@@ -40,6 +40,7 @@ export function ChannelsList() {
                   key={channel._id}
                   channel={channel}
                   serverId={serverId!}
+                  activeId={roomId}
                 />
               )
             }

@@ -3,16 +3,59 @@
 .wrapper {
   border-radius: 4px;
   padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p, button {
+    font-weight: 500;
+  }
+
+  a {
+    width: 100%;
+  }
 
   &:hover {
     background-color: colors.$bg-modifier-hover;
     
-    p, button, svg path {
+    p, button {
       color: colors.$text-primary;
+    }
+
+    .editButton {
+      display: flex;
+    }
+  }
+}
+
+.active {
+  background-color: colors.$bg-modifier-active;
+
+  p, button {
+    color: colors.$white;
+  }
+
+  .editButton {
+    display: flex;
+  }
+}
+
+.editButton {
+  display: none;
+  align-items: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+
+    path {
+      fill: colors.$interactive-normal;
     }
   }
 
-  > div {
-    width: 100%;
+  &:hover {
+    path {
+      fill: colors.$interactive-hover;
+    }
   }
 }

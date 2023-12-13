@@ -29,7 +29,10 @@ export function ModalButton<TModalProps>({
     <>
       <button
         ref={btnRef}
-        onClick={toggle}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggle();
+        }}
         {...props}
         className={`${styles.modalButton} ${props.className || ''}`}
       >

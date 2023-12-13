@@ -9,9 +9,10 @@ import { EditChannelModal } from './edit-channel-modal';
 
 type EditChannelButtonProps = {
   channel: ChannelData;
-};
+  children: React.ReactNode;
+} & React.HTMLAttributes<HTMLButtonElement>;
 
-export function EditChannelButton({ channel }: EditChannelButtonProps) {
+export function EditChannelButton({ channel, children, ...props }: EditChannelButtonProps) {
   const authorized = useServerAuthorize('manageChannels');
 
   if (!authorized) return null;
@@ -20,8 +21,9 @@ export function EditChannelButton({ channel }: EditChannelButtonProps) {
     <ChannelContext.Provider value={channel}>
       <ModalButton
         modal={EditChannelModal}
+        {...props}
       >
-        <img src="#" alt="Edit channel" />
+        {children}
       </ModalButton>
     </ChannelContext.Provider>
   );

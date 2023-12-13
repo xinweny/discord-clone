@@ -1,10 +1,10 @@
-import { useHover } from '@uidotdev/usehooks';
 import { Link } from 'react-router-dom';
 
 import type { ChannelData } from '../types';
 
 import { ChannelLabel } from './channel-label';
-import { EditChannelButton } from '../edit';
+
+import styles from './text-channel-list-item.module.scss';
 
 type TextChannelListItemProps = {
   channel: ChannelData;
@@ -12,14 +12,11 @@ type TextChannelListItemProps = {
 };
 
 export function TextChannelListItem({ channel, serverId }: TextChannelListItemProps) {
-  const [hoverRef, isHovered] = useHover();
-
   return (
-    <div ref={hoverRef}>
+    <div className={styles.button}>
       <Link to={`/channels/${serverId}/${channel._id}`}>
         <ChannelLabel channel={channel} />
       </Link>
-      {isHovered && <EditChannelButton channel={channel} />}
     </div>
   );
 }
