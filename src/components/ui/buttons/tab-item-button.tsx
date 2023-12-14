@@ -1,3 +1,5 @@
+import styles from './tab-item-button.module.scss';
+
 type TabItemButtonProps = {
   tabId: string;
   activeTabId: string;
@@ -8,7 +10,7 @@ type TabItemButtonProps = {
 export function TabItemButton({
   tabId, activeTabId, setActiveTabId, children
 }: TabItemButtonProps) {
-  const className = `tab-item ${activeTabId === tabId ? 'active' : ''}`;
+  const className = `${styles.button} ${activeTabId === tabId ? styles.active : ''}`;
 
   return (
     <button
