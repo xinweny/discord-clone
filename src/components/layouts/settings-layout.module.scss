@@ -7,14 +7,43 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
+  @include mixins.hover-scroller();
+
+  flex-grow: 2.5;
+  min-height: 100vh;
   background-color: colors.$bg-secondary;
+  display: flex;
+  justify-content: end;
+
+  > div {
+    width: 192px;
+    padding: 60px 0px 60px 20px;
+  }
+}
+
+.content {
+  @include mixins.scroller();
+
+  position: relative;
+  flex-grow: 3;
+  
+  min-height: 100vh;
+
+  > div {
+    width: 660px;
+    padding: 60px 32px 80px 40px;
+  }
 }
 
 .closeButton {
   color: colors.$interactive-normal;
+  position: absolute;
+  top: 60px;
+  left: 740px;
 
   .iconWrapper {
     > div {

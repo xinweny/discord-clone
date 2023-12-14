@@ -32,16 +32,18 @@ export function SettingsLayout({
       <div className={styles.layout}>
         <div className={styles.sidebar}>{sidebar}</div>
         <div className={styles.content}>
-          {children}
-        </div>
-        <button ref={closeBtnRef} onClick={close} className={styles.closeButton}>
-          <div className={styles.iconWrapper}>
-            <div>
-              <CrossIcon />
-            </div>
-            <p>ESC</p>
+          <div>
+            {children}
           </div>
-        </button>
+          <button ref={closeBtnRef} onClick={close} className={styles.closeButton}>
+            <div className={styles.iconWrapper}>
+              <div>
+                <CrossIcon />
+              </div>
+              <p>ESC</p>
+            </div>
+          </button>
+        </div>
       </div>
     </SettingsContext.Provider>
   );
