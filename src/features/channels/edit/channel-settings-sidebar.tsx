@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-
 import { CHANNEL_SETTINGS } from './tabs';
 
-import { ChannelContext } from '../context';
+import { useChannelContext } from '../context';
 
 import { TabGroupLayout } from '@components/layouts';
 import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentation';
@@ -12,7 +10,7 @@ import { DeleteChannelButton } from '../delete';
 export function ChannelSettingsSidebar({
   activeTabId, setActiveTabId
 }: SettingsSidebarProps) {
-  const channel = useContext(ChannelContext);
+  const channel = useChannelContext();
 
   return (
     <SettingsSidebar>

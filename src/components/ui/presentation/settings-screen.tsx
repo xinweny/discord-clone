@@ -1,5 +1,7 @@
 import type { TabData } from '@utils';
 
+import styles from './settings-screen.module.scss';
+
 export type SettingsScreenWrapperProps = {
   activeTabId: string;
 };
@@ -11,19 +13,19 @@ type SettingsScreenProps = {
 
 export function SettingsScreen({ activeTabId, tabs }: SettingsScreenProps) {
   return (
-    <div>
+    <div className={styles.wrapper}>
       {tabs.map(tab => {
-          const SettingsForm = tab.component;
-          return (activeTabId === tab.id)
-            ? (
-              <div key={tab.id}>
-                <h2>{tab.label}</h2>
-                <SettingsForm />
-              </div>
-            )
-            : null;
-        }
-      )}
+        if (activeTabId !== tab.id) return null;
+
+        const SettingsForm = tab.component;
+
+        return (
+          <div key={tab.id}>
+            <h2>{tab.label}</h2>
+            <SettingsForm />
+          </div>
+        );
+      })}
     </div>
   );
 }

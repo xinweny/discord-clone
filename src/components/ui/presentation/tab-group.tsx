@@ -1,3 +1,7 @@
+import { Separator } from '../displays';
+
+import styles from './tab-group.module.scss';
+
 type TabGroupProps = {
   title?: string;
   children?: React.ReactNode;
@@ -7,11 +11,14 @@ export function TabGroup({
   title, children
 }: TabGroupProps) {
   return (
-    <div>
-      {title && <p><strong>{title.toUpperCase()}</strong></p>}
-      <div>
-        {children}
+    <>
+      <div className={styles.group}>
+        {title && <h3>{title.toUpperCase()}</h3>}
+        <div className={styles.list}>
+          {children}
+        </div>
       </div>
-    </div>
+      <Separator className={styles.separator} />
+    </>
   );
 }

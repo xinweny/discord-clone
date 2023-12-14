@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 
-import { SettingsContext } from '@components/layouts';
-import { ChannelContext } from '../context';
+import { useSettingsContext } from '@components/context';
+import { useChannelContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -14,8 +13,8 @@ export function DeleteChannelModal({
   isOpen,
   onClose,
 }: ModalProps) {
-  const channel = useContext(ChannelContext);
-  const closeBtnRef = useContext(SettingsContext);
+  const channel = useChannelContext();
+  const closeBtnRef = useSettingsContext();
 
   const [deleteChannel] = useDeleteChannelMutation();
 

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import type { ModalProps } from '@types';
 import type { CategoryData } from '../types';
 
-import { SettingsContext } from '@components/layouts';
+import { SettingsContext } from '@components/context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 

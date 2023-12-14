@@ -47,18 +47,18 @@
 
   .iconWrapper {
     > div {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 18px;
+      border-radius: 36px;
       border: 2px solid colors.$interactive-normal;
       overflow: hidden;
 
       svg {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
 
         path {
           fill: colors.$interactive-normal;

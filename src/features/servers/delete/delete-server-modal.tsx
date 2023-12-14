@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 
-import { useSettingsContext } from '@components/layouts';
+import { useSettingsContext } from '@components/context';
 import { useServerContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';

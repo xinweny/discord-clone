@@ -1,4 +1,6 @@
-import { useRef, createContext, useContext, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+
+import { SettingsContext } from '@components/context';
 
 import CrossIcon from '@assets/icons/cross.svg?react';
 
@@ -10,9 +12,6 @@ type SettingsLayoutProps = {
   close: () => void;
 };
 
-export const SettingsContext = createContext<React.RefObject<HTMLButtonElement> | null>(null);
-
-export const useSettingsContext = () => useContext(SettingsContext);
 
 export function SettingsLayout({
   sidebar, children, close
@@ -20,7 +19,9 @@ export function SettingsLayout({
   const closeBtnRef = useRef(null);
 
   useEffect(() => {
-    const handleEscape = (e) => { if (e.key === 'Escape') close(); };
+    const handleEscape = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') close();
+    };
 
     window.addEventListener('keydown', handleEscape);
 
