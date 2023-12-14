@@ -28,3 +28,13 @@
     }
   }
 }
+
+.crown {
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  
+  path {
+    fill: colors.$text-warning;
+  }
+}

@@ -37,6 +37,8 @@ $primary-800: hsl(220 calc($saturation-factor * 8.1%) 7.3%);
 
 $blue-345: hsl(200 calc($saturation-factor * 100%) 49.4%);
 
+$yellow-300: hsl(40 calc($saturation-factor * 86.4%) 56.9%);
+
 $bg-primary: $primary-600;
 $bg-secondary: $primary-630;
 $bg-secondary-alt: $primary-660;
@@ -60,6 +62,7 @@ $text-primary: $primary-230;
 $text-secondary: $primary-330;
 $text-muted: $primary-360;
 $text-link: $blue-345;
+$text-warning: $yellow-300;
 
 $interactive-normal: $primary-330;
 $interactive-hover: $primary-230;

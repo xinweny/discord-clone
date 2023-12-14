@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import type { ServerMemberMainData } from '../types';
 
 import { useStateContext } from '@context';
+import { useServerContext } from '@features/servers/context';
 
 import { ServerMemberCard } from './server-member-card';
 
@@ -15,12 +15,13 @@ import {
 import styles from './server-members-panel.module.scss';
 
 export function ServerMembersPanel() {
-  const { serverId } = useParams();
-
   const [online, setOnline] = useState<ServerMemberMainData[]>([]);
   const [offline, setOffline] = useState<ServerMemberMainData[]>([]);
 
   const [showPanel] = useStateContext()!;
+  const server = useServerContext()!;
+  const { _id: serverId, ownerId } = server;
+
 
   const { data: members, isSuccess } = useGetServerMembersQuery(serverId!);
   const { data: statuses } = useGetServerMemberStatusesQuery(serverId!);
@@ -45,7 +46,11 @@ export function ServerMembersPanel() {
           <span>{`ONLINE — ${online.length}`}</span>
           <div className={styles.list}>
             {online.map(
-              member => <ServerMemberCard key={member._id} member={member} />
+              member => <ServerMemberCard
+                key={member._id}
+                member={member}
+                isOwner={member._id === ownerId}
+              />
             )}
           </div>
         </div>
@@ -53,7 +58,11 @@ export function ServerMembersPanel() {
           <span>{`OFFLINE — ${offline.length}`}</span>
           <div className={styles.list}>
             {offline.map(
-              member => <ServerMemberCard key={member._id} member={member} />
+              member => <ServerMemberCard
+                key={member._id}
+                member={member}
+                isOwner={member._id === ownerId}
+              />
             )}
           </div>
         </div>
