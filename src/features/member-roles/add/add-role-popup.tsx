@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ServerMemberContext } from '@features/members/context';
+import { useServerMemberContext } from '@features/members/context';
 
 import { useServerAuthorize } from '@features/servers/hooks';
 
@@ -13,7 +13,7 @@ import { useGetRolesQuery } from '@features/roles/api';
 export function AddRolePopup() {
   const { serverId } = useParams();
 
-  const member = useContext(ServerMemberContext);
+  const member = useServerMemberContext();
 
   const [query, setQuery] = useState<string>('');
 

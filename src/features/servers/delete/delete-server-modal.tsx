@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 
-import { SettingsContext } from '@components/layouts';
-import { ServerContext } from '../context';
+import { useSettingsContext } from '@components/layouts';
+import { useServerContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -14,8 +13,8 @@ export function DeleteServerModal({
   isOpen,
   onClose,
 }: ModalProps) {
-  const server = useContext(ServerContext);
-  const closeBtnRef = useContext(SettingsContext);
+  const server = useServerContext();
+  const closeBtnRef = useSettingsContext();
 
   const [deleteServer] = useDeleteServerMutation();
 

@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
-import { ServerContext } from '@features/servers/context';
-import { ActiveRoleContext } from '../context';
+import { useServerContext } from '@features/servers/context';
+import { useActiveRoleContext } from '../context';
 
 import { useGetRolesQuery } from '../api';
 
@@ -13,9 +13,9 @@ import { RoleSearchBar } from '../search';
 import { CreateRoleButton } from '../create';
 
 export function ServerRolesSettings() {
-  const { _id: serverId } = useContext(ServerContext)!;
+  const { _id: serverId } = useServerContext()!;
 
-  const role = useContext(ActiveRoleContext);
+  const role = useActiveRoleContext();
 
   const [query, setQuery] = useState<string>('');
 

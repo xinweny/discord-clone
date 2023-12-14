@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { ServerContext } from '@features/servers/context';
-import { ActiveRoleContext } from '../context';
+import { useServerContext } from '@features/servers/context';
+import { useActiveRoleContext } from '../context';
 
 import { TabItemButton } from '@components/ui/buttons';
 
@@ -10,8 +10,8 @@ import { CreateRoleButton } from '../create';
 import { useGetRolesQuery } from '../api';
 
 export function EditRoleNavbar() {
-  const { _id: serverId } = useContext(ServerContext)!;
-  const activeRole = useContext(ActiveRoleContext);
+  const { _id: serverId } = useServerContext()!;
+  const activeRole = useActiveRoleContext();
 
   const [activeRoleId, setActiveRoleId] = useState<string>(activeRole!.data!._id);
 

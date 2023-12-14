@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { ModalProps } from '@types';
 import type { DMData } from '@features/dms/types';
 
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { useQuery } from '@hooks';
 import { useGetUserData } from '@features/auth/hooks';
@@ -25,7 +25,7 @@ export function InviteFriendsModal({
   isOpen,
   onClose,
 }: InviteFriendsModalProps) {
-  const server = useContext(ServerContext);
+  const server = useServerContext();
 
   const { query, setQuery } = useQuery();
 

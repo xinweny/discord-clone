@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { useDeleteEmojiMutation } from '../api';
 
@@ -10,7 +8,7 @@ type DeleteEmojiButtonProps = {
 };
 
 export function DeleteEmojiButton({ show, emojiId }: DeleteEmojiButtonProps) {
-  const { _id: serverId } = useContext(ServerContext)!;
+  const { _id: serverId } = useServerContext()!;
 
   const [deleteEmoji] = useDeleteEmojiMutation();
 

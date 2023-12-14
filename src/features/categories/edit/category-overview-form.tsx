@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,7 +6,7 @@ import { EditCategoryFields } from '../types';
 
 import { editCategorySchema } from '../schema';
 
-import { CategoryContext } from '../context';
+import { useCategoryContext } from '../context';
 
 import {
   FormGroup,
@@ -20,7 +19,7 @@ import { useEditCategoryMutation } from '../api';
 
 export function CategoryOverviewForm() {
   const { serverId } = useParams();
-  const category = useContext(CategoryContext);
+  const category = useCategoryContext();
 
   const [editCategory] = useEditCategoryMutation();
 

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm, FormProvider, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -6,14 +6,14 @@ import type { CreateEmojiFields } from '../types';
 
 import { createEmojiSchema } from '../schema';
 
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { EmojiInput } from './emoji-input';
 
 import { useCreateEmojiMutation } from '../api';
 
 export function CreateEmojiForm() {
-  const server = useContext(ServerContext);
+  const server = useServerContext();
 
   const [createEmoji] = useCreateEmojiMutation();
 

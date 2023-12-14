@@ -1,4 +1,4 @@
-import { useRef, createContext } from 'react';
+import { useRef, createContext, useContext } from 'react';
 
 type SettingsLayoutProps = {
   sidebar: React.ReactNode;
@@ -7,6 +7,8 @@ type SettingsLayoutProps = {
 };
 
 export const SettingsContext = createContext<React.RefObject<HTMLButtonElement> | null>(null);
+
+export const useSettingsContext = () => useContext(SettingsContext);
 
 export function SettingsLayout({
   sidebar, children, close

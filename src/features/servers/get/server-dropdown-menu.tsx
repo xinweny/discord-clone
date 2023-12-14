@@ -1,6 +1,6 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 
-import { ServerMemberContext } from '@features/members/context';
+import { useServerMemberContext } from '@features/members/context';
 
 import { useServerAuthorize } from '@features/servers/hooks';
 
@@ -21,7 +21,7 @@ export function ServerDropdownMenu() {
   const inviteFriendsBtnRef = useRef<HTMLButtonElement>(null);
 
   const authorized = useServerAuthorize('manageChannels');
-  const member = useContext(ServerMemberContext);
+  const member = useServerMemberContext();
 
   if (!member) return null;
 

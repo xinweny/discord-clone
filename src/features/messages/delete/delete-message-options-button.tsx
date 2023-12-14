@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { MessageContext } from '../context';
+import { useMessageContext } from '../context';
 
 import { useMessageAuthorize } from '../hooks';
 
@@ -18,7 +16,7 @@ export function DeleteMessageOptionsButton({
   deleteBtnRef,
   children
 }: DeleteMessageOptionsButtonProps) {
-  const message = useContext(MessageContext);
+  const message = useMessageContext();
   const dmAuthorized = useMessageAuthorize();
   const serverAuthorized = useServerAuthorize('manageMessages');
 

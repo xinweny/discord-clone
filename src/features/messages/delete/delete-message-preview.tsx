@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { MessageContext } from '../context';
+import { useMessageContext } from '../context';
 
 import { Avatar } from '@components/ui/media';
 import {
@@ -10,7 +8,7 @@ import {
 } from '../list';
 
 export function DeleteMessagePreview() {
-  const message = useContext(MessageContext);
+  const message = useMessageContext();
 
   if (!message) return null;
 

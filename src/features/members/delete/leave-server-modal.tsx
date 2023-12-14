@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { ModalProps } from '@types';
 
-import { ServerContext } from '@features/servers/context';
-import { ServerMemberContext } from '../context';
+import { useServerContext } from '@features/servers/context';
+import { useServerMemberContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -14,8 +13,8 @@ export function LeaveServerModal ({
   isOpen,
   onClose,
 }: ModalProps) {
-  const server = useContext(ServerContext);
-  const member = useContext(ServerMemberContext);
+  const server = useServerContext();
+  const member = useServerMemberContext();
 
   const [leaveServer] = useLeaveServerMutation();
 

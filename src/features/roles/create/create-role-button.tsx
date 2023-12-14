@@ -1,7 +1,5 @@
-import { useContext } from 'react';
-
-import { ActiveRoleContext } from '../context';
-import { ServerContext } from '@features/servers/context';
+import { useActiveRoleContext } from '../context';
+import { useServerContext } from '@features/servers/context';
 
 import { useCreateRoleMutation } from '../api';
 
@@ -10,8 +8,8 @@ type CreateRoleButtonProps = {
 };
 
 export function CreateRoleButton({ children }: CreateRoleButtonProps) {
-  const activeRole = useContext(ActiveRoleContext);
-  const { _id: serverId } = useContext(ServerContext)!;
+  const activeRole = useActiveRoleContext();
+  const { _id: serverId } = useServerContext()!;
 
   const [createRole] = useCreateRoleMutation();
 

@@ -4,7 +4,7 @@ import type { DMData } from '../types';
 
 import { useGetUserData } from '@features/auth/hooks';
 import { useLivekitContext } from '@features/webrtc/hooks';
-import { useDmHeaderContext } from '../hooks';
+import { useDmHeaderContext } from '../context';
 
 import { useStateContext } from '@context';
 

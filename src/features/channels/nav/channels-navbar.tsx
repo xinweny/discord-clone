@@ -1,6 +1,6 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { SidebarLayout } from '@components/layouts';
 
@@ -11,7 +11,7 @@ import styles from './channels-navbar.module.scss';
 import { ServerBanner } from '@features/servers/get';
 
 export function ChannelsNavbar() {
-  const server = useContext(ServerContext);
+  const server = useServerContext();
 
   const [bannerStyle, setBannerStyle] = useState<React.CSSProperties>({
     opacity: 1,

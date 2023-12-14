@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { createEditor } from 'slate';
 import { withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
@@ -6,7 +6,7 @@ import { withHistory } from 'slate-history';
 import type { MessageData } from './types';
 import type { MessageEmojiData } from './types';
 
-import { MessageContext } from './context';
+import { useMessageContext } from './context';
 
 import { withEmojis } from './slate';
 
@@ -14,7 +14,7 @@ import { useGetUserData } from '@features/auth/hooks';
 
 export const useMessageAuthorize = () => {
   const { user } = useGetUserData();
-  const message = useContext(MessageContext);
+  const message = useMessageContext();
 
   if (!message) return false;
 

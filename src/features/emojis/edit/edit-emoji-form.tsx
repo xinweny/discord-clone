@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import {
   useForm,
   FormProvider,
@@ -10,7 +9,7 @@ import type { EditEmojiFields, CustomEmojiData } from '../types';
 
 import { editEmojiSchema } from '../schema';
 
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { EditEmojiNameInput } from './edit-emoji-name-input';
 
@@ -22,7 +21,7 @@ type EditEmojiFormProps = {
 };
 
 export function EditEmojiForm({ emoji, closeForm }: EditEmojiFormProps) {
-  const server = useContext(ServerContext);
+  const server = useServerContext();
 
   const defaultValues = {
     emojiId: emoji._id,

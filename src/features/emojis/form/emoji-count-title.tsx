@@ -1,13 +1,11 @@
 import pluralize from 'pluralize';
 
-import { useContext } from 'react';
-
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import { useGetEmojisQuery } from '../api';
 
 export function EmojiCountTitle() {
-  const { _id: serverId } = useContext(ServerContext)!;
+  const { _id: serverId } = useServerContext()!;
   const emojis = useGetEmojisQuery({ serverId, getCreators: true });
 
   if (!emojis.isSuccess) return null;

@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import type { ActiveRoleContextData, RoleData } from './types';
 
-import { ServerContext } from '@features/servers/context';
-import { ActiveRoleContext } from './context';
+import { useServerContext } from '@features/servers/context';
+import { useActiveRoleContext } from './context';
 
 import { useGetRolesQuery } from './api';
 
@@ -25,8 +25,8 @@ export type RoleTabsHookData = {
 export const useRoleTabs = (labels: string[]): RoleTabsHookData => {
   const tabs = labels.map(label => ({ label, id: uuid() }));
 
-  const { _id: serverId } = useContext(ServerContext)!;
-  const activeRole = useContext(ActiveRoleContext)!;
+  const { _id: serverId } = useServerContext()!;
+  const activeRole = useActiveRoleContext()!;
 
   const [activeTab, setActiveTab] = useState<TabData>(tabs[0]);
 

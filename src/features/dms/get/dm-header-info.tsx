@@ -3,7 +3,7 @@ import type { DMData } from '../types';
 import { getDmInfo } from '../utils';
 
 import { useGetUserData } from '@features/auth/hooks';
-import { useDmHeaderContext } from '../hooks';
+import { useDmHeaderContext } from '../context';
 
 import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';

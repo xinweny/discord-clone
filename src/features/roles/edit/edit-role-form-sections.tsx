@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -6,7 +6,7 @@ import { editRoleSchema } from '../schema';
 
 import type { EditRoleFields } from '../types';
 
-import { ServerContext } from '@features/servers/context';
+import { useServerContext } from '@features/servers/context';
 
 import type { RoleTabsHookData } from '../hooks';
 
@@ -32,7 +32,7 @@ export function EditRoleFormSections({
   } = state;
   const { label } = activeTab;
 
-  const { _id: serverId } = useContext(ServerContext)!;
+  const { _id: serverId } = useServerContext()!;
 
   const defaultValues = {
     name: role?.name,

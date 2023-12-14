@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import data from '@emoji-mart/data/sets/14/twitter.json';
 import Picker from '@emoji-mart/react';
 
-import { MessageContext } from '@features/messages/context';
+import { useMessageContext } from '@features/messages/context';
 
 import { useGetServerRoomIds } from '@hooks';
 import { useGetPickerCustomEmojis } from '../hooks';
@@ -16,7 +15,7 @@ type AddReactionFormProps = {
 export function AddReactionForm({
   btnRef
 }: AddReactionFormProps) {
-  const message = useContext(MessageContext);
+  const message = useMessageContext();
 
   const { custom, categoryIcons } = useGetPickerCustomEmojis();
 

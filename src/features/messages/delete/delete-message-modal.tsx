@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-
 import type { ModalProps } from '@types';
 
-import { MessageContext } from '../context';
+import { useMessageContext } from '../context';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -15,7 +13,7 @@ export function DeleteMessageModal({
   isOpen,
   onClose,
 }: ModalProps) {
-  const message = useContext(MessageContext);
+  const message = useMessageContext();
 
   const [deleteMessage] = useDeleteMessageMutation();
 
