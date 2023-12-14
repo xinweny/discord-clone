@@ -22,14 +22,16 @@ export function ChannelsList() {
 
   return (
     <div className={styles.list}>
-      {uncategorizedChannels.map(channel =>
-        <ChannelListItem
-          key={channel._id}
-          channel={channel}
-          serverId={serverId!}
-          activeId={roomId}
-        />
-      )}
+      {uncategorizedChannels.length > 0 && <div className={styles.uncategorized}>
+        {uncategorizedChannels.map(channel =>
+          <ChannelListItem
+            key={channel._id}
+            channel={channel}
+            serverId={serverId!}
+            activeId={roomId}
+          />
+        )}
+      </div>}
       {categories.data.map(
         category => (
           <CategoryGroup key={category._id} category={category}>

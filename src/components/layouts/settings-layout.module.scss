@@ -1,0 +1,61 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.layout {
+  background-color: colors.$bg-primary;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: colors.$bg-secondary;
+}
+
+.closeButton {
+  color: colors.$interactive-normal;
+
+  .iconWrapper {
+    > div {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      border: 2px solid colors.$interactive-normal;
+      overflow: hidden;
+
+      svg {
+        width: 24px;
+        height: 24px;
+
+        path {
+          fill: colors.$interactive-normal;
+        }
+      }
+    }
+  }
+
+  p {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &:hover {
+    .iconWrapper > div {
+      background-color: colors.$bg-modifier-hover;
+      border-color: colors.$interactive-hover;
+      
+      svg path {
+        fill: colors.$interactive-hover;
+      }
+    }
+
+    p {
+      color: colors.$interactive-hover;
+    }
+  }
+}
