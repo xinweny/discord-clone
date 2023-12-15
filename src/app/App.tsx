@@ -5,7 +5,9 @@ import { IntlProvider } from 'react-intl';
 import { store } from './store';
 
 import Router from './router';
+
 import { SvgMasks } from '@components/svg';
+import { Portals } from '@components/ui/displays';
 
 import './app.scss';
 import '@assets/styles/typography.scss';
@@ -22,8 +24,7 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
-    <div id="modal-root" className={styles.container}></div>
-    <div id="popup-root" className={styles.container}></div>
+    <Portals ids={['modal-root', 'popup-root']}/>
   </div>
 );
 

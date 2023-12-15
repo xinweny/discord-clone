@@ -41,7 +41,7 @@ export function SettingsModal({
       activeTabState: {
         id: activeTabId,
         set: setActiveTabId,
-      }
+      },
     }}>
       <ModalWrapper closeModal={onClose} isOpen={isOpen}>
         <SettingsLayout

@@ -1,32 +1,74 @@
+import { UserSelfData } from '../types';
+
 import { useSettingsContext } from '@components/context';
 
 import { useGetUserData } from '@features/auth/hooks';
 
+import { USER_SETTINGS } from '../tabs';
+
 import { Avatar, ColorBanner } from '@components/ui/media';
+import { Separator } from '@components/ui/displays';
 
 import { UserStatusIcon } from '../status';
+import { AccountEditSection } from './account-edit-section';
+
+import styles from './account-settings-form.module.scss';
 
 export function AccountSettingsForm() {
-  const settings = useSettingsContext();
+  const { activeTabState } = useSettingsContext()!;
   const { user } = useGetUserData();
-  
-  const self = user.data;
 
-  if (!self) return null;
+  if (!user.data) return null;
+
+  const { set } = activeTabState;
+  const {
+    id,
+    bannerColor,
+    avatarUrl,
+    displayName,
+    username,
+    email,
+  } = user.data as UserSelfData;
 
   return (
-    <div>
-      <ColorBanner color={self.bannerColor} />
+    <div className={styles.container}>
+      <ColorBanner color={bannerColor} />
       <div>
         <Avatar
-          src={self.avatarUrl}
-          notification={<UserStatusIcon userId={self.id} />}
+          src={avatarUrl}
+          notification={<UserStatusIcon userId={id} />}
         />
-        <h3>{self.displayName}</h3>
-        <button></button>
+        <h3>{displayName}</h3>
+        <button onClick={() => { set(USER_SETTINGS[1].id); }}>
+          Edit User Profile
+        </button>
       </div>
       <div>
-
+        <AccountEditSection
+          header="DISPLAY NAME"
+          value={displayName}
+          button={(
+            <button onClick={() => { set(USER_SETTINGS[1].id); }}>Edit</button>
+          )}
+        />
+        <AccountEditSection
+          header="USERNAME"
+          value={username}
+          button={(
+            <button>Edit</button>
+          )}
+        />
+        <AccountEditSection
+          header="EMAIL"
+          value={email}
+          revealPattern={/.+?(?=@)/}
+          button={<button>Edit</button>}
+        />
+      </div>
+      <Separator className={styles.divider} />
+      <div>
+        <h2>Password and Authentication</h2>
+        <button>Change Password</button>
       </div>
     </div>
   );
