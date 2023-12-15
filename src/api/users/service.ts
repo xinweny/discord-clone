@@ -4,6 +4,7 @@ import { keepKeys } from '@helpers/keepKeys';
 import { CustomError } from '@helpers/CustomError';
 
 import { cloudinaryService } from '@services/cloudinary';
+import { authService } from '@api/auth/service';
 
 import { User } from './model';
 
@@ -98,6 +99,28 @@ const checkUsernameAvailable = async (username: string) => {
   return !user;
 };
 
+const changePassword = async (
+  userId: string | Types.ObjectId,
+  currentPassword: string,
+  newPassword: string,
+) => {
+  const user = await User.findById(userId);
+
+  if (!user) throw new CustomError(400, 'User not found.');
+
+  const isCorrectPassword = await authService.verifyPassword(currentPassword, user.password);
+
+  if (!isCorrectPassword) throw new CustomError(401, 'Unauthorized');
+
+  const password = await authService.hashPassword(newPassword);
+
+  const updatedUser = await User.findByIdAndUpdate(userId, {
+    password,
+  }, { new: true });
+
+  return updatedUser;
+}
+
 export const userService = {
   getOne,
   getById,
@@ -106,4 +129,5 @@ export const userService = {
   updateSensitive,
   remove,
   checkUsernameAvailable,
+  changePassword,
 };

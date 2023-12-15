@@ -47,7 +47,25 @@ const updateUser: RequestHandler[] = [
   )
 ];
 
+const changePassword: RequestHandler[] = [
+  authenticate,
+  authorize.userSelf('params'),
+  tryCatch(
+    async (req, res) => {
+      const { currentPassword, newPassword } = req.body;
+
+      const user = await userService.changePassword(req.user?._id, currentPassword, newPassword);
+
+      res.json({
+        data: user,
+        message: 'Password successfully updated.',
+      });
+    }
+  )
+]
+
 export const userController = {
   getUser,
   updateUser,
+  changePassword,
 };

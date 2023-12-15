@@ -124,7 +124,7 @@ const getStatuses = async (serverId: string) => {
 
   const userIds = members.map(member => member.userId.toString());
 
-  const res = await redisService.getMany(userIds);
+  const res = await redisService.getMany(userIds.map(id => `${id}_SOCKET`));
 
   for (const [index, id] of userIds.entries()) {
     statuses[id] = !!res[index];
