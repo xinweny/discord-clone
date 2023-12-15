@@ -30,6 +30,8 @@
 
   position: relative;
   flex-grow: 3;
+  display: flex;
+  align-items: start;
   
   min-height: 100vh;
 
@@ -41,9 +43,9 @@
 
 .closeButton {
   color: colors.$interactive-normal;
-  position: absolute;
+  position: sticky;
+  margin-top: 60px;
   top: 60px;
-  left: 740px;
 
   .iconWrapper {
     > div {
