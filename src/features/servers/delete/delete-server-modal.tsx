@@ -14,7 +14,7 @@ export function DeleteServerModal({
   onClose,
 }: ModalProps) {
   const server = useServerContext();
-  const closeBtnRef = useSettingsContext();
+  const { closeBtnRef } = useSettingsContext()!;
 
   const [deleteServer] = useDeleteServerMutation();
 

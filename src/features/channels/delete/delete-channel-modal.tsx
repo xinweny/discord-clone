@@ -14,7 +14,7 @@ export function DeleteChannelModal({
   onClose,
 }: ModalProps) {
   const channel = useChannelContext();
-  const closeBtnRef = useSettingsContext();
+  const { closeBtnRef } = useSettingsContext()!;
 
   const [deleteChannel] = useDeleteChannelMutation();
 

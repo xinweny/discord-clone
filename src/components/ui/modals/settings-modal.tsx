@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { SettingsContext } from '@components/context';
 
 import { SettingsLayout } from '@components/layouts';
 import { ModalWrapper } from '.';
@@ -27,22 +29,32 @@ export function SettingsModal({
   sidebar,
   content,
 }: SettingsModalProps) {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
   const [activeTabId, setActiveTabId] = useState<string>(initialTabId);
 
   const SettingsSidebar = sidebar;
   const FormScreen = content;
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
-      <SettingsLayout
-        sidebar={<SettingsSidebar
-          activeTabId={activeTabId}
-          setActiveTabId={setActiveTabId}
-        />}
-        close={onClose}
-      >
-        <FormScreen activeTabId={activeTabId} />
-      </SettingsLayout>
-    </ModalWrapper>
+    <SettingsContext.Provider value={{
+      closeBtnRef,
+      activeTabState: {
+        id: activeTabId,
+        set: setActiveTabId,
+      }
+    }}>
+      <ModalWrapper closeModal={onClose} isOpen={isOpen}>
+        <SettingsLayout
+          sidebar={<SettingsSidebar
+            activeTabId={activeTabId}
+            setActiveTabId={setActiveTabId}
+          />}
+          close={onClose}
+          closeBtnRef={closeBtnRef}
+        >
+          <FormScreen activeTabId={activeTabId} />
+        </SettingsLayout>
+      </ModalWrapper>
+    </SettingsContext.Provider>
   );
 }

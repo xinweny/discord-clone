@@ -1,6 +1,4 @@
-import { useRef, useEffect } from 'react';
-
-import { SettingsContext } from '@components/context';
+import { useEffect } from 'react';
 
 import CrossIcon from '@assets/icons/cross.svg?react';
 
@@ -10,14 +8,16 @@ type SettingsLayoutProps = {
   sidebar: React.ReactNode;
   children: React.ReactNode;
   close: () => void;
+  closeBtnRef: React.RefObject<HTMLButtonElement>;
 };
 
 
 export function SettingsLayout({
-  sidebar, children, close
+  sidebar,
+  children,
+  close,
+  closeBtnRef,
 }: SettingsLayoutProps) {
-  const closeBtnRef = useRef(null);
-
   useEffect(() => {
     const handleEscape = (ev: KeyboardEvent) => {
       if (ev.key === 'Escape') close();
@@ -29,23 +29,21 @@ export function SettingsLayout({
   }, []);
 
   return (
-    <SettingsContext.Provider value={closeBtnRef}>
-      <div className={styles.layout}>
-        <div className={styles.sidebar}>{sidebar}</div>
-        <div className={styles.content}>
-          <div>
-            {children}
-          </div>
-          <button ref={closeBtnRef} onClick={close} className={styles.closeButton}>
-            <div className={styles.iconWrapper}>
-              <div>
-                <CrossIcon />
-              </div>
-              <p>ESC</p>
-            </div>
-          </button>
+    <div className={styles.layout}>
+      <div className={styles.sidebar}>{sidebar}</div>
+      <div className={styles.content}>
+        <div>
+          {children}
         </div>
+        <button ref={closeBtnRef} onClick={close} className={styles.closeButton}>
+          <div className={styles.iconWrapper}>
+            <div>
+              <CrossIcon />
+            </div>
+            <p>ESC</p>
+          </div>
+        </button>
       </div>
-    </SettingsContext.Provider>
+    </div>
   );
 }

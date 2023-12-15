@@ -15,7 +15,7 @@ import { signAndUpload } from '@services/cloudinary';
 const userApi = api.injectEndpoints({
   endpoints(build) {
     return {
-      getUser: build.query<UserData, string>({
+      getUser: build.query<UserData | UserSelfData, string>({
         query: (userId) => ({
           url: `/users/${userId}`,
           method: 'get',
