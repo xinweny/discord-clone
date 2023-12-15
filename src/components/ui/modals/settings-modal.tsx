@@ -43,7 +43,12 @@ export function SettingsModal({
         set: setActiveTabId,
       },
     }}>
-      <ModalWrapper closeModal={onClose} isOpen={isOpen} rootId="settings-root">
+      <ModalWrapper
+        closeModal={onClose}
+        isOpen={isOpen}
+        rootId="settings-root"
+        withClickAway={false}
+      >
         <SettingsLayout
           sidebar={<SettingsSidebar
             activeTabId={activeTabId}

@@ -7,9 +7,9 @@ import { mergeRefs } from '@utils';
 import styles from './portal-wrapper.module.scss';
 
 export type ChildOptions = {
-  style?: React.CSSProperties,
-  className?: string,
-  ref?: React.RefObject<Element>,
+  style?: React.CSSProperties;
+  className?: string;
+  ref?: React.RefObject<HTMLDivElement>;
 };
 
 type PortalWrapperProps = {
@@ -18,6 +18,7 @@ type PortalWrapperProps = {
   close?: () => void;
   children: React.ReactNode;
   childOpts?: ChildOptions;
+  withClickAway?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export function PortalWrapper({
@@ -26,11 +27,13 @@ export function PortalWrapper({
   close,
   childOpts,
   children,
+  withClickAway = false,
   ...props
 }: PortalWrapperProps) {
   const rootNode = document.getElementById(rootId);
 
-  const clickAwayRef = useClickAway(() => {
+  const clickAwayRef = useClickAway((e) => {
+    e.stopPropagation();
     close && close();
   }) as React.RefObject<HTMLDivElement>;
 
@@ -42,7 +45,7 @@ export function PortalWrapper({
       className={`${styles.wrapper} ${props.className || ''}`}
     >
       <div
-        ref={mergeRefs(clickAwayRef, childOpts?.ref)}
+        ref={withClickAway ? mergeRefs(clickAwayRef, childOpts?.ref) : childOpts?.ref}
         className={childOpts?.className}
         style={childOpts?.style}
       >

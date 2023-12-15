@@ -18,7 +18,10 @@ export function ChangePasswordModal({
         <p>Enter your current password and a new password.</p>
       </div>
       <ChangePasswordForm closeBtnRef={closeBtnRef} />
-      <button ref={closeBtnRef} type="button" onClick={onClose}>x</button>
+      <button ref={closeBtnRef} type="button" onClick={(e) => {
+        e.stopPropagation();
+        onClose();
+      }}>x</button>
     </ModalWrapper>
   );
 }

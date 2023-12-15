@@ -26,6 +26,7 @@ export function PopupWrapper({
       className={styles.container}
       childOpts={popupOpts}
       {...props}
+      withClickAway
     >
       {children}
     </PortalWrapper>

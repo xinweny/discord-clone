@@ -5,9 +5,13 @@ export const useModal = (): [boolean, () => void] => {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+
+    return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
-  const toggle = () => { setIsOpen(!isOpen) };
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   return [isOpen, toggle];
 };
