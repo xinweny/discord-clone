@@ -11,6 +11,7 @@ import { Separator } from '@components/ui/displays';
 
 import { UserStatusIcon } from '../status';
 import { AccountEditSection } from './account-edit-section';
+import { ChangePasswordButton } from './change-password-button';
 
 import styles from './account-settings-form.module.scss';
 
@@ -68,7 +69,7 @@ export function AccountSettingsForm() {
       <Separator className={styles.divider} />
       <div>
         <h2>Password and Authentication</h2>
-        <button>Change Password</button>
+        <ChangePasswordButton>Change Password</ChangePasswordButton>
       </div>
     </div>
   );

@@ -62,3 +62,9 @@ export enum ProfileSettingsTabs {
   USER_PROFILE = 'user_profile',
   SERVER_PROFILES = 'server_profiles',
 }
+
+export type UpdatePasswordFields = {
+  userId: string;
+  oldPassword: string;
+  newPassword: string;
+};

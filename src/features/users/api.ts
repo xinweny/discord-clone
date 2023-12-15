@@ -2,13 +2,15 @@ import api from '@services/api';
 
 import { setupSocketEventListeners } from '@services/websocket';
 
-import {
-  type UserData,
-  type UserSelfData,
-  type UpdateUserFields,
-  StatusEvent,
-  type GetStatusEventPayload,
+import type {
+  UserData,
+  UserSelfData,
+  UpdateUserFields,
+  GetStatusEventPayload,
+  UpdatePasswordFields,
+
 } from '@features/users/types';
+import { StatusEvent } from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
 
@@ -54,6 +56,7 @@ const userApi = api.injectEndpoints({
             console.log(err);
           }
         },
+        invalidatesTags: (...[, , { userId }]) => [{ type: 'User', id: userId }],
       }),
       getUserStatus: build.query<boolean, string>({
         query: (userId) => ({
@@ -79,6 +82,17 @@ const userApi = api.injectEndpoints({
           );
         },
       }),
+      updatePassword: build.mutation<UserSelfData, UpdatePasswordFields>({
+        query: ({ userId, oldPassword, newPassword }) => ({
+          url: `/users/${userId}/password`,
+          method: 'put',
+          data: {
+            oldPassword,
+            newPassword,
+          },
+        }),
+        invalidatesTags: (...[, , { userId }]) => [{ type: 'User', id: userId }],
+      }),
     };
   }
 });
@@ -89,4 +103,5 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useGetUserStatusQuery,
+  useUpdatePasswordMutation,
 } = userApi;

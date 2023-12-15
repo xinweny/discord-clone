@@ -33,6 +33,7 @@ export function RegisterForm() {
     mode: 'onChange',
     resolver: zodResolver(registerSchema),
   });
+  
   const {
     handleSubmit,
     setValue,
