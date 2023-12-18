@@ -14,7 +14,7 @@ export const userProfileSchema = zod.object({
 });
 
 export const editPasswordSchema = zod.object({
-  oldPassword: zod.string(),
+  currentPassword: zod.string().min(1, 'Password is required.'),
   password: zod.string()
     .min(8, 'Password must be a minimum of 8 characters.'),
   confirmPassword: zod.string(),

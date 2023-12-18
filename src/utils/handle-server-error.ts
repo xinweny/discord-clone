@@ -2,7 +2,7 @@ import { ErrorResponse } from '@types';
 
 type ErrorCond = {
   status: number;
-  message: string;
+  message?: string;
 };
 
 export const handleServerError = (
@@ -12,7 +12,10 @@ export const handleServerError = (
 ) => {
   const err = error as ErrorResponse;
 
-  if (err.status === cond.status && err.data.message.includes(cond.message)) handler();
+  if (
+    err.status === cond.status &&
+    (cond.message && err.data.message.includes(cond.message))  
+  ) handler();
 };
 
 export const handleServerErrorAsync = async (
@@ -22,5 +25,8 @@ export const handleServerErrorAsync = async (
 ) => {
   const err = error as ErrorResponse;
 
-  if (err.status === cond.status && err.data.message.includes(cond.message)) await handler();
+  if (
+    err.status === cond.status &&
+    (cond.message && err.data.message.includes(cond.message))
+  ) await handler();
 };

@@ -13,6 +13,7 @@ import {
 
 import { useUpdateSensitiveMutation } from '../api';
 import { useGetUserData } from '@features/auth/hooks';
+import { handleServerError } from '@utils';
 
 type ChangePasswordFormProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
@@ -26,8 +27,8 @@ export function ChangePasswordForm({
 
   const defaultValues = {
     userId,
-    oldPassword: '',
-    newPassword: '',
+    currentPassword: '',
+    password: '',
     confirmPassword: '',
   };
 
@@ -37,20 +38,29 @@ export function ChangePasswordForm({
     resolver: zodResolver(editPasswordSchema),
   });
 
-  const { handleSubmit } = methods;
+  const { handleSubmit, setError } = methods;
 
   const [changePassword] = useUpdateSensitiveMutation();
 
   const onSubmit = async (data: UpdateSensitiveFields) => {
-    const { currentPassword, password } = data;
-
-    await changePassword({
-      userId,
-      currentPassword,
-      password,
-    });
-
-    closeBtnRef.current?.click();
+    try {
+      const { currentPassword, password } = data;
+  
+      await changePassword({
+        userId,
+        currentPassword,
+        password,
+      });
+  
+      closeBtnRef.current?.click();
+    } catch (error) {
+      handleServerError(error, { status: 401 }, () => {
+        setError('currentPassword', {
+          type: 'custom',
+          message: 'Password does not match.',
+        });
+      });
+    }
   };
 
   const pwdProps = {
@@ -61,23 +71,23 @@ export function ChangePasswordForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup label="current password" htmlFor="password">
+        <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
           <TextInput
             type="password"
             id="current-password"
-            name="oldPassword"
+            name="currentPassword"
             {...pwdProps}
           />
         </FormGroup>
-        <FormGroup label="new password" htmlFor="password" showError>
+        <FormGroup label="new password" htmlFor="password" name="password">
           <TextInput
             type="password"
-            id="new-password"
-            name="newPassword"
+            id="password"
+            name="password"
             {...pwdProps}
           />
         </FormGroup>
-        <FormGroup label="confirm new password" htmlFor="confirmPassword" showError>
+        <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
           <TextInput
             type="password"
             id="confirm-password"
