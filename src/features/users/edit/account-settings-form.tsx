@@ -63,7 +63,7 @@ export function AccountSettingsForm() {
           header="EMAIL"
           value={email}
           revealPattern={/.+?(?=@)/}
-          button={<button>Edit</button>}
+          button={<button disabled>Edit</button>}
         />
       </div>
       <Separator className={styles.divider} />
