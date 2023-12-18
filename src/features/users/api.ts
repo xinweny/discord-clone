@@ -7,7 +7,7 @@ import type {
   UserSelfData,
   UpdateUserFields,
   GetStatusEventPayload,
-  UpdatePasswordFields,
+  UpdateSensitiveFields,
 
 } from '@features/users/types';
 import { StatusEvent } from '@features/users/types';
@@ -82,13 +82,15 @@ const userApi = api.injectEndpoints({
           );
         },
       }),
-      updatePassword: build.mutation<UserSelfData, UpdatePasswordFields>({
-        query: ({ userId, oldPassword, newPassword }) => ({
-          url: `/users/${userId}/password`,
+      updateSensitive: build.mutation<UserSelfData, UpdateSensitiveFields>({
+        query: ({ userId, currentPassword, password, username }) => ({
+          url: `/users/${userId}`,
+          params: { sensitive: true },
           method: 'put',
           data: {
-            oldPassword,
-            newPassword,
+            username,
+            currentPassword,
+            password,
           },
         }),
         invalidatesTags: (...[, , { userId }]) => [{ type: 'User', id: userId }],
@@ -103,5 +105,5 @@ export const {
   useGetUserQuery,
   useUpdateUserMutation,
   useGetUserStatusQuery,
-  useUpdatePasswordMutation,
+  useUpdateSensitiveMutation,
 } = userApi;

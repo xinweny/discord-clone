@@ -13,12 +13,18 @@ export const userProfileSchema = zod.object({
   file: fileValidator.avatar,
 });
 
-export const changePasswordSchema = zod.object({
+export const editPasswordSchema = zod.object({
   oldPassword: zod.string(),
-  newPassword: zod.string()
+  password: zod.string()
     .min(8, 'Password must be a minimum of 8 characters.'),
   confirmPassword: zod.string(),
-}).refine((data) => data.newPassword === data.confirmPassword, {
+}).refine((data) => data.password === data.confirmPassword, {
   message: 'Passwords do not match',
   path: ['confirmPassword'],
+});
+
+export const editUsernameSchema = zod.object({
+  username: zod.string()
+    .min(2).max(32),
+  password: zod.string(),
 });

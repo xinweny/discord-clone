@@ -63,8 +63,9 @@ export enum ProfileSettingsTabs {
   SERVER_PROFILES = 'server_profiles',
 }
 
-export type UpdatePasswordFields = {
+export type UpdateSensitiveFields = {
   userId: string;
-  oldPassword: string;
-  newPassword: string;
+  username?: string;
+  currentPassword: string;
+  password: string;
 };

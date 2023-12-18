@@ -1,9 +1,9 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import type { UpdatePasswordFields } from '../types';
+import type { UpdateSensitiveFields } from '../types';
 
-import { changePasswordSchema } from '../schema';
+import { editPasswordSchema } from '../schema';
 
 import {
   FormGroup,
@@ -11,7 +11,7 @@ import {
   ResetSubmitButtons,
 } from '@components/ui/forms';
 
-import { useUpdatePasswordMutation } from '../api';
+import { useUpdateSensitiveMutation } from '../api';
 import { useGetUserData } from '@features/auth/hooks';
 
 type ChangePasswordFormProps = {
@@ -31,23 +31,23 @@ export function ChangePasswordForm({
     confirmPassword: '',
   };
 
-  const methods = useForm<UpdatePasswordFields>({
+  const methods = useForm<UpdateSensitiveFields>({
     defaultValues,
     mode: 'onSubmit',
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodResolver(editPasswordSchema),
   });
 
   const { handleSubmit } = methods;
 
-  const [changePassword] = useUpdatePasswordMutation();
+  const [changePassword] = useUpdateSensitiveMutation();
 
-  const onSubmit = async (data: UpdatePasswordFields) => {
-    const { oldPassword, newPassword } = data;
+  const onSubmit = async (data: UpdateSensitiveFields) => {
+    const { currentPassword, password } = data;
 
     await changePassword({
       userId,
-      oldPassword,
-      newPassword,
+      currentPassword,
+      password,
     });
 
     closeBtnRef.current?.click();
