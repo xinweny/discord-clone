@@ -38,9 +38,10 @@ const messageApi = api.injectEndpoints({
           });
         },
         merge: (currentCache, newMessages) => {
-          currentCache.items.push(...newMessages.items);
-
-          currentCache.next = newMessages.next;
+          if (newMessages) {
+            currentCache.items.push(...newMessages.items);
+            currentCache.next = newMessages.next;
+          }
         },
         forceRefetch: ({ currentArg, previousArg }) => !(_.isEqual(currentArg, previousArg)),
         onCacheEntryAdded: async (
@@ -115,7 +116,7 @@ const messageApi = api.injectEndpoints({
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: null },
+              { serverId, roomId, next: undefined },
               (draftMsgs) => {
                 draftMsgs.items.push(message);
 
@@ -141,7 +142,7 @@ const messageApi = api.injectEndpoints({
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: null },
+              { serverId, roomId, next: undefined },
               (draftMsgs) => {
                 const index = draftMsgs.items.findIndex(
                   msg => msg._id === message._id
@@ -175,7 +176,7 @@ const messageApi = api.injectEndpoints({
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: null },
+              { serverId, roomId, next: undefined },
               (draftMsgs) => {
                 draftMsgs.items = draftMsgs.items.filter(
                   msg => msg._id !== messageId

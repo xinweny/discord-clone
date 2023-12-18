@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { NotificationEvent } from '@features/notifications/types';
@@ -25,10 +25,14 @@ export function MessagesContainer({
   authorized,
 }: MessagesContainerProps) {
   const { serverId, roomId } = useParams();
+
+  const listRef = useRef<HTMLDivElement>(null);
+  
   const currentDate = useUpdateCurrentDate();
 
-  const [next, setNext] = useState<string | null>(null);
+  const [next, setNext] = useState<string | 0 | undefined>(undefined);
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
+  const [hasFirstLoad, setHasFirstLoad] = useState<boolean>(false);
 
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
@@ -37,17 +41,29 @@ export function MessagesContainer({
   });
 
   useEffect(() => {
-    if (messages && scrolledToTop) setNext(messages.next);
+    if (messages && next !== 0 && scrolledToTop) setNext(messages.next);
   }, [scrolledToTop]);
 
   useEffect(() => {
-    if (messages) emitEvents({
+    if (!messages) return;
+
+    emitEvents({
       [NotificationEvent.UpdateReadStatus]: {
         roomId,
         lastReadAt: new Date(),
       },
     });
+
+    if (!hasFirstLoad && isSuccess) setHasFirstLoad(true);
   }, [messages]);
+
+  useEffect(() => {
+    if (!hasFirstLoad) return;
+
+    const container = listRef.current;
+
+    if (container) container.scrollTop = container.scrollHeight;
+  }, [hasFirstLoad]); 
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -58,8 +74,8 @@ export function MessagesContainer({
 
   return (
     <div className={styles.container}>
-      <div onScroll={handleScroll} className={styles.content}>
-        {welcomeComponent}
+      <div onScroll={handleScroll} className={styles.content} ref={listRef}>
+        {(next === 0) && welcomeComponent}
         {messages.items.map(
           (message, index) => <MessageCard
             key={message._id}
