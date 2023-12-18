@@ -61,13 +61,12 @@ const updateSensitive = async (id: Types.ObjectId | string, fields: {
 };
 
 const update = async (id: Types.ObjectId | string, fields: {
-  username?: string,
   displayName?: string,
   bannerColor?: string,
   bio?: string,
   customStatus?: string,
 }, avatarFileName?: string) => {
-  const updateQuery = keepKeys(fields, ['username', 'displayName', 'bannerColor', 'bio', 'customStatus']);
+  const updateQuery = keepKeys(fields, ['displayName', 'bannerColor', 'bio', 'customStatus']);
 
   const user = await User.findByIdAndUpdate(id, {
     $set: {
@@ -99,11 +98,16 @@ const checkUsernameAvailable = async (username: string) => {
   return !user;
 };
 
-const changePassword = async (
+const updateSecure = async (
   userId: string | Types.ObjectId,
   currentPassword: string,
-  newPassword: string,
+  secureFields: {
+    password?: string;
+    username?: string;
+  },
 ) => {
+  const updateQuery = keepKeys(secureFields, ['username', 'password']);
+
   const user = await User.findById(userId);
 
   if (!user) throw new CustomError(400, 'User not found.');
@@ -112,14 +116,14 @@ const changePassword = async (
 
   if (!isCorrectPassword) throw new CustomError(401, 'Unauthorized');
 
-  const password = await authService.hashPassword(newPassword);
+  const newPassword = updateQuery.password;
 
-  const updatedUser = await User.findByIdAndUpdate(userId, {
-    password,
-  }, { new: true });
+  if (newPassword) updateQuery.password = await authService.hashPassword(newPassword);
+
+  const updatedUser = await User.findByIdAndUpdate(userId, updateQuery, { new: true });
 
   return updatedUser;
-}
+};
 
 export const userService = {
   getOne,
@@ -129,5 +133,5 @@ export const userService = {
   updateSensitive,
   remove,
   checkUsernameAvailable,
-  changePassword,
+  updateSecure,
 };

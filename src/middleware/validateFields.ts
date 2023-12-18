@@ -4,11 +4,13 @@ import { VALIDATION_RULES } from '@data/validationRules';
 
 import { handleValidationErrors } from '@helpers/handleValidationErrors';
 
-export const validateFields = (fields: string[]): RequestHandler[] => {
+export const validateFields = (fields: string[], skip = false): RequestHandler[] => {
   const validator = fields.map((fieldName: string | number) => VALIDATION_RULES[fieldName]);
 
-  return [
-    ...validator,
-    handleValidationErrors,
-  ];
-}
+  return skip
+    ? validator
+    : [
+      ...validator,
+      handleValidationErrors,
+    ];
+};

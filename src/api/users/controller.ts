@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 
 import { tryCatch } from '@helpers/tryCatch';
+import { handleValidationErrors } from '@helpers/handleValidationErrors';
 
 import { authenticate } from '@middleware/authenticate';
 import { authorize } from '@middleware/authorize';
@@ -32,12 +33,27 @@ const getUser: RequestHandler[] = [
 ];
 
 const updateUser: RequestHandler[] = [
-  ...validateFields(['username', 'displayName', 'bio', 'bannerColor', 'customStatus']),
+  ...validateFields(['username', 'displayName', 'bio', 'bannerColor', 'customStatus'], true),
   authenticate,
   authorize.userSelf('params'),
   tryCatch(
-    async (req, res) => {
-      const user = await userService.update(req.user?._id, { ...req.body }, req.body.filename);
+    async (req, res, next) => {
+      const sensitive = !!req.query.sensitive;
+
+      let user = null;
+
+      if (sensitive) {
+        const { currentPassword, newPassword, username } = req.body;
+
+        user = await userService.updateSecure(req.user?._id, currentPassword, {
+          ...(newPassword && { password: newPassword }),
+          ...(username && { username }),
+        });
+      } else {
+        handleValidationErrors(req, res, next);
+
+        user = await userService.update(req.user?._id, { ...req.body }, req.body.filename);
+      }
 
       res.json({
         data: user,
@@ -47,25 +63,7 @@ const updateUser: RequestHandler[] = [
   )
 ];
 
-const changePassword: RequestHandler[] = [
-  authenticate,
-  authorize.userSelf('params'),
-  tryCatch(
-    async (req, res) => {
-      const { currentPassword, newPassword } = req.body;
-
-      const user = await userService.changePassword(req.user?._id, currentPassword, newPassword);
-
-      res.json({
-        data: user,
-        message: 'Password successfully updated.',
-      });
-    }
-  )
-]
-
 export const userController = {
   getUser,
   updateUser,
-  changePassword,
 };

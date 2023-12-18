@@ -23,8 +23,6 @@ userRouter.use('/:userId/status', userStatusRouter);
 
 userRouter.use('/:userId/notifications', notificationRouter);
 
-userRouter.put('/:userId/password', userController.changePassword);
-
 userRouter.get('/:userId', userController.getUser);
 
 userRouter.put('/:userId', userController.updateUser);
