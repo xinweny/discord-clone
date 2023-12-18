@@ -12,6 +12,7 @@ import { Separator } from '@components/ui/displays';
 import { UserStatusIcon } from '../status';
 import { AccountEditSection } from './account-edit-section';
 import { ChangePasswordButton } from './change-password-button';
+import { ChangeUsernameButton } from './change-username-button';
 
 import styles from './account-settings-form.module.scss';
 
@@ -56,7 +57,7 @@ export function AccountSettingsForm() {
           header="USERNAME"
           value={username}
           button={(
-            <button>Edit</button>
+            <ChangeUsernameButton>Edit</ChangeUsernameButton>
           )}
         />
         <AccountEditSection

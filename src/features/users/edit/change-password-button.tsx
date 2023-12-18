@@ -4,7 +4,7 @@ import { ModalButton } from '@components/ui/buttons';
 
 type ChangePasswordButtonProps = {
   children: React.ReactNode;
-}
+};
 
 export function ChangePasswordButton({ children }: ChangePasswordButtonProps) {
   return (

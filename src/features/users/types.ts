@@ -65,7 +65,7 @@ export enum ProfileSettingsTabs {
 
 export type UpdateSensitiveFields = {
   userId: string;
-  username?: string;
   currentPassword: string;
-  password: string;
+  username?: string;
+  password?: string;
 };

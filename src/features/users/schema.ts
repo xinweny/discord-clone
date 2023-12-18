@@ -1,6 +1,7 @@
 import * as zod from 'zod';
 
 import { fileValidator } from '@utils';
+import { checkUsernameAvailability } from '@features/auth/utils';
 
 export const userProfileSchema = zod.object({
   displayName: zod.string().min(2),
@@ -24,7 +25,9 @@ export const editPasswordSchema = zod.object({
 });
 
 export const editUsernameSchema = zod.object({
+  currentPassword: zod.string().min(1, 'Password is required.'),
   username: zod.string()
-    .min(2).max(32),
-  password: zod.string(),
+    .min(2).max(32)
+    .refine((value) => /^[a-z0-9._]+$/.test(value), 'Please only use numbers, letters, underscores _ or periods.')
+    .refine(checkUsernameAvailability, 'Username is unavailable. Try adding numbers, letters, underscores_ or full stops.'),
 });

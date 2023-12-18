@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import type { UpdateSensitiveFields } from '../types';
 
-import { editPasswordSchema } from '../schema';
+import { editUsernameSchema } from '../schema';
 
 import { handleServerError } from '@utils';
 
@@ -11,46 +11,45 @@ import {
   FormGroup,
   TextInput,
   ResetSubmitButtons,
+  ErrorMessage,
 } from '@components/ui/forms';
 
 import { useUpdateSensitiveMutation } from '../api';
 import { useGetUserData } from '@features/auth/hooks';
 
-type ChangePasswordFormProps = {
+type ChangeUsernameFormProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
 };
 
-export function ChangePasswordForm({
+export function ChangeUsernameForm({
   closeBtnRef,
-}: ChangePasswordFormProps) {
+}: ChangeUsernameFormProps) {
   const { user } = useGetUserData();
   const userId = user.data!.id;
 
   const defaultValues = {
-    userId,
     currentPassword: '',
-    password: '',
-    confirmPassword: '',
+    username: user.data!.username,
   };
 
   const methods = useForm<UpdateSensitiveFields>({
     defaultValues,
-    mode: 'onSubmit',
-    resolver: zodResolver(editPasswordSchema),
+    mode: 'onChange',
+    resolver: zodResolver(editUsernameSchema),
   });
 
   const { handleSubmit, setError } = methods;
 
-  const [changePassword] = useUpdateSensitiveMutation();
+  const [changeUsername] = useUpdateSensitiveMutation();
 
   const onSubmit = async (data: UpdateSensitiveFields) => {
     try {
-      const { currentPassword, password } = data;
+      const { currentPassword, username } = data;
   
-      await changePassword({
+      await changeUsername({
         userId,
         currentPassword,
-        password,
+        username: username!,
       });
   
       closeBtnRef.current?.click();
@@ -64,36 +63,25 @@ export function ChangePasswordForm({
     }
   };
 
-  const pwdProps = {
-    rules: { required: true },
-    options: { trim: false },
-  };
-
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <FormGroup label="username" htmlFor="username">
+          <TextInput
+            type="text"
+            id="username"
+            name="username"
+            rules={{ required: true, max: 32 }}
+          />
+          <ErrorMessage name="username" validatedMsg="Username is available. Nice!" />
+        </FormGroup>
         <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
           <TextInput
             type="password"
             id="current-password"
             name="currentPassword"
-            {...pwdProps}
-          />
-        </FormGroup>
-        <FormGroup label="new password" htmlFor="password" name="password">
-          <TextInput
-            type="password"
-            id="password"
-            name="password"
-            {...pwdProps}
-          />
-        </FormGroup>
-        <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
-          <TextInput
-            type="password"
-            id="confirm-password"
-            name="confirmPassword"
-            {...pwdProps}
+            rules={{ required: true }}
+            options={{ trim: false }}
           />
         </FormGroup>
         <ResetSubmitButtons

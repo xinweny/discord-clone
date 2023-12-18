@@ -88,8 +88,8 @@ const userApi = api.injectEndpoints({
           params: { sensitive: true },
           method: 'put',
           data: {
-            username,
             currentPassword,
+            username,
             password,
           },
         }),
