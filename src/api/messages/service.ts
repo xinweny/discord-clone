@@ -33,6 +33,11 @@ const getMany = async (
 ) => {
   const { next, limit } = pagination;
 
+  if (next === '0') return {
+    messages: [],
+    next: 0,
+  };
+
   const queryObj = {
     ...fields,
     ...(query && { body: { $regex: query, $options: 'i' } }),
@@ -59,9 +64,9 @@ const getMany = async (
 
   return {
     messages,
-    next: lastMessage ? lastMessage._id : null,
+    next: lastMessage ? lastMessage._id : 0,
   };
-}
+};
 
 const create = async (
   fields: {

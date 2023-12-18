@@ -108,7 +108,7 @@ const updateSecure = async (
 ) => {
   const updateQuery = keepKeys(secureFields, ['username', 'password']);
 
-  const user = await User.findById(userId);
+  const user = await User.findById(userId, 'password');
 
   if (!user) throw new CustomError(400, 'User not found.');
 

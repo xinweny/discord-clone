@@ -43,10 +43,10 @@ const updateUser: RequestHandler[] = [
       let user = null;
 
       if (sensitive) {
-        const { currentPassword, newPassword, username } = req.body;
+        const { currentPassword, password, username } = req.body;
 
         user = await userService.updateSecure(req.user?._id, currentPassword, {
-          ...(newPassword && { password: newPassword }),
+          ...(password && { password }),
           ...(username && { username }),
         });
       } else {
