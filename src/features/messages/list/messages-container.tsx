@@ -30,18 +30,19 @@ export function MessagesContainer({
   
   const currentDate = useUpdateCurrentDate();
 
-  const [next, setNext] = useState<string | 0 | undefined>(undefined);
+  const next = useRef<string | 0 | undefined>(undefined);
+
   const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
   const [hasFirstLoad, setHasFirstLoad] = useState<boolean>(false);
 
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
     roomId: roomId!,
-    next,
+    next: next.current,
   });
 
   useEffect(() => {
-    if (messages && next !== 0 && scrolledToTop) setNext(messages.next);
+    if (messages && next.current !== 0 && scrolledToTop) next.current = messages.next;
   }, [scrolledToTop]);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ export function MessagesContainer({
   return (
     <div className={styles.container}>
       <div onScroll={handleScroll} className={styles.content} ref={listRef}>
-        {(next === 0) && welcomeComponent}
+        {(messages.items.length === 0 || next.current === 0) && welcomeComponent}
         {messages.items.map(
           (message, index) => <MessageCard
             key={message._id}
