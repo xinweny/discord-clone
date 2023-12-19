@@ -44,24 +44,26 @@ export function ChangePasswordForm({
   const [changePassword] = useUpdateSensitiveMutation();
 
   const onSubmit = async (data: UpdateSensitiveFields) => {
-    try {
-      const { currentPassword, password } = data;
-  
-      await changePassword({
-        userId,
-        currentPassword,
-        password,
-      });
-  
-      closeBtnRef.current?.click();
-    } catch (error) {
-      handleServerError(error, { status: 401, message: 'Unauthorized' }, () => {
+    const { currentPassword, password } = data;
+
+    const res = await changePassword({
+      userId,
+      currentPassword,
+      password,
+    });
+
+    if ('error' in res) {
+      handleServerError(res.error, { status: 401, message: 'Unauthorized' }, () => {
         setError('currentPassword', {
           type: 'custom',
           message: 'Password does not match.',
         });
-      });
+      })
+      
+      return;
     }
+
+    closeBtnRef.current?.click();
   };
 
   const pwdProps = {

@@ -24,9 +24,9 @@ export function FormGroup({
 
   return (
     <div className={styles.group}>
-      <label htmlFor={htmlFor}>
-        <span className={styles.label}>{label.toUpperCase()}</span>
-        <span>
+      <label htmlFor={htmlFor} className={error && styles.error}>
+        <h2 className={styles.label}>{label.toUpperCase()}</h2>
+        <span className={styles.errorMessage}>
           {name && error
             ? ` - ${error.message}`
             : `${required ? '*' : ''}`

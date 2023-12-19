@@ -54,8 +54,7 @@ export function ChangeUsernameForm({
     });
 
     if ('error' in res) {
-      console.log(res);
-      handleServerError(res.error, { status: 401 }, () => {
+      handleServerError(res.error, { status: 401, message: 'Unauthorized' }, () => {
         setError('currentPassword', {
           type: 'custom',
           message: 'Password does not match.',
