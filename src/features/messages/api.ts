@@ -38,8 +38,7 @@ const messageApi = api.injectEndpoints({
           });
         },
         merge: (currentCache, newMessages) => {
-          console.log('merge');
-          if (newMessages) {
+          if (newMessages.items) {
             currentCache.items.push(...newMessages.items);
             currentCache.next = newMessages.next;
           }
@@ -88,23 +87,6 @@ const messageApi = api.injectEndpoints({
             events,
             { cacheDataLoaded, cacheEntryRemoved },
           );
-        },
-        onQueryStarted: async (args, { dispatch, queryFulfilled }) => {
-          try {
-            console.log('query started');
-            await queryFulfilled;
-
-            console.log('query fulfilled');
-          } catch (err) {
-            dispatch(messageApi.util.updateQueryData(
-              'getMessages',
-              args,
-              (draft) => {
-                console.log(draft);
-                return draft;
-              },
-            ));
-          }
         },
       }),
       sendMessage: build.mutation<MessageData, SendMessageFields>({

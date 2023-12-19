@@ -71,7 +71,7 @@ export function MessagesContainer({
     setScrolledToTop(e.currentTarget.scrollTop === 0);
   };
 
-  if (!isSuccess) return null;
+  if (!messages?.items) return null;
 
   return (
     <div className={styles.container}>
