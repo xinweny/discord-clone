@@ -1,0 +1,13 @@
+.card {
+  position: relative;
+
+  &.active > div:last-child {
+    height: 40px !important;
+  }
+
+  &:hover {
+    > div:last-child {
+      height: 24px;
+    }
+  }
+}

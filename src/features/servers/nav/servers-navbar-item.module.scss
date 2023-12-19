@@ -6,13 +6,15 @@
   background-color: colors.$bg-primary;
   color: colors.$white;
   border-radius: 24px;
-  overflow: hidden;
   transition: all 0.15s ease-out;
-  
 
-  &.active, &:hover {
+  &.active, &:hover, img {
     background-color: colors.$blurple;
     border-radius: 16px;
+  }
+
+  a {
+    overflow: hidden;
   }
 
   > div, a, button {
@@ -23,6 +25,7 @@
   }
 
   img {
+    overflow: hidden;
     max-width: 100%;
     max-height: 100%;
   }

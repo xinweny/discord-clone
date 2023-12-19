@@ -1,17 +1,21 @@
 import { TimestampDict } from '../types';
 
+import styles from './server-new-message-notification.module.scss';
+
 type ServerNewMessageNotificationProps = {
   channelIds: string[];
   lastTimestamps: TimestampDict;
   readTimestamps: TimestampDict;
+  className?: string;
 };
 
 export function ServerNewMessageNotification({
   channelIds,
   lastTimestamps,
   readTimestamps,
+  className,
 }: ServerNewMessageNotificationProps) {
-  const notification = <img src="#" alt="New" />;
+  const notification = <div className={`${styles.notification} ${className || ''}`}></div>;
 
   for (const channelId of channelIds) {
     const lastDate = lastTimestamps[channelId] ? new Date(lastTimestamps[channelId]).getTime() : undefined;
@@ -23,5 +27,5 @@ export function ServerNewMessageNotification({
     if (!readDate || (lastDate > readDate)) return notification;
   }
 
-  return null;
+  return <div className={`${styles.notification} ${className || ''} ${styles.noNotification}`}></div>;
 }
