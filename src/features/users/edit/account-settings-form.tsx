@@ -33,44 +33,48 @@ export function AccountSettingsForm() {
   } = user.data as UserSelfData;
 
   return (
-    <div className={styles.container}>
-      <ColorBanner color={bannerColor} />
-      <div>
-        <Avatar
-          src={avatarUrl}
-          notification={<UserStatusIcon userId={id} />}
-        />
-        <h3>{displayName}</h3>
-        <button onClick={() => { set(USER_SETTINGS[1].id); }}>
-          Edit User Profile
-        </button>
-      </div>
-      <div>
-        <AccountEditSection
-          header="DISPLAY NAME"
-          value={displayName}
-          button={(
-            <button onClick={() => { set(USER_SETTINGS[1].id); }}>Edit</button>
-          )}
-        />
-        <AccountEditSection
-          header="USERNAME"
-          value={username}
-          button={(
-            <ChangeUsernameButton>Edit</ChangeUsernameButton>
-          )}
-        />
-        <AccountEditSection
-          header="EMAIL"
-          value={email}
-          revealPattern={/.+?(?=@)/}
-          button={<button disabled>Edit</button>}
-        />
+    <div>
+      <div className={styles.container}>
+        <ColorBanner color={bannerColor} className={styles.banner} />
+        <div className={styles.header}>
+          <div className={styles.wrapper}>
+            <Avatar
+              src={avatarUrl}
+              notification={<UserStatusIcon userId={id} />}
+            />
+          </div>
+          <h3>{displayName}</h3>
+          <button onClick={() => { set(USER_SETTINGS[1].id); }} className={styles.blueButton}>
+            Edit User Profile
+          </button>
+        </div>
+        <div className={styles.options}>
+          <AccountEditSection
+            header="DISPLAY NAME"
+            value={displayName}
+            button={(
+              <button onClick={() => { set(USER_SETTINGS[1].id); }}>Edit</button>
+            )}
+          />
+          <AccountEditSection
+            header="USERNAME"
+            value={username}
+            button={(
+              <ChangeUsernameButton>Edit</ChangeUsernameButton>
+            )}
+          />
+          <AccountEditSection
+            header="EMAIL"
+            value={email}
+            revealPattern={/.+?(?=@)/}
+            button={<button disabled>Edit</button>}
+          />
+        </div>
       </div>
       <Separator className={styles.divider} />
-      <div>
+      <div className={styles.section}>
         <h2>Password and Authentication</h2>
-        <ChangePasswordButton>Change Password</ChangePasswordButton>
+        <ChangePasswordButton className={styles.blueButton}>Change Password</ChangePasswordButton>
       </div>
     </div>
   );

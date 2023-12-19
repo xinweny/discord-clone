@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import styles from './account-edit-section.module.scss';
+
 type AccountEditSection = {
   header: string;
   value: string;
@@ -19,8 +21,8 @@ export function AccountEditSection({
   const replaceStr = match ? match[0] : '';
 
   return (
-    <div>
-      <div>
+    <div className={styles.row}>
+      <div className={styles.content}>
         <h4>{header.toUpperCase()}</h4>
         <div>
           <span>{replaceStr
@@ -31,7 +33,7 @@ export function AccountEditSection({
             : value
           }</span>
           {revealPattern && (
-            <button onClick={() => { setIsMasked((prev) => !prev ); }}>
+            <button onClick={() => { setIsMasked((prev) => !prev ); }} className={styles.revealButton}>
               {isMasked ? 'Reveal' : 'Hide'}
             </button>
           )}
