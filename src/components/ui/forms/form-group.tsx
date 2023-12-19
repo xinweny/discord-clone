@@ -23,12 +23,15 @@ export function FormGroup({
   const error = name ? formState.errors[name] : undefined;
 
   return (
-    <div>
-      <label htmlFor={htmlFor} className={styles.error}>
-        {name && error
-          ? `${label.toUpperCase()} - ${error.message}`
-          : `${label.toUpperCase()} ${required ? '*' : ''}`
-        }
+    <div className={styles.group}>
+      <label htmlFor={htmlFor}>
+        <span className={styles.label}>{label.toUpperCase()}</span>
+        <span>
+          {name && error
+            ? ` - ${error.message}`
+            : `${required ? '*' : ''}`
+          }
+        </span>
       </label>
       {children}
     </div>

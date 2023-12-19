@@ -2,7 +2,7 @@ import { ErrorResponse } from '@types';
 
 type ErrorCond = {
   status: number;
-  message?: string;
+  message: string;
 };
 
 export const handleServerError = (
@@ -14,7 +14,7 @@ export const handleServerError = (
 
   if (
     err.status === cond.status &&
-    (cond.message && err.data.message.includes(cond.message))  
+    (cond.message && err.data.message.includes(cond.message))
   ) handler();
 };
 

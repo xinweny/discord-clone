@@ -55,7 +55,7 @@ export function ChangePasswordForm({
   
       closeBtnRef.current?.click();
     } catch (error) {
-      handleServerError(error, { status: 401 }, () => {
+      handleServerError(error, { status: 401, message: 'Unauthorized' }, () => {
         setError('currentPassword', {
           type: 'custom',
           message: 'Password does not match.',
@@ -72,30 +72,32 @@ export function ChangePasswordForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
-          <TextInput
-            type="password"
-            id="current-password"
-            name="currentPassword"
-            {...pwdProps}
-          />
-        </FormGroup>
-        <FormGroup label="new password" htmlFor="password" name="password">
-          <TextInput
-            type="password"
-            id="password"
-            name="password"
-            {...pwdProps}
-          />
-        </FormGroup>
-        <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
-          <TextInput
-            type="password"
-            id="confirm-password"
-            name="confirmPassword"
-            {...pwdProps}
-          />
-        </FormGroup>
+        <div>
+          <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
+            <TextInput
+              type="password"
+              id="current-password"
+              name="currentPassword"
+              {...pwdProps}
+            />
+          </FormGroup>
+          <FormGroup label="new password" htmlFor="password" name="password">
+            <TextInput
+              type="password"
+              id="password"
+              name="password"
+              {...pwdProps}
+            />
+          </FormGroup>
+          <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
+            <TextInput
+              type="password"
+              id="confirm-password"
+              name="confirmPassword"
+              {...pwdProps}
+            />
+          </FormGroup>
+        </div>
         <ResetSubmitButtons
           submitLabel="Done"
           closeBtnRef={closeBtnRef}

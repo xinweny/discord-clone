@@ -8,6 +8,7 @@ type ModalWrapperProps = {
   children: React.ReactNode;
   rootId?: string;
   withClickAway?: boolean;
+  className?: string;
 };
 
 export function ModalWrapper({
@@ -16,6 +17,7 @@ export function ModalWrapper({
   children,
   rootId,
   withClickAway = true,
+  className,
 }: ModalWrapperProps) {
   return (
     <PortalWrapper
@@ -24,6 +26,7 @@ export function ModalWrapper({
       close={closeModal}
       className={styles.container}
       withClickAway={withClickAway}
+      childOpts={{ className }}
     >
     {children}
     </PortalWrapper>

@@ -43,47 +43,54 @@ export function ChangeUsernameForm({
   const [changeUsername] = useUpdateSensitiveMutation();
 
   const onSubmit = async (data: UpdateSensitiveFields) => {
-    try {
-      const { currentPassword, username } = data;
-  
-      await changeUsername({
-        userId,
-        currentPassword,
-        username: username!,
-      });
-  
-      closeBtnRef.current?.click();
-    } catch (error) {
-      handleServerError(error, { status: 401 }, () => {
+    const { currentPassword, username } = data;
+
+    if (username === user.data!.username) return;
+
+    const res = await changeUsername({
+      userId,
+      currentPassword,
+      username: username!,
+    });
+
+    if ('error' in res) {
+      console.log(res);
+      handleServerError(res.error, { status: 401 }, () => {
         setError('currentPassword', {
           type: 'custom',
           message: 'Password does not match.',
         });
-      });
+      })
+      
+      return;
     }
+
+    closeBtnRef.current?.click();
   };
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup label="username" htmlFor="username">
-          <TextInput
-            type="text"
-            id="username"
-            name="username"
-            rules={{ required: true, max: 32 }}
-          />
-          <ErrorMessage name="username" validatedMsg="Username is available. Nice!" />
-        </FormGroup>
-        <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
-          <TextInput
-            type="password"
-            id="current-password"
-            name="currentPassword"
-            rules={{ required: true }}
-            options={{ trim: false }}
-          />
-        </FormGroup>
+        <div>
+          <FormGroup label="username" htmlFor="username">
+            <TextInput
+              type="text"
+              id="username"
+              name="username"
+              rules={{ required: true, max: 32 }}
+            />
+            <ErrorMessage name="username" validatedMsg="Username is available. Nice!" />
+          </FormGroup>
+          <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
+            <TextInput
+              type="password"
+              id="current-password"
+              name="currentPassword"
+              rules={{ required: true }}
+              options={{ trim: false }}
+            />
+          </FormGroup>
+        </div>
         <ResetSubmitButtons
           submitLabel="Done"
           closeBtnRef={closeBtnRef}

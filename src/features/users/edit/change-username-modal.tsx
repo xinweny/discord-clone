@@ -6,13 +6,17 @@ import { ChangeUsernameForm } from './change-username-form';
 
 import type { ModalProps } from '@types';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+
+import styles from './account-edit-modal.module.scss';
+
 export function ChangeUsernameModal({
   isOpen, onClose
 }: ModalProps) {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
+    <ModalWrapper closeModal={onClose} isOpen={isOpen} className={styles.modal}>
       <div>
         <h2>Change your username</h2>
         <p>Enter a new username and your existing password.</p>
@@ -21,7 +25,9 @@ export function ChangeUsernameModal({
       <button ref={closeBtnRef} type="button" onClick={(e) => {
         e.stopPropagation();
         onClose();
-      }}>x</button>
+      }}>
+        <CrossIcon />
+      </button>
     </ModalWrapper>
   );
 }
