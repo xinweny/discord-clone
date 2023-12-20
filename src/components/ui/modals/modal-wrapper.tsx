@@ -1,5 +1,7 @@
 import { PortalWrapper } from '@components/wrappers';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+
 import styles from './modal-wrapper.module.scss';
 
 type ModalWrapperProps = {
@@ -9,6 +11,7 @@ type ModalWrapperProps = {
   rootId?: string;
   withClickAway?: boolean;
   className?: string;
+  closeBtnRef?: React.RefObject<HTMLButtonElement>;
 };
 
 export function ModalWrapper({
@@ -18,6 +21,7 @@ export function ModalWrapper({
   rootId,
   withClickAway = true,
   className,
+  closeBtnRef,
 }: ModalWrapperProps) {
   return (
     <PortalWrapper
@@ -26,9 +30,17 @@ export function ModalWrapper({
       close={closeModal}
       className={styles.container}
       withClickAway={withClickAway}
-      childOpts={{ className }}
+      childOpts={{ className: `${styles.modal} ${className || ''}` }}
     >
-    {children}
+      {children}
+      {closeBtnRef && (
+        <button ref={closeBtnRef} type="button" onClick={(e) => {
+          e.stopPropagation();
+          closeModal();
+        }}>
+          <CrossIcon />
+        </button>
+      )}
     </PortalWrapper>
   );
 }

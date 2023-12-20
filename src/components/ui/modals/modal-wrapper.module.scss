@@ -6,3 +6,98 @@
   justify-content: center;
   background-color: colors.$bg-modal;
 }
+
+.modal {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: colors.$bg-primary;
+  position: relative;
+  width: 440px;
+
+  > header:first-child {
+    text-align: center;
+    padding: 24px 16px;
+
+    h2 {
+      font-weight: bold;
+      color: colors.$white;
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    p {
+      margin-top: 8px;
+      color: colors.$text-muted;
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  > form {
+    > div:first-child {
+      padding: 16px;
+      padding-top: 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    > div:last-child {
+      background-color: colors.$modal-footer-bg;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      button {
+        width: 96px;
+        height: 36px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: colors.$white;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0px 16px;
+      
+        &:first-child {
+          margin-right: 8px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &:last-child {
+          background-color: colors.$brand-500;
+
+          &:hover {
+            background-color: colors.$brand-560;
+          }
+        }
+      }
+    }
+  }
+
+  > button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+
+      path {
+        stroke: colors.$interactive-normal;
+      }
+
+      &:hover {
+        path {
+          stroke: colors.$interactive-hover;
+        }
+      }
+    }
+  }
+}

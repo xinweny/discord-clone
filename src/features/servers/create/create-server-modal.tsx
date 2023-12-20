@@ -12,11 +12,12 @@ export function CreateServerModal({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen}>
-      <h2>Create a server</h2>
-      <p>Your server is where you and your friends hang out. Make yours and start talking.</p>
-      <CreateServerForm closeBtn={closeBtnRef.current} />
-      <button ref={closeBtnRef} type="button" onClick={onClose}>x</button>
+    <ModalWrapper closeModal={onClose} isOpen={isOpen} closeBtnRef={closeBtnRef}>
+      <header>
+        <h2>Create a server</h2>
+        <p>Your server is where you and your friends hang out. Make yours and start talking.</p>
+      </header>
+      <CreateServerForm closeBtnRef={closeBtnRef} />
     </ModalWrapper>
   );
 }

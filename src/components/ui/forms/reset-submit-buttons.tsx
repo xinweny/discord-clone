@@ -3,22 +3,29 @@ import { useFormContext } from 'react-hook-form';
 import { SubmitButton } from '.';
 
 type ResetSubmitButtonsProps = {
-  submitLabel: string;
-  closeBtnRef: React.RefObject<HTMLButtonElement>;
-}
+  submitLabel?: string;
+  closeBtnRef?: React.RefObject<HTMLButtonElement>;
+  resetLabel?: string;
+  className?: string;
+};
 
-export function ResetSubmitButtons({ submitLabel, closeBtnRef }: ResetSubmitButtonsProps) {
+export function ResetSubmitButtons({
+  submitLabel = 'Submit',
+  closeBtnRef,
+  resetLabel = 'Cancel',
+  className,
+}: ResetSubmitButtonsProps) {
   const { reset } = useFormContext();
 
   return (
-    <div>
+    <div className={className}>
       <button
         type="button"
         onClick={() => {
           reset();
-          closeBtnRef.current?.click();
+          if (closeBtnRef) closeBtnRef.current?.click();
         }}
-      >Cancel</button>
+      >{resetLabel}</button>
       <SubmitButton>{submitLabel}</SubmitButton>
     </div>
   );

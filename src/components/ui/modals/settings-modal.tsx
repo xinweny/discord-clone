@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { SettingsContext } from '@components/context';
 
 import { SettingsLayout } from '@components/layouts';
-import { ModalWrapper } from '.';
+import { PortalWrapper } from '@components/wrappers';
 
 import type { ModalProps } from '@types';
 
@@ -43,8 +43,8 @@ export function SettingsModal({
         set: setActiveTabId,
       },
     }}>
-      <ModalWrapper
-        closeModal={onClose}
+      <PortalWrapper
+        close={onClose}
         isOpen={isOpen}
         rootId="settings-root"
         withClickAway={false}
@@ -59,7 +59,7 @@ export function SettingsModal({
         >
           <FormScreen activeTabId={activeTabId} />
         </SettingsLayout>
-      </ModalWrapper>
+      </PortalWrapper>
     </SettingsContext.Provider>
   );
 }
