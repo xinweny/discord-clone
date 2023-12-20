@@ -5,7 +5,6 @@ import { MemberStatusEvent } from '@features/members/types';
 import { emitEvents } from '@services/websocket';
 
 import { JoinedServerCard } from './joined-server-card';
-import { ServerNewMessageNotification } from '@features/notifications/message';
 
 import {
   useGetLastTimestampsQuery,

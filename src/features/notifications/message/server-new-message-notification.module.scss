@@ -1,19 +1,10 @@
 @use '@styles/colors';
 
 .notification {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: calc(-4px - 12px);
   background-color: colors.$text-primary;
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  z-index: 2;
-
-  &.noNotification {
-    height: 0px;
-  }
 }
 
 

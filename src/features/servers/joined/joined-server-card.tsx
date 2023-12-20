@@ -33,6 +33,13 @@ export function JoinedServerCard({
       tooltipText={name}
       isActive={isActive}
       className={`${styles.card} ${isActive ? styles.active : ''}`}
+      notification={(lastTimestamps && readTimestamps) && (
+        <ServerNewMessageNotification
+          channelIds={server.channels.map(c => c._id)}
+          lastTimestamps={lastTimestamps}
+          readTimestamps={readTimestamps}
+        />
+      )}
     >
       <LinkImage href={`/channels/${id}`}>
         {avatarUrl
@@ -40,13 +47,6 @@ export function JoinedServerCard({
           : <Acronym name={name} />
         }
       </LinkImage>
-      {(lastTimestamps && readTimestamps) && (
-        <ServerNewMessageNotification
-          channelIds={server.channels.map(c => c._id)}
-          lastTimestamps={lastTimestamps}
-          readTimestamps={readTimestamps}
-        />
-      )}
     </ServersNavbarItem>
   );
 }

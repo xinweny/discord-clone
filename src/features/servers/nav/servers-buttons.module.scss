@@ -15,7 +15,7 @@
       stroke: colors.$green;
     }
   
-    &:hover {
+    &.active, &:hover {
       background-color: colors.$green;
   
       svg, svg * {

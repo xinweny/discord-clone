@@ -27,5 +27,5 @@ export function ServerNewMessageNotification({
     if (!readDate || (lastDate > readDate)) return notification;
   }
 
-  return <div className={`${styles.notification} ${className || ''} ${styles.noNotification}`}></div>;
+  return null;
 }

@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 import { LinkImage } from '@components/ui/links';
 
 import { CreateServerButton } from '@features/servers/create';
@@ -9,6 +11,8 @@ import CompassIcon from '@assets/icons/compass.svg?react';
 import styles from './servers-buttons.module.scss';
 
 export function ServersButtons() {
+  const { pathname } = useLocation();
+
   return (
     <div className={styles.container}>
       <ServersNavbarItem
@@ -20,8 +24,8 @@ export function ServersButtons() {
       </ServersNavbarItem>
       <ServersNavbarItem
         tooltipText="Explore Servers"
-        isActive={false}
-        className={styles.item}
+        isActive={pathname === '/servers'}
+        className={`${styles.item} ${pathname === '/servers' ? styles.active : ''}`}
       >
         <LinkImage href="/servers">
           <CompassIcon width="24" />
