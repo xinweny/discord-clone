@@ -15,9 +15,11 @@ export function ContentLayout({
 }: ContentLayoutProps) {
   return (
     <div className={styles.layout}>
-      <div className={styles.header}>
-        {header}
-      </div>
+      {header && (
+        <div className={styles.header}>
+          {header}
+        </div>
+      )}
       <div className={styles.content}>
         {children}
       </div>

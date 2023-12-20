@@ -19,10 +19,7 @@ export function ContactsPage() {
 
   return (
     <ContentLayout
-      header={<ContactsNavbar
-        set={set}
-        id={id}
-      />}
+      header={<ContactsNavbar set={set} id={id} />}
     >
       {id === 'add_friend'
         ? <SendFriendRequestForm />

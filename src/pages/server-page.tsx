@@ -33,7 +33,7 @@ export function ServerPage() {
 
   const member = useGetUserServerMemberQuery({
     serverId: serverId!,
-    userId: user.data!._id,
+    userId: user.data!.id,
   });
 
   if (!server.isSuccess || !channels.isSuccess) return null;

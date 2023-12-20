@@ -3,7 +3,7 @@ import { UserShortcutsBar } from '@features/users/profile';
 import styles from './sidebar-layout.module.scss';
 
 type SidebarLayoutProps = {
-  top: React.ReactNode;
+  top?: React.ReactNode;
   children: React.ReactNode;
   handleScroll?: (e: React.UIEvent<HTMLDivElement>) => void;
   scrollerRef?: React.RefObject<HTMLDivElement>;

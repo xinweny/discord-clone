@@ -15,7 +15,7 @@ export function AppPage() {
   const { user } = useGetUserData();
   const livekit = useLivekit();
 
-  useJoinAllRooms(user.data);
+  useJoinAllRooms(user.data as any);
 
   if (!user.isSuccess) return null;
 
