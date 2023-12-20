@@ -242,11 +242,11 @@ const checkRefreshToken: RequestHandler = tryCatch(
   }
 );
 
-const checkFields: RequestHandler = tryCatch(
+const checkUsername: RequestHandler = tryCatch(
   async (req, res) => {
-    const { username } = req.params;
+    const { username } = req.query;
 
-    const isAvailable = await userService.checkUsernameAvailable(username);
+    const isAvailable = await userService.checkUsernameAvailable(username as string);
 
     res.json({
       data: isAvailable,
@@ -264,5 +264,5 @@ export const authController = {
   requestEmailVerification,
   verifyEmail,
   checkRefreshToken,
-  checkFields,
+  checkUsername,
 };

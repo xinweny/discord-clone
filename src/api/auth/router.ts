@@ -20,7 +20,7 @@ authRouter.post('/reqVerify', authController.requestEmailVerification);
 
 authRouter.post('/verify', authController.verifyEmail);
 
-authRouter.get('/check', authController.checkFields);
+authRouter.get('/check', authController.checkUsername);
 
 authRouter.get('/whoami', authController.checkRefreshToken);
 
