@@ -1,10 +1,18 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import SearchIcon from '@assets/icons/search.svg?react';
+import CrossIcon from '@assets/icons/cross.svg?react';
+
 import styles from './server-search-form.module.scss';
 
 export function ServerSearchForm() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { isDirty },
+    reset,
+  } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data: FieldValues) => {
@@ -18,8 +26,11 @@ export function ServerSearchForm() {
         {...register('query', { required: true })}
         placeholder="Explore communities"
       />
-      <button type="submit">
-        <img src="#" alt="Discover servers" />
+      <button
+        type={isDirty ? 'reset' : 'submit'}
+        onClick={() => { if (isDirty) reset(); }}
+      >
+        {isDirty ? <CrossIcon /> : <SearchIcon />}
       </button>
     </form>
   );
