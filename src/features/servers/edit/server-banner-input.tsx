@@ -36,11 +36,9 @@ export function ServerBannerInput({
       </FormGroup>
       <div>
         <label htmlFor="server-banner">
-          <ImagePreview
-            name={name}
-            src={src}
-            defaultSrc="#"
-          />
+          <ImagePreview name={name}>
+            <img src={src} alt="" />
+          </ImagePreview>
           <FileInput
             id="server-banner"
             name={name}

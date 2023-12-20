@@ -39,10 +39,9 @@ export function EditGroupAvatarForm({ dm }: EditGroupAvatarFormProps) {
     <FormProvider {...methods}>
       <form>
         <label htmlFor="upload">
-          <ImagePreview
-            name="avatar"
-            defaultSrc={dm.imageUrl || ''}
-          />
+          <ImagePreview name="avatar">
+            <img src={dm.imageUrl} alt="" />
+          </ImagePreview>
           <FileInput
             id="upload"
             name="avatar"

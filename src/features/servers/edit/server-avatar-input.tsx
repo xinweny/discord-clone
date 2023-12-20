@@ -20,11 +20,9 @@ export function ServerAvatarInput({
     <div>
       <div>
         <label htmlFor="server-avatar">
-          <ImagePreview
-            name={name}
-            src={src}
-            defaultSrc="#"
-          />
+          <ImagePreview name={name}>
+            <img src={src} alt="" />
+          </ImagePreview>
           <FileInput
             id="server-avatar"
             name={name}

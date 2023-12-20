@@ -16,6 +16,8 @@ export function SubmitButton({
       className={className}
       type="submit"
       disabled={!isDirty && !isValid}
-    >{children}</button>
+    >
+      {children}
+    </button>
   );
 }

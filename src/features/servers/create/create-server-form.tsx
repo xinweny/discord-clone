@@ -18,6 +18,10 @@ import { ImagePreview } from '@components/ui/media';
 
 import { useCreateServerMutation } from '../api';
 
+import ImageUploadIcon from '@assets/icons/image-upload.svg?react';
+
+import styles from './create-server-form.module.scss';
+
 type CreateServerFormProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
 };
@@ -57,12 +61,11 @@ export function CreateServerForm({ closeBtnRef }: CreateServerFormProps) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="upload">
-            <ImagePreview
-              name="file"
-              defaultSrc="#"
-            />
+        <div className={styles.section}>
+          <label htmlFor="upload" className={styles.imageUpload}>
+            <ImagePreview name="file">
+              <ImageUploadIcon />
+            </ImagePreview>
             <FileInput
               id="upload"
               name="file"

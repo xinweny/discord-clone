@@ -2,17 +2,17 @@ import { useFormContext } from 'react-hook-form';
 
 import { useFileWatchSingle } from '@components/hooks';
 
+import styles from './image-preview.module.scss';
+
 type ImagePreviewProps = {
   name: string;
   className?: string;
-  src?: string;
-  defaultSrc: string;
+  children: React.ReactNode;
 };
 
 export function ImagePreview({
   name,
-  src,
-  defaultSrc,
+  children,
   className,
 }: ImagePreviewProps) {
   const { control } = useFormContext();
@@ -20,11 +20,14 @@ export function ImagePreview({
   const { fileDataUrl } = useFileWatchSingle({ control, name });
 
   return (
-    <div className={className}>
-      <img
-        src={fileDataUrl || src || defaultSrc}
-        alt={fileDataUrl ? 'Preview' : 'Upload'}
-      />
+    <div className={`${styles.container} ${className || ''}`}>
+      {(fileDataUrl)
+        ? <img
+          src={fileDataUrl}
+          alt="Preview"
+        />
+        : children
+      }
     </div> 
-  )
+  );
 }

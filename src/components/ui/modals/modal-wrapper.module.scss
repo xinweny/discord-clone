@@ -27,7 +27,7 @@
 
     p {
       margin-top: 8px;
-      color: colors.$text-muted;
+      color: colors.$text-primary;
       font-size: 16px;
       line-height: 20px;
     }
@@ -50,7 +50,7 @@
       justify-content: flex-end;
 
       button {
-        width: 96px;
+        min-width: 96px;
         height: 36px;
         border-radius: 4px;
         display: flex;

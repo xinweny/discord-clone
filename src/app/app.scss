@@ -23,6 +23,11 @@ button {
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled, &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 strong {
