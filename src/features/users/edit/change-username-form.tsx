@@ -78,7 +78,11 @@ export function ChangeUsernameForm({
               name="username"
               rules={{ required: true, max: 32 }}
             />
-            <ErrorMessage name="username" validatedMsg="Username is available. Nice!" />
+            <ErrorMessage
+              name="username"
+              validatedMsg="Username is available. Nice!"
+              initialMsg="Please only use numbers, letters, underscores _, or periods."
+            />
           </FormGroup>
           <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
             <TextInput

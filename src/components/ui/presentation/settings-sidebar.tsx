@@ -1,3 +1,5 @@
+import styles from './settings-sidebar.module.scss';
+
 export type SettingsSidebarProps = {
   activeTabId: string;
   setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +14,7 @@ export function SettingsSidebar({
   children,
 }: SettingsSideBarWrapperProps) {
   return (
-    <div>
+    <div className={styles.container}>
       {children}
     </div>
   );
