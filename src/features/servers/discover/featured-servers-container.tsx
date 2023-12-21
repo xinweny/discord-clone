@@ -2,16 +2,18 @@ import { FeaturedServerCard } from './featured-server-card';
 
 import { useGetPublicServersQuery } from '../api';
 
+import compassFooterImg from '@assets/static/compass-footer.svg';
+
 import styles from './featured-servers-container.module.scss';
 
 type FeaturedServersContainerProps = {
-  query?: string;
+  containerRef: React.RefObject<HTMLDivElement>;
 };
 
 export function FeaturedServersContainer({
-  query = '',
+  containerRef,
 }: FeaturedServersContainerProps) {
-  const { data: servers } = useGetPublicServersQuery(query);
+  const { data: servers } = useGetPublicServersQuery('');
 
   return (
     <div className={styles.container}>
@@ -21,6 +23,16 @@ export function FeaturedServersContainer({
           key={server._id}
           server={server}
         />)}
+      </div>
+      <div className={styles.footer}>
+        <img src={compassFooterImg} />
+        <span>There are more communities out there!</span>
+        <div
+          role="button"
+          onClick={() => { containerRef.current?.scrollTo(0, 0); }}
+        >
+          Try searching for them.
+        </div>
       </div>
     </div>
   );

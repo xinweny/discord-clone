@@ -1,11 +1,17 @@
 import { FeaturedServersContainer } from './featured-servers-container';
 import { ServerSearchBanner } from './server-search-banner';
 
-export function DiscoverServersContainer() {
+type DiscoverServersContainerProps = {
+  containerRef: React.RefObject<HTMLDivElement>;
+};
+
+export function DiscoverServersContainer({
+  containerRef,
+}: DiscoverServersContainerProps) {
   return (
     <>
       <ServerSearchBanner />
-      <FeaturedServersContainer />
+      <FeaturedServersContainer containerRef={containerRef} />
     </>
   );
 }
