@@ -1,0 +1,17 @@
+@use '@styles/colors';
+
+.container {
+  h2 {
+    color: colors.$header-primary;
+    line-height: 24px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .list {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+    gap: 16px;
+  }
+}

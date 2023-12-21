@@ -34,7 +34,7 @@
   > div {
     display: flex;
     
-    input {
+    input:not([type="color"]) {
       flex-grow: 1;
       font-size: 16px;
       border: none;
