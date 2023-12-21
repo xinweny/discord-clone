@@ -13,7 +13,9 @@ type FeaturedServersContainerProps = {
 export function FeaturedServersContainer({
   containerRef,
 }: FeaturedServersContainerProps) {
-  const { data: servers } = useGetPublicServersQuery('');
+  const { data: servers } = useGetPublicServersQuery({
+    query: '',
+  });
 
   return (
     <div className={styles.container}>

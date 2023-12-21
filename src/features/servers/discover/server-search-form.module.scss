@@ -37,9 +37,27 @@
       }
     }
 
-    &[type="reset"] {
-      path {
-        stroke: colors.$interactive-normal;
+    div.reset {
+      width: 24px;
+      height: 24px;
+      border-radius: 24px;
+      background-color: colors.$bg-secondary;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: colors.$bg-tertiary;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+
+        path {
+          stroke: colors.$white;
+          stroke-width: 2px;
+        }
       }
     }
   }

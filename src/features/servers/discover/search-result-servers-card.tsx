@@ -3,6 +3,10 @@ import pluralize from 'pluralize';
 
 import type { PublicServerData } from '@features/servers/types';
 
+import { Gif, Acronym } from '@components/ui/media';
+
+import styles from './search-result-servers-card.module.scss';
+
 type SearchResultServersCardProps = {
   server: PublicServerData;
 };
@@ -15,14 +19,27 @@ export function SearchResultServersCard({
   const { avatarUrl, bannerUrl, name, description, memberCount, _id } = server;
 
   return (
-    <button onClick={() => { navigate(`/channels/${_id}`) }}>
-      <img src={bannerUrl} alt="Server banner" />
-      <div>
-        <img src={avatarUrl} alt="Server icon" />
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>{pluralize('Member', memberCount, true)}</p>
+    <div
+      className={styles.card}
+      onClick={() => { navigate(`/channels/${_id}`) }}
+      role="button"
+    >
+      <div className={styles.banner}>
+        {bannerUrl && <img src={bannerUrl} />}
       </div>
-    </button>
+      <div className={styles.info}>
+        <div className={styles.header}>
+          <div className={styles.avatar}>
+            {avatarUrl
+              ? <Gif src={avatarUrl} />
+              : <Acronym name={name} className={styles.acronym} />
+            }
+          </div>
+          <h2>{name}</h2>
+        </div>
+        <p>{description}</p>
+        <span>{pluralize('Member', memberCount, true).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+      </div>
+    </div>
   );
 }

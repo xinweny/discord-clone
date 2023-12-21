@@ -6,6 +6,7 @@ import type {
   PublicServerData,
   UserServerData,
   CreateServerFields,
+  GetPublicServersQuery,
 } from './types';
 import type { ApiPaginationData } from '@types';
 import { MemberStatusEvent } from '@features/members/types';
@@ -69,9 +70,14 @@ const serverApi = api.injectEndpoints({
           'JoinedServers',
         ],
       }),
-      getPublicServers: build.query<ApiPaginationData<PublicServerData>, string>({
-        query: (query) => ({
-          url: `/servers?query=${query}`,
+      getPublicServers: build.query<ApiPaginationData<PublicServerData>, GetPublicServersQuery>({
+        query: ({ query, page, limit }) => ({
+          url: '/servers',
+          params: {
+            query,
+            page,
+            limit,
+          },
           method: 'get',
         }),
       }),

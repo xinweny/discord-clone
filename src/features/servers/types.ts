@@ -35,3 +35,9 @@ export type EditServerFields = {
   avatar?: File;
   banner?: File;
 };
+
+export type GetPublicServersQuery = {
+  query: string;
+  page?: number;
+  limit?: number;
+};
