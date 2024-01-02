@@ -1,0 +1,46 @@
+@use '@styles/colors';
+
+.header {
+  text-align: left !important;
+}
+
+.content {
+  padding: 0px 8px 20px 16px;
+}
+
+.submit {
+  background-color: colors.$modal-footer-bg;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  button {
+    min-width: 96px;
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: colors.$white;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0px 16px;
+  
+    &:first-child {
+      margin-right: 8px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:last-child {
+      background-color: colors.$button-danger-bg;
+
+      &:hover {
+        background-color: colors.$button-danger-active;
+      }
+    }
+  }
+}

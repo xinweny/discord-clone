@@ -5,6 +5,8 @@ import type { ModalProps } from '@types';
 import { ModalHeader, ModalWrapper } from '.';
 import { FormGroup, Input } from '../forms';
 
+import styles from './confirmation-modal.module.scss';
+
 type ConfirmationModalProps = {
   title: string;
   message: string;
@@ -37,23 +39,30 @@ export function ConfirmationModal({
     <ModalWrapper
       isOpen={isOpen}
       closeModal={onClose}
-      header={<ModalHeader title={title} subtitle={message} />}
+      header={<ModalHeader
+        title={title}
+        subtitle={message}
+        alt
+        className={styles.header}
+      />}
       hasScroll={hasScroll}
     >
-      {confirmation && (
-        <FormGroup label={confirmation.label}>
-          <Input
-            name="confirmation"
-            type="text"
-            label={confirmation.label}
-            onChange={(e) => {
-              if (e.target.value === confirmation.value) setIsDisabled(false);
-            }}
-          />
-        </FormGroup>
-      )}
-      {children}
-      <div>
+      <div className="content">
+        {confirmation && (
+          <FormGroup label={confirmation.label}>
+            <Input
+              name="confirmation"
+              type="text"
+              label={confirmation.label}
+              onChange={(e) => {
+                if (e.target.value === confirmation.value) setIsDisabled(false);
+              }}
+            />
+          </FormGroup>
+        )}
+        {children}
+      </div>
+      <div className={styles.submit}>
         <button type="button" onClick={onClose}>Cancel</button>
         <button
           type="button"
