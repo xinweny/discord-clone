@@ -6,3 +6,4 @@ export * from './auth-layout';
 export * from './sidebar-layout';
 export * from './settings-layout';
 export * from './tab-group-layout';
+export * from './modal-form-layout';

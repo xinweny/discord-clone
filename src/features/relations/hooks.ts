@@ -47,8 +47,10 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
   }, [relations]);
 
   useEffect(() => {
-    if (query && relations.isSuccess) {
-      const q = query.toLowerCase();
+    if (!relations.isSuccess) return;
+
+    if (query) {
+      const q = query.trim().toLowerCase();
 
       setContacts(relations.data.filter((relation) => {
           const { username, displayName } = relation.user;
@@ -59,6 +61,8 @@ export const useContacts = (query: string, tab: ContactsTabs) => {
           );
         })
       );
+    } else {
+      setContacts(relations.data);
     }
   }, [query]);
 

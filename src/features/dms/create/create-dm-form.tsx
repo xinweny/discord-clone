@@ -105,7 +105,7 @@ export function CreateDmForm({
               participant={friend.user}
               name="participantIds"
             />)
-            : <NullMessage src={magnifyingGlass} message="No friends found." gap={20} />
+            : <NullMessage src={magnifyingGlass} message="No friends found." gap={20} className={styles.noResult} />
           }
         </div>
         <div className={styles.submitContainer}>

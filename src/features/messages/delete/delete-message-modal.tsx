@@ -37,6 +37,7 @@ export function DeleteMessageModal({
       onClose={onClose}
       onConfirm={onConfirm}
       confirmLabel="Delete"
+      hasScroll={false}
     >
       <DeleteMessagePreview />
       <DeleteMessageProtip />

@@ -42,8 +42,9 @@
   $bg-color: colors.$bg-secondary,
   $thumb-color: colors.$bg-tertiary,
   $width: 8px,
+  $overflow: scroll,
 ) {
-  overflow: hidden scroll;
+  overflow: hidden $overflow;
 
   &::-webkit-scrollbar {
     background-color: $bg-color;

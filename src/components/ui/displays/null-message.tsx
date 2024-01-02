@@ -5,16 +5,18 @@ type NullMessageProps = {
   header?: string;
   message: string;
   gap?: number;
+  className?: string;
 };
 
 export function NullMessage({
   header,
+  className,
   message,
   src,
   gap,
 }: NullMessageProps) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className || ''}`}>
       {src && (
         <div>
           <img src={src} style={{

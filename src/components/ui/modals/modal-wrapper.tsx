@@ -12,16 +12,20 @@ type ModalWrapperProps = {
   withClickAway?: boolean;
   className?: string;
   closeBtnRef?: React.RefObject<HTMLButtonElement>;
+  hasScroll?: boolean;
+  header: React.ReactNode;
 };
 
 export function ModalWrapper({
   isOpen,
   closeModal,
+  header,
   children,
   rootId,
   withClickAway = true,
   className,
   closeBtnRef,
+  hasScroll = true,
 }: ModalWrapperProps) {
   return (
     <PortalWrapper
@@ -30,8 +34,11 @@ export function ModalWrapper({
       close={closeModal}
       className={styles.container}
       withClickAway={withClickAway}
-      childOpts={{ className: `${styles.modal} ${className || ''}` }}
+      childOpts={{
+        className: `${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`,
+      }}
     >
+      {header}
       {children}
       {closeBtnRef && (
         <button ref={closeBtnRef} type="button" onClick={(e) => {

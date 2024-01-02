@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { ModalWrapper } from '@components/ui/modals';
+import { ModalHeader, ModalWrapper } from '@components/ui/modals';
 
 import { ChangeUsernameForm } from './change-username-form';
 
@@ -12,11 +12,16 @@ export function ChangeUsernameModal({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen} closeBtnRef={closeBtnRef}>
-      <header>
-        <h2>Change your username</h2>
-        <p>Enter a new username and your existing password.</p>
-      </header>
+    <ModalWrapper
+      closeModal={onClose}
+      isOpen={isOpen}
+      closeBtnRef={closeBtnRef}
+      header={<ModalHeader
+        title="Change your username"
+        subtitle="Enter a new username and your existing password."
+        alt
+      />}
+    >
       <ChangeUsernameForm closeBtnRef={closeBtnRef} />
     </ModalWrapper>
   );

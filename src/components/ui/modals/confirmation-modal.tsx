@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import type { ModalProps } from '@types';
 
-import { ModalWrapper } from '.';
+import { ModalHeader, ModalWrapper } from '.';
 import { FormGroup, Input } from '../forms';
 
 type ConfirmationModalProps = {
@@ -15,6 +15,7 @@ type ConfirmationModalProps = {
   };
   confirmLabel?: string;
   children?: React.ReactNode;
+  hasScroll?: boolean;
 } & ModalProps;
 
 export function ConfirmationModal({
@@ -26,15 +27,19 @@ export function ConfirmationModal({
   confirmation,
   confirmLabel,
   children,
+  hasScroll = true,
 }: ConfirmationModalProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(!!confirmation);
 
   if (!isOpen) return null;
 
   return (
-    <ModalWrapper isOpen={isOpen} closeModal={onClose}>
-      <h2>{title}</h2>
-      <p>{message}</p>
+    <ModalWrapper
+      isOpen={isOpen}
+      closeModal={onClose}
+      header={<ModalHeader title={title} subtitle={message} />}
+      hasScroll={hasScroll}
+    >
       {confirmation && (
         <FormGroup label={confirmation.label}>
           <Input

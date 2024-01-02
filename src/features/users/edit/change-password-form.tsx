@@ -5,6 +5,8 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editPasswordSchema } from '../schema';
 
+import { ModalFormLayout } from '@components/layouts';
+
 import { handleServerError } from '@utils';
 
 import {
@@ -73,8 +75,13 @@ export function ChangePasswordForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+      <ModalFormLayout
+        onSubmit={handleSubmit(onSubmit)}
+        submitComponent={<ResetSubmitButtons
+          submitLabel="Done"
+          closeBtnRef={closeBtnRef}
+        />}
+      >
           <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
             <TextInput
               type="password"
@@ -99,12 +106,7 @@ export function ChangePasswordForm({
               {...pwdProps}
             />
           </FormGroup>
-        </div>
-        <ResetSubmitButtons
-          submitLabel="Done"
-          closeBtnRef={closeBtnRef}
-        />
-      </form>
+      </ModalFormLayout>
     </FormProvider>
   );
 }

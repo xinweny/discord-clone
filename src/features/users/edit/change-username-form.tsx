@@ -5,6 +5,8 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editUsernameSchema } from '../schema';
 
+import { ModalFormLayout } from '@components/layouts';
+
 import { handleServerError } from '@utils';
 
 import {
@@ -69,36 +71,36 @@ export function ChangeUsernameForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <FormGroup label="username" htmlFor="username">
-            <TextInput
-              type="text"
-              id="username"
-              name="username"
-              rules={{ required: true, max: 32 }}
-            />
-            <ErrorMessage
-              name="username"
-              validatedMsg="Username is available. Nice!"
-              initialMsg="Please only use numbers, letters, underscores _, or periods."
-            />
-          </FormGroup>
-          <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
-            <TextInput
-              type="password"
-              id="current-password"
-              name="currentPassword"
-              rules={{ required: true }}
-              options={{ trim: false }}
-            />
-          </FormGroup>
-        </div>
-        <ResetSubmitButtons
+      <ModalFormLayout
+        onSubmit={handleSubmit(onSubmit)}
+        submitComponent={        <ResetSubmitButtons
           submitLabel="Done"
           closeBtnRef={closeBtnRef}
-        />
-      </form>
+        />}
+      >
+        <FormGroup label="username" htmlFor="username">
+          <TextInput
+            type="text"
+            id="username"
+            name="username"
+            rules={{ required: true, max: 32 }}
+          />
+          <ErrorMessage
+            name="username"
+            validatedMsg="Username is available. Nice!"
+            initialMsg="Please only use numbers, letters, underscores _, or periods."
+          />
+        </FormGroup>
+        <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
+          <TextInput
+            type="password"
+            id="current-password"
+            name="currentPassword"
+            rules={{ required: true }}
+            options={{ trim: false }}
+          />
+        </FormGroup>
+      </ModalFormLayout>
     </FormProvider>
   );
 }

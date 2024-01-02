@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { ModalWrapper } from '@components/ui/modals';
+import { ModalHeader, ModalWrapper } from '@components/ui/modals';
 
 import { ChangePasswordForm } from './change-password-form';
 
@@ -12,11 +12,16 @@ export function ChangePasswordModal({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen} closeBtnRef={closeBtnRef}>
-      <header>
-        <h2>Update your password</h2>
-        <p>Enter your current password and a new password.</p>
-      </header>
+    <ModalWrapper
+      closeModal={onClose}
+      isOpen={isOpen}
+      closeBtnRef={closeBtnRef}
+      header={<ModalHeader
+        title="Update your password"
+        subtitle="Enter your current password and a new password."
+        alt
+      />}
+    >
       <ChangePasswordForm closeBtnRef={closeBtnRef} />
     </ModalWrapper>
   );
