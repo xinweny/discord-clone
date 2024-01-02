@@ -7,14 +7,18 @@ import { useGetUserData } from '@features/auth/hooks';
 import { useGetUserServerMemberQuery } from '../api';
 import { useJoinServerMutation } from '../api';
 
+import styles from './join-server-button.module.scss';
+
 type JoinServerButtonProps = {
   children: React.ReactNode;
   serverId: string;
+  className?: string;
 };
 
 export function JoinServerButton({
   children,
   serverId,
+  className,
 }: JoinServerButtonProps) {
   const { user } = useGetUserData();
 
@@ -41,7 +45,7 @@ export function JoinServerButton({
   };
 
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} className={`${styles.button} ${member && styles.joined} ${className || ''}`}>
       {member ? 'Joined' : children}
     </button>
   );

@@ -43,6 +43,8 @@ $yellow-300: hsl(40 calc($saturation-factor * 86.4%) 56.9%);
 $red-345: hsl(358 calc($saturation-factor * 92.9%) 72.4%);
 
 $green-330: hsl(146 calc($saturation-factor * 63.1%) 47.8%);
+$green-430: hsl(142 calc($saturation-factor * 56.1%) 32.2%);
+$green-530: hsl(140 calc($saturation-factor * 60.7%) 21%);
 
 $bg-primary: $primary-600;
 $bg-secondary: $primary-630;
@@ -57,7 +59,7 @@ $bg-modifier-active: functions.hslac($primary-500, 0.48);
 $bg-modifier-hover: functions.hslac($primary-500, 0.3);
 $bg-modifier-selected: functions.hslac($primary-500, 0.6);
 $bg-modifier-accent: $bg-modifier-active;
-$bg-modifier-darken: darken($primary-600, 2%);
+$bg-modifier-darken: darken($primary-600, 1%);
 
 $header-primary: $primary-130;
 $header-secondary: $primary-330;
@@ -78,6 +80,8 @@ $icon-primary: $primary-400;
 
 $button-secondary-bg: $primary-500;
 $button-secondary-hover: $primary-430;
+$button-positive-bg: $green-430;
+$button-positive-active: $green-530;
 
 $modal-footer-bg: $primary-630;
 

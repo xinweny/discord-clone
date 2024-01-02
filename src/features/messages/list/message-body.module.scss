@@ -14,5 +14,9 @@
 
   a {
     color: colors.$text-link;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

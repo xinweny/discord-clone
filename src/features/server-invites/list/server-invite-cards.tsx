@@ -6,6 +6,8 @@ import { getServerInviteLinks, getUrlId } from '../utils';
 
 import { ServerInviteCard } from './server-invite-card';
 
+import styles from './server-invite-cards.module.scss';
+
 type ServerInviteCardsProps = {
   message: MessageData;
   isDm: boolean;
@@ -22,14 +24,14 @@ export function ServerInviteCards({ message, isDm }: ServerInviteCardsProps) {
   if (!links || links.length === 0) return null;
 
   return (
-    <div>
+    <div className={styles.container}>
       {[...new Set(links)].map(link => {
         const urlId = getUrlId(link);
 
         return <ServerInviteCard
           key={urlId}
           urlId={urlId}
-          senderName={senderId === user.data!._id
+          senderName={senderId === user.data!.id
             ? undefined
             : senderName}
         />;

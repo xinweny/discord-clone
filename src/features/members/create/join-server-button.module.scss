@@ -1,0 +1,7 @@
+@use '@styles/colors';
+
+.button {
+  &.joined {
+    background-color: colors.$button-positive-active;
+  }
+}
