@@ -8,7 +8,8 @@ import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentati
 import { LogoutButton } from '@features/auth/logout';
 
 export function UserSettingsSidebar({
-  activeTabId, setActiveTabId
+  activeTabId,
+  setActiveTabId,
 }: SettingsSidebarProps) {
   return (
     <SettingsSidebar>

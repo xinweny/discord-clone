@@ -8,7 +8,10 @@ type TabItemButtonProps = {
 };
 
 export function TabItemButton({
-  tabId, activeTabId, setActiveTabId, children
+  tabId,
+  activeTabId,
+  setActiveTabId,
+  children,
 }: TabItemButtonProps) {
   const className = `${styles.button} ${activeTabId === tabId ? styles.active : ''}`;
 

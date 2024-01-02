@@ -10,7 +10,7 @@ type SidebarLayoutProps = {
 };
 
 export function SidebarLayout({
-  top, children, handleScroll, scrollerRef
+  top, children, handleScroll, scrollerRef,
 }: SidebarLayoutProps) {
   return (
     <nav className={styles.layout}>

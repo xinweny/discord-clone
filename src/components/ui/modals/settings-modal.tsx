@@ -32,6 +32,11 @@ export function SettingsModal({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const [activeTabId, setActiveTabId] = useState<string>(initialTabId);
 
+  const handleClose = () => {
+    onClose();
+    setActiveTabId(initialTabId);
+  };
+
   const SettingsSidebar = sidebar;
   const FormScreen = content;
 
@@ -44,7 +49,7 @@ export function SettingsModal({
       },
     }}>
       <PortalWrapper
-        close={onClose}
+        close={handleClose}
         isOpen={isOpen}
         rootId="settings-root"
         withClickAway={false}
@@ -54,7 +59,7 @@ export function SettingsModal({
             activeTabId={activeTabId}
             setActiveTabId={setActiveTabId}
           />}
-          close={onClose}
+          close={handleClose}
           closeBtnRef={closeBtnRef}
         >
           <FormScreen activeTabId={activeTabId} />

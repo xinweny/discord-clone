@@ -25,7 +25,7 @@ export function UserPanel() {
         <Avatar
           src={avatarUrl}
           notification={<UserStatusIcon
-            userId={user.data!._id}
+            userId={user.data!.id}
           />}
         />
         <div>

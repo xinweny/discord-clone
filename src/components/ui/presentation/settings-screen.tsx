@@ -12,20 +12,18 @@ type SettingsScreenProps = {
 };
 
 export function SettingsScreen({ activeTabId, tabs }: SettingsScreenProps) {
+  const tab = tabs.find(t => activeTabId === t.id);
+
+  if (!tab) return null;
+
+  const SettingsForm = tab.component;
+
   return (
     <div className={styles.wrapper}>
-      {tabs.map(tab => {
-        if (activeTabId !== tab.id) return null;
-
-        const SettingsForm = tab.component;
-
-        return (
-          <div key={tab.id}>
-            <h2>{tab.label}</h2>
-            <SettingsForm />
-          </div>
-        );
-      })}
+      <div key={tab.id}>
+        <h2>{tab.label}</h2>
+        <SettingsForm />
+      </div>
     </div>
   );
 }
