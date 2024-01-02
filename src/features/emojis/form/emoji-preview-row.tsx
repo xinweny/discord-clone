@@ -22,7 +22,7 @@ export function EmojiPreviewRow({ emoji }: EmojiPreviewRowProps) {
       onMouseLeave={() => { setIsHovered(false); }}
     >
       <td>
-        <Emoji src={url} />
+        <Emoji emoji={url} custom />
       </td>
       <td>
         <EditEmojiButton emoji={emoji} />
