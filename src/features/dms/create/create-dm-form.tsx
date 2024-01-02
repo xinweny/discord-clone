@@ -23,6 +23,8 @@ import { RemoveParticipantButtons } from './remove-participant-buttons';
 
 import { useCreateDmMutation } from '../api';
 
+import magnifyingGlass from '@assets/static/magnifying-glass.svg';
+
 import styles from './create-dm-form.module.scss';
 
 const MAX_PARTICIPANTS = 10;
@@ -103,7 +105,7 @@ export function CreateDmForm({
               participant={friend.user}
               name="participantIds"
             />)
-            : <NullMessage src="#" message="No friends found." />
+            : <NullMessage src={magnifyingGlass} message="No friends found." gap={20} />
           }
         </div>
         <div className={styles.submitContainer}>

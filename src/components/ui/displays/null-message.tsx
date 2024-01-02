@@ -4,16 +4,22 @@ type NullMessageProps = {
   src?: string;
   header?: string;
   message: string;
+  gap?: number;
 };
 
 export function NullMessage({
-  header, message, src
+  header,
+  message,
+  src,
+  gap,
 }: NullMessageProps) {
   return (
     <div className={styles.container}>
       {src && (
         <div>
-          <img src={src} />
+          <img src={src} style={{
+            marginBottom: `${gap || 40}px`,
+          }}/>
         </div>
       )}
       {header && <h3>{header.toUpperCase()}</h3>}
