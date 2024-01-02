@@ -5,13 +5,18 @@ import { useServerMemberContext } from '@features/members/context';
 import { useServerAuthorize } from '@features/servers/hooks';
 
 import { Dropdown, DropdownItem } from '@components/ui/dropdowns';
-import { LabelAndIcon } from '@components/ui/presentation';
 
 import { CreateChannelButton } from '@features/channels/create';
 import { CreateCategoryButton } from '@features/categories/create';
 import { ServerSettingsButton } from '../settings';
 import { LeaveServerButton } from '@features/members/delete';
 import { InviteFriendsButton } from '@features/members/create';
+
+import AddUserIcon from '@assets/icons/add-user.svg?react';
+import PlusCircle from '@assets/icons/plus-circle.svg?react';
+import AddFolderIcon from '@assets/icons/add-folder.svg?react';
+import GearIcon from '@assets/icons/gear.svg?react';
+import LeaveIcon from '@assets/icons/leave.svg?react';
 
 export function ServerDropdownMenu() {
   const createChannelBtnRef = useRef<HTMLButtonElement>(null);
@@ -30,32 +35,34 @@ export function ServerDropdownMenu() {
       <Dropdown>
         <DropdownItem
           clickRef={inviteFriendsBtnRef}
-        >
-          <LabelAndIcon label="Invite People" icon="#" />
-        </DropdownItem>
+          label="Invite People"
+          color="blue"
+          icon={<AddUserIcon />}
+        />
         <DropdownItem
           clickRef={createChannelBtnRef}
           authorized={authorized}
-        >
-          <LabelAndIcon label="Create Channel" icon="#" />
-        </DropdownItem>
+          label="Create Channel"
+          icon={<PlusCircle />}
+        />
         <DropdownItem
           clickRef={createCategoryBtnRef}
           authorized={authorized}
-        >
-          <LabelAndIcon label="Create Category" icon="#" />
-        </DropdownItem>
+          label="Create Category"
+          icon={<AddFolderIcon />}
+        />
         <DropdownItem
           clickRef={serverSettingsBtnRef}
           authorized={authorized}
-        >
-          <LabelAndIcon label="Server Settings" icon="#" />
-        </DropdownItem>
+          label="Server Settings"
+          icon={<GearIcon />}
+        />
         <DropdownItem
           clickRef={leaveServerBtnRef}
-        >
-          <LabelAndIcon label="Leave Server" icon="#" />
-        </DropdownItem>
+          label="Leave Server"
+          icon={<LeaveIcon />}
+          color="red"
+        />
       </Dropdown>
       <>
         <CreateChannelButton btnRef={createChannelBtnRef} hidden />

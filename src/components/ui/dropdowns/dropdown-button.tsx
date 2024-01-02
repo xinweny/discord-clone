@@ -2,6 +2,11 @@ import { useContext } from 'react';
 
 import { DropdownContext } from '.';
 
+import ChevronIcon from '@assets/icons/chevron.svg?react';
+import CrossIcon from '@assets/icons/cross.svg?react';
+
+import styles from './dropdown-button.module.scss';
+
 type DropdownButtonProps = {
   children?: React.ReactNode;
   openComponent?: React.ReactNode;
@@ -16,11 +21,11 @@ export function DropdownButton({
   const { isOpen, toggle } = useContext(DropdownContext)!;
 
   const toggleIcon = isOpen
-    ? closeComponent || <img src="#" alt="Close dropdown" />
-    : openComponent || <img src="#" alt="Open dropdown" />;
+    ? closeComponent || <CrossIcon className={styles.icon} />
+    : openComponent || <ChevronIcon className={styles.icon} />;
 
   return (
-    <button onClick={toggle}>
+    <button onClick={toggle} className={styles.button}>
       {children || toggleIcon}
     </button>
   );

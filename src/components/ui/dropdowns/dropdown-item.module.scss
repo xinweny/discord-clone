@@ -1,0 +1,49 @@
+@use '@styles/colors';
+
+.item {
+  height: 32px;
+  margin: 2px 0px;
+  display: flex;
+
+  button {
+    flex-grow: 1;
+    padding: 6px 8px;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: colors.$interactive-normal;
+    font-weight: 500;
+    font-size: 14px;
+
+    &:hover {
+      color: colors.$white;
+      background-color: colors.$blurple;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &.red {
+      color: colors.$red;
+
+      &:hover {
+        color: colors.$white;
+        background-color: colors.$red;
+      }
+    }
+
+    &.blue {
+      color: colors.$blurple;
+
+      &:hover {
+        color: colors.$white;
+        background-color: colors.$blurple;
+      }
+    }
+  }
+}
