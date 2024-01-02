@@ -1,3 +1,5 @@
+import styles from './fieldset.module.scss';
+
 type FieldSetGroupProps = {
   legend: string;
   children: React.ReactNode;
@@ -5,9 +7,9 @@ type FieldSetGroupProps = {
 
 export function Fieldset({ legend, children }: FieldSetGroupProps) {
   return (
-    <fieldset>
+    <fieldset className={styles.fieldset}>
       <legend>{legend.toUpperCase()}</legend>
-      <div>
+      <div className={styles.options}>
         {children}
       </div>
     </fieldset>

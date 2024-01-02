@@ -2,6 +2,9 @@ import { Fieldset, RadioInput } from '@components/ui/forms';
 
 import { ChannelTypeInputWrapper } from './channel-type-input-wrapper';
 
+import HashIcon from '@assets/icons/hash.svg?react';
+import SpeakerIcon from '@assets/icons/speaker.svg?react';
+
 export function ChannelTypeFieldset() {
   return (
     <Fieldset legend="channel type">
@@ -12,13 +15,10 @@ export function ChannelTypeFieldset() {
           value="text"
           label="Channel Type"
         />}
-      >
-      <img src="#" alt="" />
-      <div>
-        <p>Text</p>
-        <p>Send messages, images, GIFs, opinions and puns</p>
-      </div>
-    </ChannelTypeInputWrapper>
+        icon={<HashIcon />}
+        label="Text"
+        description="Send messages, images, GIFs, opinions and puns"
+      />
     <ChannelTypeInputWrapper
       value="voice"
       radioInput={<RadioInput
@@ -26,13 +26,10 @@ export function ChannelTypeFieldset() {
         value="voice"
         label="Channel Type"
       />}
-    >
-      <img src="#" alt="" />
-      <div>
-        <p>Voice</p>
-        <p>Hang out together with voice, video and screen share</p>
-      </div>
-    </ChannelTypeInputWrapper>
+      icon={<SpeakerIcon />}
+      label="Voice"
+      description="Hang out together with voice, video and screen share"
+    />
   </Fieldset>
   );
 }

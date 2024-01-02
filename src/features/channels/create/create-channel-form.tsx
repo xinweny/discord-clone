@@ -6,7 +6,7 @@ import { ChannelTypes, type CreateChannelFields } from '../types';
 
 import { createChannelSchema } from '../schema';
 
-import { ResetSubmitButtons } from '@components/ui/forms';
+import { ResetSubmitButtons, ModalForm } from '@components/ui/forms';
 
 import { useCreateChannelMutation } from '../api';
 
@@ -52,11 +52,16 @@ export function CreateChannelForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <ModalForm
+        onSubmit={handleSubmit(onSubmit)}
+        submitComponent={<ResetSubmitButtons
+          closeBtnRef={closeBtnRef}
+          submitLabel="Create Channel"
+        />}
+      >
         <ChannelTypeFieldset />
         <CreateChannelNameInput />
-        <ResetSubmitButtons closeBtnRef={closeBtnRef} submitLabel="Create Channel" />
-      </form>
+      </ModalForm>
     </FormProvider>
   );
 }

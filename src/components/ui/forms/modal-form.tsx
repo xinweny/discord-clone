@@ -1,16 +1,16 @@
-import styles from './modal-form-layout.module.scss';
+import styles from './modal-form.module.scss';
 
-type ModalFormLayoutProps = {
+type ModalFormProps = {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   children: React.ReactNode;
   submitComponent?: React.ReactNode;
 };
 
-export function ModalFormLayout({
+export function ModalForm({
   onSubmit,
   children,
   submitComponent,
-}: ModalFormLayoutProps) {
+}: ModalFormProps) {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.content}>

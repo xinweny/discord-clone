@@ -14,3 +14,4 @@ export * from './reset-submit-buttons';
 export * from './input';
 export * from './submitted-message';
 export * from './search-input';
+export * from './modal-form';

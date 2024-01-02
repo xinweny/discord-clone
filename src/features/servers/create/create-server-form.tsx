@@ -12,6 +12,7 @@ import {
   FileInput,
   FormGroup,
   ResetSubmitButtons,
+  ModalForm,
 } from '@components/ui/forms';
 
 import { ImagePreview } from '@components/ui/media';
@@ -60,36 +61,36 @@ export function CreateServerForm({ closeBtnRef }: CreateServerFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.section}>
-          <label htmlFor="upload" className={styles.imageUpload}>
-            <ImagePreview name="file">
-              <ImageUploadIcon />
-            </ImagePreview>
-            <FileInput
-              id="upload"
-              name="file"
-              accept="image/*"
-              label="Upload"
-              hidden
-            />
-          </label>
-          <FormGroup label="server's name" htmlFor="server-name">
-            <TextInput
-              type="text"
-              name="name"
-              id="server-name"
-              label="Server's name"
-              maxLength={100}
-              rules={{ required: true }}
-            />
-          </FormGroup>
-        </div>
-        <ResetSubmitButtons
+      <ModalForm
+        onSubmit={handleSubmit(onSubmit)}
+        submitComponent={<ResetSubmitButtons
           submitLabel="Create"
           closeBtnRef={closeBtnRef}
-        />
-      </form>
+        />}
+      >
+        <label htmlFor="upload" className={styles.imageUpload}>
+          <ImagePreview name="file">
+            <ImageUploadIcon />
+          </ImagePreview>
+          <FileInput
+            id="upload"
+            name="file"
+            accept="image/*"
+            label="Upload"
+            hidden
+          />
+        </label>
+        <FormGroup label="server's name" htmlFor="server-name">
+          <TextInput
+            type="text"
+            name="name"
+            id="server-name"
+            label="Server's name"
+            maxLength={100}
+            rules={{ required: true }}
+          />
+        </FormGroup>
+      </ModalForm>
     </FormProvider>
   );
 }

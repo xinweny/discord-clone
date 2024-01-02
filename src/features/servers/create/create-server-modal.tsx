@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { ModalWrapper } from '@components/ui/modals';
+import { ModalHeader, ModalWrapper } from '@components/ui/modals';
 
 import { CreateServerForm } from './create-server-form';
 
@@ -12,11 +12,16 @@ export function CreateServerModal({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <ModalWrapper closeModal={onClose} isOpen={isOpen} closeBtnRef={closeBtnRef}>
-      <header>
-        <h2>Create a server</h2>
-        <p>Your server is where you and your friends hang out. Make yours and start talking.</p>
-      </header>
+    <ModalWrapper
+      closeModal={onClose}
+      isOpen={isOpen}
+      closeBtnRef={closeBtnRef}
+      header={<ModalHeader
+        title="Create a server"
+        subtitle="Your server is where you and your friends hang out. Make yours and start talking."
+        alt
+      />}
+    >
       <CreateServerForm closeBtnRef={closeBtnRef} />
     </ModalWrapper>
   );

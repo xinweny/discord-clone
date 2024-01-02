@@ -5,7 +5,7 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editUsernameSchema } from '../schema';
 
-import { ModalFormLayout } from '@components/layouts';
+import { ModalForm } from '@components/ui/forms';
 
 import { handleServerError } from '@utils';
 
@@ -71,7 +71,7 @@ export function ChangeUsernameForm({
 
   return (
     <FormProvider {...methods}>
-      <ModalFormLayout
+      <ModalForm
         onSubmit={handleSubmit(onSubmit)}
         submitComponent={        <ResetSubmitButtons
           submitLabel="Done"
@@ -100,7 +100,7 @@ export function ChangeUsernameForm({
             options={{ trim: false }}
           />
         </FormGroup>
-      </ModalFormLayout>
+      </ModalForm>
     </FormProvider>
   );
 }

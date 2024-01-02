@@ -26,15 +26,15 @@
 
   > button {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 16px;
+    right: 16px;
 
     svg {
       width: 24px;
       height: 24px;
 
       path {
-        stroke: colors.$interactive-normal;
+        stroke: colors.$text-muted;
       }
 
       &:hover {

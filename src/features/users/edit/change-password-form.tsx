@@ -5,7 +5,7 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editPasswordSchema } from '../schema';
 
-import { ModalFormLayout } from '@components/layouts';
+import { ModalForm } from '@components/ui/forms';
 
 import { handleServerError } from '@utils';
 
@@ -75,7 +75,7 @@ export function ChangePasswordForm({
 
   return (
     <FormProvider {...methods}>
-      <ModalFormLayout
+      <ModalForm
         onSubmit={handleSubmit(onSubmit)}
         submitComponent={<ResetSubmitButtons
           submitLabel="Done"
@@ -106,7 +106,7 @@ export function ChangePasswordForm({
               {...pwdProps}
             />
           </FormGroup>
-      </ModalFormLayout>
+      </ModalForm>
     </FormProvider>
   );
 }
