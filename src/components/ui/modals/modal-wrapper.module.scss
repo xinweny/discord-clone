@@ -16,9 +16,9 @@
   overflow: hidden;
   background-color: colors.$bg-primary;
   position: relative;
-  width: 440px;
+  width: 460px;
   flex-shrink: 1;
-  max-height: 460px;
+  max-height: 482px;
 
   &.scroll {
     @include mixins.scroller(transparent, colors.$bg-tertiary, 4px, auto);

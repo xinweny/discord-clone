@@ -18,6 +18,8 @@ export type TextInputProps<
   options?: {
     trim?: boolean;
   };
+  before?: React.ReactNode;
+  after?: React.ReactNode;
 } & Omit<InputProps, 'name' | 'id' | 'ariaLabel'>;
 
 export function TextInput<TFormValues extends FieldValues>({
@@ -28,6 +30,8 @@ export function TextInput<TFormValues extends FieldValues>({
   options = {
     trim: true,
   },
+  before,
+  after,
   ...props
 }: TextInputProps<TFormValues>) {
   const { register, setValue, control } = useFormContext();
@@ -37,6 +41,7 @@ export function TextInput<TFormValues extends FieldValues>({
 
   return (
     <div className={className} aria-live="polite">
+      {before}
       <Input
         id={id}
         value={text}
@@ -51,6 +56,7 @@ export function TextInput<TFormValues extends FieldValues>({
           ...rules,
         }))}
       />
+      {after}
     </div>
   );
 }

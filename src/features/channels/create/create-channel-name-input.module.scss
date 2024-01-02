@@ -1,0 +1,27 @@
+@use '@styles/colors';
+
+.input {
+  background-color: colors.$bg-tertiary;
+  border-radius: 4px;
+
+  input {
+    padding-left: 0px !important;
+  }
+
+  .icon {
+    padding: 10px;
+    padding-right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 16px;
+      height: 16px;
+  
+      path {
+        fill: colors.$white;
+      }
+    }
+  }
+}

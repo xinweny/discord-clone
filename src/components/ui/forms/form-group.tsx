@@ -9,6 +9,7 @@ type FormGroupProps = {
   showError?: boolean;
   required?: boolean;
   name?: string;
+  className?: string;
 };
 
 export function FormGroup({
@@ -17,13 +18,14 @@ export function FormGroup({
   name,
   required = false,
   children,
+  className,
 }: FormGroupProps) {
   const { formState } = useFormContext();
 
   const error = name ? formState.errors[name] : undefined;
 
   return (
-    <div className={styles.group}>
+    <div className={`${styles.group} ${className || ''}`}>
       <label htmlFor={htmlFor} className={error && styles.error}>
         <h2 className={styles.label}>{label.toUpperCase()}</h2>
         <span className={styles.errorMessage}>
