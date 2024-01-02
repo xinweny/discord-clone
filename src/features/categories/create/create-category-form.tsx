@@ -4,7 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { createCategorySchema } from '../schema';
 
-import { CreateCategoryFields } from '../types';
+import type { CreateCategoryFields } from '../types';
+
+import { ModalForm } from '@components/ui/forms';
 
 import {
   FormGroup,
@@ -38,8 +40,14 @@ export function CreateCategoryForm({ closeBtnRef }: CreateCategoryFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormGroup label="channel name" htmlFor="channel-name">
+      <ModalForm
+        onSubmit={handleSubmit(onSubmit)}
+        submitComponent={<ResetSubmitButtons
+          closeBtnRef={closeBtnRef}
+          submitLabel="Create Category"
+        />}
+      >
+        <FormGroup label="category name" htmlFor="category-name">
           <TextInput
             name="name"
             label="Category Name"
@@ -48,8 +56,7 @@ export function CreateCategoryForm({ closeBtnRef }: CreateCategoryFormProps) {
             maxLength={100}
           />
         </FormGroup>
-        <ResetSubmitButtons closeBtnRef={closeBtnRef} submitLabel="Create Category" />
-      </form>
+      </ModalForm>
     </FormProvider>
   );
 }
