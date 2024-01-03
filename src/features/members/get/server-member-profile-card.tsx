@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
@@ -5,10 +6,12 @@ import { ServerMemberData } from '../types';
 
 import { ServerMemberContext } from '../context';
 
-import { Avatar, ColorBanner } from '@components/ui/media';
+import { Avatar, ColorBanner, Acronym } from '@components/ui/media';
+import { Separator } from '@components/ui/displays';
 
 import { ServerMemberRolesList } from '@features/member-roles/list';
 import { UserStatusIcon } from '@features/users/status';
+import { UserProfileButton } from '@features/users/get';
 
 import { useGetServerQuery } from '@features/servers/api';
 
@@ -21,6 +24,8 @@ type ServerMemberProfileCardProps = {
 export function ServerMemberProfileCard({
   member,
 }: ServerMemberProfileCardProps) {
+  const [hidden, setHidden] = useState<boolean>(false);
+
   const { serverId } = useParams();
 
   const { data: server } = useGetServerQuery(serverId!);
@@ -28,41 +33,54 @@ export function ServerMemberProfileCard({
   const { bio, createdAt, user, displayName, bannerColor, userId } = member;
   const { avatarUrl, username } = user;
 
-  const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL yyyy');
+  const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL, yyyy');
 
   return (
     <ServerMemberContext.Provider value={member}>
-      <div className={styles.card}>
+      <div className={styles.card} hidden={hidden}>
         <ColorBanner color={bannerColor} height={60} className={styles.banner}>
-          <button>
-            <Avatar
-              src={avatarUrl}
-              notification={<UserStatusIcon userId={userId} />}
-            />
-          </button>
+          <UserProfileButton
+            userId={userId}
+            onOpen={() => { setHidden(true); }}
+          >
+            <div className={styles.wrapper}>
+              <Avatar
+                src={avatarUrl}
+                notification={<UserStatusIcon userId={userId} />}
+              />
+            </div>
+          </UserProfileButton>
         </ColorBanner>
         <div className={styles.content}>
-          <div>
-            <h3>{displayName}</h3>
-            <p>{username}</p>
+          <div className={styles.header}>
+            <h1>{displayName}</h1>
+            <span>{username}</span>
           </div>
-          {bio && <div>
-            <p>ABOUT ME</p>
-            <p>{bio}</p>
-          </div>}
-          <p>MEMBER SINCE</p>
-          <div>
+          <Separator className={styles.separator} />
+          {bio && (<>
+            <div className={styles.section}>
+              <h3>ABOUT ME</h3>
+              <p>{bio}</p>
+            </div>
+          </>)}
+          <div className={styles.section}>
+            <h3>MEMBER SINCE</h3>
             <div>
               <img src="#" alt="Discord Clone" />
-              <p>{joinedDate(user.createdAt)}</p>
+              <span>{joinedDate(user.createdAt)}</span>
             </div>
+            <Separator className={styles.divider} />
             <div>
-              <Avatar src={server!.avatarUrl} />
-              <p>{joinedDate(createdAt)}</p>
+              {server!.avatarUrl
+                ? <Avatar src={server!.avatarUrl} />
+                : <Acronym name={server!.name} />}
+              <span>{joinedDate(createdAt)}</span>
             </div>
           </div>
+          <div className={styles.section}>
+            <ServerMemberRolesList memberId={member._id} />
+          </div>
         </div>
-        <ServerMemberRolesList memberId={member._id} />
       </div>
     </ServerMemberContext.Provider>
   );

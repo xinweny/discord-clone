@@ -9,8 +9,95 @@
   .banner {
     position: relative;
 
-    > button {
+    button {
+      position: absolute;
+      top: 12px;
+      left: 16px;
 
+      .wrapper {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border: 4px solid colors.$bg-secondary-alt;
+        border-radius: 40px;
+  
+        &::after {
+          display: none;
+          position: absolute;
+          content: 'VIEW PROFILE';
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: colors.$white;
+          font-weight: 600;
+          font-size: 10px;
+        }
+    
+        > svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &:hover {
+        .wrapper::after {
+          display: block;
+        }
+
+        foreignObject {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .content {
+    margin: 16px;
+    margin-top: 54px;
+    border-radius: 8px;
+    background-color: colors.$bg-floating;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+
+    h1, h3 {
+      color: colors.$header-primary;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+
+    span, p {
+      color: colors.$text-primary;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .header {
+      h1 {
+        word-break: break-word;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    .separator {
+      margin-top: 8px;
+      margin-bottom: 4px;
+      border-top: 1px solid colors.$bg-modifier-accent;
+    }
+
+    .section {
+      padding-top: 12px;
+
+      h3 {
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
     }
   }
 }

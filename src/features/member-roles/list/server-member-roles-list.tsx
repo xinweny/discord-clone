@@ -24,11 +24,11 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
 
   return (
     <div>
-      <p><strong>{
+      <h3>{
         customRoles.length > 0
           ? pluralize('ROLE', customRoles.length)
           : 'NO ROLES'
-      }</strong></p>
+      }</h3>
       <div>
         {customRoles.map(role => (
           <ServerMemberRoleCard

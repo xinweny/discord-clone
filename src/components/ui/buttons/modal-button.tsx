@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useModal } from '@components/hooks';
 
 import type { ModalProps } from '@types';
@@ -12,6 +13,7 @@ export type ModalButtonProps = {
 type FullModalButtonProps<TModalProps> = {
   modalProps?: TModalProps;
   modal: React.FC<ModalProps>;
+  onOpen?: () => void;
 } & ModalButtonProps;
 
 export function ModalButton<TModalProps>({
@@ -19,11 +21,16 @@ export function ModalButton<TModalProps>({
   btnRef,
   modal,
   modalProps,
+  onOpen,
   ...props
 }: FullModalButtonProps<TModalProps>) {
   const [show, toggle] = useModal();
 
   const Modal = modal;
+
+  useEffect(() => {
+    if (show && onOpen) onOpen();
+  }, [show]);
 
   return (
     <>

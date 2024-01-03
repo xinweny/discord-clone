@@ -13,7 +13,7 @@ type ModalWrapperProps = {
   className?: string;
   closeBtnRef?: React.RefObject<HTMLButtonElement>;
   hasScroll?: boolean;
-  header: React.ReactNode;
+  header?: React.ReactNode;
 };
 
 export function ModalWrapper({

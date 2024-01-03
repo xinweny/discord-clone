@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import type { ServerMemberMainData } from '../types';
 
 import { ClickPopup, Tooltip } from '@components/ui/popups';
@@ -24,6 +26,8 @@ export function ServerMemberCard({
 }: ServerMemberCardProps) {
   const [getServerMember] = useLazyGetServerMemberQuery();
 
+  const btnRef = useRef<HTMLButtonElement>(null);
+
   const renderPopup = async () => {
     const serverMember = await getServerMember({
       serverId,
@@ -32,7 +36,9 @@ export function ServerMemberCard({
 
     if (!serverMember) return null;
 
-    return <ServerMemberProfileCard member={serverMember} />;
+    return <ServerMemberProfileCard
+      member={serverMember}
+    />;
   };
 
   return (
@@ -43,6 +49,7 @@ export function ServerMemberCard({
         align: 'start',
         gap: 16,
       }}
+      btnRef={btnRef}
     >
       <div className={styles.card} role="button">
         <Avatar src={member.user.avatarUrl} />
