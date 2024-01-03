@@ -3,14 +3,15 @@ import pluralize from 'pluralize';
 import { RelationStatus } from '../types';
 
 import { Separator } from '@components/ui/displays';
-import { Acronym, Avatar } from '@components/ui/media';
+
+import { ServerAvatar } from '@features/servers/get';
 
 import { SendFriendRequestButton, ToggleBlockButton } from '../create';
+import { RemoveRelationButton } from '../delete';
 
 import { useGetMutualServersQuery, useGetRelationsQuery } from '../api';
 
 import styles from './relation-options-bar.module.scss';
-import { RemoveRelationButton } from '../delete';
 
 type RelationOptionsBarProps = {
   senderId: string;
@@ -34,10 +35,7 @@ export function RelationOptionsBar({
       {(mutualServers && mutualServers.length > 0) && <>
         <div>
           <div className={styles.mutualServersList}>
-            {mutualServers.map(server => server.avatarUrl
-              ? <Avatar src={server.avatarUrl} />
-              : <Acronym name={server.name} />  
-            )}
+            {mutualServers.map(server => <ServerAvatar server={server} />)}
           </div>
           <span>{pluralize('Mutual Server', mutualServers.length, true)}</span>
         </div>

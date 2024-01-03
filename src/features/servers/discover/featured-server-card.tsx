@@ -3,8 +3,7 @@ import pluralize from 'pluralize';
 
 import type { PublicServerData } from '../types';
 
-import { Gif } from '@components/ui/media';
-import { Acronym } from '@components/ui/media';
+import { ServerAvatar } from '../get';
 
 import styles from './featured-server-card.module.scss';
 
@@ -20,7 +19,6 @@ export function FeaturedServerCard({ server }: FeaturedServerCardProps) {
     name,
     description,
     bannerUrl,
-    avatarUrl,
     memberCount,
   } = server;
 
@@ -35,10 +33,7 @@ export function FeaturedServerCard({ server }: FeaturedServerCardProps) {
           {bannerUrl && <img src={bannerUrl} />}
         </div>
         <div className={styles.avatar}>
-          {avatarUrl
-            ? <Gif src={avatarUrl} />
-            : <Acronym name={name} className={styles.acronym} />
-          }
+          <ServerAvatar server={server} />
         </div>
       </div>
       <div className={styles.info}>

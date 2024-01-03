@@ -16,7 +16,7 @@ export interface ServerData {
 export type ServerBasicData = {
   _id: string;
   name: string;
-  avatarUrl: string;
+  avatarUrl?: string;
 };
 
 export type PublicServerData = Omit<ServerData, 'private'>;

@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import pluralize from 'pluralize';
 
-import type { PublicServerData } from '@features/servers/types';
+import { ServerAvatar } from '../get';
 
-import { Gif, Acronym } from '@components/ui/media';
+import type { PublicServerData } from '@features/servers/types';
 
 import styles from './search-result-servers-card.module.scss';
 
@@ -16,7 +16,7 @@ export function SearchResultServersCard({
 }: SearchResultServersCardProps) {
   const navigate = useNavigate();
 
-  const { avatarUrl, bannerUrl, name, description, memberCount, _id } = server;
+  const { bannerUrl, name, description, memberCount, _id } = server;
 
   return (
     <div
@@ -30,10 +30,7 @@ export function SearchResultServersCard({
       <div className={styles.info}>
         <div className={styles.header}>
           <div className={styles.avatar}>
-            {avatarUrl
-              ? <Gif src={avatarUrl} />
-              : <Acronym name={name} className={styles.acronym} />
-            }
+            <ServerAvatar server={server} />
           </div>
           <h2>{name}</h2>
         </div>

@@ -1,6 +1,6 @@
 import type { ServerBasicData } from '../types';
 
-import { Acronym, Avatar } from '@components/ui/media';
+import { Acronym, Gif } from '@components/ui/media';
 
 type ServerAvatarProps = {
   server: ServerBasicData;
@@ -10,12 +10,8 @@ type ServerAvatarProps = {
 export function ServerAvatar({ server, className }: ServerAvatarProps) {
   const { name, avatarUrl } = server;
 
-  return (
-    <div className={className}>
-      {avatarUrl
-        ? <Avatar src={avatarUrl} />
-        : <Acronym name={name} />
-      }
-    </div>
+  return (avatarUrl
+    ? <Gif src={avatarUrl} className={className} />
+    : <Acronym name={name} className={className} />
   );
 }

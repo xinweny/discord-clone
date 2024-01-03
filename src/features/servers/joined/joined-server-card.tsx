@@ -4,10 +4,11 @@ import type { UserServerData } from '../types';
 import type { TimestampDict } from '@features/notifications/types';
 
 import { LinkImage } from '@components/ui/links';
-import { Acronym, Gif } from '@components/ui/media';
 
 import { ServerNewMessageNotification } from '@features/notifications/message';
+
 import { ServersNavbarItem } from '../nav';
+import { ServerAvatar } from '../get';
 
 import styles from './joined-server-card.module.scss';
 
@@ -24,7 +25,7 @@ export function JoinedServerCard({
 }: JoinedServerCardProps) {
   const { serverId } = useParams();
 
-  const { _id: id, avatarUrl, name } = server;
+  const { _id: id, name } = server;
 
   const isActive = serverId === id;
 
@@ -42,10 +43,7 @@ export function JoinedServerCard({
       )}
     >
       <LinkImage href={`/channels/${id}`}>
-        {avatarUrl
-          ? <Gif src={avatarUrl} alt={name} />
-          : <Acronym name={name} />
-        }
+        <ServerAvatar server={server} />
       </LinkImage>
     </ServersNavbarItem>
   );

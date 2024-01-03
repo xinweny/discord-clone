@@ -6,14 +6,17 @@ import { ServerMemberData } from '../types';
 
 import { ServerMemberContext } from '../context';
 
-import { Avatar, ColorBanner, Acronym } from '@components/ui/media';
+import { Avatar, ColorBanner } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
 
 import { ServerMemberRolesList } from '@features/member-roles/list';
 import { UserStatusIcon } from '@features/users/status';
 import { UserProfileButton } from '@features/users/get';
+import { ServerAvatar } from '@features/servers/get';
 
 import { useGetServerQuery } from '@features/servers/api';
+
+import logoSrc from '@assets/static/logo.png';
 
 import styles from './server-member-profile-card.module.scss';
 
@@ -65,16 +68,16 @@ export function ServerMemberProfileCard({
           </>)}
           <div className={styles.section}>
             <h3>MEMBER SINCE</h3>
-            <div>
-              <img src="#" alt="Discord Clone" />
-              <span>{joinedDate(user.createdAt)}</span>
-            </div>
-            <Separator className={styles.divider} />
-            <div>
-              {server!.avatarUrl
-                ? <Avatar src={server!.avatarUrl} />
-                : <Acronym name={server!.name} />}
-              <span>{joinedDate(createdAt)}</span>
+            <div className={styles.joinDates}>
+              <div className={styles.joinDate}>
+                <img src={logoSrc} alt="Discord Clone" className={styles.serverIcon} />
+                <span>{joinedDate(user.createdAt)}</span>
+              </div>
+              <Separator className={styles.divider} />
+              <div className={styles.joinDate}>
+                <ServerAvatar server={server!} className={styles.serverIcon} />
+                <span>{joinedDate(createdAt)}</span>
+              </div>
             </div>
           </div>
           <div className={styles.section}>

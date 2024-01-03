@@ -38,9 +38,13 @@
       background-color: colors.$bg-secondary-alt;
       overflow: hidden;
 
-      img {
+      svg, img {
         width: 100%;
         height: 100%;
+      }
+
+      svg div {
+        border-radius: 0px !important;
       }
 
       .acronym {

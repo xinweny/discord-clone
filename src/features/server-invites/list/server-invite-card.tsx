@@ -1,9 +1,8 @@
 import pluralize from 'pluralize';
 import { Link } from 'react-router-dom';
 
-import { Acronym, Gif } from '@components/ui/media';
-
 import { JoinServerButton } from '@features/members/create';
+import { ServerAvatar } from '@features/servers/get';
 
 import { useGetServerInviteQuery } from '../api';
 import { useGetServerQuery } from '@features/servers/api';
@@ -28,10 +27,7 @@ export function ServerInviteCard({ urlId, senderName }: ServerInviteCardProps) {
       <div>
         <div className={styles.avatar}>
           {isSuccess && server
-            ? (server.avatarUrl
-              ? <Gif src={server.avatarUrl} />
-              : <Acronym name={server.name} />
-            )
+            ? <ServerAvatar server={server} />
             : <img src={poop} />
           }
         </div>
