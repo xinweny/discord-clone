@@ -113,6 +113,7 @@ export const {
   useGetServerMembersQuery,
   useGetUserServerMemberQuery,
   useGetServerMemberQuery,
+  useLazyGetServerMemberQuery,
   useJoinServerMutation,
   useLeaveServerMutation,
   useUpdateServerMemberMutation,

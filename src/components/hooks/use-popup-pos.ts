@@ -5,6 +5,7 @@ type ArgsData = {
   btnRef: React.RefObject<Element>;
   popupRef: React.RefObject<Element>;
   position: PositionData;
+  popup: React.ReactNode;
 }
 
 export type PositionData = {
@@ -73,7 +74,7 @@ export const usePopupPos = (args: ArgsData) => {
     opacity: 0,
   });
 
-  const { show, btnRef, popupRef, position } = args;
+  const { show, btnRef, popupRef, popup, position } = args;
 
   useEffect(() => {
     if (!show) return;
@@ -89,7 +90,7 @@ export const usePopupPos = (args: ArgsData) => {
     }, 0);
     
     return () => { clearTimeout(timeoutId); };
-  }, [show]);
+  }, [show, popup]);
 
   return style;
 };

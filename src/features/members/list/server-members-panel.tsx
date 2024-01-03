@@ -49,6 +49,7 @@ export function ServerMembersPanel() {
               member => <ServerMemberCard
                 key={member._id}
                 member={member}
+                serverId={serverId}
                 isOwner={member._id === ownerId}
               />
             )}
@@ -61,6 +62,7 @@ export function ServerMembersPanel() {
               member => <ServerMemberCard
                 key={member._id}
                 member={member}
+                serverId={serverId}
                 isOwner={member._id === ownerId}
               />
             )}

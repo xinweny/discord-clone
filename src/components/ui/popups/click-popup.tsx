@@ -5,7 +5,7 @@ import { PositionData, usePopupPos } from '@components/hooks';
 import { PopupWrapper } from '.';
 
 type ClickPopupProps = {
-  renderPopup: () => React.ReactElement;
+  renderPopup: () => React.ReactElement | null | undefined | Promise<React.ReactElement | null | undefined>;
   children: React.ReactNode;
   onOpen?: () => void;
   onClose?: () => void;
@@ -28,23 +28,37 @@ export function ClickPopup({
   toggleComponent,
 }: ClickPopupProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
+  const [popup, setPopup] = useState<React.ReactElement>();
 
-  const defaultRef = useRef(null);
+  const defaultRef = useRef<HTMLButtonElement>(null);
   const buttonRef = btnRef || defaultRef;
 
   const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showPopup === true) {
+      const getPopup = async () => {
+        const component = await renderPopup();
+        
+        if (component) {
+          setPopup(component);
+          if (onOpen) onOpen();
+        }
+      };
+  
+      getPopup();
+    } else {
+      if (onClose) onClose();
+    }
+  }, [showPopup]);
 
   const style = usePopupPos({
     show: !!showPopup,
     btnRef: buttonRef,
     popupRef,
+    popup,
     position,
   });
-
-  useEffect(() => {
-    if (showPopup === true && onOpen) onOpen();
-    if (showPopup === false && onClose) onClose();
-  }, [showPopup]);
 
   return (
     <>
@@ -68,7 +82,7 @@ export function ClickPopup({
           ref: popupRef,
         }}
       >
-        {renderPopup()}
+        {popup}
       </PopupWrapper>
     </>
   );

@@ -1,10 +1,11 @@
-import { ClickPopup, Tooltip } from '@components/ui/popups';
-
 import type { ServerMemberMainData } from '../types';
 
+import { ClickPopup, Tooltip } from '@components/ui/popups';
 import { Avatar } from '@components/ui/media';
 
-import { ServerMemberProfileCard } from '../profile';
+import { ServerMemberProfileCard } from '../get';
+
+import { useLazyGetServerMemberQuery } from '../api';
 
 import CrownIcon from '@assets/icons/crown.svg?react';
 
@@ -12,24 +13,38 @@ import styles from './server-member-card.module.scss';
 
 type ServerMemberCardProps = {
   member: ServerMemberMainData;
+  serverId: string;
   isOwner: boolean;
 };
 
 export function ServerMemberCard({
-  member, isOwner
+  member,
+  serverId,
+  isOwner,
 }: ServerMemberCardProps) {
+  const [getServerMember] = useLazyGetServerMemberQuery();
+
+  const renderPopup = async () => {
+    const serverMember = await getServerMember({
+      serverId,
+      memberId: member._id,
+    }).unwrap();
+
+    if (!serverMember) return null;
+
+    return <ServerMemberProfileCard member={serverMember} />;
+  };
+
   return (
     <ClickPopup
-      renderPopup={
-        () => <ServerMemberProfileCard memberId={member._id} />
-      }
+      renderPopup={renderPopup}
       position={{
         direction: 'left',
         align: 'center',
         gap: 4,
       }}
     >
-      <div className={styles.card}>
+      <div className={styles.card} role="button">
         <Avatar src={member.user.avatarUrl} />
         <p>{member.displayName}</p>
         {isOwner && <Tooltip

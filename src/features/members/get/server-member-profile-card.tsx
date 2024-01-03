@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
+import { ServerMemberData } from '../types';
+
 import { ServerMemberContext } from '../context';
 
 import { Avatar, ColorBanner } from '@components/ui/media';
@@ -8,25 +10,18 @@ import { Avatar, ColorBanner } from '@components/ui/media';
 import { ServerMemberRolesList } from '@features/member-roles/list';
 import { UserStatusIcon } from '@features/users/status';
 
-import { useGetServerMemberQuery } from '../api';
 import { useGetServerQuery } from '@features/servers/api';
 
 type ServerMemberProfileCardProps = {
-  memberId: string;
+  member: ServerMemberData;
 };
 
 export function ServerMemberProfileCard({
-  memberId
+  member,
 }: ServerMemberProfileCardProps) {
   const { serverId } = useParams();
 
-  const { data: member, isSuccess } = useGetServerMemberQuery({
-    serverId: serverId!,
-    memberId,
-  });
   const { data: server } = useGetServerQuery(serverId!);
-
-  if (!isSuccess) return null;
 
   const { bio, createdAt, user, displayName, bannerColor, userId } = member;
   const { avatarUrl, username } = user;
@@ -36,7 +31,7 @@ export function ServerMemberProfileCard({
   return (
     <ServerMemberContext.Provider value={member}>
       <div>
-        <ColorBanner color={bannerColor || '#5C64F3'}>
+        <ColorBanner color={bannerColor}>
           <div>
             <Avatar
               src={avatarUrl}
