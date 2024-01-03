@@ -14,6 +14,7 @@ type RadioInputProps<
   name: Path<TFormValues>;
   value: any;
   rules?: RegisterOptions;
+  children?: React.ReactNode;
 } & Omit<InputProps, 'name' | 'type' | 'value'>;
 
 export function RadioInput<TFormValues extends FieldValues>({
@@ -21,6 +22,7 @@ export function RadioInput<TFormValues extends FieldValues>({
   name,
   id,
   value,
+  children,
   ...props
 }: RadioInputProps<TFormValues>) {
   const { register } = useFormContext();
@@ -33,7 +35,9 @@ export function RadioInput<TFormValues extends FieldValues>({
         value={value}
         {...props}
         {...(register && register(name))}
+        hidden={!!children}
       />
+      {children}
     </div>
   );
 }

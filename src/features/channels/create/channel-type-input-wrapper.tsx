@@ -4,7 +4,7 @@ import styles from './channel-type-input-wrapper.module.scss';
 
 type ChannelTypeInputWrapperProps = {
   value: string;
-  radioInput: React.ReactNode;
+  children: React.ReactNode;
   icon: React.ReactNode;
   label: string;
   description: string;
@@ -12,7 +12,7 @@ type ChannelTypeInputWrapperProps = {
 
 export function ChannelTypeInputWrapper({
   value,
-  radioInput,
+  children,
   icon,
   label,
   description,
@@ -35,7 +35,7 @@ export function ChannelTypeInputWrapper({
         <h4>{label}</h4>
         <span>{description}</span>
       </div>
-      {radioInput}
+      {children}
     </div>
   );
 }

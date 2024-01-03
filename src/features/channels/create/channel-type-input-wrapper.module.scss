@@ -19,13 +19,19 @@
     background-color: colors.$bg-modifier-selected;
   }
 
+  &:not(.selected) {
+    circle {
+      display: none;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .icon {
     margin-right: 12px;
-
-    svg {
-      width: 24px;
-      height: 24px;
-    }
   }
 
   .content {
