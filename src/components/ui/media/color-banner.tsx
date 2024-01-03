@@ -1,3 +1,5 @@
+import styles from './color-banner.module.scss';
+
 type ColorBannerProps = {
   color: string;
   className?: string;
@@ -16,7 +18,7 @@ export function ColorBanner({
         height,
         width,
       }}
-      className={className || ''}
+      className={`${styles.banner} ${className || ''}`}
     >
       {children}
     </div>

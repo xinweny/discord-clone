@@ -1,3 +1,16 @@
+@use '@styles/colors';
+
 .card {
-  
+  width: 340px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: colors.$bg-secondary-alt;
+
+  .banner {
+    position: relative;
+
+    > button {
+
+    }
+  }
 }

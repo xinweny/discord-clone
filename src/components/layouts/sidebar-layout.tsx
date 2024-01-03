@@ -1,4 +1,4 @@
-import { UserShortcutsBar } from '@features/users/profile';
+import { UserShortcutsBar } from '@features/users/get';
 
 import styles from './sidebar-layout.module.scss';
 

@@ -12,6 +12,8 @@ import { UserStatusIcon } from '@features/users/status';
 
 import { useGetServerQuery } from '@features/servers/api';
 
+import styles from './server-member-profile-card.module.scss';
+
 type ServerMemberProfileCardProps = {
   member: ServerMemberData;
 };
@@ -30,16 +32,16 @@ export function ServerMemberProfileCard({
 
   return (
     <ServerMemberContext.Provider value={member}>
-      <div>
-        <ColorBanner color={bannerColor}>
-          <div>
+      <div className={styles.card}>
+        <ColorBanner color={bannerColor} height={60} className={styles.banner}>
+          <button>
             <Avatar
               src={avatarUrl}
               notification={<UserStatusIcon userId={userId} />}
             />
-          </div>
+          </button>
         </ColorBanner>
-        <div>
+        <div className={styles.content}>
           <div>
             <h3>{displayName}</h3>
             <p>{username}</p>

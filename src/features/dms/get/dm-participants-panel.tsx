@@ -2,7 +2,7 @@ import type { UserBasicData } from '@features/users/types';
 
 import { useGetUserQuery } from '@features/users/api';
 
-import { UserShortProfile } from '@features/users/profile';
+import { UserShortProfile } from '@features/users/get';
 import { MutualsLists } from '@features/relations/mutuals';
 
 import styles from './dm-participants-panel.module.scss';

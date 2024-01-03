@@ -77,7 +77,7 @@ export const usePopupPos = (args: ArgsData) => {
   const { show, btnRef, popupRef, popup, position } = args;
 
   useEffect(() => {
-    if (!show) return;
+    if (!show || !popup) return;
 
     const timeoutId = setTimeout(() => {
       if (!show) return;

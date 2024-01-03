@@ -40,8 +40,8 @@ export function ServerMemberCard({
       renderPopup={renderPopup}
       position={{
         direction: 'left',
-        align: 'center',
-        gap: 4,
+        align: 'start',
+        gap: 16,
       }}
     >
       <div className={styles.card} role="button">
