@@ -59,7 +59,6 @@ export function RemoveRelationModal({
     await removeRelation({
       senderId: user.data!.id,
       relationId,
-      status,
     }).unwrap();
   };
 

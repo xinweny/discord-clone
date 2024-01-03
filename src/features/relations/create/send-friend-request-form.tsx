@@ -3,7 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 
-import type { SendFriendRequestFields } from '../types';
+import { RelationStatus, type CreateRelationFields } from '../types';
 
 import { handleServerError } from '@utils';
 
@@ -18,7 +18,7 @@ import {
 } from '@components/ui/forms';
 import { NullMessage } from '@components/ui/displays';
 
-import { useSendFriendRequestMutation } from '../api';
+import { useCreateRelationMutation } from '../api';
 
 import wumpus2 from '@assets/static/wumpus_2.svg';
 import CompassIcon from '@assets/icons/compass.svg?react';
@@ -34,11 +34,12 @@ export function SendFriendRequestForm() {
   const [submittedName, setSubmittedName] = useState<string>('');
 
   const defaultValues = {
+    status: RelationStatus.PENDING_TO,
     senderId: user.data!.id,
     username: '',
   };
 
-  const methods = useForm<SendFriendRequestFields>({
+  const methods = useForm<CreateRelationFields>({
     defaultValues,
     resolver: zodResolver(sendFriendRequestSchema),
     mode: 'onChange',
@@ -50,11 +51,11 @@ export function SendFriendRequestForm() {
     formState: { isValid },
   } = methods;
 
-  const [sendFriendRequest] = useSendFriendRequestMutation();
+  const [createRelation] = useCreateRelationMutation();
 
-  const onSubmit = async (data: SendFriendRequestFields) => {
+  const onSubmit = async (data: CreateRelationFields) => {
     try {
-      await sendFriendRequest(data).unwrap();
+      await createRelation(data).unwrap();
 
       setSubmittedName(data.username!);
 

@@ -24,7 +24,8 @@ export type RelationData<T = RelationStatus> = {
 
 export type FriendRequestData = RelationData<RelationStatus.PENDING_FROM | RelationStatus.PENDING_TO>;
 
-export type SendFriendRequestFields = {
+export type CreateRelationFields = {
+  status: RelationStatus;
   senderId: string;
   username?: string;
   recipientId?: string;
@@ -38,7 +39,6 @@ export type AcceptFriendRequestFields = {
 export type RemoveRelationFields = {
   senderId: string;
   relationId: string;
-  status: RelationStatus;
 };
 
 export type GetMutualsQuery = {

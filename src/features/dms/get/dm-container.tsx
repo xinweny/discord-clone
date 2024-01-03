@@ -12,6 +12,7 @@ import { DmOngoingCall, DmCall } from '@features/webrtc/dm';
 import defaultUserAvatar from '@assets/static/default-user-avatar.png';
 
 import styles from './dm-container.module.scss';
+import { RelationOptionsBar } from '@features/relations/get/relation-options-bar';
 
 type DmContainerProps = {
   dm: DMData;
@@ -20,8 +21,9 @@ type DmContainerProps = {
 
 export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
   const { user } = useGetUserData();
+  const userId = user.data!.id;
 
-  const { name, avatarUrl, participants } = getDmInfo(dm, user.data!.id);
+  const { name, avatarUrl, participants } = getDmInfo(dm, userId);
   const { isGroup, participantIds } = dm;
 
   return (
@@ -36,9 +38,13 @@ export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
             name={name}
             avatarSrc={avatarUrl || defaultUserAvatar}
             username={isGroup ? undefined : participants[0].username}
+            component={!isGroup && <RelationOptionsBar
+              senderId={userId}
+              recipientId={participants[0]._id}
+            />}
           />}
           formPlaceholder={`Message ${isGroup ? '' : '@'}${name}`}
-          authorized={participantIds.includes(user.data!.id)}
+          authorized={participantIds.includes(userId)}
         />
     </div>
   );

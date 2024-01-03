@@ -17,7 +17,7 @@ export function MutualFriendsList({
   const { user } = useGetUserData();
 
   const { data: mutualFriends, isSuccess } = useGetMutualFriendsQuery({
-    userId1: user.data!._id,
+    userId1: user.data!.id,
     userId2: participantId,
   });
 
