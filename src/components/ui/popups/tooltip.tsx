@@ -55,17 +55,16 @@ export function Tooltip({
         <PortalWrapper
           rootId="popup-root"
           isOpen={isHovered}
-          className={styles.wrapper}
-          childOpts={{
-            className: styles.container,
-            style: {
+          className={styles.container}
+        >
+          <div
+            className={`${styles.tooltip} ${styles[direction]}`}
+            style={{
               ...posStyles,
               '--arrow-width': `${arrowWidth}px`,
-            } as React.CSSProperties,
-            ref: tooltipRef,
-          }}
-        >
-          <div className={`${styles.tooltip} ${styles[direction]}`}>
+            } as React.CSSProperties}
+            ref={tooltipRef}
+          >
             <span>{text}</span>
           </div>
         </PortalWrapper>

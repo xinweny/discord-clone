@@ -2,22 +2,13 @@ import { createPortal } from 'react-dom';
 
 import { useClickAway } from '@uidotdev/usehooks';
 
-import { mergeRefs } from '@utils';
-
 import styles from './portal-wrapper.module.scss';
-
-export type ChildOptions = {
-  style?: React.CSSProperties;
-  className?: string;
-  ref?: React.RefObject<HTMLDivElement>;
-};
 
 type PortalWrapperProps = {
   rootId: string;
   isOpen: boolean;
   close?: () => void;
   children: React.ReactNode;
-  childOpts?: ChildOptions;
   withClickAway?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
@@ -25,7 +16,6 @@ export function PortalWrapper({
   rootId,
   isOpen,
   close,
-  childOpts,
   children,
   withClickAway = false,
   ...props
@@ -43,14 +33,9 @@ export function PortalWrapper({
     <div
       {...props}
       className={`${styles.wrapper} ${props.className || ''}`}
+      ref={withClickAway ? clickAwayRef : undefined}
     >
-      <div
-        ref={withClickAway ? mergeRefs(clickAwayRef, childOpts?.ref) : childOpts?.ref}
-        className={childOpts?.className}
-        style={childOpts?.style}
-      >
-        {children}
-      </div>
+      {children}
     </div>
   ), rootNode);
 }

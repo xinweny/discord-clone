@@ -6,6 +6,10 @@ import { AddRolesButton } from '../add';
 
 import { useGetMemberRolesQuery } from '../api';
 
+import PlusIcon from '@assets/icons/plus.svg?react';
+
+import styles from './server-member-roles-list.module.scss';
+
 type ServerMemberRolesListProps = {
   memberId: string;
 };
@@ -23,7 +27,7 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
   const customRoles = roles.slice(1);
 
   return (
-    <div>
+    <div className={styles.list}>
       <h3>{
         customRoles.length > 0
           ? pluralize('ROLE', customRoles.length)
@@ -38,7 +42,11 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
             memberId={memberId}
           />
         ))}
-        <AddRolesButton />
+        <AddRolesButton>
+          <div className={styles.button}>
+            <PlusIcon />
+          </div>
+        </AddRolesButton>
       </div>
     </div>
   );

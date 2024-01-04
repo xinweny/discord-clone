@@ -1,11 +1,8 @@
 @use '@styles/colors';
 
-.wrapper {
-  pointer-events: none !important;
-}
-
 .container {
   position: absolute;
+  pointer-events: none !important;
 }
 
 $arrow-offset: calc(-1 * var(--arrow-width));
@@ -26,6 +23,7 @@ $arrow-offset-double: calc(2 * $arrow-offset);
   position: relative;
   background: colors.$black;
   color: colors.$text-primary;
+  width: fit-content;
   font-size: 14px;
   font-weight: 500;
   padding: 8px 12px;

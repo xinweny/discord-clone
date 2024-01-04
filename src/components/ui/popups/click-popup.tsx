@@ -28,7 +28,7 @@ export function ClickPopup({
   toggleComponent,
 }: ClickPopupProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
-  const [popup, setPopup] = useState<React.ReactElement>();
+  const [popup, setPopup] = useState<React.ReactElement | null>(null);
 
   const defaultRef = useRef<HTMLButtonElement>(null);
   const buttonRef = btnRef || defaultRef;
@@ -77,12 +77,10 @@ export function ClickPopup({
       <PopupWrapper
         isOpen={!!showPopup}
         closePopup={() => { setShowPopup(false); }}
-        popupOpts={{
-          style,
-          ref: popupRef,
-        }}
       >
-        {popup}
+        <div style={style} ref={popupRef}>
+          {popup}
+        </div>
       </PopupWrapper>
     </>
   );

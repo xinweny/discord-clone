@@ -1,0 +1,13 @@
+@use '@styles/colors';
+
+.list {
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .button {
+    padding: 4px 5px;
+    background-color: colors.$bg-secondary-alt;
+  }
+}

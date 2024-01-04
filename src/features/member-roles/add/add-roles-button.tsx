@@ -1,12 +1,23 @@
 import { ClickPopup } from '@components/ui/popups';
 import { AddRolePopup } from './add-role-popup';
 
-export function AddRolesButton() {
+type AddRolesButtonProps = {
+  children: React.ReactNode;
+};
+
+export function AddRolesButton({
+  children,
+}: AddRolesButtonProps) {
   return (
     <ClickPopup
       renderPopup={() => <AddRolePopup />}
+      position={{
+        direction: 'bottom',
+        align: 'center',
+        gap: 4,
+      }}
     >
-      <div>+</div>
+      {children}
     </ClickPopup>
   );
 }

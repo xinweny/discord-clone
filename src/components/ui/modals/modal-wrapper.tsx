@@ -27,6 +27,11 @@ export function ModalWrapper({
   closeBtnRef,
   hasScroll = true,
 }: ModalWrapperProps) {
+  const handleClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    closeModal();
+  };
+  
   return (
     <PortalWrapper
       rootId={rootId || 'modal-root'}
@@ -34,20 +39,16 @@ export function ModalWrapper({
       close={closeModal}
       className={styles.container}
       withClickAway={withClickAway}
-      childOpts={{
-        className: `${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`,
-      }}
     >
-      {header}
-      {children}
-      {closeBtnRef && (
-        <button ref={closeBtnRef} type="button" onClick={(e) => {
-          e.stopPropagation();
-          closeModal();
-        }}>
-          <CrossIcon />
-        </button>
-      )}
+      <div className={`${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`}>
+        {header}
+        {children}
+        {closeBtnRef && (
+          <button ref={closeBtnRef} type="button" onClick={handleClose}>
+            <CrossIcon />
+          </button>
+        )}
+      </div>
     </PortalWrapper>
   );
 }
