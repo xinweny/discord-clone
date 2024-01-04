@@ -43,7 +43,7 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
           />
         ))}
         <AddRolesButton>
-          <div className={styles.button}>
+          <div className={styles.addButton}>
             <PlusIcon />
           </div>
         </AddRolesButton>

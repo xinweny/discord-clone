@@ -6,8 +6,10 @@
     height: 14px;
   }
   
-  .button {
+  .addButton {
     padding: 4px 5px;
     background-color: colors.$bg-secondary-alt;
+    border-radius: 4px;
+    color: colors.$white;
   }
 }

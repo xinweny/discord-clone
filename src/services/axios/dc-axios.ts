@@ -32,12 +32,12 @@ dcAxios.interceptors.response.use(
 
     if (
       (originalReq.url !== '/auth/refresh')
-      && err.response.status === 401
+      && (err.response.status === 500 && err.response.data.message === 'jwt expired')
       && !originalReq._retry
     ) {
       originalReq._retry = true;
 
-      const result = store.dispatch(authApi.endpoints.refreshToken.initiate());
+      const result = store.dispatch(authApi.endpoints.refreshToken.initiate(undefined, { forceRefetch: true }));
 
       const response = await result.unwrap();
 
