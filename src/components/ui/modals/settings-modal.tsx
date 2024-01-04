@@ -51,7 +51,7 @@ export function SettingsModal({
       <PortalWrapper
         close={handleClose}
         isOpen={isOpen}
-        rootId="settings-root"
+        layer={0}
         withClickAway={false}
       >
         <SettingsLayout

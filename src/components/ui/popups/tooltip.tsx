@@ -53,7 +53,7 @@ export function Tooltip({
       </div>
       {isHovered && (
         <PortalWrapper
-          rootId="popup-root"
+          layer={1}
           isOpen={isHovered}
           className={styles.container}
         >

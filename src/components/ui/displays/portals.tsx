@@ -1,14 +1,21 @@
 import styles from './portals.module.scss';
 
 type PortalsProps = {
-  ids: string[];
+  numLayers: number;
 };
 
-export function Portals({ ids }: PortalsProps) {
+export function Portals({ numLayers }: PortalsProps) {
+  const nums = [...Array(numLayers).keys()];
+
   return (
     <div className={styles.portals}>
-      {ids.map(id => (
-        <div key={id} id={id} className={styles.container}></div>
+      {nums.map((n) => (
+        <div
+          key={n}
+          id={`portal_layer_${n}`}
+          className={styles.container}
+          style={{ zIndex: n + 1 }}
+        ></div>
       ))}
     </div>
   )

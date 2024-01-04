@@ -5,7 +5,7 @@ import { useClickAway } from '@uidotdev/usehooks';
 import styles from './portal-wrapper.module.scss';
 
 type PortalWrapperProps = {
-  rootId: string;
+  layer: number;
   isOpen: boolean;
   close?: () => void;
   children: React.ReactNode;
@@ -13,14 +13,14 @@ type PortalWrapperProps = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export function PortalWrapper({
-  rootId,
+  layer,
   isOpen,
   close,
   children,
   withClickAway = false,
   ...props
 }: PortalWrapperProps) {
-  const rootNode = document.getElementById(rootId);
+  const rootNode = document.getElementById(`portal_layer_${layer}`);
 
   const clickAwayRef = useClickAway((e) => {
     e.stopPropagation();
@@ -33,9 +33,10 @@ export function PortalWrapper({
     <div
       {...props}
       className={`${styles.wrapper} ${props.className || ''}`}
-      ref={withClickAway ? clickAwayRef : undefined}
     >
-      {children}
+      <div ref={withClickAway ? clickAwayRef : undefined}>
+        {children}
+      </div>
     </div>
   ), rootNode);
 }

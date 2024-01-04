@@ -24,7 +24,7 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
-    <Portals ids={['settings-root', 'modal-root', 'popup-root']} />
+    <Portals numLayers={3} />
   </div>
 );
 

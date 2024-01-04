@@ -30,7 +30,7 @@ export function InviteFriendsModal({
   const { query, setQuery } = useQuery();
 
   const { user } = useGetUserData();
-  const userId = user.data!._id;
+  const userId = user.data!.id;
 
   const { data: dms } = useGetDmsQuery(userId);
 

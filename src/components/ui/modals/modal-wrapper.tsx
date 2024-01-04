@@ -8,7 +8,6 @@ type ModalWrapperProps = {
   isOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
-  rootId?: string;
   withClickAway?: boolean;
   className?: string;
   closeBtnRef?: React.RefObject<HTMLButtonElement>;
@@ -21,20 +20,18 @@ export function ModalWrapper({
   closeModal,
   header,
   children,
-  rootId,
-  withClickAway = true,
   className,
   closeBtnRef,
+  withClickAway = true,
   hasScroll = true,
 }: ModalWrapperProps) {
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     closeModal();
   };
-  
   return (
     <PortalWrapper
-      rootId={rootId || 'modal-root'}
+      layer={2}
       isOpen={isOpen}
       close={closeModal}
       className={styles.container}

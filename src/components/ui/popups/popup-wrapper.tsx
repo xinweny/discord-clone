@@ -16,7 +16,7 @@ export function PopupWrapper({
 }: PopupWrapperProps) {
   return (
     <PortalWrapper
-      rootId="popup-root"
+      layer={1}
       isOpen={isOpen}
       close={closePopup}
       className={styles.container}
