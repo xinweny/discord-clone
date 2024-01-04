@@ -27,13 +27,13 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
   const customRoles = roles.slice(1);
 
   return (
-    <div className={styles.list}>
+    <>
       <h3>{
         customRoles.length > 0
           ? pluralize('ROLE', customRoles.length)
           : 'NO ROLES'
       }</h3>
-      <div>
+      <div className={styles.list}>
         {customRoles.map(role => (
           <ServerMemberRoleCard
             key={role._id}
@@ -42,12 +42,10 @@ export function ServerMemberRolesList({ memberId }: ServerMemberRolesListProps) 
             memberId={memberId}
           />
         ))}
-        <AddRolesButton>
-          <div className={styles.addButton}>
-            <PlusIcon />
-          </div>
+        <AddRolesButton className={styles.addButton}>
+          <PlusIcon />
         </AddRolesButton>
       </div>
-    </div>
+    </>
   );
 }

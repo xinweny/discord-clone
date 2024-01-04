@@ -1,0 +1,28 @@
+@use '@styles/colors';
+
+.container {
+  border: 1px solid colors.$bg-modifier-accent;
+  border-radius: 4px;
+  background-color: colors.$bg-primary;
+  padding: 8px;
+  width: 250px;
+
+  .noResult {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+
+    h2 {
+      color: colors.$white;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 600;
+    }
+
+    span {
+      color: colors.$text-muted;
+    }
+  }
+}

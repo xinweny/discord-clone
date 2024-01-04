@@ -3,10 +3,12 @@ import { AddRolePopup } from './add-role-popup';
 
 type AddRolesButtonProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
 export function AddRolesButton({
   children,
+  className,
 }: AddRolesButtonProps) {
   return (
     <ClickPopup
@@ -14,8 +16,9 @@ export function AddRolesButton({
       position={{
         direction: 'bottom',
         align: 'center',
-        gap: 4,
+        gap: 8,
       }}
+      className={className}
     >
       {children}
     </ClickPopup>

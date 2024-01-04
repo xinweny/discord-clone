@@ -10,6 +10,8 @@ import { AddRoleButton } from './add-role-button';
 
 import { useGetRolesQuery } from '@features/roles/api';
 
+import styles from './add-role-popup.module.scss';
+
 export function AddRolePopup() {
   const { serverId } = useParams();
 
@@ -36,11 +38,11 @@ export function AddRolePopup() {
   if (!authorized) return null;
 
   return (
-    <div>
+    <div className={styles.container}>
       <RoleSearchBar
         query={query}
         setQuery={setQuery}
-        placeholder="Add Role"
+        placeholder="Role"
       />
       <div>
         {filteredRoles.length > 0
@@ -53,9 +55,9 @@ export function AddRolePopup() {
             />
           ))
           : (
-            <div>
-              <p><strong>Nope!</strong></p>
-              <p>Did you make a typo?</p>
+            <div className={styles.noResult}>
+              <h2>Nope!</h2>
+              <span>Did you make a typo?</span>
             </div>
           )
         }

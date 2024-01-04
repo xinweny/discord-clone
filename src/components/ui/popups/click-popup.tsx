@@ -12,6 +12,7 @@ type ClickPopupProps = {
   btnRef?: React.RefObject<HTMLButtonElement>;
   position?: PositionData;
   toggleComponent?: React.ReactNode;
+  className?: string;
 };
 
 export function ClickPopup({
@@ -20,6 +21,7 @@ export function ClickPopup({
   onOpen,
   onClose,
   btnRef,
+  className,
   position = {
     direction: 'left',
     align: 'start',
@@ -64,6 +66,7 @@ export function ClickPopup({
     <>
       <button
         type="button"
+        className={className}
         onClick={() => {
           setShowPopup(prev => !prev);
         }}
@@ -77,6 +80,7 @@ export function ClickPopup({
       <PopupWrapper
         isOpen={!!showPopup}
         close={(e: Event) => {
+          e.stopPropagation();
           if (showPopup && !buttonRef.current?.contains(e.target as Node)) setShowPopup(false);
         }}
       >
