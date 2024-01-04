@@ -1,3 +1,5 @@
+import { useClickAway } from '@uidotdev/usehooks';
+
 import { PortalWrapper } from '@components/wrappers';
 
 import CrossIcon from '@assets/icons/cross.svg?react';
@@ -29,15 +31,20 @@ export function ModalWrapper({
     e.stopPropagation();
     closeModal();
   };
+
+  const clickAwayRef = useClickAway(() => { closeModal(); }) as React.RefObject<HTMLDivElement>;
+
   return (
     <PortalWrapper
       layer={2}
       isOpen={isOpen}
       close={closeModal}
       className={styles.container}
-      withClickAway={withClickAway}
     >
-      <div className={`${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`}>
+      <div
+        className={`${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`}
+        ref={withClickAway ? clickAwayRef : undefined}
+      >
         {header}
         {children}
         {closeBtnRef && (

@@ -49,10 +49,8 @@ export function SettingsModal({
       },
     }}>
       <PortalWrapper
-        close={handleClose}
         isOpen={isOpen}
         layer={0}
-        withClickAway={false}
       >
         <SettingsLayout
           sidebar={<SettingsSidebar

@@ -76,7 +76,9 @@ export function ClickPopup({
       </button>
       <PopupWrapper
         isOpen={!!showPopup}
-        closePopup={() => { setShowPopup(false); }}
+        close={(e: Event) => {
+          if (showPopup && !buttonRef.current?.contains(e.target as Node)) setShowPopup(false);
+        }}
       >
         <div style={style} ref={popupRef}>
           {popup}
