@@ -14,7 +14,7 @@ const getById = async (id: Types.ObjectId | string) => {
   const member = await ServerMember
     .findById(id)
     .populate([
-      { path: 'user', select: 'avatarUrl username' },
+      { path: 'user', select: 'avatarUrl username createdAt' },
     ]);
 
   return member;
@@ -24,7 +24,7 @@ const getOne = async (userId: Types.ObjectId | string, serverId: Types.ObjectId 
   const member = await ServerMember
     .findOne({ userId, serverId })
     .populate([
-      { path: 'user', select: 'avatarUrl username' },
+      { path: 'user', select: 'avatarUrl username createdAt' },
     ]);
 
   return member;
@@ -42,7 +42,7 @@ const getMany = async (
     ? await ServerMember
       .find(fields)
       .select(select)
-      .populate('user', 'avatarUrl username')
+      .populate('user', 'avatarUrl username createdAt')
     : await ServerMember
       .find(fields)
       .select(select);

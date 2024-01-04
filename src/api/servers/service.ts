@@ -17,7 +17,7 @@ const getPublic = async (
   pagination?: { page: number, limit: number },
 ) => {
   const page = pagination?.page || 1;
-  const limit = pagination?.limit || 10; 
+  const limit = pagination?.limit || 20; 
 
   const queryObj = {
     private: false,
@@ -30,11 +30,11 @@ const getPublic = async (
         queryObj,
         query ? { score: { $meta: 'textScore' } } : undefined
       )
-      .select('name createdAt memberCount description imageUrl')
-      .sort(query ? { score: { $meta: 'textScore' } } : { memberCount: 1 })
+      .select('name createdAt memberCount description avatarUrl bannerUrl')
+      .sort(query ? { score: { $meta: 'textScore' } } : { memberCount: -1 })
       .skip((page - 1) * limit)
       .limit(limit),
-    Server.countDocuments(queryObj)
+    Server.countDocuments(queryObj),
   ]);
 
   return { servers, count };

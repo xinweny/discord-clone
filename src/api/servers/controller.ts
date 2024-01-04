@@ -15,10 +15,8 @@ const getPublicServers: RequestHandler[] = [
     async (req, res) => {
       const query = req.query.query?.toString();
 
-      if (!query) throw new CustomError(400, 'Query string required.');
-
       const page = req.query.page ? +req.query.page : 1;
-      const limit = req.query.limit ? +req.query.limit : 10;
+      const limit = req.query.limit ? +req.query.limit : 20;
 
       const { servers, count } = await serverService.getPublic(query, { page, limit });
 
