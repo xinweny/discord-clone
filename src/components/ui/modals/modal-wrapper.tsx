@@ -32,13 +32,12 @@ export function ModalWrapper({
     closeModal();
   };
 
-  const clickAwayRef = useClickAway(() => { closeModal(); }) as React.RefObject<HTMLDivElement>;
+  const clickAwayRef = useClickAway(closeModal) as React.RefObject<HTMLDivElement>;
 
   return (
     <PortalWrapper
-      layer={2}
+      layer={1}
       isOpen={isOpen}
-      close={closeModal}
       className={styles.container}
     >
       <div
