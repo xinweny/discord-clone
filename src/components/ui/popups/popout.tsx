@@ -65,7 +65,7 @@ export function Popout({
     show: !!showPopup,
     btnRef: buttonRef,
     popupRef,
-    isLoaded: popup ? true : null,
+    isLoaded: !!popup,
     position,
   });
 
