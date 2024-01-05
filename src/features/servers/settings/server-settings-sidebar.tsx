@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { SERVER_SETTINGS } from './tabs';
+import { SERVER_SETTINGS } from '../tabs';
 
 import { ServerContext } from '../context';
 

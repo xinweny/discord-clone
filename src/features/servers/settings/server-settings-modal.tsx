@@ -1,6 +1,6 @@
 import type { ModalProps } from '@types';
 
-import { SERVER_SETTINGS } from './tabs';
+import { SERVER_SETTINGS } from '../tabs';
 
 import { SettingsModal } from '@components/ui/modals';
 

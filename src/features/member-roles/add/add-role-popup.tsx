@@ -5,7 +5,7 @@ import { useServerMemberContext } from '@features/members/context';
 
 import { useServerAuthorize } from '@features/servers/hooks';
 
-import { RoleSearchBar } from '@features/roles/search';
+import { RoleSearchBar } from '@features/roles/list';
 import { AddRoleButton } from './add-role-button';
 
 import { useGetRolesQuery } from '@features/roles/api';

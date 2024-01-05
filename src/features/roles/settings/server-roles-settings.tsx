@@ -9,7 +9,7 @@ import {
   CustomRolesTable,
   DefaultRoleSection,
 } from '../list';
-import { RoleSearchBar } from '../search';
+import { RoleSearchBar } from '../list';
 import { CreateRoleButton } from '../create';
 
 export function ServerRolesSettings() {

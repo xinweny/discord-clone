@@ -1,5 +1,10 @@
 import { Input } from '@components/ui/forms';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+import SearchIcon from '@assets/icons/search.svg?react';
+
+import styles from './role-search-bar.module.scss';
+
 type RoleSearchBar = {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -10,7 +15,7 @@ export function RoleSearchBar({
   query, setQuery, placeholder
 }: RoleSearchBar) {
   return (
-    <div>
+    <div className={styles.search}>
       <Input
         name="query"
         id="role-search-query"
@@ -20,8 +25,12 @@ export function RoleSearchBar({
         onChange={e => { setQuery(e.target.value); }}
       />
       {query
-        ? <button onClick={() => { setQuery(''); }}><img src="#" alt="Clear" /></button>
-        : <img src="#" alt="Search" />
+        ? (
+          <button onClick={() => { setQuery(''); }}>
+            <CrossIcon />
+          </button>
+        )
+        : <SearchIcon />
       }
     </div>
   )

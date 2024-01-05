@@ -1,8 +1,8 @@
 import { generateTabs } from '@utils';
 
-import { ServerOverviewForm } from '../edit';
+import { ServerOverviewForm } from './edit';
 import { CustomEmojiForm } from '@features/emojis/form';
-import { ServerRolesForm } from '@features/roles/form';
+import { ServerRolesForm } from '@features/roles/settings';
 
 export const SERVER_SETTINGS = generateTabs({
   'Overview': ServerOverviewForm,

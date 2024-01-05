@@ -1,4 +1,4 @@
-import { SERVER_SETTINGS } from './tabs';
+import { SERVER_SETTINGS } from '../tabs';
 
 import { SettingsScreen, SettingsScreenWrapperProps } from '@components/ui/presentation';
 
