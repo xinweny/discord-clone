@@ -15,7 +15,7 @@ export function RoleSearchBar({
   query, setQuery, placeholder
 }: RoleSearchBar) {
   return (
-    <div className={styles.search}>
+    <div className={styles.container}>
       <Input
         name="query"
         id="role-search-query"
@@ -24,14 +24,9 @@ export function RoleSearchBar({
         value={query}
         onChange={e => { setQuery(e.target.value); }}
       />
-      {query
-        ? (
-          <button onClick={() => { setQuery(''); }}>
-            <CrossIcon />
-          </button>
-        )
-        : <SearchIcon />
-      }
+      <button onClick={() => { setQuery(''); }} disabled={!query}>
+        {query ? <CrossIcon /> : <SearchIcon />}
+      </button>
     </div>
   )
 }
