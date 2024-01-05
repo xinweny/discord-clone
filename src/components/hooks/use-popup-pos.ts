@@ -74,17 +74,19 @@ const getPosStyle = (
     }
     default: break;
   }
-    
+
+  posStyles.top = posStyles.top < 0 ? 0 : posStyles.top;
+  posStyles.left = posStyles.left < 0 ? 0 : posStyles.left;
+
   const { top, left } = posStyles;
+
   const bottom = top + height;
   const right = left + width;
 
-  posStyles.top = (top < 0)
-    ? 0
-    : (bottom > vh) ? top - (bottom - vh) : top;
-  posStyles.left = (left < 0)
-    ? 0
-    : (right > vw) ? left - (right - vw)  : left;
+  console.log(top, bottom);
+
+  posStyles.top = (bottom > vh) ? top - (bottom - vh) : top;
+  posStyles.left = (right > vw) ? left - (right - vw) : left;
   posStyles.height = (height > vh) ? vh : height;
   posStyles.width = (width > vw) ? vw : width;
 
