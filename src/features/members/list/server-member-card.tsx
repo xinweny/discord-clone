@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import type { ServerMemberMainData } from '../types';
 
-import { ClickPopup, Tooltip } from '@components/ui/popups';
+import { Popout, Tooltip } from '@components/ui/popups';
 import { Avatar } from '@components/ui/media';
 
 import { ServerMemberProfileCard } from '../get';
@@ -42,7 +42,7 @@ export function ServerMemberCard({
   };
 
   return (
-    <ClickPopup
+    <Popout
       renderPopup={renderPopup}
       position={{
         direction: 'left',
@@ -62,6 +62,6 @@ export function ServerMemberCard({
           <CrownIcon className={styles.crown} />
         </Tooltip>}
       </div>
-    </ClickPopup>
+    </Popout>
   );
 }

@@ -8,7 +8,7 @@ import { getTwemoji } from '@utils';
 import type { ActiveIdState } from '@hooks';
 import { PositionData } from '@components/hooks';
 
-import { ClickPopup } from '@components/ui/popups';
+import { Popout } from '@components/ui/popups';
 
 import { MessageEmojiPicker } from './message-emoji-picker';
 
@@ -43,7 +43,7 @@ export function EmojiPickerButton({
   if (!spriteUrl) return null;
 
   return (
-    <ClickPopup
+    <Popout
       renderPopup={() => <MessageEmojiPicker
         btnRef={emojiPickerBtnRef}
         editor={editor}
@@ -60,6 +60,6 @@ export function EmojiPickerButton({
           setCurrentEmoji(icons[Math.floor(Math.random() * icons.length)]);
         }}
       />
-    </ClickPopup>
+    </Popout>
   );
 }

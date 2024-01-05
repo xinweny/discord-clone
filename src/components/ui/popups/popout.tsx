@@ -5,10 +5,10 @@ import { PositionData, usePopupPos } from '@components/hooks';
 
 import { PortalWrapper } from '@components/wrappers';
 
-import styles from './click-popup.module.scss';
+import styles from './popout.module.scss';
 import { mergeRefs } from '@utils';
 
-type ClickPopupProps = {
+type PopoutProps = {
   renderPopup: () => React.ReactElement | null | undefined | Promise<React.ReactElement | null | undefined>;
   children: React.ReactNode;
   onOpen?: () => void;
@@ -19,7 +19,7 @@ type ClickPopupProps = {
   className?: string;
 };
 
-export function ClickPopup({
+export function Popout({
   renderPopup,
   children,
   onOpen,
@@ -32,7 +32,7 @@ export function ClickPopup({
     gap: 0,
   },
   toggleComponent,
-}: ClickPopupProps) {
+}: PopoutProps) {
   const [showPopup, setShowPopup] = useState<boolean | null>(null);
   const [popup, setPopup] = useState<React.ReactElement | null>(null);
 

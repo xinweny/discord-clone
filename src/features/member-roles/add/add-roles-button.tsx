@@ -1,4 +1,4 @@
-import { ClickPopup } from '@components/ui/popups';
+import { Popout } from '@components/ui/popups';
 import { AddRolePopup } from './add-role-popup';
 
 type AddRolesButtonProps = {
@@ -11,7 +11,7 @@ export function AddRolesButton({
   className,
 }: AddRolesButtonProps) {
   return (
-    <ClickPopup
+    <Popout
       renderPopup={() => <AddRolePopup />}
       position={{
         direction: 'bottom',
@@ -21,6 +21,6 @@ export function AddRolesButton({
       className={className}
     >
       {children}
-    </ClickPopup>
+    </Popout>
   );
 }

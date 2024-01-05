@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import type { ActiveIdState } from '@hooks';
 import type { PositionData } from '@components/hooks';
 
-import { ClickPopup } from '@components/ui/popups';
+import { Popout } from '@components/ui/popups';
 import { MessageGifPicker } from './message-gif-picker';
 
 import GifIcon from '@assets/icons/gif.svg?react';
@@ -24,7 +24,7 @@ export function GifPickerButton({
   const { set } = tabState;
 
   return (
-    <ClickPopup
+    <Popout
       renderPopup={() => <MessageGifPicker btnRef={gifPickerBtnRef} />}
       onOpen={() => { set('gif'); }}
       onClose={() => { set(null); }}
@@ -32,6 +32,6 @@ export function GifPickerButton({
       position={position}
     >
       <GifIcon className={styles.icon} />
-    </ClickPopup>
+    </Popout>
   );
 }

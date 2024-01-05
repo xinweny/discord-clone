@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { ClickPopup } from '@components/ui/popups';
+import { Popout } from '@components/ui/popups';
 import { AddReactionForm } from './add-reaction-form';
 
 import type { ActiveIdState } from '@hooks';
@@ -28,7 +28,7 @@ export function AddNewReactionButton({
   if (!authorized) return null;
 
   return (
-    <ClickPopup
+    <Popout
       renderPopup={() => (
         <AddReactionForm btnRef={addReactionBtnRef} />
       )}
@@ -41,6 +41,6 @@ export function AddNewReactionButton({
       position={position}
     >
       {children}
-    </ClickPopup>
+    </Popout>
   );  
 }
