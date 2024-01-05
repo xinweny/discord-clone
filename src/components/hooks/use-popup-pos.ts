@@ -5,7 +5,7 @@ type ArgsData = {
   btnRef: React.RefObject<Element>;
   popupRef: React.RefObject<Element>;
   position: PositionData;
-  popup?: React.ReactNode | null;
+  isLoaded?: boolean | null;
 };
 
 export type PositionData = {
@@ -74,10 +74,10 @@ export const usePopupPos = (args: ArgsData) => {
     opacity: 0,
   });
 
-  const { show, btnRef, popupRef, popup, position } = args;
+  const { show, btnRef, popupRef, isLoaded, position } = args;
 
   useEffect(() => {
-    if (!show || popup === null) return;
+    if (!show || isLoaded === null) return;
 
     const timeoutId = setTimeout(() => {
       if (!show) return;
@@ -90,7 +90,7 @@ export const usePopupPos = (args: ArgsData) => {
     }, 0);
     
     return () => { clearTimeout(timeoutId); };
-  }, [show, popup]);
+  }, [show, isLoaded]);
 
   return style;
 };

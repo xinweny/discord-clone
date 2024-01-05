@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { useClickAway } from '@uidotdev/usehooks';
 
 import { PositionData, usePopupPos } from '@components/hooks';
 
-import { PopupWrapper } from '.';
+import { PortalWrapper } from '@components/wrappers';
+
+import styles from './click-popup.module.scss';
+import { mergeRefs } from '@utils';
 
 type ClickPopupProps = {
   renderPopup: () => React.ReactElement | null | undefined | Promise<React.ReactElement | null | undefined>;
@@ -37,6 +41,8 @@ export function ClickPopup({
 
   const popupRef = useRef<HTMLDivElement>(null);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (showPopup === true) {
       const getPopup = async () => {
@@ -44,6 +50,7 @@ export function ClickPopup({
         
         if (component) {
           setPopup(component);
+          
           if (onOpen) onOpen();
         }
       };
@@ -54,12 +61,27 @@ export function ClickPopup({
     }
   }, [showPopup]);
 
-  const style = usePopupPos({
+  const posStyles = usePopupPos({
     show: !!showPopup,
     btnRef: buttonRef,
     popupRef,
-    popup,
+    isLoaded: popup ? true : null,
     position,
+  });
+
+  const clickAwayRef = useClickAway((e: Event) => {
+    if (!showPopup) return;
+    if (buttonRef.current?.contains(e.target as Node)) return;
+
+    const portal = wrapperRef.current?.parentNode;
+
+    const popups =  Array.from(portal!.childNodes).map(node => node.firstChild) as ChildNode[];
+
+    const selfIndex = popups.findIndex(node => node.isSameNode(popupRef.current));
+
+    if (selfIndex < popups.findIndex(node => node.contains(e.target as Node))) return;
+
+    setShowPopup(false);
   });
 
   return (
@@ -67,9 +89,7 @@ export function ClickPopup({
       <button
         type="button"
         className={className}
-        onClick={() => {
-          setShowPopup(prev => !prev);
-        }}
+        onClick={() => { setShowPopup(prev => !prev); }}
         ref={buttonRef}
       >
         {!showPopup
@@ -77,17 +97,23 @@ export function ClickPopup({
           : (toggleComponent || children)
         }
       </button>
-      <PopupWrapper
+      <PortalWrapper
+        layer={1}
         isOpen={!!showPopup}
-        close={(e: Event) => {
-          e.stopPropagation();
-          if (showPopup && !buttonRef.current?.contains(e.target as Node)) setShowPopup(false);
-        }}
+        className={styles.container}
+        wrapperRef={wrapperRef}
       >
-        <div style={style} ref={popupRef}>
+        <div
+          className={styles.popup}
+          style={posStyles}
+          ref={mergeRefs(
+            clickAwayRef as React.RefObject<HTMLDivElement>,
+            popupRef,
+          )}
+        >
           {popup}
         </div>
-      </PopupWrapper>
+      </PortalWrapper>
     </>
   );
 }

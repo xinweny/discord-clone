@@ -1,7 +1,7 @@
 .container {
   pointer-events: none;
   
-  .popup > div {
+  .popup {
     position: absolute;
     pointer-events: all;
   }

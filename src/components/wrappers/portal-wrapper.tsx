@@ -4,6 +4,7 @@ import styles from './portal-wrapper.module.scss';
 
 type PortalWrapperProps = {
   layer: number;
+  wrapperRef?: React.RefObject<HTMLDivElement>;
   isOpen: boolean;
   close?: () => void;
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export function PortalWrapper({
   layer,
   isOpen,
   children,
+  wrapperRef,
   ...props
 }: PortalWrapperProps) {
   const rootNode = document.getElementById(`portal_layer_${layer}`);
@@ -23,6 +25,7 @@ export function PortalWrapper({
     <div
       {...props}
       className={`${styles.wrapper} ${props.className || ''}`}
+      ref={wrapperRef}
     >
       {children}
     </div>
