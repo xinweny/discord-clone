@@ -12,7 +12,13 @@ import { useGetRolesQuery } from '@features/roles/api';
 
 import styles from './add-role-popup.module.scss';
 
-export function AddRolePopup() {
+type AddRolePopupProps = {
+  btnRef?: React.RefObject<HTMLButtonElement>;
+};
+
+export function AddRolePopup({
+  btnRef
+}: AddRolePopupProps) {
   const { serverId } = useParams();
 
   const member = useServerMemberContext();
@@ -44,16 +50,20 @@ export function AddRolePopup() {
         setQuery={setQuery}
         placeholder="Role"
       />
-      <div>
         {filteredRoles.length > 0
-          ? filteredRoles.map(role => (
-            <AddRoleButton
-              key={role._id}
-              memberId={member._id}
-              serverId={serverId!}
-              memberRole={role}
-            />
-          ))
+          ? (
+            <ul className={styles.list}>
+              {filteredRoles.map(role => (
+                <AddRoleButton
+                  key={role._id}
+                  memberId={member._id}
+                  serverId={serverId!}
+                  memberRole={role}
+                  btnRef={btnRef}
+                />
+              ))}
+            </ul>
+          )
           : (
             <div className={styles.noResult}>
               <h2>Nope!</h2>
@@ -61,7 +71,6 @@ export function AddRolePopup() {
             </div>
           )
         }
-      </div>
     </div>
   );
 }

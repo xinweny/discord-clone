@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { Popout } from '@components/ui/popups';
 import { AddRolePopup } from './add-role-popup';
 
@@ -10,9 +12,11 @@ export function AddRolesButton({
   children,
   className,
 }: AddRolesButtonProps) {
+  const btnRef = useRef<HTMLButtonElement>(null);
+
   return (
     <Popout
-      renderPopup={() => <AddRolePopup />}
+      renderPopup={() => <AddRolePopup btnRef={btnRef} />}
       position={{
         direction: 'bottom',
         align: 'center',

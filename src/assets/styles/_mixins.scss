@@ -13,6 +13,15 @@
   font-style: $style;
 }
 
+@mixin invisible-scroller() {
+  overflow: hidden scroll;
+
+  &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    width: 0px;
+  }
+}
+
 @mixin hover-scroller(
   $thumb-color: colors.$bg-tertiary
 ) {

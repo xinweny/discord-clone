@@ -1,0 +1,38 @@
+@use '@styles/colors';
+
+.listItem {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+
+  > div {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    margin: 0px 8px 0px 4px;
+  }
+
+  span {
+    text-align: left;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    color: colors.$interactive-normal;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+
+    span {
+      color: colors.$interactive-hover;
+    }
+  }
+}

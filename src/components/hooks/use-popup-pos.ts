@@ -83,8 +83,6 @@ const getPosStyle = (
   const bottom = top + height;
   const right = left + width;
 
-  console.log(top, bottom);
-
   posStyles.top = (bottom > vh) ? top - (bottom - vh) : top;
   posStyles.left = (right > vw) ? left - (right - vw) : left;
   posStyles.height = (height > vh) ? vh : height;
