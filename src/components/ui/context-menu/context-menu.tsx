@@ -9,6 +9,7 @@ import styles from './context-menu.module.scss';
 export type ContextMenuOptionsData = {
   label: string;
   action: () => void;
+  className?: string;
 };
 
 type ContextMenuProps = {
@@ -33,12 +34,13 @@ export function ContextMenu({
       style={menuStyle}
     >
       <ul ref={clickAwayRef}>
-        {options.map(({ label, action }) => 
+        {options.map(({ label, action, className }) => 
           <ContextMenuItem
             key={label}
             label={label}
             action={action}
             closeMenu={closeContextMenu}
+            className={className}
           />
         )}
       </ul>

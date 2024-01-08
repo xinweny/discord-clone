@@ -1,8 +1,11 @@
+import styles from './context-menu-item.module.scss';
+
 type ContextMenuItemProps = {
   label: string;
   action: () => void;
   closeMenu: () => void;
   authorized?: boolean;
+  className?: string;
 };
 
 export function ContextMenuItem({
@@ -10,18 +13,19 @@ export function ContextMenuItem({
   action,
   closeMenu,
   authorized = true,
+  className,
 }: ContextMenuItemProps) {
   if (!authorized) return null;
 
   return (
-    <li key={label}>
+    <li key={label} className={`${styles.item} ${className || ''}`}>
       <button
         onClick={() => {
           closeMenu();
           action();
         }}
       >
-        {label}
+        <span>{label}</span>
       </button>
     </li>
   );

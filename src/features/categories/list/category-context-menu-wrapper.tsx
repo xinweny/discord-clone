@@ -7,6 +7,8 @@ import { ContextMenuWrapper } from '@components/ui/context-menu';
 import { EditCategoryButton } from '../edit';
 import { DeleteCategoryButton } from '../delete';
 
+import styles from './category-context-menu-wrapper.module.scss';
+
 type CategoryContextMenuWrapperProps = {
   category: CategoryData;
   children: React.ReactNode;
@@ -33,6 +35,7 @@ export function CategoryContextMenuWrapper({
       action: () => {
         if (deleteBtnRef) deleteBtnRef.current?.click();
       },
+      className: styles.danger,
     },
   ];
 
@@ -41,16 +44,14 @@ export function CategoryContextMenuWrapper({
       <ContextMenuWrapper options={options} className={className}>
         {children}
       </ContextMenuWrapper>
-      <div>
+      <div hidden>
         <EditCategoryButton
           btnRef={editBtnRef}
           category={category}
-          hidden
         />
         <DeleteCategoryButton
           btnRef={deleteBtnRef}
           category={category}
-          hidden
         />
       </div>
     </>
