@@ -1,0 +1,54 @@
+@use '@styles/colors';
+
+.container {
+  max-height: 645px;
+  min-height: 144px;
+
+  .header {
+    padding: 16px;
+    border-bottom: 1px solid colors.$bg-tertiary;
+
+    h2 {
+      margin-right: 28px;
+      text-overflow: ellipsis;
+      margin-bottom: 12px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: colors.$header-primary;
+
+      span {
+        font-weight: 600;
+      }
+    }
+
+    .subHeader {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: colors.$interactive-normal;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      h3 {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .footer {
+    padding: 16px;
+
+    h2 {
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: colors.$header-secondary;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+}

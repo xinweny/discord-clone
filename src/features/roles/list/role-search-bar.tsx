@@ -23,6 +23,7 @@ export function RoleSearchBar({
         placeholder={placeholder}
         value={query}
         onChange={e => { setQuery(e.target.value); }}
+        autoFocus
       />
       <button onClick={() => { setQuery(''); }} disabled={!query}>
         {query ? <CrossIcon /> : <SearchIcon />}

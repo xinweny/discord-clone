@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { useGetServerInviteQuery } from '../api';
 
+import styles from './server-invite-link.module.scss';
+
 type ServerInviteLinkProps = {
   serverId: string;
 };
@@ -16,10 +18,11 @@ export function ServerInviteLink({ serverId }: ServerInviteLinkProps) {
   const { url } = serverInvite;
   
   return (
-    <div>
-      <p>{url}</p>
+    <div className={styles.container}>
+      <span>{url}</span>
       <button
         type="button"
+        className={isCopied ? styles.isCopied : undefined}
         onClick={() => {
           navigator.clipboard.writeText(url);
           setIsCopied(true);
