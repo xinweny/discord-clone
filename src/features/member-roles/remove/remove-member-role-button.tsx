@@ -2,14 +2,20 @@ import { useRemoveMemberRoleMutation } from '../api';
 
 import { useServerAuthorize } from '@features/servers/hooks';
 
+import CrossIcon from '@assets/icons/cross.svg?react';
+
 type RemoveMemberRoleButtonProps = {
   serverId: string;
   memberId: string;
   roleId: string;
+  className?: string;
 };
 
 export function RemoveMemberRoleButton({  
-  serverId, memberId, roleId
+  serverId,
+  memberId,
+  roleId,
+  className,
 }: RemoveMemberRoleButtonProps) {
   const [removeRole] = useRemoveMemberRoleMutation();
 
@@ -26,6 +32,8 @@ export function RemoveMemberRoleButton({
   if (!authorize) return null;
 
   return (
-    <button onClick={handleClick}>x</button>
+    <button onClick={handleClick} className={className}>
+      <CrossIcon strokeWidth={1} />
+    </button>
   );
 }
