@@ -1,8 +1,11 @@
 import { useRef } from 'react';
 
-import { usePosAbsolute } from '../hooks';
+import { usePosAbsolute } from '../../hooks';
 
-import { ContextMenu, ContextMenuOptionsData } from '@components/ui/context-menu';
+import { ContextMenu, ContextMenuOptionsData } from '.';
+import { PortalWrapper } from '@components/wrappers';
+
+import styles from './context-menu-wrapper.module.scss';
 
 type ContextMenuWrapperProps = {
   options: ContextMenuOptionsData[];
@@ -20,6 +23,7 @@ export function ContextMenuWrapper({
   const targetRef = useRef<HTMLDivElement>(null);
 
   const {
+    posData,
     openAbsElement,
     absElementRef,
     absStyle,
@@ -29,7 +33,7 @@ export function ContextMenuWrapper({
   const handler = { [mode]: openAbsElement };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <div
         ref={targetRef}
         {...handler}
@@ -37,12 +41,17 @@ export function ContextMenuWrapper({
       >
         {children}
       </div>
-      <ContextMenu
-        options={options}
-        contextMenuRef={absElementRef}
-        menuStyle={absStyle}
-        closeContextMenu={closeAbsElement}
-      />
+      <PortalWrapper
+        layer={3}
+        isOpen={posData.visible}
+      >
+        <ContextMenu
+          options={options}
+          contextMenuRef={absElementRef}
+          menuStyle={absStyle}
+          closeContextMenu={closeAbsElement}
+        />
+      </PortalWrapper>
     </div>
   );
 }

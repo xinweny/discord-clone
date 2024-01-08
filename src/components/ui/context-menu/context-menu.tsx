@@ -1,9 +1,10 @@
-import { useRef } from 'react';
 import { useClickAway } from '@uidotdev/usehooks';
 
 import type { AbsStyleData } from '@components/hooks';
 
 import { ContextMenuItem } from './context-menu-item';
+
+import styles from './context-menu.module.scss';
 
 export type ContextMenuOptionsData = {
   label: string;
@@ -25,9 +26,9 @@ export function ContextMenu({
 }: ContextMenuProps) {
   const clickAwayRef = useClickAway<HTMLUListElement>(closeContextMenu);
 
-
   return (
     <div
+      className={styles.container}
       ref={contextMenuRef}
       style={menuStyle}
     >

@@ -24,7 +24,7 @@ const App = () => (
         </BrowserRouter>
       </Provider>
     </IntlProvider>
-    <Portals numLayers={3} />
+    <Portals numLayers={4} />
   </div>
 );
 

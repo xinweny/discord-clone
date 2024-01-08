@@ -4,7 +4,7 @@ import type { RoleData } from '../types';
 
 import { useServerAuthorize } from '@features/servers/hooks';
 
-import { ContextMenuWrapper } from '@components/wrappers';
+import { ContextMenuWrapper } from '@components/ui/context-menu';
 
 import { DeleteRoleButton } from '../delete';
 

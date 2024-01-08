@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import type { CategoryData } from '../types';
 
-import { ContextMenuWrapper } from '@components/wrappers';
+import { ContextMenuWrapper } from '@components/ui/context-menu';
 
 import { EditCategoryButton } from '../edit';
 import { DeleteCategoryButton } from '../delete';
