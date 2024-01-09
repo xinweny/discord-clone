@@ -14,6 +14,9 @@ import { UserHeader, UserInfo } from '.';
 
 import { useGetUserQuery } from '../api';
 
+import noCommonServersSrc from '@assets/static/no-common-servers.svg';
+import noCommonFriendsSrc from '@assets/static/no-common-friends.svg';
+
 import styles from './user-profile-modal.module.scss';
 
 type UserProfileModalProps = {
@@ -58,8 +61,20 @@ export function UserProfileModal({
             : <Tabs
               tabs={{
                 'User Info': <UserInfo user={user} />,
-                'Mutual Servers': <MutualServersList participantId={userId} withToggle={false} />,
-                'Mutual Friends': <MutualFriendsList participantId={userId} withToggle={false} />
+                'Mutual Servers': <MutualServersList
+                  participantId={userId}
+                  placeholder={<div className={styles.noResult}>
+                    <img src={noCommonServersSrc} />
+                    <span>NO SERVERS IN COMMON</span>
+                  </div>}
+                />,
+                'Mutual Friends': <MutualFriendsList
+                  participantId={userId}
+                  placeholder={<div className={styles.noResult}>
+                    <img src={noCommonFriendsSrc} />
+                    <span>NO FRIENDS IN COMMON</span>
+                  </div>}
+                />,
               }}
             />
           }

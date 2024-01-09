@@ -1,23 +1,18 @@
-import pluralize from 'pluralize';
-import { useToggle } from '@uidotdev/usehooks';
-
 import { useGetUserData } from '@features/auth/hooks';
 import { useGetMutualServersQuery } from '../api';
 import { MutualServerCard } from './mutual-server-card';
 
 type MutualServersListProps = {
   participantId: string;
-  withToggle?: boolean;
   className?: string;
+  placeholder?: React.ReactNode;
 };
 
 export function MutualServersList({
   participantId,
-  withToggle = true,
   className,
+  placeholder,
 }: MutualServersListProps) {
-  const [on, toggle] = useToggle(!withToggle);
-
   const { user } = useGetUserData();
 
   const { data: mutualServers, isSuccess } = useGetMutualServersQuery({
@@ -27,21 +22,14 @@ export function MutualServersList({
 
   const length = mutualServers?.length || 0;
 
-  if (!isSuccess || length === 0) return null;
+  if (!isSuccess || length === 0) return placeholder || null;
 
   return (
     <div className={className}>
-      {withToggle && (
-        <button onClick={() => toggle(!on)}>
-          {pluralize('Mutual Server', length, true)}
-        </button>
-      )}
-      {on && <div>
-        {mutualServers.map(server => <MutualServerCard
-          key={server._id}
-          server={server}
-        />)}
-      </div>}
+      {mutualServers.map(server => <MutualServerCard
+        key={server._id}
+        server={server}
+      />)}
     </div>
   ); 
 }

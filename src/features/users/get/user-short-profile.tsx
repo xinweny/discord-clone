@@ -10,13 +10,11 @@ import { UserHeader, UserInfo } from '.';
 import styles from './user-short-profile.module.scss';
 
 type UserShortProfileProps = {
-  children?: React.ReactNode;
   user: UserData;
 };
 
 export function UserShortProfile({
   user,
-  children,
 }: UserShortProfileProps) {
   const {
     _id,
@@ -38,7 +36,6 @@ export function UserShortProfile({
         <UserHeader user={user} />
         <Separator className={styles.separator} />
         <UserInfo user={user} />
-        {children}
       </div>
     </div>
   )
