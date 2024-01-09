@@ -8,11 +8,11 @@ import { RoomWelcome, RoomTypes } from '@components/ui/displays';
 
 import { MessagesContainer } from '@features/messages/list';
 import { DmOngoingCall, DmCall } from '@features/webrtc/dm';
+import { RelationOptionsBar } from '@features/relations/get';
 
 import defaultUserAvatar from '@assets/static/default-user-avatar.png';
 
 import styles from './dm-container.module.scss';
-import { RelationOptionsBar } from '@features/relations/get/relation-options-bar';
 
 type DmContainerProps = {
   dm: DMData;

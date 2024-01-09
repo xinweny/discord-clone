@@ -9,6 +9,7 @@ import { Tabs } from '@components/ui/tabs';
 
 import { UserStatusIcon } from '../status';
 import { MutualServersList, MutualFriendsList } from '@features/relations/mutuals';
+import { UserProfileOptions } from '@features/relations/get';
 
 import { UserHeader, UserInfo } from '.';
 
@@ -29,12 +30,13 @@ export function UserProfileModal({
   userId,
 }: UserProfileModalProps) {
   const { user: self } = useGetUserData();
+  const selfId = self.data!.id;
 
   const { data: user } = useGetUserQuery(userId!);
 
   if (!userId || !user) return null;
 
-  const isSelf = userId === self.data?.id;
+  const isSelf = userId === selfId;
 
   const { bannerColor, avatarUrl } = user;
 
@@ -52,7 +54,10 @@ export function UserProfileModal({
           />
         </ColorBanner>
         <div className={styles.options}>
-          {!isSelf && <div></div>}
+          {!isSelf && <UserProfileOptions
+            senderId={selfId}
+            recipientId={userId}
+          />}
         </div>
         <div className={styles.content}>
           <UserHeader user={user} />
