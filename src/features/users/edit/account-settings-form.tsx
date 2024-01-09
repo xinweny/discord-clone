@@ -4,7 +4,7 @@ import { useSettingsContext } from '@components/context';
 
 import { useGetUserData } from '@features/auth/hooks';
 
-import { USER_SETTINGS } from '../tabs';
+import { USER_SETTINGS_TABS } from '../tabs';
 
 import { Avatar, ColorBanner } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
@@ -31,6 +31,8 @@ export function AccountSettingsForm() {
     username,
     email,
   } = user.data as UserSelfData;
+  
+  const goToProfile = () => { set(USER_SETTINGS_TABS[1].id); };
 
   return (
     <div>
@@ -44,7 +46,7 @@ export function AccountSettingsForm() {
             />
           </div>
           <h3>{displayName}</h3>
-          <button onClick={() => { set(USER_SETTINGS[1].id); }} className={styles.blueButton}>
+          <button onClick={goToProfile} className={styles.blueButton}>
             Edit User Profile
           </button>
         </div>
@@ -53,7 +55,7 @@ export function AccountSettingsForm() {
             header="DISPLAY NAME"
             value={displayName}
             button={(
-              <button onClick={() => { set(USER_SETTINGS[1].id); }}>Edit</button>
+              <button onClick={goToProfile}>Edit</button>
             )}
           />
           <AccountEditSection

@@ -1,4 +1,4 @@
-import { USER_SETTINGS } from '../tabs';
+import { USER_SETTINGS_TABS } from '../tabs';
 
 import { SettingsModal } from '@components/ui/modals';
 
@@ -17,7 +17,7 @@ export function UserSettingsModal({
     <SettingsModal
       isOpen={isOpen}
       onClose={onClose}
-      initialTabId={USER_SETTINGS[0].id}
+      initialTabId={USER_SETTINGS_TABS[0].id}
       sidebar={UserSettingsSidebar}
       content={UserSettingsScreen}
     />

@@ -7,12 +7,16 @@ import { MutualFriendCard } from './mutual-friend-card';
 
 type MutualFriendsListProps = {
   participantId: string;
+  withToggle?: boolean;
+  className?: string;
 };
 
 export function MutualFriendsList({
-  participantId
+  participantId,
+  withToggle = true,
+  className,
 }: MutualFriendsListProps) {
-  const [on, toggle] = useToggle(false);
+  const [on, toggle] = useToggle(!withToggle);
 
   const { user } = useGetUserData();
 
@@ -26,8 +30,12 @@ export function MutualFriendsList({
   if (!isSuccess || length === 0) return null;
 
   return (
-    <div>
-      <button onClick={() => toggle(!on)}>{pluralize('Mutual Friend', length, true)}</button>
+    <div className={className}>
+      {withToggle && (
+        <button onClick={() => toggle(!on)}>
+          {pluralize('Mutual Friend', length, true)}
+        </button>
+      )}
       {on && <div>
         {mutualFriends.map(friend => <MutualFriendCard
           key={friend._id}

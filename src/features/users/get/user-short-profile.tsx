@@ -1,11 +1,11 @@
-import { DateTime } from 'luxon';
-
 import type { UserData } from '../types';
 
 import { ColorBanner, Avatar } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
 
 import { UserStatusIcon } from '../status';
+
+import { UserHeader, UserInfo } from '.';
 
 import styles from './user-short-profile.module.scss';
 
@@ -21,19 +21,12 @@ export function UserShortProfile({
   const {
     _id,
     bannerColor,
-    displayName,
-    createdAt,
-    bio,
-    customStatus,
+    avatarUrl,
   } = user;
-
-  const { avatarUrl, username } = user;
-
-  const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('LLL d, yyyy');
 
   return (
     <div>
-      <ColorBanner className={styles.banner} color={bannerColor || '#5C64F3'}>
+      <ColorBanner className={styles.banner} color={bannerColor}>
         <div className={styles.wrapper}>
           <Avatar
             src={avatarUrl}
@@ -42,22 +35,9 @@ export function UserShortProfile({
         </div>
       </ColorBanner>
       <div className={styles.content}>
-        <div className={styles.header}>
-          <h2>{displayName}</h2>
-          <h3>{username}</h3>
-          {customStatus && <p>{customStatus}</p>}
-        </div>
+        <UserHeader user={user} />
         <Separator className={styles.separator} />
-        <div className={styles.info}>
-          {bio && <div>
-            <h4>ABOUT ME</h4>
-            <p>{bio}</p>
-          </div>}
-          <div>
-            <h4>DISCORD MEMBER SINCE</h4>
-            <p>{joinedDate(createdAt)}</p>
-          </div>
-        </div>
+        <UserInfo user={user} />
         {children}
       </div>
     </div>

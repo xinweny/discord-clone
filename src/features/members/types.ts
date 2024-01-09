@@ -10,6 +10,7 @@ export type ServerMemberData = {
     avatarUrl: string;
     username: string;
     createdAt: string;
+    customStatus?: string;
   };
   createdAt: string;
 };

@@ -8,6 +8,9 @@ import { Avatar, ColorBanner } from '@components/ui/media';
 import { Tabs } from '@components/ui/tabs';
 
 import { UserStatusIcon } from '../status';
+import { MutualServersList, MutualFriendsList } from '@features/relations/mutuals';
+
+import { UserHeader, UserInfo } from '.';
 
 import { useGetUserQuery } from '../api';
 
@@ -49,7 +52,17 @@ export function UserProfileModal({
           {!isSelf && <div></div>}
         </div>
         <div className={styles.content}>
-          
+          <UserHeader user={user} />
+          {isSelf
+            ? <UserInfo user={user} />
+            : <Tabs
+              tabs={{
+                'User Info': <UserInfo user={user} />,
+                'Mutual Servers': <MutualServersList participantId={userId} withToggle={false} />,
+                'Mutual Friends': <MutualFriendsList participantId={userId} withToggle={false} />
+              }}
+            />
+          }
         </div>
       </div>
     </ModalWrapper>

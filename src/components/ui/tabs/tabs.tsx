@@ -1,11 +1,13 @@
+import _ from 'lodash';
 import { useState } from 'react';
-
-import type { TabData } from '@utils';
 
 import styles from './tabs.module.scss';
 
+
 type TabsProps = {
-  tabs: TabData[];
+  tabs: {
+    [key: string]: React.ReactNode;
+  };
   init?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
 
@@ -14,24 +16,29 @@ export function Tabs({
   init = 0,
   ...props
 }: TabsProps) {
-  const [activeId, setActiveId] = useState<string>(tabs[init].id);
+  const t = _.map(tabs, (node, label) => ({
+    label,
+    component: node,
+  }));
 
-  const Component = tabs.find(tab => tab.id === activeId)?.component;
+  const [activeId, setActiveId] = useState<string>(t[init].label);
+
+  const component = t.find(tab => tab.label === activeId)?.component;
 
   return (
     <div {...props}>
       <nav>
-        {tabs.map(tab => (
+        {t.map(tab => (
           <button
-            key={tab.id}
-            className={`${styles.button} ${activeId === tab.id ? styles.active : ''}`}
-            onClick={() => { setActiveId(tab.id); }}
+            key={tab.label}
+            className={`${styles.button} ${activeId === tab.label ? styles.active : ''}`}
+            onClick={() => { setActiveId(tab.label); }}
           >
             {tab.label}
           </button>
         ))}
       </nav>
-      {Component && <Component />}
+      {component}
     </div>
   );
 }

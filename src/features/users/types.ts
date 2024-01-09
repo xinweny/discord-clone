@@ -7,7 +7,7 @@ export type UserBasicData = {
   displayName: string;
   username: string;
   avatarUrl: string;
-  customStatus: string;
+  customStatus?: string;
 };
 
 export type UserSelfData = {
@@ -22,7 +22,9 @@ export type UserSelfData = {
   relations: RelationData[];
   dms: DMData[];
   servers: ServerBasicData[];
-  customStatus: string;
+  customStatus?: string;
+  createdAt: string;
+  _id: string;
 };
 
 export type UserData = {
@@ -34,7 +36,7 @@ export type UserData = {
   displayName: string;
   avatarUrl: string;
   createdAt: string;
-  customStatus: string;
+  customStatus?: string;
 };
 
 export type UpdateUserFields = {

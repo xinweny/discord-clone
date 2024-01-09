@@ -7,12 +7,16 @@ import { MutualServerCard } from './mutual-server-card';
 
 type MutualServersListProps = {
   participantId: string;
+  withToggle?: boolean;
+  className?: string;
 };
 
 export function MutualServersList({
-  participantId
+  participantId,
+  withToggle = true,
+  className,
 }: MutualServersListProps) {
-  const [on, toggle] = useToggle(false);
+  const [on, toggle] = useToggle(!withToggle);
 
   const { user } = useGetUserData();
 
@@ -26,8 +30,12 @@ export function MutualServersList({
   if (!isSuccess || length === 0) return null;
 
   return (
-    <div>
-      <button onClick={() => toggle(!on)}>{pluralize('Mutual Server', length, true)}</button>
+    <div className={className}>
+      {withToggle && (
+        <button onClick={() => toggle(!on)}>
+          {pluralize('Mutual Server', length, true)}
+        </button>
+      )}
       {on && <div>
         {mutualServers.map(server => <MutualServerCard
           key={server._id}

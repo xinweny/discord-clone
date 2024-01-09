@@ -14,7 +14,7 @@ export function ColorBanner({
   return (
     <div
       style={{
-        backgroundColor: color,
+        backgroundColor: color || '#5C64F3',
         height,
         width,
       }}
