@@ -24,6 +24,7 @@ export function UserShortProfile({
     displayName,
     createdAt,
     bio,
+    customStatus,
   } = user;
 
   const { avatarUrl, username } = user;
@@ -44,7 +45,7 @@ export function UserShortProfile({
         <div className={styles.header}>
           <h2>{displayName}</h2>
           <h3>{username}</h3>
-          {'customStatus' in user && <p>{user.customStatus}</p>}
+          {customStatus && <p>{customStatus}</p>}
         </div>
         <Separator className={styles.separator} />
         <div className={styles.info}>

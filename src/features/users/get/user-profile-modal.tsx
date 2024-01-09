@@ -1,10 +1,17 @@
-import { useRef } from 'react';
 
 import type { ModalProps } from '@types';
 
+import { useGetUserData } from '@features/auth/hooks';
+
 import { ModalWrapper } from '@components/ui/modals';
+import { Avatar, ColorBanner } from '@components/ui/media';
+import { Tabs } from '@components/ui/tabs';
+
+import { UserStatusIcon } from '../status';
 
 import { useGetUserQuery } from '../api';
+
+import styles from './user-profile-modal.module.scss';
 
 type UserProfileModalProps = {
   userId?: string;
@@ -15,19 +22,36 @@ export function UserProfileModal({
   onClose,
   userId,
 }: UserProfileModalProps) {
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const { user: self } = useGetUserData();
 
   const { data: user } = useGetUserQuery(userId!);
 
-  if (!user) return null;
+  if (!userId || !user) return null;
+
+  const isSelf = userId === self.data?.id;
+
+  const { bannerColor, avatarUrl } = user;
 
   return (
     <ModalWrapper
       closeModal={onClose}
       isOpen={isOpen}
-      closeBtnRef={closeBtnRef}
+      className={styles.modal}
     >
-      <div></div>
+      <div>
+        <ColorBanner color={bannerColor} className={styles.banner}>
+          <Avatar
+            src={avatarUrl}
+            notification={<UserStatusIcon userId={userId} />}
+          />
+        </ColorBanner>
+        <div className={styles.options}>
+          {!isSelf && <div></div>}
+        </div>
+        <div className={styles.content}>
+          
+        </div>
+      </div>
     </ModalWrapper>
   );
 }
