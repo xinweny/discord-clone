@@ -17,6 +17,12 @@
       height: 40px;
       border-radius: 16px;
     }
+
+    span {
+      font-weight: 500;
+      font-size: 16px;
+      color: colors.$text-primary;
+    }
   }
 
   &:hover {

@@ -21,7 +21,7 @@ export function MutualServerCard({
     <li className={styles.card}>
       <button onClick={() => { navigate(`/channels/${_id}`); }}>
         <ServerAvatar server={server} />
-        <p>{name}</p>
+        <span>{name}</span>
       </button>
     </li>
   );

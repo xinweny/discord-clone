@@ -21,8 +21,9 @@ export function MutualFriendsList({
   });
 
   const length = mutualFriends?.length || 0;
-
-  if (!isSuccess || length === 0) return placeholder || null;
+  
+  if (!isSuccess) return null;
+  if (length === 0) return placeholder;
 
   return (
     <ul className={className}>
