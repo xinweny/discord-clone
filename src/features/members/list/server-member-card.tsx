@@ -5,7 +5,7 @@ import type { ServerMemberMainData } from '../types';
 import { Popout, Tooltip } from '@components/ui/popups';
 import { Avatar } from '@components/ui/media';
 
-import { ServerMemberProfileCard } from '../get';
+import { ServerMemberProfileButton } from '../get';
 
 import { useLazyGetServerMemberQuery } from '../api';
 
@@ -24,32 +24,15 @@ export function ServerMemberCard({
   serverId,
   isOwner,
 }: ServerMemberCardProps) {
-  const [getServerMember] = useLazyGetServerMemberQuery();
-
-  const btnRef = useRef<HTMLButtonElement>(null);
-
-  const renderPopup = async () => {
-    const serverMember = await getServerMember({
-      serverId,
-      memberId: member._id,
-    }).unwrap();
-
-    if (!serverMember) return null;
-
-    return <ServerMemberProfileCard
-      member={serverMember}
-    />;
-  };
-
   return (
-    <Popout
-      renderPopup={renderPopup}
+    <ServerMemberProfileButton
       position={{
         direction: 'left',
         align: 'start',
         gap: 16,
       }}
-      btnRef={btnRef}
+      memberId={member._id}
+      serverId={serverId}
     >
       <div className={styles.card} role="button">
         <Avatar src={member.user.avatarUrl} />
@@ -62,6 +45,6 @@ export function ServerMemberCard({
           <CrownIcon className={styles.crown} />
         </Tooltip>}
       </div>
-    </Popout>
+    </ServerMemberProfileButton>
   );
 }

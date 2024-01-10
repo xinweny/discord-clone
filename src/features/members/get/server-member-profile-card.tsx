@@ -11,7 +11,7 @@ import { Separator } from '@components/ui/displays';
 
 import { ServerMemberRolesList } from '@features/member-roles/list';
 import { UserStatusIcon } from '@features/users/status';
-import { UserProfileButton } from '@features/users/get';
+import { UserProfileButton, UserHeader } from '@features/users/get';
 import { ServerAvatar } from '@features/servers/get';
 
 import { useGetServerQuery } from '@features/servers/api';
@@ -34,7 +34,7 @@ export function ServerMemberProfileCard({
   const { data: server } = useGetServerQuery(serverId!);
 
   const { bio, createdAt, user, displayName, bannerColor, userId } = member;
-  const { avatarUrl, username } = user;
+  const { avatarUrl } = user;
 
   const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL, yyyy');
 
@@ -55,10 +55,7 @@ export function ServerMemberProfileCard({
           </UserProfileButton>
         </ColorBanner>
         <div className={styles.content}>
-          <div className={styles.header}>
-            <h1>{displayName}</h1>
-            <span>{username}</span>
-          </div>
+          <UserHeader user={{ ...user, displayName }} />
           <Separator className={styles.separator} />
           {bio && (<>
             <div className={styles.section}>

@@ -34,6 +34,7 @@ export type MessageData = {
     displayName: string;
   };
   serverMember?: {
+    _id: string;
     displayName: string;
   };
   type: 'channel' | 'dm';
