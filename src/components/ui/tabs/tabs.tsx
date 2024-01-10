@@ -3,17 +3,18 @@ import { useState } from 'react';
 
 import styles from './tabs.module.scss';
 
-
 type TabsProps = {
   tabs: {
     [key: string]: React.ReactNode;
   };
   init?: number;
+  activeStyles?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export function Tabs({
   tabs,
   init = 0,
+  activeStyles,
   ...props
 }: TabsProps) {
   const t = _.map(tabs, (node, label) => ({
@@ -26,19 +27,19 @@ export function Tabs({
   const component = t.find(tab => tab.label === activeId)?.component;
 
   return (
-    <div {...props}>
-      <nav>
+    <>
+      <nav className={`${styles.tabs} ${props.className || ''}`}>
         {t.map(tab => (
           <button
             key={tab.label}
-            className={`${styles.button} ${activeId === tab.label ? styles.active : ''}`}
+            className={`${styles.button} ${activeId === tab.label ? styles.active : ''} ${activeStyles || ''}`}
             onClick={() => { setActiveId(tab.label); }}
           >
-            {tab.label}
+            <span>{tab.label}</span>
           </button>
         ))}
       </nav>
       {component}
-    </div>
+    </>
   );
 }

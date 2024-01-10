@@ -6,6 +6,7 @@ import { useGetUserData } from '@features/auth/hooks';
 import { ModalWrapper } from '@components/ui/modals';
 import { Avatar, ColorBanner } from '@components/ui/media';
 import { Tabs } from '@components/ui/tabs';
+import { Separator } from '@components/ui/displays';
 
 import { UserStatusIcon } from '../status';
 import { MutualServersList, MutualFriendsList } from '@features/mutuals/list';
@@ -44,14 +45,16 @@ export function UserProfileModal({
     <ModalWrapper
       closeModal={onClose}
       isOpen={isOpen}
-      className={styles.modal}
+      className={styles.container}
     >
-      <div>
+      <div className={styles.modal}>
         <ColorBanner color={bannerColor} className={styles.banner}>
-          <Avatar
-            src={avatarUrl}
-            notification={<UserStatusIcon userId={userId} />}
-          />
+          <div className={styles.avatar}>
+            <Avatar
+              src={avatarUrl}
+              notification={<UserStatusIcon userId={userId} />}
+            />
+          </div>
         </ColorBanner>
         <div className={styles.options}>
           {!isSelf && <UserProfileOptions
@@ -60,12 +63,15 @@ export function UserProfileModal({
           />}
         </div>
         <div className={styles.content}>
-          <UserHeader user={user} />
+          <UserHeader user={user} className={styles.header} />
           {isSelf
-            ? <UserInfo user={user} />
+            ? <>
+              <Separator className={styles.separator} />
+              <UserInfo user={user} className={styles.info} />
+            </>
             : <Tabs
               tabs={{
-                'User Info': <UserInfo user={user} />,
+                'User Info': <UserInfo user={user} className={styles.info} />,
                 'Mutual Servers': <MutualServersList
                   participantId={userId}
                   placeholder={<div className={styles.noResult}>
@@ -81,6 +87,8 @@ export function UserProfileModal({
                   </div>}
                 />,
               }}
+              className={styles.tabs}
+              activeStyles={styles.active}
             />
           }
         </div>

@@ -17,8 +17,8 @@
   overflow: hidden scroll;
 
   &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    width: 0px;
+    background-color: transparent !important;
+    width: 0px !important;
   }
 }
 

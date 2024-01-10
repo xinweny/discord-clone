@@ -6,15 +6,16 @@ import styles from './user-info.module.scss';
 
 type UserInfoProps = {
   user: UserData;
+  className?: string;
 };
 
-export function UserInfo({ user }: UserInfoProps) {
+export function UserInfo({ user, className }: UserInfoProps) {
   const { bio, createdAt } = user;
 
   const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('LLL d, yyyy');
 
   return (
-    <div className={styles.info}>
+    <div className={`${styles.info} ${className || ''}`}>
       {bio && <div>
         <h3>ABOUT ME</h3>
         <p>{bio}</p>

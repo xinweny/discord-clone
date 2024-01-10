@@ -1,6 +1,111 @@
-.modal {
-  height: auto;
-  max-height: 100%;
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.container {
   width: 600px;
+  height: 100%;
+  background-color: colors.$bg-secondary-alt;
   overflow: hidden !important;
+
+  .modal {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .banner {
+      height: 106px;
+      position: relative;
+      flex-shrink: 0;
+
+      .avatar {
+        position: absolute;
+        
+        border-radius: 120px;
+        border: 6px solid colors.$bg-secondary-alt;
+        background-color: colors.$bg-secondary-alt;
+        top: 46px;
+        left: 12px;
+
+        > svg {
+          width: 120px;
+          height: 120px;
+        }
+      }
+    }
+
+    .options {
+      flex-shrink: 0;
+      height: 80px;
+    }
+
+    .content {
+      flex-grow: 1;
+      border-radius: 8px;
+      background-color: colors.$bg-floating;
+      margin: 12px;
+      padding: 12px;
+
+      @include mixins.invisible-scroller();
+
+      .header {
+        h1, p {
+          color: colors.$text-primary;
+        }
+
+        span {
+          color: colors.$header-secondary;
+          font-weight: 600;
+        }
+      }
+
+      .info {
+        padding-bottom: 12px;
+
+        h3 {
+          color: colors.$white;
+        }
+
+        span {
+          color: colors.$text-primary;
+        }
+      }
+
+      .tabs {
+      margin-top: 20px;
+
+        span {
+          font-size: 14px;
+        }
+
+        > button {
+          &:hover {
+            border-bottom-color: colors.$interactive-normal;
+          }
+        }
+      }
+    }
+
+    .separator {
+      margin: 16px 0px;
+      border-top: 1px solid colors.$bg-modifier-accent;
+    }
+
+    .noResult {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+
+      span {
+        text-transform: uppercase;
+        color: colors.$text-secondary;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.active {
+  border-bottom-color: colors.$interactive-active;
 }
