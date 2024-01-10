@@ -25,11 +25,11 @@ export function MutualFriendsList({
   if (!isSuccess || length === 0) return placeholder || null;
 
   return (
-    <div className={className}>
+    <ul className={className}>
       {mutualFriends.map(friend => <MutualFriendCard
         key={friend._id}
         friend={friend}
       />)}
-    </div>
+    </ul>
   ); 
 }

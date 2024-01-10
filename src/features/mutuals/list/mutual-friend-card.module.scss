@@ -1,0 +1,24 @@
+@use '@styles/colors';
+
+.card {
+  width: 100%;
+  border-radius: 4px;
+  margin: 1px 0px;
+  
+  > button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px;
+
+    > svg, img, div {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+  }
+}

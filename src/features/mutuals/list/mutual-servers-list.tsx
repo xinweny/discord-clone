@@ -25,11 +25,11 @@ export function MutualServersList({
   if (!isSuccess || length === 0) return placeholder || null;
 
   return (
-    <div className={className}>
+    <ul className={className}>
       {mutualServers.map(server => <MutualServerCard
         key={server._id}
         server={server}
       />)}
-    </div>
+    </ul>
   ); 
 }

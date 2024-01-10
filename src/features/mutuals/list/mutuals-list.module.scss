@@ -1,0 +1,47 @@
+@use '@styles/colors';
+
+.container {
+  border-radius: 8px;
+  background-color: colors.$bg-floating;
+  margin: 16px;
+  margin-top: 0px;
+  
+  &, button {
+    color: colors.$text-primary;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .section {
+    > button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        transform: rotate(-90deg);
+      }
+
+      &.show {
+        svg {
+          transform: rotate(0deg);
+        }
+      }
+    }
+
+    ul {
+      margin: 12px 8px;
+      margin-top: 0px;
+      padding-bottom: 12px;
+    }
+  }
+
+  .separator {
+    border-top: 1px solid colors.$bg-modifier-accent;
+  }
+}
