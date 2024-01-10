@@ -34,7 +34,7 @@ const getServers = async (userId1: Types.ObjectId | string, userId2: Types.Objec
   const userIds = [userId1, userId2].map(id => new Types.ObjectId(id));
 
   const mutualServers = await ServerMember.aggregate([
-    { $match: { userIds: { $in: userIds } } },
+    { $match: { userId: { $in: userIds } } },
     {
       $group: {
         _id: '$serverId',

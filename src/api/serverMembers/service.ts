@@ -24,7 +24,7 @@ const getOne = async (userId: Types.ObjectId | string, serverId: Types.ObjectId 
   const member = await ServerMember
     .findOne({ userId, serverId })
     .populate([
-      { path: 'user', select: 'avatarUrl username createdAt' },
+      { path: 'user', select: 'avatarUrl username createdAt customStatus' },
     ]);
 
   return member;
