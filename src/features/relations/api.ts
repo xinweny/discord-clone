@@ -4,13 +4,9 @@ import type {
   FriendRequestData,
   CreateRelationFields,
   RelationData,
-  GetMutualsQuery,
   AcceptFriendRequestFields,
   RemoveRelationFields,
 } from './types';
-
-import type { ServerData } from '@features/servers/types';
-import type { UserBasicData } from '@features/users/types';
 
 const relationApi = api.injectEndpoints({
   endpoints(build) {
@@ -48,20 +44,6 @@ const relationApi = api.injectEndpoints({
         }),
         invalidatesTags: (...[, , { senderId }]) => [{ type: 'Relations', id: senderId }],
       }),
-      getMutualServers: build.query<ServerData[], GetMutualsQuery>({
-        query: ({ userId1, userId2 }) => ({
-          url: `/users/${userId1}/mutuals/${userId2}/servers`,
-          method: 'get',
-        }),
-        providesTags: (...[, , { userId2 }]) => [{ type: 'MutualServers', id: userId2 }],
-      }),
-      getMutualFriends: build.query<UserBasicData[], GetMutualsQuery>({
-        query: ({ userId1, userId2 }) => ({
-          url: `/users/${userId1}/mutuals/${userId2}/friends`,
-          method: 'get',
-        }),
-        providesTags: (...[, , { userId2 }]) => [{ type: 'MutualFriends', id: userId2 }],
-      }),
     };
   }
 });
@@ -73,6 +55,4 @@ export const {
   useCreateRelationMutation,
   useAcceptFriendRequestMutation,
   useRemoveRelationMutation,
-  useGetMutualServersQuery,
-  useGetMutualFriendsQuery,
 } = relationApi;

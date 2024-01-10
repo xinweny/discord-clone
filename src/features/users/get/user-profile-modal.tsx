@@ -8,7 +8,7 @@ import { Avatar, ColorBanner } from '@components/ui/media';
 import { Tabs } from '@components/ui/tabs';
 
 import { UserStatusIcon } from '../status';
-import { MutualServersList, MutualFriendsList } from '@features/relations/mutuals';
+import { MutualServersList, MutualFriendsList } from '@features/mutuals/list';
 import { UserProfileOptions } from '@features/relations/get';
 
 import { UserHeader, UserInfo } from '.';

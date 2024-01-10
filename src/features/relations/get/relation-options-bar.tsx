@@ -9,7 +9,8 @@ import { ServerAvatar } from '@features/servers/get';
 import { SendFriendRequestButton, ToggleBlockButton } from '../create';
 import { RemoveRelationButton } from '../delete';
 
-import { useGetMutualServersQuery, useGetRelationsQuery } from '../api';
+import { useGetRelationsQuery } from '../api';
+import { useGetMutualServersQuery } from '@features/mutuals/api';
 
 import styles from './relation-options-bar.module.scss';
 
