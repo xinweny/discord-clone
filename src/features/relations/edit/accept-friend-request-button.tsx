@@ -4,10 +4,14 @@ import { useAcceptFriendRequestMutation } from '../api';
 
 type AcceptFriendRequestButtonProps = {
   relationId: string;
+  className?: string;
+  children: React.ReactNode;
 };
 
 export function AcceptFriendRequestButton({
-  relationId
+  relationId,
+  children,
+  className,
 }: AcceptFriendRequestButtonProps) {
   const { user } = useGetUserData();
   const [acceptRequest] = useAcceptFriendRequestMutation();
@@ -20,8 +24,8 @@ export function AcceptFriendRequestButton({
   };
 
   return (
-    <button onClick={handleClick}>
-      <img src="#" alt="Accept Friend Request" />
+    <button onClick={handleClick} className={className}>
+      {children}
     </button>
   );
 }

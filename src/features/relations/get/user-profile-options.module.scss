@@ -1,0 +1,35 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  margin-right: 12px;
+
+  .mainButton {
+    height: 32px;
+    padding: 0px 16px;
+    color: colors.$white;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: colors.$button-positive-bg;
+
+    &:hover {
+      background-color: colors.$button-positive-active;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: colors.$interactive-normal;
+
+    &:hover {
+      cursor: pointer;
+      color: colors.$interactive-hover;
+    }
+  }
+}

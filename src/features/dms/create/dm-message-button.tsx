@@ -4,12 +4,14 @@ import { useCreateDmMutation } from '../api';
 
 type MessageButtonProps = {
   userId: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  btnRef?: React.RefObject<HTMLButtonElement>;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 export function DmMessageButton({
   children,
   userId,
+  btnRef,
   ...props
 }: MessageButtonProps) {
   const navigate = useNavigate();
@@ -32,8 +34,9 @@ export function DmMessageButton({
 
   return (
     <button
-    {...props}
+      {...props}
       onClick={handleClick}
+      ref={btnRef}
     >
       {children}
     </button>

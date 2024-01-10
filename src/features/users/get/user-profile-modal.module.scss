@@ -36,6 +36,10 @@
     .options {
       flex-shrink: 0;
       height: 80px;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
     }
 
     .content {

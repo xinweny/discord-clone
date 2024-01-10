@@ -12,4 +12,18 @@
     font-weight: 500;
     color: colors.$interactive-normal;
   }
+
+  .danger {
+    span {
+      color: colors.$button-danger-bg;
+    }
+  
+    &:hover {
+      span {
+        color: colors.$interactive-hover;
+      }
+
+      background-color: colors.$button-danger-bg;
+    }
+  }
 }

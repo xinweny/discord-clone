@@ -10,12 +10,14 @@ type SendFriendRequestButtonProps = {
   senderId: string;
   recipientId: string;
   className?: string;
+  btnRef?: React.RefObject<HTMLButtonElement>;
 };
 
 export function ToggleBlockButton({
   senderId,
   recipientId,
   className,
+  btnRef,
 }: SendFriendRequestButtonProps) {
   const { data: relations, isSuccess } = useGetRelationsQuery(senderId);
 
@@ -41,6 +43,7 @@ export function ToggleBlockButton({
 
   return (
     <button
+      ref={btnRef}
       className={className}
       onClick={handleClick}
     >
