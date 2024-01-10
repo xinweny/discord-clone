@@ -7,7 +7,9 @@ import { useUpdateCurrentDate } from '@hooks';
 import { emitEvents } from '@services/websocket';
 
 import { SendMessageForm } from '../send';
+
 import { MessageCard } from './message-card';
+import { MessageDivider } from './message-divider';
 
 import { useGetMessagesQuery } from '../api';
 
@@ -77,16 +79,25 @@ export function MessagesContainer({
     <div className={styles.container}>
       <div onScroll={handleScroll} className={styles.content} ref={listRef}>
         {(messages.items.length === 0 || next.current === 0) && welcomeComponent}
-        {messages.items.map(
-          (message, index) => <MessageCard
-            key={message._id}
-            message={message}
-            currentDate={currentDate}
-            isDm={!serverId}
-            authorized={authorized}
-            prev={messages.items[index - 1]}
-          />
-        )}
+        {messages.items.map((message, index) => {
+          const prev = messages.items[index - 1];
+          const prevSentAt = prev?.createdAt;
+          const { createdAt } = message;
+
+          return (<div key={message._id}>
+            <MessageDivider
+              prevDate={prevSentAt}
+              currentDate={createdAt}
+            />
+            <MessageCard
+              message={message}
+              currentDate={currentDate}
+              isDm={!serverId}
+              authorized={authorized}
+              prev={prev}
+            />
+          </div>);
+        })}
       </div>
       <SendMessageForm
         placeholder={formPlaceholder}
