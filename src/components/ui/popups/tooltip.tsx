@@ -44,6 +44,7 @@ export function Tooltip({
     show: isHovered,
     btnRef: divRef,
     popupRef: tooltipRef,
+    deps: text,
   });
 
   return (

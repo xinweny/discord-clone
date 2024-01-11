@@ -7,6 +7,7 @@ type ArgsData = {
   popupRef: React.RefObject<Element>;
   position: PositionData;
   isLoaded?: boolean;
+  deps?: any,
 };
 
 export type PositionData = {
@@ -97,6 +98,7 @@ export const usePopupPos = ({
   popupRef,
   isLoaded = true,
   position,
+  deps,
 }: ArgsData) => {
   const [style, setStyle] = useState<React.CSSProperties>({
     opacity: 0,
@@ -118,7 +120,7 @@ export const usePopupPos = ({
     }, 0);
     
     return () => { clearTimeout(timeoutId); };
-  }, [show, isLoaded, windowSize]);
+  }, [show, isLoaded, windowSize, deps]);
 
   return style;
 };

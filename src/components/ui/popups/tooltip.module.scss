@@ -23,7 +23,7 @@ $arrow-offset-double: calc(2 * $arrow-offset);
   position: relative;
   background: colors.$black;
   color: colors.$text-primary;
-  width: fit-content;
+  width: fit-content !important;
   height: fit-content !important;
   font-size: 14px;
   font-weight: 600;
