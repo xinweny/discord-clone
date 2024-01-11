@@ -1,0 +1,45 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+
+  label {
+    margin: 0;
+  }
+
+  .button {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px;
+    border-radius: 4px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.addButton {
+      background-color: colors.$brand-500;
+
+      &:hover {
+        background-color: colors.$brand-560;
+      }
+    }
+
+    &.removeButton:hover {
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: colors.$header-primary;
+  }
+}

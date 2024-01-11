@@ -1,5 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
+import { Separator } from '../displays';
+
 import styles from './form-group.module.scss';
 
 type FormGroupProps = {
@@ -10,6 +12,7 @@ type FormGroupProps = {
   required?: boolean;
   name?: string;
   className?: string;
+  withSeparator?: boolean;
 };
 
 export function FormGroup({
@@ -19,23 +22,27 @@ export function FormGroup({
   required = false,
   children,
   className,
+  withSeparator = false,
 }: FormGroupProps) {
   const { formState } = useFormContext();
 
   const error = name ? formState.errors[name] : undefined;
 
   return (
-    <div className={`${styles.group} ${className || ''}`}>
-      <label htmlFor={htmlFor} className={error && styles.error}>
-        <h2 className={styles.label}>{label.toUpperCase()}</h2>
-        <span className={styles.errorMessage}>
-          {name && error
-            ? ` - ${error.message}`
-            : `${required ? '*' : ''}`
-          }
-        </span>
-      </label>
-      {children}
-    </div>
+    <>
+      <div className={`${styles.group} ${className || ''}`}>
+        <label htmlFor={htmlFor} className={error && styles.error}>
+          <h2 className={styles.label}>{label.toUpperCase()}</h2>
+          <span className={styles.errorMessage}>
+            {name && error
+              ? ` - ${error.message}`
+              : `${required ? '*' : ''}`
+            }
+          </span>
+        </label>
+        {children}
+      </div>
+      {withSeparator && <Separator className={styles.separator} />}
+    </>
   );
 }

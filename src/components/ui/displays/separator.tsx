@@ -1,9 +1,15 @@
+import styles from './separator.module.scss';
+
 type SeparatorProps = {
-  className: string;
+  className?: string;
+  axis?: 'x' | 'y';
 };
 
-export function Separator({ className }: SeparatorProps) {
+export function Separator({
+  className,
+  axis = 'x',
+}: SeparatorProps) {
   return (
-    <div className={className}></div>
-  )
+    <div className={`${styles.separator} ${styles[axis]} ${className}`}></div>
+  );
 }

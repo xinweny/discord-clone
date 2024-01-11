@@ -10,6 +10,8 @@ import { useUpdateUserMutation } from '../api';
 import { UserProfilePreview } from './user-profile-preview';
 import { ProfileAvatarInput } from './profile-avatar-input';
 
+import styles from './profiles-settings-form.module.scss';
+
 import {
   TextInput,
   ColorInput,
@@ -61,38 +63,42 @@ export function ProfilesSettingsForm() {
   };
 
   return (
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FormGroup label="display name" htmlFor="displayName">
-            <TextInput
-              name="displayName"
-              id="displayName"
-              label="Display Name"
+      <div className={styles.container}>
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormGroup label="display name" htmlFor="displayName" withSeparator>
+              <TextInput
+                name="displayName"
+                id="displayName"
+                label="Display Name"
+              />
+            </FormGroup>
+            <ProfileAvatarInput />
+            <FormGroup label="banner color" htmlFor="bannerColor" withSeparator>
+              <ColorInput
+                name="bannerColor"
+                id="bannerColor"
+                label="Banner Color"
+              />
+            </FormGroup>
+            <FormGroup label="about me" htmlFor="bio" withSeparator>
+              <TextAreaInput
+                name="bio"
+                id="bio"
+                label="About Me"
+                maxLength={190}
+                options={{ showCharCount: true }}
+              />
+            </FormGroup>
+            <FormChangesAlert
+              defaultValues={defaultValues}
+              className={styles.popup}
             />
+          </form>
+          <FormGroup label="preview">
+            <UserProfilePreview />
           </FormGroup>
-          <ProfileAvatarInput />
-          <FormGroup label="banner color" htmlFor="bannerColor">
-            <ColorInput
-              name="bannerColor"
-              id="bannerColor"
-              label="Banner Color"
-            />
-          </FormGroup>
-          <FormGroup label="about me" htmlFor="bio">
-            <TextAreaInput
-              name="bio"
-              id="bio"
-              label="About Me"
-              maxLength={190}
-              options={{ showCharCount: true }}
-            />
-          </FormGroup>
-          <FormChangesAlert defaultValues={defaultValues} />
-        </form>
-        <div>
-          <p>PREVIEW</p>
-          <UserProfilePreview />
-        </div>
-      </FormProvider>
+        </FormProvider>
+      </div>
   );
 }
