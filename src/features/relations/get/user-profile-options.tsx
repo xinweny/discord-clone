@@ -17,9 +17,14 @@ import styles from './user-profile-options.module.scss';
 type UserProfileOptionsProps = {
   senderId: string;
   recipientId: string;
+  closeModal?: () => void;
 };
 
-export function UserProfileOptions({ senderId, recipientId }: UserProfileOptionsProps) {
+export function UserProfileOptions({
+  senderId,
+  recipientId,
+  closeModal,
+}: UserProfileOptionsProps) {
   const { data: relations } = useGetRelationsQuery(senderId);
 
   const relation = relations?.find(relation => relation.userId === recipientId);
@@ -44,6 +49,7 @@ export function UserProfileOptions({ senderId, recipientId }: UserProfileOptions
         <DmMessageButton
           userId={recipientId}
           className={buttonStyles}
+          onClick={closeModal}
         >
           Send Message
         </DmMessageButton>

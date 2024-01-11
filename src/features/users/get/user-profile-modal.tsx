@@ -60,6 +60,7 @@ export function UserProfileModal({
           {!isSelf && <UserProfileOptions
             senderId={selfId}
             recipientId={userId}
+            closeModal={onClose}
           />}
         </div>
         <div className={styles.content}>

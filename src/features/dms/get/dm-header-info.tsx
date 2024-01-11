@@ -9,6 +9,8 @@ import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';
 
 import { UserStatusIcon } from '@features/users/status';
+import { UserProfileButton } from '@features/users/get';
+
 import {
   EditGroupAvatarForm,
   EditGroupNameForm,
@@ -41,12 +43,14 @@ export function DmHeaderInfo({ dm }: DmHeaderInfoProps) {
             src={avatarUrl}
             notification={<UserStatusIcon userId={dmUsers[0]._id} />}
           />
-          <Tooltip
-            text={dmUsers[0].username}
-            {...tooltipProps}
-          >
-            <p className={styles.displayName}>{name}</p>
-          </Tooltip>
+          <UserProfileButton userId={dmUsers[0]._id}>
+            <Tooltip
+              text={dmUsers[0].username}
+              {...tooltipProps}
+            >
+              <span className={styles.displayName}>{name}</span>
+            </Tooltip>
+          </UserProfileButton>
         </>
       }
     </div>

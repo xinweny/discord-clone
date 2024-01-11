@@ -6,12 +6,14 @@ type MessageButtonProps = {
   userId: string;
   children?: React.ReactNode;
   btnRef?: React.RefObject<HTMLButtonElement>;
+  onClick?: () => void;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 export function DmMessageButton({
   children,
   userId,
   btnRef,
+  onClick,
   ...props
 }: MessageButtonProps) {
   const navigate = useNavigate();
@@ -30,6 +32,8 @@ export function DmMessageButton({
     } catch {
       navigate(homeUrl);
     }
+    
+    if (onClick) onClick();
   };
 
   return (

@@ -1,4 +1,7 @@
+import { useRef } from 'react';
 import { useClickAway } from '@uidotdev/usehooks';
+
+import { mergeRefs } from '@utils';
 
 import { PortalWrapper } from '@components/wrappers';
 
@@ -27,12 +30,28 @@ export function ModalWrapper({
   withClickAway = true,
   hasScroll = true,
 }: ModalWrapperProps) {
-  const handleClose = (e: React.MouseEvent) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickAway = (e: MouseEvent) => {
     e.stopPropagation();
-    closeModal();
+
+    const { clientX, clientY } = e;
+    const { left, right, top, bottom } = modalRef.current!.getBoundingClientRect();
+
+    const contextMenus = Array
+      .from(document.getElementById('portal_layer_3')?.childNodes || [])
+      .map(child => child.firstChild!);
+
+    if (
+      !(
+        (clientX >= left && clientX <= right) &&
+        (clientY >= top && clientY <= bottom)
+      ) ||
+      contextMenus.some(menu => menu.contains(e.target as Node))
+    ) closeModal();
   };
 
-  const clickAwayRef = useClickAway(closeModal) as React.RefObject<HTMLDivElement>;
+  const clickAwayRef = useClickAway(handleClickAway as (e: Event) => void) as React.RefObject<HTMLDivElement>;
 
   return (
     <PortalWrapper
@@ -42,12 +61,12 @@ export function ModalWrapper({
     >
       <div
         className={`${styles.modal} ${className || ''} ${hasScroll ? styles.scroll : ''}`}
-        ref={withClickAway ? clickAwayRef : undefined}
+        ref={mergeRefs(modalRef, withClickAway ? clickAwayRef : undefined)}
       >
         {header}
         {children}
         {closeBtnRef && (
-          <button ref={closeBtnRef} type="button" onClick={handleClose}>
+          <button ref={closeBtnRef} type="button" onClick={closeModal}>
             <CrossIcon />
           </button>
         )}

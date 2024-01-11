@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import type { CategoryData } from '../types';
 
-import { ContextMenuWrapper } from '@components/ui/context-menu';
+import { type ContextMenuOptionsData, ContextMenuWrapper } from '@components/ui/context-menu';
 
 import { EditCategoryButton } from '../edit';
 import { DeleteCategoryButton } from '../delete';
@@ -21,7 +21,7 @@ export function CategoryContextMenuWrapper({
   const editBtnRef = useRef<HTMLButtonElement>(null);
   const deleteBtnRef = useRef<HTMLButtonElement>(null);
 
-  const options = [
+  const options: ContextMenuOptionsData[] = [
     {
       label: 'Edit Category',
       action: () => { if (editBtnRef) editBtnRef.current?.click(); },
