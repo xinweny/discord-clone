@@ -17,8 +17,6 @@ export function UploadFileButton({
   fileWatch,
   authorized,
 }: UploadFileButtonProps) {
-  if (!authorized) return null;
-
   const { setAllFiles } = fileWatch;
 
   return (
@@ -34,6 +32,7 @@ export function UploadFileButton({
               setAllFiles(prev => [...prev, ...e.target.files]);
             }}}
             hidden
+            disabled={!authorized}
           />
         </label>
       </Tooltip>

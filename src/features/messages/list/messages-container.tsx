@@ -19,12 +19,14 @@ type MessagesContainerProps = {
   welcomeComponent: React.ReactNode;
   formPlaceholder: string;
   authorized: boolean;
+  errorPlaceholder?: string;
 };
 
 export function MessagesContainer({
   welcomeComponent,
   formPlaceholder,
   authorized,
+  errorPlaceholder,
 }: MessagesContainerProps) {
   const { serverId, roomId } = useParams();
 
@@ -102,6 +104,7 @@ export function MessagesContainer({
       <SendMessageForm
         placeholder={formPlaceholder}
         authorized={authorized}
+        errorPlaceholder={errorPlaceholder}
       />
     </div>
   );

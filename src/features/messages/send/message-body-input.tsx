@@ -29,6 +29,7 @@ type MessageBodyInputProps = {
   editor: CustomEditor;
   message?: MessageData;
   setEmojis: React.Dispatch<React.SetStateAction<MessageEmojiData[]>>;
+  errorPlaceholder?: string;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function MessageBodyInput({
@@ -38,6 +39,7 @@ export function MessageBodyInput({
   editor,
   message,
   setEmojis,
+  errorPlaceholder = 'You do not have permission to send messages in this channel.',
   ...props
 }: MessageBodyInputProps) {
   const { roomId } = useParams();
@@ -94,9 +96,7 @@ export function MessageBodyInput({
           >
             <Editable
               className={styles.input}
-              placeholder={!authorized
-                ? 'You do not have permission to send messages in this channel.'
-                : placeholder}
+              placeholder={!authorized ? errorPlaceholder : placeholder}
               renderPlaceholder={({ children, attributes }) => {
                 const style = attributes.style;
                 style.top = '50%';

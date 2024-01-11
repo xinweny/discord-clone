@@ -21,9 +21,14 @@ import styles from './send-message-form.module.scss';
 type SendMessageFormProps = {
   authorized?: boolean;
   placeholder?: string;
+  errorPlaceholder?: string;
 };
 
-export function SendMessageForm({ authorized = true, placeholder }: SendMessageFormProps) {
+export function SendMessageForm({
+  authorized = true,
+  placeholder,
+  errorPlaceholder,
+}: SendMessageFormProps) {
   const { roomId, serverId } = useParams();
 
   const defaultValues = {
@@ -77,13 +82,14 @@ export function SendMessageForm({ authorized = true, placeholder }: SendMessageF
     <div className={styles.container}>
       <FormProvider {...methods}>
         <AttachmentsPreview fileWatch={fileWatch} />
-        <form className={styles.form}>
+        <form className={`${styles.form} ${authorized ? '' : styles.unauthorized}`}>
           <UploadFileButton authorized={authorized} fileWatch={fileWatch} />
           <MessageBodyInput
             name="body"
             authorized={authorized}
             enterSubmit={enterSubmit}
             placeholder={placeholder}
+            errorPlaceholder={errorPlaceholder}
             editor={editor}
             setEmojis={setEmojis}
           />

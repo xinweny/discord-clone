@@ -1,8 +1,10 @@
 import type { DMData } from '../types';
-4
-import { useGetUserData } from '@features/auth/hooks';
+import { RelationStatus } from '@features/relations/types';
 
 import { getDmInfo } from '@features/dms/utils';
+
+import { useGetUserData } from '@features/auth/hooks';
+import { useGetRelationsQuery } from '@features/relations/api';
 
 import { RoomWelcome, RoomTypes } from '@components/ui/displays';
 
@@ -26,6 +28,8 @@ export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
   const { name, avatarUrl, participants } = getDmInfo(dm, userId);
   const { isGroup, participantIds } = dm;
 
+  const { data: relations } = useGetRelationsQuery(userId);
+
   return (
     <div className={styles.container}>
       {isInCurrentRoomCall
@@ -44,7 +48,11 @@ export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
             />}
           />}
           formPlaceholder={`Message ${isGroup ? '' : '@'}${name}`}
-          authorized={participantIds.includes(userId)}
+          authorized={isGroup
+            ? participantIds.includes(userId)
+            : !relations?.find(relation => relation.userId === participants[0]._id && relation.status === RelationStatus.BLOCKED)
+          }
+          errorPlaceholder={isGroup ? undefined : 'You cannot send messages to a user you have blocked.'}
         />
     </div>
   );

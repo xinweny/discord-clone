@@ -46,8 +46,8 @@ export function ModalWrapper({
       !(
         (clientX >= left && clientX <= right) &&
         (clientY >= top && clientY <= bottom)
-      ) ||
-      contextMenus.some(menu => menu.contains(e.target as Node))
+      ) &&
+      !contextMenus.some(menu => menu.contains(e.target as Node))
     ) closeModal();
   };
 
