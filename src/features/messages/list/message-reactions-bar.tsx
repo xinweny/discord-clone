@@ -1,5 +1,6 @@
+import { useHover } from '@uidotdev/usehooks';
+
 import { useActiveIds } from '@hooks';
-import { useDisplay } from '@components/hooks';
 
 import { Tooltip } from '@components/ui/popups';
 
@@ -16,18 +17,18 @@ type MessageReactionsBarProps = {
 };
 
 export function MessageReactionsBar({ messageId, authorized }: MessageReactionsBarProps) {
-  const { hover, visible, hide } = useDisplay();
+  const [hoverRef, isHovering] = useHover();
+
   const activeTabState = useActiveIds();
 
   return (
-    <div {...hover} className={styles.container}>
+    <div ref={hoverRef} className={styles.container}>
       <MessageReactionsList messageId={messageId} authorized={authorized} />
-      {(visible || activeTabState.id === 'addReaction') && (
+      {(isHovering || activeTabState.id === 'addReaction') && (
         <div className={styles.button}>
           <Tooltip text="Add Reaction" direction="top" gap={2}>
             <AddNewReactionButton
               authorized={authorized}
-              hide={hide}
               activeTabState={activeTabState}
               position={{
                 direction: 'right',

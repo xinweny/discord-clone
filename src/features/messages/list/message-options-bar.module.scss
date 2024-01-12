@@ -3,7 +3,6 @@
 .container {
   position: absolute;
   overflow: hidden;
-  height: 32px;
   display: flex;
   align-items: stretch;
   top: -16px;
@@ -12,12 +11,13 @@
   border: 1px solid colors.$bg-secondary-alt;
   border-radius: 4px;
 
-  > * {
-    &, button {
+  > button {
+    padding: 4px 6px;
+    
+    &, > div {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2px 4px;
     }
 
     &:hover {
@@ -25,6 +25,14 @@
 
       path {
         fill: colors.$interactive-hover;
+      }
+    }
+
+    &.active {
+      background-color: colors.$bg-modifier-selected !important;
+      
+      path {
+        fill: colors.$white !important;
       }
     }
   }

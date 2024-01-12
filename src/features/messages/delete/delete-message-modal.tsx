@@ -9,10 +9,15 @@ import { DeleteMessageProtip } from './delete-message-protip';
 
 import { useDeleteMessageMutation } from '../api';
 
+type DeleteMessageModalProps = {
+  afterClose?: () => void;
+} & ModalProps;
+
 export function DeleteMessageModal({
   isOpen,
   onClose,
-}: ModalProps) {
+  afterClose,
+}: DeleteMessageModalProps) {
   const message = useMessageContext();
 
   const [deleteMessage] = useDeleteMessageMutation();
@@ -34,8 +39,14 @@ export function DeleteMessageModal({
       title="Delete Message"
       message="Are you sure you want to delete this message?"
       isOpen={isOpen}
-      onClose={onClose}
-      onConfirm={onConfirm}
+      onClose={() => {
+        onClose();
+        if (afterClose) afterClose();
+      }}
+      onConfirm={() => {
+        onConfirm();
+        if (afterClose) afterClose();
+      }}
       confirmLabel="Delete"
       hasScroll={false}
     >

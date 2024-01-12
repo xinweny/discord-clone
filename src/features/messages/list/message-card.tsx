@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { DateTime } from 'luxon';
+import { useHover } from '@uidotdev/usehooks';
 
 import type { MessageData } from '../types';
 
 import { useActiveIds } from '@hooks';
-import { useDisplay } from '@components/hooks';
 import { useTenorGif } from '../hooks';
 
 import { MessageContext } from '../context';
@@ -39,8 +39,9 @@ export function MessageCard({
   authorized = true,
   prev,
 }: MessageCardProps) {
-  const { visible, hover, hide } = useDisplay();
   const activeTabState = useActiveIds();
+
+  const [hoverRef, isHovering] = useHover();
   
   const {
     tenorError,
@@ -57,10 +58,13 @@ export function MessageCard({
 
   return (
     <MessageContext.Provider value={message}>
-      <div className={`${styles.card} ${!isGrouped ? styles.headMessage : ''}`} {...hover}>
+      <div
+        className={`${styles.card} ${!isGrouped ? styles.headMessage : ''}`}
+        ref={hoverRef}
+      >
         <div className={styles.avatar}>
           {isGrouped
-            ? (visible && <p>{DateTime.fromISO(message.createdAt).toFormat('h:mm a')}</p>)
+            ? (isHovering && <span>{DateTime.fromISO(message.createdAt).toFormat('h:mm a')}</span>)
             : <Avatar src={message.sender.avatarUrl} />
           }
         </div>
@@ -85,8 +89,7 @@ export function MessageCard({
           <MessageReactionsBar messageId={message._id} authorized={authorized} />
         </div>
         <MessageOptionsBar
-          visible={visible}
-          hide={hide}
+          visible={isHovering}
           activeTabState={activeTabState}
           refs={{
             deleteMessageBtn: deleteMessageBtnRef,
@@ -94,10 +97,10 @@ export function MessageCard({
           authorized={authorized}
         />
       </div>
-      <div>
+      <div hidden>
         <DeleteMessageButton
           btnRef={deleteMessageBtnRef}
-          hidden
+          afterClose={() => { activeTabState.set(null); }}
         />
       </div>
     </MessageContext.Provider>

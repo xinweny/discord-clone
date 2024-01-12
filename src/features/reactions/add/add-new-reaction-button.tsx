@@ -7,11 +7,12 @@ import type { ActiveIdState } from '@hooks';
 import type { PositionData } from '@components/hooks';
 
 type AddNewReactionButtonProps = {
-  hide: () => void;
+  hide?: () => void;
   activeTabState: ActiveIdState;
   authorized: boolean;
   children: React.ReactNode;
-  position: PositionData
+  position: PositionData;
+  className?: string;
 };
 
 export function AddNewReactionButton({
@@ -20,6 +21,7 @@ export function AddNewReactionButton({
   authorized,
   children,
   position,
+  className,
 }: AddNewReactionButtonProps) {
   const { set } = activeTabState;
 
@@ -35,10 +37,11 @@ export function AddNewReactionButton({
       onOpen={() => { set('addReaction'); }}
       onClose={() => {
         set(null);
-        hide();
+        if (hide) hide();
       }}
       btnRef={addReactionBtnRef}
       position={position}
+      className={className}
     >
       {children}
     </Popout>

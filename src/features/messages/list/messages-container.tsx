@@ -86,19 +86,21 @@ export function MessagesContainer({
           const prevSentAt = prev?.createdAt;
           const { createdAt } = message;
 
-          return (<div key={message._id}>
-            <MessageDivider
-              prevDate={prevSentAt}
-              currentDate={createdAt}
-            />
-            <MessageCard
-              message={message}
-              currentDate={currentDate}
-              isDm={!serverId}
-              authorized={authorized}
-              prev={prev}
-            />
-          </div>);
+          return (
+            <div key={message._id}>
+              <MessageDivider
+                prevDate={prevSentAt}
+                currentDate={createdAt}
+              />
+              <MessageCard
+                message={message}
+                currentDate={currentDate}
+                isDm={!serverId}
+                authorized={authorized}
+                prev={prev}
+              />
+            </div>
+          );
         })}
       </div>
       <SendMessageForm

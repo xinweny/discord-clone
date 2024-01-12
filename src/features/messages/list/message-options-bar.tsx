@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ActiveIdState } from '@hooks';
 
 import { Tooltip } from '@components/ui/popups';
@@ -16,7 +17,6 @@ import styles from './message-options-bar.module.scss';
 
 type MessageOptionsBarProps = {
   visible: boolean;
-  hide: () => void;
   activeTabState: ActiveIdState;
   refs: {
     deleteMessageBtn: React.RefObject<HTMLButtonElement>;
@@ -26,7 +26,6 @@ type MessageOptionsBarProps = {
 
 export function MessageOptionsBar({
   visible,
-  hide,
   activeTabState,
   refs,
   authorized,
@@ -35,43 +34,43 @@ export function MessageOptionsBar({
 
   const msgAuthorized = useMessageAuthorize();
 
-  if (!visible && id !== 'addReaction') return null;
+  if ((!visible && id == null) || id === 'editMessage') return null;
 
   const tooltipProps = {
     direction: 'top' as const,
-    gap: 4,
+    gap: 8,
   };
 
   return (
     <div className={styles.container}>
-      <Tooltip text="Add Reaction" {...tooltipProps}>
-        <AddNewReactionButton
-          authorized={authorized}
-          activeTabState={activeTabState}
-          hide={hide}
-          position={{
-            direction: 'left',
-            align: 'start',
-            gap: 4,
-          }}
-        >
+      <AddNewReactionButton
+        authorized={authorized}
+        activeTabState={activeTabState}
+        position={{
+          direction: 'left',
+          align: 'start',
+          gap: 8,
+        }}
+        className={id === 'addReaction' ? styles.active : undefined}
+      >
+        <Tooltip text="Add Reaction" {...tooltipProps}>
           <AddReactionIcon />
-        </AddNewReactionButton>
-      </Tooltip>
+        </Tooltip>
+      </AddNewReactionButton>
       {msgAuthorized && <>
-        <Tooltip text="Edit Message" {...tooltipProps}>
-          <EditMessageButton set={set} id={id}>
+        <EditMessageButton set={set} id={id}>
+          <Tooltip text="Edit Message" {...tooltipProps}>
             <PencilIcon />
-          </EditMessageButton>
-        </Tooltip>
-        <Tooltip text="Delete Message" {...tooltipProps}>
-          <DeleteMessageOptionsButton
-            set={set}
-            deleteBtnRef={refs.deleteMessageBtn}
-          >
+          </Tooltip>
+        </EditMessageButton>
+        <DeleteMessageOptionsButton
+          set={set}
+          deleteBtnRef={refs.deleteMessageBtn}
+        >
+          <Tooltip text="Delete Message" {...tooltipProps}>
             <TrashCanIcon />
-          </DeleteMessageOptionsButton>
-        </Tooltip>
+          </Tooltip>
+        </DeleteMessageOptionsButton>
       </>}
     </div>
   );
