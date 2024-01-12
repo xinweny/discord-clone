@@ -1,6 +1,8 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { UserServerData } from '@features/servers/types';
+
 import type {
   EditServerMemberFields,
   ServerMemberData
@@ -24,10 +26,12 @@ import styles from './edit-server-member-form.module.scss';
 
 type EditServerMemberFormProps = {
   member: ServerMemberData;
+  server: UserServerData;
 };
 
 export function EditServerMemberForm({
   member,
+  server,
 }: EditServerMemberFormProps) {
   const defaultValues = {
     memberId: member._id,
@@ -93,7 +97,8 @@ export function EditServerMemberForm({
           </div>
           <FormChangesAlert defaultValues={defaultValues} />
         </form>
-        <FormGroup label="preview">
+        <FormGroup
+          label={`preview for ${server.name}`}>
           <UserProfilePreview />
         </FormGroup>
       </FormProvider>
