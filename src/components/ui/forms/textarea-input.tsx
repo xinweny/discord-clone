@@ -8,6 +8,8 @@ import type {
 
 import { TextArea, TextAreaProps } from './textarea';
 
+import styles from './textarea-input.module.scss';
+
 type FormTextAreaOptions = {
   showCharCount?: boolean;
 };
@@ -41,16 +43,18 @@ export function TextAreaInput<TFormValues extends FieldValues>({
   const { showCharCount } = options;
 
   return (
-    <div className={className} aria-live="polite">
+    <div className={`${styles.textArea} ${className}`} aria-live="polite">
       <TextArea
         id={id}
         maxLength={maxLength}
         {...props}
         {...(register && register(name, rules))}
       />
-      {(control && showCharCount && maxLength) && (
-        <p>{maxLength - text.length}</p>
-      )}
+      <div className={styles.control}>
+        {(control && showCharCount && maxLength) && (
+          <span>{maxLength - text.length}</span>
+        )}
+      </div>
     </div>
   );
 }

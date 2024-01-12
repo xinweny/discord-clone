@@ -1,0 +1,36 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.textArea {
+  color: colors.$text-primary;
+  background-color: colors.$bg-tertiary;
+  border-radius: 4px;
+  display: flex;
+  padding: 12px 10px 12px 16px;
+  height: calc(136px - 24px);
+  width: 100%;
+
+  textarea {
+    flex-grow: 1;
+    border: none;
+    appearance: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+    color: colors.$text-primary;
+    font-size: 16px;
+    line-height: 20px;
+
+    @include mixins.hover-scroller(colors.$bg-floating);
+  }
+
+  .control {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    span {
+      margin-left: 4px;
+    }
+  }
+}
