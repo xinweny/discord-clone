@@ -49,7 +49,10 @@ export function ConfirmationModal({
     >
       <div className="content">
         {confirmation && (
-          <FormGroup label={confirmation.label}>
+          <div>
+            <label>
+              <h2>{confirmation.label}</h2>
+            </label>
             <Input
               name="confirmation"
               type="text"
@@ -58,7 +61,7 @@ export function ConfirmationModal({
                 if (e.target.value === confirmation.value) setIsDisabled(false);
               }}
             />
-          </FormGroup>
+          </div>
         )}
         {children}
       </div>

@@ -9,6 +9,10 @@ import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentati
 
 import { DeleteServerButton } from '../delete';
 
+import TrashCanIcon from '@assets/icons/trash-can.svg?react';
+
+import styles from './server-settings-sidebar.module.scss';
+
 export function ServerSettingsSidebar({
   activeTabId, setActiveTabId
 }: SettingsSidebarProps) {
@@ -23,7 +27,10 @@ export function ServerSettingsSidebar({
         setActiveTabId={setActiveTabId}
       />
       <TabGroupLayout>
-        <DeleteServerButton />
+        <DeleteServerButton className={styles.button}>
+          <span>Delete Server</span>
+          <TrashCanIcon />
+        </DeleteServerButton>
       </TabGroupLayout>
     </SettingsSidebar>
   );
