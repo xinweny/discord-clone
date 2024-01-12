@@ -2,6 +2,8 @@ import { useFormContext } from 'react-hook-form';
 
 import { Input, InputProps } from './input';
 
+import styles from './color-input.module.scss';
+
 import type {
   RegisterOptions,
   FieldValues,
@@ -12,7 +14,6 @@ type ColorInputProps<
   TFormValues extends FieldValues
 > = {
   name: Path<TFormValues>;
-  hidden?: boolean;
   rules?: RegisterOptions;
   setPreview?: React.ChangeEventHandler;
 } & Omit<InputProps, 'name' | 'type'>;
@@ -22,13 +23,12 @@ export function ColorInput<TFormValues extends FieldValues>({
   name,
   id,
   setPreview,
-  hidden = false,
   ...props
 }: ColorInputProps<TFormValues>) {
   const { register } = useFormContext();
 
   return (
-    <div className={className} aria-live="polite">
+    <label className={`${styles.swatch} ${className || ''}`} aria-live="polite">
       <Input
         type="color"
         id={id}
@@ -38,8 +38,7 @@ export function ColorInput<TFormValues extends FieldValues>({
             if (setPreview) setPreview(e.target.value);
           },
         }))}
-        hidden={hidden}
       />
-    </div>
+    </label>
   );
 }

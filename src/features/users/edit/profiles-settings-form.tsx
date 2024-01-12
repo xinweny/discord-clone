@@ -81,7 +81,7 @@ export function ProfilesSettingsForm() {
                 label="Banner Color"
               />
             </FormGroup>
-            <FormGroup label="about me" htmlFor="bio" withSeparator>
+            <FormGroup label="about me" htmlFor="bio">
               <TextAreaInput
                 name="bio"
                 id="bio"
@@ -90,10 +90,7 @@ export function ProfilesSettingsForm() {
                 options={{ showCharCount: true }}
               />
             </FormGroup>
-            <FormChangesAlert
-              defaultValues={defaultValues}
-              className={styles.popup}
-            />
+            <FormChangesAlert defaultValues={defaultValues} />
           </form>
           <FormGroup label="preview">
             <UserProfilePreview />

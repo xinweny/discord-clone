@@ -5,7 +5,9 @@ import { FormGroup, FileInput } from '@components/ui/forms';
 import styles from './profile-avatar-input.module.scss';
 
 export function ProfileAvatarInput() {
-  const { setValue } = useFormContext();
+  const { watch, setValue } = useFormContext();
+
+  const fileList = watch('file');
 
   return (
     <FormGroup label="avatar" withSeparator>
@@ -25,13 +27,15 @@ export function ProfileAvatarInput() {
             hidden
           />
         </label>
-        <button
-          className={`${styles.button} ${styles.removeButton}`}
-          type="button"
-          onClick={() => { setValue('file', undefined); }}
-        >
-          <span>Remove Avatar</span>
-        </button>
+        {fileList && (
+          <button
+            className={`${styles.button} ${styles.removeButton}`}
+            type="button"
+            onClick={() => { setValue('file', undefined); }}
+          >
+            <span>Remove Avatar</span>
+          </button>
+        )}
       </div>
     </FormGroup>
   );
