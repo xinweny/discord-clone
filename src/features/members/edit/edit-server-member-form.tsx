@@ -16,7 +16,11 @@ import {
   FormChangesAlert,
 } from '@components/ui/forms';
 
+import { UserProfilePreview } from '@features/users/edit';
+
 import { useUpdateServerMemberMutation } from '../api';
+
+import styles from './edit-server-member-form.module.scss';
 
 type EditServerMemberFormProps = {
   member: ServerMemberData;
@@ -59,35 +63,40 @@ export function EditServerMemberForm({
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <FormGroup label="Server Nickname" htmlFor="display-name">
-            <TextInput
-              id="display-name"
-              name="displayName"
-              value={displayName}
-            />
-          </FormGroup>
-          <FormGroup label="Banner Color" htmlFor="banner-color">
-            <ColorInput
-              id="banner-color"
-              name="bannerColor"
-              value={bannerColor}
-            />
-          </FormGroup>
-          <FormGroup label="About Me" htmlFor="bio">
-            <TextAreaInput
-              id="bio"
-              name="bio"
-              value={bio}
-              maxLength={190}
-              options={{ showCharCount: true }}
-            />
-          </FormGroup>
-        </div>
-        <FormChangesAlert defaultValues={defaultValues} />
-      </form>
-    </FormProvider>
+    <div className={styles.container}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <FormGroup label="Server Nickname" htmlFor="display-name" withSeparator>
+              <TextInput
+                id="display-name"
+                name="displayName"
+                value={displayName}
+              />
+            </FormGroup>
+            <FormGroup label="Banner Color" htmlFor="banner-color" withSeparator>
+              <ColorInput
+                id="banner-color"
+                name="bannerColor"
+                value={bannerColor}
+              />
+            </FormGroup>
+            <FormGroup label="About Me" htmlFor="bio">
+              <TextAreaInput
+                id="bio"
+                name="bio"
+                value={bio}
+                maxLength={190}
+                options={{ showCharCount: true }}
+              />
+            </FormGroup>
+          </div>
+          <FormChangesAlert defaultValues={defaultValues} />
+        </form>
+        <FormGroup label="preview">
+          <UserProfilePreview />
+        </FormGroup>
+      </FormProvider>
+    </div>
   );
 }

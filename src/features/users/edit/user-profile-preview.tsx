@@ -12,7 +12,7 @@ import { Separator } from '@components/ui/displays';
 
 export function UserProfilePreview() {
   const { user } = useGetUserData();
-  const { avatarUrl, username } = user.data!;
+  const { id: userId, avatarUrl, username } = user.data!;
 
   const { control } = useFormContext();
 
@@ -28,7 +28,7 @@ export function UserProfilePreview() {
         <div className={styles.wrapper}>
           <Avatar
             src={fileDataUrl || avatarUrl}
-            notification={<UserStatusIcon userId={user.data!.id} />}
+            notification={<UserStatusIcon userId={userId} />}
           />
         </div>
       </ColorBanner>
