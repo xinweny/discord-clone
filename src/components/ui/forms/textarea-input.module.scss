@@ -31,6 +31,10 @@
 
     span {
       margin-left: 4px;
+
+      &.danger {
+        color: colors.$text-danger;
+      }
     }
   }
 }

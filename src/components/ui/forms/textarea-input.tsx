@@ -52,7 +52,7 @@ export function TextAreaInput<TFormValues extends FieldValues>({
       />
       <div className={styles.control}>
         {(control && showCharCount && maxLength) && (
-          <span>{maxLength - text.length}</span>
+          <span className={text.length === maxLength ? styles.danger : undefined}>{maxLength - text.length}</span>
         )}
       </div>
     </div>
