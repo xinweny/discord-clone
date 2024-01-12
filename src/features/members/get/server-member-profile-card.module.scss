@@ -74,6 +74,12 @@
       line-height: 18px;
     }
 
+    p {
+      width: inherit;
+      word-break: break-all;
+      overflow-wrap: break-word;
+    }
+
     .separator {
       margin-top: 8px;
       margin-bottom: 4px;

@@ -46,13 +46,12 @@ export function TextAreaInput<TFormValues extends FieldValues>({
     <div className={`${styles.textArea} ${className}`} aria-live="polite">
       <TextArea
         id={id}
-        maxLength={maxLength}
         {...props}
         {...(register && register(name, rules))}
       />
       <div className={styles.control}>
         {(control && showCharCount && maxLength) && (
-          <span className={text.length === maxLength ? styles.danger : undefined}>{maxLength - text.length}</span>
+          <span className={text.length >= maxLength ? styles.danger : undefined}>{maxLength - text.length}</span>
         )}
       </div>
     </div>

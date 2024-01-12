@@ -3,7 +3,12 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { useFileWatchSingle } from '@components/hooks';
 import { useGetUserData } from '@features/auth/hooks';
 
-import { Avatar } from '@components/ui/media';
+import { Avatar, ColorBanner } from '@components/ui/media';
+
+import { UserStatusIcon } from '../status';
+
+import styles from './user-profile-preview.module.scss';
+import { Separator } from '@components/ui/displays';
 
 export function UserProfilePreview() {
   const { user } = useGetUserData();
@@ -18,19 +23,28 @@ export function UserProfilePreview() {
   const { fileDataUrl } = useFileWatchSingle({ control, name: 'file' });
 
   return (
-    <div>
-      <div style={{ color: bannerColor }}></div>
-      <Avatar src={fileDataUrl || avatarUrl} />
-      <div>
-        <div>
-          <h4>{displayName}</h4>
-          <p>{username}</p>
+    <div className={styles.container}>
+      <ColorBanner color={bannerColor} className={styles.banner}>
+        <div className={styles.wrapper}>
+          <Avatar
+            src={fileDataUrl || avatarUrl}
+            notification={<UserStatusIcon userId={user.data!.id} />}
+          />
+        </div>
+      </ColorBanner>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <h2>{displayName}</h2>
+          <span>{username}</span>
         </div>
         {bio && (
-          <div>
-            <p>ABOUT ME</p>
-            <p>{bio}</p>
-          </div>
+          <>
+            <Separator className={styles.separator} />
+            <div>
+              <h3>ABOUT ME</h3>
+              <p>{bio}</p>
+            </div>
+          </>
         )}
       </div>
     </div>

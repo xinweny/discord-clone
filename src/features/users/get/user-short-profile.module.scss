@@ -29,7 +29,10 @@
   color: colors.$text-primary;
 
   p {
+    width: inherit;
     font-size: 14px;
+    word-break: break-all;
+    overflow-wrap: break-word;
   }
 
   h4 {
