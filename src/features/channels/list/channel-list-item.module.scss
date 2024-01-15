@@ -3,6 +3,7 @@
 .wrapper {
   border-radius: 4px;
   padding: 8px;
+  margin: 2px 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +30,7 @@
 }
 
 .active {
-  background-color: colors.$bg-modifier-active;
+  background-color: colors.$bg-modifier-active !important;
 
   p, button {
     color: colors.$white;

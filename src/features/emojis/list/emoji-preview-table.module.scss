@@ -1,0 +1,29 @@
+@use '@styles/colors';
+
+.table {
+  width: 100%;
+
+  > * {
+    display: block;
+  }
+
+  thead {
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: bold;
+    color: colors.$text-secondary;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  tbody {
+    color: colors.$text-primary;
+  }
+
+  tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: 55px 1fr 1fr 24px;
+  }
+}

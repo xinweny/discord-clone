@@ -3,11 +3,12 @@ import { useServerContext } from '@features/servers/context';
 import { useDeleteEmojiMutation } from '../api';
 
 type DeleteEmojiButtonProps = {
-  show: boolean;
   emojiId: string;
+  children: React.ReactNode;
+  className?: string;
 };
 
-export function DeleteEmojiButton({ show, emojiId }: DeleteEmojiButtonProps) {
+export function DeleteEmojiButton({ emojiId, children, className }: DeleteEmojiButtonProps) {
   const { _id: serverId } = useServerContext()!;
 
   const [deleteEmoji] = useDeleteEmojiMutation();
@@ -16,14 +17,13 @@ export function DeleteEmojiButton({ show, emojiId }: DeleteEmojiButtonProps) {
     await deleteEmoji({ serverId,emojiId });
   };
 
-  if (!show) return null;
-
   return (
     <button
       type="button"
       onClick={handleClick}
+      className={className}
     >
-      <img src="#" alt="Delete" />
+      {children}
     </button>
   );
 }

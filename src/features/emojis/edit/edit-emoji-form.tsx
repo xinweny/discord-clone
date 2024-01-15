@@ -40,14 +40,14 @@ export function EditEmojiForm({ emoji, closeForm }: EditEmojiFormProps) {
   const onSubmit: SubmitHandler<EditEmojiFields> = async (data) => {
     const { name } = data;
 
-    if (name === emoji.name) return;
+    if (name !== emoji.name) {
+      await editEmoji(data).unwrap();
 
-    await editEmoji(data).unwrap();
-
-    reset({
-      name,
-      serverId: server?._id,
-    });
+      reset({
+        name,
+        serverId: server?._id,
+      });
+    }
 
     closeForm();
   };
