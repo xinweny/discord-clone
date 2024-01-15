@@ -2,7 +2,7 @@ import styles from './modal-header.module.scss';
 
 type ModalHeaderProps = {
   title: string;
-  subtitle?: string;
+  subtitle?: string | React.ReactNode;
   className?: string;
   alt?: boolean;
 };

@@ -93,6 +93,7 @@ export function MessagesContainer({
                 currentDate={createdAt}
               />
               <MessageCard
+                className={styles.card}
                 message={message}
                 currentDate={currentDate}
                 isDm={!serverId}

@@ -3,13 +3,13 @@ import { useState } from 'react';
 import type { ModalProps } from '@types';
 
 import { ModalHeader, ModalWrapper } from '.';
-import { FormGroup, Input } from '../forms';
+import { Input } from '../forms';
 
 import styles from './confirmation-modal.module.scss';
 
 type ConfirmationModalProps = {
   title: string;
-  message: string;
+  message: string | React.ReactNode;
   onConfirm: () => void;
   confirmation?: {
     value: string;
@@ -18,6 +18,7 @@ type ConfirmationModalProps = {
   confirmLabel?: string;
   children?: React.ReactNode;
   hasScroll?: boolean;
+  className?: string;
 } & ModalProps;
 
 export function ConfirmationModal({
@@ -29,6 +30,7 @@ export function ConfirmationModal({
   confirmation,
   confirmLabel,
   children,
+  className,
   hasScroll = true,
 }: ConfirmationModalProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(!!confirmation);
@@ -39,7 +41,7 @@ export function ConfirmationModal({
     <ModalWrapper
       isOpen={isOpen}
       closeModal={onClose}
-      className={styles.wrapper}
+      className={`${styles.wrapper} ${className || ''}`}
       header={<ModalHeader
         title={title}
         subtitle={message}
@@ -49,8 +51,9 @@ export function ConfirmationModal({
       hasScroll={hasScroll}
     >
       <div className={styles.content}>
+        {children}
         {confirmation && (
-          <div>
+          <div className={styles.confirmation}>
             <label>
               <h2>{confirmation.label}</h2>
             </label>
@@ -64,7 +67,6 @@ export function ConfirmationModal({
             />
           </div>
         )}
-        {children}
       </div>
       <div className={styles.submit}>
         <button type="button" onClick={onClose}>Cancel</button>

@@ -10,5 +10,10 @@
     @include mixins.scroller();
 
     flex-grow: 1;
+
+    .card {
+      margin-right: 4px;
+      padding: 2px 48px 4px 0px;
+    }
   }
 }

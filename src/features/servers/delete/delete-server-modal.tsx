@@ -9,6 +9,8 @@ import { ConfirmationModal } from '@components/ui/modals';
 
 import { useDeleteServerMutation } from '../api';
 
+import styles from './delete-server-modal.module.scss';
+
 export function DeleteServerModal({
   isOpen,
   onClose,
@@ -29,13 +31,18 @@ export function DeleteServerModal({
     navigate('/channels/@me');
   };
 
+  const { name } = server;
+
   return (
     <ConfirmationModal
-      title="Delete Server"
-      message={`Are you sure you want to delete ${server.name}? This cannot be undone.`}
+      title={`Delete '${name}'`}
+      message={<>
+        Are you sure you want to delete <strong>{name}</strong>? This cannot be undone.
+      </>}
       isOpen={isOpen}
       onClose={onClose}
       onConfirm={onConfirm}
+      className={styles.modal}
       confirmation={{
         label: 'Enter Server Name',
         value: server.name,

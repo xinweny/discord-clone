@@ -1,0 +1,14 @@
+@use '@styles/colors';
+
+.modal {
+  header > p {
+    padding: 10px;
+    border-radius: 4px;
+    color: colors.$white !important;
+    background-color: colors.$status-warning-bg;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
