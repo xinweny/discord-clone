@@ -30,6 +30,7 @@ type MessageCardProps = {
   currentDate: Date;
   authorized?: boolean;
   prev: MessageData | undefined;
+  className?: string;
 };
 
 export function MessageCard({
@@ -38,6 +39,7 @@ export function MessageCard({
   currentDate,
   authorized = true,
   prev,
+  className,
 }: MessageCardProps) {
   const activeTabState = useActiveIds();
 
@@ -59,7 +61,7 @@ export function MessageCard({
   return (
     <MessageContext.Provider value={message}>
       <div
-        className={`${styles.card} ${!isGrouped ? styles.headMessage : ''}`}
+        className={`${styles.card} ${!isGrouped ? styles.headMessage : ''} ${className || ''}`}
         ref={hoverRef}
       >
         <div className={styles.avatar}>

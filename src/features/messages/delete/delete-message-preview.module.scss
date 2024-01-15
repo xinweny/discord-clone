@@ -1,0 +1,10 @@
+@use '@styles/colors';
+
+.preview {
+  pointer-events: none;
+  margin: 0px !important;
+  padding: 8px !important;
+  padding-left: 0px !important;
+  border: 1px solid colors.$bg-secondary-alt;
+  border-radius: 4px;
+}

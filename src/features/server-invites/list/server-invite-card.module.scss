@@ -3,7 +3,7 @@
 .card {
   background-color: colors.$bg-secondary;
   border-radius: 8px;
-  width: 400px;
+  max-width: 400px;
   padding: 16px;
 
   h3 {

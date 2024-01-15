@@ -39,6 +39,7 @@ export function ConfirmationModal({
     <ModalWrapper
       isOpen={isOpen}
       closeModal={onClose}
+      className={styles.wrapper}
       header={<ModalHeader
         title={title}
         subtitle={message}
@@ -47,7 +48,7 @@ export function ConfirmationModal({
       />}
       hasScroll={hasScroll}
     >
-      <div className="content">
+      <div className={styles.content}>
         {confirmation && (
           <div>
             <label>

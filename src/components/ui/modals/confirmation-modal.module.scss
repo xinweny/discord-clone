@@ -1,11 +1,22 @@
 @use '@styles/colors';
+@use '@styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-height: calc(100vh - 80px) !important;
+}
 
 .header {
   text-align: left !important;
 }
 
 .content {
+  flex-grow: 1;
   padding: 0px 8px 20px 16px;
+  
+  @include mixins.hover-scroller();
 }
 
 .submit {

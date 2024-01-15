@@ -1,11 +1,8 @@
 import { useMessageContext } from '../context';
 
-import { Avatar } from '@components/ui/media';
-import {
-  MessageHeader,
-  MessageBody,
-  AttachmentsPreview,
-} from '../list';
+import { MessageCard } from '../list';
+
+import styles from './delete-message-preview.module.scss';
 
 export function DeleteMessagePreview() {
   const message = useMessageContext();
@@ -13,20 +10,11 @@ export function DeleteMessagePreview() {
   if (!message) return null;
 
   return (
-    <div onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    }}>
-      <Avatar src={message.sender.avatarUrl} />
-      <div>
-        <MessageHeader
-          message={message}
-          isDm={message.type === 'dm'}
-          currentDate={new Date()}
-        />
-        <MessageBody message={message} />
-        <AttachmentsPreview attachments={message.attachments} downloadable={false} />
-      </div>
-    </div>
+    <MessageCard
+      message={message}
+      currentDate={new Date()}
+      prev={undefined}
+      className={styles.preview}
+    />
   );
 }
