@@ -1,9 +1,10 @@
+import styles from './emoji-upload-guidelines.module.scss';
+
 export function EmojiUploadGuidelines() {
   return (
-    <div>
-      <p>Add up to 50 custom emojis that anyone can use in this server.</p>
-      <br />
-      <p>UPLOAD REQUIREMENTS</p>
+    <div className={styles.container}>
+      <span>Add up to 50 custom emojis that anyone can use in this server.</span>
+      <h3>UPLOAD REQUIREMENTS</h3>
       <ul>
         <li>File type: JPEG, PNG, GIF</li>
         <li>Recommended file size: 256 KB</li>

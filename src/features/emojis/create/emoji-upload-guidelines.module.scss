@@ -1,0 +1,25 @@
+@use '@styles/colors';
+
+.container {
+  font-size: 14px;
+  line-height: 20px;
+  color: colors.$text-secondary;
+
+  span {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+}

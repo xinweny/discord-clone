@@ -6,6 +6,8 @@ import { formatEmojiName } from '@utils';
 
 import { FileInput } from '@components/ui/forms';
 
+import styles from './emoji-input.module.scss';
+
 export function EmojiInput() {
   const name = 'file';
 
@@ -31,8 +33,8 @@ export function EmojiInput() {
   }
 
   return (
-    <label htmlFor="emoji">
-      <div>Upload Emoji</div>
+    <label htmlFor="emoji" className={styles.button}>
+      <div role="button">Upload Emoji</div>
       <FileInput
         id="emoji"
         label="emoji"
