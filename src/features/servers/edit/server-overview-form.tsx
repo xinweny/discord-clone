@@ -14,11 +14,14 @@ import {
   TextAreaInput,
   FormChangesAlert,
 } from '@components/ui/forms';
+import { Separator } from '@components/ui/displays';
 
 import { ServerAvatarInput } from './server-avatar-input';
 import { ServerBannerInput } from './server-banner-input';
 
 import { useEditServerMutation } from '../api';
+
+import styles from './server-overview-form.module.scss';
 
 export function ServerOverviewForm() {
   const server = useContext(ServerContext);
@@ -57,7 +60,7 @@ export function ServerOverviewForm() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className={styles.section}>
           <ServerAvatarInput src={server?.avatarUrl} />
           <FormGroup label="Server Name" htmlFor="server-name">
             <TextInput
@@ -68,7 +71,8 @@ export function ServerOverviewForm() {
             />
           </FormGroup>
         </div>
-        <FormGroup label="Server Description" htmlFor="server-description">
+        <Separator className={styles.separator} />
+        <FormGroup label="Server Description" htmlFor="server-description" withSeparator>
           <TextAreaInput
             id="server-description"
             label="Server Description"

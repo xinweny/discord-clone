@@ -35,6 +35,8 @@ $primary-630: hsl(220 calc($saturation-factor * 6.5%) 18%);
 $primary-660: hsl(228 calc($saturation-factor * 6.7%) 14.7%);
 $primary-700: hsl(225 calc($saturation-factor * 6.3%) 12.5%);
 $primary-800: hsl(220 calc($saturation-factor * 8.1%) 7.3%);
+$primary-860: hsl(240 calc($saturation-factor * 7.7%) 2.5%);
+$primary-900: hsl(0 calc($saturation-factor * 0%) 0.8%);
 
 $blue-345: hsl(200 calc($saturation-factor * 100%) 49.4%);
 
@@ -91,3 +93,7 @@ $button-danger-active: $red-530;
 $status-warning-bg: $yellow-300;
 
 $modal-footer-bg: $primary-630;
+
+$elevation-low: 0 1px 0 functions.hslac($primary-900, 0.2), 0 1.5px 0 functions.hslac($primary-860, 0.05), 0 2px 0 functions.hslac($primary-900, 0.05);
+$elevation-medium: 0 4px 4px functions.hslac($black, 0.16);
+$elevation-high: 0 8px 16px functions.hslac($black, 0.24);

@@ -3,7 +3,7 @@ import type { ServerBasicData } from '../types';
 import { Acronym, Gif } from '@components/ui/media';
 
 type ServerAvatarProps = {
-  server: ServerBasicData;
+  server: Pick<ServerBasicData, 'name' | 'avatarUrl'>;
   className?: string;
 };
 
