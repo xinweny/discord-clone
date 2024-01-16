@@ -7,6 +7,10 @@ import { SettingsSidebar, SettingsSidebarProps } from '@components/ui/presentati
 
 import { DeleteChannelButton } from '../delete';
 
+import TrashCanIcon from '@assets/icons/trash-can.svg?react';
+
+import styles from './channel-settings-sidebar.module.scss';
+
 export function ChannelSettingsSidebar({
   activeTabId, setActiveTabId
 }: SettingsSidebarProps) {
@@ -21,7 +25,10 @@ export function ChannelSettingsSidebar({
         setActiveTabId={setActiveTabId}
       />
       <TabGroupLayout>
-        <DeleteChannelButton />
+        <DeleteChannelButton className={styles.button}>
+          <span>Delete Channel</span>
+          <TrashCanIcon />
+        </DeleteChannelButton>
       </TabGroupLayout>
     </SettingsSidebar>
   );
