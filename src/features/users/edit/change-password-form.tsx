@@ -5,6 +5,8 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editPasswordSchema } from '../schema';
 
+import { useGetUserData } from '@features/auth/hooks';
+
 import { ModalForm } from '@components/ui/forms';
 
 import { handleServerError } from '@utils';
@@ -16,7 +18,6 @@ import {
 } from '@components/ui/forms';
 
 import { useUpdateSensitiveMutation } from '../api';
-import { useGetUserData } from '@features/auth/hooks';
 
 type ChangePasswordFormProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
@@ -82,30 +83,30 @@ export function ChangePasswordForm({
           closeBtnRef={closeBtnRef}
         />}
       >
-          <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
-            <TextInput
-              type="password"
-              id="current-password"
-              name="currentPassword"
-              {...pwdProps}
-            />
-          </FormGroup>
-          <FormGroup label="new password" htmlFor="password" name="password">
-            <TextInput
-              type="password"
-              id="password"
-              name="password"
-              {...pwdProps}
-            />
-          </FormGroup>
-          <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
-            <TextInput
-              type="password"
-              id="confirm-password"
-              name="confirmPassword"
-              {...pwdProps}
-            />
-          </FormGroup>
+        <FormGroup label="current password" htmlFor="current-password" name="currentPassword">
+          <TextInput
+            type="password"
+            id="current-password"
+            name="currentPassword"
+            {...pwdProps}
+          />
+        </FormGroup>
+        <FormGroup label="new password" htmlFor="password" name="password">
+          <TextInput
+            type="password"
+            id="password"
+            name="password"
+            {...pwdProps}
+          />
+        </FormGroup>
+        <FormGroup label="confirm new password" htmlFor="confirmPassword" name="confirmPassword">
+          <TextInput
+            type="password"
+            id="confirm-password"
+            name="confirmPassword"
+            {...pwdProps}
+          />
+        </FormGroup>
       </ModalForm>
     </FormProvider>
   );

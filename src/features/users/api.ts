@@ -32,6 +32,7 @@ const userApi = api.injectEndpoints({
           username,
           bannerColor,
           bio,
+          customStatus,
         }) => ({
           url: `/users/${userId}`,
           method: 'put',
@@ -40,6 +41,7 @@ const userApi = api.injectEndpoints({
             username,
             bannerColor,
             bio,
+            customStatus,
             filename: file?.name,
           },
         }),

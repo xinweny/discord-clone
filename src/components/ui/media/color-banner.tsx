@@ -6,14 +6,16 @@ type ColorBannerProps = {
   height?: number;
   width?: number;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 export function ColorBanner({
-  color, className, height, width, children
+  color, className, height, width, children, style,
 }: ColorBannerProps) {
   return (
     <div
       style={{
+        ...style,
         backgroundColor: color || '#5C64F3',
         height,
         width,

@@ -3,10 +3,13 @@ import { useState } from 'react';
 import { useGetUserData } from '@features/auth/hooks';
 
 import { Avatar } from '@components/ui/media';
+import { Popout } from '@components/ui/popups';
 
 import { UserSettingsButton } from '../settings';
 import { ToggleMuteButton } from '@features/webrtc/controls';
 import { UserStatusIcon } from '../status';
+
+import { SelfShortProfile } from './self-short-profile';
 
 import styles from './user-panel.module.scss';
 
@@ -21,21 +24,30 @@ export function UserPanel() {
       onMouseEnter={() => setIsFocus(true)}
       onMouseLeave={() => setIsFocus(false)}
     >
-      <div className={styles.content}>
-        <Avatar
-          src={avatarUrl}
-          notification={<UserStatusIcon
-            userId={user.data!.id}
-          />}
-        />
-        <div>
-          <p className={styles.header}>{displayName}</p>
-          {isFocus
-            ? <p>{username}</p>
-            : <p>Online</p>
-          }
+      <Popout
+        renderPopup={() => <SelfShortProfile />}
+        position={{
+          direction: 'top',
+          align: 'start',
+          gap: 12,
+        }}
+      >
+        <div className={styles.content}>
+          <Avatar
+            src={avatarUrl}
+            notification={<UserStatusIcon
+              userId={user.data!.id}
+            />}
+          />
+          <div>
+            <p className={styles.header}>{displayName}</p>
+            {isFocus
+              ? <p>{username}</p>
+              : <p>Online</p>
+            }
+          </div>
         </div>
-      </div>
+      </Popout>
       <div className={styles.buttonsContainer}>
         <ToggleMuteButton />
         <UserSettingsButton />

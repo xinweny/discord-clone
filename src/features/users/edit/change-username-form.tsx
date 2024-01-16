@@ -5,6 +5,8 @@ import type { UpdateSensitiveFields } from '../types';
 
 import { editUsernameSchema } from '../schema';
 
+import { useGetUserData } from '@features/auth/hooks';
+
 import { ModalForm } from '@components/ui/forms';
 
 import { handleServerError } from '@utils';
@@ -17,7 +19,6 @@ import {
 } from '@components/ui/forms';
 
 import { useUpdateSensitiveMutation } from '../api';
-import { useGetUserData } from '@features/auth/hooks';
 
 type ChangeUsernameFormProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;

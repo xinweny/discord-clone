@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
+import type { ModalProps } from '@types';
+
 import { ModalHeader, ModalWrapper } from '@components/ui/modals';
 
 import { ChangePasswordForm } from './change-password-form';
-
-import type { ModalProps } from '@types';
 
 export function ChangePasswordModal({
   isOpen, onClose

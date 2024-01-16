@@ -6,12 +6,10 @@ import { ServerMemberData } from '../types';
 
 import { ServerMemberContext } from '../context';
 
-import { Avatar, ColorBanner } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
 
 import { ServerMemberRolesList } from '@features/member-roles/list';
-import { UserStatusIcon } from '@features/users/status';
-import { UserProfileButton, UserHeader } from '@features/users/get';
+import { UserHeader, UserSplash } from '@features/users/get';
 import { ServerAvatar } from '@features/servers/get';
 
 import { useGetServerQuery } from '@features/servers/api';
@@ -33,27 +31,19 @@ export function ServerMemberProfileCard({
 
   const { data: server } = useGetServerQuery(serverId!);
 
-  const { bio, createdAt, user, displayName, bannerColor, userId } = member;
-  const { avatarUrl } = user;
+  const { bio, createdAt, user, userId, displayName, bannerColor } = member;
 
   const joinedDate = (cAt: string) => DateTime.fromISO(cAt).toFormat('d LLL, yyyy');
 
   return (
     <ServerMemberContext.Provider value={member}>
       <div className={styles.card} hidden={hidden}>
-        <ColorBanner color={bannerColor} height={60} className={styles.banner}>
-          <UserProfileButton
-            userId={userId}
-            onOpen={() => { setHidden(true); }}
-          >
-            <div className={styles.wrapper}>
-              <Avatar
-                src={avatarUrl}
-                notification={<UserStatusIcon userId={userId} />}
-              />
-            </div>
-          </UserProfileButton>
-        </ColorBanner>
+        <UserSplash
+          user={{ _id: userId, bannerColor,...user }}
+          withProfileBtn
+          className={styles.banner}
+          onClick={() => { setHidden(true); }}
+        />
         <div className={styles.content}>
           <UserHeader user={{ ...user, displayName }} />
           <Separator className={styles.separator} />

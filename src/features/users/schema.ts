@@ -31,3 +31,7 @@ export const editUsernameSchema = zod.object({
     .refine((value) => /^[a-z0-9._]+$/.test(value), 'Please only use numbers, letters, underscores _ or periods.')
     .refine(checkUsernameAvailability, 'Username is unavailable. Try adding numbers, letters, underscores_ or full stops.'),
 });
+
+export const editCustomStatusSchema = zod.object({
+  customStatus: zod.string().max(128),
+});

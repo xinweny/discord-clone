@@ -50,8 +50,7 @@
     }
 
     .separator {
-      margin-top: 8px;
-      margin-bottom: 4px;
+      margin: 12px 0px;
       border-top: 1px solid colors.$bg-modifier-accent;
     }
 
@@ -62,37 +61,6 @@
         font-size: 12px;
         text-transform: uppercase;
         margin-bottom: 6px;
-      }
-    }
-
-    .joinDates {
-      display: flex;
-      align-items: center;
-
-      > div {
-        display: flex;
-        align-items: center;
-      }
-
-      .serverIcon {
-        margin-right: 8px;
-        width: 16px;
-        height: 16px;
-        border-radius: 16px;
-        background-color: colors.$bg-tertiary;
-        
-        p {
-          font-weight: normal;
-          font-size: 8px;
-        }
-      }
-
-      .divider {
-        width: 4px;
-        height: 4px;
-        border-radius: 4px;
-        background-color: colors.$bg-modifier-accent;
-        margin: 0px 8px;
       }
     }
   }

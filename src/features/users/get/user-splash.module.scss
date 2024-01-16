@@ -1,0 +1,50 @@
+@use '@styles/colors';
+
+.banner {
+  width: 100%;
+  height: 120px;
+  position: relative;
+
+  > .wrapper, > button {
+    position: absolute;
+    bottom: -40px;
+    left: 16px;
+  }
+
+  .wrapper {
+    border-radius: 80px;
+    border: 6px solid colors.$bg-secondary;
+    background-color: colors.$bg-secondary;
+    width: 80px;
+    height: 80px;
+
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  > button {
+    .wrapper::after {
+      display: none;
+      position: absolute;
+      content: 'VIEW PROFILE';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: colors.$white;
+      font-weight: 600;
+      font-size: 10px;
+    }
+
+    &:hover {
+      .wrapper::after {
+        display: block;
+      }
+
+      foreignObject {
+        opacity: 0.5;
+      }
+    }
+  }
+}

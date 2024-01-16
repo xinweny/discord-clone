@@ -7,6 +7,10 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   column-gap: 8px;
+
+  button {
+    text-align: left;
+  }
 }
 
 .content {

@@ -12,7 +12,7 @@ import { UserStatusIcon } from '../status';
 import { MutualServersList, MutualFriendsList } from '@features/mutuals/list';
 import { UserProfileOptions } from '@features/relations/get';
 
-import { UserHeader, UserInfo } from '.';
+import { UserHeader, UserInfo, UserSplash } from '.';
 
 import { useGetUserQuery } from '../api';
 
@@ -39,8 +39,6 @@ export function UserProfileModal({
 
   const isSelf = userId === selfId;
 
-  const { bannerColor, avatarUrl } = user;
-
   return (
     <ModalWrapper
       closeModal={onClose}
@@ -48,14 +46,7 @@ export function UserProfileModal({
       className={styles.container}
     >
       <div className={styles.modal}>
-        <ColorBanner color={bannerColor} className={styles.banner}>
-          <div className={styles.avatar}>
-            <Avatar
-              src={avatarUrl}
-              notification={<UserStatusIcon userId={userId} />}
-            />
-          </div>
-        </ColorBanner>
+        <UserSplash user={user} className={styles.banner} />
         <div className={styles.options}>
           {!isSelf && <UserProfileOptions
             senderId={selfId}

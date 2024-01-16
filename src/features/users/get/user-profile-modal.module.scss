@@ -14,22 +14,16 @@
 
     .banner {
       height: 106px;
-      position: relative;
       flex-shrink: 0;
 
-      .avatar {
-        position: absolute;
-        
+      > div {
         border-radius: 120px;
         border: 6px solid colors.$bg-secondary-alt;
         background-color: colors.$bg-secondary-alt;
         top: 46px;
         left: 12px;
-
-        > svg {
-          width: 120px;
-          height: 120px;
-        }
+        width: 120px;
+        height: 120px;
       }
     }
 

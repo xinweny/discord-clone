@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
+import type { ModalProps } from '@types';
+
 import { ModalHeader, ModalWrapper } from '@components/ui/modals';
 
 import { ChangeUsernameForm } from './change-username-form';
-
-import type { ModalProps } from '@types';
 
 export function ChangeUsernameModal({
   isOpen, onClose

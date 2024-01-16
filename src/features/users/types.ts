@@ -46,6 +46,7 @@ export type UpdateUserFields = {
   displayName?: string;
   bannerColor?: string;
   bio?: string;
+  customStatus?: string;
 };
 
 export enum StatusEvent {
