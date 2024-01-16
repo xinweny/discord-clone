@@ -12,6 +12,8 @@ type ContextMenuWrapperProps = {
   children: React.ReactNode;
   mode?: 'onContextMenu' | 'onClick';
   className?: string;
+  onOpen?: () => void;
+  onClose?: () => void;
 };
 
 export function ContextMenuWrapper({
@@ -19,6 +21,8 @@ export function ContextMenuWrapper({
   children,
   mode = 'onContextMenu',
   className,
+  onOpen,
+  onClose,
 }: ContextMenuWrapperProps) {
   const targetRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +34,12 @@ export function ContextMenuWrapper({
     closeAbsElement,
   } = usePosAbsolute(targetRef);
 
-  const handler = { [mode]: openAbsElement };
+  const handler = {
+    [mode]: (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (onOpen) onOpen();
+      openAbsElement(e);
+    },
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -38,6 +47,7 @@ export function ContextMenuWrapper({
         ref={targetRef}
         {...handler}
         className={className}
+        role="button"
       >
         {children}
       </div>
@@ -49,7 +59,10 @@ export function ContextMenuWrapper({
           options={options}
           contextMenuRef={absElementRef}
           menuStyle={absStyle}
-          closeContextMenu={closeAbsElement}
+          closeContextMenu={() => {
+            closeAbsElement();
+            if (onClose) onClose();
+          }}
         />
       </PortalWrapper>
     </div>

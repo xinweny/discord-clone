@@ -12,6 +12,8 @@ import {
 import { RoleSearchBar } from '../list';
 import { CreateRoleButton } from '../create';
 
+import styles from './server-roles-settings.module.scss';
+
 export function ServerRolesSettings() {
   const { _id: serverId } = useServerContext()!;
 
@@ -29,7 +31,7 @@ export function ServerRolesSettings() {
   return (
     <div>
       <DefaultRoleSection role={defaultRole} />
-      <div>
+      <div className={styles.search}>
         <RoleSearchBar
           query={query}
           setQuery={setQuery}

@@ -5,9 +5,10 @@ import { useCreateRoleMutation } from '../api';
 
 type CreateRoleButtonProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
-export function CreateRoleButton({ children }: CreateRoleButtonProps) {
+export function CreateRoleButton({ children, className }: CreateRoleButtonProps) {
   const activeRole = useActiveRoleContext();
   const { _id: serverId } = useServerContext()!;
 
@@ -23,6 +24,7 @@ export function CreateRoleButton({ children }: CreateRoleButtonProps) {
     <button
       type="button"
       onClick={handleClick}
+      className={className}
     >{children}</button>
   );
 }

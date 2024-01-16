@@ -1,0 +1,24 @@
+@use '@styles/colors';
+
+.search {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+
+  > div:first-child {
+    flex-grow: 1;
+  }
+
+  > button {
+    padding: 0px 16px;
+    border-radius: 4px;
+    background-color: colors.$brand-500;
+    color: colors.$white;
+    font-weight: 500;
+    font-size: 14px;
+
+    &:hover {
+      background-color: colors.$brand-560;
+    }
+  }
+}

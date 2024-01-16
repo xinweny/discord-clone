@@ -1,11 +1,19 @@
 import { useContext } from 'react';
 import { useHover } from '@uidotdev/usehooks';
 
+import type { RoleData } from '../types';
+
 import { ActiveRoleContext } from '../context';
+
+import { Tooltip } from '@components/ui/popups';
 
 import { RoleContextMenuButton } from '.';
 
-import type { RoleData } from '../types';
+import RoleBadgeIcon from '@assets/icons/role-badge.svg?react';
+import PersonIcon from '@assets/icons/person.svg?react';
+import PencilIcon from '@assets/icons/pencil.svg?react';
+
+import styles from './server-role-row.module.scss';
 
 type ServerRoleRowProps = {
   role: RoleData;
@@ -18,32 +26,35 @@ export function ServerRoleRow({ role }: ServerRoleRowProps) {
 
   const openForm = () => { activeRole.set(role); };
 
+  const { name, color, memberCount } = role;
+
+  const buttonCellProps = {
+    role: 'button',
+    onClick: openForm,
+  };
+
   return (
-    <tr ref={hoverRef}>
-      <td>
-        <img src="#" alt={role.color} />
-        <p>{role.name}</p>
+    <tr ref={hoverRef} className={styles.row}>
+      <td className={styles.role} {...buttonCellProps}>
+        <RoleBadgeIcon className={styles.badge} style={{ color }} />
+        <span>{name}</span>
       </td>
-      <td>
-        <p>{role.memberCount || 0}</p>
-        <img src="#" />
+      <td {...buttonCellProps} className={styles.memberCount}>
+        <span>{memberCount || 0}</span>
+        <PersonIcon />
       </td>
-      <td>
+      <td {...buttonCellProps} className={styles.edit}>
         {isHovered && (
-          <button
-            type="button"
-            onClick={openForm}
-          >
-            <img src="#" alt="Edit" />
-          </button>
+          <Tooltip text="Edit" direction="top" gap={4}>
+            <PencilIcon />
+          </Tooltip>
         )}
       </td>
       <td>
-        {isHovered && (
-          <RoleContextMenuButton
-            serverRole={role}
-          />
-        )}
+        <RoleContextMenuButton
+          isShown={isHovered}
+          serverRole={role}
+        />
       </td>
     </tr>
   )

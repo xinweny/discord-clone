@@ -2,6 +2,8 @@ import { RoleData } from '../types';
 
 import { ServerRoleRow } from './server-role-row';
 
+import styles from './custom-roles-table.module.scss';
+
 type CustomRolesTableProps = {
   roles: RoleData[];
   searchQuery: string;
@@ -16,10 +18,10 @@ export function CustomRolesTable({ roles, searchQuery }: CustomRolesTableProps) 
     : roles;
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
-          <th>{`ROLES - ${filteredRoles.length}`}</th>
+          <th>{`ROLES – ${filteredRoles.length}`}</th>
           <th>MEMBERS</th>
           <th></th>
           <th></th>
