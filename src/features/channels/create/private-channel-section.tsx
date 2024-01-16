@@ -11,7 +11,7 @@ export function PrivateChannelSection() {
         name="private"
         id="private-channel"
         label="Private Channel"
-      />
+      ><></></CheckboxInput>
     </div>
   );
 }

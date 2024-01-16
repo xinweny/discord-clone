@@ -2,7 +2,9 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import _ from 'lodash';
 
 import { FormGroup, CheckboxInput } from '@components/ui/forms';
-import { Separator } from '@components/ui/displays';
+
+import CrossIcon from '@assets/icons/cross.svg?react';
+import CheckmarkIcon from '@assets/icons/checkmark.svg?react';
 
 import styles from './role-permissions-form-section.module.scss';
 
@@ -36,8 +38,14 @@ export function RolePermissionsFormSection() {
                   name={`permissions.${name}`}
                   label={name}
                   checked={permissions[name]}
+                  className={`${styles.checkbox} ${permissions[name] ? styles.checked : ''}`}
                 >
-                  <></>
+                  <div className={styles.slider}>
+                    {permissions[name]
+                      ? <CheckmarkIcon />
+                      : <CrossIcon />
+                    }
+                  </div>
                 </CheckboxInput>
               </div>
               <p>{description}</p>
