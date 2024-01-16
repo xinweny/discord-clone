@@ -37,8 +37,8 @@ export interface IReqUser extends Document {
 }
 
 const userSchema = new Schema({
-  username: { type: String, required: true, length: { max: 32 }, unique: true },
-  displayName: { type: String, required: true, length: { max: 32 } },
+  username: { type: String, required: true, length: { min: 2, max: 32 }, unique: true },
+  displayName: { type: String, required: true, length: { min: 2, max: 32 } },
   password: { type: String, required: true, select: false },
   email: { type: String, required: true, select: false, unique: true },
   verified: { type: Boolean, default: true, select: false },
@@ -60,7 +60,7 @@ const userSchema = new Schema({
 },
   serverIds: { type: [Types.ObjectId], ref: 'Server', default: [] },
   bio: { type: String, default: '', length: { max: 190 } },
-  customStatus: { type: String, length: { max: 128 } },
+  customStatus: { type: String, length: { max: 128 }, default: '' },
   bannerColor: { type: String, default: '' },
 }, { timestamps: true });
 
