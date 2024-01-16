@@ -38,7 +38,7 @@ export function SelfShortProfile() {
         {separator}
         <UserInfo user={self} />
         {separator}
-        <EditCustomStatusButton customStatus={customStatus}>
+        <EditCustomStatusButton customStatus={customStatus} className={styles.statusButton}>
           Edit Custom Status
         </EditCustomStatusButton>
       </div>
