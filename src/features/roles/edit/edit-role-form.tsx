@@ -3,6 +3,8 @@ import { useRoleTabs } from '../hooks';
 import { EditRoleTabs } from './edit-role-tabs';
 import { EditRoleFormSections } from './edit-role-form-sections';
 
+import styles from './edit-role-form.module.scss';
+
 export function EditRoleForm() {
   const state = useRoleTabs([
     'Display',
@@ -14,10 +16,10 @@ export function EditRoleForm() {
   if (!role) return null;
 
   return (
-    <div>
-      <div>
+    <div className={styles.form}>
+      <header>
         <h3>{`EDIT ROLE - ${role?.name.toUpperCase()}`}</h3>
-      </div>
+      </header>
       <EditRoleTabs state={state} />
       <EditRoleFormSections state={state} />
     </div>

@@ -1,4 +1,6 @@
-import type { RoleTabsHookData } from '@hooks';
+import type { RoleTabsHookData } from '../hooks';
+
+import styles from './edit-role-tabs.module.scss';
 
 type EditRoleTabsProps = {
   state: RoleTabsHookData;
@@ -15,15 +17,17 @@ export function EditRoleTabs({
   } = state;
 
   return (
-    <div>
+    <div className={styles.tabs}>
       {tabs.map(tab => (
         <button
-          className={`${activeTab.id === tab.id ? 'active' : ''}`}
+          className={`${activeTab.id === tab.id ? styles.active : ''}`}
           type="button"
           key={tab.id}
           onClick={() => { changeTab(tab.label); }}
           disabled={!checkPermissions(['Display'], tab.label)}
-        >{tab.label}</button>
+        >
+          <span>{tab.label}</span>
+        </button>
       ))}
     </div>
   );

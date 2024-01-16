@@ -1,0 +1,74 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.navbar {
+  width: 232px;
+  height: 100%;
+  border-right: 1px solid colors.$bg-modifier-accent;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 8px 16px 0px;
+    margin: 0px 8px 8px 0px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    > button:first-child {
+      gap: 8px;
+      color: colors.$interactive-normal;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        transform: rotate(-90deg);
+      }
+
+      span {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 16px;
+      }
+
+      &:hover {
+        color: colors.$interactive-hover;
+      }
+    }
+
+    > div:last-child {
+      svg {
+        width: 20px;
+        height: 20px;
+
+        path {
+          stroke: colors.$white;
+        }
+      }
+    }
+  }
+
+  .list {
+    padding-left: 8px;
+    padding-right: 24px;
+
+    @include mixins.scroller(colors.$bg-secondary, colors.$bg-tertiary, 4px, auto);
+
+    > button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+
+      .pin {
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+      }
+    }
+  }
+}

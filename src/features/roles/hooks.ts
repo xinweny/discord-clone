@@ -23,7 +23,7 @@ export type RoleTabsHookData = {
 };
 
 export const useRoleTabs = (labels: string[]): RoleTabsHookData => {
-  const tabs = labels.map(label => ({ label, id: uuid() }));
+  const tabs = labels.map(label => ({ label, id: label }));
 
   const { _id: serverId } = useServerContext()!;
   const activeRole = useActiveRoleContext()!;

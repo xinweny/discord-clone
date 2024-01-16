@@ -4,10 +4,17 @@ import { useServerContext } from '@features/servers/context';
 import { useActiveRoleContext } from '../context';
 
 import { TabItemButton } from '@components/ui/buttons';
+import { Tooltip } from '@components/ui/popups';
+import { Separator } from '@components/ui/displays';
 
 import { CreateRoleButton } from '../create';
 
 import { useGetRolesQuery } from '../api';
+
+import ArrowIcon from '@assets/icons/arrow.svg?react';
+import PlusIcon from '@assets/icons/plus.svg?react';
+
+import styles from './edit-role-navbar.module.scss';
 
 export function EditRoleNavbar() {
   const { _id: serverId } = useServerContext()!;
@@ -33,19 +40,19 @@ export function EditRoleNavbar() {
   };
 
   return (
-    <div>
-      <div>
+    <nav className={styles.navbar}>
+      <div className={styles.header}>
         <button type="button" onClick={closeSection}>
-          <div>
-            <img src="#" alt="Back" />
-            <p>BACK</p>
-          </div>
+          <ArrowIcon />
+          <span>BACK</span>
         </button>
-        <CreateRoleButton>
-          <img src="#" alt="Create Role" />
-        </CreateRoleButton>
+        <Tooltip text="Create Role" direction="top" gap={4}>
+          <CreateRoleButton>
+            <PlusIcon />
+          </CreateRoleButton>
+        </Tooltip>
       </div>
-      <div>
+      <div className={styles.list}>
         {roles.data.map(role => (
           <TabItemButton
             key={role._id}
@@ -53,13 +60,12 @@ export function EditRoleNavbar() {
             activeTabId={activeRoleId}
             setActiveTabId={setActiveRoleId}
           >
-            <div>
-              <img src="#" alt="Color" />
-              <p>{role.name}</p>
-            </div>
+            <div className={styles.pin} style={{ backgroundColor: role.color }} />
+            <span>{role.name}</span>
           </TabItemButton>
         ))}
       </div>
-    </div>
+      <Separator className={styles.separator} axis="y" />
+    </nav>
   )
 }
