@@ -1,0 +1,70 @@
+@use '@styles/colors';
+
+.section {
+  margin-bottom: 16px;
+
+  > * {
+    display: block;
+  }
+
+  > span {
+    margin-bottom: 16px;
+    color: colors.$header-secondary;
+    font-size: 14px;
+  }
+
+  > button {
+    width: 100%;
+    color: colors.$interactive-normal;
+    padding: 16px;
+    padding-right: 24px;
+    border-radius: 4px;
+    background-color: colors.$bg-secondary-alt;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: colors.$interactive-hover;
+      background-color: colors.$bg-modifier-accent;
+    }
+
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: colors.$bg-primary;
+      border-radius: 32px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .info {
+      margin-left: 16px;
+      flex-grow: 1;
+      text-align: left;
+
+      h3 {
+        margin-bottom: 4px;
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 700;
+      }
+
+      span {
+        font-size: 12px;
+        line-height: calc(4 / 3);
+      }
+    }
+
+    .chevron {
+      width: 24px;
+      height: 24px;
+      transform: rotate(-90deg);
+    }
+  }
+}

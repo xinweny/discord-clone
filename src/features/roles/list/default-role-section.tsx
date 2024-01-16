@@ -4,6 +4,11 @@ import type { RoleData } from '../types';
 
 import { ActiveRoleContext } from '../context';
 
+import MembersIcon from '@assets/icons/members.svg?react';
+import ChevronIcon from '@assets/icons/chevron.svg?react';
+
+import styles from './default-role-section.module.scss';
+
 type DefaultRoleSectionProps = {
   role: RoleData;
 };
@@ -16,17 +21,17 @@ export function DefaultRoleSection({ role }: DefaultRoleSectionProps) {
   };
 
   return (
-    <div>
-      <p>Use roles to group your server members and assign permissions.</p>
+    <div className={styles.section}>
+      <span>Use roles to group your server members and assign permissions.</span>
       <button type="button" onClick={openEditRoleSection}>
-        <div>
-          <img src="#" alt="#" />
-          <div>
-            <h3>Default permissions</h3>
-            <p>@everyone·applies to all server members</p>
-          </div>
-          <img src="#" alt=">" />
+        <div className={styles.iconWrapper}>
+          <MembersIcon />
         </div>
+        <div className={styles.info}>
+          <h3>Default permissions</h3>
+          <span>@everyone · applies to all server members</span>
+        </div>
+        <ChevronIcon className={styles.chevron} />
       </button>
     </div>
   )
