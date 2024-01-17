@@ -6,8 +6,11 @@
 }
 
 .container {
+  flex-grow: 1;
   background-color: colors.$bg-floating;
-  min-height: 200px;
+  padding: 16px;
+  padding-top: 0px;
+  min-height: calc(200px - 16px);
 
   > *:first-child {
     display: flex;

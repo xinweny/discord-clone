@@ -1,27 +1,33 @@
-import { TrackToggle, DisconnectButton } from '@livekit/components-react';
-import { Track } from 'livekit-client';
+import {
+  ParticipantContext,
+  useLocalParticipant,
+} from '@livekit/components-react';
 
-import { useLivekitContext } from '../hooks';
+
+import {
+  ToggleCameraButton,
+  ToggleMuteButton,
+  ToggleScreenShareButton,
+} from '../controls';
+import { DisconnectFromRoomButton } from '../disconnect';
+
+import styles from './call-controls.module.scss';
+
 
 export function CallControls() {
-  const livekit = useLivekitContext();
-
-  const { isMuted, setIsMuted } = { ...livekit };
+  const { localParticipant } = useLocalParticipant();
 
   return (
-    <div>
-      <TrackToggle source={Track.Source.Camera} />
-      <TrackToggle source={Track.Source.ScreenShare} />
-      <TrackToggle
-        source={Track.Source.Microphone}
-        onChange={(enabled) => {
-          if (setIsMuted) setIsMuted(!enabled);
-        }}
-        initialState={!isMuted}
-      />
-      <DisconnectButton>
-        <img src="" alt="Disconnect" />
-      </DisconnectButton>
-    </div>
+    <ParticipantContext.Provider value={localParticipant}>
+      <div className={styles.container}>
+        <ToggleCameraButton />
+        <ToggleScreenShareButton />
+        <ToggleMuteButton
+          className={styles.muteButton}
+          activeClassName={styles.muted}
+        />
+        <DisconnectFromRoomButton className={styles.disconnectButton} />
+      </div>
+    </ParticipantContext.Provider>
   );
 }

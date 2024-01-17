@@ -1,13 +1,21 @@
 import { DisconnectButton } from '@livekit/components-react';
 
+import { Tooltip } from '@components/ui/popups';
+
+import PhoneIcon from '@assets/icons/phone.svg?react';
+
 type DisconnectFromRoomButtonProps = {
-  children: React.ReactNode;
-}
+  className?: string;
+};
 
 export function DisconnectFromRoomButton({
-  children
+  className,
 }: DisconnectFromRoomButtonProps) {
   return (
-    <DisconnectButton>{children}</DisconnectButton>
+    <Tooltip text="Disconnect" direction="top" gap={4}>
+      <DisconnectButton className={className}>
+        <PhoneIcon />
+      </DisconnectButton>
+    </Tooltip>
   );
 }

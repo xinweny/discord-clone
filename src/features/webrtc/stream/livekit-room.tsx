@@ -45,16 +45,3 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     </LiveKitRoom>
   );
 }
-
-/* 
-  <VideoConference />
-  <ControlBar
-    controls={{
-      microphone: true,
-      camera: true,
-      screenShare: true,
-      leave: true,
-      chat: false,
-    }}
-  />
-*/

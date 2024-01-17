@@ -1,0 +1,38 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: colors.$white;
+    background-color: colors.$bg-secondary;
+
+    &:hover {
+      background-color: colors.$bg-tertiary;
+    }
+
+    &.muteButton:not(.muted) {
+      background-color: colors.$white;
+      color: colors.$black;
+    }
+
+    &.disconnectButton {
+      background-color: colors.$red-430;
+
+      &:hover {
+        background-color: colors.$red-530;
+      }
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}

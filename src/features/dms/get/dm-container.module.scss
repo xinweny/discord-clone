@@ -2,5 +2,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-right: 4px;
+
+  > div:last-child {
+    padding-right: 4px;
+  }
 }

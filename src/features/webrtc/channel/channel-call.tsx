@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
-import { ParticipantTile, CallControls } from '../stream';
+import { CallControls } from '../stream';
+import { ChannelParticipantTile } from './channel-participant-tile';
 
 export function ChannelCall() {
   const { serverId } = useParams();
@@ -11,8 +12,8 @@ export function ChannelCall() {
   return (
     <div>
       <ParticipantLoop participants={participants}>
-        <ParticipantTile
-          serverId={serverId}
+        <ChannelParticipantTile
+          serverId={serverId!}
         />
       </ParticipantLoop>
       <CallControls />

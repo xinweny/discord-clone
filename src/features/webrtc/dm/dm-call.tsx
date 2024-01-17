@@ -4,7 +4,8 @@ import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
 import { useContentLayoutContext } from '@components/context';
 
-import { ParticipantTile, CallControls } from '../stream';
+import { CallControls } from '../stream';
+import { DmParticipantTile } from './dm-participant-tile';
 
 import styles from './dm-call.module.scss';
 
@@ -24,7 +25,7 @@ export function DmCall() {
   return (
     <div className={styles.container} ref={containerRef}>
       <ParticipantLoop participants={participants}>
-        <ParticipantTile />
+        <DmParticipantTile />
       </ParticipantLoop>
       <CallControls />
     </div>

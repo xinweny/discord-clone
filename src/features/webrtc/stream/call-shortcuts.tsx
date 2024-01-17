@@ -4,13 +4,9 @@ import {
   ParticipantContext,
 } from '@livekit/components-react';
 
-import { Tooltip } from '@components/ui/popups';
-
 import { DisconnectFromRoomButton } from '../disconnect';
 import { CallInfo } from './call-info';
 import { CallShortcutsControls } from './call-shortcuts-controls';
-
-import PhoneIcon from '@assets/icons/phone.svg?react';
 
 import styles from './call-shortcuts.module.scss';
 
@@ -25,13 +21,7 @@ export function CallShortcuts() {
       <div className={styles.container}>
         <div className={styles.upper}>
           <CallInfo />
-          <Tooltip text="Disconnect" direction="top" gap={4}>
-            <DisconnectFromRoomButton>
-              <div className={styles.disconnectButton}>
-                <PhoneIcon />
-              </div>
-            </DisconnectFromRoomButton>
-          </Tooltip>
+          <DisconnectFromRoomButton className={styles.disconnectButton} />
         </div>
         <CallShortcutsControls />
       </div>
