@@ -21,6 +21,10 @@ export function ToggleMuteButton() {
     isOnCall,
   } = livekit;
 
+  const classes = `${styles.button} ${isMuted ? styles.muted : styles.unmuted}`;
+
+  const icon = isMuted ? <MutedIcon /> : <UnmutedIcon />;
+
   return (
     <Tooltip
       text={isMuted ? 'Unmute' : 'Mute'}
@@ -28,23 +32,24 @@ export function ToggleMuteButton() {
       gap={4}
     >
       {isOnCall
-      ? <TrackToggle
-        source={Track.Source.Microphone}
-        onChange={(enabled) => {
-          if (setIsMuted) setIsMuted(!enabled);
-        }}
-        initialState={!isMuted}
-      />
-      : <button
-        className={`${styles.button} ${isMuted ? styles.muted : styles.unmuted}`}
-        type="button"
-        onClick={() => { setIsMuted(muted => !muted); }}
-      >
-        {isMuted
-          ? <MutedIcon />
-          : <UnmutedIcon />
-        }
-      </button>
+        ? <TrackToggle
+          source={Track.Source.Microphone}
+          onChange={(enabled) => {
+            if (setIsMuted) setIsMuted(!enabled);
+          }}
+          initialState={!isMuted}
+          className={classes}
+          showIcon={false}
+        >
+          {icon}
+        </TrackToggle>
+        : <button
+          className={classes}
+          type="button"
+          onClick={() => { setIsMuted(muted => !muted); }}
+        >
+          {icon}
+        </button>
       }
     </Tooltip>
   );
