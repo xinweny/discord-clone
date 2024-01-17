@@ -34,18 +34,24 @@ export function RelationOptionsBar({
   return (
     <div className={styles.container}>
       {(mutualServers && mutualServers.length > 0) && <>
-        <div>
-          <div className={styles.mutualServersList}>
-            {mutualServers.map(server => <ServerAvatar server={server} />)}
-          </div>
+        <div className={styles.mutualServers}>
+          <ServerAvatar
+            className={styles.avatar}
+            key={mutualServers[0]._id}
+            server={mutualServers[0]}
+          />
           <span>{pluralize('Mutual Server', mutualServers.length, true)}</span>
         </div>
-        <Separator className={''} />
+        <div className={styles.dot}></div>
       </>}
       <div className={styles.buttonsList}>
         {(!relation || relation.status === RelationStatus.PENDING_TO) && (
-          <SendFriendRequestButton senderId={senderId} recipientId={recipientId}>
-            Send Friend Request
+          <SendFriendRequestButton
+            senderId={senderId}
+            recipientId={recipientId}
+            className={styles.friendRequestButton}
+          >
+            Add Friend
           </SendFriendRequestButton>
         )}
         {(relation && relation.status === RelationStatus.FRIENDS) && (

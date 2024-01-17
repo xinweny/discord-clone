@@ -1,0 +1,63 @@
+@use '@styles/colors';
+
+.container {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+
+  .mutualServers{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: colors.$bg-secondary;
+      font-size: 8px;
+    }
+
+    span {
+      font-size: 14px;
+      color: colors.$interactive-normal;
+    }
+  }
+
+  .dot {
+    margin: 0px 16px;
+    background-color: colors.$bg-modifier-accent;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+  }
+
+  .buttonsList {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    button {
+      height: 24px;
+      padding: 0px 16px;
+      text-align: center;
+      color: colors.$interactive-active;
+      font-weight: 500;
+      font-size: 14px;
+      background-color: colors.$button-secondary-bg;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: colors.$button-secondary-hover;
+      }
+    }
+  }
+
+  .friendRequestButton {
+    background-color: colors.$brand-500 !important;
+
+    &:hover {
+      background-color: colors.$brand-560 !important;
+    }
+  }
+}

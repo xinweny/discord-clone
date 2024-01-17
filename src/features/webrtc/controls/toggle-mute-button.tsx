@@ -10,7 +10,12 @@ import MutedIcon from '@assets/icons/microphone-mute.svg?react';
 
 import styles from './toggle-mute-button.module.scss';
 
-export function ToggleMuteButton() {
+type ToggleMuteButtonProps = {
+  className?: string;
+  activeClassName?: string;
+};
+
+export function ToggleMuteButton({ className, activeClassName }: ToggleMuteButtonProps) {
   const livekit = useLivekitContext();
 
   if (!livekit) return null;
@@ -21,7 +26,7 @@ export function ToggleMuteButton() {
     isOnCall,
   } = livekit;
 
-  const classes = `${styles.button} ${isMuted ? styles.muted : styles.unmuted}`;
+  const classes = `${className} ${styles.button} ${isMuted ? `${activeClassName} ${styles.muted}` : styles.unmuted}`;
 
   const icon = isMuted ? <MutedIcon /> : <UnmutedIcon />;
 
