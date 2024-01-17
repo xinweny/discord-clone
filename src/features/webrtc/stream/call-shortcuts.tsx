@@ -8,7 +8,7 @@ import { Tooltip } from '@components/ui/popups';
 
 import { DisconnectFromRoomButton } from '../disconnect';
 import { CallInfo } from './call-info';
-import { CallShortcutsControls } from '../controls';
+import { CallShortcutsControls } from './call-shortcuts-controls';
 
 import PhoneIcon from '@assets/icons/phone.svg?react';
 

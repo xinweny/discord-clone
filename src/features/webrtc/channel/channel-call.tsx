@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
-import { ParticipantTile } from '../stream';
-import { CallControls } from '../controls';
+import { ParticipantTile, CallControls } from '../stream';
 
 export function ChannelCall() {
   const { serverId } = useParams();
