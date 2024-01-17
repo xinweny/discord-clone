@@ -1,0 +1,7 @@
+@use '@styles/colors';
+
+.container {
+  padding: 8px;
+  border-bottom: 1px solid colors.$bg-modifier-accent;
+  background-color: colors.$bg-secondary-alt;
+}

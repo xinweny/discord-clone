@@ -8,6 +8,8 @@ import { DisconnectFromRoomButton } from '../disconnect';
 import { CallInfo } from './call-info';
 import { CallShortcutsControls } from '../controls';
 
+import styles from './call-shortcuts.module.scss';
+
 export function CallShortcuts() {
   const { localParticipant } = useLocalParticipant();
   const connectionState = useConnectionState();
@@ -16,13 +18,13 @@ export function CallShortcuts() {
 
   return (
     <ParticipantContext.Provider value={localParticipant}>
-      <div>
+      <div className={styles.container}>
         <CallInfo />
         <DisconnectFromRoomButton>
           <img src="" alt="Disconnect" />
         </DisconnectFromRoomButton>
+        <CallShortcutsControls />
       </div>
-      <CallShortcutsControls />
     </ParticipantContext.Provider>
   );
 }
