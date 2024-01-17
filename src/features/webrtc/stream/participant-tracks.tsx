@@ -8,14 +8,20 @@ import { TrackContainer } from '@components/ui/media';
 
 import { getParticipantTracks } from '../utils';
 
+import styles from './participant-tracks.module.scss';
+
 type ParticipantTracksProps = {
   placeholder: React.ReactNode;
   displayName: string;
+  className?: string;
+  isFocus?: boolean;
 };
 
 export function ParticipantTracks({
   placeholder,
   displayName,
+  className,
+  isFocus = true,
 }: ParticipantTracksProps) {
   const participant = useParticipantContext();
 
@@ -35,23 +41,22 @@ export function ParticipantTracks({
   const trackContainerProps = {
     label: displayName,
     isMicrophoneEnabled,
+    showDetails: isFocus,
   };
 
   return (
-    <div>
+    <div className={`${styles.container} ${className || ''}`}>
       {isCameraEnabled || isScreenShareEnabled
         ? <>
           {(isScreenShareEnabled && ssTrack) && (
             <TrackContainer {...trackContainerProps}>
-              <VideoTrack trackRef={ssTrack} />
+              <VideoTrack trackRef={ssTrack} className={styles.videoTrack} />
               {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
             </TrackContainer>
           )}
           {(isCameraEnabled && cameraTrack) && (
             <TrackContainer {...trackContainerProps}>
-              <VideoTrack
-                trackRef={cameraTrack}
-              />
+              <VideoTrack trackRef={cameraTrack} className={styles.videoTrack} />
             </TrackContainer>
           )}
         </>

@@ -1,10 +1,18 @@
 @use '@styles/colors';
 
 .container {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
+  width: 100%;
+  background: linear-gradient(transparent, colors.$bg-floating);
+  z-index: 5;
+  padding-bottom: 16px;
 
   button {
     width: 56px;
@@ -18,8 +26,8 @@
     }
 
     &.muteButton:not(.muted) {
-      background-color: colors.$white;
-      color: colors.$black;
+      background-color: colors.$white !important;
+      color: colors.$black !important;
     }
 
     &.disconnectButton {

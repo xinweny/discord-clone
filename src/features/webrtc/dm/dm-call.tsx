@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-
+import { useEffect } from 'react';
+import { useHover } from '@uidotdev/usehooks';
 import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
 import { useContentLayoutContext } from '@components/context';
@@ -14,7 +14,7 @@ export function DmCall() {
 
   const { setHeaderClass } = useContentLayoutContext()!;
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [hoverRef, isHovered] = useHover();
 
   useEffect(() => {
     setHeaderClass(styles.header);
@@ -23,11 +23,11 @@ export function DmCall() {
   }, []);
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container} ref={hoverRef}>
       <ParticipantLoop participants={participants}>
-        <DmParticipantTile />
+        <DmParticipantTile isFocus={isHovered} />
       </ParticipantLoop>
-      <CallControls />
+      <CallControls show={isHovered} />
     </div>
   );
 }

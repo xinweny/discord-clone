@@ -6,6 +6,7 @@
 }
 
 .container {
+  position: relative;
   flex-grow: 1;
   background-color: colors.$bg-floating;
   padding: 16px;

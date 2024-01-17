@@ -8,9 +8,15 @@ import { Avatar } from '@components/ui/media';
 
 import { ParticipantTracks } from '../stream';
 
+import MutedIcon from '@assets/icons/microphone-mute.svg?react';
+
 import styles from './dm-participant-tile.module.scss';
 
-export function DmParticipantTile() {
+type DmParticipantTileProps = {
+  isFocus?: boolean;
+};
+
+export function DmParticipantTile({ isFocus = true }: DmParticipantTileProps) {
   const participant = useParticipantContext();
 
   const {
@@ -30,13 +36,23 @@ export function DmParticipantTile() {
   return (
     <div className={styles.tile}>
       <ParticipantTracks
-        placeholder={<Avatar
-          className={`${styles.avatar} ${isSpeaking ? styles.speaking : ''}`}
-          src={avatarUrl}
-        />}
+        placeholder={(
+          <div className={`${styles.wrapper} ${isSpeaking ? styles.speaking : ''}`}>
+            <Avatar
+              className={styles.avatar}
+              src={avatarUrl}
+            />
+            {!isMicrophoneEnabled && (
+              <div className={styles.notification}>
+                <MutedIcon />
+              </div>
+            )}
+          </div>
+        )}
         displayName={displayName}
+        className={styles.tracks}
+        isFocus={isFocus}
       />
-      {isMicrophoneEnabled || <img src="" alt="Muted" />}
     </div>
   );
 }

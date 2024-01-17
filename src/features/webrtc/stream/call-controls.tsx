@@ -3,7 +3,6 @@ import {
   useLocalParticipant,
 } from '@livekit/components-react';
 
-
 import {
   ToggleCameraButton,
   ToggleMuteButton,
@@ -13,9 +12,16 @@ import { DisconnectFromRoomButton } from '../disconnect';
 
 import styles from './call-controls.module.scss';
 
+type CallControlsProps = {
+  show?: boolean;
+};
 
-export function CallControls() {
+export function CallControls({ show }: CallControlsProps) {
   const { localParticipant } = useLocalParticipant();
+
+  const { isCameraEnabled } = localParticipant;
+
+  if (isCameraEnabled && !show) return null;
 
   return (
     <ParticipantContext.Provider value={localParticipant}>
