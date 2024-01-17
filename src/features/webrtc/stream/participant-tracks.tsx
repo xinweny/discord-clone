@@ -8,6 +8,8 @@ import { TrackContainer } from '@components/ui/media';
 
 import { getParticipantTracks } from '../utils';
 
+import styles from './participant-tracks.module.scss';
+
 type ParticipantTracksProps = {
   placeholder: React.ReactNode;
   displayName: string;
@@ -38,7 +40,7 @@ export function ParticipantTracks({
   };
 
   return (
-    <>
+    <div className={styles.tracks}>
       {isCameraEnabled || isScreenShareEnabled
         ? <>
           {(isScreenShareEnabled && ssTrack) && (
@@ -58,6 +60,6 @@ export function ParticipantTracks({
         : placeholder
       }
       {(isMicrophoneEnabled && audioTrack) && <AudioTrack trackRef={audioTrack} />}
-    </>
+    </div>
   );
 }

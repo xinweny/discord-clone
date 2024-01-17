@@ -1,4 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
+
+import { ContentLayoutContext } from '@components/context';
 
 import styles from './content-layout.module.scss';
 
@@ -13,19 +15,23 @@ export function ContentLayout({
   children,
   panel,
 }: ContentLayoutProps) {
+  const [headerClass, setHeaderClass] = useState<string>('');
+
   return (
-    <div className={styles.layout}>
-      {header && (
-        <div className={styles.header}>
-          {header}
+    <ContentLayoutContext.Provider value={{ setHeaderClass }}>
+      <div className={styles.layout}>
+        {header && (
+          <div className={`${styles.header} ${headerClass}`}>
+            {header}
+          </div>
+        )}
+        <div className={styles.content}>
+          {children}
         </div>
-      )}
-      <div className={styles.content}>
-        {children}
+        <div className={styles.panel}>
+          {panel}
+        </div>
       </div>
-      <div className={styles.panel}>
-        {panel}
-      </div>
-    </div>
+    </ContentLayoutContext.Provider>
   );
 }

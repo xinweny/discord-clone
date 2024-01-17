@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.header {
+  background-color: colors.$bg-floating;
+  border-bottom: 1px solid colors.$bg-floating;
+}
+
+.container {
+  background-color: colors.$bg-floating;
+  min-height: 200px;
+
+  > *:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -4,7 +4,12 @@ import {
 
 import { useGetUserQuery } from '@features/users/api';
 import { useGetUserServerMemberQuery } from '@features/members/api';
+
+import { Gif } from '@components/ui/media';
+
 import { ParticipantTracks } from './participant-tracks';
+
+import styles from './participant-tile.module.scss';
 
 type ParticipantTileProps = {
   serverId?: string;
@@ -36,13 +41,13 @@ export function ParticipantTile({ serverId }: ParticipantTileProps) {
   const avatarUrl = user?.avatarUrl || member?.user.avatarUrl as string;
 
   return (
-    <>
+    <div className={styles.tile}>
       <ParticipantTracks
-        placeholder={<img src={avatarUrl} />}
+        placeholder={<Gif className={styles.avatar} src={avatarUrl} />}
         displayName={displayName}
       />
-      <p>{displayName}</p>
+      <span>{displayName}</span>
       {isMicrophoneEnabled || <img src="" alt="Muted" />}
-    </>
+    </div>
   );
 }
