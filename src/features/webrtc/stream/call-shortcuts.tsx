@@ -6,7 +6,7 @@ import {
 
 import { DisconnectFromRoomButton } from '../disconnect';
 import { CallInfo } from './call-info';
-import { CallShortcutsControls } from './call-shortcuts-controls';
+import { CallShortcutsControls } from '../controls';
 
 import styles from './call-shortcuts.module.scss';
 

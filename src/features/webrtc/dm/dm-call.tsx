@@ -4,7 +4,9 @@ import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
 import { useContentLayoutContext } from '@components/context';
 
-import { CallControls, VideoModeWrapper } from '../stream';
+import { VideoModeWrapper } from '../stream';
+import { CallControls } from '../controls';
+
 import { DmParticipantTile } from './dm-participant-tile';
 
 import styles from './dm-call.module.scss';

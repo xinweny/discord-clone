@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
-import { CallControls } from '../stream';
+import { CallControls } from '../controls';
+
 import { ChannelParticipantTile } from './channel-participant-tile';
 
 export function ChannelCall() {

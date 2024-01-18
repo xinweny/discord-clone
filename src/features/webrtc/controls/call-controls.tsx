@@ -7,7 +7,7 @@ import {
   ToggleCameraButton,
   ToggleMuteButton,
   ToggleScreenShareButton,
-} from '../controls';
+} from '.';
 import { DisconnectFromRoomButton } from '../disconnect';
 
 import styles from './call-controls.module.scss';

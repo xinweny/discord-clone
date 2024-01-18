@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { type Participant } from 'livekit-client';
+import { useParticipants } from '@livekit/components-react';
 
 import { LivekitContext } from './context';
 
@@ -134,4 +135,16 @@ export const useServerMemberParticipant = (participant: Participant, serverId: s
   const member = members.find(member => member.userId === participant.identity);
 
   return member || null;
+};
+
+export const useVideoMode = () => {
+  const participants = useParticipants();
+
+  const [videoMode, setVideoMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    setVideoMode(!!participants.find(participant => participant.isCameraEnabled || participant.isScreenShareEnabled));
+  }, [participants]);
+
+  return videoMode;
 };

@@ -6,11 +6,11 @@ import {
 
 import { getParticipantTracks } from '../utils';
 
-import { Avatar, TrackContainer } from '@components/ui/media';
+import { TrackContainer } from '@components/ui/media';
+
+import { CallAvatar } from '../stream';
 
 import { useGetUserQuery } from '@features/users/api';
-
-import MutedIcon from '@assets/icons/microphone-mute.svg?react';
 
 import styles from './dm-participant-tile.module.scss';
 
@@ -26,7 +26,6 @@ export function DmParticipantTile({ isFocus = true }: DmParticipantTileProps) {
     isMicrophoneEnabled,
     isScreenShareEnabled,
     isCameraEnabled,
-    isSpeaking,
   } = participant;
 
   const { data: user } = useGetUserQuery(userId, { skip: !userId });
@@ -34,8 +33,6 @@ export function DmParticipantTile({ isFocus = true }: DmParticipantTileProps) {
   if (!user) return null;
 
   const displayName = user?.displayName as string;
-
-  const avatarUrl = user?.avatarUrl as string;
 
   const {
     cameraTrack,
@@ -67,19 +64,7 @@ export function DmParticipantTile({ isFocus = true }: DmParticipantTileProps) {
               </TrackContainer>
             ))}
         </>
-        : (
-          <div className={`${styles.wrapper} ${isSpeaking ? styles.speaking : ''}`}>
-            <Avatar
-              className={styles.avatar}
-              src={avatarUrl}
-            />
-            {!isMicrophoneEnabled && (
-              <div className={styles.notification}>
-                <MutedIcon />
-              </div>
-            )}
-          </div>
-        )
+        : <CallAvatar participant={participant} />
       }
       {(isMicrophoneEnabled && audioTrack) && <AudioTrack trackRef={audioTrack} />}
     </div>
