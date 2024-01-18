@@ -48,17 +48,18 @@ export function ParticipantTracks({
     <div className={`${styles.container} ${className || ''}`}>
       {isCameraEnabled || isScreenShareEnabled
         ? <>
-          {(isScreenShareEnabled && ssTrack) && (
-            <TrackContainer {...trackContainerProps}>
-              <VideoTrack trackRef={ssTrack} className={styles.videoTrack} />
-              {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
-            </TrackContainer>
-          )}
-          {(isCameraEnabled && cameraTrack) && (
-            <TrackContainer {...trackContainerProps}>
-              <VideoTrack trackRef={cameraTrack} className={styles.videoTrack} />
-            </TrackContainer>
-          )}
+          {(isScreenShareEnabled && ssTrack)
+            ? (
+              <TrackContainer {...trackContainerProps}>
+                <VideoTrack trackRef={ssTrack} className={styles.videoTrack} />
+                {ssAudioTrack && <AudioTrack trackRef={ssAudioTrack} />}
+              </TrackContainer>
+            )
+            : ((isCameraEnabled && cameraTrack) && (
+              <TrackContainer {...trackContainerProps}>
+                <VideoTrack trackRef={cameraTrack} className={styles.videoTrack} />
+              </TrackContainer>
+            ))}
         </>
         : placeholder
       }

@@ -16,6 +16,7 @@ import {
   DmHeader,
   DmParticipantsPanel,
 } from '@features/dms/get';
+import { DmCall, DmOngoingCall } from '@features/webrtc/dm';
 
 import { useGetDmQuery } from '@features/dms/api';
 
@@ -50,17 +51,19 @@ export function DMPage() {
   return (
     <StateContext.Provider value={panelState}>
       <ContentLayout
-        header={<DmHeader dm={dm} />}
+        header={isInCurrentRoomCall
+          ? <DmCall header={<DmHeader dm={dm} />} />
+          : <>
+            <DmHeader dm={dm} />
+            <DmOngoingCall roomId={dm._id} roomName={name} />
+          </>}
         panel={<DmParticipantsPanel
           participants={participants}
           isGroup={isGroup}
           show={showPanel && !isInCurrentRoomCall}
         />}
       >
-        <DmContainer
-          dm={dm}
-          isInCurrentRoomCall={!!isInCurrentRoomCall}
-        />
+        <DmContainer dm={dm} />
       </ContentLayout>
     </StateContext.Provider>
   );

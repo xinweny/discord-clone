@@ -16,7 +16,7 @@ type CallControlsProps = {
   show?: boolean;
 };
 
-export function CallControls({ show }: CallControlsProps) {
+export function CallControls({ show = true }: CallControlsProps) {
   const { localParticipant } = useLocalParticipant();
 
   const { isCameraEnabled } = localParticipant;

@@ -9,7 +9,11 @@ import { DmParticipantTile } from './dm-participant-tile';
 
 import styles from './dm-call.module.scss';
 
-export function DmCall() {
+type DmHeaderProps = {
+  header?: React.ReactNode;
+};
+
+export function DmCall({ header }: DmHeaderProps) {
   const participants = useParticipants();
 
   const { setHeaderClass } = useContentLayoutContext()!;
@@ -24,10 +28,17 @@ export function DmCall() {
 
   return (
     <div className={styles.container} ref={hoverRef}>
-      <ParticipantLoop participants={participants}>
-        <DmParticipantTile isFocus={isHovered} />
-      </ParticipantLoop>
-      <CallControls show={isHovered} />
+      <div className={styles.top} hidden={!isHovered}>
+        {header}
+      </div>
+      <div className={styles.tiles}>
+        <ParticipantLoop participants={participants}>
+          <DmParticipantTile isFocus={isHovered} />
+        </ParticipantLoop>
+      </div>
+      <div className={styles.controls}>
+        <CallControls show={isHovered} />
+      </div>
     </div>
   );
 }

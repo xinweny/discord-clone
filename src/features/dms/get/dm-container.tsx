@@ -9,7 +9,6 @@ import { useGetRelationsQuery } from '@features/relations/api';
 import { RoomWelcome, RoomTypes } from '@components/ui/displays';
 
 import { MessagesContainer } from '@features/messages/list';
-import { DmOngoingCall, DmCall } from '@features/webrtc/dm';
 import { RelationOptionsBar } from '@features/relations/get';
 
 import defaultUserAvatar from '@assets/static/default-user-avatar.png';
@@ -18,10 +17,9 @@ import styles from './dm-container.module.scss';
 
 type DmContainerProps = {
   dm: DMData;
-  isInCurrentRoomCall: boolean;
 };
 
-export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
+export function DmContainer({ dm }: DmContainerProps) {
   const { user } = useGetUserData();
   const userId = user.data!.id;
 
@@ -32,28 +30,24 @@ export function DmContainer({ dm, isInCurrentRoomCall }: DmContainerProps) {
 
   return (
     <div className={styles.container}>
-      {isInCurrentRoomCall
-        ? <DmCall />
-        : <DmOngoingCall roomId={dm._id} roomName={name} />
-      }
-        <MessagesContainer
-          welcomeComponent={<RoomWelcome
-            type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
-            name={name}
-            avatarSrc={avatarUrl || defaultUserAvatar}
-            username={isGroup ? undefined : participants[0].username}
-            component={!isGroup && <RelationOptionsBar
-              senderId={userId}
-              recipientId={participants[0]._id}
-            />}
+      <MessagesContainer
+        welcomeComponent={<RoomWelcome
+          type={isGroup ? RoomTypes.GROUP : RoomTypes.DM}
+          name={name}
+          avatarSrc={avatarUrl || defaultUserAvatar}
+          username={isGroup ? undefined : participants[0].username}
+          component={!isGroup && <RelationOptionsBar
+            senderId={userId}
+            recipientId={participants[0]._id}
           />}
-          formPlaceholder={`Message ${isGroup ? '' : '@'}${name}`}
-          authorized={isGroup
-            ? participantIds.includes(userId)
-            : !relations?.find(relation => relation.userId === participants[0]._id && relation.status === RelationStatus.BLOCKED)
-          }
-          errorPlaceholder={isGroup ? undefined : 'You cannot send messages to a user you have blocked.'}
-        />
+        />}
+        formPlaceholder={`Message ${isGroup ? '' : '@'}${name}`}
+        authorized={isGroup
+          ? participantIds.includes(userId)
+          : !relations?.find(relation => relation.userId === participants[0]._id && relation.status === RelationStatus.BLOCKED)
+        }
+        errorPlaceholder={isGroup ? undefined : 'You cannot send messages to a user you have blocked.'}
+      />
     </div>
   );
 }
