@@ -4,13 +4,19 @@ import { Track } from 'livekit-client';
 import { Tooltip } from '@components/ui/popups';
 
 import ScreenShareIcon from '@assets/icons/screen-share.svg?react';
+import StopStreamingIcon from '@assets/icons/stop-streaming.svg?react';
 
 type ToggleScreenShareButtonProps = {
   className?: string;
   activeClassName?: string;
+  toggleIcon?: boolean;
 };
 
-export function ToggleScreenShareButton({ className, activeClassName }: ToggleScreenShareButtonProps) {
+export function ToggleScreenShareButton({
+  className,
+  activeClassName,
+  toggleIcon = false,
+}: ToggleScreenShareButtonProps) {
   const participant = useParticipantContext();
 
   if (!participant) return null;
@@ -28,7 +34,10 @@ export function ToggleScreenShareButton({ className, activeClassName }: ToggleSc
         showIcon={false}
         className={`${className} ${isScreenShareEnabled ? activeClassName : ''}`}
       >
-        <ScreenShareIcon />
+        {toggleIcon
+          ? (isScreenShareEnabled ? <StopStreamingIcon /> : <ScreenShareIcon />)
+          : <ScreenShareIcon />
+        }
       </TrackToggle>
     </Tooltip>
   );

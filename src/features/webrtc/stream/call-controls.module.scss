@@ -19,9 +19,19 @@
       background-color: colors.$bg-tertiary;
     }
 
-    &.muteButton:not(.muted) {
+    &.active {
       background-color: colors.$white !important;
       color: colors.$black !important;
+    }
+
+    &.muteButton {
+      background-color: colors.$white !important;
+      color: colors.$black !important;
+
+      &.active {
+        color: colors.$white !important;
+        background-color: colors.$bg-secondary !important;
+      }
     }
 
     &.disconnectButton {

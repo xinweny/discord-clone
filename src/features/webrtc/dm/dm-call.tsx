@@ -4,7 +4,7 @@ import { useParticipants, ParticipantLoop } from '@livekit/components-react';
 
 import { useContentLayoutContext } from '@components/context';
 
-import { CallControls } from '../stream';
+import { CallControls, VideoModeWrapper } from '../stream';
 import { DmParticipantTile } from './dm-participant-tile';
 
 import styles from './dm-call.module.scss';
@@ -28,8 +28,10 @@ export function DmCall({ header }: DmHeaderProps) {
 
   return (
     <div className={styles.container} ref={hoverRef}>
-      <div className={styles.top} hidden={!isHovered}>
-        {header}
+      <div className={styles.top}>
+        <VideoModeWrapper condition={isHovered}>
+          {header}
+        </VideoModeWrapper>
       </div>
       <div className={styles.tiles}>
         <ParticipantLoop participants={participants}>
@@ -37,7 +39,9 @@ export function DmCall({ header }: DmHeaderProps) {
         </ParticipantLoop>
       </div>
       <div className={styles.controls}>
-        <CallControls show={isHovered} />
+        <VideoModeWrapper condition={isHovered}>
+          <CallControls />
+        </VideoModeWrapper>
       </div>
     </div>
   );

@@ -3,6 +3,8 @@
 .tile {
   position: relative;
   height: 100%;
+  display: flex;
+  align-items: center;
 
   .wrapper {
     width: 80px;
@@ -41,5 +43,14 @@
         height: 14px;
       }
     }
+  }
+
+  audio {
+    display: none;
+  }
+
+  .videoTrack {
+    height: 100%;
+    width: auto;
   }
 }

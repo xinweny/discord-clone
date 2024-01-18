@@ -12,25 +12,22 @@ import { DisconnectFromRoomButton } from '../disconnect';
 
 import styles from './call-controls.module.scss';
 
-type CallControlsProps = {
-  show?: boolean;
-};
-
-export function CallControls({ show = true }: CallControlsProps) {
+export function CallControls() {
   const { localParticipant } = useLocalParticipant();
-
-  const { isCameraEnabled } = localParticipant;
-
-  if (isCameraEnabled && !show) return null;
 
   return (
     <ParticipantContext.Provider value={localParticipant}>
       <div className={styles.container}>
-        <ToggleCameraButton />
-        <ToggleScreenShareButton />
+        <ToggleCameraButton
+          activeClassName={styles.active}
+        />
+        <ToggleScreenShareButton 
+          activeClassName={styles.active}
+          toggleIcon
+        />
         <ToggleMuteButton
           className={styles.muteButton}
-          activeClassName={styles.muted}
+          activeClassName={styles.active}
         />
         <DisconnectFromRoomButton className={styles.disconnectButton} />
       </div>
