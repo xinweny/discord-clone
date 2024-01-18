@@ -25,7 +25,7 @@ export function ChannelOngoingCallParticipantCardPreview({
   return (
     <div>
       <Avatar src={avatarUrl} />
-      <p>{displayName}</p>
+      <span>{displayName}</span>
     </div>
   );
 }

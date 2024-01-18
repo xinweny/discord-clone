@@ -1,45 +1,34 @@
-import type { LocalParticipant, RemoteParticipant } from 'livekit-client';
+import type { Participant } from 'livekit-client';
 
 import { useVideoMode } from '../hooks';
 
 import { CallAvatar } from '.';
 
-import styles from './private-participant-loop.module.scss';
-
 type PrivateParticipantLoopProps = {
-  localParticipant: LocalParticipant;
-  remoteParticipant: RemoteParticipant;
+  participants: Participant[];
+  showDetails?: boolean;
 };
 
-export function GroupParticipantLoop({
-  localParticipant,
-  remoteParticipant,
+export function PrivateParticipantLoop({
+  participants,
+  showDetails = true,
 }: PrivateParticipantLoopProps) {
-  const participants = [localParticipant, remoteParticipant];
   const videoMode = useVideoMode();
 
-  if (!videoMode) return (
-    <div className={styles.noVideoLoop}>
-      {participants.map(participant => (
-        <CallAvatar
-          key={participant.identity}
-          participant={participant}
-        />
-      ))}
-    </div>
-  );
-
-  
+  const localParticipant = participants.find(participant => participant.isLocal);
+  const remoteParticipant = participants.find(participant => !participant.isLocal);
 
   return (
-    <>
-      <div className={styles.videoLoop}>
-        {remoteParticipant.isCameraEnabled || remoteParticipant.isScreenShareEnabled
-          ?
-          : 
-        }
-      </div>
-    </>
-
+    <div>
+      {!videoMode
+        ? participants.map(participant => (
+          <CallAvatar
+            key={participant.identity}
+            participant={participant}
+          />
+        ))
+        : null
+      }
+    </div>
   );
 }

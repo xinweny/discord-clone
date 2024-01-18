@@ -1,0 +1,63 @@
+@use '@styles/colors';
+
+.tile {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  audio {
+    display: none;
+  }
+}
+
+.track {
+  position: relative;
+  height: 100%;
+
+  &.speaking {
+    border: 4px solid colors.$text-positive;
+  }
+
+  > *:not(:first-child) {
+    position: absolute;
+    bottom: 8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+  }
+
+  > .info {
+    border-radius: 8px;
+    left: 8px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  > .states {
+    right: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    .button {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  *[hidden] {
+    display: none;
+    opacity: 0;
+  }
+}

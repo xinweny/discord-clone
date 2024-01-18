@@ -1,50 +1,25 @@
-import { useEffect } from 'react';
-import { useHover } from '@uidotdev/usehooks';
-import { useParticipants, ParticipantLoop } from '@livekit/components-react';
+import { useParticipants } from '@livekit/components-react';
 
-import { useContentLayoutContext } from '@components/context';
-
-import { VideoModeWrapper } from '../stream';
-import { CallControls } from '../controls';
-
-import { DmParticipantTile } from './dm-participant-tile';
-
-import styles from './dm-call.module.scss';
+import {
+  CallWrapper,
+  GroupParticipantLoop,
+  PrivateParticipantLoop,
+} from '../stream';
 
 type DmHeaderProps = {
   header?: React.ReactNode;
+  isGroup: boolean;
 };
 
-export function DmCall({ header }: DmHeaderProps) {
+export function DmCall({ header, isGroup }: DmHeaderProps) {
   const participants = useParticipants();
 
-  const { setHeaderClass } = useContentLayoutContext()!;
-
-  const [hoverRef, isHovered] = useHover();
-
-  useEffect(() => {
-    setHeaderClass(styles.header);
-
-    return () => { setHeaderClass(''); };
-  }, []);
-
   return (
-    <div className={styles.container} ref={hoverRef}>
-      <div className={styles.top}>
-        <VideoModeWrapper condition={isHovered}>
-          {header}
-        </VideoModeWrapper>
-      </div>
-      <div className={styles.tiles}>
-        <ParticipantLoop participants={participants}>
-          <DmParticipantTile isFocus={isHovered} />
-        </ParticipantLoop>
-      </div>
-      <div className={styles.controls}>
-        <VideoModeWrapper condition={isHovered}>
-          <CallControls />
-        </VideoModeWrapper>
-      </div>
-    </div>
+    <CallWrapper header={header} >
+      {isGroup
+        ? <GroupParticipantLoop participants={participants} />
+        : <PrivateParticipantLoop participants={participants} />
+      }
+    </CallWrapper>
   );
 }
