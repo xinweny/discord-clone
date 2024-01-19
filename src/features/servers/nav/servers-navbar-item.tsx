@@ -7,7 +7,6 @@ type ServersNavbarItemProps = {
   tooltipText: string;
   children: React.ReactNode;
   className?: string;
-  notification?: React.ReactNode | null;
 };
 
 export function ServersNavbarItem({
@@ -15,7 +14,6 @@ export function ServersNavbarItem({
   tooltipText,
   children,
   className,
-  notification,
 }: ServersNavbarItemProps) {
   return (
     <Tooltip
@@ -26,7 +24,6 @@ export function ServersNavbarItem({
       <div className={`${styles.item} ${isActive ? styles.active : ''} ${className || ''}`}>
         {children}
         <div className={styles.indicator}>
-          {notification}
         </div>
       </div>
     </Tooltip>

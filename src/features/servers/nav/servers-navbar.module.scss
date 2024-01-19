@@ -6,12 +6,18 @@
   background-color: colors.$bg-tertiary;
   padding: 12px;
   pointer-events: all;
+
+  .friends {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    margin: 6px auto;
+    width: 32px;
+    border-top-width: 2px;
+    background-color: colors.$bg-primary;
+  }
 }
 
-.separator {
-  margin: 6px auto;
-  height: 2px;
-  width: 32px;
-  border-radius: 1px;
-  background-color: colors.$bg-primary;
-}
