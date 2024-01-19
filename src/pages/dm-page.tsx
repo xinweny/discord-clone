@@ -51,12 +51,7 @@ export function DMPage() {
   return (
     <StateContext.Provider value={panelState}>
       <ContentLayout
-        header={isInCurrentRoomCall
-          ? <DmCall header={<DmHeader dm={dm} />} />
-          : <>
-            <DmHeader dm={dm} />
-            <DmOngoingCall roomId={dm._id} roomName={name} />
-          </>}
+        header={<DmHeader dm={dm} />}
         panel={<DmParticipantsPanel
           participants={participants}
           isGroup={isGroup}

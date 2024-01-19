@@ -25,7 +25,7 @@ export function DmCallShortcut() {
   const roomId = data?.roomId;
   const serverId = data?.serverId;
 
-  const { data: dm } = useGetDmQuery(roomId || '', { skip: !data || !serverId || !roomId });
+  const { data: dm } = useGetDmQuery({ dmId: roomId || '' }, { skip: !data || !serverId || !roomId });
 
   if (!isOnCall || !roomData || !!serverId) return null;
 

@@ -92,7 +92,6 @@ export function PrivateParticipantTile({
           })}
         </div>
       </Draggable>
-      
     </>
   );
 }

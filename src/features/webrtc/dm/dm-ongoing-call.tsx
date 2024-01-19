@@ -1,37 +1,40 @@
-import { ConnectToRoomButton } from '../connect';
+import { OngoingCallWrapper } from '../get';
+
 import { DmOngoingCallParticipantCard } from './dm-ongoing-call-participant-card';
+import { JoinOngoingCallControls } from './join-ongoing-call-controls';
 
 import { useGetParticipantsQuery } from '../api';
 
 type DmOngoingCallProps = {
+  header: React.ReactNode;
   roomId: string;
   roomName: string;
 };
 
 export function DmOngoingCall({
+  header,
   roomId,
   roomName,
 }: DmOngoingCallProps) {
-  const { data: participants, isSuccess } = useGetParticipantsQuery(roomId);
-
-  if (!isSuccess || participants.length === 0) return null;
+  const { data: participants } = useGetParticipantsQuery(roomId);
 
   return (
-    <div>
+    <OngoingCallWrapper
+      participants={participants}
+      header={header}
+      controls={<JoinOngoingCallControls
+        roomId={roomId}
+        roomName={roomName}
+      />}
+    >
       <div>
-        {participants.map(participant => 
+        {participants && participants.map(participant => 
           <DmOngoingCallParticipantCard
             key={participant.identity}
             participant={participant}
           />
         )}
       </div>
-      <ConnectToRoomButton
-        roomId={roomId}
-        roomName={roomName}
-      >
-        <img src="" alt="Join Call" />
-      </ConnectToRoomButton>
-    </div>
+    </OngoingCallWrapper>
   );
 }
