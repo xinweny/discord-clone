@@ -1,5 +1,6 @@
 import type { Participant } from 'livekit-client';
 import { VideoTrack } from '@livekit/components-react';
+import Draggable from 'react-draggable';
 
 import { getParticipantTracks } from '../utils';
 
@@ -51,42 +52,47 @@ export function PrivateParticipantTile({
           showLabel={showDetails}
         />
       </div>
-      <div className={styles.popoutTracks}>
-        {participants.map((participant, i) => {
-          if (!participant) return null;
+      <Draggable
+        axis="both"
+      >
+        <div className={styles.popoutTracks}>
+          {participants.map((participant, i) => {
+            if (!participant) return null;
 
-          const { cameraTrack } = getParticipantTracks(participant)!;
+            const { cameraTrack } = getParticipantTracks(participant)!;
 
-          if (i === 0
-            ? !(participant.isScreenShareEnabled && participant.isCameraEnabled)
-            : isRemoteMain || !participant.isScreenShareEnabled || !participant.isCameraEnabled
-          )
-           return null;
+            if (i === 0
+              ? !(participant.isScreenShareEnabled && participant.isCameraEnabled)
+              : isRemoteMain || !participant.isScreenShareEnabled || !participant.isCameraEnabled
+            )
+            return null;
 
-          if (!cameraTrack) return null
-          
-          return (
-            <div
-              className={`${styles.popoutTrack} ${participant.isSpeaking ? styles.speaking : ''}`}
-              key={participant.identity}
-            >
-              <VideoTrack
-                className={styles.videoTrack}
-                trackRef={cameraTrack}
-                participant={participant}
-              />
-              <CallParticipantInfo
-                className={styles.info}
-                participant={participant}
-                label={i === 0
-                  ? remoteUser?.displayName
-                  : localUser?.displayName}
-                showLabel={showDetails}
-              />
-            </div>
-          );
-        })}
-      </div>
+            if (!cameraTrack) return null
+            
+            return (
+              <div
+                className={`${styles.popoutTrack} ${participant.isSpeaking ? styles.speaking : ''}`}
+                key={participant.identity}
+              >
+                <VideoTrack
+                  className={styles.videoTrack}
+                  trackRef={cameraTrack}
+                  participant={participant}
+                />
+                <CallParticipantInfo
+                  className={styles.info}
+                  participant={participant}
+                  label={i === 0
+                    ? remoteUser?.displayName
+                    : localUser?.displayName}
+                  showLabel={showDetails}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </Draggable>
+      
     </>
   );
 }
