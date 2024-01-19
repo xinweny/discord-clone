@@ -1,45 +1,9 @@
-@use '@styles/colors';
-
-.header {
-  border: none;
-  height: auto;
+.handle {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  z-index: 5;
   width: 100%;
-}
-
-.container {
-  position: relative;
-  flex-grow: 1;
-  background-color: colors.$bg-floating;
-  min-height: 200px;
-  max-height: 453px;
-  display: flex;
-  width: 100%;
-
-  .top {
-    width: calc(100% - 16px);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    background: linear-gradient(colors.$bg-floating, transparent);
-  }
-
-  .tiles {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    padding: 0px 16px;
-  }
-
-  .controls {
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    z-index: 5;
-    background: linear-gradient(transparent, colors.$bg-floating);
-  }
+  height: 5px;
+  cursor: row-resize;
 }

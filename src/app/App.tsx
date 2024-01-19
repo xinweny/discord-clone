@@ -11,6 +11,7 @@ import { Portals } from '@components/ui/displays';
 
 import './app.scss';
 import '@assets/styles/typography.scss';
+import 'react-resizable/css/styles.css';
 
 import styles from './app.module.scss';
 

@@ -1,4 +1,7 @@
-> .container {
+.container {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
   width: calc(100% - 16px);
   display: flex;
   align-items: center;
@@ -10,21 +13,24 @@
     line-height: 20px;
   }
 
-  > div {
+  .label, .statuses > .button {
     background-color: rgba(0, 0, 0, 0.75);
     color: white;
-    padding: 2px 8px;
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .label {
     border-radius: 8px;
+    padding: 2px 8px;
   }
 
   .statuses {
     .button {
       width: 24px;
       height: 24px;
-      border-radius: 50%;
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;

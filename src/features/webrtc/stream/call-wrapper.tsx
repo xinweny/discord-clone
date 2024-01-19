@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useHover } from '@uidotdev/usehooks';
 
 import { useContentLayoutContext } from '@components/context';
 
@@ -12,16 +11,21 @@ import styles from './call-wrapper.module.scss';
 type CallWrapperProps = {
   header?: React.ReactNode;
   children: React.ReactNode;
+  divRef?: React.RefObject<HTMLDivElement>;
+  isFocused?: boolean;
 };
 
-export function CallWrapper({ header, children }: CallWrapperProps) {
+export function CallWrapper({
+  header,
+  children,
+  divRef,
+  isFocused = true,
+}: CallWrapperProps) {
   const { setHeaderClass } = useContentLayoutContext()!;
-
-  const [hoverRef, isHovered] = useHover();
 
   const videoMode = useVideoMode();
 
-  const showMenus = !videoMode || videoMode && isHovered;
+  const showMenus = !videoMode || videoMode && isFocused;
 
   useEffect(() => {
     setHeaderClass(styles.header);
@@ -30,7 +34,7 @@ export function CallWrapper({ header, children }: CallWrapperProps) {
   }, []);
 
   return (
-    <div className={styles.container} ref={hoverRef}>
+    <div className={styles.container} ref={divRef}>
       <div className={styles.top}>
         {showMenus && header}
       </div>

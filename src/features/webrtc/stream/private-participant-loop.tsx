@@ -1,10 +1,11 @@
 import type { Participant } from 'livekit-client';
-import { useHover } from '@uidotdev/usehooks';
 
 import { useVideoMode } from '../hooks';
 
 import { CallAvatar } from '.';
 import { PrivateParticipantTile } from './private-participant-tile';
+
+import styles from './private-participant-loop.module.scss';
 
 type PrivateParticipantLoopProps = {
   participants: Participant[];
@@ -17,13 +18,11 @@ export function PrivateParticipantLoop({
 }: PrivateParticipantLoopProps) {
   const videoMode = useVideoMode();
 
-  const [hoverRef, isHovered] = useHover();
-
   const localParticipant = participants.find(participant => participant.isLocal);
   const remoteParticipant = participants.find(participant => !participant.isLocal);
 
   return (
-    <div ref={hoverRef}>
+    <div className={styles.container}>
       {!videoMode
         ? participants.map(participant => (
           <CallAvatar
@@ -35,7 +34,7 @@ export function PrivateParticipantLoop({
           <PrivateParticipantTile
             localParticipant={localParticipant}
             remoteParticipant={remoteParticipant}
-            showDetails={isHovered}
+            showDetails={showDetails}
           />
         )
       }

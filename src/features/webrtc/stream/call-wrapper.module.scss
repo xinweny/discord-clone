@@ -4,23 +4,26 @@
   border: none;
   height: auto;
   width: 100%;
+
+  > div {
+    width: 100%;
+  }
 }
 
 .container {
   position: relative;
   flex-grow: 1;
   background-color: colors.$bg-floating;
-  min-height: 200px;
-  max-height: 453px;
-  display: flex;
+  height: 100%;
   width: 100%;
+  display: flex;
 
   .top {
     width: calc(100% - 16px);
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 2;
     background: linear-gradient(colors.$bg-floating, transparent);
   }
 
@@ -39,7 +42,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    z-index: 5;
+    z-index: 2;
     background: linear-gradient(transparent, colors.$bg-floating);
   }
 }

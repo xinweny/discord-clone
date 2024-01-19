@@ -38,6 +38,7 @@ export function PrivateParticipantTile({
     <>
       <div className={styles.mainTile}>
         <VideoTrack
+          className={styles.videoTrack}
           trackRef={mainTracks?.ssTrack || mainTracks?.cameraTrack}
           participant={mainParticipant}
         />
