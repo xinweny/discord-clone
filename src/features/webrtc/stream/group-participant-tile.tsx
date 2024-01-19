@@ -8,6 +8,8 @@ import { Avatar } from '@components/ui/media';
 import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetUserQuery } from '@features/users/api';
 
+import { CallParticipantInfo } from './call-participant-info';
+
 import MutedIcon from '@assets/icons/microphone-mute.svg?react';
 
 import styles from './group-participant-tile.module.scss';
@@ -36,7 +38,7 @@ export function GroupParticipantTile({
     ssTrack,
     audioTrack,
     ssAudioTrack,
-  } = getParticipantTracks(participant);
+  } = getParticipantTracks(participant)!;
 
   const { data: member } = useGetUserServerMemberQuery({
     userId,
@@ -55,10 +57,13 @@ export function GroupParticipantTile({
           {ssAudioTrack && (
             <AudioTrack trackRef={ssAudioTrack} participant={participant} />
           )}
-          <div className={styles.info} hidden={!showDetails}>
-            <img src="#" alt="Icon" />
-            <span>{displayName}</span>
-          </div>
+          <CallParticipantInfo
+            className={styles.info}
+            participant={participant}
+            label={displayName}
+            showLabel={showDetails}
+            withSs
+          />
         </div>
       )}
       <div className={`${styles.track} ${isSpeaking ? styles.speaking : ''}`}>
@@ -66,16 +71,12 @@ export function GroupParticipantTile({
           ? <VideoTrack trackRef={cameraTrack} participant={participant} />
           : <Avatar src={avatarUrl} />
         }
-        <div className={styles.info} hidden={!showDetails}>
-          <span>{displayName}</span>
-        </div>
-        <div className={styles.statuses}>
-          {!isMicrophoneEnabled && (
-            <div className={styles.button}>
-              <MutedIcon />
-            </div>
-          )}
-        </div>
+        <CallParticipantInfo
+          className={styles.info}
+          participant={participant}
+          label={displayName}
+          showLabel={showDetails}
+        />
       </div>
       {isMicrophoneEnabled && audioTrack && (
         <AudioTrack trackRef={audioTrack} participant={participant} />

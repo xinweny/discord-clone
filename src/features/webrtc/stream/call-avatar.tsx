@@ -22,7 +22,7 @@ export function CallAvatar({ participant }: CallAvatarProps) {
     isSpeaking,
   } = participant;
 
-  const { audioTrack } = getParticipantTracks(participant);
+  const { audioTrack } = getParticipantTracks(participant)!;
 
   const { data: user } = useGetUserQuery(userId, { skip: !userId });
 

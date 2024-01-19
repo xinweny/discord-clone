@@ -1,4 +1,5 @@
 import type { Participant } from 'livekit-client';
+import { useHover } from '@uidotdev/usehooks';
 
 import { useVideoMode } from '../hooks';
 
@@ -9,18 +10,18 @@ import { GroupParticipantTile } from './group-participant-tile';
 type GroupParticipantLoopProps = {
   participants: Participant[];
   serverId?: string;
-  showDetails?: boolean;
 };
 
 export function GroupParticipantLoop({
   participants,
   serverId,
-  showDetails,
 }: GroupParticipantLoopProps) {
   const videoMode = useVideoMode();
 
+  const [hoverRef, isHovered] = useHover();
+
   return (
-    <div>
+    <div ref={hoverRef}>
       {participants.map(participant => (!serverId && !videoMode
         ? <CallAvatar
           key={participant.identity}
@@ -30,7 +31,7 @@ export function GroupParticipantLoop({
           key={participant.identity}
           participant={participant}
           serverId={serverId}
-          showDetails={showDetails}
+          showDetails={isHovered}
         />
       ))}
     </div>
