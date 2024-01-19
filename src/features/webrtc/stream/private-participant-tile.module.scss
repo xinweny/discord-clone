@@ -1,10 +1,44 @@
+@use '@styles/colors';
+
 .mainTile {
   height: 100%;
+  max-height: auto;
   width: auto;
+  max-width: 100%;
   position: relative;
 
   .videoTrack {
     height: 100%;
     width: auto;
+  }
+}
+
+.popoutTracks {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .popoutTrack {
+    position: relative;
+    border-radius: 8px;
+
+    &.speaking {
+      border: 4px solid colors.$text-positive;
+    }
+
+    .videoTrack {
+      height: 74px;
+      width: auto;
+    }
+  }
+
+  .info {
+    span {
+      font-size: 12px;
+    }
   }
 }

@@ -25,11 +25,9 @@ export function DmCallShortcut() {
   const roomId = data?.roomId;
   const serverId = data?.serverId;
 
-  const { data: dm } = useGetDmQuery(roomId || '', { skip: !data || !!serverId });
+  const { data: dm } = useGetDmQuery(roomId || '', { skip: !data || !serverId || !roomId });
 
   if (!isOnCall || !roomData || !!serverId) return null;
-
-  console.log(roomData);
 
   const { url, avatarUrl, name } = roomData;
 

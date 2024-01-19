@@ -8,6 +8,7 @@ import {
 
 import { env } from '@config';
 import { ParticipantsEvent } from '../types';
+import { CallAudio } from './call-audio';
 
 type LivekitRoomProps = {
   children: React.ReactNode;
@@ -42,6 +43,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
       video={initVideo}
     >
       {children}
+      <CallAudio />
     </LiveKitRoom>
   );
 }

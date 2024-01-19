@@ -17,6 +17,7 @@
   height: 100%;
   width: 100%;
   display: flex;
+  overflow: hidden;
 
   .top {
     width: calc(100% - 16px);
@@ -33,7 +34,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 100%;
+    width: 100%;
     padding: 0px 16px;
     height: 100%;
   }

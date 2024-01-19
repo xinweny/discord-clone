@@ -1,5 +1,5 @@
 import type { Participant } from 'livekit-client';
-import { VideoTrack, AudioTrack } from '@livekit/components-react';
+import { VideoTrack } from '@livekit/components-react';
 
 import { getParticipantTracks } from '../utils';
 
@@ -25,14 +25,15 @@ export function PrivateParticipantTile({
   });
   const { data: remoteUser } = useGetUserQuery(remoteParticipant?.identity || '', { skip: !remoteParticipant?.identity });
 
-  const localTracks = getParticipantTracks(localParticipant);
-  const remoteTracks = getParticipantTracks(remoteParticipant);
-
   const mainParticipant = remoteParticipant?.isCameraEnabled || remoteParticipant?.isScreenShareEnabled
     ? remoteParticipant
     : localParticipant;
 
   const mainTracks = getParticipantTracks(mainParticipant);
+
+  const isRemoteMain = mainParticipant && mainParticipant.identity === remoteUser?._id;
+
+  const participants = [remoteParticipant, localParticipant];
 
   return (
     <>
@@ -44,18 +45,48 @@ export function PrivateParticipantTile({
         />
         <CallParticipantInfo
           participant={mainParticipant!}
-          label={mainParticipant?.identity === remoteUser?._id
+          label={isRemoteMain
             ? remoteUser?.displayName
             : localUser?.displayName}
           showLabel={showDetails}
         />
       </div>
-      {localParticipant?.isMicrophoneEnabled && localTracks?.audioTrack && (
-        <AudioTrack trackRef={localTracks?.audioTrack} participant={localParticipant} />
-      )}
-      {remoteParticipant?.isMicrophoneEnabled && remoteTracks?.audioTrack && (
-        <AudioTrack trackRef={remoteTracks?.audioTrack} participant={remoteParticipant} />
-      )}
+      <div className={styles.popoutTracks}>
+        {participants.map((participant, i) => {
+          if (!participant) return null;
+
+          const { cameraTrack } = getParticipantTracks(participant)!;
+
+          if (i === 0
+            ? !(participant.isScreenShareEnabled && participant.isCameraEnabled)
+            : isRemoteMain || !participant.isScreenShareEnabled || !participant.isCameraEnabled
+          )
+           return null;
+
+          if (!cameraTrack) return null
+          
+          return (
+            <div
+              className={`${styles.popoutTrack} ${participant.isSpeaking ? styles.speaking : ''}`}
+              key={participant.identity}
+            >
+              <VideoTrack
+                className={styles.videoTrack}
+                trackRef={cameraTrack}
+                participant={participant}
+              />
+              <CallParticipantInfo
+                className={styles.info}
+                participant={participant}
+                label={i === 0
+                  ? remoteUser?.displayName
+                  : localUser?.displayName}
+                showLabel={showDetails}
+              />
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }

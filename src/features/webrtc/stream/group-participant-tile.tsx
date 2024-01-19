@@ -1,5 +1,5 @@
 import { Participant } from 'livekit-client';
-import { AudioTrack, VideoTrack } from '@livekit/components-react';
+import { VideoTrack } from '@livekit/components-react';
 
 import { getParticipantTracks } from '../utils';
 
@@ -9,8 +9,6 @@ import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetUserQuery } from '@features/users/api';
 
 import { CallParticipantInfo } from './call-participant-info';
-
-import MutedIcon from '@assets/icons/microphone-mute.svg?react';
 
 import styles from './group-participant-tile.module.scss';
 
@@ -27,7 +25,6 @@ export function GroupParticipantTile({
 }: GroupParticipantTileProps) {
   const {
     identity: userId,
-    isMicrophoneEnabled,
     isScreenShareEnabled,
     isCameraEnabled,
     isSpeaking,
@@ -36,8 +33,6 @@ export function GroupParticipantTile({
   const {
     cameraTrack,
     ssTrack,
-    audioTrack,
-    ssAudioTrack,
   } = getParticipantTracks(participant)!;
 
   const { data: member } = useGetUserServerMemberQuery({
@@ -54,9 +49,6 @@ export function GroupParticipantTile({
       {isScreenShareEnabled && ssTrack && (
         <div className={styles.track}>
           <VideoTrack trackRef={ssTrack} participant={participant} />
-          {ssAudioTrack && (
-            <AudioTrack trackRef={ssAudioTrack} participant={participant} />
-          )}
           <CallParticipantInfo
             className={styles.info}
             participant={participant}
@@ -78,9 +70,6 @@ export function GroupParticipantTile({
           showLabel={showDetails}
         />
       </div>
-      {isMicrophoneEnabled && audioTrack && (
-        <AudioTrack trackRef={audioTrack} participant={participant} />
-      )}
     </div>
   );
 }

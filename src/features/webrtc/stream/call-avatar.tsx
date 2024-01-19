@@ -1,7 +1,4 @@
 import { Participant } from 'livekit-client';
-import { AudioTrack } from '@livekit/components-react';
-
-import { getParticipantTracks } from '../utils';
 
 import { Avatar } from '@components/ui/media';
 
@@ -22,8 +19,6 @@ export function CallAvatar({ participant }: CallAvatarProps) {
     isSpeaking,
   } = participant;
 
-  const { audioTrack } = getParticipantTracks(participant)!;
-
   const { data: user } = useGetUserQuery(userId, { skip: !userId });
 
   return (
@@ -36,9 +31,6 @@ export function CallAvatar({ participant }: CallAvatarProps) {
         <div className={styles.notification}>
           <MutedIcon />
         </div>
-      )}
-      {isMicrophoneEnabled && audioTrack && (
-        <AudioTrack trackRef={audioTrack} participant={participant} />
       )}
     </div>
   );
