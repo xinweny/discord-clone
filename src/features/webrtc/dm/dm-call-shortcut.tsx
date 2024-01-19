@@ -1,4 +1,5 @@
 import { useLivekitContext } from '@features/webrtc/hooks';
+import { useLocation } from 'react-router-dom';
 
 import { LinkImage } from '@components/ui/links';
 import { Gif } from '@components/ui/media';
@@ -12,6 +13,8 @@ import defaultGroupAvatar from '@assets/static/default-group-avatar.png';
 
 export function DmCallShortcut() {
   const livekit = useLivekitContext();
+
+  const { pathname } = useLocation();
 
   const {
     isOnCall,
@@ -31,7 +34,10 @@ export function DmCallShortcut() {
   const { url, avatarUrl, name } = roomData;
 
   return (
-    <ServersNavbarItem tooltipText={name!} isActive>
+    <ServersNavbarItem
+      tooltipText={name!}
+      isActive={!serverId && pathname === `/channels/@me/${roomId}`}
+    >
       <LinkImage href={url!}>
         <Gif src={avatarUrl || (dm?.isGroup
           ? defaultGroupAvatar

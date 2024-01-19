@@ -1,11 +1,10 @@
 import { Separator } from '@components/ui/displays';
 
 import { DmsLinkButton } from '@features/dms/nav';
+import { DmCallShortcut } from '@features/webrtc/dm';
 
 import { ServersButtons } from '.';
 import { JoinedServersList } from '../joined';
-
-import { DmCallShortcut } from '@features/webrtc/dm';
 
 import styles from './servers-navbar.module.scss';
 
