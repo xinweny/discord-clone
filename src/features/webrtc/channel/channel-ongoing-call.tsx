@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
+import pluralize from 'pluralize';
 
 import { ChannelTypes, type ChannelData } from '@features/channels/types';
 
-import { ChannelOngoingCallParticipantCard } from './channel-ongoing-participant-card';
 import { ConnectToRoomButton } from '../connect';
-import { OngoingCallWrapper } from '../get';
+import { OngoingCallParticipantLoop, OngoingCallWrapper } from '../get';
 
 import { useGetParticipantsQuery } from '../api';
 
@@ -31,18 +31,13 @@ export function ChannelOngoingCall({ header, channel }: ChannelOngoingCallProps)
       className={styles.container}
     >
       <div>
-        <div>
-          {hasOngoingCall && (participants.map(participant =>
-            <ChannelOngoingCallParticipantCard
-              key={participant.identity}
-              participant={participant}
-              serverId={serverId!}
-            />
-          ))}
-        </div>
-        <div>
-          <h3>{name}</h3>
-            <span>No one is currently in voice.</span>
+        <OngoingCallParticipantLoop
+          participants={participants}
+          className={styles.tiles}
+        />
+        <div className={styles.noCall}>
+          <h2>{name}</h2>
+            <span>{`${hasOngoingCall ? pluralize('Member', participants.length, true) : 'No one is'} currently in voice.`}</span>
             <ConnectToRoomButton
               roomId={roomId}
               roomName={name}

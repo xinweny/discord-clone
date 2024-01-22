@@ -1,0 +1,12 @@
+.tiles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  > div {
+    flex: 1 1 100%;
+    display: flex;
+  }
+}

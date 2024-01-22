@@ -54,6 +54,7 @@ export function DmHeader({ dm }: DmHeaderProps) {
           header={header}
           roomId={dm._id}
           roomName={name}
+          isGroup={isGroup}
         />
       }
     </DmHeaderContext.Provider>
