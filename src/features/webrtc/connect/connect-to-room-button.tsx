@@ -5,6 +5,8 @@ import { useLivekitContext } from '../hooks';
 import { ModalButton } from '@components/ui/buttons';
 import { ConnectToRoomConfirmationModal } from './connect-to-room-confirmation-modal';
 
+import connectAudio from '@assets/audio/connect.mp3';
+
 type ConnectToRoomButtonProps = {
   roomId: string;
   roomName: string;
@@ -54,6 +56,8 @@ export function ConnectToRoomButton({
           if (isOngoingCurrentRoom && roomData) navigate(roomData.url);
 
           connectToRoom(roomId, serverId, { withVideo });
+          
+          new Audio(connectAudio).play();
         }}
       >
         {children}

@@ -7,6 +7,8 @@ import { Tooltip } from '@components/ui/popups';
 
 import UnmutedIcon from '@assets/icons/microphone.svg?react';
 import MutedIcon from '@assets/icons/microphone-mute.svg?react';
+import muteAudio from '@assets/audio/mute.mp3';
+import unmuteAudio from '@assets/audio/unmute.mp3';
 
 import styles from './toggle-mute-button.module.scss';
 
@@ -30,6 +32,12 @@ export function ToggleMuteButton({ className, activeClassName }: ToggleMuteButto
 
   const icon = isMuted ? <MutedIcon /> : <UnmutedIcon />;
 
+  const handleToggle = () => {
+    setIsMuted(muted => !muted);
+
+    new Audio(isMuted ? unmuteAudio : muteAudio).play();
+  };
+
   return (
     <Tooltip
       text={isMuted ? 'Unmute' : 'Mute'}
@@ -39,9 +47,7 @@ export function ToggleMuteButton({ className, activeClassName }: ToggleMuteButto
       {isOnCall
         ? <TrackToggle
           source={Track.Source.Microphone}
-          onChange={(enabled) => {
-            if (setIsMuted) setIsMuted(!enabled);
-          }}
+          onClick={handleToggle}
           initialState={!isMuted}
           className={classes}
           showIcon={false}
@@ -51,7 +57,7 @@ export function ToggleMuteButton({ className, activeClassName }: ToggleMuteButto
         : <button
           className={classes}
           type="button"
-          onClick={() => { setIsMuted(muted => !muted); }}
+          onClick={handleToggle}
         >
           {icon}
         </button>
