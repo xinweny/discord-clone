@@ -1,6 +1,5 @@
 import { type Participant, Track } from 'livekit-client';
 
-
 export const getParticipantTracks = (participant?: Participant) => {
   if (!participant) return null;
 

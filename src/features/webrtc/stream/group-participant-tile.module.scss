@@ -1,6 +1,6 @@
 @use '@styles/colors';
 
-.tile {
+.tiles {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -12,6 +12,10 @@
 }
 
 .track {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   height: 100%;
   border-radius: 8px;

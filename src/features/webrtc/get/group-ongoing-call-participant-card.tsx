@@ -1,13 +1,11 @@
-import ColorThief from 'colorthief';
-
 import type { Participant } from 'livekit-client';
 
 import { Avatar } from '@components/ui/media';
 
+import { useTileBgColor } from '../hooks';
+
 import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetUserQuery } from '@features/users/api';
-
-import defaultUserAvatar from '@assets/static/default-user-avatar.png';
 
 import styles from './group-ongoing-call-participant-card.module.scss';
 
@@ -23,18 +21,17 @@ export function GroupOngoingCallParticipantCard({ participant, serverId }: Group
     userId,
     serverId: serverId!,
   }, { skip: !serverId || !userId });
+
   const { data: user } = useGetUserQuery(userId, { skip: !!serverId || !userId });
 
-  const colorThief = new ColorThief();
-
   const avatarUrl = member?.user.avatarUrl || user?.avatarUrl;
+
+  const color = useTileBgColor(avatarUrl);
 
   return (
     <div
       className={styles.card}
-      style={{
-        backgroundColor: `rgb(${colorThief.getColor(avatarUrl || defaultUserAvatar).join(', ')})`,
-      }}
+      style={{ backgroundColor: color }}
     >
       <Avatar src={avatarUrl} />
     </div>

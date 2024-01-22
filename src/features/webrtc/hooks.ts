@@ -1,14 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { type Participant } from 'livekit-client';
 import { useParticipants } from '@livekit/components-react';
-
-import { LivekitContext } from './context';
+import ColorThief from 'colorthief';
 
 import type {
   RoomData,
   CallData,
   LivekitContextData,
 } from './types';
+
+import { LivekitContext } from './context';
 
 import { getDmInfo } from '@features/dms/utils';
 
@@ -20,6 +21,8 @@ import { useLazyGetServerQuery } from '@features/servers/api';
 import { useLazyGetChannelsQuery } from '@features/channels/api';
 import { useLazyGetDmQuery } from '@features/dms/api';
 import { useGetServerMembersQuery } from '@features/members/api';
+
+import defaultUserAvatar from '@assets/static/default-user-avatar.png';
 
 export const useLivekit = (): LivekitContextData => {
   const initialData = {
@@ -147,4 +150,26 @@ export const useVideoMode = () => {
   }, [participants]);
 
   return videoMode;
+};
+
+export const useTileBgColor = (src: string | undefined) => {
+  const [color, setColor] = useState<string>('');
+
+  useEffect(() => {
+    const colorThief = new ColorThief();
+
+    const img = document.createElement('img');
+    img.src = src || defaultUserAvatar;
+    img.crossOrigin = 'Anonymous';
+
+    const cb = () => {
+      setColor(`rgb(${colorThief.getColor(img).join(', ')})`);
+    };
+
+    img.addEventListener('load', cb);
+
+    return () => { img.removeEventListener('load', cb); }
+  }, [src])
+
+  return color;
 };

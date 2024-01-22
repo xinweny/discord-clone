@@ -5,6 +5,8 @@ import { getParticipantTracks } from '../utils';
 
 import { Avatar } from '@components/ui/media';
 
+import { useTileBgColor } from '../hooks';
+
 import { useGetUserServerMemberQuery } from '@features/members/api';
 import { useGetUserQuery } from '@features/users/api';
 
@@ -44,8 +46,10 @@ export function GroupParticipantTile({
   const displayName = member?.displayName || user?.displayName;
   const avatarUrl = member?.user.avatarUrl || user?.avatarUrl;
 
+  const color = useTileBgColor(avatarUrl);
+
   return (
-    <div className={styles.tile}>
+    <div className={styles.tiles}>
       {isScreenShareEnabled && ssTrack && (
         <div className={styles.track}>
           <VideoTrack trackRef={ssTrack} participant={participant} />
@@ -58,7 +62,10 @@ export function GroupParticipantTile({
           />
         </div>
       )}
-      <div className={`${styles.track} ${isSpeaking ? styles.speaking : ''}`}>
+      <div
+        className={`${styles.track} ${isSpeaking ? styles.speaking : ''}`}
+        style={{ backgroundColor: color }}
+      >
         {isCameraEnabled && cameraTrack
           ? <VideoTrack trackRef={cameraTrack} participant={participant} />
           : <Avatar src={avatarUrl} />
