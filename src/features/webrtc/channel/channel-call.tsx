@@ -1,23 +1,33 @@
 import { useParams } from 'react-router-dom';
-import { useParticipants, ParticipantLoop } from '@livekit/components-react';
+import { useParticipants } from '@livekit/components-react';
+import { useHover } from '@uidotdev/usehooks';
 
-import { CallControls } from '../controls';
+import { CallWrapper, GroupParticipantLoop } from '../stream';
 
-import { ChannelParticipantTile } from './channel-participant-tile';
+import styles from './channel-call.module.scss';
 
-export function ChannelCall() {
+type ChannelCallProps = {
+  header: React.ReactNode;
+};
+
+export function ChannelCall({ header }: ChannelCallProps) {
   const { serverId } = useParams();
 
   const participants = useParticipants();
 
+  const [hoverRef, isHovered] = useHover();
+
   return (
-    <div>
-      <ParticipantLoop participants={participants}>
-        <ChannelParticipantTile
-          serverId={serverId!}
-        />
-      </ParticipantLoop>
-      <CallControls />
-    </div>
+    <CallWrapper
+      header={header}
+      divRef={hoverRef as unknown as React.RefObject<HTMLDivElement>}
+      isFocused={isHovered}
+      className={styles.container}
+    >
+      <GroupParticipantLoop
+        serverId={serverId}
+        participants={participants}
+      />
+    </CallWrapper>
   );
 }

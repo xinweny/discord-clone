@@ -13,6 +13,7 @@ type CallWrapperProps = {
   children: React.ReactNode;
   divRef?: React.RefObject<HTMLDivElement>;
   isFocused?: boolean;
+  className?: string;
 };
 
 export function CallWrapper({
@@ -20,6 +21,7 @@ export function CallWrapper({
   children,
   divRef,
   isFocused = true,
+  className,
 }: CallWrapperProps) {
   const { setHeaderClass } = useContentLayoutContext()!;
 
@@ -30,11 +32,13 @@ export function CallWrapper({
   useEffect(() => {
     setHeaderClass(styles.header);
 
-    return () => { setHeaderClass(''); };
+    return () => {
+      setHeaderClass('');
+    };
   }, []);
 
   return (
-    <div className={styles.container} ref={divRef}>
+    <div className={`${styles.container} ${className || ''}`} ref={divRef}>
       <div className={styles.top}>
         {showMenus && header}
       </div>

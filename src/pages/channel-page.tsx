@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 
+import { ChannelTypes } from '@features/channels/types';
+
 import { ContentLayout } from '@components/layouts';
 
 import { useActiveChannel } from '@features/channels/hooks';
@@ -17,7 +19,7 @@ export function ChannelPage() {
   return (
     <ContentLayout
       header={<ChannelHeader />}
-      panel={<ServerMembersPanel />}
+      panel={channel.type === ChannelTypes.TEXT && <ServerMembersPanel />}
     >
       <ChannelContainer channel={channel} serverId={serverId} />
     </ContentLayout>

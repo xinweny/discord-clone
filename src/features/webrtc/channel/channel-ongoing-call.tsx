@@ -1,44 +1,57 @@
 import { useParams } from 'react-router-dom';
 
-import type { ChannelData } from '@features/channels/types';
+import { ChannelTypes, type ChannelData } from '@features/channels/types';
 
-import { ConnectToRoomButton } from '../connect';
 import { ChannelOngoingCallParticipantCard } from './channel-ongoing-participant-card';
+import { ConnectToRoomButton } from '../connect';
+import { OngoingCallWrapper } from '../get';
 
 import { useGetParticipantsQuery } from '../api';
 
+import styles from './channel-ongoing-call.module.scss';
+
 type ChannelOngoingCallProps = {
+  header: React.ReactNode;
   channel: ChannelData;
 };
 
-export function ChannelOngoingCall({ channel }: ChannelOngoingCallProps) {
-  const { _id, name } = channel;
+export function ChannelOngoingCall({ header, channel }: ChannelOngoingCallProps) {
+  const { _id: roomId, name } = channel;
 
   const { serverId } = useParams();
 
-  const { data: participants } = useGetParticipantsQuery(_id);
+  const { data: participants } = useGetParticipantsQuery(roomId);
 
-  return !participants || participants.length === 0
-    ? (
+  const hasOngoingCall = participants && participants.length > 0;
+
+  return (
+    <OngoingCallWrapper
+      header={header}
+      alwaysShow={channel.type === ChannelTypes.VOICE}
+      className={styles.container}
+    >
       <div>
-        <h3>{name}</h3>
-        <p>No one is currently in voice.</p>
-        <ConnectToRoomButton
-          roomId={_id}
-          roomName={name}
-          serverId={serverId!}
-        >
-          Join Voice
-        </ConnectToRoomButton>
+        <div>
+          {hasOngoingCall && (participants.map(participant =>
+            <ChannelOngoingCallParticipantCard
+              key={participant.identity}
+              participant={participant}
+              serverId={serverId!}
+            />
+          ))}
+        </div>
+        <div>
+          <h3>{name}</h3>
+            <span>No one is currently in voice.</span>
+            <ConnectToRoomButton
+              roomId={roomId}
+              roomName={name}
+              serverId={serverId!}
+            >
+              Join Voice
+            </ConnectToRoomButton>
+          </div>
       </div>
-    )
-    : (
-      <div>{participants.map(participant =>
-        <ChannelOngoingCallParticipantCard
-          key={participant.identity}
-          participant={participant}
-          serverId={serverId!}
-        />
-      )}</div>
-    );
+    </OngoingCallWrapper>
+  );
 }

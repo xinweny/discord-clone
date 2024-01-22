@@ -27,14 +27,12 @@ export function DmOngoingCall({
         roomName={roomName}
       />}
     >
-      <div>
-        {participants && participants.map(participant => 
-          <DmOngoingCallParticipantCard
-            key={participant.identity}
-            participant={participant}
-          />
-        )}
-      </div>
+      {participants && participants.map(participant => 
+        <DmOngoingCallParticipantCard
+          key={participant.identity}
+          participant={participant}
+        />
+      )}
     </OngoingCallWrapper>
   );
 }

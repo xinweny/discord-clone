@@ -11,6 +11,7 @@ type OngoingCallWrapperProps = {
   children: React.ReactNode;
   controls?: React.ReactNode;
   alwaysShow?: boolean;
+  className?: string;
 };
 
 export function OngoingCallWrapper({
@@ -19,6 +20,7 @@ export function OngoingCallWrapper({
   children,
   controls,
   alwaysShow = false,
+  className,
 }: OngoingCallWrapperProps) {
   const { setHeaderClass } = useContentLayoutContext()!;
 
@@ -33,7 +35,7 @@ export function OngoingCallWrapper({
   if (!alwaysShow && hasNoOngoingCall) return header;
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className || ''}`}>
       <div className={styles.top}>{header}</div>
       <div className={styles.content}>
         {children}
