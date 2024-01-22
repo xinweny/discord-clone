@@ -8,35 +8,35 @@ import styles from './ongoing-call-wrapper.module.scss';
 type OngoingCallWrapperProps = {
   participants?: Participant[];
   header: React.ReactNode;
-  placeholder?: React.ReactNode;
   children: React.ReactNode;
   controls?: React.ReactNode;
+  alwaysShow?: boolean;
 };
 
 export function OngoingCallWrapper({
   participants,
   header,
-  placeholder,
   children,
   controls,
+  alwaysShow = false,
 }: OngoingCallWrapperProps) {
   const { setHeaderClass } = useContentLayoutContext()!;
 
+  const hasNoOngoingCall = !participants || participants.length === 0;
+
   useEffect(() => {
-    if (participants && participants.length > 0) setHeaderClass(styles.header);
+    if (alwaysShow || !hasNoOngoingCall) setHeaderClass(styles.header);
 
     return () => { setHeaderClass(''); };
   }, []);
 
-  const hasNoOngoingCall = !participants || participants.length === 0;
-
-  if (!placeholder && hasNoOngoingCall) return header;
+  if (!alwaysShow && hasNoOngoingCall) return header;
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>{header}</div>
       <div className={styles.content}>
-        {hasNoOngoingCall ? placeholder : children}
+        {children}
       </div>
       {controls && (
         <div className={styles.controls}>
