@@ -6,6 +6,8 @@ import { CallAvatar } from '.';
 
 import { GroupParticipantTile } from './group-participant-tile';
 
+import styles from './group-participant-loop.module.scss';
+
 type GroupParticipantLoopProps = {
   participants: Participant[];
   serverId?: string;
@@ -20,7 +22,7 @@ export function GroupParticipantLoop({
   const videoMode = useVideoMode();
 
   return (
-    <div>
+    <div className={styles.loop}>
       {participants.map(participant => (!serverId && !videoMode
         ? <CallAvatar
           key={participant.identity}

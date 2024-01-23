@@ -49,10 +49,14 @@ export function GroupParticipantTile({
   const color = useTileBgColor(avatarUrl);
 
   return (
-    <div className={styles.tiles}>
+    <>
       {isScreenShareEnabled && ssTrack && (
         <div className={styles.track}>
-          <VideoTrack trackRef={ssTrack} participant={participant} />
+          <VideoTrack
+            className={styles.videoTrack}
+            trackRef={ssTrack}
+            participant={participant}
+          />
           <CallParticipantInfo
             className={styles.info}
             participant={participant}
@@ -67,7 +71,11 @@ export function GroupParticipantTile({
         style={{ backgroundColor: color }}
       >
         {isCameraEnabled && cameraTrack
-          ? <VideoTrack trackRef={cameraTrack} participant={participant} />
+          ? <VideoTrack
+            className={styles.videoTrack}
+            trackRef={cameraTrack}
+            participant={participant}
+          />
           : <Avatar src={avatarUrl} />
         }
         <CallParticipantInfo
@@ -77,6 +85,6 @@ export function GroupParticipantTile({
           showLabel={showDetails}
         />
       </div>
-    </div>
+    </>
   );
 }

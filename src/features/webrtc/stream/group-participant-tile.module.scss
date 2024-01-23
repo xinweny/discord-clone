@@ -1,24 +1,14 @@
 @use '@styles/colors';
 
-.tiles {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  audio {
-    display: none;
-  }
-}
-
 .track {
-  flex: 1 1 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   height: 100%;
   border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
 
   &.speaking {
     border: 4px solid colors.$text-positive;
@@ -27,5 +17,10 @@
   .info {
     position: absolute;
     bottom: 0;
+  }
+
+  .videoTrack {
+    width: 100%;
+    height: 100%;
   }
 }

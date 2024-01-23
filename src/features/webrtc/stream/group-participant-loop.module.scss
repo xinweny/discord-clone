@@ -1,0 +1,11 @@
+.loop {
+  flex: 1 1 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  flex-wrap: wrap;
+  gap: 8px;
+
+  audio {
+    display: none;
+  }
+}

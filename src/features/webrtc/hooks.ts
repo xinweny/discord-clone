@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { type Participant } from 'livekit-client';
+import { Room, type Participant, RoomEvent } from 'livekit-client';
 import { useParticipants } from '@livekit/components-react';
 import ColorThief from 'colorthief';
 
@@ -12,6 +12,7 @@ import type {
 import { LivekitContext } from './context';
 
 import { getDmInfo } from '@features/dms/utils';
+import { setupAudioEffects } from './utils';
 
 import { useGetUserData } from '@features/auth/hooks';
 
@@ -173,3 +174,18 @@ export const useTileBgColor = (src: string | undefined) => {
 
   return color;
 };
+
+export const useRoomEventHandlers = (room?: Room) => {
+  useEffect(() => {
+    if (!room) return;
+
+    const {
+      addAudioEffects,
+      removeAudioEffects,
+    } = setupAudioEffects(room);
+
+    addAudioEffects();
+
+    return () => { removeAudioEffects(); };
+  }, [room]);
+}

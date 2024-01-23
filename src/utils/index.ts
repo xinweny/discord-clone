@@ -8,3 +8,4 @@ export * from './find-urls';
 export * from './css-value';
 export * from './merge-refs';
 export * from './get-twemoji';
+export * from './play-audio';

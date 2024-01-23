@@ -1,10 +1,8 @@
+import { LiveKitRoom, useLiveKitRoom } from '@livekit/components-react';
+
 import { socket } from '@app';
 
-import { useLivekitContext } from '../hooks';
-
-import {
-  LiveKitRoom,
-} from '@livekit/components-react';
+import { useLivekitContext, useRoomEventHandlers } from '../hooks';
 
 import { env } from '@config';
 import { ParticipantsEvent } from '../types';
@@ -17,30 +15,37 @@ type LivekitRoomProps = {
 export function LivekitRoom({ children }: LivekitRoomProps) {
   const livekit = useLivekitContext();
 
-
-  if (!livekit) return null;
-
   const {
     data: { token, roomId, initVideo },
     isOnCall,
     notifyDisconnection,
     isMuted,
-  } = livekit;
+  } = livekit!;
+
+  const { room } = useLiveKitRoom({
+    token,
+    serverUrl: env.VITE_WS_URL,
+    connect: isOnCall,
+    onConnected: () => {
+      socket.emit(ParticipantsEvent.Get, roomId);
+    },
+    onDisconnected: () => {
+      notifyDisconnection();
+      socket.emit(ParticipantsEvent.Get, roomId);
+    },
+    audio: !isMuted,
+    video: initVideo,
+  });
+
+  console.log(isMuted);
+
+  useRoomEventHandlers(room);
 
   return (
     <LiveKitRoom
-      token={token}
+      room={room}
       serverUrl={env.VITE_WS_URL}
-      connect={isOnCall}
-      onConnected={() => {
-        socket.emit(ParticipantsEvent.Get, roomId);
-      }}
-      onDisconnected={() => {
-        notifyDisconnection();
-        socket.emit(ParticipantsEvent.Get, roomId);
-      }}
-      audio={!isMuted}
-      video={initVideo}
+      token={token}
     >
       {children}
       <CallAudio />
