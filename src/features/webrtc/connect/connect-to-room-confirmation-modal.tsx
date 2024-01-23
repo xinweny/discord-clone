@@ -7,6 +7,8 @@ import { ParticipantsEvent } from '../types';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
+import styles from './connect-to-room-confirmation-modal.module.scss';
+
 type ConnectToRoomConfirmationModalProps = {
   newRoomId?: string;
   newRoomName?: string;
@@ -30,6 +32,7 @@ export function ConnectToRoomConfirmationModal({
 
   return (
     <ConfirmationModal
+      className={styles.modal}
       isOpen={isOpen}
       onClose={onClose}
       title="You Sure?"

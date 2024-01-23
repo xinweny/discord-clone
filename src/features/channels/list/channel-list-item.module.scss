@@ -8,6 +8,10 @@
   align-items: center;
   justify-content: space-between;
 
+  > *:first-child {
+    flex-grow: 1;
+  }
+
   p, button {
     font-weight: 500;
   }

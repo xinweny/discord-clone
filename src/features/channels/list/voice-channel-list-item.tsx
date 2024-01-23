@@ -1,5 +1,3 @@
-import { useHover } from '@uidotdev/usehooks';
-
 import type { ChannelData } from '../types';
 
 import { useSocketRoomJoin } from '@services/websocket/hooks';
@@ -17,22 +15,23 @@ type VoiceChannelListItemProps = {
 };
 
 export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItemProps) {
-
   useSocketRoomJoin(channel._id);
 
   return (
-    <div className={styles.button}>
-      <ConnectToRoomButton
-        roomId={channel._id}
-        roomName={channel.name}
-        serverId={serverId}
-      >
-        <ChannelLabel channel={channel} />
-      </ConnectToRoomButton>
+    <>
+      <div className={styles.button}>
+        <ConnectToRoomButton
+          roomId={channel._id}
+          roomName={channel.name}
+          serverId={serverId}
+        >
+          <ChannelLabel channel={channel} />
+        </ConnectToRoomButton>
+      </div>
       <ChannelOngoingCallPreview
         serverId={serverId}
         roomId={channel._id}
       />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,10 @@
 .button {
   button {
+    width: 100%;
+    text-align: left;
+
     p {
+      flex-grow: 1;
       font-size: 16px;
     }
   }
