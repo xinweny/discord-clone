@@ -27,17 +27,11 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     serverUrl: env.VITE_WS_URL,
     connect: isOnCall,
     onConnected: () => {
-      setTimeout(() => {
-        socket.emit(ParticipantsEvent.Get, roomId);
-        console.log('USER CONNECTED');
-      }, 2000);
+      socket.emit(ParticipantsEvent.Get, roomId);
     },
     onDisconnected: () => {
-      setTimeout(() => {
-        notifyDisconnection();
-        socket.emit(ParticipantsEvent.Get, roomId);
-        console.log('USER DISCONNECTED');
-      }, 2000);
+      notifyDisconnection();
+      socket.emit(ParticipantsEvent.Get, roomId);
     },
     audio: !isMuted,
     video: initVideo,

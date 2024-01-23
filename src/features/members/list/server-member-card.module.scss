@@ -12,7 +12,7 @@
     margin-right: 12px;
   }
 
-  > p {
+  > span {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;
@@ -23,7 +23,7 @@
   &:hover {
     background-color: colors.$bg-modifier-hover;
 
-    > p {
+    > span {
       color: colors.$text-primary;
     }
   }
@@ -37,4 +37,12 @@
   path {
     fill: colors.$text-warning;
   }
+}
+
+.active {
+  > span {
+    color: colors.$interactive-active !important;
+  }
+  
+  background-color: colors.$bg-modifier-active !important;
 }

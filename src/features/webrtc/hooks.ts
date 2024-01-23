@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Room, type Participant, RoomEvent } from 'livekit-client';
+import { Room, type Participant } from 'livekit-client';
 import { useParticipants } from '@livekit/components-react';
 import ColorThief from 'colorthief';
 

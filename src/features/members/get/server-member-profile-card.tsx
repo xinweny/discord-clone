@@ -45,7 +45,7 @@ export function ServerMemberProfileCard({
           onClick={() => { setHidden(true); }}
         />
         <div className={styles.content}>
-          <UserHeader user={{ ...user, displayName }} />
+          <UserHeader user={{ ...user, displayName }} className={styles.banner} />
           <Separator className={styles.separator} />
           {bio && (<>
             <div className={styles.section}>
@@ -60,7 +60,7 @@ export function ServerMemberProfileCard({
                 <img src={logoSrc} alt="Discord Clone" className={styles.serverIcon} />
                 <span>{joinedDate(user.createdAt)}</span>
               </div>
-              <Separator className={styles.divider} />
+              <div className={styles.divider} />
               <div className={styles.joinDate}>
                 <ServerAvatar server={server!} className={styles.serverIcon} />
                 <span>{joinedDate(createdAt)}</span>

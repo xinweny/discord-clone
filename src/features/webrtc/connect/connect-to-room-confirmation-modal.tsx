@@ -7,6 +7,8 @@ import { ParticipantsEvent } from '../types';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
+import connectAudio from '@assets/audio/connect.mp3';
+
 import styles from './connect-to-room-confirmation-modal.module.scss';
 
 type ConnectToRoomConfirmationModalProps = {
@@ -41,7 +43,10 @@ export function ConnectToRoomConfirmationModal({
       onConfirm={() => {
         notifyDisconnection();
         socket.emit(ParticipantsEvent.Get, roomId);
-        if (newRoomId) connectToRoom(newRoomId);
+        if (newRoomId) {
+          connectToRoom(newRoomId);
+          new Audio(connectAudio).play();
+        }
       }}
     />
   );

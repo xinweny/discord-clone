@@ -1,13 +1,9 @@
-import { useRef } from 'react';
-
 import type { ServerMemberMainData } from '../types';
 
-import { Popout, Tooltip } from '@components/ui/popups';
+import { Tooltip } from '@components/ui/popups';
 import { Avatar } from '@components/ui/media';
 
 import { ServerMemberProfileButton } from '../get';
-
-import { useLazyGetServerMemberQuery } from '../api';
 
 import CrownIcon from '@assets/icons/crown.svg?react';
 
@@ -33,18 +29,18 @@ export function ServerMemberCard({
       }}
       memberId={member._id}
       serverId={serverId}
+      className={styles.card}
+      activeClass={styles.active}
     >
-      <div className={styles.card} role="button">
-        <Avatar src={member.user.avatarUrl} />
-        <p>{member.displayName}</p>
-        {isOwner && <Tooltip
-          text="Server Owner"
-          direction="top"
-          gap={2}
-        >
-          <CrownIcon className={styles.crown} />
-        </Tooltip>}
-      </div>
+      <Avatar src={member.user.avatarUrl} />
+      <span>{member.displayName}</span>
+      {isOwner && <Tooltip
+        text="Server Owner"
+        direction="top"
+        gap={2}
+      >
+        <CrownIcon className={styles.crown} />
+      </Tooltip>}
     </ServerMemberProfileButton>
   );
 }

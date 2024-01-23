@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import type { PositionData } from '@components/hooks';
 
 import { Popout } from '@components/ui/popups';
@@ -11,6 +13,8 @@ type ServerMemberProfileButtonProps = {
   position: PositionData;
   memberId: string;
   serverId: string;
+  className?: string;
+  activeClass?: string;
 };
 
 export function ServerMemberProfileButton({
@@ -18,8 +22,12 @@ export function ServerMemberProfileButton({
   position,
   memberId,
   serverId,
+  className,
+  activeClass,
 }: ServerMemberProfileButtonProps) {
   const [getServerMember] = useLazyGetServerMemberQuery();
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const renderPopup = async () => {
     const serverMember = await getServerMember({
@@ -29,15 +37,16 @@ export function ServerMemberProfileButton({
 
     if (!serverMember) return null;
 
-    return <ServerMemberProfileCard
-      member={serverMember}
-    />;
+    return <ServerMemberProfileCard member={serverMember} />;
   };
 
   return (
     <Popout
       renderPopup={renderPopup}
       position={position}
+      className={`${className || ''} ${isOpen && activeClass ? activeClass : ''}`}
+      onOpen={() => { setIsOpen(true); }}
+      onClose={() => { setIsOpen(false); }}
     >
       {children}
     </Popout>

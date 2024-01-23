@@ -13,6 +13,7 @@ type ConnectToRoomButtonProps = {
   children: React.ReactNode;
   serverId?: string;
   withVideo?: boolean;
+  className?: string;
 };
 
 export function ConnectToRoomButton({
@@ -21,6 +22,7 @@ export function ConnectToRoomButton({
   children,
   serverId,
   withVideo = false,
+  className,
 }: ConnectToRoomButtonProps) {
   const livekit = useLivekitContext();
 
@@ -45,6 +47,7 @@ export function ConnectToRoomButton({
           newRoomId: roomId,
           newRoomName: roomName,
         }}
+        className={className}
       >
         {children}
       </ModalButton>
@@ -55,10 +58,13 @@ export function ConnectToRoomButton({
         onClick={() =>{
           if (isOngoingCurrentRoom && roomData) navigate(roomData.url);
 
-          connectToRoom(roomId, serverId, { withVideo });
+          if (!isOngoingCurrentRoom) {
+            connectToRoom(roomId, serverId, { withVideo });
           
-          new Audio(connectAudio).play();
+            new Audio(connectAudio).play();
+          }
         }}
+        className={className}
       >
         {children}
       </button>

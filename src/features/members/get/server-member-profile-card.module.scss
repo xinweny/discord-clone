@@ -10,12 +10,12 @@
     position: relative;
     height: 60px;
 
-    button {
+    > button {
       top: 12px;
       left: 16px;
 
-      .wrapper {
-        border: 4px solid colors.$bg-secondary-alt;
+      > div {
+        border: 6px solid colors.$bg-secondary-alt;
         background-color: colors.$bg-secondary-alt;
       }
     }
@@ -83,6 +83,7 @@
         
         p {
           font-weight: normal;
+          text-align: center;
           font-size: 8px;
         }
       }

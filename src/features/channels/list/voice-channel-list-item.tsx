@@ -5,7 +5,6 @@ import { useSocketRoomJoin } from '@services/websocket/hooks';
 import { ChannelLabel } from './channel-label';
 
 import { ConnectToRoomButton } from '@features/webrtc/connect';
-import { ChannelOngoingCallPreview } from '@features/webrtc/channel';
 
 import styles from './voice-channel-list-item.module.scss';
 
@@ -15,23 +14,19 @@ type VoiceChannelListItemProps = {
 };
 
 export function VoiceChannelListItem({ channel, serverId }: VoiceChannelListItemProps) {
-  useSocketRoomJoin(channel._id);
+  const { _id: roomId, name } = channel;
+
+  useSocketRoomJoin(roomId);
 
   return (
-    <>
-      <div className={styles.button}>
-        <ConnectToRoomButton
-          roomId={channel._id}
-          roomName={channel.name}
-          serverId={serverId}
-        >
-          <ChannelLabel channel={channel} />
-        </ConnectToRoomButton>
-      </div>
-      <ChannelOngoingCallPreview
+    <div className={styles.button}>
+      <ConnectToRoomButton
+        roomId={roomId}
+        roomName={name}
         serverId={serverId}
-        roomId={channel._id}
-      />
-    </>
+      >
+        <ChannelLabel channel={channel} />
+      </ConnectToRoomButton>
+    </div>
   );
 }

@@ -6,9 +6,13 @@ import { socket } from '@app';
 
 export const useSocketRoomJoin = (roomName: string | string[]) => {
   useEffect(() => {
+    if (roomName.length === 0) return;
     socket.emit('join', roomName);
 
-    return () => { socket.emit('leave', roomName); };
+    return () => {
+      if (roomName.length === 0) return;
+      socket.emit('leave', roomName);
+    };
   }, [roomName]);
 };
 
