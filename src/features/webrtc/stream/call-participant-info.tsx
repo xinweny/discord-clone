@@ -1,6 +1,7 @@
 import type { Participant } from 'livekit-client';
 
 import MutedIcon from '@assets/icons/microphone-mute.svg?react';
+import StreamingIcon from '@assets/icons/streaming.svg?react';
 
 import styles from './call-participant-info.module.scss';
 
@@ -26,7 +27,7 @@ export function CallParticipantInfo({
   return (
     <div className={`${styles.container} ${className || ''}`}>
       <div className={styles.label} hidden={!showLabel}>
-        {withSs && <img src="#" alt="Icon" />}
+        {withSs && <StreamingIcon />}
         <span>{label}</span>
       </div>
       <div className={styles.statuses}>

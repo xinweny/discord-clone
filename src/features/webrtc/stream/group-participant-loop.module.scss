@@ -1,7 +1,8 @@
 .loop {
   flex: 1 1 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
 

@@ -46,6 +46,18 @@ export const setupAudioEffects = (room?: Room) => {
         default: break;
       }
     },
+    [RoomEvent.LocalTrackPublished]: (publication: RemoteTrackPublication) => {
+      switch (publication.track?.source) {
+        case Track.Source.ScreenShare: playAudio(startStreamAudio); break;
+        default: break;
+      }
+    },
+    [RoomEvent.LocalTrackUnpublished]: (publication: RemoteTrackPublication) => {
+      switch (publication.track?.source) {
+        case Track.Source.ScreenShare: playAudio(stopStreamAudio); break;
+        default: break;
+      }
+    },
   };
   
   const addAudioEffects = () => {

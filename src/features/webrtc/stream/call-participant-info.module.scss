@@ -24,6 +24,11 @@
   .label {
     border-radius: 8px;
     padding: 2px 8px;
+
+    > svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .statuses {

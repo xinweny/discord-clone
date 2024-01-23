@@ -76,7 +76,7 @@ export function GroupParticipantTile({
             trackRef={cameraTrack}
             participant={participant}
           />
-          : <Avatar src={avatarUrl} />
+          : <Avatar src={avatarUrl} className={styles.avatar} />
         }
         <CallParticipantInfo
           className={styles.info}

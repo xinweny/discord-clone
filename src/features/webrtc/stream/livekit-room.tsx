@@ -37,8 +37,6 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     video: initVideo,
   });
 
-  console.log(isMuted);
-
   useRoomEventHandlers(room);
 
   return (
