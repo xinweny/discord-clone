@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 
 import type { LoggedInContext } from '@components/routes';
 
-export function DemoButton() {
+export function DemoButton({ className }: React.HTMLAttributes<HTMLButtonElement>) {
   const { isLoggedIn } = useOutletContext<LoggedInContext>();
 
   if (isLoggedIn) return null;
@@ -12,7 +12,7 @@ export function DemoButton() {
   };
 
   return (
-    <button onClick={loginDemoAccount}>
+    <button onClick={loginDemoAccount} className={className}>
       Demo
     </button>
   );

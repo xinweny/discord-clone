@@ -40,11 +40,6 @@
     font-size: 20px;
     padding: 16px 32px;
     border-radius: 28px;
-
-    &.signupButton {
-      background-color: colors.$not-quite-black;
-      color: colors.$white;
-    }
   }
 }
 
@@ -67,5 +62,22 @@
   
   .foregroundRight {
     margin-left: 370px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  .signupButton {
+    background-color: colors.$not-quite-black;
+    color: colors.$white;
+  }
+
+  .demoButton {
+    background-color: colors.$white;
+    color: colors.$not-quite-black;
   }
 }
