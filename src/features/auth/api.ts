@@ -4,6 +4,7 @@ import type {
   AuthData,
   LoginFields,
   RegisterFields,
+  ResetPasswordFields,
 } from './types';
 import type { UserSelfData } from '@features/users/types';
 
@@ -58,6 +59,19 @@ const authApi = api.injectEndpoints({
           data: { email },
         }),
       }),
+      resetPassword: build.mutation<void, ResetPasswordFields>({
+        query: ({ password, confirmPassword, token, uid }) => ({
+          url: '/auth/reset',
+          method: 'post',
+          data: {
+            password,
+            confirmPassword,
+            token,
+            uid,
+          },
+        }),
+        invalidatesTags: (...[, , { uid }]) => [{ type: 'User', id: uid }],
+      }),
     };
   }
 });
@@ -70,4 +84,5 @@ export const {
   useRefreshTokenQuery,
   useLogoutMutation,
   useLazyRequestPasswordResetMailQuery,
+  useResetPasswordMutation,
 } = authApi;

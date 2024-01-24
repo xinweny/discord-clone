@@ -15,3 +15,10 @@ export type RegisterFields = {
   password: string;
   confirmPassword: string;
 };
+
+export type ResetPasswordFields = {
+  password: string;
+  confirmPassword: string;
+  token: string;
+  uid: string;
+};

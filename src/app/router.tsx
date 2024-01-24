@@ -9,6 +9,7 @@ import {
   LandingPage,
   LoginPage,
   RegisterPage,
+  ResetPasswordPage,
   AppPage,
   DashboardPage,
   ContactsPage,
@@ -30,6 +31,7 @@ const Router = () => {
       <Route element={<RestrictedRoute />}>
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
+        <Route path="reset" element={<ResetPasswordPage />} />
       </Route>
 
       // Private routes

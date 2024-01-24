@@ -60,6 +60,7 @@ export function LoginForm() {
               name="password"
               label="password"
               rules={{ required: true }}
+              options={{ trim: false }}
             />
             <RequestPasswordResetButton className={styles.requestResetButton} />
           </FormGroup>

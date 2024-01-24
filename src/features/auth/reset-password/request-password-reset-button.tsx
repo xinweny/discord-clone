@@ -1,7 +1,5 @@
 import { useFormContext } from 'react-hook-form';
 
-import type { ErrorResponse } from '@types';
-
 import { ButtonWithNotice } from '@components/ui/buttons';
 
 import { PasswordRequestSentModal } from './password-request-sent-modal';
