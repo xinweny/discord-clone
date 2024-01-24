@@ -51,6 +51,13 @@ const authApi = api.injectEndpoints({
           params: { username },
         }),
       }),
+      requestPasswordResetMail: build.query<void, string>({
+        query: (email) => ({
+          url: '/auth/reqReset',
+          method: 'post',
+          data: { email },
+        }),
+      }),
     };
   }
 });
@@ -62,4 +69,5 @@ export const {
   useRegisterMutation,
   useRefreshTokenQuery,
   useLogoutMutation,
+  useLazyRequestPasswordResetMailQuery,
 } = authApi;

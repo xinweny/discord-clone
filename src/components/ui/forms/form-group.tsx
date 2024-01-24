@@ -33,12 +33,14 @@ export function FormGroup({
       <div className={`${styles.group} ${className || ''}`}>
         <label htmlFor={htmlFor} className={error && styles.error}>
           <h2 className={styles.label}>{label.toUpperCase()}</h2>
-          <span className={styles.errorMessage}>
-            {name && error
-              ? ` - ${error.message}`
-              : `${required ? '*' : ''}`
-            }
-          </span>
+          {required && (
+            <span className={styles.required}>*</span>
+          )}
+          {name && error && (
+            <span className={styles.errorMessage}>
+              {` - ${error.message}`}
+            </span>
+          )}
         </label>
         {children}
       </div>

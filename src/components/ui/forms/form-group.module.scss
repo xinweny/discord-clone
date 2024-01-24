@@ -29,19 +29,35 @@
       font-style: italic;
       font-weight: 500;
     }
+
+    .required {
+      font-size: 12px;
+      font-weight: 500;
+      color: colors.$status-danger;
+      padding-left: 4px;
+    }
   }
 
   > div {
     display: flex;
-    
-    input:not([type="color"]) {
-      flex-grow: 1;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      padding: 10px;
-      background-color: colors.$bg-tertiary;
-      color: colors.$white;
+
+    input {
+      &:not([type="color"]) {
+        flex-grow: 1;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: colors.$bg-tertiary;
+        color: colors.$white;
+      }
+
+      &:auto-fill, &:-webkit-autofill {
+        &, &:hover, &:focus, &:active {
+          -webkit-text-fill-color: colors.$white !important;
+          -webkit-box-shadow: 0 0 0 1000px colors.$bg-tertiary inset !important;
+        }
+      }
     }
   }
 }

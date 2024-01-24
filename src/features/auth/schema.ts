@@ -3,7 +3,7 @@ import * as zod from 'zod';
 import { checkUsernameAvailability } from './utils';
 
 export const registerSchema = zod.object({
-  email: zod.string(),
+  email: zod.string({ required_error: 'This field is required' }),
   displayName: zod.string()
     .or(zod.literal('')),
   username: zod.string()
@@ -18,4 +18,11 @@ export const registerSchema = zod.object({
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
     path: ['confirmPassword'],
+});
+
+export const loginSchema = zod.object({
+  email: zod.string()
+    .min(1, 'This field is required'),
+  password: zod.string()
+    .min(1, 'This field is required'),
 });

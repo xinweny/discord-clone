@@ -3,11 +3,13 @@ import { useFormContext } from 'react-hook-form';
 type SubmitButtonProps = {
   className?: string;
   children: React.ReactNode;
+  withoutDisable?: boolean;
 };
 
 export function SubmitButton({
   className,
   children,
+  withoutDisable = false,
 }: SubmitButtonProps) {
   const { formState: { isDirty, isValid } } = useFormContext();
   
@@ -15,7 +17,7 @@ export function SubmitButton({
     <button
       className={className}
       type="submit"
-      disabled={!isDirty && !isValid}
+      disabled={!withoutDisable && (!isDirty && !isValid)}
     >
       {children}
     </button>

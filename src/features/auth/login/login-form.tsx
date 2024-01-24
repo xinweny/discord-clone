@@ -1,11 +1,16 @@
 import { useForm, FormProvider } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, Link } from 'react-router-dom';
 
 import type { LoginFields } from '../types';
 
+import { loginSchema } from '../schema';
+
 import { TextInput, FormGroup, SubmitButton } from '@components/ui/forms';
 
 import { useLoginMutation } from '@features/auth/api';
+
+import styles from './login-form.module.scss';
 
 export function LoginForm() {
   const methods = useForm<LoginFields>({
@@ -13,6 +18,8 @@ export function LoginForm() {
       email: '',
       password: '',
     },
+    resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
   });
   const { handleSubmit } = methods;
 
@@ -27,14 +34,15 @@ export function LoginForm() {
   };
   
   return (
-    <div>
-      <div>
-        <h3>Welcome back!</h3>
-        <p>We're so excited to see you again!</p>
-      </div>
+    <div className={styles.container}>
+      <header>
+        <h1>Welcome back!</h1>
+        <span>We're so excited to see you again!</span>
+      </header>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormGroup label="email" htmlFor="email">
+          <FormGroup
+            name="email" label="email" required className={styles.input}>
             <TextInput
               type="email"
               id="email"
@@ -43,7 +51,7 @@ export function LoginForm() {
               rules={{ required: true }}
             />
           </FormGroup>
-          <FormGroup label="password" htmlFor="password">
+          <FormGroup name="password" label="password" required className={styles.input}>
             <TextInput
               type="password"
               id="password"
@@ -52,10 +60,15 @@ export function LoginForm() {
               rules={{ required: true }}
             />
           </FormGroup>
-          <SubmitButton>Log In</SubmitButton>
+          <SubmitButton
+            className={styles.submitButton}
+            withoutDisable
+          >
+            Log In
+          </SubmitButton>
         </form>
       </FormProvider>
-      <p>Need an account? <Link to="/register"><strong>Register</strong></Link></p>
+      <span>Need an account? <Link to="/register">Register</Link></span>
     </div>
   );
 }
