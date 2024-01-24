@@ -1,11 +1,12 @@
 export const passwordResetMail = (username: string, link: string) => (`
-  <p>Hey ${username},</p>
+  <h2>Hey ${username},</h2>
   <br>
-  <p>Forgot your password?</p>
+  <h1>Forgot your password?</h1>
   <br>
-  <p>Please click on the link below to reset your password:</p>
+  <p>Your Discord password can be reset by clicking the link below. If you did not request a new password, please ignore this email.</p>
   <a href="${link}"><strong>Reset Password</strong></a>
-  <p>Please note that this link will expire in <em>30 minutes.</em></p>
+  <br>
+  <p>Please note that this link will expire in <strong>30 minutes.</strong></p>
   <br>
   <p>Thank you,<p>
   <p>Discord Clone</p>

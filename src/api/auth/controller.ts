@@ -127,18 +127,17 @@ const requestPasswordReset: RequestHandler[] = [
 
       const id = user._id.toString();
       const resetToken = await authService.issueTempToken(id, 'RESET', 1800000);
-      const clientURL = `${env.HOST}:${env.PORT}`;
 
-      const link = `${clientURL}/api/v1/reset?token=${resetToken}&uid=${id}`;
+      const link = `${env.clientURL}/reset?token=${resetToken}&uid=${id}`;
 
-      const mail = await mailService.sendMail(
+      await mailService.sendMail(
         email,
         'Discord Clone Password Reset',
         passwordResetMail(user.username, link)
       );
 
       res.json({
-        data: mail,
+        data: null,
         message: 'Password reset email sent successfully.'
       });
     }

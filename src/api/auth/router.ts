@@ -24,6 +24,4 @@ authRouter.get('/check', authController.checkUsername);
 
 authRouter.get('/whoami', authController.checkRefreshToken);
 
-authRouter.post('/lk');
-
 export { authRouter };

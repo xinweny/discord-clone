@@ -1,11 +1,12 @@
 export const emailVerificationMail = (username: string, link: string) => (`
-  <p>Hey ${username},</p>
+  <h2>Hey ${username},</h2>
   <br>
-  <p>Welcome to Discord Clone!</p>
+  <h1>Welcome to Discord Clone!</h1>
   <br>
   <p>Please click on the link below to verify your email address:</p>
   <a href="${link}"><strong>Verify Email</strong></a>
-  <p>Please note that this link will expire in <em>30 minutes.</em></p>
+  <br>
+  <p>Please note that this link will expire in <strong>30 minutes.</strong></p>
   <br>
   <p>Thank you,<p>
   <p>Discord Clone</p>
