@@ -8,6 +8,8 @@ import { loginSchema } from '../schema';
 
 import { TextInput, FormGroup, SubmitButton } from '@components/ui/forms';
 
+import { RequestPasswordResetButton } from '../reset-password';
+
 import { useLoginMutation } from '@features/auth/api';
 
 import styles from './login-form.module.scss';
@@ -59,6 +61,7 @@ export function LoginForm() {
               label="password"
               rules={{ required: true }}
             />
+            <RequestPasswordResetButton className={styles.requestResetButton} />
           </FormGroup>
           <SubmitButton
             className={styles.submitButton}
