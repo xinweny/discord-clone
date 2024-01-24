@@ -4,11 +4,9 @@ import type { ModalProps } from '@types';
 import { useGetUserData } from '@features/auth/hooks';
 
 import { ModalWrapper } from '@components/ui/modals';
-import { Avatar, ColorBanner } from '@components/ui/media';
 import { Tabs } from '@components/ui/tabs';
 import { Separator } from '@components/ui/displays';
 
-import { UserStatusIcon } from '../status';
 import { MutualServersList, MutualFriendsList } from '@features/mutuals/list';
 import { UserProfileOptions } from '@features/relations/get';
 
