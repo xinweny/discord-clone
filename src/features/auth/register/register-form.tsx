@@ -19,6 +19,8 @@ import {
   SubmitButton,
 } from '@components/ui/forms';
 
+import styles from './register-form.module.scss';
+
 export function RegisterForm() {
   const defaultValues = {
     email: '',
@@ -66,16 +68,19 @@ export function RegisterForm() {
   };
   
   return (
-    <div>
-      <h2>Create an account</h2>
+    <div className={styles.container}>
+      <header>
+        <h1>Create an account</h1>
+      </header>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <FormGroup
             label="email"
             htmlFor="email"
             showError
           >
             <TextInput
+              autoComplete="false"
               type="email"
               id="email"
               name="email"
@@ -85,6 +90,7 @@ export function RegisterForm() {
           </FormGroup>
           <FormGroup label="display name" htmlFor="displayName">
             <TextInput
+              autoComplete="false"
               type="text"
               id="display-name"
               name="displayName"
@@ -95,6 +101,7 @@ export function RegisterForm() {
           </FormGroup>
           <FormGroup label="username" htmlFor="username">
             <TextInput
+              autoComplete="false"
               type="text"
               id="username"
               name="username"
@@ -113,6 +120,7 @@ export function RegisterForm() {
           </FormGroup>
           <FormGroup label="password" htmlFor="password">
             <TextInput
+              autoComplete="false"
               type="password"
               id="password"
               name="password"
@@ -129,6 +137,7 @@ export function RegisterForm() {
           </FormGroup>
           <FormGroup label="confirm password" htmlFor="confirmPassword">
             <TextInput
+              autoComplete="false"
               type="password"
               id="confirm-password"
               name="confirmPassword"
@@ -138,10 +147,13 @@ export function RegisterForm() {
             />
             <ErrorMessage name="confirmPassword" />
           </FormGroup>
-          <SubmitButton>Continue</SubmitButton>
+          <SubmitButton
+            className={styles.submitButton}
+            withoutDisable
+          >Continue</SubmitButton>
         </form>
       </FormProvider>
-      <Link to="/login"><strong>Already have an account?</strong></Link>
+      <Link to="/login" className={styles.link}>Already have an account?</Link>
     </div>
   )
 }
