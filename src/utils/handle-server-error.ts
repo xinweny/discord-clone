@@ -5,23 +5,10 @@ type ErrorCond = {
   message: string;
 };
 
-export const handleServerError = (
+export const handleServerError = async (
   error: unknown,
   cond: ErrorCond,
-  handler: () => any,
-) => {
-  const err = error as ErrorResponse;
-
-  if (
-    err.status === cond.status &&
-    (cond.message && err.data.message.includes(cond.message))
-  ) handler();
-};
-
-export const handleServerErrorAsync = async (
-  error: unknown,
-  cond: ErrorCond,
-  handler: () => Promise<any>,
+  handler: (() => any) | (() => Promise<any>),
 ) => {
   const err = error as ErrorResponse;
 

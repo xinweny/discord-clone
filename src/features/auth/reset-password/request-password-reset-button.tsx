@@ -7,6 +7,7 @@ import { ButtonWithNotice } from '@components/ui/buttons';
 import { PasswordRequestSentModal } from './password-request-sent-modal';
 
 import { useLazyRequestPasswordResetMailQuery } from '../api';
+import { handleServerError } from '@utils';
 
 type RequestPasswordResetButtonProps = {
   name?: string;
@@ -17,25 +18,28 @@ export function RequestPasswordResetButton({
   name = 'email',
   className,
 }: RequestPasswordResetButtonProps) {
-  const { watch, trigger, setError } = useFormContext();
+  const { watch, trigger, setError, formState: { errors } } = useFormContext();
 
   const [requestPasswordReset] = useLazyRequestPasswordResetMailQuery();
 
   const email = watch(name);
 
   const handleClick = async () => {
-    try {
-      await trigger(name, { shouldFocus: true });
+    const isValidated = await trigger(name, { shouldFocus: true });
 
-      await requestPasswordReset(email);
-    } catch (error) {
-      const err = error as ErrorResponse;
+    if (!isValidated) return;
 
-      if (err.status === 400 && err.data.message === 'User does not exist.') setError(name, {
+    const response = await requestPasswordReset(email);
+
+    handleServerError(response, {
+      status: 400,
+      message: 'User does not exist',
+    }, () => {
+      setError(name, {
         type: 'custom',
         message: 'Email does not exist.',
       });
-    }
+  });
   };
   
   return (
@@ -44,6 +48,7 @@ export function RequestPasswordResetButton({
       className={className}
       modal={PasswordRequestSentModal}
       modalProps={{ email }}
+      error={errors[name]}
     >
       Forgot your password?
     </ButtonWithNotice>

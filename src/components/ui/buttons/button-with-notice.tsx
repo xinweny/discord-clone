@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { useModal } from '@components/hooks';
 
 import { ModalProps } from '@types';
@@ -5,6 +7,7 @@ import { ModalProps } from '@types';
 type ButtonWithNoticeProps = {
   action: (() => void) | (() => Promise<void>);
   children: React.ReactNode;
+  error?: any;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 type FullButtonWithNoticeProps<TModalProps> = {
@@ -17,20 +20,23 @@ export function ButtonWithNotice<TModalProps>({
   children,
   modal,
   modalProps,
+  error,
   ...props
 }: FullButtonWithNoticeProps<TModalProps>) {
+  const [hasError, setHasError] = useState<boolean>(!error);
+
+  useEffect(() => {
+    setHasError(!!error);
+  }, [error]);
+
   const [show, toggle] = useModal();
 
   const Modal = modal;
 
   const handleClick = async () => {
-    try {
-      await action();
+    await action();
 
-      toggle();
-    } catch {
-      return;
-    }
+    if (!hasError) toggle();
   };
 
   return (
@@ -42,7 +48,7 @@ export function ButtonWithNotice<TModalProps>({
       >
         {children}
       </button>
-      <Modal isOpen={show} onClose={toggle} {...modalProps} />
+      <Modal isOpen={show && !hasError} onClose={toggle} {...modalProps} />
     </>
   )
 }
