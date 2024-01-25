@@ -90,19 +90,20 @@ export const useLivekit = (): LivekitContextData => {
     roomId: string,
     serverId?: string,
     options = { withVideo: false }) => {
-    if (!user.data?._id) return undefined;
+    try {
+      if (!user.data?._id) return undefined;
 
-    const token = await getLivekitToken({
-      roomId,
-      userId: user.data._id,
-    }).unwrap();
+      const token = await getLivekitToken({ roomId, serverId }).unwrap();
 
-    setData({
-      token,
-      roomId,
-      serverId,
-      initVideo: options.withVideo,
-    });
+      setData({
+        token: token,
+        roomId,
+        serverId,
+        initVideo: options.withVideo,
+      });
+    } catch {
+      setData(initialData);
+    }
   };
 
   const notifyDisconnection = () => {

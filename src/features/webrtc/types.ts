@@ -1,8 +1,8 @@
 import type { Participant } from 'livekit-client';
 
 export type GetLivekitTokenFields = {
-  userId: string;
   roomId: string;
+  serverId?: string;
 };
 
 export type CallData = {

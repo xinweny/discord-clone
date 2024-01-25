@@ -19,9 +19,9 @@ export function MainLayout({
         {topNotice}
       </div>
       <div className={styles.content}>
-        <div>
+        <nav>
           {sideBar}
-        </div>
+        </nav>
         <main>
           {children}
         </main>

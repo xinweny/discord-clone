@@ -37,8 +37,6 @@ export function ServerNewMessageNotification({
         const readDate = readTimestamps[channelId]
           ? new Date(readTimestamps[channelId]).getTime()
           : undefined;
-
-        if (readDate) console.log(lastDate, readDate, lastDate > readDate);
     
         if (!readDate || (lastDate > readDate)) {
           setClsName(notifClass);

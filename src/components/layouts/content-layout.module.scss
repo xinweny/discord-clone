@@ -1,7 +1,6 @@
 @use '@styles/colors';
 
 .layout {
-  height: 100vh;
   max-height: 100vh;
   background-color: colors.$bg-primary;
   display: grid;

@@ -13,8 +13,9 @@ const webRtcApi = api.injectEndpoints({
   endpoints(build) {
     return {
       getLivekitToken: build.query<string, GetLivekitTokenFields>({
-        query: ({ roomId }) => ({
+        query: ({ roomId, serverId }) => ({
           url: `/rtc/${roomId}/token`,
+          params: { serverId },
           method: 'get',
         }),
         providesTags: ['WebRTC'],

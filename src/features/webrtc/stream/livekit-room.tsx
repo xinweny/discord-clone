@@ -8,6 +8,9 @@ import { env } from '@config';
 import { ParticipantsEvent } from '../types';
 import { CallAudio } from './call-audio';
 
+import connectAudio from '@assets/audio/connect.mp3';
+import disconnectAudio from '@assets/audio/disconnect.mp3';
+
 type LivekitRoomProps = {
   children: React.ReactNode;
 };
@@ -28,10 +31,12 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     connect: isOnCall,
     onConnected: () => {
       socket.emit(ParticipantsEvent.Get, roomId);
+      new Audio(connectAudio).play();
     },
     onDisconnected: () => {
       notifyDisconnection();
       socket.emit(ParticipantsEvent.Get, roomId);
+      new Audio(disconnectAudio).play();
     },
     audio: !isMuted,
     video: initVideo,

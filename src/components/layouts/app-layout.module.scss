@@ -16,8 +16,13 @@
     width: 0px;
     background: transparent;
   }
+
+  > * {
+    min-height: 100%;
+  }
 }
 
 .content {
   z-index: 1;
+  max-height: 100vh;
 }
