@@ -1,6 +1,8 @@
 import { useLivekitContext } from '@features/webrtc/hooks';
 import { useLocation } from 'react-router-dom';
 
+import { useGetUserData } from '@features/auth/hooks';
+
 import { LinkImage } from '@components/ui/links';
 import { Gif } from '@components/ui/media';
 
@@ -16,6 +18,8 @@ export function DmCallShortcut() {
 
   const { pathname } = useLocation();
 
+  const { user } = useGetUserData();
+
   const {
     isOnCall,
     roomData,
@@ -25,7 +29,10 @@ export function DmCallShortcut() {
   const roomId = data?.roomId;
   const serverId = data?.serverId;
 
-  const { data: dm } = useGetDmQuery({ dmId: roomId || '' }, { skip: !data || !serverId || !roomId });
+  const { data: dm } = useGetDmQuery({
+    dmId: roomId || '',
+    userId: user.data!.id,
+  }, { skip: !data || !serverId || !roomId });
 
   if (!isOnCall || !roomData || !!serverId) return null;
 

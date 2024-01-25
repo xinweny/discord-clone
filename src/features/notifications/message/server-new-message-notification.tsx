@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
+
 import { TimestampDict } from '../types';
 
-import styles from './server-new-message-notification.module.scss';
-
-type ServerNewMessageNotificationProps = {
-  channelIds: string[];
-  lastTimestamps: TimestampDict;
-  readTimestamps: TimestampDict;
+export type ServerNewMessageNotificationProps = {
+  channelIds?: string[];
+  lastTimestamps?: TimestampDict;
+  readTimestamps?: TimestampDict;
   className?: string;
+  noNotifClass?: string;
+  notifClass?: string;
 };
 
 export function ServerNewMessageNotification({
@@ -14,18 +16,39 @@ export function ServerNewMessageNotification({
   lastTimestamps,
   readTimestamps,
   className,
+  noNotifClass = '',
+  notifClass = '',
 }: ServerNewMessageNotificationProps) {
-  const notification = <div className={`${styles.notification} ${className || ''}`}></div>;
+  const [clsName, setClsName] = useState<string>(noNotifClass);
 
-  for (const channelId of channelIds) {
-    const lastDate = lastTimestamps[channelId] ? new Date(lastTimestamps[channelId]).getTime() : undefined;
+  useEffect(() => {
+    if (!channelIds || !lastTimestamps || !readTimestamps) {
+      setClsName(noNotifClass);
 
-    if (!lastDate) continue;
+      return;
+    } else {
+      for (const channelId of channelIds) {
+        const lastDate = lastTimestamps[channelId]
+          ? new Date(lastTimestamps[channelId]).getTime()
+          : undefined;
+    
+        if (!lastDate) continue;
+    
+        const readDate = readTimestamps[channelId]
+          ? new Date(readTimestamps[channelId]).getTime()
+          : undefined;
 
-    const readDate = readTimestamps[channelId] ? new Date(readTimestamps[channelId]).getTime() : undefined;
+        if (readDate) console.log(lastDate, readDate, lastDate > readDate);
+    
+        if (!readDate || (lastDate > readDate)) {
+          setClsName(notifClass);
+          return;
+        }
+      }
+    }
+  }, [channelIds, lastTimestamps, readTimestamps]);
 
-    if (!readDate || (lastDate > readDate)) return notification;
-  }
-
-  return null;
+  return (
+    <div className={`${clsName} ${className || ''}`} />
+  );
 }

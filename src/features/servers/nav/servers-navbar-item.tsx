@@ -1,5 +1,10 @@
 import { Tooltip } from '@components/ui/popups';
 
+import {
+  ServerNewMessageNotification,
+  type ServerNewMessageNotificationProps,
+} from '@features/notifications/message';
+
 import styles from './servers-navbar-item.module.scss';
 
 type ServersNavbarItemProps = {
@@ -7,6 +12,7 @@ type ServersNavbarItemProps = {
   tooltipText: string;
   children: React.ReactNode;
   className?: string;
+  notificationProps?: ServerNewMessageNotificationProps;
 };
 
 export function ServersNavbarItem({
@@ -14,6 +20,7 @@ export function ServersNavbarItem({
   tooltipText,
   children,
   className,
+  notificationProps,
 }: ServersNavbarItemProps) {
   return (
     <Tooltip
@@ -23,8 +30,11 @@ export function ServersNavbarItem({
     >
       <div className={`${styles.item} ${isActive ? styles.active : ''} ${className || ''}`}>
         {children}
-        <div className={styles.indicator}>
-        </div>
+        <ServerNewMessageNotification
+          {...notificationProps}
+          className={styles.indicator}
+          notifClass={notificationProps ? styles.notification : ''}
+        />
       </div>
     </Tooltip>
   );

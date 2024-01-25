@@ -24,6 +24,7 @@ export function JoinedServersList({ userId }: JoinedServersListProps) {
   const { data: lastTimestamps } = useGetLastTimestampsQuery(userId);
   const { data: readTimestamps } = useGetReadStatusesQuery(userId);
 
+  // Notify offline status for each server the user is a member of
   useEffect(() => {
     return () => {
       if (servers.data && servers.data.length > 0) {

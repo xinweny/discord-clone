@@ -7,6 +7,8 @@
   overflow: hidden;
 
   .content {
+    padding-bottom: 24px;
+
     @include mixins.scroller();
 
     flex-grow: 1;

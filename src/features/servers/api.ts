@@ -93,6 +93,7 @@ const serverApi = api.injectEndpoints({
 
             const serverIds = servers.map(server => server._id);
 
+            // Notify online status for all servers the user has joined
             emitEvents({
               [MemberStatusEvent.Update]: {
                 userId,
