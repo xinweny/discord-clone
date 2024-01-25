@@ -14,7 +14,7 @@ export function SendInviteButton({
 }: SendInviteButtonProps) {
   const [isSent, setIsSent] = useState<boolean>(false);
 
-  const { data: serverInvite, isSuccess } = useGetServerInviteQuery(serverId);
+  const { data: serverInvite, isSuccess } = useGetServerInviteQuery({ serverId });
 
   const [sendMessage, res] = useSendMessageMutation();
 
