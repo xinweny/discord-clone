@@ -25,10 +25,10 @@ const getRelations = async (userId: Types.ObjectId | string, status: RelationSta
       },
     });
 
-  if (!user) throw new CustomError(400, 'User 4not found.');
+  if (!user) throw new CustomError(400, 'User not found.');
 
   const relations = (status)
-    ? user.relations.find(
+    ? user.relations.filter(
       relation => relation.status.includes(status)
     )
     : user.relations;

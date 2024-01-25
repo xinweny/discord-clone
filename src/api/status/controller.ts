@@ -19,6 +19,20 @@ const getUserStatus: RequestHandler[] = [
   )
 ];
 
-export const userStatusController = {
+const getUserStatuses: RequestHandler[] = [
+  authenticate,
+  tryCatch(
+    async (req, res) => {
+      const userIds = req.query.userIds as string[];
+
+      const statuses = await statusService.getStatuses(userIds);
+
+      res.json({ data: statuses });
+    }
+  )
+];
+
+export const statusController = {
   getUserStatus,
+  getUserStatuses,
 };

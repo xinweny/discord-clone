@@ -1,7 +1,6 @@
 import { Socket } from 'socket.io';
 
 import { redisService } from '@services/redis';
-import { serverMemberService } from '@api/serverMembers/service';
 
 const getSockets = async (userId: string) => {
   const res = await redisService.get(`${userId}_SOCKET`);
@@ -38,9 +37,22 @@ const getStatus = async (userId: string) => {
   return sockets.length > 0;
 };
 
+const getStatuses = async (userIds: string[]) => {
+  const res = await redisService.getMany(userIds.map(userId => `${userId}_SOCKET`));
+
+  const statuses = {} as { [key: string]: boolean };
+
+  userIds.forEach((userId, i) => {
+    statuses[userId] = res[i] ? JSON.parse(res[i] as string).length > 0 : false;
+  });
+
+  return statuses;
+};
+
 export const statusService = {
   getSockets,
   set,
   remove,
   getStatus,
+  getStatuses,
 };

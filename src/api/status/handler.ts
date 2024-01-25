@@ -2,7 +2,7 @@ import { Socket } from 'socket.io';
 
 import { io } from '@app/server';
 
-import { statusService } from '@api/users/status/service';
+import { statusService } from './service';
 
 export const statusHandler = async (socket: Socket) => {
   const userId = socket.user._id;

@@ -7,6 +7,7 @@ import { userRouter } from '@api/users/router';
 import { uploadRouter } from './upload/router';
 import { webRtcRouter } from './webrtc/router';
 import { serverInviteRouter } from './serverInvites/router';
+import { statusRouter } from './status/router';
 
 const apiRouter = Router();
 
@@ -23,5 +24,7 @@ apiRouter.use('/users', userRouter);
 apiRouter.use('/upload', uploadRouter);
 
 apiRouter.use('/rtc', webRtcRouter);
+
+apiRouter.use('/statuses', statusRouter);
 
 export { apiRouter };
