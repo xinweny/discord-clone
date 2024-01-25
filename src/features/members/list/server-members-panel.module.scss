@@ -4,7 +4,7 @@
 .scroller {
   @include mixins.hover-scroller();
 
-  height: calc(100vh - 48px);
+  height: calc(100%);
 }
 
 .container {

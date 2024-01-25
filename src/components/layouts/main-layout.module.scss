@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 240px 1fr;
 
-  > nav {
+  > nav, main {
     height: 100%;
     overflow: hidden;
   }
