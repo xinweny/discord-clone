@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useModal = (): [boolean, () => void] => {
+export const useModal = (): [boolean, () => void, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -13,5 +13,5 @@ export const useModal = (): [boolean, () => void] => {
     setIsOpen(!isOpen);
   };
 
-  return [isOpen, toggle];
+  return [isOpen, toggle, setIsOpen];
 };

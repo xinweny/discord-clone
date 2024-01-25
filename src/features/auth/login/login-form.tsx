@@ -6,6 +6,8 @@ import type { LoginFields } from '../types';
 
 import { loginSchema } from '../schema';
 
+import { handleServerError } from '@utils';
+
 import { TextInput, FormGroup, SubmitButton } from '@components/ui/forms';
 
 import { RequestPasswordResetButton } from '../reset-password';
@@ -23,16 +25,27 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, setError } = methods;
 
   const [login] = useLoginMutation();
 
   const navigate = useNavigate();
 
   const onSubmit = async (data: LoginFields) => {
-    const result = await login(data).unwrap();
-    
-    if (result) navigate('/channels/@me');
+    try {
+      await login(data).unwrap();
+
+      navigate('/channels/@me');
+    } catch (error) {
+      handleServerError(
+        error,
+        { status: 400, message: 'Invalid email or password.' },
+        () => {
+          setError('email', { type: 'custom', message: 'Login or password is invalid.' });
+          setError('password', { type: 'custom', message: 'Login or password is invalid.' });
+        }
+      );
+    }
   };
   
   return (
