@@ -128,7 +128,7 @@ const requestPasswordReset: RequestHandler[] = [
       const id = user._id.toString();
       const resetToken = await authService.issueTempToken(id, 'RESET', 1800000);
 
-      const link = `${env.clientURL}/reset?token=${resetToken}&uid=${id}`;
+      const link = `${env.CLIENT_URL}/reset?token=${resetToken}&id=${id}`;
 
       await mailService.sendMail(
         email,
@@ -148,15 +148,14 @@ const resetPassword: RequestHandler[] = [
   ...validateFields(['password', 'confirmPassword']),
   tryCatch(
     async (req, res) => {
-      if (!req.query.token || !req.query.uid) throw new CustomError(404, 'Not found.');
+      const { token, uid, password } = req.body;
 
-      const token = req.query.token.toString();
-      const uid = req.query.uid.toString();
+      if (!token || !uid) throw new CustomError(404, 'Not found.');
 
       const isValid = await authService.verifyTempToken(token, uid, 'RESET');
       if (!isValid) throw new CustomError(400, 'Invalid reset token');
 
-      const hashedPassword = await authService.hashPassword(req.body.password);
+      const hashedPassword = await authService.hashPassword(password);
 
       const user = await userService.updateSensitive(uid, { password: hashedPassword });
 
@@ -182,9 +181,8 @@ const requestEmailVerification: RequestHandler[] = [
 
       const id = user._id.toString();
       const verifyToken = await authService.issueTempToken(id, 'VERIFY', 1800000);
-      const clientURL = `${env.HOST}:${env.PORT}`;
 
-      const link = `${clientURL}/api/v1/verify?token=${verifyToken}&uid=${id}`;
+      const link = `${env.CLIENT_URL}/verify?token=${verifyToken}&id=${id}`;
 
       const mail = await mailService.sendMail(
         email,

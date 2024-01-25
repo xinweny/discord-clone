@@ -166,7 +166,7 @@ export const getUnreadTimestamps = async (userId: string | Types.ObjectId) => {
 
   const lastTimestamps = await Message.aggregate([
     { $match: { roomId: { $in: roomIds } } },
-    { $sort: { _id: -1 } },
+    { $sort: { _id: 1 } },
     { $group: {
       _id: '$roomId',
       lastAt: { $last: '$createdAt' },
