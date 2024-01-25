@@ -2,11 +2,13 @@ import { RequestHandler } from 'express';
 
 import { tryCatch } from '@helpers/tryCatch';
 import { authenticate } from '@middleware/authenticate';
+import { authorize } from '@middleware/authorize';
 
 import { webRtcService } from './service';
 
 const generateLivekitToken: RequestHandler[] = [
   authenticate,
+  authorize.rtc,
   tryCatch(
     async (req, res) => {
       const userId = req.user!.id;

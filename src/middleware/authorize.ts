@@ -3,8 +3,6 @@ import { RequestHandler } from 'express';
 import { tryCatch } from '@helpers/tryCatch';
 import { CustomError } from '@helpers/CustomError';
 
-import { DM } from '@api/dms/model';
-
 import { serverService } from '@api/servers/service';
 import { serverMemberService } from '@api/serverMembers/service';
 import { channelService } from '@api/servers/channels/service';
@@ -134,7 +132,7 @@ const message = (action: 'view' | 'send' | 'react') => {
   };
 
   return tryCatch(authorizeMiddleware);
-}
+};
 
 const messageSelf = (action: 'update' | 'delete') => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
@@ -216,6 +214,27 @@ const dmOwnerOrParticipantSelf: RequestHandler = tryCatch(
   }
 );
 
+const rtc: RequestHandler = tryCatch(
+  async (req, res, next) => {
+    const { roomId } = req.params;
+    const { serverId } = req.query;
+
+    const userId = req.user?._id;
+
+    if (!serverId) {
+      const dm = await dmService.checkMembership(userId, roomId);
+
+      if (!dm) throw new CustomError(403, 'Unauthorized');
+    } else {
+      const server = await serverMemberService.checkMembership(serverId as string, userId);
+
+      if (!server) throw new CustomError(403, 'Unauthorized');
+    }
+
+    next();
+  }
+);
+
 export const authorize = {
   server,
   serverMember,
@@ -226,4 +245,5 @@ export const authorize = {
   userSelf,
   dmMember,
   dmOwnerOrParticipantSelf,
+  rtc,
 };
