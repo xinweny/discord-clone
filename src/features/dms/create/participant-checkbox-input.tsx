@@ -4,7 +4,7 @@ import { CheckboxInput } from '@components/ui/forms';
 import { Avatar } from '@components/ui/media';
 
 import type { UserBasicData } from '@features/users/types';
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIcon } from '@features/statuses/get';
 
 import CheckmarkIcon from '@assets/icons/checkmark.svg?react';
 

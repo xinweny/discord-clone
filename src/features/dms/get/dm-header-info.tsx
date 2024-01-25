@@ -8,7 +8,7 @@ import { useDmHeaderContext } from '../context';
 import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';
 
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIcon } from '@features/statuses/get';
 import { UserProfileButton } from '@features/users/get';
 
 import {

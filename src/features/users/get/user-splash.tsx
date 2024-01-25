@@ -2,7 +2,7 @@ import { UserData } from '../types';
 
 import { ColorBanner, Avatar } from '@components/ui/media';
 
-import { UserStatusIcon } from '../status';
+import { UserStatusIcon } from '@features/statuses/get';
 import { UserProfileButton } from '.';
 
 import styles from './user-splash.module.scss';

@@ -5,12 +5,12 @@ import {
   RelationData, 
   RelationStatus,
 } from '../types';
-import type { UserStatusesData } from '@features/users/types';
+import type { UserStatusesData } from '@features/statuses/types';
 
 import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';
 
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIcon } from '@features/statuses/get';
 import { DmMessageButton } from '@features/dms/create';
 
 import { AcceptFriendRequestButton } from '../edit';
@@ -20,7 +20,7 @@ import styles from './contact-card.module.scss';
 
 import ChatBubbleIcon from '@assets/icons/chat-bubble.svg?react';
 import CrossIcon from '@assets/icons/cross.svg?react';
-
+import CheckmarkIcon from '@assets/icons/checkmark.svg?react';
 
 export type ContactCardProps = {
   contact: RelationData;
@@ -78,15 +78,19 @@ export function ContactCard({
       );
       case ContactsTabs.PENDING: return formatProps(
         `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`,
-        <>
-          {status === RelationStatus.PENDING_FROM && <AcceptFriendRequestButton relationId={relationId} />}
-        </>
+        <Tooltip text="Accept" direction="top" gap={4}>
+          {status === RelationStatus.PENDING_FROM && (
+            <AcceptFriendRequestButton relationId={relationId}>
+              <CheckmarkIcon />
+            </AcceptFriendRequestButton>
+          )}
+        </Tooltip>
       );
       case ContactsTabs.BLOCKED: return formatProps('Blocked');
     }
   };
 
-  const labelRemove = (param: string) => {
+  const label = (param: string) => {
     switch (param) {
       case RelationStatus.FRIENDS: return 'Remove Friend';
       case RelationStatus.PENDING_FROM: return 'Reject';
@@ -127,7 +131,7 @@ export function ContactCard({
       </div>
       {props?.buttons && <div className={styles.buttons}>
         {props.buttons}
-        <Tooltip text={labelRemove(status)} direction="top" gap={4}>
+        <Tooltip text={label(status)} direction="top" gap={4}>
           <RemoveRelationButton relation={contact}>
             <CrossIcon />
           </RemoveRelationButton>

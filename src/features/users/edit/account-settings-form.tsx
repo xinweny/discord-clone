@@ -9,7 +9,8 @@ import { USER_SETTINGS_TABS } from '../tabs';
 import { Avatar, ColorBanner } from '@components/ui/media';
 import { Separator } from '@components/ui/displays';
 
-import { UserStatusIcon } from '../status';
+import { UserStatusIcon } from '@features/statuses/get';
+
 import { AccountEditSection } from './account-edit-section';
 import { ChangePasswordButton } from './change-password-button';
 import { ChangeUsernameButton } from './change-username-button';

@@ -1,16 +1,11 @@
 import api from '@services/api';
 
-import { setupSocketEventListeners } from '@services/websocket';
-
 import type {
   UserData,
   UserSelfData,
   UpdateUserFields,
-  GetStatusEventPayload,
   UpdateSensitiveFields,
-
 } from '@features/users/types';
-import { StatusEvent } from '@features/users/types';
 
 import { signAndUpload } from '@services/cloudinary';
 
@@ -60,30 +55,6 @@ const userApi = api.injectEndpoints({
         },
         invalidatesTags: (...[, , { userId }]) => [{ type: 'User', id: userId }],
       }),
-      getUserStatus: build.query<boolean, string>({
-        query: (userId) => ({
-          url: `/users/${userId}/status`,
-          method: 'get',
-        }),
-        onCacheEntryAdded: async (
-          userId,
-          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
-        ) => {
-          const events = {
-            [StatusEvent.Get]: ({ status, userId: uid }: GetStatusEventPayload) => {
-              if (userId !== uid) return;
-
-              updateCachedData(() => status);
-            },
-          };
-
-          setupSocketEventListeners(
-            events,
-            { cacheDataLoaded, cacheEntryRemoved },
-            `user_status#${userId}`
-          );
-        },
-      }),
       updateSensitive: build.mutation<UserSelfData, UpdateSensitiveFields>({
         query: ({ userId, currentPassword, password, username }) => ({
           url: `/users/${userId}`,
@@ -106,6 +77,5 @@ export default userApi;
 export const {
   useGetUserQuery,
   useUpdateUserMutation,
-  useGetUserStatusQuery,
   useUpdateSensitiveMutation,
 } = userApi;

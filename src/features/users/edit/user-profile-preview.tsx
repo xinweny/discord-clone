@@ -5,7 +5,7 @@ import { useGetUserData } from '@features/auth/hooks';
 
 import { Avatar, ColorBanner } from '@components/ui/media';
 
-import { UserStatusIcon } from '../status';
+import { UserStatusIcon } from '@features/statuses/get';
 
 import styles from './user-profile-preview.module.scss';
 import { Separator } from '@components/ui/displays';

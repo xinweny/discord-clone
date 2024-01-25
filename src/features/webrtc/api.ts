@@ -32,6 +32,7 @@ const webRtcApi = api.injectEndpoints({
         ) => {
           const events = {
             [ParticipantsEvent.Get]: ({ roomId: rId, participants }: GetParticipantsEventPayload) => {
+              console.log('update', participants);
               if (rId === roomId) updateCachedData(() => participants);
             },
           };

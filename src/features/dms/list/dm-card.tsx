@@ -6,7 +6,7 @@ import { getDmInfo } from '../utils';
 
 import { Avatar } from '@components/ui/media';
 
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIcon } from '@features/statuses/get';
 import { DmsNavItem } from '../nav';
 
 import defaultGroupAvatar from '@assets/static/default-group-avatar.png';

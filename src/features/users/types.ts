@@ -49,19 +49,6 @@ export type UpdateUserFields = {
   customStatus?: string;
 };
 
-export enum StatusEvent {
-  Get = 'user_status:get',
-}
-
-export type GetStatusEventPayload = {
-  userId: string;
-  status: boolean;
-};
-
-export type UserStatusesData = {
-  [key: string]: boolean;
-};
-
 export type UpdateSensitiveFields = {
   userId: string;
   currentPassword: string;

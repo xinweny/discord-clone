@@ -7,7 +7,7 @@ import { Popout } from '@components/ui/popups';
 
 import { UserSettingsButton } from '../settings';
 import { ToggleMuteButton } from '@features/webrtc/controls';
-import { UserStatusIcon } from '../status';
+import { UserStatusIcon } from '@features/statuses/get';
 
 import { SelfShortProfile } from './self-short-profile';
 

@@ -1,7 +1,7 @@
 import type { UserBasicData } from '@features/users/types';
 
 import { Avatar } from '@components/ui/media';
-import { UserStatusIcon } from '@features/users/status';
+import { UserStatusIcon } from '@features/statuses/get';
 
 import styles from './mutual-friend-card.module.scss';
 

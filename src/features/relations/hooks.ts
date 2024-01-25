@@ -5,7 +5,7 @@ import {
   ContactsTabs,
   RelationStatus,
 } from './types';
-import { UserStatusesData } from '@features/users/types';
+import { UserStatusesData } from '@features/statuses/types';
 
 import { useGetUserData } from '@features/auth/hooks';
 
