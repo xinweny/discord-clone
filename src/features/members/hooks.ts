@@ -15,7 +15,7 @@ export const useServerMemberAuthorize = (options?: { skip: boolean }) => {
   const { data: member } = useGetUserServerMemberQuery({ userId, serverId: serverId! }, options);
 
   useEffect(() => {
-    setAuthorized((options) ? true : !!member);
+    setAuthorized((options?.skip) ? true : !!member);
   }, [member]);
 
   return authorized;
