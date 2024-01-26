@@ -63,7 +63,7 @@ export const useFriends = (relations: RelationData[] | undefined) => {
   const [friends, setFriends] = useState<RelationData[]>([]);
 
   const { data: statuses } = useGetUserStatusesQuery(
-    friends.map(friend => friend._id),
+    friends.map(friend => friend.userId),
     { skip: friends.length === 0 }
   );
 
