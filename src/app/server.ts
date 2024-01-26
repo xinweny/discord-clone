@@ -5,7 +5,9 @@ import { JwtPayload } from 'jsonwebtoken';
 import env from '@config/env';
 
 import { app } from './app';
-import { socketIo } from './socketio';
+
+import { socketIo } from '@config/socketio';
+import { terminus } from '@config/terminus';
 
 const server = createServer(app);
 
@@ -23,5 +25,7 @@ export const io = new Server(server, {
 });
 
 socketIo(io);
+
+terminus(server);
 
 export default server;
