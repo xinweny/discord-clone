@@ -34,13 +34,18 @@ const getParticipants: RequestHandler[] = [
   )
 ];
 
-const livekitWebhook: RequestHandler = tryCatch(
-  (req, res) => {
-    const event = receiver.receive(req.body, req.get('Authorization'));
-  
-    console.log(event);
-  }
-);
+const livekitWebhook: RequestHandler[] = [
+  raw({ type: 'application/webhook+json '}),
+  tryCatch(
+    (req, res) => {
+      const event = receiver.receive(req.body, req.get('Authorization'));
+
+      res.status(200).end();
+
+      console.log(event);
+    }
+  )
+];
 
 export const webRtcController = {
   generateLivekitToken,

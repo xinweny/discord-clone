@@ -8,4 +8,6 @@ webRtcRouter.get('/:roomId/token', webRtcController.generateLivekitToken);
 
 webRtcRouter.get('/:roomId/participants', webRtcController.getParticipants);
 
+webRtcRouter.post('/webhook', webRtcController.livekitWebhook);
+
 export { webRtcRouter };
