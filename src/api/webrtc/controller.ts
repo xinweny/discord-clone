@@ -1,4 +1,6 @@
-import { RequestHandler } from 'express';
+import { RequestHandler, raw } from 'express';
+
+import { receiver } from '@config/livekit';
 
 import { tryCatch } from '@helpers/tryCatch';
 import { authenticate } from '@middleware/authenticate';
@@ -32,7 +34,16 @@ const getParticipants: RequestHandler[] = [
   )
 ];
 
+const livekitWebhook: RequestHandler = tryCatch(
+  (req, res) => {
+    const event = receiver.receive(req.body, req.get('Authorization'));
+  
+    console.log(event);
+  }
+);
+
 export const webRtcController = {
   generateLivekitToken,
   getParticipants,
+  livekitWebhook,
 };

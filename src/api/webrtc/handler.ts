@@ -5,7 +5,9 @@ import { io } from '@app/server';
 import { livekitClient } from '@config/livekit';
 
 export const webRtcHandler = async (socket: Socket) => {
-  socket.on('participants:get', async (roomId: string) => {
+  socket.on('participants:get', async ({
+    roomId,
+  }) => {
     try {
       const participants = await livekitClient.listParticipants(roomId);
   

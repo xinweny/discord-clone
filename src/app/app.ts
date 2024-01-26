@@ -11,6 +11,8 @@ import { apiRateLimiter } from '@config/rateLimit';
 
 import { errorHandler } from '@middleware/errorHandler';
 
+import { webRtcController } from '@api/webrtc/controller';
+
 import { apiRouter } from '@api/router';
 
 const app = express();
@@ -29,6 +31,10 @@ app.use(apiRateLimiter);
 
 // ROUTES
 app.use('/api/v1', apiRouter);
+
+// WEBHOOKS
+app.use(express.raw({type: ' application/webhook+json '}));
+app.post('/webhook-endpoint', webRtcController.livekitWebhook);
 
 // ERROR HANDLING
 app.use('*', (req, res) => res.status(404).json({ message: 'Resource not found.' }));
