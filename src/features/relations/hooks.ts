@@ -6,8 +6,6 @@ import {
   RelationStatus,
 } from './types';
 
-import { useGetUserStatusesQuery } from '@features/statuses/api';
-
 const RELATION_DICT: {
   [key in ContactsTabs]: string;
 } = {
@@ -58,20 +56,3 @@ export const useSearchContacts = (contacts: RelationData[], query: string) => {
 
   return filteredContacts;
 };
-
-export const useFriends = (relations: RelationData[] | undefined) => {
-  const [friends, setFriends] = useState<RelationData[]>([]);
-
-  const { data: statuses } = useGetUserStatusesQuery(
-    friends.map(friend => friend.userId),
-    { skip: friends.length === 0 }
-  );
-
-  useEffect(() => {
-    if (!relations || relations.length === 0) return;
-
-    setFriends(relations.filter(relation => relation.status === RelationStatus.FRIENDS));
-  }, [relations]);
-
-  return { friends, statuses };
-}

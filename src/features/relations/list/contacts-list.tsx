@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 
 import { ContactsTabs } from '../types';
 
-import { useContacts, useFriends, useSearchContacts } from '../hooks';
+import { useSocketRoomJoin } from '@services/websocket';
+
+import { useContacts, useSearchContacts } from '../hooks';
 import { useGetUserData } from '@features/auth/hooks';
 
 import { NoContactsMessage } from './no-contacts-message';
 import { ContactCard } from './contact-card';
 
 import { useGetRelationsQuery } from '../api';
+import { useGetFriendStatusesQuery } from '@features/statuses/api';
 
 import styles from './contacts-list.module.scss';
 
@@ -19,14 +22,17 @@ type ContactsListProps = {
 
 export function ContactsList({ query, activeTab }: ContactsListProps) {
   const { user } = useGetUserData();
+  const userId = user.data!.id;
 
   const [numContacts, setNumContacts] = useState<number>(0);
 
-  const { data: relations } = useGetRelationsQuery(user.data!.id);
+  const { data: relations } = useGetRelationsQuery(userId);
+  const { data: statuses } = useGetFriendStatusesQuery(userId);
+
+  useSocketRoomJoin(statuses ? Object.keys(statuses) : []);
 
   const contacts = useContacts(relations, activeTab);
   const filteredContacts = useSearchContacts(contacts, query);
-  const { statuses } = useFriends(contacts);
 
   useEffect(() => {
     setNumContacts(activeTab === ContactsTabs.ONLINE

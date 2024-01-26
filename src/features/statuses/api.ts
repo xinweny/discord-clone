@@ -35,16 +35,17 @@ const statusApi = api.injectEndpoints({
           );
         },
       }),
-      getUserStatuses: build.query<UserStatusesData, string[]>({
-        query: (userIds) => ({
-          url: '/statuses/users',
+      getFriendStatuses: build.query<UserStatusesData, string>({
+        query: (userId) => ({
+          url: `/statuses/users/${userId}/friends`,
           method: 'get',
-          params: { userIds },
         }),
         onCacheEntryAdded: async (
-          userIds,
+          userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
+          const userIds = Object.keys((await cacheDataLoaded).data);
+
           const events = {
             [StatusEvent.Get]: ({ status, userId: uid }: GetStatusEventPayload) => {
               if (!userIds.includes(uid)) return;
@@ -60,9 +61,35 @@ const statusApi = api.injectEndpoints({
           setupSocketEventListeners(
             events,
             { cacheDataLoaded, cacheEntryRemoved },
-            userIds.map(id => `user_status#${id}`)
           );
         },
+        providesTags: (...[, , userId]) => [{ type: 'Relations', id: userId }],
+      }),
+      getServerMemberStatuses: build.query<UserStatusesData, string>({
+        query: (serverId) => ({
+          url: `/statuses/servers/${serverId}/members`,
+          method: 'get',
+        }),
+        onCacheEntryAdded: async (
+          serverId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [StatusEvent.Get]: ({ status, userId }: GetStatusEventPayload) => {
+              updateCachedData((draft) => {
+                if (Object.keys(draft).includes(userId)) draft[userId] = status;
+
+                return draft;
+              });
+            },
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
+        providesTags: (...[, , serverId]) => [{ type: 'ServerMembers', id: serverId }],
       }),
     };
   }
@@ -72,5 +99,6 @@ export default statusApi;
 
 export const {
   useGetUserStatusQuery,
-  useGetUserStatusesQuery,
+  useGetFriendStatusesQuery,
+  useGetServerMemberStatusesQuery,
 } = statusApi;

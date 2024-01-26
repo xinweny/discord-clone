@@ -9,9 +9,6 @@ import type {
   GetPublicServersQuery,
 } from './types';
 import type { ApiPaginationData } from '@types';
-import { MemberStatusEvent } from '@features/members/types';
-
-import { emitEvents } from '@services/websocket';
 
 import { signAndUpload } from '@services/cloudinary';
 
@@ -87,24 +84,6 @@ const serverApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: ['JoinedServers'],
-        onQueryStarted: async (userId, { queryFulfilled }) => {
-          try {
-            const { data: servers } = await queryFulfilled;
-
-            const serverIds = servers.map(server => server._id);
-
-            // Notify online status for all servers the user has joined
-            emitEvents({
-              [MemberStatusEvent.Update]: {
-                userId,
-                status: true,
-                serverIds,
-              },
-            });
-          } catch (err) {
-            console.log(err);
-          }
-        },
       }),
       createServer: build.mutation<ServerData, CreateServerFields>({
         query: ({ name, file }) => ({

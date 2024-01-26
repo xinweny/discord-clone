@@ -5,12 +5,12 @@ import type { ServerMemberMainData } from '../types';
 import { useStateContext } from '@context';
 import { useServerContext } from '@features/servers/context';
 
+import { useSocketRoomJoin } from '@services/websocket';
+
 import { ServerMemberCard } from './server-member-card';
 
-import {
-  useGetServerMembersQuery,
-  useGetServerMemberStatusesQuery,
-} from '../api';
+import { useGetServerMembersQuery } from '../api';
+import { useGetServerMemberStatusesQuery } from '@features/statuses/api';
 
 import styles from './server-members-panel.module.scss';
 
@@ -22,9 +22,10 @@ export function ServerMembersPanel() {
   const server = useServerContext()!;
   const { _id: serverId, ownerId } = server;
 
-
   const { data: members, isSuccess } = useGetServerMembersQuery(serverId!);
   const { data: statuses } = useGetServerMemberStatusesQuery(serverId!);
+
+  useSocketRoomJoin(members ? members.map(member => member.userId) : []);
 
   useEffect(() => {
     if (isSuccess) setOffline(members);
