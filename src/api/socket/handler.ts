@@ -12,12 +12,4 @@ export const roomHandler = async (socket: Socket) => {
       socket.leave(roomName);
     }
   });
-
-  socket.on('refresh', async ({
-    oldRooms,
-    newRooms
-  }) => {
-    await socket.leave(oldRooms);
-    await socket.join(newRooms);
-  });
 };
