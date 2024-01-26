@@ -4,7 +4,8 @@ import env from '@config/env';
 
 import { statusHandler } from './statuses/handler';
 import { messageHandler } from './messages/handler';
-import { webRtcHandler, roomHandler } from './webrtc/handler';
+import { webRtcHandler } from './webrtc/handler';
+import { roomHandler } from './socket/handler';
 import { notificationHandler } from './users/notifications/handler';
 import { dmHandler } from './dms/handler';
 import { reactionHandler } from './reactions/handler';
