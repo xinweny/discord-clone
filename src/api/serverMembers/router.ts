@@ -8,8 +8,6 @@ const serverMemberRouter = Router({ mergeParams: true });
 
 serverMemberRouter.get('/', serverMemberController.getServerMembers);
 
-serverMemberRouter.get('/statuses', serverMemberController.getMemberStatuses);
-
 serverMemberRouter.post('/', serverMemberController.joinServer);
 
 serverMemberRouter.use('/:memberId/roles', serverMemberRoleRouter);

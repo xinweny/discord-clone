@@ -94,24 +94,10 @@ const leaveServer: RequestHandler[] = [
   )
 ];
 
-const getMemberStatuses: RequestHandler[] = [
-  authenticate,
-  tryCatch(
-    async (req, res) => {
-      const { serverId } = req.params;
-
-      const statuses = await serverMemberService.getStatuses(serverId);
-
-      res.json({ data: statuses });
-    }
-  )
-]
-
 export const serverMemberController = {
   getServerMember,
   getServerMembers,
   joinServer,
   leaveServer,
   editServerProfile,
-  getMemberStatuses,
 };

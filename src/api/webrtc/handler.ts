@@ -20,12 +20,16 @@ export const roomHandler = async (socket: Socket) => {
 
 export const webRtcHandler = async (socket: Socket) => {
   socket.on('participants:get', async (roomId: string) => {
-    const participants = await livekitClient.listParticipants(roomId);
+    try {
+      const participants = await livekitClient.listParticipants(roomId);
   
-    io.to(roomId)
-      .emit('participants:get', {
-        roomId,
-        participants,
-      });
+      io.to(roomId)
+        .emit('participants:get', {
+          roomId,
+          participants,
+        });
+    } catch {
+      return;
+    }
   });
 };

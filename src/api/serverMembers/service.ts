@@ -117,22 +117,6 @@ const checkMembership = async (serverId: Types.ObjectId | string, userId: Types.
   return member;
 };
 
-const getStatuses = async (serverId: string) => {
-  const members = await serverMemberService.getMany({ serverId }, 'userId', false);
-
-  const statuses: { [key: string]: boolean } = {};
-
-  const userIds = members.map(member => member.userId.toString());
-
-  const res = await redisService.getMany(userIds.map(id => `${id}_SOCKET`));
-
-  for (const [index, id] of userIds.entries()) {
-    statuses[id] = !!res[index];
-  }
-
-  return statuses;
-}
-
 export const serverMemberService = {
   getById,
   getOne,
@@ -141,5 +125,4 @@ export const serverMemberService = {
   update,
   remove,
   checkMembership,
-  getStatuses,
 };
