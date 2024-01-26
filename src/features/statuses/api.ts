@@ -5,6 +5,7 @@ import { setupSocketEventListeners } from '@services/websocket';
 import {
   type GetStatusEventPayload,
   StatusEvent,
+  UserStatusesData,
 } from './types';
 
 const statusApi = api.injectEndpoints({
@@ -12,7 +13,7 @@ const statusApi = api.injectEndpoints({
     return {
       getUserStatus: build.query<boolean, string>({
         query: (userId) => ({
-          url: `/users/${userId}/status`,
+          url: `/statuses/users/${userId}`,
           method: 'get',
         }),
         onCacheEntryAdded: async (
@@ -34,6 +35,35 @@ const statusApi = api.injectEndpoints({
           );
         },
       }),
+      getUserStatuses: build.query<UserStatusesData, string[]>({
+        query: (userIds) => ({
+          url: '/statuses/users',
+          method: 'get',
+          params: { userIds },
+        }),
+        onCacheEntryAdded: async (
+          userIds,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
+        ) => {
+          const events = {
+            [StatusEvent.Get]: ({ status, userId: uid }: GetStatusEventPayload) => {
+              if (!userIds.includes(uid)) return;
+
+              updateCachedData(draft => {
+                draft[uid] = status;
+
+                return draft;
+              });
+            },
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+            userIds.map(id => `user_status#${id}`)
+          );
+        },
+      }),
     };
   }
 });
@@ -42,4 +72,5 @@ export default statusApi;
 
 export const {
   useGetUserStatusQuery,
+  useGetUserStatusesQuery,
 } = statusApi;

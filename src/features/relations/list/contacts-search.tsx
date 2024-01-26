@@ -10,7 +10,8 @@ type ContactsSearchProps = {
 export function ContactsSearch({ query, setQuery }: ContactsSearchProps) {
   return (
     <div className={styles.container}>
-      <SearchInput  
+      <SearchInput
+        name="query"
         query={query}
         setQuery={setQuery}
         placeholder="Search"

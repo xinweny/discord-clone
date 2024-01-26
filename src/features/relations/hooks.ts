@@ -5,11 +5,8 @@ import {
   ContactsTabs,
   RelationStatus,
 } from './types';
-import { UserStatusesData } from '@features/statuses/types';
 
-import { useGetUserData } from '@features/auth/hooks';
-
-import { useGetRelationsQuery } from './api';
+import { useGetUserStatusesQuery } from '@features/statuses/api';
 
 const RELATION_DICT: {
   [key in ContactsTabs]: string;
@@ -20,72 +17,61 @@ const RELATION_DICT: {
   blocked: RelationStatus.BLOCKED,
 };
 
-export const useContacts = (query: string, tab: ContactsTabs) => {
-  const { user } = useGetUserData();
-
-  const relations = useGetRelationsQuery(user.data!.id);
+export const useContacts = (relations: RelationData[] | undefined, tab: ContactsTabs) => {
 
   const [contacts, setContacts] = useState<RelationData[]>([]);
-  const [statuses, setStatuses] = useState<UserStatusesData>({});
 
   useEffect(() => {
-    if (relations.isSuccess) {
-      setContacts(relations.data);
+    if (!relations || relations.length === 0) return;
 
-      const st: UserStatusesData = {};
+    const filteredContacts = relations.filter(
+      relation => relation.status.includes(RELATION_DICT[tab])
+    );
 
-      const friendContacts = relations.data.filter(
-        relation => relation.status === RelationStatus.FRIENDS
-      );
+    setContacts(filteredContacts);
+  }, [relations, tab]);
 
-      for (const friend of friendContacts) {
-        st[friend.user._id] = false;
-      }
+  return contacts;
+};
 
-      setStatuses(st);
+export const useSearchContacts = (contacts: RelationData[], query: string) => {
+  const [filteredContacts, setFilteredContacts] = useState<RelationData[]>([]);
+
+  useEffect(() => {
+    if (!query) {
+      setFilteredContacts(contacts);
+      return;
     }
+
+    const q = query.trim().toLowerCase();
+
+    setFilteredContacts(contacts.filter((relation) => {
+        const { username, displayName } = relation.user;
+        
+        return (
+          username.toLowerCase().includes(q) ||
+          displayName.toLowerCase().includes(q)
+        );
+      })
+    );
+  }, [query, contacts]);
+
+  return filteredContacts;
+};
+
+export const useFriends = (relations: RelationData[] | undefined) => {
+  const [friends, setFriends] = useState<RelationData[]>([]);
+
+  const { data: statuses } = useGetUserStatusesQuery(
+    friends.map(friend => friend._id),
+    { skip: friends.length === 0 }
+  );
+
+  useEffect(() => {
+    if (!relations || relations.length === 0) return;
+
+    setFriends(relations.filter(relation => relation.status === RelationStatus.FRIENDS));
   }, [relations]);
 
-  useEffect(() => {
-    if (!relations.isSuccess) return;
-
-    if (query) {
-      const q = query.trim().toLowerCase();
-
-      setContacts(relations.data.filter((relation) => {
-          const { username, displayName } = relation.user;
-          
-          return (
-            username.toLowerCase().includes(q) ||
-            displayName.toLowerCase().includes(q)
-          );
-        })
-      );
-    } else {
-      setContacts(relations.data);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    if (relations.isSuccess) {
-      const filteredContacts = relations.data.filter(
-        relation => relation.status.includes(RELATION_DICT[tab])
-      );
-
-      setContacts(filteredContacts);
-    }
-  }, [tab]);
-
-  const updateStatus = (userId: string, isOnline: boolean) => {
-    setStatuses(prevStatuses => ({
-      ...prevStatuses,
-      [userId]: isOnline,
-    }));
-  };
-
-  return {
-    contacts,
-    statuses,
-    updateStatus,
-  };
-};
+  return { friends, statuses };
+}

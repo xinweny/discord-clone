@@ -5,7 +5,6 @@ import {
   RelationData, 
   RelationStatus,
 } from '../types';
-import type { UserStatusesData } from '@features/statuses/types';
 
 import { Avatar } from '@components/ui/media';
 import { Tooltip } from '@components/ui/popups';
@@ -25,17 +24,13 @@ import CheckmarkIcon from '@assets/icons/checkmark.svg?react';
 export type ContactCardProps = {
   contact: RelationData;
   activeTab: ContactsTabs;
-  updateStatus: (userId: string, isOnline: boolean) => void;
-  hidden: boolean;
-  userStatuses: UserStatusesData
+  isOnline?: boolean;
 };
 
 export function ContactCard({
   contact,
   activeTab,
-  updateStatus,
-  hidden,
-  userStatuses,
+  isOnline,
 }: ContactCardProps) {
   const [hoverRef, isHovered] = useHover();
 
@@ -65,7 +60,7 @@ export function ContactCard({
       </Tooltip>
     );
 
-    const friendStatus = customStatus || (userStatuses[userId] ? 'Online' : 'Offline');
+    const friendStatus = customStatus || (isOnline ? 'Online' : 'Offline');
 
     switch (tab) {
       case ContactsTabs.ONLINE: return formatProps(
@@ -105,7 +100,7 @@ export function ContactCard({
   return (
     <div
       ref={hoverRef}
-      hidden={hidden}
+      hidden={activeTab === ContactsTabs.ONLINE ? false : !isOnline}
       className={styles.item}
     >
       <div className={styles.userInfo}>
@@ -114,10 +109,7 @@ export function ContactCard({
           notification={
             (activeTab === ContactsTabs.ONLINE) ||
             (activeTab === ContactsTabs.ALL)
-              ? <UserStatusIcon
-                userId={userId}
-                updateStatus={updateStatus}
-              />
+              ? <UserStatusIcon userId={userId} />
               : undefined
           }
         />
