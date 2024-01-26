@@ -1,4 +1,4 @@
-import type { Participant } from 'livekit-client';
+import type { Participant, Room, Track } from 'livekit-client';
 
 export type GetLivekitTokenFields = {
   roomId: string;

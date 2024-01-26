@@ -1,6 +1,7 @@
+import { Participant } from 'livekit-client';
+
 import api from '@services/api';
 
-import { Participant } from 'livekit-client';
 import {
   type GetLivekitTokenFields,
   ParticipantsEvent,
