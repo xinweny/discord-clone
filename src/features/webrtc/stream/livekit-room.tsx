@@ -29,6 +29,8 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     token,
     serverUrl: env.VITE_WS_URL,
     connect: isOnCall,
+    audio: !isMuted,
+    video: initVideo,
     onConnected: () => {
       socket.emit(ParticipantsEvent.Get, roomId);
       new Audio(connectAudio).play();
@@ -38,8 +40,6 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
       socket.emit(ParticipantsEvent.Get, roomId);
       new Audio(disconnectAudio).play();
     },
-    audio: !isMuted,
-    video: initVideo,
   });
 
   useRoomEventHandlers(room);
