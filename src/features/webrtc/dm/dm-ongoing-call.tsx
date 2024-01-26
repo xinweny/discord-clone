@@ -1,11 +1,13 @@
+import { Participant } from 'livekit-client';
+
 import { OngoingCallParticipantLoop, OngoingCallWrapper } from '../get';
 
+import { CallResizerWrapper } from './call-resizer-wrapper';
 import { JoinOngoingCallControls } from './join-ongoing-call-controls';
-
-import { useGetParticipantsQuery } from '../api';
 
 type DmOngoingCallProps = {
   header: React.ReactNode;
+  participants: Participant[];
   roomId: string;
   roomName: string;
   isGroup: boolean;
@@ -13,25 +15,26 @@ type DmOngoingCallProps = {
 
 export function DmOngoingCall({
   header,
+  participants,
   roomId,
   roomName,
   isGroup,
 }: DmOngoingCallProps) {
-  const { data: participants } = useGetParticipantsQuery(roomId);
-
   return (
-    <OngoingCallWrapper
-      participants={participants}
-      header={header}
-      controls={<JoinOngoingCallControls
-        roomId={roomId}
-        roomName={roomName}
-      />}
-    >
-      <OngoingCallParticipantLoop
+    <CallResizerWrapper style={{ flexGrow: 1 }}>
+      <OngoingCallWrapper
         participants={participants}
-        isPrivate={!isGroup}
-      />
-    </OngoingCallWrapper>
+        header={header}
+        controls={<JoinOngoingCallControls
+          roomId={roomId}
+          roomName={roomName}
+        />}
+      >
+        <OngoingCallParticipantLoop
+          participants={participants}
+          isPrivate={!isGroup}
+        />
+      </OngoingCallWrapper>
+    </CallResizerWrapper>
   );
 }

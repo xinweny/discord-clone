@@ -6,10 +6,14 @@ import styles from './call-resizer-wrapper.module.scss';
 
 type CallResizerWrapperProps = {
   children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
 export function CallResizerWrapper({
   children,
+  className,
+  style,
 }: CallResizerWrapperProps) {
   return (
     <ResizableBox
@@ -22,8 +26,9 @@ export function CallResizerWrapper({
       handle={(handleAxis, ref) => <ResizableHandle
         innerRef={ref}
         handleAxis={handleAxis}
-        className={styles.handle}
+        className={`${styles.handle} ${className || ''}`}
       />}
+      style={style}
     >
       {children}
     </ResizableBox>

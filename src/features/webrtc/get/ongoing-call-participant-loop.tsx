@@ -21,7 +21,9 @@ export function OngoingCallParticipantLoop({
   if (!hasOngoingCall) return null;
 
   return (
-    <div className={`${styles.tiles} ${className || ''}`}>
+    <div
+      className={`${styles.tiles} ${className || ''} ${isPrivate ? styles.private : ''}`}
+    >
       {participants.map(participant => isPrivate
         ? <PrivateOngoingCallParticipantCard
           key={participant.identity}

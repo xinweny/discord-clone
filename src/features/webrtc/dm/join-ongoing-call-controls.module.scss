@@ -1,0 +1,27 @@
+@use '@styles/colors';
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding-bottom: 16px;
+
+  button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: colors.$white;
+    background-color: colors.$button-positive-bg;
+
+    &:hover {
+      background-color: colors.$button-positive-active;
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}

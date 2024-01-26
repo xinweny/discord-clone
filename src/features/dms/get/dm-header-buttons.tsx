@@ -58,10 +58,7 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
             roomId={dm._id}
             roomName={name}
           >
-            {hasOngoingCall
-              ? <img src="" alt="Join Call" />
-              : <VoiceCallIcon />
-            }
+            <VoiceCallIcon />
           </ConnectToRoomButton>
         </Tooltip>
         <Tooltip
@@ -73,10 +70,7 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
             roomName={name}
             withVideo
           >
-            {hasOngoingCall
-              ? <img src="" alt="Join Call with Video" />
-              : <VideoCallIcon />
-            }
+            <VideoCallIcon />
           </ConnectToRoomButton>
         </Tooltip>
       </>

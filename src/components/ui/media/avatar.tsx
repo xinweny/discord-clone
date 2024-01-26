@@ -10,13 +10,17 @@ type AvatarProps = {
   notification?: React.ReactNode;
   placeholder?: string;
   className?: string;
+  size?: number;
 };
 
 export function Avatar({
-  src, alt, notification, placeholder, className
+  src,
+  alt,
+  notification,
+  placeholder,
+  className,
+  size = 32
 }: AvatarProps) {
-  const size = '32';
-
   const renderImg = (src: string | undefined) => {
     const className = styles.avatar;
     

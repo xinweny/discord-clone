@@ -19,7 +19,7 @@ export function PrivateOngoingCallParticipantCard({ participant }: PrivateOngoin
 
   return (
     <div className={styles.card}>
-      <Avatar src={avatarUrl} />
+      <Avatar src={avatarUrl} className={styles.avatar} />
     </div>
   );
 }
