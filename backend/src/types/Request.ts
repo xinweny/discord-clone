@@ -6,8 +6,6 @@ import { IDM } from '@api/dms/model';
 declare module 'express-serve-static-core' {
   interface Request {
     user?: IReqUser,
-    emoji?: Express.Multer.File,
-    attachments?: Express.Multer.File[],
     server?: IServer,
     member?: IServerMember,
     dm?: IDM,
