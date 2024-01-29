@@ -1,0 +1,18 @@
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+
+# Build directories
+dist
+
+# Debug log from npm
+npm-debug.log
+
+.DS_Store
+
+.env
+.env.development
+.env.production
