@@ -1,0 +1,16 @@
+@use '@styles/colors';
+
+.message {
+  font-size: 12px;
+  padding: 4px 0px;
+
+  button {
+    padding: 0px;
+    color: colors.$text-link;
+    font-size: 12px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

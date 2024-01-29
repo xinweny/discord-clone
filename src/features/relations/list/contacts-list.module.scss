@@ -1,0 +1,23 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.header {
+  margin: 16px 20px 16px 0px;
+  color: colors.$header-muted;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.list {
+  @include mixins.scroller();
+
+  flex-grow: 1;
+  margin: 4px 0px;
+}

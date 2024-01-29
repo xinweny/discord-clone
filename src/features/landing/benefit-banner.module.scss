@@ -1,0 +1,59 @@
+@use '@styles/sizes';
+@use '@styles/colors';
+
+%benefitBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 40px;
+  width: 100%;
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    max-width: sizes.$page-max-width;
+  }
+
+  h2 {
+    font-size: 56px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.left {
+  @extend %benefitBanner;
+
+  .description {
+    grid-column: 8 / 12;
+  }
+
+  img {
+    grid-column: 1 / 7;
+  }
+}
+
+.right {
+  @extend %benefitBanner;
+  flex-direction: row-reverse;
+  background-color: colors.$off-white;
+
+  .description {
+    grid-column: 1 / 5;
+  }
+
+  img {
+    grid-column: 6 / 12;
+    order: 1;
+  }
+}

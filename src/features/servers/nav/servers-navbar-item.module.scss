@@ -1,0 +1,72 @@
+@use '@styles/colors';
+
+.item {
+  width: 48px;
+  height: 48px;
+  background-color: colors.$bg-primary;
+  color: colors.$white;
+  border-radius: 24px;
+  position: relative;
+
+  &, img {
+    transition: all 0.15s ease-out;
+  }
+
+  &.active, &:hover {
+    background-color: colors.$blurple;
+    border-radius: 16px;
+
+    img {
+      border-radius: 16px;
+    }
+  }
+
+  .indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(-4px - 12px);
+    background-color: colors.$text-primary;
+    border-radius: 8px;
+    width: 8px;
+    height: 0px;
+
+    &.notification {
+      height: 8px;
+    }
+  }
+
+  &:hover {
+    .indicator {
+      height: 24px !important;
+    }
+  }
+
+  &.active {
+    .indicator {
+      height: 40px !important;
+    }
+  }
+
+  a {
+    overflow: hidden;
+  }
+
+  > div, a, button {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    overflow: hidden;
+    border-radius: 24px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  svg, svg * {
+    fill: colors.$white;
+  }
+}

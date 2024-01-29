@@ -1,0 +1,36 @@
+@use '@styles/colors';
+
+.track {
+  flex: 1 1 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-height: calc(100vh - 32px);
+  min-width: 240px;
+  max-width: calc(100% - 32px);
+  aspect-ratio: 16 / 9;
+
+  &.speaking {
+    border: 4px solid colors.$text-positive;
+  }
+
+  .info {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .videoTrack {
+    width: 100%;
+    height: 100%;
+    background-color: colors.$bg-secondary-alt;
+  }
+
+  .avatar {
+    width: min(80px, 100% - 16px);
+    height: min(80px, 100% - 16px);
+  }
+}

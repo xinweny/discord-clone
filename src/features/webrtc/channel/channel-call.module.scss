@@ -1,0 +1,9 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.container {
+  height: 100vh !important;
+  width: 100%;
+
+  @include mixins.scroller(transparent, colors.$bg-tertiary, 8px, auto);
+}

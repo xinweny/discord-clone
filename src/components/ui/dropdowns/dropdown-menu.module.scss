@@ -1,0 +1,12 @@
+@use '@styles/colors';
+
+.menu {
+  position: absolute;
+  top: 40px;
+  right: -6px;
+  background-color: colors.$bg-floating;
+  width: calc(220px - 16px);
+  padding: 6px 8px;
+  border-radius: 8px;
+  z-index: 3;
+}

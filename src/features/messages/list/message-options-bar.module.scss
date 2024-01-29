@@ -1,0 +1,48 @@
+@use '@styles/colors';
+
+.container {
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  top: -16px;
+  right: 12px;
+  background-color: colors.$bg-primary;
+  border: 1px solid colors.$bg-secondary-alt;
+  border-radius: 4px;
+
+  > button {
+    padding: 4px 6px;
+    
+    &, > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:hover {
+      background-color: colors.$bg-modifier-hover;
+
+      path {
+        fill: colors.$interactive-hover;
+      }
+    }
+
+    &.active {
+      background-color: colors.$bg-modifier-selected !important;
+      
+      path {
+        fill: colors.$white !important;
+      }
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    path {
+      fill: colors.$interactive-normal;
+    }
+  }
+}

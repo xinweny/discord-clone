@@ -1,0 +1,104 @@
+@use 'sass:math';
+@use 'sass:color';
+
+@use '@styles/functions';
+
+$saturation-factor: 1;
+
+$blue: #404EED;
+$blurple: #5865F2;
+$green: #248046;
+$yellow: #FEE75C;
+$fuchsia: #EB459E;
+$red: #ED4245;
+$white: #FFFFFF;
+$black: #000000;
+$off-white: #F6F6F6;
+$not-quite-black: #23272A;
+
+$brand-360: hsl(235 calc($saturation-factor * 86.1%) 77.5%);
+$brand-500: hsl(235 calc($saturation-factor * 85.6%) 64.7%);
+$brand-560: hsl(235 calc($saturation-factor * 51.4%) 52.4%);
+$brand-600: hsl(235 calc($saturation-factor * 46.7%) 44.1%);
+$brand-15a: functions.hslac($brand-500, 0.15);
+
+$primary-130: hsl(220 calc($saturation-factor * 13%) 95.5%);
+$primary-230: hsl(10 calc($saturation-factor * 9.1%) 87.1%);
+$primary-300: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
+$primary-330: hsl(215 calc($saturation-factor * 8.8%) 73.3%);
+$primary-360: hsl(214 calc($saturation-factor * 8.1%) 61.2%);
+$primary-400: hsl(223 calc($saturation-factor * 5.8%) 52.9%);
+$primary-430: hsl(229 calc($saturation-factor * 4.8%) 44.9%);
+$primary-500: hsl(228 calc($saturation-factor * 6%) 32.5%);
+$primary-560: hsl(225 calc($saturation-factor * 6.7%) 23.5%);
+$primary-600: hsl(223 calc($saturation-factor * 6.7%) 20.6%);
+$primary-630: hsl(220 calc($saturation-factor * 6.5%) 18%);
+$primary-660: hsl(228 calc($saturation-factor * 6.7%) 14.7%);
+$primary-700: hsl(225 calc($saturation-factor * 6.3%) 12.5%);
+$primary-800: hsl(220 calc($saturation-factor * 8.1%) 7.3%);
+$primary-860: hsl(240 calc($saturation-factor * 7.7%) 2.5%);
+$primary-900: hsl(0 calc($saturation-factor * 0%) 0.8%);
+
+$blue-345: hsl(200 calc($saturation-factor * 100%) 49.4%);
+
+$yellow-300: hsl(40 calc($saturation-factor * 86.4%) 56.9%);
+
+$red-345: hsl(358 calc($saturation-factor * 92.9%) 72.4%);
+$red-400: hsl(359 calc($saturation-factor * 87.3%) 59.8%);
+$red-430: hsl(358 calc($saturation-factor * 68.8%) 53.5%);
+$red-530: hsl(359 calc($saturation-factor * 63.4%) 34.3%);
+
+$green-330: hsl(146 calc($saturation-factor * 63.1%) 47.8%);
+$green-360: hsl(145 calc($saturation-factor * 65%) 39.2%);
+$green-430: hsl(142 calc($saturation-factor * 56.1%) 32.2%);
+$green-530: hsl(140 calc($saturation-factor * 60.7%) 21%);
+
+$bg-primary: $primary-600;
+$bg-secondary: $primary-630;
+$bg-secondary-alt: $primary-660;
+$bg-tertiary: $primary-700;
+
+$bg-modal: rgba(0, 0, 0, 0.85);
+$bg-floating: $primary-800;
+$bg-textarea: $primary-560;
+
+$bg-modifier-active: functions.hslac($primary-500, 0.48);
+$bg-modifier-hover: functions.hslac($primary-500, 0.3);
+$bg-modifier-selected: functions.hslac($primary-500, 0.6);
+$bg-modifier-accent: $bg-modifier-active;
+$bg-modifier-darken: darken($primary-600, 1%);
+
+$header-primary: $primary-130;
+$header-secondary: $primary-330;
+$header-muted: $primary-360;
+
+$text-primary: $primary-230;
+$text-secondary: $primary-330;
+$text-muted: $primary-360;
+$text-link: $blue-345;
+$text-warning: $yellow-300;
+$text-danger: $red-345;
+$text-positive: $green-330;
+
+$interactive-normal: $primary-330;
+$interactive-hover: $primary-230;
+$interactive-active: $white;
+
+$icon-primary: $primary-400;
+
+$status-danger: $red-400;
+
+$button-secondary-bg: $primary-500;
+$button-secondary-hover: $primary-430;
+$button-positive-bg: $green-430;
+$button-positive-active: $green-530;
+$button-danger-bg: $red-430;
+$button-danger-active: $red-530;
+
+$status-warning-bg: $yellow-300;
+
+$modal-footer-bg: $primary-630;
+
+$elevation-low: 0 1px 0 functions.hslac($primary-900, 0.2), 0 1.5px 0 functions.hslac($primary-860, 0.05), 0 2px 0 functions.hslac($primary-900, 0.05);
+$elevation-medium: 0 4px 4px functions.hslac($black, 0.16);
+$elevation-high: 0 8px 16px functions.hslac($black, 0.24);

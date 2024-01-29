@@ -1,0 +1,18 @@
+.page {
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  button {
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      filter: brightness(120%);
+    }
+  }
+}

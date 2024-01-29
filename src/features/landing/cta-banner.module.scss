@@ -1,0 +1,79 @@
+@use '@styles/sizes';
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$off-white;
+  width: 100vw;
+
+  > div {
+    max-width: sizes.$page-max-width;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+
+  h2, p {
+    text-align: center;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 40px 80px 40px;
+
+  img {
+    margin-top: 16px;
+  }
+}
+
+.last {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 120px;
+  padding: 0px 40px;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: auto;
+  }
+
+  h3 {
+    margin-top: 30px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  button {
+    font-weight: 500;
+    font-size: 20px;
+    padding: 16px 32px;
+    border-radius: 28px;
+    margin-top: 40px;
+    background-color: colors.$blue;
+    color: colors.$white;
+  }
+}

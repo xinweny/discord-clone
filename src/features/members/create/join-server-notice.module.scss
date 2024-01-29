@@ -1,0 +1,46 @@
+@use '@styles/colors';
+
+.notice {
+  height: 40px;
+  padding: 0px 8px;
+  background-color: colors.$brand-600;
+  color: colors.$white;
+  display: flex;
+  align-items: center;
+
+  > div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    > span {
+      font-size: 14px;
+    }
+  }
+
+  button {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid colors.$white;
+    font-size: 14px;
+    line-height: 16px;
+    color: colors.$white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      transform: rotate(-90deg);
+    }
+
+    &:hover {
+      background-color: colors.$brand-500;
+    }
+  }
+}

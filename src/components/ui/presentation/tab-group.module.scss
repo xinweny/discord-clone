@@ -1,0 +1,37 @@
+@use '@styles/colors';
+
+.group {
+  h3 {
+    color: colors.$text-muted;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 0px 6px 10px 6px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  > button {
+    padding: 6px 10px;
+    font-size: 16px;
+    color: colors.$interactive-normal;
+    font-weight: 500;
+    text-align: left;
+    border-radius: 4px;
+
+    &:hover {
+      color: colors.$interactive-hover;
+      background-color: colors.$bg-modifier-hover;
+    }
+  }
+}
+
+.separator {
+  margin: 8px 10px;
+}

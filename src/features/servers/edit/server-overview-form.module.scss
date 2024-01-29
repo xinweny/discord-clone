@@ -1,0 +1,9 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.separator {
+  margin: 40px 0px;
+}

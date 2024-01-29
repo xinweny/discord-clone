@@ -1,0 +1,10 @@
+.container {
+  margin: 2px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  > div {
+    border-radius: 8px;
+  }
+}

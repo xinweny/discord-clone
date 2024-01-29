@@ -1,0 +1,68 @@
+@use '@styles/colors';
+
+.header {
+  display: grid;
+  align-items: center;
+
+  grid-template-columns: auto 1fr auto;
+  padding: 8px;
+  width: 100%;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+      color: colors.$white;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    svg {
+      margin-left: 8px;
+    }
+
+    g > path:first-child {
+      fill: colors.$icon-primary;
+    }
+  }
+
+  > div:last-child {
+    path {
+      fill: colors.$interactive-normal;
+    }
+
+    &:hover {
+      path {
+        fill: colors.$interactive-hover;
+      }
+    }
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  nav {
+    button {
+      &.greenButton {
+        background-color: colors.$green;
+        color: colors.$white;
+    
+        &.active {
+          color: colors.$green;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  margin: 0px 8px;
+  background-color: colors.$bg-modifier-accent;
+}

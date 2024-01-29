@@ -1,0 +1,100 @@
+@use '@styles/colors';
+
+.card {
+  width: 340px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: colors.$bg-secondary-alt;
+
+  .banner {
+    position: relative;
+    height: 60px;
+
+    > button {
+      top: 12px;
+      left: 16px;
+
+      > div {
+        border: 6px solid colors.$bg-secondary-alt;
+        background-color: colors.$bg-secondary-alt;
+      }
+    }
+  }
+
+  .content {
+    margin: 16px;
+    margin-top: 54px;
+    border-radius: 8px;
+    background-color: colors.$bg-floating;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+
+    h1, h3 {
+      color: colors.$header-primary;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+
+    span, p {
+      color: colors.$text-primary;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    p {
+      width: inherit;
+      word-break: break-all;
+      overflow-wrap: break-word;
+    }
+
+    .separator {
+      margin-top: 8px;
+      margin-bottom: 4px;
+      border-top: 1px solid colors.$bg-modifier-accent;
+    }
+
+    .section {
+      padding-top: 12px;
+
+      h3 {
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+    }
+
+    .joinDates {
+      display: flex;
+      align-items: center;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+
+      .serverIcon {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+        border-radius: 16px;
+        background-color: colors.$bg-tertiary;
+        
+        p {
+          font-weight: normal;
+          text-align: center;
+          font-size: 8px;
+        }
+      }
+
+      .divider {
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: colors.$bg-modifier-accent;
+        margin: 0px 8px;
+      }
+    }
+  }
+}

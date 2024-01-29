@@ -1,0 +1,19 @@
+@use '@styles/colors';
+
+.list {
+  display: flex;
+
+  .addButton {
+    padding: 4px 5px;
+    margin: 0px 4px 4px 0px;
+    line-height: 0;
+    background-color: colors.$bg-secondary-alt;
+    border-radius: 4px;
+    color: colors.$white;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

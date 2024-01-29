@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+
+  > *:first-child {
+    width: 24px;
+    height: 24px;
+    margin: 0px 12px 0px 8px;
+  }
+
+  .displayName {
+    color: colors.$header-primary;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}

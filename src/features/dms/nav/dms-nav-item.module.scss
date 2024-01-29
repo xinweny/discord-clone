@@ -1,0 +1,33 @@
+@use '@styles/colors';
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  border-radius: 4px;
+  height: 42px;
+  color: colors.$text-muted;
+  gap: 16px;
+
+  .icon {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &:hover {
+    color: colors.$text-primary;
+    background-color: colors.$bg-modifier-hover;
+  }
+
+  &.active {
+    color: colors.$white;
+    background-color: colors.$bg-modifier-selected;
+  }
+}

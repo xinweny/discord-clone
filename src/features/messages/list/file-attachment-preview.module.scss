@@ -1,0 +1,39 @@
+@use '@styles/colors';
+
+.card {
+  align-self: start;
+  padding: 16px;
+  background-color: colors.$bg-secondary;
+  border: 1px solid colors.$bg-secondary-alt;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  width: 360px;
+
+  svg {
+    width: auto;
+    height: 40px;
+  }
+
+  .fileInfo {
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .filename {
+      color: colors.$text-link;
+      font-size: 16px;
+      text-overflow: ellipsis;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    > p:last-child {
+      color: colors.$text-muted;
+      font-size: 12px;
+    }
+  }
+}

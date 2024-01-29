@@ -1,0 +1,11 @@
+.tiles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.private {
+  margin-bottom: 24px;
+}

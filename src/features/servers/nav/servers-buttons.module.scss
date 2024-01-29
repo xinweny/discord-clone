@@ -1,0 +1,27 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg, svg * {
+      fill: colors.$green;
+      stroke: colors.$green;
+    }
+  
+    &.active, &:hover {
+      background-color: colors.$green;
+  
+      svg, svg * {
+        fill: colors.$white;
+        stroke: colors.$white;
+      }
+    }
+  }
+}

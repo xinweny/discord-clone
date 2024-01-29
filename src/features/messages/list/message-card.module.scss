@@ -1,0 +1,39 @@
+@use '@styles/colors';
+
+.card {
+  position: relative;
+  display: flex;
+  color: colors.$text-primary;
+  line-height: 1.35rem;
+
+  &:hover {
+    background-color: colors.$bg-modifier-darken;
+  }
+
+  &.headMessage {
+    margin-top: 18px;
+  }
+}
+
+.avatar {
+  width: 72px;
+  display: flex;
+  justify-content: center;
+
+  > svg {
+    margin-top: 2px;
+    width: 40px;
+    height: 40px;
+  }
+
+  span {
+    margin-top: 2px;
+    color: colors.$text-muted;
+    font-size: 10px;
+    font-weight: 500;
+  }
+}
+
+.content {
+  flex-grow: 1;
+}

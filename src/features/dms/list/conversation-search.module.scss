@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  border-bottom: 1px solid colors.$bg-tertiary;
+  padding: 0px 10px;
+  height: 48px;
+
+  > div {
+    flex: 1;
+  }
+
+  input {
+    padding: 2px 6px;
+  }
+}

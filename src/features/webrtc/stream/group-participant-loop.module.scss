@@ -1,0 +1,12 @@
+.loop {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  audio {
+    display: none;
+  }
+}

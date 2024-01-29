@@ -1,0 +1,15 @@
+@use '@styles/colors';
+
+.message {
+  color: colors.$text-primary;
+  font-size: 14px;
+  margin-top: 8px;
+
+  &.error {
+    color: colors.$text-danger;
+  }
+
+  &.validated {
+    color: colors.$text-positive;
+  }
+}

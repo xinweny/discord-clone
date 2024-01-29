@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@app": ["app/index.ts"],
+      "@app/*": ["app/*"],
+      "@config": ["config/index.ts"],
+      "@services/*": ["services/*"],
+      "@types": ["types/index.ts"],
+      "@features/*": ["features/*"],
+      "@components/*": ["components/*"],
+      "@hooks": ["hooks/index.ts"],
+      "@middlewares": ["middlewares/index.ts"],
+      "@pages": ["pages/index.ts"],
+      "@utils": ["utils/index.ts"],
+      "@assets": ["assets/*"],
+      "@context": ["context/index.ts"],
+    }
+  }
+}

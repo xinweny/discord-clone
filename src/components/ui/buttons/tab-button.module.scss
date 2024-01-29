@@ -1,0 +1,20 @@
+@use '@styles/colors';
+
+.button {
+  color: colors.$text-muted;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 16px;
+  margin: 0px 8px;
+  font-weight: 500;
+
+  &:hover {
+    color: colors.$text-primary;
+    background-color: colors.$bg-modifier-hover;
+  }
+
+  &.active {
+    color: colors.$white;
+    background-color: colors.$bg-modifier-selected;
+  }
+}

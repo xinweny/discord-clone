@@ -1,0 +1,26 @@
+@use '@styles/colors';
+
+.button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  background-color: colors.$bg-secondary;
+  color: colors.$interactive-normal;
+
+  &.hovered {
+    background-color: colors.$bg-tertiary;
+  }
+
+  &:hover {
+    color: colors.$white !important;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transform: rotate(90deg);
+  }
+}

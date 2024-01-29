@@ -1,0 +1,104 @@
+@use '@styles/colors';
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 8px;
+  border-radius: 4px;
+  margin-right: 16px;
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+  
+    > svg {
+      margin-right: 12px;
+    }
+
+    > div > p {
+      margin-top: 4px;
+      color: colors.$text-muted;
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+
+    & .buttons > * {
+      background-color: colors.$bg-tertiary;
+    }
+  }
+
+  &:after {
+    content: "";
+    background: colors.$bg-modifier-hover;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(100% - 8px);
+    height: 1px;
+    transform: translateX(-50%);
+  }
+}
+
+.userNames {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+
+  > p:first-child {
+    color: colors.$white;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .username {
+    font-size: 14px;
+    color: colors.$text-muted;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+
+  > * {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background-color: colors.$bg-secondary-alt;
+  }
+
+  button {
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      svg {
+        fill: colors.$white;
+
+        path {
+          stroke: colors.$white;
+        }
+      }
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: colors.$text-primary;
+
+    path {
+      stroke: colors.$text-primary;
+    }
+  }
+}

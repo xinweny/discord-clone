@@ -1,0 +1,19 @@
+@use '@styles/colors';
+
+.button {
+  display: flex;
+  align-items: center;
+  color: colors.$text-primary;
+  background-color: colors.$bg-primary;
+  border-radius: 2px;
+  padding: 0px 8px;
+
+  p {
+    font-size: 14px;
+  }
+
+  svg {
+    margin-left: 4px;
+    width: 12px;
+  }
+}

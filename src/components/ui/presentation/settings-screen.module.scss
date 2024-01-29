@@ -1,0 +1,11 @@
+@use '@styles/colors';
+
+.wrapper {
+  h2 {
+    color: colors.$header-primary;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 24px;
+  }
+}

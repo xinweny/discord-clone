@@ -1,0 +1,12 @@
+@use '@styles/colors';
+
+.container {
+  h2 {
+    margin: 16px;
+    margin-right: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: colors.$header-primary;
+    line-height: 30px;
+  }
+}

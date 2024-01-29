@@ -1,0 +1,19 @@
+.layout {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.content {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+
+  > nav, main {
+    height: 100%;
+    overflow: hidden;
+  }
+}

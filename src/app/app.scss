@@ -1,0 +1,50 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+html * {
+  font-family: Whitney !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled, &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+strong em, em strong {
+  font-weight: bold;
+  font-style: italic;
+}
+
+textarea, input {
+  &:focus {
+    outline: none;
+  }
+}

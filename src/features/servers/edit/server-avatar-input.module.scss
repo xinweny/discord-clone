@@ -1,0 +1,133 @@
+@use '@styles/colors';
+@use 'sass:color';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  .input {
+    .iconWrapper {
+      position: relative;
+
+      > .icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        top: 0px;
+        right: -8px;
+        background-color: colors.$white;
+        border-radius: 28px;
+      }
+    }
+
+    .preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: colors.$elevation-high;
+
+      img {
+        min-width: 100px;
+        max-width: 100px;
+        min-height: 100px;
+        max-height: 100px;
+      }
+
+      &:hover::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: colors.$white;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        content: 'CHANGE ICON';
+        background-color: colors.$bg-tertiary;
+      }
+
+      &.hasImage:hover::after {
+        background-color: transparentize(colors.$black, 0.5);
+      }
+
+      .avatar {
+        background-color: colors.$bg-primary;
+
+        img {
+          width: 100px;
+          height: 100px;
+        }
+
+        p {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+
+  .sizeInfo {
+    margin-top: 10px;
+    color: colors.$text-muted;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      color: colors.$interactive-normal;
+      font-weight: 600;
+      font-size: 12px;
+
+      &:hover {
+        color: colors.$interactive-hover;
+      }
+    }
+
+    span {
+      font-size: 10px;
+      
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .description {
+    margin: 0px 10px;
+    
+    span {
+      color: colors.$text-secondary;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    > label > div:first-child {
+      padding: 0px 16px;
+      width: fit-content;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: 1px solid colors.$bg-modifier-accent;
+      color: colors.$white;
+      font-size: 14px;
+      font-weight: 500;
+      
+      &:hover {
+        cursor: pointer;
+        background-color: colors.$bg-modifier-accent;
+      }
+    }
+  }
+}

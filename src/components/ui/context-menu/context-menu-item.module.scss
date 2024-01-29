@@ -1,0 +1,15 @@
+@use '@styles/colors';
+
+.item {
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin: 2px 0px;
+
+  &:hover {
+    background-color: colors.$brand-560;
+
+    span {
+      color: colors.$interactive-hover;
+    }
+  }
+}

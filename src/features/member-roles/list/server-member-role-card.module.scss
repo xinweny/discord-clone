@@ -1,0 +1,40 @@
+@use '@styles/colors';
+
+.card {
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  background-color: colors.$bg-secondary-alt;
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 2px;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    font-weight: 500 !important;
+    color: colors.$text-primary !important;
+  }
+
+  .roleColor {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    margin: 0px 4px;
+
+    .button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: colors.$black;
+
+      svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}

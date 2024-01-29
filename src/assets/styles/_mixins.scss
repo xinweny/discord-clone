@@ -1,0 +1,68 @@
+@use '@styles/colors';
+
+@mixin font-face(
+  $family,
+  $name,
+  $ext,
+  $weight,
+  $style
+) {
+  font-family: $family;
+  src: url('../fonts/#{$name}.#{$ext}') format($ext);
+  font-weight: $weight;
+  font-style: $style;
+}
+
+@mixin invisible-scroller() {
+  overflow: hidden scroll;
+
+  &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    width: 0px !important;
+  }
+}
+
+@mixin hover-scroller(
+  $thumb-color: colors.$bg-tertiary
+) {
+  overflow: hidden scroll;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: transparent;
+    background-clip: padding-box;
+    border-right: 2px transparent solid;
+    border-left: 2px transparent solid;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+  }
+
+  z-index: 2;
+}
+
+@mixin scroller(
+  $bg-color: colors.$bg-secondary,
+  $thumb-color: colors.$bg-tertiary,
+  $width: 8px,
+  $overflow: scroll,
+) {
+  overflow: hidden $overflow;
+
+  &::-webkit-scrollbar {
+    background-color: $bg-color;
+    width: $width;
+    border-radius: $width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $width;
+    background-color: $thumb-color;
+  }
+}

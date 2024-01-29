@@ -1,0 +1,24 @@
+@use '@styles/colors';
+
+.container {
+  margin-top: 20px;
+
+  span, p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  span {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: colors.$text-positive;
+  }
+
+  p {
+    color: colors.$text-muted;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}

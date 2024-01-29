@@ -1,0 +1,27 @@
+@use '@styles/colors';
+
+.container {
+  > span {
+    display: block;
+    color: colors.$text-primary;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .group {
+    label {
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: colors.$header-secondary;
+    }
+  }
+
+  .separator {
+    margin: 24px 0px;
+  }
+}

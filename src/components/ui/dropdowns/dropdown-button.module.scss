@@ -1,0 +1,16 @@
+@use '@styles/colors';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+
+  path {
+    stroke: colors.$white;
+  }
+}

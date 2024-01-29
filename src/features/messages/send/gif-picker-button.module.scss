@@ -1,0 +1,13 @@
+@use '@styles/colors';
+
+.icon {  
+  path {
+    fill: colors.$interactive-normal;
+  }
+
+  &:hover {
+    path {
+      fill: colors.$interactive-hover;
+    }
+  }
+}

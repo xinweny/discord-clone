@@ -1,0 +1,11 @@
+.container {
+  margin: 16px 20px 8px 0px;
+
+  input {
+    padding: 2px 8px;
+    
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+}

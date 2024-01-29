@@ -1,0 +1,1 @@
+export * from './accept-friend-request-button';

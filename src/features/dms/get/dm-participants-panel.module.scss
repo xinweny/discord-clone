@@ -1,0 +1,8 @@
+@use '@styles/mixins';
+
+.container {
+  width: 340px;
+  height: 100%;
+
+  @include mixins.invisible-scroller();
+}

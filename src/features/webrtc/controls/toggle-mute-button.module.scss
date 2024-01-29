@@ -1,0 +1,9 @@
+@use '@styles/colors';
+
+.button {
+  &.muted {
+    svg path:last-child {
+      fill: colors.$red;
+    }
+  }
+}

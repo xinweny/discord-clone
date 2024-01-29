@@ -1,0 +1,29 @@
+@use '@styles/colors';
+
+.container {
+  position: absolute;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: colors.$bg-floating;
+  width: calc(180px - 8px - 8px);
+  
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: colors.$interactive-normal;
+  }
+
+  .danger {
+    span {
+      color: colors.$button-danger-bg;
+    }
+  
+    &:hover {
+      span {
+        color: colors.$interactive-hover;
+      }
+
+      background-color: colors.$button-danger-bg;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: colors.$bg-secondary;
+}
+
+.content {
+  @include mixins.hover-scroller();
+
+  > div {
+    padding-right: 0px;
+  }
+}

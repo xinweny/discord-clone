@@ -1,0 +1,28 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.nav {
+  min-height: 100vh;
+  overflow-y: scroll;
+  z-index: 2;
+  pointer-events: none;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  > * {
+    min-height: 100%;
+  }
+}
+
+.content {
+  z-index: 1;
+  max-height: 100vh;
+}

@@ -1,0 +1,33 @@
+@use '@styles/colors';
+
+.container {
+  border-radius: 4px;
+  background-color: colors.$bg-tertiary;
+  display: flex;
+  align-items: center;
+
+  span {
+    flex-grow: 1;
+    color: colors.$text-primary;
+    text-overflow: ellipsis;
+    padding: 10px;
+  }
+
+  button {
+    border-radius: 4px;
+    background-color: colors.$brand-500;
+    width: 72px;
+    height: 32px;
+    margin-right: 2px;
+    color: colors.$white;
+    font-weight: 500;
+
+    &:hover {
+      background-color: colors.$brand-560;
+    }
+
+    &.isCopied {
+      background-color: colors.$button-positive-active;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use '@styles/colors';
+
+.container {
+  min-height: calc(100% - (12px * 2));
+  overflow-x: visible;
+  background-color: colors.$bg-tertiary;
+  padding: 12px;
+  pointer-events: all;
+
+  .friends {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    margin: 6px auto;
+    width: 32px;
+    border-top-width: 2px;
+    background-color: colors.$bg-primary;
+  }
+}
+

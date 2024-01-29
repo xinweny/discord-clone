@@ -1,0 +1,11 @@
+@use '@styles/colors';
+
+.modal {
+  > div:last-child > button:last-child {
+    background-color: colors.$brand-500;
+
+    &:hover {
+      background-color: colors.$brand-560;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.list {
+  color: colors.$text-muted;
+  padding: 16px 0px;
+  padding-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  a, button {
+    color: colors.$text-muted;
+  }
+}
+
+.uncategorized {
+  padding: 16px 0px 16px 8px;
+}

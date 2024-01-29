@@ -1,0 +1,74 @@
+@use '@styles/colors';
+
+.wrapper {
+  border-radius: 4px;
+  padding: 8px;
+  margin: 2px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > *:first-child {
+    flex-grow: 1;
+  }
+
+  button {
+    text-align: left;
+  }
+
+  p, button {
+    font-weight: 500;
+  }
+
+  a {
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: colors.$bg-modifier-hover;
+    
+    p, button {
+      color: colors.$text-primary;
+    }
+
+    .editButton {
+      display: block;
+    }
+  }
+}
+
+.active {
+  background-color: colors.$bg-modifier-active !important;
+
+  p, button {
+    color: colors.$white;
+  }
+
+  .editButton {
+    display: block;
+  }
+}
+
+.editButton {
+  display: none;
+  
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+
+    path {
+      fill: colors.$interactive-normal;
+    }
+  }
+
+  &:hover {
+    path {
+      fill: colors.$interactive-hover;
+    }
+  }
+}

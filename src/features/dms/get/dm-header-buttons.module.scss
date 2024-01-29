@@ -1,0 +1,22 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0px 4px;
+
+  svg {
+    color: colors.$interactive-normal;
+
+    &:hover {
+      color: colors.$interactive-hover;
+    }
+  }
+}
+
+.active {
+  svg {
+    color: colors.$text-primary;
+  }
+}

@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.online {
+  circle {
+    fill: colors.$green;
+  }
+}
+
+.offline {
+  path {
+    stroke: #80848e;
+  }
+}

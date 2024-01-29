@@ -1,0 +1,56 @@
+@use '@styles/colors';
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0px;
+  margin: 0 auto;
+  max-width: 720px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+    color: colors.$white;
+    font-weight: 600;
+
+    &:hover {
+      background-color: colors.$bg-tertiary;
+    }
+  }
+
+  > button {
+    align-self: stretch;
+    width: auto;
+    height: auto;
+    padding: 0px 12px;
+    border-radius: 4px;
+  }
+
+  .list {
+    display: flex;
+    
+    button {
+      padding: 6px;
+      border-radius: 100%;
+      font-size: 16px;
+      
+      &.active {
+        background-color: colors.$blurple !important;
+      }
+
+      div {
+        min-width: 16px;
+        height: 16px;
+      }
+
+      &, div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

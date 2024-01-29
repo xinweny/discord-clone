@@ -1,0 +1,66 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.container {
+  padding: 8px;
+  padding-right: 0px;
+  height: 200px;
+  flex-grow: 1;
+
+  @include mixins.hover-scroller();
+
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 4px;
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      span {
+        text-overflow: ellipsis;
+        color: colors.$header-primary;
+        font-size: 16px;
+      }
+    }
+
+    button {
+      border-radius: 4px;
+      border: 1px solid colors.$text-positive;
+      color: colors.$white;
+      font-size: 14px;
+      font-weight: 500;
+      height: 32px;
+      width: 72px;
+    }
+    
+    &:hover {
+      background-color: colors.$bg-modifier-hover;
+
+      button {
+        border-color: colors.$button-positive-bg;
+        background-color: colors.$button-positive-bg;
+
+        &:hover {
+          border-color: colors.$button-positive-active;
+          background-color: colors.$button-positive-active;
+        }
+      }
+    }
+  }
+}
+
+.noResult {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: colors.$text-muted;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

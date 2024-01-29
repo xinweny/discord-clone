@@ -1,0 +1,22 @@
+@use '@styles/colors';
+
+.divider {
+  position: relative;
+  margin: 18px;
+  margin-bottom: 0px;
+  height: 1px;
+  background-color: colors.$bg-modifier-accent;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    color: colors.$text-muted;
+    font-weight: 600;
+    background-color: colors.$bg-primary;
+    font-size: 12px;
+    padding: 0px 4px;
+  }
+}

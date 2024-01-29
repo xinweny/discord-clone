@@ -1,0 +1,47 @@
+@use '@styles/colors';
+@use '@styles/mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$bg-modal;
+  padding: 40px 0px;
+  height: calc(100vh - 80px);
+}
+
+.modal {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: colors.$bg-primary;
+  position: relative;
+  width: 460px;
+  flex-shrink: 1;
+  max-height: 482px;
+
+  &.scroll {
+    @include mixins.scroller(transparent, colors.$bg-tertiary, 4px, auto);
+  }
+
+  > button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+
+      path {
+        stroke: colors.$text-muted;
+      }
+
+      &:hover {
+        path {
+          stroke: colors.$interactive-hover;
+        }
+      }
+    }
+  }
+}

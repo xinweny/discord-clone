@@ -1,0 +1,26 @@
+@use '@styles/colors';
+
+.card {
+  overflow: hidden;
+  position: relative;
+
+  img {
+    border-radius: 8px;
+    width: auto;
+    height: auto;
+    max-width: 550px;
+    max-height: 350px;
+  }
+
+  .label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: colors.$bg-secondary;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-weight: 600;
+    color: colors.$white;
+    user-select: none;
+  }
+}

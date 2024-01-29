@@ -1,0 +1,60 @@
+@use '@styles/colors';
+
+.quality {
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  span {
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-overflow: ellipsis;
+  }
+
+  &, &.disconnected {
+    color: colors.$text-muted;
+  }
+
+  &.connecting, &.reconnecting {
+    color: colors.$text-warning;
+  }
+
+  &.connected {
+    &.unknown {
+      color: colors.$text-muted;
+    }
+  
+    &.excellent {
+      color: colors.$text-positive;
+    }
+  
+    &.good {
+      color: colors.$text-warning;
+    }
+  
+    &.poor {
+      color: colors.$text-danger;
+    }
+  }
+}
+
+.link {
+  font-size: 12px;
+  line-height: calc(4 / 3);
+  color: colors.$header-secondary;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: colors.$header-secondary;
+  }
+}

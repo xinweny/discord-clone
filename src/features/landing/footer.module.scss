@@ -1,0 +1,30 @@
+@use '@styles/sizes';
+@use '@styles/colors';
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background-color: colors.$not-quite-black;
+  color: colors.$white;
+
+  a {
+    color: colors.$white;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-width: sizes.$page-max-width;
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}

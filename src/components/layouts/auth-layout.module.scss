@@ -1,0 +1,18 @@
+@use '@styles/colors';
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  > div {
+    padding: 32px;
+    border-radius: 4px;
+    background-color: colors.$bg-primary;
+    min-width: 416px;
+  }
+}

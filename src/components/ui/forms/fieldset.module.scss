@@ -1,0 +1,17 @@
+@use '@styles/colors';
+
+.fieldset {
+  legend {
+    font-size: 12px;
+    font-weight: 600;
+    color: colors.$header-secondary;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

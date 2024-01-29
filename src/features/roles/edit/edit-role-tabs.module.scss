@@ -1,0 +1,39 @@
+@use '@styles/colors';
+
+.tabs {
+  padding-top: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid colors.$bg-modifier-accent;
+
+  > button {
+    padding-bottom: 16px;
+    border-bottom: 2px solid transparent;
+
+    span {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: colors.$interactive-normal;
+    }
+
+    &:hover {
+      span {
+        color: colors.$interactive-hover;
+      }
+
+      border-bottom: 2px solid;
+      border-bottom-color: colors.$brand-560;
+    }
+
+    &.active {
+      border-bottom: 2px solid !important;
+      border-bottom-color: colors.$brand-360 !important;
+
+      span {
+        color: colors.$interactive-active !important;
+      }
+    }
+  }
+}

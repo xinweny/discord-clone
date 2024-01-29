@@ -1,0 +1,47 @@
+@use '@styles/colors';
+
+.container {
+  height: 100vh !important;
+}
+
+.tiles {
+  margin-bottom: 20px;
+}
+
+.noCall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    color: colors.$header-primary;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 1.25;
+    margin: 8px 0px;
+  }
+
+  span {
+    font-size: 14px;
+    color: colors.$text-primary;
+  }
+
+  button {
+    margin-top: 24px;
+    color: colors.$white;
+    background-color: colors.$button-positive-bg;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    height: 38px;
+    width: 96px;
+
+    &:hover {
+      background-color: colors.$button-positive-active;
+    }
+  }
+}

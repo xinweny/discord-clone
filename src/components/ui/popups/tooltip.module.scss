@@ -1,0 +1,72 @@
+@use '@styles/colors';
+
+.container {
+  position: absolute;
+  pointer-events: none !important;
+}
+
+$arrow-offset: calc(-1 * var(--arrow-width));
+$arrow-offset-double: calc(2 * $arrow-offset);
+
+%arrow {
+  content: "";
+  display: block;
+  position: absolute;
+  border: var(--arrow-width) solid transparent;
+  width: 0;
+  height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tooltip {
+  position: relative;
+  background: colors.$black;
+  color: colors.$text-primary;
+  width: fit-content !important;
+  height: fit-content !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+
+  &.top:after {
+    @extend %arrow;
+
+    top: 100%;
+    left: 50%;
+    margin-left: $arrow-offset;
+    border-top-color: colors.$black;
+  }
+
+  &.left:after {
+    @extend %arrow;
+
+    top: 50%;
+    left: 100%;
+    margin-top: $arrow-offset;
+    border-left-color: colors.$black;
+  }
+
+  &.bottom:after {
+    @extend %arrow;
+
+    top: 0%;
+    left: 50%;
+    margin-left: $arrow-offset;
+    margin-top: $arrow-offset-double;
+    border-bottom-color: colors.$black;
+  }
+
+  &.right:after {
+    @extend %arrow;
+
+    top: 50%;
+    left: 0%;
+    margin-top: $arrow-offset;
+    margin-left: $arrow-offset-double;
+    border-right-color: colors.$black;
+  }
+}

@@ -1,0 +1,87 @@
+@use '@styles/colors';
+
+.container {
+  display: flex;
+
+  .description {
+    span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 20px;
+      color: colors.$text-secondary;
+    }
+
+    > label > div:first-child {
+      padding: 0px 16px;
+      width: fit-content;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: 1px solid colors.$bg-modifier-accent;
+      color: colors.$white;
+      font-size: 14px;
+      font-weight: 500;
+      
+      &:hover {
+        cursor: pointer;
+        background-color: colors.$bg-modifier-accent;
+      }
+    }
+  }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .iconWrapper {
+      position: relative;
+
+      > .icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        top: 8px;
+        right: 8px;
+        background-color: colors.$white;
+        border-radius: 28px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .preview {
+      width: 320px;
+      height: 180px;
+      border-radius: 4px;
+      background-color: colors.$bg-modifier-accent;
+      overflow: hidden;
+      
+      img {
+        min-width: 320px;
+        max-width: 320px;
+        min-height: 180px;
+        max-height: 320px;
+      }
+    }
+
+    > button {
+      font-size: 14px;
+      font-weight: 600;
+      color: colors.$interactive-normal;
+
+      &:hover {
+        color: colors.$interactive-hover;
+      }
+    }
+  }
+}

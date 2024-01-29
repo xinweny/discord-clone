@@ -1,0 +1,30 @@
+@use '@styles/colors';
+
+.reaction {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 8px;
+  gap: 8px;
+  height: 24px;
+
+  > *:first-child {
+    width: 16px;
+    height: 16px;
+  }
+
+  p {
+    font-weight: 600;
+    font-size: 16px;
+    color: colors.$text-primary;
+  }
+}
+
+.reactButton {
+  background-color: colors.$bg-secondary;
+}
+
+.unreactButton {
+  border: 1px solid colors.$blurple;
+  background-color: colors.$brand-15a;
+}
