@@ -38,22 +38,6 @@ const generateUrl = (filename: string, folder: string, customPublicId?: string) 
   return url;
 };
 
-const upload = async (file: Express.Multer.File, folderPath: string, url?: string) => {
-  const dataUri = formatDataUri(file.buffer, file.mimetype);
-
-  const ext = file.originalname.split('.').slice(-1)[0];
-
-  const res = await cloudinary.uploader.upload(dataUri, {
-    folder: `discord_clone/${folderPath}`,
-    use_filename: true,
-    resource_type: (ext === 'pdf') ? 'raw' : 'auto',
-    overwrite: true,
-    ...(url && { public_id: getPublicId(url, ext === 'pdf') }),
-  });
-
-  return res;
-};
-
 const deleteByUrl = async (url: string) => {
   const publicId = getPublicId(url);
   const res = await cloudinary.uploader.destroy(publicId);
@@ -85,7 +69,6 @@ const deleteByFolder = async (folderPath: string) => {
 export const cloudinaryService = {
   createSignature,
   generateUrl,
-  upload,
   deleteByUrl,
   deleteByFolder,
 };
