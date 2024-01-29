@@ -6,12 +6,12 @@
   "scripts": {
     "start": "NODE_ENV=production node dist/index.js",
     "build": "tsc && tsc-alias",
-    "dev": "NODE_ENV=development concurrently \"nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts\" \"livekit-server --dev\"",
+    "dev": "NODE_ENV=development concurrently \"nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts\" \"livekit-server --dev --config livekit.config.yaml\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xinweny/discord-clone-backend"
+    "url": "https://github.com/xinweny/discord-clone"
   },
   "author": "Xin Wen Yap",
   "license": "MIT",
