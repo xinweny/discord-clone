@@ -2,12 +2,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 import '../types/Request';
 
 import env from '@config/env';
 import '@config/db';
-import { apiRateLimiter } from '@config/rateLimit';
 
 import { errorHandler } from '@middleware/errorHandler';
 
@@ -28,7 +28,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
-app.use(apiRateLimiter);
+app.use(rateLimit({
+  windowMs: 60000,
+  max: 10000,
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
 
 // ROUTES
 app.use('/api/v1', apiRouter);
