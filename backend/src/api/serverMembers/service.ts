@@ -3,7 +3,6 @@ import { Types } from 'mongoose';
 import { keepKeys } from '@helpers/keepKeys';
 import { CustomError } from '@helpers/CustomError';
 
-import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
 import { ReadStatus } from '@api/users/notifications/model';
 import { ServerMember } from './model';
@@ -60,16 +59,11 @@ const create = async (fields: {
   const member = new ServerMember(fields);
   member.roleIds.push(server.roles[0]._id);
 
-  const { userId, serverId } = fields;
-
   await member.save();
 
-  await Promise.all([
-    Server.findByIdAndUpdate(fields.serverId, {
-      $inc: { memberCount: 1 },
-    }),
-    User.findByIdAndUpdate(userId, { $push: { serverIds: serverId } }),
-  ]);
+  await Server.findByIdAndUpdate(fields.serverId, {
+    $inc: { memberCount: 1 },
+  });
 
   return member;
 };
@@ -99,7 +93,6 @@ const remove = async (id: Types.ObjectId | string) => {
   const { userId, serverId } = serverMember;
 
   await Promise.all([
-    User.findByIdAndUpdate(userId, { $pull: { serverIds: serverId } }),
     Server.findByIdAndUpdate(serverId, {
       $inc: { memberCount: -1 },
     }),
