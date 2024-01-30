@@ -4,11 +4,12 @@ import api from '@services/api';
 
 import {
   type GetLivekitTokenFields,
-  ParticipantsEvent,
-  type GetParticipantsEventPayload,
+  LivekitWebhookEvent,
+  LivekitWebhookEventPayload,
 } from './types';
 
 import { setupSocketEventListeners } from '@services/websocket';
+import { WritableDraft } from 'immer/dist/internal.js';
 
 const webRtcApi = api.injectEndpoints({
   endpoints(build) {
@@ -32,8 +33,29 @@ const webRtcApi = api.injectEndpoints({
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
-            [ParticipantsEvent.Get]: ({ roomId: rId, participants }: GetParticipantsEventPayload) => {
-              if (rId === roomId) updateCachedData(() => participants);
+            [LivekitWebhookEvent.ParticipantJoined]: ({
+              room,
+              participant,
+            }: LivekitWebhookEventPayload) => {
+              if (!room || !participant) return;
+
+              if (room.name === roomId) updateCachedData(draft => {
+                draft.push(participant as Participant & WritableDraft<Participant>);
+
+                return draft;
+              });
+            },
+            [LivekitWebhookEvent.ParticipantLeft]: ({
+              room,
+              participant,
+            }: LivekitWebhookEventPayload) => {
+              if (!room || !participant) return;
+
+              if (room.name === roomId) updateCachedData(draft => {
+                draft = draft.filter(p => p.identity !== participant.identity) as WritableDraft<Participant[]>;
+
+                return draft;
+              });
             },
           };
 

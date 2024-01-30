@@ -1,9 +1,6 @@
-import { socket } from '@app';
-
 import { useLivekitContext } from '../hooks';
 
 import type { ModalProps } from '@types';
-import { ParticipantsEvent } from '../types';
 
 import { ConfirmationModal } from '@components/ui/modals';
 
@@ -27,7 +24,6 @@ export function ConnectToRoomConfirmationModal({
   if (!livekit || !livekit.roomData) return null;
 
   const {
-    data: { roomId },
     connectToRoom,
     notifyDisconnection,
   } = livekit;
@@ -42,7 +38,7 @@ export function ConnectToRoomConfirmationModal({
       confirmLabel="Confirm"
       onConfirm={() => {
         notifyDisconnection();
-        socket.emit(ParticipantsEvent.Get, roomId);
+
         if (newRoomId) {
           connectToRoom(newRoomId);
           new Audio(connectAudio).play();

@@ -1,4 +1,8 @@
-import type { Participant, Room, Track } from 'livekit-client';
+import type {
+  Participant,
+  Room,
+  Track
+} from 'livekit-client';
 
 export type GetLivekitTokenFields = {
   roomId: string;
@@ -34,11 +38,14 @@ export type LivekitContextData = {
   setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export enum ParticipantsEvent {
-  Get = 'participants:get',
+export enum LivekitWebhookEvent {
+  ParticipantJoined = 'participant_joined',
+  ParticipantLeft = 'participant_left',
 }
 
-export type GetParticipantsEventPayload = {
-  roomId: string;
-  participants: Participant[];
+export type LivekitWebhookEventPayload = {
+  event: string;
+  room?: Room;
+  participant?: Participant;
+  track?: Track;
 };

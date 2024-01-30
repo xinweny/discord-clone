@@ -5,7 +5,7 @@ import { socket } from '@app';
 import { useLivekitContext, useRoomEventHandlers } from '../hooks';
 
 import { env } from '@config';
-import { ParticipantsEvent } from '../types';
+
 import { CallAudio } from './call-audio';
 
 import connectAudio from '@assets/audio/connect.mp3';
@@ -19,7 +19,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
   const livekit = useLivekitContext();
 
   const {
-    data: { token, roomId, initVideo },
+    data: { token, initVideo },
     isOnCall,
     notifyDisconnection,
     isMuted,
@@ -32,16 +32,11 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
     audio: !isMuted,
     video: initVideo,
     onConnected: () => {
-      socket.emit(ParticipantsEvent.Get, {
-        roomId,
-      });
       new Audio(connectAudio).play();
     },
     onDisconnected: () => {
       notifyDisconnection();
-      socket.emit(ParticipantsEvent.Get, {
-        roomId,
-      });
+
       new Audio(disconnectAudio).play();
     },
   });
