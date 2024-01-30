@@ -25,6 +25,8 @@ app.use(helmet());
 app.use(cors({
   origin: env.CLIENT_URL,
   credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 app.use(apiRateLimiter);
 
