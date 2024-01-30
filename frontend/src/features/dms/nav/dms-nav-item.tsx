@@ -4,11 +4,17 @@ type DmNavsItemProps = {
   icon: React.ReactNode;
   children: React.ReactNode;
   isActive: boolean;
+  className?: string;
 }
 
-export function DmsNavItem({ icon, children, isActive }: DmNavsItemProps) {
+export function DmsNavItem({
+  icon,
+  children,
+  isActive,
+  className = '',
+}: DmNavsItemProps) {
   return (
-    <div className={`${styles.item} ${isActive ? styles.active : ''}`}>
+    <div className={`${className} ${styles.item} ${isActive ? styles.active : ''}`}>
       <div className={styles.icon}>
         {icon}
       </div>

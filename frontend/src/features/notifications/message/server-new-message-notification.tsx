@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { TimestampDict } from '../types';
 
+import { useHasNewMessage } from '../hooks';
+
 export type ServerNewMessageNotificationProps = {
   channelIds?: string[];
   lastTimestamps?: TimestampDict;
@@ -21,30 +23,11 @@ export function ServerNewMessageNotification({
 }: ServerNewMessageNotificationProps) {
   const [clsName, setClsName] = useState<string>(noNotifClass);
 
-  useEffect(() => {
-    if (!channelIds || !lastTimestamps || !readTimestamps) {
-      setClsName(noNotifClass);
+  const hasNewMessage = useHasNewMessage(channelIds, lastTimestamps, readTimestamps);
 
-      return;
-    } else {
-      for (const channelId of channelIds) {
-        const lastDate = lastTimestamps[channelId]
-          ? new Date(lastTimestamps[channelId]).getTime()
-          : undefined;
-    
-        if (!lastDate) continue;
-    
-        const readDate = readTimestamps[channelId]
-          ? new Date(readTimestamps[channelId]).getTime()
-          : undefined;
-    
-        if (!readDate || (lastDate > readDate)) {
-          setClsName(notifClass);
-          return;
-        }
-      }
-    }
-  }, [channelIds, lastTimestamps, readTimestamps]);
+  useEffect(() => {
+    setClsName(hasNewMessage ? notifClass : noNotifClass);
+  }, [hasNewMessage]);
 
   return (
     <div className={`${clsName} ${className || ''}`} />

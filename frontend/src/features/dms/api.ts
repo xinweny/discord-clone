@@ -41,12 +41,10 @@ const dmApi = api.injectEndpoints({
 
                 const index = draft.findIndex(dm => dm._id === dmId);
 
-                index !== -1
-                  ? draft.unshift(draft.splice(index, 1)[0])
-                  : dispatch(dmApi.endpoints.getDm.initiate({
-                    dmId,
-                    userId,
-                  }));
+                if (index === -1) dispatch(dmApi.endpoints.getDm.initiate({
+                  dmId,
+                  userId,
+                }));
 
                 return draft;
               });

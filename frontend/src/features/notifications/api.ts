@@ -15,7 +15,6 @@ import {
 import { setupSocketEventListeners } from '@services/websocket';
 
 import newMessageAudio from '@assets/audio/new-message.mp3';
-import { RoomTypes } from '@components/ui/displays';
 
 const notificationApi = api.injectEndpoints({
   endpoints(build) {
@@ -87,10 +86,10 @@ const notificationApi = api.injectEndpoints({
                 const { roomId, createdAt } = message;
                 draft[roomId] = createdAt;
 
-                new Audio(newMessageAudio).play();
-
                 return draft;
               });
+
+              new Audio(newMessageAudio).play();
             }
           };
 

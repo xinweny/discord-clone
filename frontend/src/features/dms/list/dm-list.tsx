@@ -48,6 +48,8 @@ export function DmList() {
         key={dm._id}
         dm={dm}
         userId={userId}
+        lastTimestamps={lastTimestamps}
+        readTimestamps={readStatuses}
       />)}
     </div>
   );
