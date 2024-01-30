@@ -15,6 +15,11 @@ export type TimestampDict = {
   [roomId: string]: string;
 };
 
+export type GetLastTimestampsQuery = {
+  userId: string;
+  type: 'dm' | 'channel',
+};
+
 export enum NotificationEvent {
   UpdateReadStatus = 'read_status:update',
 }

@@ -1,16 +1,17 @@
 import { Types } from 'mongoose';
 
-import { User } from '../model';
+import { ServerMember } from '@api/serverMembers/model';
 
 const getJoined = async (userId: Types.ObjectId | string) => {
-  const user = await User.findById(userId, 'serverIds')
+  const serverMembers = await ServerMember.find({ userId: new Types.ObjectId(userId) }, 'serverId')
     .populate([
-      { path: 'servers', select: 'name avatarUrl channels._id' },
+      { path: 'server', select: 'name avatarUrl channels._id' },
     ]);
 
-  if (!user) return null;
+  if (!serverMembers) return null;
 
-  return user.servers;
+  return serverMembers.map(member => member.server)
+    .filter(server => !!server);
 };
 
 export const userServersService = {

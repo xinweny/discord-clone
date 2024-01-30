@@ -11,7 +11,8 @@ import { ContactsTabs } from '@features/relations/types';
 
 import { handleServerError } from '@utils';
 
-import { useContacts } from '@features/relations/hooks';
+import { useGetUserData } from '@features/auth/hooks';
+import { useContacts, useSearchContacts } from '@features/relations/hooks';
 
 import { SubmitButton } from '@components/ui/forms';
 import { NullMessage } from '@components/ui/displays';
@@ -21,6 +22,7 @@ import { ParticipantCheckboxInput } from './participant-checkbox-input';
 import { ParticipantSearchInput } from './participant-search-input';
 import { RemoveParticipantButtons } from './remove-participant-buttons';
 
+import { useGetRelationsQuery } from '@features/relations/api';
 import { useCreateDmMutation } from '../api';
 
 import magnifyingGlass from '@assets/static/magnifying-glass.svg';
@@ -38,9 +40,11 @@ export function CreateDmForm({
 }: CreateDMFormProps) {
   const [query, setQuery] = useState<string>('');
 
-  const {
-    contacts: friends,
-  } = useContacts(query, ContactsTabs.ALL);
+  const { user } = useGetUserData();
+  const { data: relations } = useGetRelationsQuery(user.data!.id);
+
+  const friends = useContacts(relations, ContactsTabs.ALL);
+  const searchedFriends = useSearchContacts(friends, query);
 
   const navigate = useNavigate();
 
@@ -99,8 +103,8 @@ export function CreateDmForm({
           />
         </CreateDmFormHeader>
         <div className={styles.list}>
-          {friends.length > 0
-              ? friends.map((friend) => <ParticipantCheckboxInput
+          {searchedFriends.length > 0
+              ? searchedFriends.map((friend) => <ParticipantCheckboxInput
               key={friend._id}
               participant={friend.user}
               name="participantIds"

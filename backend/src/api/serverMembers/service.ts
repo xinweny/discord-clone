@@ -8,8 +8,6 @@ import { Server } from '@api/servers/model';
 import { ReadStatus } from '@api/users/notifications/model';
 import { ServerMember } from './model';
 
-import { redisService } from '@services/redis';
-
 const getById = async (id: Types.ObjectId | string) => {
   const member = await ServerMember
     .findById(id)

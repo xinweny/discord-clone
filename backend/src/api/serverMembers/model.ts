@@ -1,11 +1,15 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
 import { IRole } from '@api/servers/roles/schema';
+import { IServer } from '@api/servers/model';
+import { IUser } from '@api/users/model';
 
 export interface IServerMember extends Document {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
+  user?: IUser;
   serverId: Types.ObjectId;
+  server?: IServer;
   displayName: string;
   roleIds: Types.ObjectId[];
   bio: string;
@@ -42,6 +46,8 @@ serverMemberSchema.virtual('server', {
 serverMemberSchema.set('toJSON', { virtuals: true });
 serverMemberSchema.set('toObject', { virtuals: true });
 
+serverMemberSchema.index({ userId: 1 });
+serverMemberSchema.index({ serverId: 1 });
 serverMemberSchema.index({ userId: 1, serverId: 1 }, { unique: true });
 
 export const ServerMember = mongoose.model<IServerMember>('ServerMember', serverMemberSchema);

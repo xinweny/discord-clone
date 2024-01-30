@@ -5,6 +5,7 @@ import {
   type TimestampDict,
   type LastTimestampData,
   NotificationEvent,
+  GetLastTimestampsQuery,
 } from './types';
 import {
   type MessageData,
@@ -14,6 +15,7 @@ import {
 import { setupSocketEventListeners } from '@services/websocket';
 
 import newMessageAudio from '@assets/audio/new-message.mp3';
+import { RoomTypes } from '@components/ui/displays';
 
 const notificationApi = api.injectEndpoints({
   endpoints(build) {
@@ -56,9 +58,10 @@ const notificationApi = api.injectEndpoints({
           );
         },
       }),
-      getLastTimestamps: build.query<TimestampDict, string>({
-        query: (userId) => ({
+      getLastTimestamps: build.query<TimestampDict, GetLastTimestampsQuery>({
+        query: ({ userId, type }) => ({
           url: `/users/${userId}/notifications/unread`,
+          params: { type },
           method: 'get',
         }),
         transformResponse: (response: LastTimestampData[]) => {
@@ -73,14 +76,15 @@ const notificationApi = api.injectEndpoints({
           return unreadCounts;
         },
         onCacheEntryAdded: async (
-          userId,
+          { type },
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
             [MessageEvent.Send]: (message: MessageData) => {
+              if (message.type !== type) return;
+
               updateCachedData((draft) => {
                 const { roomId, createdAt } = message;
-
                 draft[roomId] = createdAt;
 
                 new Audio(newMessageAudio).play();

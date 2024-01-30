@@ -1,17 +1,16 @@
-import { Types } from 'mongoose';
+import { Types, } from 'mongoose';
 
 import { CustomError } from '@helpers/CustomError';
+import { keepKeys } from '@helpers/keepKeys';
 
 import { IMessageEmoji, Message } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
-
-import { keepKeys } from '@helpers/keepKeys';
+import { DM } from '@api/dms/model';
+import { ServerMember } from '@api/serverMembers/model';
 
 import { cloudinaryService } from '@services/cloudinary';
-import { userRoomService } from '@api/users/rooms/service';
-import { userDmsService } from '@api/users/dms/service';
 
 const getOne = async (id: string) => {
   const message = await Message.findById(id);
@@ -116,9 +115,6 @@ const create = async (
   const [populatedMessage] = await Promise.all([
     message.populate(populateOptions),
     message.save(),
-    !serverId
-      ? userDmsService.upsertDm(message.roomId)
-      : Promise.resolve(),
   ]);
   
   return populatedMessage;
@@ -161,8 +157,22 @@ const remove = async (id: string) => {
   return message;
 };
 
-export const getUnreadTimestamps = async (userId: string | Types.ObjectId) => {
-  const roomIds = await userRoomService.getAllRoomIds(userId);
+export const getUnreadTimestamps = async (userId: string | Types.ObjectId, type: 'dm' | 'channel') => {
+  const rooms = type === 'dm'
+    ? await DM.find({
+      participantIds: new Types.ObjectId(userId),
+    }).populate('_id')
+    : await ServerMember.find({ userId: new Types.ObjectId(userId) })
+      .select('serverId')
+      .populate('server', 'channels');
+
+  if (!rooms) return null;
+
+  const roomIds = type === 'dm'
+    ? rooms.map(room => room._id)
+    : rooms.flatMap(
+      (room: any) => room.server.channels.map((channel: any) => channel._id)
+    );
 
   const lastTimestamps = await Message.aggregate([
     { $match: { roomId: { $in: roomIds } } },

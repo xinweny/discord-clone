@@ -1,9 +1,8 @@
-import mongoose, { Types, Schema, Document, Model } from 'mongoose';
+import mongoose, { Types, Schema, Document } from 'mongoose';
 
 import env from '@config/env';
 
 import { IServer } from '@api/servers/model';
-import { IDM } from '@api/dms/model';
 
 import { CustomError } from '@helpers/CustomError';
 import { relationSchema, IRelation } from './relations/schema';
@@ -18,10 +17,7 @@ export interface IUser extends Document {
   customStatus?: string;
   role: string;
   relations: Types.DocumentArray<IRelation>;
-  dms: {
-    dm: Types.ObjectId | IDM;
-    updatedAt: Date;
-  }[];
+  dmIds: Types.ObjectId[];
   serverIds: Types.ObjectId[];
   servers?: IServer[];
   bio: string;
@@ -51,13 +47,7 @@ const userSchema = new Schema({
     select: false,
   },
   relations: { type: [relationSchema], default: [], select: false },
-  dms: {
-    type: [{
-      dm: { type: Types.ObjectId, ref: 'DM', required: true },
-      updatedAt: { type: Date, required: true },
-    }],
-    default: [],
-},
+  dmIds: { type: [Types.ObjectId], ref: 'DM', default: [] },
   serverIds: { type: [Types.ObjectId], ref: 'Server', default: [] },
   bio: { type: String, default: '', length: { max: 190 } },
   customStatus: { type: String, length: { max: 128 }, default: '' },

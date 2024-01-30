@@ -28,27 +28,15 @@ const dmApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: ['DMs'],
-        transformResponse: (response: UserDMData[]) => {
-          return response.map(res => ({
-            ...res.dm,
-            updatedAt: res.updatedAt,
-          }));
-        },
         onCacheEntryAdded: async (
           userId,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }
         ) => {
-          updateCachedData((draft) => {
-            draft.sort((a, b) => {
-              return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-            });
-
-            return draft;
-          });
-
           const events = {
             [MessageEvent.Send]: (message: MessageData) => {
-              if (message.type === 'dm') updateCachedData((draft) => {
+              if (message.type !== 'dm') return;
+
+              updateCachedData((draft) => {
                 const { roomId: dmId } = message;
 
                 const index = draft.findIndex(dm => dm._id === dmId);
@@ -73,8 +61,7 @@ const dmApi = api.injectEndpoints({
       }),
       getAllUserDms: build.query<DMIdData[], string>({
         query: (userId) => ({
-          url: '/dms',
-          params: { userId },
+          url: `/users/${userId}/dms`,
           method: 'get',
         }),
         onCacheEntryAdded: async (
@@ -103,21 +90,6 @@ const dmApi = api.injectEndpoints({
           method: 'get',
         }),
         providesTags: (...[, , { dmId }]) => [{ type: 'DM', id: dmId }],
-        onQueryStarted: async ({ dmId, userId }, { queryFulfilled, dispatch }) => {
-          const { data: dm } = await queryFulfilled;
-
-          dispatch(dmApi.util.updateQueryData(
-            'getDms',
-            userId,
-            (draft) => {
-              const i = draft.findIndex(dm => dm._id === dmId);
-
-              if (i === -1) draft.unshift(dm);
-
-              return draft;
-            }
-          ));
-        }
       }),
       createDm: build.mutation<DMData, CreateDMFields>({
         query: ({ participantIds }) => ({

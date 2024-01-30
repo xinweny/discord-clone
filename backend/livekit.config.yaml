@@ -177,7 +177,7 @@ webhook:
   api_key: devkey
 #   # list of URLs to be notified of room events
   urls:
-    - http://10.0.0.170:5173/api/v1/rtc/webhook
+    - https://plainly-causal-midge.ngrok-free.app/api/v1/rtc/webhook
 
 # Signal Relay
 # since v1.4.0, a more reliable, psrpc based signal relay is available

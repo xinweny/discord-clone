@@ -21,20 +21,6 @@ const getRoom: RequestHandler[] = [
   )
 ];
 
-const getRooms: RequestHandler[] = [
-  authenticate,
-  authorize.userSelf('query'),
-  tryCatch(
-    async (req, res) => {
-      const { userId } = req.query;
-
-      const dms = await dmService.getMany({ userId: userId as string });
-
-      res.json({ data: dms });
-    }
-  )
-]
-
 const createRoom: RequestHandler[] = [
   authenticate,
   tryCatch(
@@ -72,7 +58,6 @@ const updateRoom: RequestHandler[] = [
 
 export const dmController = {
   getRoom,
-  getRooms,
   createRoom,
   updateRoom,
 };

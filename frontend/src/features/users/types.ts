@@ -1,6 +1,4 @@
-import { DMData } from '@features/dms/types';
 import { RelationData } from '@features/relations/types';
-import { ServerBasicData } from '@features/servers/types';
 
 export type UserBasicData = {
   _id: string;
@@ -20,8 +18,6 @@ export type UserSelfData = {
   email: string;
   password: string;
   relations: RelationData[];
-  dms: DMData[];
-  servers: ServerBasicData[];
   customStatus?: string;
   createdAt: string;
   _id: string;

@@ -1,7 +1,3 @@
-import { useEffect } from 'react';
-
-import { emitEvents } from '@services/websocket';
-
 import { JoinedServerCard } from './joined-server-card';
 
 import {
@@ -19,7 +15,7 @@ type JoinedServersListProps = {
 export function JoinedServersList({ userId }: JoinedServersListProps) {
   const servers = useGetJoinedServersQuery(userId);
 
-  const { data: lastTimestamps } = useGetLastTimestampsQuery(userId);
+  const { data: lastTimestamps } = useGetLastTimestampsQuery({ userId, type: 'dm' });
   const { data: readTimestamps } = useGetReadStatusesQuery(userId);
 
   if (!servers.isSuccess) return null;

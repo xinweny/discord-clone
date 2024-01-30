@@ -40,6 +40,7 @@ const messageApi = api.injectEndpoints({
         merge: (currentCache, newMessages) => {
           if (newMessages.items) {
             currentCache.items.push(...newMessages.items);
+            currentCache.items = [...new Map(currentCache.items.map(item => [item._id, item])).values()];
             currentCache.next = newMessages.next;
           }
         },
