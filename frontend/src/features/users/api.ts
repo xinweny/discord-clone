@@ -76,6 +76,7 @@ export default userApi;
 
 export const {
   useGetUserQuery,
+  useLazyGetUserQuery,
   useUpdateUserMutation,
   useUpdateSensitiveMutation,
 } = userApi;

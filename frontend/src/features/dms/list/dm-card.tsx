@@ -58,8 +58,10 @@ export function DmCard({
         />}
         isActive={roomId === _id}
       >
-        <span className={hasNewMessage ? styles.newMessage : undefined}>{name}</span>
-        <span>{customStatus}</span>
+        <div className={styles.text}>
+          <span className={hasNewMessage ? styles.newMessage : undefined}>{name}</span>
+          <span className={styles.status}>{customStatus}</span>
+        </div>
       </DmsNavItem>
     </Link>
   );

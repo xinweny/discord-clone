@@ -6,6 +6,7 @@ import { UserShortProfile } from '@features/users/get';
 import { MutualsLists } from '@features/mutuals/list';
 
 import styles from './dm-participants-panel.module.scss';
+import { GroupMembersInfo } from './group-members-info';
 
 type DmParticipantsPanelProps = {
   participants: UserBasicData[];
@@ -15,6 +16,7 @@ type DmParticipantsPanelProps = {
 
 export function DmParticipantsPanel({ participants, isGroup, show }: DmParticipantsPanelProps) {
   const { data: participant, isSuccess } = useGetUserQuery(participants[0]._id, { skip: isGroup });
+  
 
   if (!show) return null;
 
@@ -25,9 +27,8 @@ export function DmParticipantsPanel({ participants, isGroup, show }: DmParticipa
           <UserShortProfile user={participant} />
           <MutualsLists participantId={participant._id} />
         </>
-        : <>
-          <p>{`MEMBERS - ${participants.length}`}</p>
-        </>}
+        : <GroupMembersInfo participants={participants} />
+      }
     </div>
   )
 }

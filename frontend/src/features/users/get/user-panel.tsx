@@ -16,7 +16,7 @@ import styles from './user-panel.module.scss';
 export function UserPanel() {
   const [isFocus, setIsFocus] = useState(false);
   const { user } = useGetUserData();
-  const { avatarUrl, displayName, username } = user.data!;
+  const { avatarUrl, displayName, username, customStatus } = user.data!;
 
   return (
     <div
@@ -40,10 +40,10 @@ export function UserPanel() {
             />}
           />
           <div>
-            <p className={styles.header}>{displayName}</p>
+            <span className={styles.header}>{displayName}</span>
             {isFocus
-              ? <p>{username}</p>
-              : <p>Online</p>
+              ? <span>{username}</span>
+              : <span>{customStatus || 'Online'}</span>
             }
           </div>
         </div>

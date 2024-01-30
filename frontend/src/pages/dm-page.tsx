@@ -16,7 +16,6 @@ import {
   DmHeader,
   DmParticipantsPanel,
 } from '@features/dms/get';
-import { DmCall, DmOngoingCall } from '@features/webrtc/dm';
 
 import { useGetDmQuery } from '@features/dms/api';
 
@@ -40,7 +39,7 @@ export function DMPage() {
 
   if (!dm) return null;
 
-  const { name, participants } = getDmInfo(dm, user.data!.id);
+  const { name } = getDmInfo(dm, user.data!.id);
 
   const { isGroup } = dm;
 
@@ -53,7 +52,7 @@ export function DMPage() {
       <ContentLayout
         header={<DmHeader dm={dm} />}
         panel={<DmParticipantsPanel
-          participants={participants}
+          participants={dm.participants}
           isGroup={isGroup}
           show={showPanel && !isInCurrentRoomCall}
         />}

@@ -22,14 +22,9 @@ export function ServerMemberCard({
 }: ServerMemberCardProps) {
   return (
     <ServerMemberProfileButton
-      position={{
-        direction: 'left',
-        align: 'start',
-        gap: 16,
-      }}
       memberId={member._id}
       serverId={serverId}
-      className={styles.card}
+      className={styles.button}
       activeClass={styles.active}
     >
       <Avatar src={member.user.avatarUrl} />

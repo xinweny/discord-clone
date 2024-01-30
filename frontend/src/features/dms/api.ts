@@ -125,6 +125,7 @@ const dmApi = api.injectEndpoints({
             console.log(err);
           }
         },
+        invalidatesTags: ['DMs'],
       }),
     };
   }

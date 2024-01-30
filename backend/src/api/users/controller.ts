@@ -24,7 +24,7 @@ const getUser: RequestHandler[] = [
 
         res.json({ data: user });
       } else {
-        const user: Partial<IUser> = await userService.getById(userId, '-dmIds -serverIds');
+        const user: Partial<IUser> = await userService.getById(userId);
   
         res.json({ data: user });
       }

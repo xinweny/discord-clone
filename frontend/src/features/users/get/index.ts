@@ -4,3 +4,4 @@ export * from './user-profile-button';
 export * from './user-header';
 export * from './user-info';
 export * from './user-splash';
+export * from './user-profile-summary-button';

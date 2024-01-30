@@ -5,4 +5,9 @@
   height: 100%;
 
   @include mixins.invisible-scroller();
+
+  .groupHeader {
+    padding: 24px 8px 0px 16px;
+    height: 40px;
+  }
 }

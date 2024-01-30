@@ -1,20 +1,14 @@
-import { useState } from 'react';
-
 import type { PositionData } from '@components/hooks';
 
-import { Popout } from '@components/ui/popups';
-
-import { ServerMemberProfileCard } from '.';
-
-import { useLazyGetServerMemberQuery } from '../api';
+import { UserProfileSummaryButton } from '@features/users/get';
 
 type ServerMemberProfileButtonProps = {
   children: React.ReactNode;
-  position: PositionData;
+  position?: PositionData;
   memberId: string;
   serverId: string;
-  className?: string;
   activeClass?: string;
+  className?: string;
 };
 
 export function ServerMemberProfileButton({
@@ -25,30 +19,15 @@ export function ServerMemberProfileButton({
   className,
   activeClass,
 }: ServerMemberProfileButtonProps) {
-  const [getServerMember] = useLazyGetServerMemberQuery();
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const renderPopup = async () => {
-    const serverMember = await getServerMember({
-      serverId,
-      memberId,
-    }).unwrap();
-
-    if (!serverMember) return null;
-
-    return <ServerMemberProfileCard member={serverMember} />;
-  };
-
   return (
-    <Popout
-      renderPopup={renderPopup}
+    <UserProfileSummaryButton
       position={position}
-      className={`${className || ''} ${isOpen && activeClass ? activeClass : ''}`}
-      onOpen={() => { setIsOpen(true); }}
-      onClose={() => { setIsOpen(false); }}
+      userId={memberId}
+      serverId={serverId}
+      className={className}
+      activeClass={activeClass}
     >
       {children}
-    </Popout>
+    </UserProfileSummaryButton>
   );
 }

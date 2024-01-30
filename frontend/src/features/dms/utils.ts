@@ -19,7 +19,7 @@ export const getDmInfo = (dm: DMData, userId: string) => {
     : participants[0].displayName;
 
   const customStatus = isGroup
-    ? `${pluralize('Member', participants.length, true)}`
+    ? `${pluralize('Member', dm.participants.length, true)}`
     : participants[0].customStatus || '';
 
   return {
