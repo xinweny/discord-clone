@@ -53,8 +53,8 @@ export function ParticipantCheckboxInput({
         rules={{
           onChange: (e) => {
             e.target.checked
-              ? setValue(name, [...participantIds, id])
-              : setValue(name, participantIds.filter((i: string) => i !== id))
+              ? setValue(name, [...new Set([...participantIds, e.target.value])])
+              : setValue(name, participantIds.filter((i: string) => i !== e.target.value))
           }
         }}
         checked={checked}
