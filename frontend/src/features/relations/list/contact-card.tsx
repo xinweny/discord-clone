@@ -73,13 +73,13 @@ export function ContactCard({
       );
       case ContactsTabs.PENDING: return formatProps(
         `${status === RelationStatus.PENDING_FROM ? 'Incoming' : 'Outgoing'} Friend Request`,
-        <Tooltip text="Accept" direction="top" gap={4}>
-          {status === RelationStatus.PENDING_FROM && (
+        status === RelationStatus.PENDING_FROM
+          ? <Tooltip text="Accept" direction="top" gap={4}>
             <AcceptFriendRequestButton relationId={relationId}>
               <CheckmarkIcon />
             </AcceptFriendRequestButton>
-          )}
-        </Tooltip>
+          </Tooltip>
+          : undefined
       );
       case ContactsTabs.BLOCKED: return formatProps('Blocked');
     }
@@ -97,11 +97,14 @@ export function ContactCard({
 
   const props = renderProps(activeTab);
 
+  const isHidden = activeTab !== ContactsTabs.ONLINE ? false : !isOnline;
+
   return (
     <div
       ref={hoverRef}
-      hidden={activeTab === ContactsTabs.ONLINE ? false : !isOnline}
+      hidden={isHidden}
       className={styles.item}
+      style={isHidden ? { display: 'none' } : undefined}
     >
       <div className={styles.userInfo}>
         <Avatar

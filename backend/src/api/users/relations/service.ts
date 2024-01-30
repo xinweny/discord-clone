@@ -14,15 +14,26 @@ type SendFriendRequestFields = {
   recipientId: Types.ObjectId | string,
 });
 
+const getRelation = async (senderId: Types.ObjectId | string, recipientId: Types.ObjectId | string) => {
+  const user = await User.findById(recipientId, 'relations')
+    .populate({
+      path: 'relations.user',
+      select: 'displayName username avatarUrl customStatus',
+    });
+
+  if (!user || !user.relations) return null;
+
+  const relation = user.relations.find(r => r.userId.equals(senderId));
+
+  return relation;
+};
+
 const getRelations = async (userId: Types.ObjectId | string, status: RelationStatus) => {
   const user = await User
     .findById(userId, 'relations')
     .populate({
       path: 'relations.user',
       select: 'displayName username avatarUrl customStatus',
-      options: {
-        sort: [{ displayName: -1 }],
-      },
     });
 
   if (!user) throw new CustomError(400, 'User not found.');
@@ -70,7 +81,7 @@ const sendFriendRequest = async (options: SendFriendRequestFields) => {
     sender.save(),
   ]);
 
-  const relation = recipient.relations.slice(-1)[0];
+  const relation = sender.relations.slice(-1)[0];
 
   return relation;
 };
@@ -160,6 +171,7 @@ const remove = async (userId: Types.ObjectId | string, relationId: Types.ObjectI
 };
 
 export const relationService = {
+  getRelation,
   getRelations,
   sendFriendRequest,
   acceptFriendRequest,

@@ -40,3 +40,9 @@ export type RemoveRelationFields = {
   senderId: string;
   relationId: string;
 };
+
+export enum RelationEvent {
+  Create = 'relation:create',
+  Update = 'relation:update',
+  Delete = 'relation:delete',
+}

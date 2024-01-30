@@ -16,11 +16,10 @@ const RELATION_DICT: {
 };
 
 export const useContacts = (relations: RelationData[] | undefined, tab: ContactsTabs) => {
-
   const [contacts, setContacts] = useState<RelationData[]>([]);
 
   useEffect(() => {
-    if (!relations || relations.length === 0) return;
+    if (!relations) return;
 
     const filteredContacts = relations.filter(
       relation => relation.status.includes(RELATION_DICT[tab])

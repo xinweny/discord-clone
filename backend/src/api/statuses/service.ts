@@ -38,9 +38,11 @@ const getStatus = async (userId: string) => {
 };
 
 const getStatuses = async (userIds: string[]) => {
-  const res = await redisService.getMany(userIds.map(userId => `${userId}_SOCKET`));
-
   const statuses = {} as { [key: string]: boolean };
+
+  if (userIds.length === 0) return statuses;
+
+  const res = await redisService.getMany(userIds.map(userId => `${userId}_SOCKET`));
 
   userIds.forEach((userId, i) => {
     statuses[userId] = res[i] ? JSON.parse(res[i] as string).length > 0 : false;

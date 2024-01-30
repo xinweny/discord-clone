@@ -8,6 +8,7 @@ export enum RelationStatus {
 }
 
 export interface IRelation extends Types.Subdocument {
+  _id: Types.ObjectId;
   userId: Types.ObjectId;
   status: RelationStatus;
 }

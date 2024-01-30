@@ -55,7 +55,10 @@ export function SendFriendRequestForm() {
 
   const onSubmit = async (data: CreateRelationFields) => {
     try {
-      await createRelation(data).unwrap();
+      await createRelation({
+        ...data,
+        status: RelationStatus.PENDING_TO,
+      }).unwrap();
 
       setSubmittedName(data.username!);
 
