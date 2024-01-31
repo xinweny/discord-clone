@@ -19,6 +19,7 @@ import { useGetParticipantsQuery } from '@features/webrtc/api';
 import VoiceCallIcon from '@assets/icons/voice-call.svg?react';
 import VideoCallIcon from '@assets/icons/video-call.svg?react';
 import UserProfileIcon from '@assets/icons/user-profile.svg?react';
+import MembersIcon from '@assets/icons/members.svg?react';
 
 import styles from './dm-header-buttons.module.scss';
 
@@ -44,7 +45,11 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
 
   const { name } = getDmInfo(dm, user.data!.id);
 
+  const { isGroup } = dm;
+
   const isInOngoingCall = livekit?.isCurrentRoom(dm._id);
+
+  const buttonLabel = isGroup ? 'Member List' : 'User Profile';
 
   return (
     <div className={styles.container}>
@@ -77,8 +82,8 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
       }
       <Tooltip
         text={isInOngoingCall
-          ? 'Show User Profile (Unavailable)'
-          : showPanel ? 'Hide User Profile' : 'Show User Profile'
+          ? `Show ${buttonLabel} (Unavailable)`
+          : showPanel ? `Hide ${buttonLabel}` : `Show ${buttonLabel}`
         }
         {...tooltipProps}
       >
@@ -87,7 +92,7 @@ export function DmHeaderButtons({ dm }: DmHeaderButtonsProps) {
           disabled={isInOngoingCall}
           className={showPanel ? styles.active : undefined}
         >
-          <UserProfileIcon />
+          {isGroup ? <MembersIcon /> : <UserProfileIcon />}
         </button>
       </Tooltip>
     </div>

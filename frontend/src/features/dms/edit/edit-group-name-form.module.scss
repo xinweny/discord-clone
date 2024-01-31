@@ -1,0 +1,28 @@
+@use '@styles/colors';
+
+.form {
+  input {
+    background-color: transparent;
+    border: none;
+    color: colors.$text-primary;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    height: 32px;
+    padding: 0 6px;
+    border: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre;
+    border-radius: 3px;
+
+    &:focus, &:hover {
+      border: 1px solid colors.$bg-tertiary;
+    }
+
+    &:focus {
+      background-color: colors.$bg-secondary;
+    }
+  }
+}

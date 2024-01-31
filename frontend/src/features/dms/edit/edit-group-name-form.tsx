@@ -13,6 +13,8 @@ import { TextInput } from '@components/ui/forms';
 
 import { useUpdateDmMutation } from '../api';
 
+import styles from './edit-group-name-form.module.scss';
+
 type EditGroupNameFormProps = {
   dm: DMData
 };
@@ -48,7 +50,7 @@ export function EditGroupNameForm({ dm }: EditGroupNameFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form className={styles.form}>
         <TextInput
           name="name"
           id="name"

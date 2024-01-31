@@ -10,6 +10,10 @@ import { FileInput } from '@components/ui/forms';
 
 import { useUpdateDmMutation } from '../api';
 
+import defaultGroupAvatarSrc from '@assets/static/default-group-avatar.png';
+
+import styles from './edit-group-avatar-form.module.scss';
+
 type EditGroupAvatarFormProps = {
   dm: DMData,
 };
@@ -37,10 +41,10 @@ export function EditGroupAvatarForm({ dm }: EditGroupAvatarFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form className={styles.form}>
         <label htmlFor="upload">
-          <ImagePreview name="avatar">
-            <img src={dm.imageUrl} alt="" />
+          <ImagePreview name="avatar" className={styles.preview}>
+            <img src={dm.imageUrl || defaultGroupAvatarSrc} alt="" />
           </ImagePreview>
           <FileInput
             id="upload"
