@@ -3,6 +3,7 @@ import type { UserBasicData } from '@features/users/types';
 import { Avatar } from '@components/ui/media';
 
 import { UserProfileSummaryButton } from '@features/users/get';
+import { UserStatusIcon } from '@features/statuses/get';
 
 import styles from './group-member-card.module.scss';
 
@@ -21,7 +22,10 @@ export function GroupMemberCard({
       className={styles.button}
       activeClass={styles.active}
     >
-      <Avatar src={avatarUrl} />
+      <Avatar
+        src={avatarUrl}
+        notification={<UserStatusIcon userId={userId} />}
+      />
       <span>{displayName}</span>
     </UserProfileSummaryButton>
   );

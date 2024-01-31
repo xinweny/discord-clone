@@ -17,11 +17,10 @@ type DmParticipantsPanelProps = {
 export function DmParticipantsPanel({ participants, isGroup, show }: DmParticipantsPanelProps) {
   const { data: participant, isSuccess } = useGetUserQuery(participants[0]._id, { skip: isGroup });
   
-
   if (!show) return null;
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isGroup ? styles.narrow : ''}`}>
       {(!isGroup && isSuccess)
         ? <>
           <UserShortProfile user={participant} />

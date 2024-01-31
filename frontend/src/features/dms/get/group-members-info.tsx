@@ -13,7 +13,7 @@ export function GroupMembersInfo({
   return (
     <>
       <h3 className={styles.groupHeader}>{`MEMBERS - ${participants.length}`}</h3>
-      <div>
+      <div className={styles.list}>
         {participants.map(participant => (
           <GroupMemberCard user={participant} />
         ))}

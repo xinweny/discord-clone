@@ -3,8 +3,17 @@
 .groupHeader {
   padding: 24px 8px 0px 16px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 12px;
   line-height: 16px;
   color: colors.$header-muted;
+  margin-bottom: 4px;
+}
+
+.list {
+  padding: 0px 8px;
+
+  > * {
+    width: 100%;
+  }
 }
