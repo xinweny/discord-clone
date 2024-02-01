@@ -1,6 +1,7 @@
 import type { ReactionData } from '../types';
 
 import { Emoji } from '@components/ui/media';
+import { Tooltip } from '@components/ui/popups';
 
 import { useGetUserData } from '@features/auth/hooks';
 
@@ -58,17 +59,23 @@ export function ToggleReactionButton({
   const userHasReacted = userIds.includes(user.data!._id);
 
   return (
-    <button
-      className={`${styles.reaction} ${userHasReacted ? styles.unreactButton : styles.reactButton}`}
-      onClick={userHasReacted ? handleUnreact : handleReact}
-      disabled={!authorized}
+    <Tooltip
+      text={`:${reaction.name}:`}
+      direction="top"
+      gap={4}
     >
-      <Emoji
-        custom={custom}
-        name={name}
-        emoji={custom ? reaction.url : reaction.native}
-      />
-      <p>{count}</p>
-    </button>
+      <button
+        className={`${styles.reaction} ${userHasReacted ? styles.unreactButton : styles.reactButton}`}
+        onClick={userHasReacted ? handleUnreact : handleReact}
+        disabled={!authorized}
+      >
+        <Emoji
+          custom={custom}
+          name={name}
+          emoji={custom ? reaction.url : reaction.native}
+        />
+        <span>{count}</span>
+      </button>
+    </Tooltip>
   );
 }
