@@ -13,5 +13,9 @@ export const useModal = (): [boolean, () => void, React.Dispatch<React.SetStateA
     setIsOpen(!isOpen);
   };
 
-  return [isOpen, toggle, setIsOpen];
+  return [
+    isOpen,
+    toggle,
+    setIsOpen,
+  ];
 };

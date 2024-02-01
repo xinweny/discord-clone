@@ -31,23 +31,39 @@ export function MessagesContainer({
   const { serverId, roomId } = useParams();
 
   const listRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
   
   const currentDate = useUpdateCurrentDate();
 
-  const next = useRef<string | 0 | undefined>(undefined);
+  const [scrolledToTop, setScrolledToTop] = useState<boolean>(true);
+  const [next, setNext] = useState<string | null | undefined>(undefined);
 
-  const [scrolledToTop, setScrolledToTop] = useState<boolean>(false);
-  const [hasFirstLoad, setHasFirstLoad] = useState<boolean>(false);
+  useEffect(() => {
+    setScrolledToTop(true);
+    setNext(undefined);
+  }, [roomId]);
 
   const { data: messages, isSuccess } = useGetMessagesQuery({
     serverId,
     roomId: roomId!,
-    next: next.current,
+    next,
+  }, {
+    skip: !scrolledToTop || next === null,
   });
 
   useEffect(() => {
-    if (messages && next.current !== 0 && scrolledToTop) next.current = messages.next;
-  }, [scrolledToTop]);
+    if (!(isSuccess && next === undefined)) return;
+
+    const timeoutId = setTimeout(() => {
+      anchorRef.current?.scrollIntoView();
+    });
+
+    return () => { clearTimeout(timeoutId); };
+  }, [isSuccess]); 
+
+  useEffect(() => {
+    if (messages && next !== null) setNext(messages.next);
+  }, [messages]);
 
   useEffect(() => {
     if (!messages) return;
@@ -58,17 +74,7 @@ export function MessagesContainer({
         lastReadAt: new Date(),
       },
     });
-
-    if (!hasFirstLoad && isSuccess) setHasFirstLoad(true);
   }, [messages]);
-
-  useEffect(() => {
-    if (!hasFirstLoad) return;
-
-    const container = listRef.current;
-
-    if (container) container.scrollTop = container.scrollHeight;
-  }, [hasFirstLoad]); 
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -80,7 +86,11 @@ export function MessagesContainer({
   return (
     <div className={styles.container}>
       <div onScroll={handleScroll} className={styles.content} ref={listRef}>
-        {(messages.items.length === 0 || next.current === 0) && welcomeComponent}
+        {(
+          messages?.items.length === 0 ||
+          next === null ||
+          (listRef.current && (listRef.current?.offsetHeight === listRef.current?.offsetWidth))
+        ) && welcomeComponent}
         {messages.items.map((message, index) => {
           const prev = messages.items[index - 1];
           const prevSentAt = prev?.createdAt;
@@ -103,6 +113,7 @@ export function MessagesContainer({
             </div>
           );
         })}
+        <div className={styles.anchor} ref={anchorRef}></div>
       </div>
       <SendMessageForm
         placeholder={formPlaceholder}

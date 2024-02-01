@@ -3,7 +3,6 @@ import api from '@services/api';
 import {
   type DMData,
   type DMIdData,
-  type UserDMData,
   type CreateDMFields,
   type EditDMFields,
   DMEvent,

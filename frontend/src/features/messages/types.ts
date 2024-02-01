@@ -43,7 +43,7 @@ export type MessageData = {
 export type GetMessagesQuery = {
   serverId?: string;
   roomId: string;
-  next?: string | 0;
+  next?: string | null;
 };
 
 export type SendMessageFields = {
