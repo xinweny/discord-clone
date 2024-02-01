@@ -8,6 +8,9 @@ import type {
   DeleteServerMemberFields,
   EditServerMemberFields,
 } from './types';
+import { ServerMemberEvent } from './types';
+
+import { setupSocketEventListeners, emitEvents } from '@services/websocket';
 
 const memberApi = api.injectEndpoints({
   endpoints(build) {
@@ -17,6 +20,45 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members`,
           method: 'get',
         }),
+        onCacheEntryAdded: async (
+          serverId,
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }
+        ) => {
+          const events = {
+            [ServerMemberEvent.Join]: (member: ServerMemberData) => {
+              if (member.serverId !== serverId) return;
+              
+              updateCachedData((draft) => {
+                draft.push(member);
+
+                return draft;
+              });
+            },
+            [ServerMemberEvent.Update]: (member: ServerMemberData) => {
+              if (member.serverId !== serverId) return;
+              
+              updateCachedData((draft) => {
+                const index = draft.findIndex(m => m._id === member._id);
+
+                if (index !== -1) draft[index] = member;
+
+                return draft;
+              });
+            },
+            [ServerMemberEvent.Leave]: (memberId: string) => {
+              updateCachedData((draft) => {
+                draft = draft.filter(member => member._id !== memberId);
+
+                return draft;
+              });
+            },
+          };
+
+          setupSocketEventListeners(
+            events,
+            { cacheDataLoaded, cacheEntryRemoved },
+          );
+        },
         providesTags: (...[, , serverId]) => [{ type: 'ServerMembers', id: serverId }],
       }),
       getUserServerMember: build.query<ServerMemberData, GetUserServerMemberQuery>({
@@ -38,6 +80,11 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members`,
           method: 'post',
         }),
+        onQueryStarted: async (args, { queryFulfilled }) => {
+          const { data: member } = await queryFulfilled;
+
+          emitEvents({ [ServerMemberEvent.Join]: member });
+        },
         invalidatesTags: (...[, , serverId]) => [
           'JoinedServers',
           'MutualServers',
@@ -50,6 +97,11 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members/${memberId}`,
           method: 'delete',
         }),
+        onQueryStarted: async ({ serverId, memberId }, { queryFulfilled }) => {
+          await queryFulfilled;
+
+          emitEvents({ [ServerMemberEvent.Leave]: { serverId, memberId } });
+        },
         invalidatesTags: (...[, , { serverId }]) => [
           'JoinedServers',
           'MutualServers',
@@ -67,6 +119,11 @@ const memberApi = api.injectEndpoints({
             bannerColor,
           },
         }),
+        onQueryStarted: async (args, { queryFulfilled }) => {
+          const { data: member } = await queryFulfilled;
+
+          emitEvents({ [ServerMemberEvent.Join]: member });
+        },
         invalidatesTags: (...[, , { serverId, memberId }]) => [
           { type: 'ServerMember', id: memberId },
           { type: 'ServerMemberSelf', id: serverId },

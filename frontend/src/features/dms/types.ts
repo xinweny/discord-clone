@@ -11,10 +11,6 @@ export type DMData = {
   updatedAt: string;
 };
 
-export type DMIdData = {
-  _id: string;
-};
-
 export type UserDMData = {
   dm: DMData;
   updatedAt: string;

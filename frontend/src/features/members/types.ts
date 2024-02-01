@@ -39,3 +39,9 @@ export type EditServerMemberFields = {
   bio: string;
   bannerColor: string;
 };
+
+export enum ServerMemberEvent {
+  Join = 'server_member:join',
+  Update = 'server_member:update',
+  Leave = 'server_member:leave',
+}

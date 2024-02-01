@@ -2,7 +2,6 @@ import api from '@services/api';
 
 import {
   type DMData,
-  type DMIdData,
   type CreateDMFields,
   type EditDMFields,
   DMEvent,
@@ -13,10 +12,9 @@ import {
   type MessageData,
 } from '@features/messages/types';
 
-import { setupSocketEventListeners } from '@services/websocket';
+import { setupSocketEventListeners, emitEvents } from '@services/websocket';
 
 import { signAndUpload } from '@services/cloudinary';
-import { emitEvents } from '@services/websocket';
 
 const dmApi = api.injectEndpoints({
   endpoints(build) {

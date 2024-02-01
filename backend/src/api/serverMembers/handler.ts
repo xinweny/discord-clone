@@ -1,19 +1,15 @@
 import { Socket } from 'socket.io';
 
+import { IServerMember } from './model';
+
 export const serverMemberHandler = async (socket: Socket) => {
-  socket.on('server_member:join', async ({
-    serverId,
-    member,
-  }) => {
-    socket.to(serverId)
+  socket.on('server_member:join', async (member: IServerMember) => {
+    socket.to(member.serverId.toString())
       .emit('server_member:join', member);
   });
 
-  socket.on('server_member:update', async ({
-    serverId,
-    member,
-  }) => {
-    socket.to(serverId)
+  socket.on('server_member:update', async (member: IServerMember) => {
+    socket.to(member.serverId.toString())
       .emit('server_member:update', member);
   });
 
