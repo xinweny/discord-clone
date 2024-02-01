@@ -5,7 +5,7 @@ import type { UserData } from '@features/users/types';
 import { useSocketRoomJoin } from '@services/websocket/hooks';
 
 import { useGetJoinedServersQuery } from '@features/servers/api';
-import { useGetAllUserDmsQuery } from '@features/dms/api';
+import { useGetDmsQuery } from '@features/dms/api';
 import { TimestampDict } from './types';
 
 export const useJoinAllRooms = (user: UserData | undefined) => {
@@ -15,7 +15,7 @@ export const useJoinAllRooms = (user: UserData | undefined) => {
   const skip = { skip: !user }
 
   const { data: servers } = useGetJoinedServersQuery(userId, skip);
-  const { data: dms } = useGetAllUserDmsQuery(userId, skip);
+  const { data: dms } = useGetDmsQuery(userId, skip);
 
   useEffect(() => {
     const channelIds = servers

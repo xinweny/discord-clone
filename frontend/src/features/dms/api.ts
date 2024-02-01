@@ -48,27 +48,9 @@ const dmApi = api.injectEndpoints({
                 return draft;
               });
             },
-          };
-
-          setupSocketEventListeners(
-            events,
-            { cacheDataLoaded, cacheEntryRemoved },
-          );
-        },
-      }),
-      getAllUserDms: build.query<DMIdData[], string>({
-        query: (userId) => ({
-          url: `/users/${userId}/dms`,
-          method: 'get',
-        }),
-        onCacheEntryAdded: async (
-          userId,
-          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
-        ) => {
-          const events = {
             [DMEvent.New]: (dm: DMData) => {
               updateCachedData((draft) => {
-                draft.push({ _id: dm._id });
+                draft.unshift(dm);
 
                 return draft;
               });
@@ -134,7 +116,6 @@ export default dmApi;
 
 export const {
   useGetDmsQuery,
-  useGetAllUserDmsQuery,
   useGetDmQuery,
   useLazyGetDmQuery,
   useCreateDmMutation,
