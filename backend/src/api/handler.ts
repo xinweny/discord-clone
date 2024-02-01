@@ -10,6 +10,7 @@ import { notificationHandler } from './users/notifications/handler';
 import { dmHandler } from './dms/handler';
 import { reactionHandler } from './reactions/handler';
 import { relationHandler } from './users/relations/handler';
+import { serverMemberHandler } from './serverMembers/handler';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);
@@ -31,6 +32,8 @@ export const connectionHandler = async (socket: Socket) => {
   reactionHandler(socket);
 
   relationHandler(socket);
+
+  serverMemberHandler(socket);
 
   if (env.NODE_ENV === 'development') socket.on('disconnect', () => { console.log(`${socket.id} disconnected`); });
 };
