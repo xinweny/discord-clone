@@ -6,7 +6,7 @@ Check out the live demo [here](#)! 👈
 ## Features
 - Real-time messaging, user updates and messaging notifications using Socket.io
 - 1:1 and 1:N voice, video and screen-share with Livekit WebRTC
-- Preview ongoing calls with Livekit websockets
+- Preview ongoing calls with Livekit webhooks
 - React to messages with emojis or upload custom ones with EmojiMart
 - Add attachments to messages with Cloudinary
 - Send GIFs with Tenor GIF API
