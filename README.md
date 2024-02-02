@@ -10,6 +10,7 @@ Check out the live demo [here](#)! 👈
 - React to messages with emojis or upload custom ones with EmojiMart
 - Add attachments to messages with Cloudinary
 - Send GIFs with Tenor GIF API
+- Rich-text editor to parse (custom) emojis, server invites and links with React Slate
 - Join servers with communities of like-minded individuals, or create and customize your own
 - Organize server discussions and topics into text and voice/video channels
 - Invite others to join servers with unique server invite links
@@ -17,12 +18,12 @@ Check out the live demo [here](#)! 👈
 - Create group chats for up to 10 friends
 - Customize your user and server profiles
 - Friend system with friend requesting, blocking and mutual friends/servers
-- Infinite scroll loading for messages
+- Infinite scroll loading for messages and offset pagination for public servers
 - Data fetching and caching with RTK Query
 - Server-side caching using Redis
 - Desktop UI responsiveness and UI with SCSS modules
 - Mongoose ORM with MongoDB Atlas cloud database
-- Authentication with JWT and bcrypt, including auto-refreshing access tokens and forgot password emailing
+- Authentication with JWT and bcrypt, including auto-refreshing access tokens and password reset emails
 
 ## Installation
 ### 1. Clone the repository
