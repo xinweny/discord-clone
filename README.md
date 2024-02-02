@@ -1,5 +1,5 @@
 # Discord Clone
-A MERN full-stack web application of [Discord](https://discord.com/).
+A full-stack web application of [Discord](https://discord.com/), created with MongoDB, Express.js, React, Node.js and Typescript.
 
 Check out the live demo [here](#)! 👈
 
