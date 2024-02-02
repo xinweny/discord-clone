@@ -5,9 +5,8 @@ const ENVIRONMENT_VARIABLES: string[] = [
   'VITE_CLOUD_NAME',
   'VITE_CLOUDINARY_API_KEY',
   'VITE_TENOR_API_KEY',
-  'VITE_WS_URL',
+  'VITE_LK_URL',
 ];
-
 
 function checkEmptyEnv(vars: string[]) {
   const emptyVars = [];
