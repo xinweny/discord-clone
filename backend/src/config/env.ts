@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 import { checkEmptyEnv } from '@utils/checkEmptyEnv';
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: '.env' });
 
 const ENVIRONMENT_VARIABLES: string[] = [
   'NODE_ENV',
@@ -23,7 +23,6 @@ const ENVIRONMENT_VARIABLES: string[] = [
   'CLOUDINARY_API_KEY',
   'CLOUDINARY_API_SECRET',
   'BASE_SHORT_URL',
-  'NODE_ENV',
   'LK_API_KEY',
   'LK_API_SECRET',
   'LK_URL',

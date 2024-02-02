@@ -4,7 +4,6 @@ import { cloudinary, cld } from '@config/cloudinary';
 
 import env from '@config/env';
 
-import { formatDataUri } from '@helpers/formatDataUri';
 import { getPublicId } from '@helpers/getPublicId';
 
 const createSignature = (filename: string, folderPath: string, customPublicId?: string) => {
