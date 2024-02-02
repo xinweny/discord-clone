@@ -13,7 +13,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   define: {
-    'process.env': loadEnv(process.env.NODE_ENV, process.cwd(), ''),
+    'process.env': loadEnv('.env', process.cwd(), ''),
   },
   resolve: {
     alias: {
@@ -22,3 +22,4 @@ export default defineConfig({
     },
   },
 });
+
