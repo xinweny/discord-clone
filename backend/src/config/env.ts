@@ -6,7 +6,6 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const ENVIRONMENT_VARIABLES: string[] = [
   'NODE_ENV',
-  'HOST',
   'PORT',
   'CLIENT_URL',
   'REDIS_URL',
