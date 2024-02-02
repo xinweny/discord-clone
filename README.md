@@ -40,7 +40,7 @@ cd backend
 # Install dependencies
 npm install
 
-# Copy the example .env files and fill it out
+# Copy the example .env file and fill it out
 cp .env.example .env
 
 # Run Express and Livekit servers
