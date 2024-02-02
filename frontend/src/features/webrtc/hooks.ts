@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Room, type Participant } from 'livekit-client';
 import { useParticipants } from '@livekit/components-react';
+// @ts-ignore
 import ColorThief from 'colorthief';
 
 import type {

@@ -22,7 +22,7 @@ const memberApi = api.injectEndpoints({
         }),
         onCacheEntryAdded: async (
           serverId,
-          { cacheDataLoaded, cacheEntryRemoved, updateCachedData, dispatch }
+          { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
             [ServerMemberEvent.Join]: (member: ServerMemberData) => {

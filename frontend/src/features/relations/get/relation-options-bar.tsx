@@ -2,8 +2,6 @@ import pluralize from 'pluralize';
 
 import { RelationStatus } from '../types';
 
-import { Separator } from '@components/ui/displays';
-
 import { ServerAvatar } from '@features/servers/get';
 
 import { SendFriendRequestButton, ToggleBlockButton } from '../create';

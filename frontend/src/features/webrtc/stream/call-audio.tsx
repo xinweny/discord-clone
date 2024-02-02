@@ -17,12 +17,14 @@ export function CallAudio() {
         <div key={participant.identity}>
           {participant.isMicrophoneEnabled && audioTrack && (
             <AudioTrack
+              // @ts-ignore
               trackRef={audioTrack}
               participant={participant}
             />
           )}
           {participant.isScreenShareEnabled && ssAudioTrack && (
             <AudioTrack
+              // @ts-ignore
               trackRef={ssAudioTrack}
               participant={participant}
             />

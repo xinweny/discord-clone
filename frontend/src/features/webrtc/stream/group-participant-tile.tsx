@@ -54,6 +54,7 @@ export function GroupParticipantTile({
         <div className={styles.track}>
           <VideoTrack
             className={styles.videoTrack}
+            // @ts-ignore
             trackRef={ssTrack}
             participant={participant}
           />
@@ -73,6 +74,7 @@ export function GroupParticipantTile({
         {isCameraEnabled && cameraTrack
           ? <VideoTrack
             className={styles.videoTrack}
+            // @ts-ignore
             trackRef={cameraTrack}
             participant={participant}
           />

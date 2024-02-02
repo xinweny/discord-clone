@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { Svg } from '../../wrappers/svg';
-
 import styles from './link-image.module.scss';
 
 type LinkImageProps = {

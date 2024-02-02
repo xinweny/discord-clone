@@ -41,6 +41,7 @@ export function PrivateParticipantTile({
       <div className={styles.mainTile}>
         <VideoTrack
           className={styles.videoTrack}
+          // @ts-ignore
           trackRef={mainTracks?.ssTrack || mainTracks?.cameraTrack}
           participant={mainParticipant}
         />
@@ -76,6 +77,7 @@ export function PrivateParticipantTile({
               >
                 <VideoTrack
                   className={styles.videoTrack}
+                  // @ts-ignore
                   trackRef={cameraTrack}
                   participant={participant}
                 />

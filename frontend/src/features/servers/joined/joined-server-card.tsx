@@ -5,8 +5,6 @@ import type { TimestampDict } from '@features/notifications/types';
 
 import { LinkImage } from '@components/ui/links';
 
-import { ServerNewMessageNotification } from '@features/notifications/message';
-
 import { ServersNavbarItem } from '../nav';
 import { ServerAvatar } from '../get';
 

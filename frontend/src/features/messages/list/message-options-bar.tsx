@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ActiveIdState } from '@hooks';
 
 import { Tooltip } from '@components/ui/popups';
