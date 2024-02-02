@@ -41,7 +41,7 @@ const statusApi = api.injectEndpoints({
           method: 'get',
         }),
         onCacheEntryAdded: async (
-          userId,
+          _,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const userIds = Object.keys((await cacheDataLoaded).data);
@@ -71,7 +71,7 @@ const statusApi = api.injectEndpoints({
           method: 'get',
         }),
         onCacheEntryAdded: async (
-          serverId,
+          _,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {

@@ -9,7 +9,6 @@ import {
 } from './types';
 
 import { setupSocketEventListeners } from '@services/websocket';
-import { WritableDraft } from 'immer/dist/internal.js';
 
 const webRtcApi = api.injectEndpoints({
   endpoints(build) {
@@ -40,7 +39,8 @@ const webRtcApi = api.injectEndpoints({
               if (!room || !participant) return;
 
               if (room.name === roomId) updateCachedData(draft => {
-                draft.push(participant as Participant & WritableDraft<Participant>);
+                // @ts-ignore
+                draft.push(participant);
 
                 return draft;
               });
@@ -52,7 +52,8 @@ const webRtcApi = api.injectEndpoints({
               if (!room || !participant) return;
 
               if (room.name === roomId) updateCachedData(draft => {
-                draft = draft.filter(p => p.identity !== participant.identity) as WritableDraft<Participant[]>;
+                // @ts-ignore
+                draft = draft.filter(p => p.identity !== participant.identity);
 
                 return draft;
               });

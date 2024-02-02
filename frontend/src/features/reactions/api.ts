@@ -23,7 +23,7 @@ const reactionApi = api.injectEndpoints({
         }),
         providesTags: (...[, , { messageId }]) => [{ type: 'Reactions', id: messageId }],
         onCacheEntryAdded: async (
-          args,
+          _,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {

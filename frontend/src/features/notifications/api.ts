@@ -36,7 +36,7 @@ const notificationApi = api.injectEndpoints({
           return readStatuses;
         },
         onCacheEntryAdded: async (
-          userId,
+          _,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {

@@ -20,7 +20,7 @@ const relationApi = api.injectEndpoints({
           method: 'get',
         }),
         onCacheEntryAdded: async (
-          userId,
+          _,
           { cacheDataLoaded, cacheEntryRemoved, updateCachedData }
         ) => {
           const events = {
@@ -66,7 +66,7 @@ const relationApi = api.injectEndpoints({
             userId: recipientId,
           },
         }),
-        onQueryStarted: async (userId, { queryFulfilled }) => {
+        onQueryStarted: async (_, { queryFulfilled }) => {
           try {
             const { data: relation } = await queryFulfilled;
 
@@ -82,7 +82,7 @@ const relationApi = api.injectEndpoints({
           url: `/users/${senderId}/relations/${relationId}`,
           method: 'put',
         }),
-        onQueryStarted: async (userId, { queryFulfilled }) => {
+        onQueryStarted: async (_, { queryFulfilled }) => {
           try {
             const { data: relation } = await queryFulfilled;
 

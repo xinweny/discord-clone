@@ -74,7 +74,7 @@ const dmApi = api.injectEndpoints({
           method: 'post',
           data: { participantIds },
         }),
-        onQueryStarted: async (args, { queryFulfilled }) => {
+        onQueryStarted: async (_, { queryFulfilled }) => {
           const { data: dm } = await queryFulfilled;
 
           emitEvents({ [DMEvent.New]: dm });

@@ -80,7 +80,7 @@ const memberApi = api.injectEndpoints({
           url: `/servers/${serverId}/members`,
           method: 'post',
         }),
-        onQueryStarted: async (args, { queryFulfilled }) => {
+        onQueryStarted: async (_, { queryFulfilled }) => {
           const { data: member } = await queryFulfilled;
 
           emitEvents({ [ServerMemberEvent.Join]: member });
@@ -119,7 +119,7 @@ const memberApi = api.injectEndpoints({
             bannerColor,
           },
         }),
-        onQueryStarted: async (args, { queryFulfilled }) => {
+        onQueryStarted: async (_, { queryFulfilled }) => {
           const { data: member } = await queryFulfilled;
 
           emitEvents({ [ServerMemberEvent.Join]: member });
