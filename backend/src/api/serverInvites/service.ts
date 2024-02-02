@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 
-import env from '@config/env';
-
 import { ServerInvite } from './model';
+
+const BASE_SHORT_URL = 'https://discord-clone.gg';
 
 const getOne = async (fields: {
   urlId?: string,
@@ -13,7 +13,7 @@ const getOne = async (fields: {
 
   const invite = await ServerInvite.findOne({
     ...(serverId && { serverId }),
-    ...(urlId && { url: `${env.BASE_SHORT_URL}/${urlId}` }),
+    ...(urlId && { url: `${BASE_SHORT_URL}/${urlId}` }),
   });
 
   return invite;
@@ -21,7 +21,7 @@ const getOne = async (fields: {
 
 const getMany = async (urlIds: string[]) => {
   const invites = await ServerInvite.find({
-    url: { $in: urlIds.map(urlId =>  `${env.BASE_SHORT_URL}/${urlId}`) },
+    url: { $in: urlIds.map(urlId =>  `${BASE_SHORT_URL}/${urlId}`) },
   });
 
   return invites;
@@ -32,7 +32,7 @@ const create = async (serverId: Types.ObjectId | string) => {
 
   const invite = new ServerInvite({
     serverId,
-    url: `${env.BASE_SHORT_URL}/${urlId}`,
+    url: `${BASE_SHORT_URL}/${urlId}`,
   });
 
   await invite.save();
@@ -45,7 +45,7 @@ const updateUrlId = async (serverId: Types.ObjectId | string) => {
 
   const invite = await ServerInvite.findOneAndUpdate(
     { serverId },
-    { url: `${env.BASE_SHORT_URL}/${urlId}` },
+    { url: `${BASE_SHORT_URL}/${urlId}` },
     { new: true }
   );
 
