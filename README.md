@@ -8,11 +8,11 @@ Check out the live demo [here](#)! 👈
 - 1:1 and 1:N voice, video and screen-share with Livekit WebRTC
 - Get live call updates outside of calls with Livekit webhooks
 - React to messages with emojis or upload custom ones with EmojiMart
-- Add attachments to messages with Cloudinary
+- Add attachments to messages and upload profile pictures with Cloudinary
 - Send GIFs with Tenor GIF API
 - Rich-text editor to parse (custom) emojis, server invites and links with React Slate
 - Join servers with communities of like-minded individuals, or create and customize your own
-- Organize server discussions and topics into text and voice/video channels
+- Organize server discussions and topics into text and voice/video channels and customizable categories
 - Invite others to join servers with unique server invite links
 - Manage server member permissions with custom roles
 - Create group chats for up to 10 friends
