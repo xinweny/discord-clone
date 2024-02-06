@@ -88,18 +88,18 @@ const dmApi = api.injectEndpoints({
         }),
         onQueryStarted: async ({ avatar }, { dispatch, queryFulfilled }) => {
           try {
-            if (avatar) {
-              const { data: dm } = await queryFulfilled;
+            if (!avatar) return;
 
-              const dmId = dm._id;
+            const { data: dm } = await queryFulfilled;
+
+            const dmId = dm._id;
+
+            await signAndUpload(avatar, `/avatars/dms/${dmId}`, dmId);
   
-              await signAndUpload(avatar, `/avatars/groups/${dmId}`, dmId);
-    
-              dispatch(api.util.invalidateTags([
-                'DMs',
-                { type: 'DM', id: dmId },
-              ]));
-            }
+            dispatch(api.util.invalidateTags([
+              'DMs',
+              { type: 'DM', id: dmId },
+            ]));
           } catch (err) {
             console.log(err);
           }
