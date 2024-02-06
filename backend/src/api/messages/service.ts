@@ -125,7 +125,11 @@ const update = async (
   const { body, emojis } = fields;
 
   const updatedMessage = await Message.findByIdAndUpdate(id, {
-    $set: { body, emojis },
+    $set: {
+      body,
+      emojis,
+      updatedAt: new Date(),
+    },
   }, { new: true });
 
   return updatedMessage;

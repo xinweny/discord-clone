@@ -18,6 +18,7 @@ export interface IMessage extends Document {
   createdAt: Date;
   updatedAt?: Date;
   type: 'channel' | 'dm';
+  emojis: IMessageEmoji[];
 }
 
 const emojiSchema = new Schema({
@@ -32,9 +33,10 @@ const messageSchema = new Schema({
   body: { type: String, required: true },
   attachments: { type: [attachmentSchema], default: [] },
   emojis: { type: [emojiSchema], default: [] },
+  updatedAt: { type: Date },
 },
 {
-  timestamps: true,
+  timestamps: { createdAt: true },
   discriminatorKey: 'type',
 });
 
