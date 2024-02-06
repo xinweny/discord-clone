@@ -13,9 +13,11 @@ const signServerAvatarUpload: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;
-      const dir = 'avatars/servers';
+      const { serverId } = req.params;
+
+      const dir = `servers/${serverId}/avatar`;
   
-      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.serverId);
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, serverId);
   
       res.json({
         data: { timestamp, signature, folder },
@@ -30,9 +32,11 @@ const signServerBannerUpload: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;
-      const dir = 'banners/servers';
+      const { serverId } = req.params;
+
+      const dir = `servers/${serverId}/banner`;
   
-      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.serverId);
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, serverId);
   
       res.json({
         data: { timestamp, signature, folder },
@@ -47,9 +51,30 @@ const signUserAvatarUpload: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { filename } = req.body;
-      const dir = 'avatars/users';
+      const { userId } = req.params;
+
+      const dir = `users/${userId}/avatar`;
   
-      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, req.params.userId);
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, userId);
+  
+      res.json({
+        data: { timestamp, signature, folder },
+      });
+    }
+  )
+];
+
+const signDmAvatarUpload: RequestHandler[] = [
+  authenticate,
+  authorize.dmMember,
+  tryCatch(
+    async (req, res) => {
+      const { filename } = req.body;
+      const { dmId } = req.params;
+
+      const dir = `dms/${dmId}/avatar`;
+  
+      const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, dmId);
   
       res.json({
         data: { timestamp, signature, folder },
@@ -66,7 +91,10 @@ const signAttachmentsUpload: RequestHandler[] = [
       const filenames: string[] = req.body.filenames;
       const { serverId, roomId } = req.query;
 
-      const dir = `attachments/${serverId ? `servers/${serverId}/` : 'dms/'}/${roomId}/${messageId}`;
+      const dir = `${serverId
+        ? `servers/${serverId}/channels`
+        : `dms`
+      }/${roomId}/messages/${messageId}/attachments`;
 
       const signatures = filenames.map(filename =>
         cloudinaryService.createSignature(filename, dir)
@@ -87,7 +115,7 @@ const signEmojiUpload: RequestHandler[] = [
       const { serverId } = req.query;
       const { filename } = req.body;
 
-      const dir = `emojis/${serverId}`;
+      const dir = `servers/${serverId}/emojis`;
   
       const { timestamp, signature, folder } = cloudinaryService.createSignature(filename, dir, emojiId);
   
@@ -102,6 +130,7 @@ export const uploadController = {
   signServerAvatarUpload,
   signServerBannerUpload,
   signUserAvatarUpload,
+  signDmAvatarUpload,
   signAttachmentsUpload,
   signEmojiUpload,
 };
