@@ -74,7 +74,7 @@ const create = async (
     ...query,
   });
 
-  if (avatarFileName) server.avatarUrl = cloudinaryService.generateUrl(avatarFileName, 'avatars/servers', serverId.toString());
+  if (avatarFileName) server.avatarUrl = cloudinaryService.generateUrl(avatarFileName, `servers/${server.id}/avatar`, serverId.toString());
 
   // Default channels
   server.categories.push({
@@ -119,7 +119,6 @@ const create = async (
   await Promise.all([
     creator.save(),
     serverInviteService.create(serverId),
-    User.findByIdAndUpdate(userId, { $push: { serverIds: serverId } }),
   ]);
 
   return server;
@@ -138,10 +137,10 @@ const update = async (id: Types.ObjectId | string, fields: {
     $set: {
       ...query,
       ...(avatar && {
-        avatarUrl: cloudinaryService.generateUrl(avatar, 'avatars/servers', id.toString()),
+        avatarUrl: cloudinaryService.generateUrl(avatar, `servers/${id}/avatar`, id.toString()),
       }),
       ...(banner && {
-        bannerUrl: cloudinaryService.generateUrl(banner, 'banners/servers', id.toString()),
+        bannerUrl: cloudinaryService.generateUrl(banner, `servers/${id}/banner`, id.toString()),
       }),
     },
   }, { new: true, runValidators: true });
@@ -190,9 +189,7 @@ const remove = async (id: Types.ObjectId | string) => {
     ),
     Message.deleteMany({ roomId: { $in: channelIds } }),
     serverInviteService.remove(server._id),
-    cloudinaryService.deleteByFolder(`attachments/${id.toString()}`),
-    (server.avatarUrl) ? cloudinaryService.deleteByUrl(server.avatarUrl) : Promise.resolve(),
-    (server.bannerUrl) ? cloudinaryService.deleteByUrl(server.bannerUrl) : Promise.resolve(),
+    cloudinaryService.deleteByFolder(`servers/${id.toString()}`),
     ReadStatus.deleteMany({ serverId: id }),
   ]);
 

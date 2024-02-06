@@ -54,15 +54,10 @@ const deleteByFolder = async (folderPath: string) => {
 
   if (!dir) return {};
 
-  const prefix = await Promise.all(
-    ['image', 'raw', 'video'].map(
-      resourceType => cloudinary.api.delete_resources_by_prefix(path, { resource_type: resourceType })
-    )
-  );
+  await cloudinary.api.delete_resources_by_prefix(path);
+  await cloudinary.api.delete_folder(path);
 
-  const folder = await cloudinary.api.delete_folder(path)
-  
-  return { prefix, folder };
+  return path;
 };
 
 export const cloudinaryService = {

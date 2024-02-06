@@ -89,7 +89,7 @@ const create = async (
       message.attachments.push({
         url: cloudinaryService.generateUrl(
           filename,
-          `attachments/${serverId ? `servers/${serverId}/` : 'dms/'}${fields.roomId}/${message._id}`
+          `${serverId ? `servers/${serverId}/channels` : 'dms'}/${fields.roomId}/${message._id}/attachments`
         ),
         filename,
         mimetype,
@@ -138,11 +138,10 @@ const remove = async (id: string) => {
 
   const { attachments } = message;
 
-  if (attachments.length > 0) {
-    await Promise.all(attachments.map(
-      attachment => cloudinaryService.deleteByUrl(attachment.url))
-    );
-  }
+  if (attachments.length > 0) await cloudinaryService.deleteByFolder(`${message.type === 'channel'
+    ? `servers/${message.serverId}/channels`
+    : 'dms'
+  }/${message.roomId}/messages/${message.id}/attachments`);
 
   await Promise.all([
     message.deleteOne(),

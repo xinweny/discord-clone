@@ -16,6 +16,7 @@ export interface IServer extends Document {
   categories: Types.DocumentArray<ICategory>;
   channels: Types.DocumentArray<IChannel>;
   customEmojis: Types.DocumentArray<ICustomEmoji>;
+  description: string;
   memberCount: number;
   avatarUrl?: string;
   bannerUrl?: string;

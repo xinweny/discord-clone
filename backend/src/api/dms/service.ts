@@ -88,7 +88,7 @@ const update = async (
     $set: {
       ...query,
       ...(filename && {
-        imageUrl: cloudinaryService.generateUrl(filename, `avatars/groups/${dmId}`, dmId.toString()),
+        imageUrl: cloudinaryService.generateUrl(filename, `dms/${dmId}/avatar`, dmId.toString()),
       }),
     },
   }, { new: true, runValidators: true });
@@ -109,6 +109,7 @@ const checkMembership = async (userId: string, roomId: string) => {
 const remove = async (dmId: Types.ObjectId | string) => {
   const [dm, ] = await Promise.all([
     DM.findByIdAndDelete(dmId),
+    cloudinaryService.deleteByFolder(`dms/${dmId}`),
     Message.deleteMany({ roomId: dmId }),
     ReadStatus.deleteMany({ roomId: dmId }),
   ]);

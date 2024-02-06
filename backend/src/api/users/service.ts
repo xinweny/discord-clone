@@ -72,7 +72,7 @@ const update = async (id: Types.ObjectId | string, fields: {
     $set: {
       ...updateQuery,
       ...(avatarFileName && {
-        avatarUrl: cloudinaryService.generateUrl(avatarFileName, 'avatars/users', id.toString()),
+        avatarUrl: cloudinaryService.generateUrl(avatarFileName, `users/${id}/avatar`, id.toString()),
       }),
     },
   }, { new: true });

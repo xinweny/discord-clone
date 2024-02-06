@@ -32,7 +32,7 @@ const create = async (
   server.customEmojis.push({
     _id: emojiId,
     ...fields,
-    url: cloudinaryService.generateUrl(filename, `emojis/${serverId}`, emojiId.toString()),
+    url: cloudinaryService.generateUrl(filename, `servers/${serverId}/emojis`, emojiId.toString()),
   });
 
   const emoji = server.customEmojis.slice(-1)[0];

@@ -9,6 +9,27 @@ export interface IRole extends Types.Subdocument {
   memberCount?: number;
 }
 
+export const defaultRoleFields = {
+  name: '@everyone',
+  color: '#99AAB5',
+  permissions: {
+    administrator: false,
+    viewChannels: true,
+    manageChannels: false,
+    manageRoles: false,
+    manageExpressions: false,
+    kickMembers: false,
+    manageServer: false,
+    createInvite: true,
+    sendMessages: true,
+    manageMessages: false,
+    addReactions: true,
+    joinCall: true,
+    speak: true,
+    video: true,
+  },
+};
+
 const roleSchema = new Schema({
   name: { type: String },
   color: { type: String, required: true },
