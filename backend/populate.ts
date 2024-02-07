@@ -8,7 +8,7 @@ import { Server } from '@api/servers/model';
 import { ServerMember } from '@api/serverMembers/model';
 import { DM } from '@api/dms/model';
 import { MessageChannel, MessageDirect } from '@api/messages/discriminators';
-import { Reaction } from '@api/reactions/model';
+import { CustomEmojiReaction, EmojiReaction } from '@api/reactions/discriminators';
 
 import { authService } from '@api/auth/service';
 
@@ -38,6 +38,7 @@ async function populateDb() {
   console.log('Creating users...');
 
   const users = await Promise.all(USERS_DATA.map(async ({
+    userId,
     email,
     password,
     username,
@@ -47,6 +48,7 @@ async function populateDb() {
     const hashedPassword = await authService.hashPassword(password);
 
     const user = new User({
+      _id: userId,
       email,
       password: hashedPassword,
       username,
@@ -54,7 +56,7 @@ async function populateDb() {
     });
 
     const cloudinaryRes = await cloudinary.uploader.upload(avatarUrl, {
-      public_id: user.id,
+      public_id: userId,
       use_filename: false,
       folder: `${CLOUDINARY_BASE_FOLDER}/users/${user.id}/avatar`,
     });
@@ -70,21 +72,20 @@ async function populateDb() {
   console.log('Creating servers...');
 
   const servers = await Promise.all(SERVERS_DATA.map(async ({
-    ownerIdx,
+    serverId,
+    ownerId,
     serverName,
     avatarUrl,
     bannerUrl,
-    categoryNames,
+    categoryFields,
     channelFields,
     roleFields, // name, color, permissions
     customEmojiFields,
     membersData,
   }) => {
-    const serverId = new Types.ObjectId();
-
     const serverOwner = new ServerMember({
       serverId,
-      userId: users[ownerIdx]._id,
+      userId: ownerId,
     });
 
     const server = new Server({
@@ -96,12 +97,21 @@ async function populateDb() {
     });
 
     // Categories - 2 to 3
-    categoryNames.forEach(name => { server.categories.push({ name }); });
+    categoryFields.forEach(({
+      categoryId,
+      name,
+    }) => {
+      server.categories.push({
+        _id: categoryId,
+        name,
+      });
+    });
 
     // Channels - 2 - 10 text, 1 - 3 voice
-    channelFields.forEach(({ name, catIdx, type }) => {
+    channelFields.forEach(({ channelId, name, categoryId, type }) => {
       server.channels.push({
-        ...(catIdx && { categoryId: server.categories[catIdx]._id}),
+        _id: channelId, 
+        ...(categoryId && { categoryId: categoryId }),
         name,
         type,
       });
@@ -110,13 +120,13 @@ async function populateDb() {
     // Upload avatar and server banner
     const [avatarRes, bannerRes] = await Promise.all([
       cloudinary.uploader.upload(avatarUrl, {
-        public_id: server.id,
+        public_id: serverId,
         use_filename: false,
         folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/avatar`,
       }),
       (bannerUrl
         ? cloudinary.uploader.upload(bannerUrl, {
-          public_id: server.id,
+          public_id: serverId,
           use_filename: false,
           folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/banner`,
         })
@@ -135,8 +145,9 @@ async function populateDb() {
     serverOwner.roleIds.push(defaultRoleId);
 
     // Roles - 2 to 5
-    roleFields.forEach(({ name, color, permissions }) => {
+    roleFields.forEach(({ roleId, name, color, permissions }) => {
       server.roles.push({
+        _id: roleId,
         name,
         color,
         permissions,
@@ -144,16 +155,15 @@ async function populateDb() {
     });
 
     // Custom emojis - 3 to 10
-    await Promise.all(customEmojiFields.map(async ({ name, creatorId, url }) => {
-      const emojiId = new Types.ObjectId();
-
+    await Promise.all(customEmojiFields.map(async ({ emojiId, name, creatorId, url }) => {
       const res = await cloudinary.uploader.upload(url, {
-        public_id: emojiId.toString(),
+        public_id: emojiId,
         use_filename: false,
         folder: `${CLOUDINARY_BASE_FOLDER}/servers/${serverId}/emojis`,
       });
 
       server.customEmojis.push({
+        _id: emojiId,
         name,
         creatorId,
         url: res.secure_url,
@@ -161,16 +171,13 @@ async function populateDb() {
     }));
 
     // Server members
-    await Promise.all(membersData.map(({ userIdx, roleIdxs }) => {
+    await Promise.all(membersData.map(({ userId, roleIds }) => {
       const member = new ServerMember({
         serverId,
-        userId: users[userIdx].id,
+        userId: userId,
         roleIds: [
           defaultRoleId,
-          ...(roleIdxs
-            ? roleIdxs.map(roleIdx => server.roles[roleIdx].id)
-            : []
-          ),
+          ...(roleIds || []),
         ],
       });
 
@@ -187,13 +194,15 @@ async function populateDb() {
   // DMs and groups - 4 DM, 2 groups
   console.log('Creating DMs...');
   const dms = await Promise.all(DMS_DATA.map(async ({
-    userIdxs,
+    dmId,
+    userIds,
     name,
     avatarUrl,
   }) => {
     const dm = new DM({
-      participantIds: userIdxs.map(index => users[index].id),
-      isGroup: userIdxs.length > 2,
+      _id: dmId,
+      participantIds: userIds,
+      isGroup: userIds.length > 2,
       ...(name && { name }),
     });
 
@@ -214,41 +223,41 @@ async function populateDb() {
   console.log('Sending messages...');
 
   const messages = await Promise.all(MESSAGES_DATA.map(async ({
-    senderIdx,
-    roomIdx,
-    serverIdx,
+    messageId,
+    senderId,
+    roomId,
+    serverId,
     body,
     emojisData,
     attachmentsData,
   }) => {
-    ['senderId', 'roomId', 'body', 'emojis']
-
     const fields = {
-      senderId: users[senderIdx].id,
+      _id: messageId,
+      senderId,
       body,
     };
 
-    const message = serverIdx
+    const message = serverId
       ? new MessageChannel({
         ...fields,
-        roomId: servers[serverIdx].channels[roomIdx],
-        serverId: servers[serverIdx].id,
+        roomId,
+        serverId,
       })
       : new MessageDirect({
         ...fields,
-        roomId: dms[roomIdx].id,
+        roomId,
       });
 
     emojisData.forEach(({
+      emojiId,
       id,
       shortcode,
-      emojiIdx,
     }) => {
       message.emojis.push({
         id,
         shortcode,
-        ...(emojiIdx && { url: servers[emojiIdx[0]].customEmojis[emojiIdx[1]].url }),
-        custom: !!emojiIdx,
+        ...(emojiId && { url: servers[emojiIdx[0]].customEmojis[emojiIdx[1]].url }),
+        custom: !!emojiId,
       });
     });
 
@@ -256,10 +265,10 @@ async function populateDb() {
       const cloudinaryRes = await cloudinary.uploader.upload(url, {
         public_id: filename,
         use_filename: true,
-        folder: `${CLOUDINARY_BASE_FOLDER}/${serverIdx
-          ? `servers/${servers[serverIdx].id}/channels/${servers[serverIdx].channels[roomIdx].id}`
-          : `dms/${dms[roomIdx].id}`
-        }/messages/${message.id}/attachments`,
+        folder: `${CLOUDINARY_BASE_FOLDER}/${serverId
+          ? `servers/${serverId}/channels/${roomId}`
+          : `dms/${roomId}`
+        }/messages/${messageId}/attachments`,
       });
 
       if (cloudinaryRes) message.attachments.push({
@@ -278,9 +287,34 @@ async function populateDb() {
 
   // TODO: Finish reaction mock data
   await Promise.all(REACTIONS_DATA.map(async ({
-
+    userIds,
+    messageId,
+    name,
+    emojiId,
+    url,
+    unified,
+    native,
   }) => {
-    const reaction = new Reaction();
+    const fields = {
+      messageId,
+      name,
+      userIds,
+      count: userIds.length,
+    };
+
+    const reaction = (emojiId && url)
+      ? new CustomEmojiReaction({
+        ...fields,
+        emojiId,
+        url,
+      })
+      : new EmojiReaction({
+        ...fields,
+        unified,
+        native,
+      });
+
+    await reaction.save();
 
     return reaction;
   }));
