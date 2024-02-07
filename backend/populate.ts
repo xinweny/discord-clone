@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import * as data from './data.json';
 
 import db from '@config/db';
 import { cloudinary } from '@config/cloudinary';
@@ -14,15 +14,15 @@ import { authService } from '@api/auth/service';
 
 import { defaultRoleFields } from '@api/servers/roles/schema';
 
-const CLOUDINARY_BASE_FOLDER = '/discord_clone';
-
-const USERS_DATA = [];
-const SERVERS_DATA = [];
-const DMS_DATA = [];
-const MESSAGES_DATA = [];
-const REACTIONS_DATA = [];
-
 async function populateDb() {
+  const CLOUDINARY_BASE_FOLDER = '/discord_clone';
+
+  const USERS_DATA = data.users;
+  const SERVERS_DATA = data.servers;
+  const DMS_DATA = data.dms;
+  const MESSAGES_DATA = data.messages;
+  const REACTIONS_DATA = data.reactions;
+
   console.log('Dropping database and CDN...');
 
   await Promise.all([
@@ -44,6 +44,7 @@ async function populateDb() {
     username,
     displayName,
     avatarUrl,
+    bannerColor,
   }) => {
     const hashedPassword = await authService.hashPassword(password);
 
@@ -53,10 +54,11 @@ async function populateDb() {
       password: hashedPassword,
       username,
       displayName,
+      bannerColor,
     });
 
     const cloudinaryRes = await cloudinary.uploader.upload(avatarUrl, {
-      public_id: userId,
+      public_id: userId.toString(),
       use_filename: false,
       folder: `${CLOUDINARY_BASE_FOLDER}/users/${user.id}/avatar`,
     });

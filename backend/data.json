@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "userId": "65c409456605b438a1cfa200",
+      "email": "guitarsan@gmail.com",
+      "password": "password1",
+      "username": "ravenproud",
+      "displayName": "RavenProud",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#1E2460"
+    },
+    {
+      "userId": "65c4094c96dcd6290c71aacb",
+      "email": "byteborn2@jigsy.com",
+      "password": "password2",
+      "username": "neko",
+      "displayName": "nekoneko",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#F4A900"
+    },
+    {
+      "userId": "65c40953a944658192c19420",
+      "email": "keeperon@answers.com",
+      "password": "password3",
+      "username": "rosemary",
+      "displayName": "Rose Chrome",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#A12312"
+    },
+    {
+      "userId": "65c4095b3c5f4ecff17000f9",
+      "email": "dsondland5@arizona.edu",
+      "password": "password4",
+      "username": "artissa",
+      "displayName": "Artissa",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#3E5F8A"
+    },
+    {
+      "userId": "65c40962f74c941eacdaa6fc",
+      "email": "fvosse8@sfgate.com",
+      "password": "password5",
+      "username": "kai",
+      "displayName": "Ring-kai",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#7D8471"
+    }
+  ],
+  "servers": [
+
+  ],
+  "dms": [],
+  "messages": [],
+  "reactions": []
+}
