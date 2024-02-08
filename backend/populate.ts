@@ -34,7 +34,7 @@ async function populateDb() {
   ]);
   
   // POPULATE DB AND CDN
-  // Users - 5
+  // Users - 10
   console.log('Creating users...');
 
   const users = await Promise.all(USERS_DATA.map(async ({
@@ -45,6 +45,18 @@ async function populateDb() {
     displayName,
     avatarUrl,
     bannerColor,
+    customStatus,
+    bio,
+  }: {
+    userId: string,
+    email: string,
+    password: string,
+    username: string,
+    displayName: string,
+    avatarUrl: string,
+    bannerColor: string,
+    customStatus?: string,
+    bio?: string,
   }) => {
     const hashedPassword = await authService.hashPassword(password);
 
@@ -55,6 +67,8 @@ async function populateDb() {
       username,
       displayName,
       bannerColor,
+      customStatus,
+      bio,
     });
 
     const cloudinaryRes = await cloudinary.uploader.upload(avatarUrl, {
@@ -98,6 +112,26 @@ async function populateDb() {
       private: false,
     });
 
+    // Upload avatar and server banner
+    const [avatarRes, bannerRes] = await Promise.all([
+      cloudinary.uploader.upload(avatarUrl, {
+        public_id: serverId,
+        use_filename: false,
+        folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/avatar`,
+      }),
+      (bannerUrl
+        ? cloudinary.uploader.upload(bannerUrl, {
+          public_id: serverId,
+          use_filename: false,
+          folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/banner`,
+        })
+        : Promise.resolve()
+      ),
+    ]);
+
+    if (avatarRes) server.avatarUrl = avatarRes.secure_url;
+    if (bannerRes) server.bannerUrl = bannerRes.secure_url;
+
     // Categories - 2 to 3
     categoryFields.forEach(({
       categoryId,
@@ -118,26 +152,6 @@ async function populateDb() {
         type,
       });
     });
-
-    // Upload avatar and server banner
-    const [avatarRes, bannerRes] = await Promise.all([
-      cloudinary.uploader.upload(avatarUrl, {
-        public_id: serverId,
-        use_filename: false,
-        folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/avatar`,
-      }),
-      (bannerUrl
-        ? cloudinary.uploader.upload(bannerUrl, {
-          public_id: serverId,
-          use_filename: false,
-          folder: `${CLOUDINARY_BASE_FOLDER}/servers/${server.id}/banner`,
-        })
-        : Promise.resolve()
-      ),
-    ]);
-
-    if (avatarRes) server.avatarUrl = avatarRes.secure_url;
-    if (bannerRes) server.bannerUrl = bannerRes.secure_url;
 
     // Create default @everyone role
     server.roles.push(defaultRoleFields);
@@ -174,6 +188,8 @@ async function populateDb() {
 
     // Server members
     await Promise.all(membersData.map(({ userId, roleIds }) => {
+      const user = users.find(u => u._id.equals(userId));
+
       const member = new ServerMember({
         serverId,
         userId: userId,
@@ -181,6 +197,8 @@ async function populateDb() {
           defaultRoleId,
           ...(roleIds || []),
         ],
+        bannerColor: user?.bannerColor,
+        bio: user?.bio,
       });
 
       server.memberCount = server.memberCount + 1;
