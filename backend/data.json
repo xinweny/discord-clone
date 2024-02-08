@@ -7,7 +7,9 @@
       "username": "ravenproud",
       "displayName": "RavenProud",
       "avatarUrl": "https://picsum.photos/200",
-      "bannerColor": "#1E2460"
+      "bannerColor": "#1E2460",
+      "bio": "Coffee addict and bookworm exploring the digital world. Join me for discussions on literature and the occasional meme exchange.",
+      "customStatus": "Exploring the universe one star at a time 🌌"
     },
     {
       "userId": "65c4094c96dcd6290c71aacb",
@@ -16,7 +18,9 @@
       "username": "neko",
       "displayName": "nekoneko",
       "avatarUrl": "https://picsum.photos/200",
-      "bannerColor": "#F4A900"
+      "bannerColor": "#F4A900",
+      "bio": "Anime aficionado and aspiring writer. Looking for fellow otakus to discuss anime, manga, and maybe even collaborate on a story or two.",
+      "customStatus": "夢を追いかけています！"
     },
     {
       "userId": "65c40953a944658192c19420",
@@ -25,7 +29,9 @@
       "username": "rosemary",
       "displayName": "Rose Chrome",
       "avatarUrl": "https://picsum.photos/200",
-      "bannerColor": "#A12312"
+      "bannerColor": "#A12312",
+      "bio": "Movie buff and trivia master. Let's binge-watch our favorite films and debate about the greatest movies of all time!",
+      "customStatus": "🌈😊🎉"
     },
     {
       "userId": "65c4095b3c5f4ecff17000f9",
@@ -34,7 +40,8 @@
       "username": "artissa",
       "displayName": "Artissa",
       "avatarUrl": "https://picsum.photos/200",
-      "bannerColor": "#3E5F8A"
+      "bannerColor": "#3E5F8A",
+      "bio": "Artist at heart, spreading positivity through pixels. Let's share our creations and inspire each other!"
     },
     {
       "userId": "65c40962f74c941eacdaa6fc",
@@ -43,11 +50,94 @@
       "username": "kai",
       "displayName": "Ring-kai",
       "avatarUrl": "https://picsum.photos/200",
-      "bannerColor": "#7D8471"
+      "bannerColor": "#7D8471",
+      "bio": "Science nerd with a curiosity for the cosmos. Join me for discussions on astrophysics, space exploration, and everything in between."
+    },
+    {
+      "userId": "65c5134c5b73b94e45f1c381",
+      "email": "hawobu_rugi51@aol.com",
+      "password": "password6",
+      "username": "santour",
+      "displayName": "Santour",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#F8F32B",
+      "bio": "Outdoor enthusiast stuck in the digital world. Let's swap hiking stories and plan our next adventure!",
+      "customStatus": "🌍🔍🌱"
+    },
+    {
+      "userId": "65c51355ac250f88e82d0908",
+      "email": "lomugo_dako13@outlook.com",
+      "password": "password7",
+      "username": "hippo",
+      "displayName": "HippoJean8",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#20603D",
+      "bio": "Music lover with a passion for coding. Seeking fellow enthusiasts for jam sessions and coding challenges.",
+      "customStatus": "Lost in the melody of life 🎶"
+    },
+    {
+      "userId": "65c5135c254666fe2c752c83",
+      "email": "rijurac66@yahoo.com",
+      "password": "password8",
+      "username": "chelvee",
+      "displayName": "ChellV2",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#3B83BD",
+      "bio": "Tech enthusiast by day, gamer by night. Always up for a chat about the latest tech trends or a round of Overwatch.",
+      "customStatus": "Fuelled by caffeine and code. 💻"
+    },
+    {
+      "userId": "65c513679348d96403f81015",
+      "email": "nume-kawuwo49@mail.com",
+      "password": "password9",
+      "username": "jaws",
+      "displayName": "Shark Claws",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#6C4675",
+      "bio": "Explorer of the virtual realm, seeking adventures and friendships. Let's embark on epic quests together!"
+    },
+    {
+      "userId": "65c5136d50697a9e9cf593ab",
+      "email": "aguti6@hotmail.com",
+      "password": "password10",
+      "username": "goldengai",
+      "displayName": "Silver-xoxo",
+      "avatarUrl": "https://picsum.photos/200",
+      "bannerColor": "#84C3BE",
+      "bio": "Foodie on a quest for the perfect ramen recipe. Join me for culinary adventures and late-night snack debates."
     }
   ],
   "servers": [
-
+    {
+      "serverId": "65c510ba04b8fcb9e27d5554",
+      "ownerId": "65c4094c96dcd6290c71aacb",
+      "serverName": "Nihongo with Neko",
+      "avatarUrl": "https://img.freepik.com/premium-vector/cute-cartoon-lucky-cat-maneki-neko-vector-illustration_773815-126.jpg"
+    },
+    {
+      "serverId": "65c5135c254666fe2c752c83",
+      "ownerId": "65c4095b3c5f4ecff17000f9",
+      "serverName": "JavaScript Hack Hub",
+      "avatarUrl": "https://assets.codepen.io/1541696/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1583055762&width=512"
+    },
+    {
+      "serverId": "65c51bf82f20492d43a847ed",
+      "ownerId": "65c4095b3c5f4ecff17000f9",
+      "serverName": "Animal Crossway",
+      "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg"
+    },
+    {
+      "serverId": "65c51ca2951dcd71073b8b36",
+      "ownerId": "65c409456605b438a1cfa200",
+      "serverName": "LoFi Study Family",
+      "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg"
+    },
+    {
+      "serverId": "65c50dda75b8b26d2bbd8381",
+      "ownerId": "65c5134c5b73b94e45f1c381",
+      "serverName": "Jenshin Impact",
+      "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg"
+    }
   ],
   "dms": [],
   "messages": [],
