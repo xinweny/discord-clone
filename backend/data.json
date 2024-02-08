@@ -112,31 +112,269 @@
       "serverId": "65c510ba04b8fcb9e27d5554",
       "ownerId": "65c4094c96dcd6290c71aacb",
       "serverName": "Nihongo with Neko",
-      "avatarUrl": "https://img.freepik.com/premium-vector/cute-cartoon-lucky-cat-maneki-neko-vector-illustration_773815-126.jpg"
+      "avatarUrl": "https://img.freepik.com/premium-vector/cute-cartoon-lucky-cat-maneki-neko-vector-illustration_773815-126.jpg",
+      "bannerUrl": "",
+      "description": "🌸 Welcome to Nihongo with Neko! 🌸\nA cozy community for learning Japanese & exploring its culture. Join us for language exchange, events & meowtastic adventures! 🐾🇯🇵✨",
+      "categoryFields": [
+        {
+          "categoryId": "601f854641462a04c84fc6b6",
+          "name": "Japanese Learning"
+        },
+        {
+          "categoryId": "601f854641462a04c84fc6b7",
+          "name": "Cultural Exchange"
+        },
+        {
+          "categoryId": "601f854641462a04c84fc6b8",
+          "name": "Voice Channels"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "601f854641462a04c84fc6b9",
+          "name": "events",
+          "type": "text",
+          "description": "Stay updated with server events and activities."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6ba",
+          "name": "announcements",
+          "type": "text",
+          "description": "Important announcements and server updates."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6bb",
+          "name": "introductions",
+          "type": "text",
+          "description": "Introduce yourself to the community and meet new members."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6bc",
+          "name": "japanese-practice",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b6",
+          "description": "Practice speaking and writing Japanese with fellow learners."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6bd",
+          "name": "japanese-resources",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b6",
+          "description": "Share helpful resources and study materials for learning Japanese."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6be",
+          "name": "日本語のみ",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b6",
+          "description": "Channel dedicated to Japanese-only discussions."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6bf",
+          "name": "jlpt",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b6",
+          "description": "Prepare for the Japanese Language Proficiency Test (JLPT) together."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c0",
+          "name": "book-club",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b6",
+          "description": "Discuss and explore Japanese literature together."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c1",
+          "name": "japan-travel",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b7",
+          "description": "Share travel experiences and recommendations for visiting Japan."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c2",
+          "name": "japan-life",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b7",
+          "description": "Discuss life in Japan, from culture to daily experiences."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c3",
+          "name": "food",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b7",
+          "description": "Share and discuss Japanese cuisine, recipes, and food culture."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c4",
+          "name": "japanese-arts",
+          "type": "text",
+          "categoryId": "601f854641462a04c84fc6b7",
+          "description": "Explore Japanese arts and crafts, from traditional to contemporary."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c5",
+          "name": "japanese-study-1",
+          "type": "voice",
+          "categoryId": "601f854641462a04c84fc6b8",
+          "description": "Voice channel for focused Japanese study sessions."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c6",
+          "name": "japanese-study-2",
+          "type": "voice",
+          "categoryId": "601f854641462a04c84fc6b8",
+          "description": "Voice channel for collaborative Japanese study sessions."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c7",
+          "name": "日本語のみ",
+          "type": "voice",
+          "categoryId": "601f854641462a04c84fc6b8",
+          "description": "Voice channel for Japanese-only conversations."
+        },
+        {
+          "channelId": "601f854641462a04c84fc6c8",
+          "name": "reading-circle",
+          "type": "voice",
+          "categoryId": "601f854641462a04c84fc6b8",
+          "description": "Voice channel for group reading sessions."
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "601f856cf6f102001e31aa02",
+          "name": "Sensei",
+          "color": "#ffcc00",
+          "permissions": {
+            "administrator": true,
+            "viewChannels": true,
+            "manageChannels": true,
+            "manageRoles": true,
+            "manageExpressions": true,
+            "kickMembers": true,
+            "manageServer": true,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": true,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f856cf6f102001e31aa03",
+          "name": "Neko Master",
+          "color": "#66ff66",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": true,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": true,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": false
+          }
+        },
+        {
+          "roleId": "601f856cf6f102001e31aa04",
+          "name": "Nihongo Student",
+          "color": "#6699ff",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f866f9c59b2054a315e78",
+          "name": "Advanced",
+          "color": "#ff9900",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f868a9c59b2054a315e79",
+          "name": "Beginner",
+          "color": "#ff3399",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ]
     },
     {
       "serverId": "65c5135c254666fe2c752c83",
       "ownerId": "65c4095b3c5f4ecff17000f9",
       "serverName": "JavaScript Hack Hub",
-      "avatarUrl": "https://assets.codepen.io/1541696/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1583055762&width=512"
+      "avatarUrl": "https://assets.codepen.io/1541696/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1583055762&width=512",
+      "bannerUrl": ""
     },
     {
       "serverId": "65c51bf82f20492d43a847ed",
       "ownerId": "65c4095b3c5f4ecff17000f9",
       "serverName": "Animal Crossway",
-      "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg"
+      "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg",
+      "bannerUrl": ""
     },
     {
       "serverId": "65c51ca2951dcd71073b8b36",
       "ownerId": "65c409456605b438a1cfa200",
       "serverName": "LoFi Study Family",
-      "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg"
+      "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg",
+      "bannerUrl": ""
     },
     {
       "serverId": "65c50dda75b8b26d2bbd8381",
       "ownerId": "65c5134c5b73b94e45f1c381",
       "serverName": "Jenshin Impact",
-      "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg"
+      "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg",
+      "bannerUrl": ""
     }
   ],
   "dms": [],
