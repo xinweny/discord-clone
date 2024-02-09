@@ -1,11 +1,26 @@
 import { Schema, Types } from 'mongoose';
 
+export interface IPermissions {
+  administrator: boolean;
+  viewChannels: boolean;
+  manageChannels: boolean;
+  manageRoles: boolean;
+  manageExpressions: boolean;
+  kickMembers: boolean;
+  manageServer: boolean;
+  createInvite: boolean;
+  sendMessages: boolean;
+  manageMessages: boolean;
+  addReactions: boolean;
+  joinCall: boolean;
+  speak: boolean;
+  video: boolean;
+}
+
 export interface IRole extends Types.Subdocument {
   name: string,
   color: string,
-  permissions: {
-    [key: string]: boolean,
-  },
+  permissions: IPermissions,
   memberCount?: number;
 }
 
