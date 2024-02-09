@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 import * as data from './data.json';
 
 import db from '@config/db';
@@ -12,7 +14,7 @@ import { CustomEmojiReaction, EmojiReaction } from '@api/reactions/discriminator
 
 import { authService } from '@api/auth/service';
 
-import { defaultRoleFields } from '@api/servers/roles/schema';
+import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 
 async function populateDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
@@ -95,9 +97,41 @@ async function populateDb() {
     bannerUrl,
     categoryFields,
     channelFields,
-    roleFields, // name, color, permissions
+    roleFields,
     customEmojiFields,
     membersData,
+  }: {
+    serverId: string;
+    ownerId: string;
+    serverName: string;
+    avatarUrl: string;
+    bannerUrl: string;
+    categoryFields: {
+      categoryId: string;
+      name: string;
+    }[];
+    channelFields: {
+      channelId: string;
+      name: string;
+      type: 'text' | 'voice';
+      description?: string;
+      categoryId?: string;
+    }[];
+    roleFields: {
+      roleId: string;
+      name: string;
+      color: string;
+      permissions: IPermissions;
+    }[];
+    customEmojiFields: {
+      emojiId: string;
+      name: string;
+      url: string;
+    }[];
+    membersData: {
+      userId: string;
+      roleIds: string[];
+    }[];
   }) => {
     const serverOwner = new ServerMember({
       serverId,
@@ -171,7 +205,7 @@ async function populateDb() {
     });
 
     // Custom emojis - 3 to 10
-    await Promise.all(customEmojiFields.map(async ({ emojiId, name, creatorId, url }) => {
+    await Promise.all(customEmojiFields.map(async ({ emojiId, name, url }) => {
       const res = await cloudinary.uploader.upload(url, {
         public_id: emojiId,
         use_filename: false,
@@ -181,7 +215,7 @@ async function populateDb() {
       server.customEmojis.push({
         _id: emojiId,
         name,
-        creatorId,
+        creatorId: ownerId,
         url: res.secure_url,
       });
     }));
@@ -189,6 +223,16 @@ async function populateDb() {
     // Server members
     await Promise.all(membersData.map(({ userId, roleIds }) => {
       const user = users.find(u => u._id.equals(userId));
+
+      if (!user) return Promise.resolve();
+
+      if (user._id.equals(serverOwner._id)) {
+        roleIds.forEach(rId => {
+          serverOwner.roleIds.push(new Types.ObjectId(rId));
+        });
+
+        return serverOwner.save();
+      }
 
       const member = new ServerMember({
         serverId,

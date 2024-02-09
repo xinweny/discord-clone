@@ -20,7 +20,7 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#F4A900",
       "bio": "Anime aficionado and aspiring writer. Looking for fellow otakus to discuss anime, manga, and maybe even collaborate on a story or two.",
-      "customStatus": "夢を追いかけています！"
+      "customStatus": "夢を追いかけよう！"
     },
     {
       "userId": "65c40953a944658192c19420",
@@ -346,35 +346,571 @@
             "video": true
           }
         }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65c68c65c6a081b4deeb8338",
+          "name": "catplushyPP",
+          "url": "https://cdn3.emoji.gg/emojis/9405-cutecatplushypp.png"
+        },
+        {
+          "emojiId": "65c68c6ef53e25493284d0d8",
+          "name": "peepoJapan",
+          "url": "https://cdn3.emoji.gg/emojis/8710-peepojapan.gif"
+        },
+        {
+          "emojiId": "65c68c7027c67fee0672eb24",
+          "name": "hellokitty_arigatou",
+          "url": "https://cdn3.emoji.gg/emojis/9425-hellokitty-rainbow.gif"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "roleIds": ["601f856cf6f102001e31aa02", "601f856cf6f102001e31aa03"]
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["601f866f9c59b2054a315e78"]
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "roleIds": ["601f866f9c59b2054a315e78"]
+        },
+        {
+          "userId": "65c4095b3c5f4ecff17000f9",
+          "roleIds": ["601f856cf6f102001e31aa04", "601f866f9c59b2054a315e78"]
+        },
+        {
+          "userId": "65c40962f74c941eacdaa6fc",
+          "roleIds": ["601f856cf6f102001e31aa04"]
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "roleIds": ["601f868a9c59b2054a315e79"]
+        },
+        {
+          "userId": "65c51355ac250f88e82d0908",
+          "roleIds": ["601f856cf6f102001e31aa04", "601f868a9c59b2054a315e79"]
+        },
+        {
+          "userId": "65c5135c254666fe2c752c83",
+          "roleIds": ["601f856cf6f102001e31aa02", "601f866f9c59b2054a315e78"]
+        },
+        {
+          "userId": "65c513679348d96403f81015",
+          "roleIds": ["601f856cf6f102001e31aa02"]
+        },
+        {
+          "userId": "65c5136d50697a9e9cf593ab",
+          "roleIds": ["601f856cf6f102001e31aa03"]
+        }
       ]
     },
     {
-      "serverId": "65c5135c254666fe2c752c83",
-      "ownerId": "65c4095b3c5f4ecff17000f9",
+      "serverId": "65c6a28d8d5f1f31b9c0e2f1",
+      "ownerId": "65c5135c254666fe2c752c83",
       "serverName": "JavaScript Hack Hub",
       "avatarUrl": "https://assets.codepen.io/1541696/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1583055762&width=512",
-      "bannerUrl": ""
+      "bannerUrl": "https://developer.sabre.com/sites/default/files/2019-10/Picture4-1-1024x242_3.png",
+      "description": "Dive into the world of JS at Javascript Hack Hub! Join our vibrant community to learn, collaborate, and innovate on coding projects. Level up your JS skills with us! 🚀",
+      "categoryFields": [
+        {
+          "categoryId": "601f87c69c59b2054a315e7a",
+          "name": "General Discussion"
+        },
+        {
+          "categoryId": "601f87c69c59b2054a315e7b",
+          "name": "Learning Resources"
+        },
+        {
+          "categoryId": "601f87c69c59b2054a315e7c",
+          "name": "Coding Help"
+        },
+        {
+          "categoryId": "601f87c69c59b2054a315e7d",
+          "name": "Project Showcase"
+        },
+        {
+          "categoryId": "601f87c69c59b2054a315e7e",
+          "name": "Voice Channels"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "601f87c69c59b2054a315e7f",
+          "name": "📢-announcements",
+          "description": "Announcements and important updates.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e80",
+          "name": "📋-rules-and-guidelines",
+          "description": "Community rules and guidelines.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e81",
+          "name": "👋-introductions",
+          "description": "Introduce yourself to the community!",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e82",
+          "name": "💬-general-chat",
+          "description": "General chat and discussions.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e83",
+          "name": "🔄-off-topic-discussion",
+          "description": "Non-programming related discussions.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e84",
+          "name": "🎲-random",
+          "description": "Random discussions and fun!",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7a"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e85",
+          "name": "📚-learning-resources",
+          "description": "Share useful resources for learning.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7b"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e86",
+          "name": "📖-tutorials",
+          "description": "Share coding tutorials and guides.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7b"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e87",
+          "name": "🔍-ask-the-experts",
+          "description": "Get help and advice from coding experts.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7c"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e88",
+          "name": "💻-coding-help",
+          "description": "Seek help with coding problems.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7c"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e89",
+          "name": "🚀-project-showcase",
+          "description": "Showcase your coding projects.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7d"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e8a",
+          "name": "📣-feedback-and-suggestions",
+          "description": "Share your feedback and suggestions for improvement.",
+          "type": "text",
+          "categoryId": "601f87c69c59b2054a315e7d"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e8b",
+          "name": "General Voice",
+          "description": "General voice chat channel.",
+          "type": "voice",
+          "categoryId": "601f87c69c59b2054a315e7e"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e8c",
+          "name": "Study Room 1",
+          "description": "Voice channel for studying and discussions.",
+          "type": "voice",
+          "categoryId": "601f87c69c59b2054a315e7e"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e8d",
+          "name": "Study Room 2",
+          "description": "Voice channel for studying and discussions.",
+          "type": "voice",
+          "categoryId": "601f87c69c59b2054a315e7e"
+        },
+        {
+          "channelId": "601f87c69c59b2054a315e8e",
+          "name": "Collaboration Corner",
+          "description": "Voice channel for collaboration on projects.",
+          "type": "voice",
+          "categoryId": "601f87c69c59b2054a315e7e"
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "601f89e69c59b2054a315e8f",
+          "name": "Front-end",
+          "color": "#FFA500",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a019c59b2054a315e90",
+          "name": "Back-end",
+          "color": "#FF69B4",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a179c59b2054a315e91",
+          "name": "Full-stack",
+          "color": "#00FFFF",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a259c59b2054a315e92",
+          "name": "React",
+          "color": "#800080",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a349c59b2054a315e93",
+          "name": "Svelte",
+          "color": "#FF0000",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a3a9c59b2054a315e94",
+          "name": "Vue.js",
+          "color": "#00FF00",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a429c59b2054a315e95",
+          "name": "Node.js",
+          "color": "#0000FF",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a4d9c59b2054a315e96",
+          "name": "TypeScript",
+          "color": "#FFFF00",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a529c59b2054a315e97",
+          "name": "Express.js",
+          "color": "#FFA07A",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a599c59b2054a315e98",
+          "name": "Next.js",
+          "color": "#8A2BE2",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a5e9c59b2054a315e99",
+          "name": "Angular",
+          "color": "#FF4500",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "601f8a649c59b2054a315e9a",
+          "name": "React Native",
+          "color": "#9400D3",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "602bd16e4c7d9b2054a314f2",
+          "name": "Moderator",
+          "color": "#00CED1",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": true,
+            "manageRoles": true,
+            "manageExpressions": true,
+            "kickMembers": true,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": true,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65c6a444bd16480850c3bdaa",
+          "name": "meow_keyboard",
+          "url": "https://cdn3.emoji.gg/emojis/5906-catkeyboardwarrior.gif"
+        },
+        {
+          "emojiId": "65c6a4ad4a4c35cd79c6816e",
+          "name": "nerdyPog",
+          "url": "https://cdn3.emoji.gg/emojis/6918-nerdypog.png"
+        },
+        {
+          "emojiId": "65c6a4dac606fe678ae45c71",
+          "name": "show_le_code",
+          "url": "https://cdn3.emoji.gg/emojis/6722-show-le-code.png"
+        },
+        {
+          "emojiId": "65c6a51acc529e237c0c2e91",
+          "name": "peepoHacker",
+          "url": "https://cdn3.emoji.gg/emojis/1983-peepo-hacker.png"
+        },
+        {
+        "emojiId": "65c6a56ede08fc98871476f1",
+        "name": "javascript",
+        "url": "https://cdn3.emoji.gg/emojis/8727-javascript.png"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c5135c254666fe2c752c83",
+          "roleIds": ["601f8a179c59b2054a315e91", "601f8a429c59b2054a315e95", "601f8a4d9c59b2054a315e96"]
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["601f89e69c59b2054a315e8f", "601f8a179c59b2054a315e91", "601f8a259c59b2054a315e92", "601f8a3a9c59b2054a315e94"]
+        },
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "roleIds": ["601f8a019c59b2054a315e90", "601f8a259c59b2054a315e92", "601f8a529c59b2054a315e97"]
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "roleIds": ["601f8a019c59b2054a315e90", "601f8a349c59b2054a315e93"]
+        },
+        {
+          "userId": "65c40962f74c941eacdaa6fc",
+          "roleIds": ["601f8a019c59b2054a315e90", "601f8a259c59b2054a315e92"]
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "roleIds": ["601f8a349c59b2054a315e93", "601f8a4d9c59b2054a315e96", "601f8a529c59b2054a315e97", "601f8a599c59b2054a315e98", "601f8a649c59b2054a315e9a"]
+        },
+        {
+          "userId": "65c51355ac250f88e82d0908",
+          "roleIds": ["601f8a3a9c59b2054a315e94", "601f8a529c59b2054a315e97"]
+        },
+        {
+          "userId": "65c513679348d96403f81015",
+          "roleIds": ["601f8a529c59b2054a315e97"]
+        },
+        {
+          "userId": "65c5136d50697a9e9cf593ab",
+          "roleIds": ["601f8a3a9c59b2054a315e94"]
+        }
+      ]
     },
     {
       "serverId": "65c51bf82f20492d43a847ed",
       "ownerId": "65c4095b3c5f4ecff17000f9",
       "serverName": "Animal Crossway",
       "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg",
-      "bannerUrl": ""
+      "bannerUrl": "https://i.pinimg.com/originals/3a/33/4f/3a334fe9f788c077fac838da7a72a2f6.jpg"
     },
     {
       "serverId": "65c51ca2951dcd71073b8b36",
       "ownerId": "65c409456605b438a1cfa200",
       "serverName": "LoFi Study Family",
       "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg",
-      "bannerUrl": ""
+      "bannerUrl": "https://wallpapercave.com/wp/wp10248299.jpg"
     },
     {
       "serverId": "65c50dda75b8b26d2bbd8381",
       "ownerId": "65c5134c5b73b94e45f1c381",
       "serverName": "Jenshin Impact",
       "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg",
-      "bannerUrl": ""
+      "bannerUrl": "https://apktodo.io/uploads/2022/12/silly-wisher-for-genshin-thumbnail.jpg"
     }
   ],
   "dms": [],
