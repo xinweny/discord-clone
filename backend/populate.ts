@@ -19,11 +19,11 @@ import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 async function populateDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
 
-  const USERS_DATA = data.users;
-  const SERVERS_DATA = data.servers;
-  const DMS_DATA = data.dms;
-  const MESSAGES_DATA = data.messages;
-  const REACTIONS_DATA = data.reactions;
+  const USERS_DATA = data.users || [];
+  const SERVERS_DATA = data.servers || [];
+  const DMS_DATA = data.dms || [];
+  const MESSAGES_DATA = data.messages || [];
+  const REACTIONS_DATA = data.reactions || [];
 
   console.log('Dropping database and CDN...');
 
@@ -262,6 +262,11 @@ async function populateDb() {
     userIds,
     name,
     avatarUrl,
+  }: {
+    dmId: string;
+    userIds: string[];
+    name?: string;
+    avatarUrl?: string;
   }) => {
     const dm = new DM({
       _id: dmId,
@@ -312,7 +317,7 @@ async function populateDb() {
         roomId,
       });
 
-    emojisData.forEach(({
+    if (emojisData) emojisData.forEach(({
       emojiId,
       id,
       shortcode,
@@ -348,8 +353,6 @@ async function populateDb() {
     return message;
   }));
 
-
-  // TODO: Finish reaction mock data
   await Promise.all(REACTIONS_DATA.map(async ({
     userIds,
     messageId,
