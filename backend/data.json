@@ -896,24 +896,946 @@
       "ownerId": "65c4095b3c5f4ecff17000f9",
       "serverName": "Animal Crossway",
       "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg",
-      "bannerUrl": "https://i.pinimg.com/originals/3a/33/4f/3a334fe9f788c077fac838da7a72a2f6.jpg"
+      "bannerUrl": "https://i.pinimg.com/originals/3a/33/4f/3a334fe9f788c077fac838da7a72a2f6.jpg",
+      "description": "🌟 A cozy haven for all Animal Crossing fans to gather and share the joy of village life! 🏡 Immerse yourself in the charming world of Animal Crossing, where every corner is filled with friendship, fun, and adorable critters. 🐶🐱🐰 Join us as we create unforgettable memories and build our own unique communities together! 🌳✨"
     },
     {
       "serverId": "65c51ca2951dcd71073b8b36",
       "ownerId": "65c409456605b438a1cfa200",
       "serverName": "LoFi Study Family",
       "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg",
-      "bannerUrl": "https://wallpapercave.com/wp/wp10248299.jpg"
+      "bannerUrl": "https://wallpapercave.com/wp/wp10248299.jpg",
+      "description": "🎶 Welcome to Lofi Study Family, your cozy retreat for productivity and relaxation! 📚 Join us as we vibe to soothing lofi beats, share study tips, motivate each other, and foster a supportive community where we can all thrive academically and creatively. 🌟 Let's embark on our study journeys together and make every session feel like a warm hug. 📝✨",
+      "categoryFields": [
+        {
+          "categoryId": "65c409456605b438a1cfa201",
+          "name": "Study Rooms"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa202",
+          "name": "Relaxation Corner"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa203",
+          "name": "Academic Support"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa204",
+          "name": "Community Connections"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa205",
+          "name": "Focus Zone"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa206",
+          "name": "Lofi Lounge"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "65c409456605b438a1cfa301",
+          "categoryId": "65c409456605b438a1cfa201",
+          "name": "study-tips 📖",
+          "description": "Share study tips and strategies.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa302",
+          "categoryId": "65c409456605b438a1cfa201",
+          "name": "productivity-hacks 💼",
+          "description": "Discuss ways to boost productivity.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa303",
+          "categoryId": "65c409456605b438a1cfa201",
+          "name": "accountability-partners 🤝",
+          "description": "Find accountability partners for study goals.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa304",
+          "categoryId": "65c409456605b438a1cfa202",
+          "name": "mental-health-help 💆‍♂️",
+          "description": "Get support for your mental health here.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa305",
+          "categoryId": "65c409456605b438a1cfa202",
+          "name": "positive-vibes ✨",
+          "description": "Spread positivity and share uplifting stories.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa306",
+          "categoryId": "65c409456605b438a1cfa202",
+          "name": "Meditation Room 1",
+          "description": "Relax and meditate in this voice channel.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa307",
+          "categoryId": "65c409456605b438a1cfa202",
+          "name": "Meditation Room 2",
+          "description": "Relax and meditate in this voice channel.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa308",
+          "categoryId": "65c409456605b438a1cfa203",
+          "name": "homework-help 📝",
+          "description": "Get assistance with homework assignments.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa309",
+          "categoryId": "65c409456605b438a1cfa203",
+          "name": "subject-discussions 📚",
+          "description": "Discuss various academic subjects.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa310",
+          "categoryId": "65c409456605b438a1cfa203",
+          "name": "study-resources 📚💡",
+          "description": "Share helpful study resources.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa311",
+          "categoryId": "65c409456605b438a1cfa203",
+          "name": "learning-challenges 🧠",
+          "description": "Discuss challenges and seek advice for learning.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa312",
+          "categoryId": "65c409456605b438a1cfa204",
+          "name": "introductions 👋",
+          "description": "Introduce yourself to the community.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa313",
+          "categoryId": "65c409456605b438a1cfa204",
+          "name": "achievements 🏆",
+          "description": "Share your academic and personal achievements.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa314",
+          "categoryId": "65c409456605b438a1cfa204",
+          "name": "creative-corner 🎨",
+          "description": "Showcase your creative projects and artworks.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa315",
+          "categoryId": "65c409456605b438a1cfa204",
+          "name": "off-topic-chat 💬",
+          "description": "Engage in casual conversations on various topics.",
+          "type": "text"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa316",
+          "categoryId": "65c409456605b438a1cfa205",
+          "name": "Study Group 1",
+          "description": "Voice channel for collaborative study sessions.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa317",
+          "categoryId": "65c409456605b438a1cfa205",
+          "name": "Study Group 2",
+          "description": "Voice channel for collaborative study sessions.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa318",
+          "categoryId": "65c409456605b438a1cfa205",
+          "name": "Silent 1",
+          "description": "Voice channel for silent individual study.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa319",
+          "categoryId": "65c409456605b438a1cfa205",
+          "name": "Silent 2",
+          "description": "Voice channel for silent individual study.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa320",
+          "categoryId": "65c409456605b438a1cfa206",
+          "name": "Now Playing 1",
+          "description": "Voice channel for sharing and listening to lofi music.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa321",
+          "categoryId": "65c409456605b438a1cfa206",
+          "name": "Now Playing 2",
+          "description": "Voice channel for sharing and listening to lofi music.",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa322",
+          "categoryId": "65c409456605b438a1cfa206",
+          "name": "Now Playing 3",
+          "description": "Voice channel for sharing and listening to lofi music.",
+          "type": "voice"
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "65c409456605b438a1cfa400",
+          "name": "Study Guru",
+          "color": "#FFB6C1",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa401",
+          "name": "Lofi Lover",
+          "color": "#ADD8E6",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa402",
+          "name": "Academic Ace",
+          "color": "#98FB98",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa403",
+          "name": "Creative Mind",
+          "color": "#FFDAB9",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa404",
+          "name": "Chill Pill",
+          "color": "#FFA07A",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65ca55db334fd10d410de73d",
+          "name": "LofiCookie",
+          "url": "https://cdn3.emoji.gg/emojis/8555-loficookie.png"
+        },
+        {
+          "emojiId": "65ca55e599215b1a68f384f3",
+          "name": "LofiHeart",
+          "url": "https://cdn3.emoji.gg/emojis/1669-lofiheart.png"
+        },
+        {
+          "emojiId": "65ca55eccf685b28ca13bdd1",
+          "name": "LofiHeartEyes",
+          "url": "https://cdn3.emoji.gg/emojis/9392-lofihearteyes.png"
+        },
+        {
+          "emojiId": "65ca55f21e81d2e5fb40a8f0",
+          "name": "LofiPray",
+          "url": "https://cdn3.emoji.gg/emojis/5208-lofipray.png"
+        },
+        {
+          "emojiId": "65ca55f84126af09ff1c2bcf",
+          "name": "LofiShocked",
+          "url": "https://cdn3.emoji.gg/emojis/2697-lofishockedface.png"
+        },
+        {
+          "emojiId": "65ca55fdcba974b824f9adfb",
+          "name": "LofiPlead",
+          "url": "https://cdn3.emoji.gg/emojis/6209-lofiplead.png"
+        },
+        {
+          "emojiId": "65ca560241bad2dca3febb6a",
+          "name": "LofiMotivated",
+          "url": "https://cdn3.emoji.gg/emojis/6868-lofigirlmotivated.png"
+        },
+        {
+          "emojiId": "65ca5607d7bdeaafb12da52a",
+          "name": "LofiLOL",
+          "url": "https://cdn3.emoji.gg/emojis/4070-lofigirllol.png"
+        },
+        {
+          "emojiId": "65ca560c207b982c95cc3323",
+          "name": "LofiGoodLuck",
+          "url": "https://cdn3.emoji.gg/emojis/5335-lofigoodluck.png"
+        },
+        {
+          "emojiId": "65ca560f11dc977805a30333",
+          "name": "LofiPray",
+          "url": "https://cdn3.emoji.gg/emojis/5208-lofipray.png"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["65c409456605b438a1cfa400", "65c409456605b438a1cfa403", "65c409456605b438a1cfa404"]
+        },
+        {
+          "userId": "65c5136d50697a9e9cf593ab",
+          "roleIds": ["65c409456605b438a1cfa401", "65c409456605b438a1cfa402", "65c409456605b438a1cfa404"]
+        },
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "roleIds": ["65c409456605b438a1cfa400", "65c409456605b438a1cfa402"]
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "roleIds": ["65c409456605b438a1cfa401", "65c409456605b438a1cfa404"]
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "roleIds": ["65c409456605b438a1cfa403", "65c409456605b438a1cfa404"]
+        },
+        {
+          "userId": "65c4095b3c5f4ecff17000f9",
+          "roleIds": ["65c409456605b438a1cfa401", "65c409456605b438a1cfa402", "65c409456605b438a1cfa403"]
+        }
+      ]
     },
     {
       "serverId": "65c50dda75b8b26d2bbd8381",
       "ownerId": "65c5134c5b73b94e45f1c381",
       "serverName": "Jenshin Impact",
       "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg",
-      "bannerUrl": "https://apktodo.io/uploads/2022/12/silly-wisher-for-genshin-thumbnail.jpg"
+      "bannerUrl": "https://apktodo.io/uploads/2022/12/silly-wisher-for-genshin-thumbnail.jpg",
+      "description": "🌍 Embark on an epic adventure in the world of Teyvat with fellow Travelers! Join Jenshin Impact for discussions, tips, and community events surrounding the popular open-world action RPG Genshin Impact. 🌟 Explore the lands, uncover secrets, and forge friendships in this enchanting journey, with Paimon as your trusty guide! 🎮✨",
+      "categoryFields": [
+        {
+          "categoryId": "65c409456605b438a1cfa501",
+          "name": "News & Events"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa502",
+          "name": "General"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa503",
+          "name": "Jenshin Corner"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa504",
+          "name": "Off-Topic"
+        },
+        {
+          "categoryId": "65c409456605b438a1cfa505",
+          "name": "Voice Channels"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "65c409456605b438a1cfa601",
+          "name": "rules",
+          "description": "Read the rules before participating!",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa501"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa602",
+          "name": "announcements",
+          "description": "Important server announcements.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa501"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa603",
+          "name": "steambird-news",
+          "description": "Latest news related to the Steambird game.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa501"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa604",
+          "name": "server-updates",
+          "description": "Updates about the server.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa501"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa605",
+          "name": "events",
+          "description": "Stay updated on upcoming events.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa501"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa606",
+          "name": "general-chat",
+          "description": "General discussion.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa502"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa607",
+          "name": "honkaiverse",
+          "description": "A place for discussions related to the Honkai universe.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa502"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa608",
+          "name": "jenshin-chat",
+          "description": "General discussions about Genshin Impact.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa609",
+          "name": "jenshin-coop",
+          "description": "Find others to team up with in Genshin Impact.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60a",
+          "name": "jenshin-help",
+          "description": "Get help or offer assistance in Genshin Impact.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60b",
+          "name": "lore-dungeon",
+          "description": "Discuss Genshin lore and theories.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60c",
+          "name": "serenitea-pot",
+          "description": "Share your Serenitea Pot layouts!",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60d",
+          "name": "genius-invokation-tcg",
+          "description": "Genius Invokation TCG decks and strategies.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60e",
+          "name": "team-building",
+          "description": "Plan teams and strategies.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60f",
+          "name": "flexers-and-showcases",
+          "description": "Pull flexing and build and damage showcases here.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa60d",
+          "name": "genshin-merch",
+          "description": "Share and discuss Genshin Impact offical and fan merchandise.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa503"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa610",
+          "name": "Room 1",
+          "description": "Voice channel for Room 1.",
+          "type": "voice",
+          "categoryId": "65c409456605b438a1cfa505"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa611",
+          "name": "Room 2",
+          "description": "Voice channel for Room 2.",
+          "type": "voice",
+          "categoryId": "65c409456605b438a1cfa505"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa612",
+          "name": "Room 3",
+          "description": "Voice channel for Room 3.",
+          "type": "voice",
+          "categoryId": "65c409456605b438a1cfa505"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa613",
+          "name": "DJ Paimon",
+          "description": "Voice channel for DJ Paimon.",
+          "type": "voice",
+          "categoryId": "65c409456605b438a1cfa505"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa614",
+          "name": "friendly-fanart",
+          "description": "Share your fan art creations.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa504"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa615",
+          "name": "cosplay",
+          "description": "Share and discuss cosplay here!",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa504"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa616",
+          "name": "gaming",
+          "description": "Discuss your favorite games and gaming experiences.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa504"
+        },
+        {
+          "channelId": "65c409456605b438a1cfa617",
+          "name": "pets",
+          "description": "Share stories and photos of your beloved pets.",
+          "type": "text",
+          "categoryId": "65c409456605b438a1cfa504"
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "65c409456605b438a1cfa701",
+          "name": "Co-op (Asia 🌸)",
+          "color": "#B8B8B8",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa702",
+          "name": "Co-op (EU 🇪🇺)",
+          "color": "#B8B8B8",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa703",
+          "name": "Co-op (CN 🇨🇳)",
+          "color": "#B8B8B8",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa704",
+          "name": "Co-op (US 🇺🇸)",
+          "color": "#B8B8B8",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa705",
+          "name": "Genius Invokator",
+          "color": "#800080",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa706",
+          "name": "Cryo Vision",
+          "color": "#4682B4",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa707",
+          "name": "Hydro Vision",
+          "color": "#0008F2",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa708",
+          "name": "Anemo Vision",
+          "color": "#00CED1",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa709",
+          "name": "Geo Vision",
+          "color": "#FFA500",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa710",
+          "name": "Pyro Vision",
+          "color": "#FF0000",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa711",
+          "name": "Dendro Vision",
+          "color": "#00A308",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c409456605b438a1cfa712",
+          "name": "Electro Vision",
+          "color": "#6B00E6",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65ca8477676c8fbf6cab5ce3",
+          "name": "Furina_Action",
+          "url": "https://cdn3.emoji.gg/emojis/8408-furina.png"
+        },
+        {
+          "emojiId": "65ca847c167ad9b057b2dbbb",
+          "name": "Navia_Nice",
+          "url": "https://cdn3.emoji.gg/emojis/6372-navia-nice.png"
+        },
+        {
+          "emojiId": "65ca84814f10ed6c938947d7",
+          "name": "Raiden_SideEye",
+          "url": "https://cdn3.emoji.gg/emojis/9829-raiden-hmm.png"
+        },
+        {
+          "emojiId": "65ca8485302e6673d318de56",
+          "name": "Wriothesley_Wink",
+          "url": "https://cdn3.emoji.gg/emojis/3378-wriothesley.png"
+        },
+        {
+          "emojiId": "65ca8489709c012c1321bc56",
+          "name": "HuTao_Wave",
+          "url": "https://cdn3.emoji.gg/emojis/8408-hutao.png"
+        },
+        {
+          "emojiId": "65ca8490aeb36e8ebc542869",
+          "name": "Furina_Cry",
+          "url": "https://cdn3.emoji.gg/emojis/6383-fruina.png"
+        },
+        {
+          "emojiId": "65ca849463d4c3e8bfdad8ea",
+          "name": "Cyno_Wheeze",
+          "url": "https://cdn3.emoji.gg/emojis/8056-cyno-wheeze.png"
+        },
+        {
+          "emojiId": "65ca8498703b67d1aff2ebc1",
+          "name": "Neuvillette_Rain",
+          "url": "https://cdn3.emoji.gg/emojis/3268-neuvillette-rain.png"
+        },
+        {
+          "emojiId": "65ca849e49cf5cff3814b8a8",
+          "name": "Klee_HAHA",
+          "url": "https://cdn3.emoji.gg/emojis/8256-kleehhaha.png"
+        },
+        {
+          "emojiId": "65ca84a225d213a2d72eca29",
+          "name": "Zhongli_Concern",
+          "url": "https://cdn3.emoji.gg/emojis/6883-zhongliconcern.png"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "roleIds": ["65c409456605b438a1cfa701", "65c409456605b438a1cfa706"]
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["65c409456605b438a1cfa702", "65c409456605b438a1cfa708", "65c409456605b438a1cfa705"]
+        },
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "roleIds": ["65c409456605b438a1cfa703", "65c409456605b438a1cfa709"]
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "roleIds": ["65c409456605b438a1cfa704", "65c409456605b438a1cfa710", "65c409456605b438a1cfa705"]
+        },
+        {
+          "userId": "65c51355ac250f88e82d0908",
+          "roleIds": ["65c409456605b438a1cfa705", "65c409456605b438a1cfa711"]
+        },
+        {
+          "userId": "65c5135c254666fe2c752c83",
+          "roleIds": ["65c409456605b438a1cfa707", "65c409456605b438a1cfa712"]
+        },
+        {
+          "userId": "65c513679348d96403f81015",
+          "roleIds": ["65c409456605b438a1cfa705"]
+        }
+      ]
     }
   ],
-  "dms": [],
+  "dms": [
+    {
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "userIds": ["65c4094c96dcd6290c71aacb", "65c5134c5b73b94e45f1c381"]
+    },
+    {
+      "dmId": "65c4094c96dcd6290c71aa82",
+      "userIds": ["65c4094c96dcd6290c71aacb", "65c51355ac250f88e82d0908"]
+    },
+    {
+      "dmId": "65c4094c96dcd6290c71aa83",
+      "userIds": ["65c4094c96dcd6290c71aacb", "65c40953a944658192c19420"]
+    },
+    {
+      "dmId": "65c4094c96dcd6290c71aa84",
+      "userIds": ["65c4094c96dcd6290c71aacb", "65c5135c254666fe2c752c83", "65c40962f74c941eacdaa6fc"],
+      "name": "Party Chat"
+    },
+    {
+      "dmId": "65c4094c96dcd6290c71aa86",
+      "userIds": ["65c4094c96dcd6290c71aacb", "65c5136d50697a9e9cf593ab", "65c5134c5b73b94e45f1c381", "65c40953a944658192c19420", "65c513679348d96403f81015"],
+      "name": "Saturday Shenanigans",
+      "avatarUrl": "https://qph.cf2.quoracdn.net/main-qimg-7094bfaa8db33a9d72ed3aa149fe6cc4-lq"
+    }
+  ],
   "messages": [],
   "reactions": []
 }
