@@ -5,6 +5,8 @@ import * as data from './data.json';
 import db from '@config/db';
 import { cloudinary } from '@config/cloudinary';
 
+import { IMessageEmoji } from '@api/messages/model';
+
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
 import { ServerMember } from '@api/serverMembers/model';
@@ -299,6 +301,21 @@ async function populateDb() {
     body,
     emojisData,
     attachmentsData,
+  }: {
+    messageId: string;
+    senderId: string;
+    roomId: string;
+    serverId?: string;
+    body: string;
+    emojisData: {
+      emojiId: string,
+      shortcode: string,
+      custom: boolean,
+    }[],
+    attachmentsData: {
+      url: string;
+      filename: string;
+    }[]
   }) => {
     const fields = {
       _id: messageId,
@@ -319,15 +336,17 @@ async function populateDb() {
 
     if (emojisData) emojisData.forEach(({
       emojiId,
-      id,
       shortcode,
+      custom,
     }) => {
       message.emojis.push({
-        id,
+        id: emojiId,
         shortcode,
-        ...(emojiId && { url: servers[emojiIdx[0]].customEmojis[emojiIdx[1]].url }),
-        custom: !!emojiId,
-      });
+        ...(emojiId && {
+          url: servers.find(s => s._id.equals(serverId))?.customEmojis.find(e => e._id.equals(emojiId))?.url,
+        }),
+        custom,
+      } as IMessageEmoji);
     });
 
     if (attachmentsData) await Promise.all(attachmentsData.map(async ({ url, filename }) => {
@@ -358,9 +377,15 @@ async function populateDb() {
     messageId,
     name,
     emojiId,
-    url,
     unified,
     native,
+  }: {
+    userIds: string[];
+    messageId: string;
+    name: string;
+    emojiId?: string;
+    unified?: string;
+    native?: string;
   }) => {
     const fields = {
       messageId,
@@ -369,11 +394,11 @@ async function populateDb() {
       count: userIds.length,
     };
 
-    const reaction = (emojiId && url)
+    const reaction = emojiId
       ? new CustomEmojiReaction({
         ...fields,
         emojiId,
-        url,
+        url: servers.flatMap(s => s.customEmojis)?.find(e => e._id.equals(emojiId))?.url,
       })
       : new EmojiReaction({
         ...fields,
