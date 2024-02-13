@@ -13,6 +13,8 @@ import { ServerMember } from '@api/serverMembers/model';
 import { DM } from '@api/dms/model';
 import { MessageChannel, MessageDirect } from '@api/messages/discriminators';
 import { CustomEmojiReaction, EmojiReaction } from '@api/reactions/discriminators';
+import { CustomEmoji } from '@api/customEmojis/model';
+import { ServerInvite } from '@api/serverInvites/model';
 
 import { authService } from '@api/auth/service';
 
@@ -64,6 +66,7 @@ async function populateDb() {
       userId: string;
       roleIds: string[];
     }[];
+    inviteId: string;
   }[];
   const DMS_DATA: {
     dmId: string;
@@ -75,17 +78,17 @@ async function populateDb() {
     messageId: string;
     senderId: string;
     roomId: string;
-    serverId?: string;
+    serverId: string | undefined;
     body: string;
     emojisData: {
       emojiId: string,
       shortcode: string,
       custom: boolean,
-    }[],
+    }[] | undefined,
     attachmentsData: {
       url: string;
       filename: string;
-    }[]
+    }[] | undefined;
   }[] = data.messages || [];
   const REACTIONS_DATA: {
     userIds: string[];
@@ -161,6 +164,7 @@ async function populateDb() {
     roleFields,
     customEmojiFields,
     membersData,
+    inviteId,
   }) => {
     const serverOwner = new ServerMember({
       serverId,
@@ -241,12 +245,16 @@ async function populateDb() {
         folder: `${CLOUDINARY_BASE_FOLDER}/servers/${serverId}/emojis`,
       });
 
-      server.customEmojis.push({
+      const emoji = new CustomEmoji({
         _id: emojiId,
-        name,
         creatorId: ownerId,
+        name,
         url: res.secure_url,
       });
+
+      await emoji.save();
+
+      return emoji;
     }));
 
     // Server members
@@ -279,7 +287,15 @@ async function populateDb() {
       return member.save();
     }));
 
-    await server.save();
+    const serverInvite = new ServerInvite({
+      serverId,
+      url: `https://discord-clone.gg/${inviteId}`
+    });
+
+    await Promise.all([
+      serverInvite.save(),
+      server.save(),
+    ]);
 
     return server;
   }));

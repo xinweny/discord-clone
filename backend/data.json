@@ -115,6 +115,7 @@
       "avatarUrl": "https://img.freepik.com/premium-vector/cute-cartoon-lucky-cat-maneki-neko-vector-illustration_773815-126.jpg",
       "bannerUrl": "",
       "description": "🌸 Welcome to Nihongo with Neko! 🌸\nA cozy community for learning Japanese & exploring its culture. Join us for language exchange, events & meowtastic adventures! 🐾🇯🇵✨",
+      "inviteId": "Pua3ubrz",
       "categoryFields": [
         {
           "categoryId": "601f854641462a04c84fc6b6",
@@ -414,6 +415,7 @@
       "avatarUrl": "https://assets.codepen.io/1541696/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1583055762&width=512",
       "bannerUrl": "https://developer.sabre.com/sites/default/files/2019-10/Picture4-1-1024x242_3.png",
       "description": "Dive into the world of JS at Javascript Hack Hub! Join our vibrant community to learn, collaborate, and innovate on coding projects. Level up your JS skills with us! 🚀",
+      "inviteId": "cY6QxSG1",
       "categoryFields": [
         {
           "categoryId": "601f87c69c59b2054a315e7a",
@@ -897,7 +899,8 @@
       "serverName": "Animal Crossway",
       "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg",
       "bannerUrl": "https://i.pinimg.com/originals/3a/33/4f/3a334fe9f788c077fac838da7a72a2f6.jpg",
-      "description": "🌟 A cozy haven for all Animal Crossing fans to gather and share the joy of village life! 🏡 Immerse yourself in the charming world of Animal Crossing, where every corner is filled with friendship, fun, and adorable critters. 🐶🐱🐰 Join us as we create unforgettable memories and build our own unique communities together! 🌳✨"
+      "description": "🌟 A cozy haven for all Animal Crossing fans to gather and share the joy of village life! 🏡 Immerse yourself in the charming world of Animal Crossing, where every corner is filled with friendship, fun, and adorable critters. 🐶🐱🐰 Join us as we create unforgettable memories and build our own unique communities together! 🌳✨",
+      "inviteId": "iTJNnHuC"
     },
     {
       "serverId": "65c51ca2951dcd71073b8b36",
@@ -906,6 +909,7 @@
       "avatarUrl": "https://upload.wikimedia.org/wikipedia/en/2/23/Lofi_girl_logo.jpg",
       "bannerUrl": "https://wallpapercave.com/wp/wp10248299.jpg",
       "description": "🎶 Welcome to Lofi Study Family, your cozy retreat for productivity and relaxation! 📚 Join us as we vibe to soothing lofi beats, share study tips, motivate each other, and foster a supportive community where we can all thrive academically and creatively. 🌟 Let's embark on our study journeys together and make every session feel like a warm hug. 📝✨",
+      "inviteId": "HkrUoYJN",
       "categoryFields": [
         {
           "categoryId": "65c409456605b438a1cfa201",
@@ -1281,6 +1285,7 @@
       "avatarUrl": "https://i.pinimg.com/564x/0a/c9/72/0ac97231816c8f75881090dbc611b4da.jpg",
       "bannerUrl": "https://apktodo.io/uploads/2022/12/silly-wisher-for-genshin-thumbnail.jpg",
       "description": "🌍 Embark on an epic adventure in the world of Teyvat with fellow Travelers! Join Jenshin Impact for discussions, tips, and community events surrounding the popular open-world action RPG Genshin Impact. 🌟 Explore the lands, uncover secrets, and forge friendships in this enchanting journey, with Paimon as your trusty guide! 🎮✨",
+      "inviteId": "IZwP6P5V",
       "categoryFields": [
         {
           "categoryId": "65c409456605b438a1cfa501",
@@ -1836,6 +1841,84 @@
       "avatarUrl": "https://qph.cf2.quoracdn.net/main-qimg-7094bfaa8db33a9d72ed3aa149fe6cc4-lq"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "messageId": "65c4094c96dcd6290c71aa811",
+      "senderId": "65c4094c96dcd6290c71aacb",
+      "body": "Hey! Have you played any good games lately?",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:00:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa812",
+      "senderId": "65c5134c5b73b94e45f1c381",
+      "body": "Hey! <:Hutao_Wave:65ca8489709c012c1321bc56> Yeah, I just started playing the new Elden Ring. It's incredible!",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:05:00Z",
+      "emojisData": [
+        {
+          "id": "65ca8489709c012c1321bc56",
+          "shortcode": ":Hutao_Wave:",
+          "url": "https://cdn3.emoji.gg/emojis/8408-hutao.png",
+          "custom": true
+        }
+      ]
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa813",
+      "senderId": "65c4094c96dcd6290c71aacb",
+      "body": "Wow, that's awesome! I've heard great things about Elden Ring. How are you finding it?",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:10:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa814",
+      "senderId": "65c5134c5b73b94e45f1c381",
+      "body": "It's really immersive and the world-building is fantastic. I can't stop playing!",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:15:00Z",
+      "attachmentsData": [
+        {
+          "url": "https://www.gamepur.com/wp-content/uploads/2022/02/27004331/Elden-Ring-Featured-Remembrances.jpg",
+          "filename": "elden_ring_ss"
+        }
+      ]
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa815",
+      "senderId": "65c4094c96dcd6290c71aacb",
+      "body": "That sounds amazing! I'll have to check it out. I've been playing Hollow Knight lately, it's really refreshing. Check it out here! https://www.hollowknight.com/",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:20:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa816",
+      "senderId": "65c4094c96dcd6290c71aacb",
+      "body": "Nice! If you're up for it, we should play together sometime. Maybe this weekend?",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:25:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa817",
+      "senderId": "65c5134c5b73b94e45f1c381",
+      "body": "Absolutely! I'm free Saturday afternoon. What games did you have in mind?",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:30:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa818",
+      "senderId": "65c4094c96dcd6290c71aacb",
+      "body": "How about some co-op action in Elden Ring? I'll send you an invite!",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:35:00Z"
+    },
+    {
+      "messageId": "65c4094c96dcd6290c71aa819",
+      "senderId": "65c5134c5b73b94e45f1c381",
+      "body": "Sounds perfect! Looking forward to it.",
+      "dmId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:40:00Z"
+    }
+  ],
   "reactions": []
 }
