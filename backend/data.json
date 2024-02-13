@@ -900,7 +900,412 @@
       "avatarUrl": "https://pbs.twimg.com/profile_images/1481028496960884737/0TV2hqEf_400x400.jpg",
       "bannerUrl": "https://i.pinimg.com/originals/3a/33/4f/3a334fe9f788c077fac838da7a72a2f6.jpg",
       "description": "🌟 A cozy haven for all Animal Crossing fans to gather and share the joy of village life! 🏡 Immerse yourself in the charming world of Animal Crossing, where every corner is filled with friendship, fun, and adorable critters. 🐶🐱🐰 Join us as we create unforgettable memories and build our own unique communities together! 🌳✨",
-      "inviteId": "iTJNnHuC"
+      "inviteId": "iTJNnHuC",
+      "categoryFields": [
+        {
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "name": "Welcome & Announcements"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "name": "Island Life"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "name": "Villager's Hub"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "name": "Creative Corner"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "name": "Voice Channels"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "65c4094c96dcd6290c71aad1",
+          "name": "📢 announcements",
+          "description": "Important server-wide announcements and updates.",
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad2",
+          "name": "🌟 introductions",
+          "description": "Introduce yourself to the community and make new friends!",
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad3",
+          "name": "🌴 general-chat",
+          "description": "A place for general discussions about island life.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad4",
+          "name": "💰 turnip-market",
+          "description": "Buy, sell, and trade turnips here.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad5",
+          "name": "🏝️ island-tours",
+          "description": "Organize and join tours to other players' islands.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad6",
+          "name": "🐞 critterpedia",
+          "description": "Share information and tips about the island's critters.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad7",
+          "name": "🔄 trade-market",
+          "description": "Trade items and resources with other players.",
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad8",
+          "name": "🦤 code-sharing",
+          "description": "Share Dodo codes and arrange visits to other islands.",
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad9",
+          "name": "🔔 turnip-trading",
+          "description": "Arrange turnip trading sessions with other players.",
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aada",
+          "name": "🖼️ art-gallery",
+          "description": "Share and admire art created by fellow players.",
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aadb",
+          "name": "🎨 custom-designs",
+          "description": "Showcase and share custom designs made in the game.",
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aadc",
+          "name": "🌺 island-inspiration",
+          "description": "Find inspiration for decorating your island and home.",
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aade",
+          "name": "Island Hangout 1",
+          "description": "Voice chat channel for hanging out with fellow players.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aadf",
+          "name": "Island Hangout 2",
+          "description": "Another voice chat channel for hanging out.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aae0",
+          "name": "Island Hangout 3",
+          "description": "Yet another voice chat channel for hanging out.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "voice"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aae1",
+          "name": "Music Island",
+          "description": "Listen to some chill tunes with other players.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "voice"
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "65c4094c96dcd6290c71ab00",
+          "name": "Nookling (MOD)",
+          "color": "#FF0000",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": true,
+            "manageRoles": true,
+            "manageExpressions": true,
+            "kickMembers": true,
+            "manageServer": true,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": true,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab01",
+          "name": "Sisterly",
+          "color": "#800080",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab02",
+          "name": "Snooty",
+          "color": "#FFA500",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab03",
+          "name": "Peppy",
+          "color": "#00FF00",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab04",
+          "name": "Cranky",
+          "color": "#0000FF",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab05",
+          "name": "Jock",
+          "color": "#FFFF00",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab06",
+          "name": "Smug",
+          "color": "#00FFFF",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab07",
+          "name": "Lazy",
+          "color": "#8A2BE2",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab08",
+          "name": "Normal",
+          "color": "#808080",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65cbec2fd8dc09f9758e1714",
+          "name": "TomNookMoney",
+          "url": "https://cdn3.emoji.gg/emojis/8092-tomnookmoney.gif"
+        },
+        {
+          "emojiId": "65cbec34a90dd8dd7d65923a",
+          "name": "TomNookBounce",
+          "url": "https://cdn3.emoji.gg/emojis/3017-nookbounce.gif"
+        },
+        {
+          "emojiId": "65cbec37cb15c3a8a5551689",
+          "name": "RolfDance",
+          "url": "https://cdn3.emoji.gg/emojis/1412-rolfdance.gif"
+        },
+        {
+          "emojiId": "65cbec3c4aa60a8617bc270f",
+          "name": "MarshallLaugh",
+          "url": "https://cdn3.emoji.gg/emojis/8935-marshalllaugh.gif"
+        },
+        {
+          "emojiId": "65cbec3f2b3684764db5d9ec",
+          "name": "IsabelleSpin",
+          "url": "https://cdn3.emoji.gg/emojis/4409-isabellespin.gif"
+        },
+        {
+          "emojiId": "65cbec45c60e9183d38a2f5f",
+          "name": "LuckyBalloon",
+          "url": "https://cdn3.emoji.gg/emojis/7831-luckyballoon.gif"
+        },
+        {
+          "emojiId": "65cbec499451137049590fde",
+          "name": "GetOnAC",
+          "url": "https://cdn3.emoji.gg/emojis/4605-get-hop-on-animal-crossing.gif"
+        },
+        {
+          "emojiId": "65cbec4d71dea6780cab2907",
+          "name": "VillagerShock",
+          "url": "https://cdn3.emoji.gg/emojis/5511-villagershock.gif"
+        },
+        {
+          "emojiId": "65cbec5190e2a6b9adcf8146",
+          "name": "Bob",
+          "url": "https://cdn3.emoji.gg/emojis/7032_bob.gif"
+        },
+        {
+          "emojiId": "65cbec55e41d9c21839657bf",
+          "name": "BrewsterCoffee",
+          "url": "https://cdn3.emoji.gg/emojis/2440-brewstercoffee.png"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c4095b3c5f4ecff17000f9",
+          "roleIds": ["65c4094c96dcd6290c71ab00", "65c4094c96dcd6290c71ab04"]
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["65c4094c96dcd6290c71ab00", "65c4094c96dcd6290c71ab01"]
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "roleIds": ["65c4094c96dcd6290c71ab02"]
+        },
+        {
+          "userId": "65c4095b3c5f4ecff17000f9",
+          "roleIds": ["65c4094c96dcd6290c71ab03"]
+        },
+        {
+          "userId": "65c40962f74c941eacdaa6fc",
+          "roleIds": ["65c4094c96dcd6290c71ab05"]
+        },
+        {
+          "userId": "65c51355ac250f88e82d0908",
+          "roleIds": ["65c4094c96dcd6290c71ab06"]
+        }
+      ]
     },
     {
       "serverId": "65c51ca2951dcd71073b8b36",
