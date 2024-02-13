@@ -24,26 +24,24 @@ export const useGetPickerCustomEmojis = () => {
     const getJoinedServerEmojis = async () => {
       if (!servers) return;
 
-      const customEmojis = await Promise.all(servers.map(async (server) => {
-        const emojis = await getEmojis({ serverId: server._id }).unwrap();
+      const emojis = await getEmojis({
+        serverIds: servers.map(server => server._id),
+      }).unwrap();
 
-        setCategoryIcons(prev => ({
-          ...prev,
-          [server.name]: { src: server.avatarUrl },
-        }));
+      setCategoryIcons(servers.reduce((prev, server) => ({
+        ...prev,
+        [server.name]: { src: server.avatarUrl },
+      }), {}));
 
-        return {
-          id: server._id,
-          name: server.name,
-          emojis: emojis.map(emoji => ({
-            id: emoji.name,
-            name: emoji._id,
-            skins: [{ src: emoji.url }],
-          })),
-        };
-      }));
-
-      setCustom(customEmojis);
+      setCustom(servers.map(server => ({
+        id: server._id,
+        name: server.name,
+        emojis: emojis.map(emoji => ({
+          id: emoji.name,
+          name: emoji._id,
+          skins: [{ src: emoji.url }],
+        })),
+      })));
     };
 
     getJoinedServerEmojis();

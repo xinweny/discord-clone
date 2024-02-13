@@ -1,6 +1,7 @@
 export type CustomEmojiData = {
   _id: string;
   creatorId: string;
+  serverId: string;
   name: string;
   url: string;
   creator?: {

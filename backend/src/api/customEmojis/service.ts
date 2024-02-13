@@ -42,13 +42,14 @@ const create = async (
 };
 
 const update = async (
+  serverId: Types.ObjectId | string,
   emojiId: Types.ObjectId | string,
   fields: { name: string }
 ) => {
   const { name } = fields;
 
-  const emoji = await CustomEmoji.findByIdAndUpdate(
-    emojiId,
+  const emoji = await CustomEmoji.findOneAndUpdate(
+    { serverId, emojiId },
     { name },
     { new: true }
   );
@@ -58,8 +59,11 @@ const update = async (
   return emoji;
 };
 
-const remove = async (emojiId: Types.ObjectId | string) => {
-  const emoji = await CustomEmoji.findById(emojiId);
+const remove = async (
+  serverId: Types.ObjectId | string,
+  emojiId: Types.ObjectId | string
+) => {
+  const emoji = await CustomEmoji.findOneAndDelete({ serverId, emojiId});
 
   if (!emoji) throw new CustomError(400, 'Emoji not found');
 

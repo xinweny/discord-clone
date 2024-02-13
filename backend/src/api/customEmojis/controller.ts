@@ -46,9 +46,9 @@ const editEmoji: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { emojiId } = req.params;
-      const { name } = req.body;
+      const { serverId, name } = req.body;
 
-      const emoji = await customEmojiService.update(emojiId, { name });
+      const emoji = await customEmojiService.update(serverId, emojiId, { name });
 
       res.json({
         data: emoji,
@@ -64,8 +64,9 @@ const deleteEmoji: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { emojiId } = req.params;
+      const { serverId } = req.body;
 
-      const emoji = await customEmojiService.remove(emojiId);
+      const emoji = await customEmojiService.remove(serverId, emojiId);
 
       res.json({
         data: emoji,
