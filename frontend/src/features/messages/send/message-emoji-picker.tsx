@@ -3,7 +3,7 @@ import data from '@emoji-mart/data/sets/14/twitter.json';
 
 import type { CustomEditor } from '@config';
 
-import { useGetPickerCustomEmojis } from '@features/reactions/hooks';
+import { useGetPickerCustomEmojis } from '@features/emojis/hooks';
 
 import { insertEmoji } from '../slate';
 

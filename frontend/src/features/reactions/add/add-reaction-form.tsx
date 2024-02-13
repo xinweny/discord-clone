@@ -4,7 +4,7 @@ import Picker from '@emoji-mart/react';
 import { useMessageContext } from '@features/messages/context';
 
 import { useGetServerRoomIds } from '@hooks';
-import { useGetPickerCustomEmojis } from '../hooks';
+import { useGetPickerCustomEmojis } from '../../emojis/hooks';
 
 import { useCreateReactionMutation } from '../api';
 
