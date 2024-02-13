@@ -21,11 +21,80 @@ import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 async function populateDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
 
-  const USERS_DATA = data.users || [];
-  const SERVERS_DATA = data.servers || [];
-  const DMS_DATA = data.dms || [];
-  const MESSAGES_DATA = data.messages || [];
-  const REACTIONS_DATA = data.reactions || [];
+  const USERS_DATA: {
+    userId: string,
+    email: string,
+    password: string,
+    username: string,
+    displayName: string,
+    avatarUrl: string,
+    bannerColor: string,
+    customStatus?: string,
+    bio?: string,
+  }[] = data.users || [];
+  const SERVERS_DATA = data.servers || [] as {
+    serverId: string;
+    ownerId: string;
+    serverName: string;
+    avatarUrl: string;
+    bannerUrl: string;
+    categoryFields: {
+      categoryId: string;
+      name: string;
+    }[];
+    channelFields: {
+      channelId: string;
+      name: string;
+      type: 'text' | 'voice';
+      description?: string;
+      categoryId?: string;
+    }[];
+    roleFields: {
+      roleId: string;
+      name: string;
+      color: string;
+      permissions: IPermissions;
+    }[];
+    customEmojiFields: {
+      emojiId: string;
+      name: string;
+      url: string;
+    }[];
+    membersData: {
+      userId: string;
+      roleIds: string[];
+    }[];
+  }[];
+  const DMS_DATA: {
+    dmId: string;
+    userIds: string[];
+    name?: string;
+    avatarUrl?: string;
+  }[] = data.dms || [];
+  const MESSAGES_DATA: {
+    messageId: string;
+    senderId: string;
+    roomId: string;
+    serverId?: string;
+    body: string;
+    emojisData: {
+      emojiId: string,
+      shortcode: string,
+      custom: boolean,
+    }[],
+    attachmentsData: {
+      url: string;
+      filename: string;
+    }[]
+  }[] = data.messages || [];
+  const REACTIONS_DATA: {
+    userIds: string[];
+    messageId: string;
+    name: string;
+    emojiId?: string;
+    unified?: string;
+    native?: string;
+  }[] = data.reactions || [];
 
   console.log('Dropping database and CDN...');
 
@@ -51,16 +120,6 @@ async function populateDb() {
     bannerColor,
     customStatus,
     bio,
-  }: {
-    userId: string,
-    email: string,
-    password: string,
-    username: string,
-    displayName: string,
-    avatarUrl: string,
-    bannerColor: string,
-    customStatus?: string,
-    bio?: string,
   }) => {
     const hashedPassword = await authService.hashPassword(password);
 
@@ -102,38 +161,6 @@ async function populateDb() {
     roleFields,
     customEmojiFields,
     membersData,
-  }: {
-    serverId: string;
-    ownerId: string;
-    serverName: string;
-    avatarUrl: string;
-    bannerUrl: string;
-    categoryFields: {
-      categoryId: string;
-      name: string;
-    }[];
-    channelFields: {
-      channelId: string;
-      name: string;
-      type: 'text' | 'voice';
-      description?: string;
-      categoryId?: string;
-    }[];
-    roleFields: {
-      roleId: string;
-      name: string;
-      color: string;
-      permissions: IPermissions;
-    }[];
-    customEmojiFields: {
-      emojiId: string;
-      name: string;
-      url: string;
-    }[];
-    membersData: {
-      userId: string;
-      roleIds: string[];
-    }[];
   }) => {
     const serverOwner = new ServerMember({
       serverId,
@@ -169,7 +196,7 @@ async function populateDb() {
     if (bannerRes) server.bannerUrl = bannerRes.secure_url;
 
     // Categories - 2 to 3
-    categoryFields.forEach(({
+    categoryFields!.forEach(({
       categoryId,
       name,
     }) => {
@@ -180,7 +207,7 @@ async function populateDb() {
     });
 
     // Channels - 2 - 10 text, 1 - 3 voice
-    channelFields.forEach(({ channelId, name, categoryId, type }) => {
+    channelFields!.forEach(({ channelId, name, categoryId, type }) => {
       server.channels.push({
         _id: channelId, 
         ...(categoryId && { categoryId: categoryId }),
@@ -197,7 +224,7 @@ async function populateDb() {
     serverOwner.roleIds.push(defaultRoleId);
 
     // Roles - 2 to 5
-    roleFields.forEach(({ roleId, name, color, permissions }) => {
+    roleFields!.forEach(({ roleId, name, color, permissions }) => {
       server.roles.push({
         _id: roleId,
         name,
@@ -207,7 +234,7 @@ async function populateDb() {
     });
 
     // Custom emojis - 3 to 10
-    await Promise.all(customEmojiFields.map(async ({ emojiId, name, url }) => {
+    await Promise.all(customEmojiFields!.map(async ({ emojiId, name, url }) => {
       const res = await cloudinary.uploader.upload(url, {
         public_id: emojiId,
         use_filename: false,
@@ -223,7 +250,7 @@ async function populateDb() {
     }));
 
     // Server members
-    await Promise.all(membersData.map(({ userId, roleIds }) => {
+    await Promise.all(membersData!.map(({ userId, roleIds }) => {
       const user = users.find(u => u._id.equals(userId));
 
       if (!user) return Promise.resolve();
@@ -264,11 +291,6 @@ async function populateDb() {
     userIds,
     name,
     avatarUrl,
-  }: {
-    dmId: string;
-    userIds: string[];
-    name?: string;
-    avatarUrl?: string;
   }) => {
     const dm = new DM({
       _id: dmId,
@@ -301,21 +323,6 @@ async function populateDb() {
     body,
     emojisData,
     attachmentsData,
-  }: {
-    messageId: string;
-    senderId: string;
-    roomId: string;
-    serverId?: string;
-    body: string;
-    emojisData: {
-      emojiId: string,
-      shortcode: string,
-      custom: boolean,
-    }[],
-    attachmentsData: {
-      url: string;
-      filename: string;
-    }[]
   }) => {
     const fields = {
       _id: messageId,
@@ -379,13 +386,6 @@ async function populateDb() {
     emojiId,
     unified,
     native,
-  }: {
-    userIds: string[];
-    messageId: string;
-    name: string;
-    emojiId?: string;
-    unified?: string;
-    native?: string;
   }) => {
     const fields = {
       messageId,
