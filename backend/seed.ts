@@ -13,14 +13,13 @@ import { ServerMember } from '@api/serverMembers/model';
 import { DM } from '@api/dms/model';
 import { MessageChannel, MessageDirect } from '@api/messages/discriminators';
 import { CustomEmojiReaction, EmojiReaction } from '@api/reactions/discriminators';
-import { CustomEmoji } from '@api/customEmojis/model';
+import { CustomEmoji, ICustomEmoji } from '@api/customEmojis/model';
 import { ServerInvite } from '@api/serverInvites/model';
+import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 
 import { authService } from '@api/auth/service';
 
-import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
-
-async function populateDb() {
+async function seedDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
 
   const USERS_DATA: {
@@ -74,22 +73,22 @@ async function populateDb() {
     name?: string;
     avatarUrl?: string;
   }[] = data.dms || [];
-  const MESSAGES_DATA: {
+  const MESSAGES_DATA = data.messages || [] as {
     messageId: string;
     senderId: string;
     roomId: string;
-    serverId: string | undefined;
+    serverId?: string;
     body: string;
-    emojisData: {
+    emojisData?: {
       emojiId: string,
       shortcode: string,
       custom: boolean,
-    }[] | undefined,
-    attachmentsData: {
+    }[];
+    attachmentsData?: {
       url: string;
       filename: string;
-    }[] | undefined;
-  }[] = data.messages || [];
+    }[];
+  }[];
   const REACTIONS_DATA: {
     userIds: string[];
     messageId: string;
@@ -98,6 +97,8 @@ async function populateDb() {
     unified?: string;
     native?: string;
   }[] = data.reactions || [];
+
+  const customEmojis: ICustomEmoji[] = [];
 
   console.log('Dropping database and CDN...');
 
@@ -254,6 +255,8 @@ async function populateDb() {
 
       await emoji.save();
 
+      customEmojis.push(emoji);
+
       return emoji;
     }));
 
@@ -364,9 +367,9 @@ async function populateDb() {
     }) => {
       message.emojis.push({
         id: emojiId,
-        shortcode,
+        shortcode: `:${shortcode}:`,
         ...(emojiId && {
-          url: servers.find(s => s._id.equals(serverId))?.customEmojis.find(e => e._id.equals(emojiId))?.url,
+          url: customEmojis.find(e => e._id.equals(emojiId))?.url,
         }),
         custom,
       } as IMessageEmoji);
@@ -414,7 +417,7 @@ async function populateDb() {
       ? new CustomEmojiReaction({
         ...fields,
         emojiId,
-        url: servers.flatMap(s => s.customEmojis)?.find(e => e._id.equals(emojiId))?.url,
+        url: customEmojis.find(e => e._id.equals(emojiId))?.url,
       })
       : new EmojiReaction({
         ...fields,
@@ -428,4 +431,4 @@ async function populateDb() {
   }));
 }
 
-populateDb();
+seedDb();

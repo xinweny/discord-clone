@@ -2250,21 +2250,27 @@
     {
       "messageId": "65c4094c96dcd6290c71aa811",
       "senderId": "65c4094c96dcd6290c71aacb",
-      "body": "Hey! Have you played any good games lately?",
-      "dmId": "65c4094c96dcd6290c71aa81",
-      "createdAt": "2024-02-08T10:00:00Z"
+      "body": "Hey! Have you played any good games lately? 😄",
+      "roomId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:00:00Z",
+      "emojisData": [
+        {
+          "emojiId": "😄",
+          "shortcode": "smile",
+          "custom": false
+        }
+      ]
     },
     {
       "messageId": "65c4094c96dcd6290c71aa812",
       "senderId": "65c5134c5b73b94e45f1c381",
       "body": "Hey! <:Hutao_Wave:65ca8489709c012c1321bc56> Yeah, I just started playing the new Elden Ring. It's incredible!",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:05:00Z",
       "emojisData": [
         {
-          "id": "65ca8489709c012c1321bc56",
-          "shortcode": ":Hutao_Wave:",
-          "url": "https://cdn3.emoji.gg/emojis/8408-hutao.png",
+          "emojiId": "65ca8489709c012c1321bc56",
+          "shortcode": "Hutao_Wave",
           "custom": true
         }
       ]
@@ -2280,7 +2286,7 @@
       "messageId": "65c4094c96dcd6290c71aa814",
       "senderId": "65c5134c5b73b94e45f1c381",
       "body": "It's really immersive and the world-building is fantastic. I can't stop playing!",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:15:00Z",
       "attachmentsData": [
         {
@@ -2293,36 +2299,49 @@
       "messageId": "65c4094c96dcd6290c71aa815",
       "senderId": "65c4094c96dcd6290c71aacb",
       "body": "That sounds amazing! I'll have to check it out. I've been playing Hollow Knight lately, it's really refreshing. Check it out here! https://www.hollowknight.com/",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
+      "serverId": "",
       "createdAt": "2024-02-08T10:20:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa816",
       "senderId": "65c4094c96dcd6290c71aacb",
       "body": "Nice! If you're up for it, we should play together sometime. Maybe this weekend?",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:25:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa817",
       "senderId": "65c5134c5b73b94e45f1c381",
       "body": "Absolutely! I'm free Saturday afternoon. What games did you have in mind?",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:30:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa818",
       "senderId": "65c4094c96dcd6290c71aacb",
       "body": "How about some co-op action in Elden Ring? I'll send you an invite!",
-      "dmId": "65c4094c96dcd6290c71aa81",
+      "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:35:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa819",
       "senderId": "65c5134c5b73b94e45f1c381",
-      "body": "Sounds perfect! Looking forward to it.",
-      "dmId": "65c4094c96dcd6290c71aa81",
-      "createdAt": "2024-02-08T10:40:00Z"
+      "body": "Sounds perfect! Looking forward to it. ✨✨",
+      "roomId": "65c4094c96dcd6290c71aa81",
+      "createdAt": "2024-02-08T10:40:00Z",
+      "emojisData": [
+        {
+          "emojiId": "✨",
+          "shortcode": "sparkles",
+          "custom": false
+        },
+        {
+          "emojiId": "✨",
+          "shortcode": "sparkles",
+          "custom": false
+        }
+      ]
     }
   ],
   "reactions": []

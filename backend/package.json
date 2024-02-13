@@ -7,7 +7,8 @@
     "start": "NODE_ENV=production node dist/index.js",
     "build": "tsc && tsc-alias",
     "dev": "NODE_ENV=development concurrently \"nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts\" \"livekit-server --dev --config livekit.config.yaml\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "ts-node -r tsconfig-paths/register seed.ts"
   },
   "repository": {
     "type": "git",
