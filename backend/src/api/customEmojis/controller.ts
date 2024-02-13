@@ -10,10 +10,9 @@ import { customEmojiService } from './service';
 
 const getEmojis: RequestHandler[] = [
   authenticate,
-  authorize.serverMember,
   tryCatch(
     async (req, res) => {
-      const emojis = await customEmojiService.getMany(req.params.serverId, !!req.query.populate);
+      const emojis = await customEmojiService.getMany(req.query.serverIds as string[], !!req.query.populate);
 
       res.json({ data: emojis });
     }
@@ -46,10 +45,10 @@ const editEmoji: RequestHandler[] = [
   authorize.server('manageExpressions'),
   tryCatch(
     async (req, res) => {
-      const { serverId, emojiId } = req.params;
+      const { emojiId } = req.params;
       const { name } = req.body;
 
-      const emoji = await customEmojiService.update(serverId, emojiId, { name });
+      const emoji = await customEmojiService.update(emojiId, { name });
 
       res.json({
         data: emoji,
@@ -64,9 +63,9 @@ const deleteEmoji: RequestHandler[] = [
   authorize.server('manageExpressions'),
   tryCatch(
     async (req, res) => {
-      const { serverId, emojiId } = req.params;
+      const { emojiId } = req.params;
 
-      const emoji = await customEmojiService.remove(serverId, emojiId);
+      const emoji = await customEmojiService.remove(emojiId);
 
       res.json({
         data: emoji,

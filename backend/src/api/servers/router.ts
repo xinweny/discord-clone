@@ -5,7 +5,6 @@ import { serverController } from './controller';
 import { channelRouter } from './channels/router';
 import { categoryRouter } from './categories/router';
 import { roleRouter } from './roles/router';
-import { customEmojiRouter } from './customEmojis/router';
 import { serverMemberRouter } from '../serverMembers/router';
 import { serverOwnerRouter } from './serverOwner/router';
 
@@ -22,8 +21,6 @@ serverRouter.use('/:serverId/categories', categoryRouter);
 serverRouter.use('/:serverId/members', serverMemberRouter);
 
 serverRouter.use('/:serverId/roles', roleRouter);
-
-serverRouter.use('/:serverId/emojis', customEmojiRouter);
 
 serverRouter.use('/:serverId/owner', serverOwnerRouter);
 

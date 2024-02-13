@@ -8,6 +8,7 @@ import { uploadRouter } from './upload/router';
 import { webRtcRouter } from './webrtc/router';
 import { serverInviteRouter } from './serverInvites/router';
 import { statusRouter } from './statuses/router';
+import { customEmojiRouter } from './customEmojis/router';
 
 const apiRouter = Router();
 
@@ -18,6 +19,8 @@ apiRouter.use('/dms', dmRouter);
 apiRouter.use('/servers', serverRouter);
 
 apiRouter.use('/invites', serverInviteRouter);
+
+apiRouter.use('/emojis', customEmojiRouter);
 
 apiRouter.use('/users', userRouter);
 

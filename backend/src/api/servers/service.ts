@@ -7,6 +7,8 @@ import { User } from '@api/users/model';
 import { Message } from '@api/messages/model';
 import { ReadStatus } from '@api/users/notifications/model';
 import { ServerMember } from '../serverMembers/model';
+import { ServerInvite } from '@api/serverInvites/model';
+import { CustomEmoji } from '@api/customEmojis/model';
 import { Server } from './model';
 
 import { serverInviteService } from '@api/serverInvites/service';
@@ -188,9 +190,10 @@ const remove = async (id: Types.ObjectId | string) => {
       { $pull: { serverIds: id } }
     ),
     Message.deleteMany({ roomId: { $in: channelIds } }),
-    serverInviteService.remove(server._id),
+    ServerInvite.deleteOne({ serverId: id }),
     cloudinaryService.deleteByFolder(`servers/${id.toString()}`),
     ReadStatus.deleteMany({ serverId: id }),
+    CustomEmoji.deleteMany({ serverId: id })
   ]);
 
   return server;

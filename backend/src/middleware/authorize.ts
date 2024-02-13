@@ -14,7 +14,10 @@ import { RelationStatus } from '@api/users/relations/schema';
 
 const server = (permissionKeys: string | string[] = []) => {
   const authorizeMiddleware: RequestHandler = async (req, res, next) => {
-    const { serverId, memberId } = req.params;
+    const serverId = req.params.serverId || req.query.serverId || req.body.serverId;
+    const memberId = req.params.memberId || req.query.memberId || req.body.memberId;
+
+    if (!serverId || !memberId) throw new CustomError(403, 'Unauthorized');
 
     const authorized = await serverService.checkPermissions(serverId, req.user?._id, permissionKeys, memberId);
 

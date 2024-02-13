@@ -14,20 +14,22 @@ const emojiApi = api.injectEndpoints({
   endpoints(build) {
     return {
       getEmojis: build.query<CustomEmojiData[], GetEmojisQuery>({
-        query: ({ serverId, getCreators }) => ({
-          url: `/servers/${serverId}/emojis`,
+        query: ({ serverIds, getCreators }) => ({
+          url: `/emojis`,
           method: 'get',
           params: {
+            serverIds,
             populate: getCreators,
           },
         }),
-        providesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
+        providesTags: (...[, , { serverIds }]) => serverIds.map(serverId => ({ type: 'CustomEmojis', id: serverId })),
       }),
       createEmoji: build.mutation<CustomEmojiData, CreateEmojiFields>({
         query: ({ serverId, name, file }) => ({
-          url: `/servers/${serverId}/emojis`,
+          url: `/emojis`,
           method: 'post',
           data: {
+            serverId,
             name,
             filename: file.name,
           },
@@ -49,16 +51,20 @@ const emojiApi = api.injectEndpoints({
       }),
       editEmoji: build.mutation<CustomEmojiData, EditEmojiFields>({
         query: ({ serverId, emojiId, name }) => ({
-          url: `/servers/${serverId}/emojis/${emojiId}`,
+          url: `/emojis/${emojiId}`,
           method: 'put',
-          data: { name },
+          data: {
+            serverId,
+            name
+          },
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
       }),
       deleteEmoji: build.mutation<void, DeleteEmojiFields>({
         query: ({ serverId, emojiId }) => ({
-          url: `/servers/${serverId}/emojis/${emojiId}`,
+          url: `/emojis/${emojiId}`,
           method: 'delete',
+          data: { serverId }
         }),
         invalidatesTags: (...[, , { serverId }]) => [{ type: 'CustomEmojis', id: serverId }],
       }),

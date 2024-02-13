@@ -6,7 +6,6 @@ import { CustomError } from '@helpers/CustomError';
 
 import { roleSchema, IRole } from './roles/schema';
 import { categorySchema, ICategory } from './categories/schema';
-import { customEmojiSchema, ICustomEmoji } from './customEmojis/schema';
 import { channelSchema, IChannel } from './channels/schema';
 import { IServerMember } from '../serverMembers/model';
 export interface IServer extends Document {
@@ -15,7 +14,6 @@ export interface IServer extends Document {
   roles: Types.DocumentArray<IRole>;
   categories: Types.DocumentArray<ICategory>;
   channels: Types.DocumentArray<IChannel>;
-  customEmojis: Types.DocumentArray<ICustomEmoji>;
   description: string;
   memberCount: number;
   avatarUrl?: string;
@@ -30,7 +28,6 @@ const serverSchema = new Schema({
   roles: { type: [roleSchema], default: () => ([]) },
   categories: { type: [categorySchema], default: () => ([]) },
   channels: { type: [channelSchema], default: () => ([]) },
-  customEmojis: { type: [customEmojiSchema], default: () => ([]) },
   avatarUrl: { type: String, default: '' },
   bannerUrl: { type: String, default: '' },
   description: { type: String, default: '' },
@@ -41,14 +38,13 @@ const serverSchema = new Schema({
 });
 
 serverSchema.pre('save', function (next) {
-  for (const subdocs of [this.roles, this.customEmojis]) {
+  for (const subdocs of [this.roles]) {
     if (subdocs) {
       const names = subdocs.map(subdoc => subdoc.name);
       if ((new Set(names)).size !== names.length) throw new CustomError(400, 'Duplicate values not allowed.');
     }
   }
-
-  if (this.customEmojis?.length > 100) throw new CustomError(400, 'Custom emoji limit (100) exceeded.');
+  
   next();
 });
 

@@ -11,7 +11,7 @@ export type CustomEmojiData = {
 };
 
 export type GetEmojisQuery = {
-  serverId: string;
+  serverIds: string[];
   getCreators?: boolean;
 };
 

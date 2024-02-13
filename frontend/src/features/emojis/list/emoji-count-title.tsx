@@ -8,7 +8,7 @@ import styles from './emoji-count-title.module.scss';
 
 export function EmojiCountTitle() {
   const { _id: serverId } = useServerContext()!;
-  const emojis = useGetEmojisQuery({ serverId, getCreators: true });
+  const emojis = useGetEmojisQuery({ serverIds: [serverId], getCreators: true });
 
   if (!emojis.isSuccess) return null;
 
