@@ -104,7 +104,7 @@ async function seedDb() {
   const customEmojis: ICustomEmoji[] = [];
 
   console.log('Connecting to mongoDB...')
-  mongoose.connect(env.MONGODB_URI, {});
+  await mongoose.connect(env.MONGODB_URI, {});
 
   console.log('Dropping database and CDN...');
 
@@ -445,6 +445,12 @@ async function seedDb() {
 
     return reaction;
   }));
+
+  console.log('Done!');
+
+  await mongoose.connection.close();
+
+  return;
 }
 
 seedDb();
