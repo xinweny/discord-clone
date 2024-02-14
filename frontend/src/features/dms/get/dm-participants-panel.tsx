@@ -15,7 +15,7 @@ type DmParticipantsPanelProps = {
 };
 
 export function DmParticipantsPanel({ participants, isGroup, show }: DmParticipantsPanelProps) {
-  const { data: participant, isSuccess } = useGetUserQuery(participants[0]._id, { skip: isGroup });
+  const { data: participant, isSuccess } = useGetUserQuery(participants[1]._id, { skip: isGroup });
   
   if (!show) return null;
 

@@ -51,13 +51,13 @@ const create = async (participantIds: Types.ObjectId[] | string[]) => {
     ],
   });
 
-  if (dms.length !== 0) {
+  const isGroup = participantIds.length > 2;
+
+  if (!isGroup && dms.length !== 0) {
     const existingDm = await dms[0].populate(populateOptions);
 
     return existingDm;
   }
-
-  const isGroup = participantIds.length > 2;
 
   const dm = new DM({
     ...(isGroup && { ownerId: participantIds[0] }),

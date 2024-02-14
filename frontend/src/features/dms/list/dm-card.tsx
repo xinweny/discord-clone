@@ -33,7 +33,7 @@ export function DmCard({
 }: DMCardProps) {
   const { roomId } = useParams();
 
-  const { _id, isGroup } = dm;
+  const { _id: dmId, isGroup } = dm;
 
   const hasNewMessage = useHasNewMessage(dm._id, lastTimestamps, readTimestamps);
 
@@ -45,7 +45,7 @@ export function DmCard({
   } = getDmInfo(dm, userId);
 
   return (
-    <Link to={`/channels/@me/${dm._id}`}>
+    <Link to={`/channels/@me/${dmId}`}>
       <DmsNavItem
         icon={<Avatar
           src={isGroup && !avatarUrl
@@ -56,7 +56,7 @@ export function DmCard({
             userId={participants[0]._id}
           />}
         />}
-        isActive={roomId === _id}
+        isActive={roomId === dmId}
       >
         <div className={styles.text}>
           <span className={hasNewMessage ? styles.newMessage : undefined}>{name}</span>

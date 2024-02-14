@@ -38,7 +38,6 @@ dmSchema.set('toObject', { virtuals: true });
 if (env.NODE_ENV === 'development') {
   dmSchema.index(
     { participantIds: 1 },
-    { unique: true, partialFilterExpression: { isGroup: { $eq: false } } },
   );
 }
 
