@@ -1,10 +1,11 @@
 import mongoose, { Types } from 'mongoose';
+import { parse } from 'path';
+import mime from 'mime';
 
 import * as data from './data.json';
 
 import env from '@config/env';
 
-import db from '@config/db';
 import { cloudinary } from '@config/cloudinary';
 
 import { IMessageEmoji } from '@api/messages/model';
@@ -20,6 +21,7 @@ import { ServerInvite } from '@api/serverInvites/model';
 import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 
 import { authService } from '@api/auth/service';
+import { redisClient } from '@config/redis';
 
 async function seedDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
@@ -106,7 +108,7 @@ async function seedDb() {
   console.log('Connecting to mongoDB...')
   await mongoose.connect(env.MONGODB_URI, {});
 
-  console.log('Dropping database and CDN...');
+  console.log('Dropping database, CDN and Redis cache...');
 
   await Promise.all([
     // db.dropDatabase(),
@@ -114,7 +116,11 @@ async function seedDb() {
       await cloudinary.api.delete_resources_by_prefix(CLOUDINARY_BASE_FOLDER);
       await cloudinary.api.delete_folder(CLOUDINARY_BASE_FOLDER);
     },
-  ]);
+    redisClient.flushDb(),
+  ])
+  .catch((err) => {
+    console.error(err);
+  });
   
   // POPULATE DB AND CDN
   // Users - 10
@@ -328,10 +334,10 @@ async function seedDb() {
     avatarUrl,
   }) => {
     const dm = new DM({
-      roomId,
+      _id: roomId,
       participantIds: userIds,
       isGroup: userIds.length > 2,
-      ...(name && { name }),
+      name: name || '',
     });
 
     if (avatarUrl) {
@@ -343,6 +349,8 @@ async function seedDb() {
 
       if (cloudinaryRes) dm.imageUrl = cloudinaryRes.secure_url;
     }
+
+    await dm.save();
 
     return dm;
   }));
@@ -392,19 +400,23 @@ async function seedDb() {
     });
 
     if (attachmentsData) await Promise.all(attachmentsData.map(async ({ url, filename }) => {
+      const { name, ext } = parse(filename);
+      const extension = ext.slice(1);
+
       const cloudinaryRes = await cloudinary.uploader.upload(url, {
-        public_id: filename,
+        public_id: name,
         use_filename: true,
         folder: `${CLOUDINARY_BASE_FOLDER}/${serverId
           ? `servers/${serverId}/channels/${roomId}`
           : `dms/${roomId}`
         }/messages/${messageId}/attachments`,
+        format: extension,
       });
 
       if (cloudinaryRes) message.attachments.push({
         url: cloudinaryRes.secure_url,
-        filename,
-        mimetype: cloudinaryRes.format,
+        filename: name,
+        mimetype: mime.getType(extension),
         bytes: cloudinaryRes.bytes,
       });
     }));
