@@ -16,4 +16,11 @@
     word-break: break-all;
     overflow-wrap: break-word;
   }
+
+  p {
+    word-wrap: normal !important;
+    word-break: normal !important;
+    white-space: normal;
+    line-height: 16px;
+  }
 }
