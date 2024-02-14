@@ -1,6 +1,8 @@
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 import * as data from './data.json';
+
+import env from '@config/env';
 
 import db from '@config/db';
 import { cloudinary } from '@config/cloudinary';
@@ -39,6 +41,7 @@ async function seedDb() {
     serverName: string;
     avatarUrl: string;
     bannerUrl: string;
+    description: string;
     categoryFields: {
       categoryId: string;
       name: string;
@@ -68,7 +71,7 @@ async function seedDb() {
     inviteId: string;
   }[];
   const DMS_DATA: {
-    dmId: string;
+    roomId: string;
     userIds: string[];
     name?: string;
     avatarUrl?: string;
@@ -100,10 +103,13 @@ async function seedDb() {
 
   const customEmojis: ICustomEmoji[] = [];
 
+  console.log('Connecting to mongoDB...')
+  mongoose.connect(env.MONGODB_URI, {});
+
   console.log('Dropping database and CDN...');
 
   await Promise.all([
-    db.dropDatabase(),
+    // db.dropDatabase(),
     async () => {
       await cloudinary.api.delete_resources_by_prefix(CLOUDINARY_BASE_FOLDER);
       await cloudinary.api.delete_folder(CLOUDINARY_BASE_FOLDER);
@@ -160,6 +166,7 @@ async function seedDb() {
     serverName,
     avatarUrl,
     bannerUrl,
+    description,
     categoryFields,
     channelFields,
     roleFields,
@@ -167,16 +174,21 @@ async function seedDb() {
     membersData,
     inviteId,
   }) => {
+    const ownerUser = users.find(u => u._id.equals(ownerId));
+
     const serverOwner = new ServerMember({
       serverId,
       userId: ownerId,
+      displayName: ownerUser?.displayName,
+      bio: ownerUser?.bio,
+      bannerColor: ownerUser?.bannerColor,
     });
 
     const server = new Server({
       _id: serverId,
       ownerId: serverOwner._id,
       name: serverName,
-      description: '',
+      description,
       private: false,
     });
 
@@ -249,6 +261,7 @@ async function seedDb() {
       const emoji = new CustomEmoji({
         _id: emojiId,
         creatorId: ownerId,
+        serverId,
         name,
         url: res.secure_url,
       });
@@ -261,33 +274,36 @@ async function seedDb() {
     }));
 
     // Server members
-    await Promise.all(membersData!.map(({ userId, roleIds }) => {
+    await Promise.all(membersData!.map(async ({ userId, roleIds }) => {
       const user = users.find(u => u._id.equals(userId));
 
       if (!user) return Promise.resolve();
 
-      if (user._id.equals(serverOwner._id)) {
+      if (user._id.equals(ownerId)) {
         roleIds.forEach(rId => {
           serverOwner.roleIds.push(new Types.ObjectId(rId));
         });
 
-        return serverOwner.save();
+        await serverOwner.save();
+      } else {
+        const member = new ServerMember({
+          serverId,
+          userId,
+          roleIds: [
+            defaultRoleId,
+            ...(roleIds || []),
+          ],
+          displayName: user?.displayName,
+          bannerColor: user?.bannerColor,
+          bio: user?.bio,
+        });
+  
+        server.memberCount = server.memberCount + 1;
+  
+        await member.save();
       }
 
-      const member = new ServerMember({
-        serverId,
-        userId: userId,
-        roleIds: [
-          defaultRoleId,
-          ...(roleIds || []),
-        ],
-        bannerColor: user?.bannerColor,
-        bio: user?.bio,
-      });
-
-      server.memberCount = server.memberCount + 1;
-
-      return member.save();
+      return Promise.resolve();
     }));
 
     const serverInvite = new ServerInvite({
@@ -306,13 +322,13 @@ async function seedDb() {
   // DMs and groups - 4 DM, 2 groups
   console.log('Creating DMs...');
   const dms = await Promise.all(DMS_DATA.map(async ({
-    dmId,
+    roomId,
     userIds,
     name,
     avatarUrl,
   }) => {
     const dm = new DM({
-      _id: dmId,
+      roomId,
       participantIds: userIds,
       isGroup: userIds.length > 2,
       ...(name && { name }),
@@ -344,7 +360,7 @@ async function seedDb() {
     attachmentsData,
   }) => {
     const fields = {
-      _id: messageId,
+      _id: new Types.ObjectId(messageId),
       senderId,
       body,
     };
