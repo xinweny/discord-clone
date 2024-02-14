@@ -63,7 +63,7 @@ const remove = async (
   serverId: Types.ObjectId | string,
   emojiId: Types.ObjectId | string
 ) => {
-  const emoji = await CustomEmoji.findOneAndDelete({ serverId, emojiId});
+  const emoji = await CustomEmoji.findOneAndDelete({ serverId, emojiId }, { returnOriginal: true });
 
   if (!emoji) throw new CustomError(400, 'Emoji not found');
 

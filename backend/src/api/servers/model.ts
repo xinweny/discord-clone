@@ -4,7 +4,7 @@ import env from '@config/env';
 
 import { CustomError } from '@helpers/CustomError';
 
-import { roleSchema, IRole } from './roles/schema';
+import { roleSchema, IRole, IPermissions } from './roles/schema';
 import { categorySchema, ICategory } from './categories/schema';
 import { channelSchema, IChannel } from './channels/schema';
 import { IServerMember } from '../serverMembers/model';
@@ -51,7 +51,7 @@ serverSchema.pre('save', function (next) {
 serverSchema.method(
   'checkPermissions',
   function (member: IServerMember, permissionKeys: string[] = []) {
-    if (this.ownerId.equals(member._id)) return true;
+    if (this.ownerId.prototype?.equals(member._id)) return true;
 
     const roles = this.roles;
 
@@ -59,9 +59,9 @@ serverSchema.method(
       const role = roles.id(id);
 
       if (!role) return false;
-      if (role.permissions.administrator) return true;
+      if (role.permissions?.administrator) return true;
 
-      if (permissionKeys.some(key => role.permissions[key])) return true;
+      if (permissionKeys.some(key => role.permissions[key as keyof IPermissions])) return true;
 
       return false;
     })) return true;

@@ -74,7 +74,7 @@ userSchema.set('toObject', { virtuals: true });
 userSchema.method(
   'relationTo',
   function (userId: Types.ObjectId | string) {
-    return this.relations.find((relation: IRelation) => relation.userId.equals(userId));
+    return this.relations.find(relation => relation.userId.prototype?.equals(userId));
   }
 );
 
