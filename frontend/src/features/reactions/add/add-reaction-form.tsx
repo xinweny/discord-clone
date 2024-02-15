@@ -1,12 +1,11 @@
-import data from '@emoji-mart/data/sets/14/twitter.json';
-import Picker from '@emoji-mart/react';
-
 import { useMessageContext } from '@features/messages/context';
 
 import { useGetServerRoomIds } from '@hooks';
-import { useGetPickerCustomEmojis } from '../../emojis/hooks';
+
+import { EmojiPicker } from '@features/emojis/list';
 
 import { useCreateReactionMutation } from '../api';
+
 
 type AddReactionFormProps = {
   btnRef: React.RefObject<HTMLButtonElement>;
@@ -16,8 +15,6 @@ export function AddReactionForm({
   btnRef
 }: AddReactionFormProps) {
   const message = useMessageContext();
-
-  const { custom, categoryIcons } = useGetPickerCustomEmojis();
 
   const { serverId, roomId } = useGetServerRoomIds();
 
@@ -52,14 +49,6 @@ export function AddReactionForm({
   };
 
   return (
-    <Picker
-      data={data}
-      custom={custom}
-      onEmojiSelect={handleClick}
-      theme="dark"
-      skinTonePosition="none"
-      set="twitter"
-      categoryIcons={categoryIcons}
-    />
+    <EmojiPicker handleSelect={handleClick} />
   );
 }

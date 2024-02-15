@@ -13,7 +13,7 @@ import styles from './emoji-preview-table.module.scss';
 export function EmojiPreviewTable() {
   const { _id: serverId } = useServerContext()!;
 
-  const emojis = useGetEmojisQuery({ serverId, getCreators: true });
+  const emojis = useGetEmojisQuery({ serverIds: [serverId], getCreators: true });
 
   if (!emojis.isSuccess) return null;
   

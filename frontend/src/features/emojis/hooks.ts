@@ -13,7 +13,6 @@ import { useLazyGetEmojisQuery } from '@features/emojis/api';
 
 export const useGetPickerCustomEmojis = () => {
   const [custom, setCustom] = useState<PickerServerEmojisData[]>([]);
-  const [categoryIcons, setCategoryIcons] = useState<PickerCategoryData>({});
 
   const [getEmojis] = useLazyGetEmojisQuery();
 
@@ -27,11 +26,6 @@ export const useGetPickerCustomEmojis = () => {
       const emojis = await getEmojis({
         serverIds: servers.map(server => server._id),
       }).unwrap();
-
-      setCategoryIcons(servers.reduce((prev, server) => ({
-        ...prev,
-        [server.name]: { src: server.avatarUrl },
-      }), {}));
 
       setCustom(servers.map(server => ({
         id: server._id,
@@ -49,6 +43,5 @@ export const useGetPickerCustomEmojis = () => {
 
   return {
     custom,
-    categoryIcons,
   };
 };

@@ -27,7 +27,7 @@ export const useTenorGif = (message: MessageData) => {
   const { body } = message;
 
   const isTenorGif = !!body
-    .match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\.gif$/);
+    .match(/^https:\/\/media\.tenor\.com\/[a-zA-Z0-9-_]+\/[a-zA-Z0-9-_]+\.gif$/);
 
   return {
     tenorError,

@@ -51,7 +51,7 @@ export function ServerMembersPanel() {
                 key={member._id}
                 member={member}
                 serverId={serverId}
-                isOwner={member._id === ownerId}
+                isOwner={member.userId === ownerId}
               />
             )}
           </div>
@@ -64,7 +64,7 @@ export function ServerMembersPanel() {
                 key={member._id}
                 member={member}
                 serverId={serverId}
-                isOwner={member._id === ownerId}
+                isOwner={member.userId === ownerId}
               />
             )}
           </div>
