@@ -12,13 +12,13 @@ import styles from './server-member-card.module.scss';
 type ServerMemberCardProps = {
   member: ServerMemberMainData;
   serverId: string;
-  isOwner: boolean;
+  ownerId: string;
 };
 
 export function ServerMemberCard({
   member,
   serverId,
-  isOwner,
+  ownerId,
 }: ServerMemberCardProps) {
   return (
     <ServerMemberProfileButton
@@ -29,7 +29,7 @@ export function ServerMemberCard({
     >
       <Avatar src={member.user.avatarUrl} />
       <span>{member.displayName}</span>
-      {isOwner && <Tooltip
+      {(member._id === ownerId) && <Tooltip
         text="Server Owner"
         direction="top"
         gap={2}
