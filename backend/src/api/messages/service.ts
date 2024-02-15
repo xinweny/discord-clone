@@ -91,7 +91,7 @@ const create = async (
       message.attachments.push({
         url: cloudinaryService.generateUrl(
           filename,
-          `${serverId ? `servers/${serverId}/channels` : 'dms'}/${fields.roomId}/${message._id}/attachments`
+          `${serverId ? `servers/${serverId}/channels` : 'dms'}/${fields.roomId}/messages/${message._id}/attachments`
         ),
         filename,
         mimetype,
