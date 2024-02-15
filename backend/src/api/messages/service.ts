@@ -58,7 +58,9 @@ const getMany = async (
 
   return {
     messages,
-    next: lastMessage ? lastMessage._id : null,
+    next: messages.length === limit && lastMessage
+      ? lastMessage._id
+      : null,
   };
 };
 
