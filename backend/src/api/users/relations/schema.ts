@@ -11,6 +11,7 @@ export interface IRelation extends Types.Subdocument {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
   status: RelationStatus;
+  updatedAt: string;
 }
 
 const relationSchema = new Schema({

@@ -9,7 +9,19 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#1E2460",
       "bio": "Coffee addict and bookworm exploring the digital world. Join me for discussions on literature and the occasional meme exchange.",
-      "customStatus": "Exploring the universe one star at a time 🌌"
+      "customStatus": "Exploring the universe one star at a time 🌌",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c4094c96dcd6290c71aacb",
@@ -20,7 +32,49 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#F4A900",
       "bio": "Anime aficionado and aspiring writer. Looking for fellow otakus to discuss anime, manga, and maybe even collaborate on a story or two.",
-      "customStatus": "夢を追いかけよう！"
+      "customStatus": "夢を追いかけよう！",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aa81",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c51355ac250f88e82d0908",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c5135c254666fe2c752c83",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c4095b3c5f4ecff17000f9",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c40962f74c941eacdaa6fc",
+          "status": "pending_from",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c5136d50697a9e9cf593ab",
+          "status": "pending_to",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c40953a944658192c19420",
@@ -31,7 +85,19 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#A12312",
       "bio": "Movie buff and trivia master. Let's binge-watch our favorite films and debate about the greatest movies of all time!",
-      "customStatus": "🌈😊🎉"
+      "customStatus": "🌈😊🎉",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c4095b3c5f4ecff17000f9",
@@ -41,7 +107,14 @@
       "displayName": "Artissa",
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#3E5F8A",
-      "bio": "Artist at heart, spreading positivity through pixels. Let's share our creations and inspire each other!"
+      "bio": "Artist at heart, spreading positivity through pixels. Let's share our creations and inspire each other!",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c40962f74c941eacdaa6fc",
@@ -51,7 +124,14 @@
       "displayName": "Ring-kai",
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#7D8471",
-      "bio": "Science nerd with a curiosity for the cosmos. Join me for discussions on astrophysics, space exploration, and everything in between."
+      "bio": "Science nerd with a curiosity for the cosmos. Join me for discussions on astrophysics, space exploration, and everything in between.",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "pending_to",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c5134c5b73b94e45f1c381",
@@ -62,7 +142,24 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#F8F32B",
       "bio": "Outdoor enthusiast stuck in the digital world. Let's swap hiking stories and plan our next adventure!",
-      "customStatus": "🌍🔍🌱"
+      "customStatus": "🌍🔍🌱",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c40953a944658192c19420",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        },
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c51355ac250f88e82d0908",
@@ -73,7 +170,14 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#20603D",
       "bio": "Music lover with a passion for coding. Seeking fellow enthusiasts for jam sessions and coding challenges.",
-      "customStatus": "Lost in the melody of life 🎶"
+      "customStatus": "Lost in the melody of life 🎶",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c5135c254666fe2c752c83",
@@ -84,7 +188,14 @@
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#3B83BD",
       "bio": "Tech enthusiast by day, gamer by night. Always up for a chat about the latest tech trends or a round of Overwatch.",
-      "customStatus": "Fuelled by caffeine and code. 💻"
+      "customStatus": "Fuelled by caffeine and code. 💻",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "friends",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     },
     {
       "userId": "65c513679348d96403f81015",
@@ -94,7 +205,8 @@
       "displayName": "Shark Claws",
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#6C4675",
-      "bio": "Explorer of the virtual realm, seeking adventures and friendships. Let's embark on epic quests together!"
+      "bio": "Explorer of the virtual realm, seeking adventures and friendships. Let's embark on epic quests together!",
+      "relationFields": []
     },
     {
       "userId": "65c5136d50697a9e9cf593ab",
@@ -104,7 +216,14 @@
       "displayName": "Silver-xoxo",
       "avatarUrl": "https://picsum.photos/200",
       "bannerColor": "#84C3BE",
-      "bio": "Foodie on a quest for the perfect ramen recipe. Join me for culinary adventures and late-night snack debates."
+      "bio": "Foodie on a quest for the perfect ramen recipe. Join me for culinary adventures and late-night snack debates.",
+      "relationFields": [
+        {
+          "userId": "65c4094c96dcd6290c71aacb",
+          "status": "pending_from",
+          "updatedAt": "2024-02-08T12:30:00.000Z"
+        }
+      ]
     }
   ],
   "servers": [

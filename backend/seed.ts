@@ -22,21 +22,27 @@ import { IPermissions, defaultRoleFields } from '@api/servers/roles/schema';
 
 import { authService } from '@api/auth/service';
 import { redisClient } from '@config/redis';
+import { RelationStatus } from '@api/users/relations/schema';
 
 async function seedDb() {
   const CLOUDINARY_BASE_FOLDER = '/discord_clone';
 
-  const USERS_DATA: {
-    userId: string,
-    email: string,
-    password: string,
-    username: string,
-    displayName: string,
-    avatarUrl: string,
-    bannerColor: string,
-    customStatus?: string,
-    bio?: string,
-  }[] = data.users || [];
+  const USERS_DATA = data.users || [] as {
+    userId: string;
+    email: string;
+    password: string;
+    username: string;
+    displayName: string;
+    avatarUrl: string;
+    bannerColor: string;
+    customStatus?: string;
+    bio?: string;
+    relationFields?: {
+      userId: string;
+      status: RelationStatus;
+      updatedAt: string;
+    }[];
+  }[];
   const SERVERS_DATA = data.servers || [] as {
     serverId: string;
     ownerId: string;
@@ -136,6 +142,7 @@ async function seedDb() {
     bannerColor,
     customStatus,
     bio,
+    relationFields,
   }) => {
     const hashedPassword = await authService.hashPassword(password);
 
@@ -148,6 +155,18 @@ async function seedDb() {
       bannerColor,
       customStatus,
       bio,
+    });
+    
+    relationFields?.forEach(({
+      userId,
+      status,
+      updatedAt,
+    }) => {
+      user.relations.push({
+        userId,
+        status,
+        updatedAt,
+      });
     });
 
     const cloudinaryRes = await cloudinary.uploader.upload(avatarUrl, {
