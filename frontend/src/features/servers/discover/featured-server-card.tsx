@@ -38,7 +38,9 @@ export function FeaturedServerCard({ server }: FeaturedServerCardProps) {
       </div>
       <div className={styles.info}>
         <h3>{name}</h3>
-        <p>{description}</p>
+        <div className={styles.description}>
+          <p>{description}</p>
+        </div>
         <div className={styles.memberCount}>
           <div className={styles.icon}></div>
           <span>{pluralize('Member', memberCount, true).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>

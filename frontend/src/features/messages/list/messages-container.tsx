@@ -35,11 +35,9 @@ export function MessagesContainer({
   
   const currentDate = useUpdateCurrentDate();
 
-  const [scrolledToTop, setScrolledToTop] = useState<boolean>(true);
   const [next, setNext] = useState<string | null | undefined>(undefined);
 
   useEffect(() => {
-    setScrolledToTop(true);
     setNext(undefined);
   }, [roomId]);
 
@@ -48,7 +46,7 @@ export function MessagesContainer({
     roomId: roomId!,
     next,
   }, {
-    skip: !scrolledToTop || next === null,
+    skip: next === null,
   });
 
   useEffect(() => {
@@ -59,11 +57,7 @@ export function MessagesContainer({
     });
 
     return () => { clearTimeout(timeoutId); };
-  }, [isSuccess]); 
-
-  useEffect(() => {
-    if (messages && next !== null) setNext(messages.next);
-  }, [messages]);
+  }, [isSuccess]);
 
   useEffect(() => {
     if (!messages) return;
@@ -78,7 +72,9 @@ export function MessagesContainer({
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     e.stopPropagation();
-    setScrolledToTop(e.currentTarget.scrollTop === 0);
+    if (e.currentTarget.scrollTop === 0 && messages && next !== null) {
+      setNext(messages.next);
+    }
   };
 
   if (!messages?.items) return null;

@@ -29,13 +29,11 @@ export function DMPage() {
   const [showPanel] = panelState;
 
   const { user } = useGetUserData();
-  const { data: dm, isLoading, isSuccess } = useGetDmQuery({ dmId: roomId!, userId: user.data!.id });
+  const { data: dm, isError } = useGetDmQuery({ dmId: roomId!, userId: user.data!.id });
 
   useEffect(() => {
-    if (!isLoading && !isSuccess) {
-      navigate('/channels/@me');
-    }
-  }, [isSuccess, isLoading]);
+    if (isError) navigate('/channels/@me');
+  }, [isError]);
 
   if (!dm) return null;
 
