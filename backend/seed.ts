@@ -462,7 +462,7 @@ async function seedDb() {
 
   await mongoose.connection.close();
 
-  return;
+  process.exit();
 }
 
 seedDb();
