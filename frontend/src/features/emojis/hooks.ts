@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import type {
-  PickerCategoryData,
   PickerServerEmojisData,
 } from '@features/emojis/types';
 
@@ -30,11 +29,13 @@ export const useGetPickerCustomEmojis = () => {
       setCustom(servers.map(server => ({
         id: server._id,
         name: server.name,
-        emojis: emojis.map(emoji => ({
-          id: emoji.name,
-          name: emoji._id,
-          skins: [{ src: emoji.url }],
-        })),
+        emojis: emojis
+          .filter(emoji => emoji.serverId === server._id)
+          .map(emoji => ({
+            id: emoji.name,
+            name: emoji._id,
+            skins: [{ src: emoji.url }],
+          })),
       })));
     };
 
