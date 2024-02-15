@@ -211,7 +211,7 @@ async function seedDb() {
 
     const server = new Server({
       _id: serverId,
-      ownerId,
+      ownerId: serverOwner._id,
       name: serverName,
       description,
       private: false,

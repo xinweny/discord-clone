@@ -232,7 +232,7 @@
       "ownerId": "65c4094c96dcd6290c71aacb",
       "serverName": "Nihongo with Neko",
       "avatarUrl": "https://img.freepik.com/premium-vector/cute-cartoon-lucky-cat-maneki-neko-vector-illustration_773815-126.jpg",
-      "bannerUrl": "",
+      "bannerUrl": "https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/00/a0000697/img/basic/a0000697_main.jpg",
       "description": "🌸 Welcome to Nihongo with Neko! 🌸\nA cozy community for learning Japanese & exploring its culture. Join us for language exchange, events & meowtastic adventures! 🐾🇯🇵✨",
       "inviteId": "Pua3ubrz",
       "categoryFields": [
@@ -2338,12 +2338,267 @@
           "roleIds": ["65c409456605b438a1cfa705"]
         }
       ]
+    },
+    {
+      "serverId": "65ce7e9dcbcbf74de0db4c86",
+      "ownerId": "65c409456605b438a1cfa200",
+      "serverName": "Birders Unite",
+      "avatarUrl": "https://peregrinefund.org/sites/default/files/styles/raptor_banner_600x430/public/2019-11/raptor-er-snowy-owl-flying-koon-cheung.jpg?itok=v-FoNhkl",
+      "bannerUrl": "https://apktodo.io/uploads/2022/12/silly-wisher-for-genshin-thumbnail.jpg",
+      "description": "🐦 Welcome to Birders Unite! Join fellow birdwatchers to share tips, sightings, & conservation efforts. Let's explore the world of birds together! 🌳 #BirdingCommunity",
+      "inviteId": "WTEbfEWs",
+      "categoryFields": [
+        {
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "name": "Welcome & Announcements"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "name": "Bird Watching Discussions"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "name": "Bird Photography"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "name": "Birding Locations"
+        },
+        {
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "name": "Conservation Efforts"
+        }
+      ],
+      "channelFields": [
+        {
+          "channelId": "65c4094c96dcd6290c71aad1",
+          "name": "🌳-welcome",
+          "description": "Welcome to Birders Unite! Check out our rules and guidelines here.",
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad2",
+          "name": "📢-announcements",
+          "description": "Stay updated with the latest news and announcements.",
+          "categoryId": "65c4094c96dcd6290c71aac1",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad3",
+          "name": "🐦-general-chat",
+          "description": "General discussions about bird watching and sightings.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad4",
+          "name": "🔍-bird-identification",
+          "description": "Need help identifying a bird? Post here!",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad5",
+          "name": "🦅-raptor-watch",
+          "description": "Share your sightings and experiences with raptors.",
+          "categoryId": "65c4094c96dcd6290c71aac2",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad6",
+          "name": "📸-photography-tips",
+          "description": "Discuss photography techniques and share your bird photos.",
+          "categoryId": "65c4094c96dcd6290c71aac3",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad7",
+          "name": "🌿-local-habitats",
+          "description": "Explore and discuss local birding hotspots.",
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad8",
+          "name": "🌍-migration-updates",
+          "description": "Stay updated on bird migration patterns and routes.",
+          "categoryId": "65c4094c96dcd6290c71aac4",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aad9",
+          "name": "🌻-community-projects",
+          "description": "Get involved in community-based bird conservation projects.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "text"
+        },
+        {
+          "channelId": "65c4094c96dcd6290c71aada",
+          "name": "🌿-conservation-discussion",
+          "description": "Discuss conservation efforts and share tips for bird-friendly practices.",
+          "categoryId": "65c4094c96dcd6290c71aac5",
+          "type": "text"
+        }
+      ],
+      "roleFields": [
+        {
+          "roleId": "65c4094c96dcd6290c71ab00",
+          "name": "Ornithologist",
+          "color": "#2ecc71",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab01",
+          "name": "Photographer",
+          "color": "#3498db",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab02",
+          "name": "Birdwatcher",
+          "color": "#1abc9c",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab03",
+          "name": "Birdsong Expert",
+          "color": "#2980b9",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": false,
+            "manageRoles": false,
+            "manageExpressions": false,
+            "kickMembers": false,
+            "manageServer": false,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": false,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        },
+        {
+          "roleId": "65c4094c96dcd6290c71ab04",
+          "name": "Moderator",
+          "color": "#27ae60",
+          "permissions": {
+            "administrator": false,
+            "viewChannels": true,
+            "manageChannels": true,
+            "manageRoles": true,
+            "manageExpressions": true,
+            "kickMembers": true,
+            "manageServer": true,
+            "createInvite": true,
+            "sendMessages": true,
+            "manageMessages": true,
+            "addReactions": true,
+            "joinCall": true,
+            "speak": true,
+            "video": true
+          }
+        }
+      ],
+      "customEmojiFields": [
+        {
+          "emojiId": "65ce8b9b81c1880987c5398e",
+          "name": "isthisapigeon",
+          "url": "https://cdn3.emoji.gg/emojis/3038-isthisapigeon.png"
+        },
+        {
+          "emojiId": "65ce8ba0711a79c07a9078cd",
+          "name": "birdparty",
+          "url": "https://cdn3.emoji.gg/emojis/1092-birdparty.gif"
+        },
+        {
+          "emojiId": "65ce8ba39b9bfe8c132f4026",
+          "name": "pigeonlike",
+          "url": "https://cdn3.emoji.gg/emojis/8832-pigeon-like.png"
+        },
+        {
+          "emojiId": "65ce8ba60f7e5bc33a7113a7",
+          "name": "fancybirb",
+          "url": "https://cdn3.emoji.gg/emojis/8208-fancybirb.png"
+        },
+        {
+          "emojiId": "65ce8baa400eddc4af2f55aa",
+          "name": "birdknife",
+          "url": "https://cdn3.emoji.gg/emojis/3603-bird-meme.png"
+        }
+      ],
+      "membersData": [
+        {
+          "userId": "65c409456605b438a1cfa200",
+          "roleIds": ["65c4094c96dcd6290c71ab04", "65c4094c96dcd6290c71ab01"]
+        },
+        {
+          "userId": "65c5136d50697a9e9cf593ab",
+          "roleIds": ["65c4094c96dcd6290c71ab00", "65c4094c96dcd6290c71ab03"]
+        },
+        {
+          "userId": "65c5134c5b73b94e45f1c381",
+          "roleIds": ["65c4094c96dcd6290c71ab02", "65c4094c96dcd6290c71ab01"]
+        }
+      ]
     }
   ],
   "dms": [
     {
       "roomId": "65c4094c96dcd6290c71aa81",
       "userIds": ["65c4094c96dcd6290c71aacb", "65c5134c5b73b94e45f1c381"]
+    },
+    {
+      "roomId": "65c4094c96dcd6290c71aa85",
+      "userIds": ["65c4094c96dcd6290c71aa81", "65c409456605b438a1cfa200"]
     },
     {
       "roomId": "65c4094c96dcd6290c71aa82",
@@ -2446,7 +2701,7 @@
     {
       "messageId": "65c4094c96dcd6290c71aa92",
       "senderId": "65c5134c5b73b94e45f1c381",
-      "body": "Sounds perfect! Looking forward to it. ✨✨",
+      "body": "Sounds perfect! Looking forward to it. ✨ <:Wriothesley_Wink:65ca8485302e6673d318de56> ✨",
       "roomId": "65c4094c96dcd6290c71aa81",
       "createdAt": "2024-02-08T10:40:00Z",
       "emojisData": [
@@ -2456,9 +2711,21 @@
           "custom": false
         },
         {
+          "emojiId": "65ca8489709c012c1321bc56",
+          "shortcode": "Wriothesley_Wink",
+          "custom": true
+        },
+        {
           "emojiId": "✨",
           "shortcode": "sparkles",
           "custom": false
+        },
+        {
+          "messageId": "65c4094c96dcd6290c71aa91",
+          "senderId": "65c4094c96dcd6290c71aacb",
+          "body": "https://media.tenor.com/IiG_4DfM42YAAAAC/holiday-classics-elf.gif",
+          "roomId": "65c4094c96dcd6290c71aa81",
+          "createdAt": "2024-02-08T10:45:00Z"
         }
       ]
     }
