@@ -22,12 +22,14 @@ type SendMessageFormProps = {
   authorized?: boolean;
   placeholder?: string;
   errorPlaceholder?: string;
+  anchorRef?: React.RefObject<HTMLDivElement>;
 };
 
 export function SendMessageForm({
   authorized = true,
   placeholder,
   errorPlaceholder,
+  anchorRef,
 }: SendMessageFormProps) {
   const { roomId, serverId } = useParams();
 
@@ -74,6 +76,7 @@ export function SendMessageForm({
 
     reset();
     setAllFiles([]);
+    anchorRef?.current?.scrollIntoView();
   };
 
   const { enterSubmit } = useCustomSubmitHandlers(handleSubmit(onSubmit));

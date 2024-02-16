@@ -30,7 +30,6 @@ export function MessagesContainer({
 }: MessagesContainerProps) {
   const { serverId, roomId } = useParams();
 
-  const listRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   
   const currentDate = useUpdateCurrentDate();
@@ -77,15 +76,16 @@ export function MessagesContainer({
     }
   };
 
+  console.log(messages?.next === null)
+
   if (!messages?.items) return null;
 
   return (
     <div className={styles.container}>
-      <div onScroll={handleScroll} className={styles.content} ref={listRef}>
+      <div onScroll={handleScroll} className={styles.content}>
         {(
           messages?.items.length === 0 ||
-          next === null ||
-          (listRef.current && (listRef.current?.offsetHeight === listRef.current?.offsetWidth))
+          next === null
         ) && welcomeComponent}
         {messages.items.map((message, index) => {
           const prev = messages.items[index - 1];
@@ -115,6 +115,7 @@ export function MessagesContainer({
         placeholder={formPlaceholder}
         authorized={authorized}
         errorPlaceholder={errorPlaceholder}
+        anchorRef={anchorRef}
       />
     </div>
   );
