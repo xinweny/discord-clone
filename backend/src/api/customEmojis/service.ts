@@ -22,13 +22,15 @@ const getMany = async (serverIds: Types.ObjectId[] | string[], populate = false)
 };
 
 const create = async (
-  serverId: Types.ObjectId | string,
   fields: {
     creatorId: Types.ObjectId | string,
     name: string,
+    serverId: Types.ObjectId | string,
   },
   filename: string) => {
   const emojiId = new Types.ObjectId();
+
+  const { serverId } = fields;
 
   const emoji = new CustomEmoji({
     _id: emojiId,
@@ -63,7 +65,7 @@ const remove = async (
   serverId: Types.ObjectId | string,
   emojiId: Types.ObjectId | string
 ) => {
-  const emoji = await CustomEmoji.findOneAndDelete({ serverId, emojiId }, { returnOriginal: true });
+  const emoji = await CustomEmoji.findByIdAndDelete({ _id: emojiId, serverId }, { returnOriginal: true });
 
   if (!emoji) throw new CustomError(400, 'Emoji not found');
 

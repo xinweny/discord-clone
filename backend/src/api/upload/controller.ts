@@ -109,6 +109,7 @@ const signAttachmentsUpload: RequestHandler[] = [
 
 const signEmojiUpload: RequestHandler[] = [
   authenticate,
+  authorize.server('manageExpressions'),
   tryCatch(
     async (req, res) => {
       const { emojiId } = req.params;

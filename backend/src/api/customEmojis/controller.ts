@@ -25,9 +25,9 @@ const createEmoji: RequestHandler[] = [
   authorize.server('manageExpressions'),
   tryCatch(
     async (req, res) => {
-      const { name, filename } = req.body;
-
-      const emoji = await customEmojiService.create(req.params.serverId, {
+      const { name, filename, serverId } = req.body;
+      const emoji = await customEmojiService.create({
+        serverId,
         creatorId: req.user!._id,
         name,
       }, filename);

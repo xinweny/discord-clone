@@ -31,15 +31,20 @@ export function CreateEmojiForm() {
 
   const file = useWatch({ control, name: 'file' });
 
-  useEffect(() => {
-    if (file && file instanceof Blob) handleSubmit(onSubmit)();
-  }, [file]);
-  
   const onSubmit = async (data: CreateEmojiFields) => {
     await createEmoji(data).unwrap();
 
     reset();
   };
+
+  useEffect(() => {
+    if (!(
+      (file instanceof Blob) ||
+      ((file as any) instanceof File)
+    )) return;
+
+    handleSubmit(onSubmit)();
+  }, [file]);
 
   return (
     <FormProvider {...methods}>

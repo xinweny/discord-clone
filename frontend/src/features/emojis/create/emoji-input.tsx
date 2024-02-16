@@ -24,10 +24,8 @@ export function EmojiInput() {
       maxWidth: 128,
       success: (result) => {
         const baseName = formatEmojiName(result.name);
-
-        setValue(name, result);
-
         setValue('name', baseName || '__');
+        setValue(name, result);
       },
     });
   }
