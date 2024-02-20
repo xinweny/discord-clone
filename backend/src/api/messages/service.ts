@@ -5,7 +5,7 @@ import { init, getEmojiDataFromNative } from 'emoji-mart';
 import { CustomError } from '@helpers/CustomError';
 import { keepKeys } from '@helpers/keepKeys';
 
-import { Message, IMessageEmojiDict, IMessage } from './model';
+import { Message, IMessageEmojiDict } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
@@ -67,29 +67,45 @@ const getMany = async (
 
       const customEmojiMatches = body.match(/(<:.+?:[a-z0-9]+>)/gu);
 
-      const customEmojis = customEmojiMatches
-        ? CustomEmoji.find({
+      const getCustomEmojis = async () => {
+        if (!customEmojiMatches) return;
+
+        const customEmojis = await CustomEmoji.find({
           _id: {
-            $in: customEmojiMatches.map(m => m.split(':').slice(-1)[0].replace('>', '')),
+            $in: customEmojiMatches.map(m => {
+              console.log(m.split(':').slice(-1)[0].replace('>', ''));
+              return new Types.ObjectId(m.split(':').slice(-1)[0].replace('>', ''));
+            }),
           },
-        })
-        : null;
+        });
+
+        for (const e of customEmojis) {
+          const { id, name, url } = e;
+
+          emojiDict[id] = { shortcode: `:${name}:`, url };
+        }
+
+        return;
+      };
       
       const twemojiMatches = body.match(/(\p{Emoji_Presentation})/gu);
 
       if (twemojiMatches) await init({ data });
 
-      const twemojis = twemojiMatches
+      const getTwemojis = twemojiMatches
         ? twemojiMatches.map(async (match) => {
           return await getEmojiDataFromNative(match).then(emoji => {
             if (emoji) emojiDict[match] = {
               shortcode: `:${emoji.id}:`,
             };
           });
-      })
-      : [];
+        })
+        : [];
       
-      await Promise.all(customEmojis ? [customEmojis, ...twemojis] : twemojis);
+      await Promise.all([
+        getCustomEmojis(),
+        ...getTwemojis
+      ]);
     
       return { ...(m.toObject()), emojis: emojiDict };
     } catch {
