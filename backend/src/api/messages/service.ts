@@ -1,4 +1,4 @@
-import { Types, } from 'mongoose';
+import { Types } from 'mongoose';
 import data from '@emoji-mart/data';
 import { init, getEmojiDataFromNative } from 'emoji-mart';
 
