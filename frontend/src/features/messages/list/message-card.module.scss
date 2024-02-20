@@ -16,9 +16,10 @@
 }
 
 .avatar {
-  width: 72px;
+  width: 72px !important;
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
 
   > svg {
     margin-top: 2px;
