@@ -8,8 +8,6 @@ import env from '@config/env';
 
 import { cloudinary } from '@config/cloudinary';
 
-import { IMessageEmoji } from '@api/messages/model';
-
 import { User } from '@api/users/model';
 import { Server } from '@api/servers/model';
 import { ServerMember } from '@api/serverMembers/model';
@@ -90,11 +88,6 @@ async function seedDb() {
     roomId: string;
     serverId?: string;
     body: string;
-    emojisData?: {
-      emojiId: string,
-      shortcode: string,
-      custom: boolean,
-    }[];
     attachmentsData?: {
       url: string;
       filename: string;
@@ -383,7 +376,6 @@ async function seedDb() {
     roomId,
     serverId,
     body,
-    emojisData,
     attachmentsData,
   }) => {
     const fields = {
@@ -402,21 +394,6 @@ async function seedDb() {
         ...fields,
         roomId,
       });
-
-    if (emojisData) emojisData.forEach(({
-      emojiId,
-      shortcode,
-      custom,
-    }) => {
-      message.emojis.push({
-        id: emojiId,
-        shortcode: `:${shortcode}:`,
-        ...(emojiId && {
-          url: customEmojis.find(e => e._id.equals(emojiId))?.url,
-        }),
-        custom,
-      } as IMessageEmoji);
-    });
 
     if (attachmentsData) await Promise.all(attachmentsData.map(async ({ url, filename }) => {
       const { name, ext } = parse(filename);

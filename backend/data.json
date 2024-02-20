@@ -2626,28 +2626,14 @@
       "senderId": "65c4094c96dcd6290c71aacb",
       "body": "Hey! Have you played any good games lately? 😄",
       "roomId": "65c4094c96dcd6290c71aa81",
-      "createdAt": "2024-02-08T10:00:00Z",
-      "emojisData": [
-        {
-          "emojiId": "😄",
-          "shortcode": "smile",
-          "custom": false
-        }
-      ]
+      "createdAt": "2024-02-08T10:00:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa8b",
       "senderId": "65c5134c5b73b94e45f1c381",
       "body": "Hey! <:Hutao_Wave:65ca8489709c012c1321bc56> Yeah, I just started playing the new Elden Ring. It's incredible!",
       "roomId": "65c4094c96dcd6290c71aa81",
-      "createdAt": "2024-02-08T10:05:00Z",
-      "emojisData": [
-        {
-          "emojiId": "65ca8489709c012c1321bc56",
-          "shortcode": "Hutao_Wave",
-          "custom": true
-        }
-      ]
+      "createdAt": "2024-02-08T10:05:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa8c",
@@ -2703,24 +2689,7 @@
       "senderId": "65c5134c5b73b94e45f1c381",
       "body": "Sounds perfect! Looking forward to it. ✨ <:Wriothesley_Wink:65ca8485302e6673d318de56> ✨",
       "roomId": "65c4094c96dcd6290c71aa81",
-      "createdAt": "2024-02-08T10:40:00Z",
-      "emojisData": [
-        {
-          "emojiId": "✨",
-          "shortcode": "sparkles",
-          "custom": false
-        },
-        {
-          "emojiId": "65ca8489709c012c1321bc56",
-          "shortcode": "Wriothesley_Wink",
-          "custom": true
-        },
-        {
-          "emojiId": "✨",
-          "shortcode": "sparkles",
-          "custom": false
-        }
-      ]
+      "createdAt": "2024-02-08T10:40:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa93",
@@ -2734,47 +2703,21 @@
       "senderId": "65c409456605b438a1cfa200",
       "body": "Hey there! 👋",
       "roomId": "65c4094c96dcd6290c71aa85",
-      "createdAt": "2024-02-08T10:00:00Z",
-      "emojisData": [
-        {
-          "emojiId": "👋",
-          "shortcode": "wave",
-          "custom": false
-        }
-      ]
+      "createdAt": "2024-02-08T10:00:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa81",
       "senderId": "65c4094c96dcd6290c71aacb",
       "body": "Hi! How's it going? <:LofiCookie:65ca55db334fd10d410de73d>",
       "roomId": "65c4094c96dcd6290c71aa85",
-      "createdAt": "2024-02-08T10:03:00Z",
-      "emojisData": [
-        {
-          "emojiId": "65ca55db334fd10d410de73d",
-          "shortcode": "LofiCookie",
-          "custom": true
-        }
-      ]
+      "createdAt": "2024-02-08T10:03:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa82",
       "senderId": "65c409456605b438a1cfa200",
       "body": "I just started a new server called Birders Unite! It's a place for bird enthusiasts to come together, share sightings, and discuss all things birds. 🦜🌿",
       "roomId": "65c4094c96dcd6290c71aa85",
-      "createdAt": "2024-02-08T10:01:00Z",
-      "emojisData": [
-        {
-          "emojiId": "🦜",
-          "shortcode": "parrot",
-          "custom": false
-        },
-        {
-          "emojiId": "🌿",
-          "shortcode": "leaf",
-          "custom": false
-        }
-      ]
+      "createdAt": "2024-02-08T10:01:00Z"
     },
     {
       "messageId": "65c4094c96dcd6290c71aa83",
@@ -2788,14 +2731,7 @@
       "senderId": "65c409456605b438a1cfa200",
       "body": "Let me know if you have any questions! <:birdparty:65ce8ba0711a79c07a9078cd>",
       "roomId": "65c4094c96dcd6290c71aa85",
-      "createdAt": "2024-02-08T10:04:00Z",
-      "emojisData": [
-        {
-          "emojiId": "65ce8ba0711a79c07a9078cd",
-          "shortcode": "birdparty",
-          "custom": true
-        }
-      ]
+      "createdAt": "2024-02-08T10:04:00Z"
     }
   ],
   "reactions": []
