@@ -11,4 +11,7 @@ const serverInviteSchema = new mongoose.Schema({
   serverId: { type: Types.ObjectId, ref: 'Server', required: true, unique: true },
 });
 
+serverInviteSchema.index({ serverId: 1 });
+serverInviteSchema.index({ url: 1 });
+
 export const ServerInvite = mongoose.model<IServerInvite>('Url', serverInviteSchema, 'server_invites');

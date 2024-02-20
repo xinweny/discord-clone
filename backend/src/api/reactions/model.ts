@@ -22,10 +22,8 @@ export const reactionSchema = new Schema({
 
 export const Reaction = mongoose.model<IReaction>('Reaction', reactionSchema);
 
-if (env.NODE_ENV === 'development') {
-  reactionSchema.index({
-    messageId: 1,
-    emojiId: 1,
-    unified: 1,
-  }, { unique: true });
-}
+reactionSchema.index({
+  messageId: 1,
+  emojiId: 1,
+  unified: 1,
+}, { unique: true });

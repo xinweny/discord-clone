@@ -35,10 +35,8 @@ dmSchema.virtual('participants', {
 dmSchema.set('toJSON', { virtuals: true });
 dmSchema.set('toObject', { virtuals: true });
 
-if (env.NODE_ENV === 'development') {
-  dmSchema.index(
-    { participantIds: 1 },
-  );
-}
+dmSchema.index(
+  { participantIds: 1 },
+);
 
 export const DM = mongoose.model<IDM>('DM', dmSchema, 'dms');

@@ -49,4 +49,6 @@ messageSchema.virtual('serverMember', {
 messageSchema.set('toJSON', { virtuals: true });
 messageSchema.set('toObject', { virtuals: true });
 
+messageSchema.index({ roomId: 1 });
+
 export const Message = mongoose.model<IMessage>('Message', messageSchema);

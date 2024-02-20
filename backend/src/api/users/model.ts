@@ -78,11 +78,9 @@ userSchema.method(
   }
 );
 
-if (env.NODE_ENV === 'development') {
-  userSchema.index({ createdAt: 1 }, {
-    expireAfterSeconds: 60 * 60,
-    partialFilterExpression: { verified: false },
-  });
-}
+userSchema.index({ createdAt: 1 }, {
+  expireAfterSeconds: 60 * 60,
+  partialFilterExpression: { verified: false },
+});
 
 export const User = mongoose.model<IUser>('User', userSchema);

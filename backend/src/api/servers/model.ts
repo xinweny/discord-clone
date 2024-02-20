@@ -70,20 +70,18 @@ serverSchema.method(
   }
 );
 
-if (env.NODE_ENV === 'development') {
-  serverSchema.index(
-    {
-      name: 'text',
-      description: 'text',
-    },
-    {
-      weights: {
-        name: 5,
-        description: 1,
-        memberCount: 3,
-      }
+serverSchema.index(
+  {
+    name: 'text',
+    description: 'text',
+  },
+  {
+    weights: {
+      name: 5,
+      description: 1,
+      memberCount: 3,
     }
-  );
-}
+  }
+);
 
 export const Server = mongoose.model<IServer>('Server', serverSchema);

@@ -36,10 +36,8 @@ customEmojiSchema.pre('save', async function (next) {
   next();
 });
 
-if (env.NODE_ENV === 'development') {
-  customEmojiSchema.index({
-    serverId: 1,
-  });
-}
+customEmojiSchema.index({
+  serverId: 1,
+});
 
 export const CustomEmoji = mongoose.model<ICustomEmoji>('CustomEmoji', customEmojiSchema, 'custom_emojis');
