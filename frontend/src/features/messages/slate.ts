@@ -9,7 +9,7 @@ import {
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
 
-import type { MessageData } from './types';
+import type { MessageData, MessageEmojiDict } from './types';
 
 import type {
   CustomEditor,
@@ -170,6 +170,17 @@ export const slateDeserialize = (message: MessageData): Descendant[] => {
   const nodes: Descendant[] = [];
   const lines = body.split('\n');
 
+  const emojiDict = emojis.reduce((acc, cur) => {
+    const { id, shortcode, url } = cur;
+
+    acc[id] = {
+      shortcode,
+      ...(url && { url }),
+    };
+
+    return acc;
+  }, {} as MessageEmojiDict);
+
   const emojiRegex = /(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu;
   const customEmojiRegex = /(<:.+?:[a-z0-9]+>)/gu;
 
@@ -201,7 +212,7 @@ export const slateDeserialize = (message: MessageData): Descendant[] => {
           ? str.split(':').slice(-1)[0].replace('>', '')
           : str;
 
-        const emoji = emojis[id];
+        const emoji = emojiDict[id];
 
         const { shortcode, url } = emoji;
 

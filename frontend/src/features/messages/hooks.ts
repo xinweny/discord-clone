@@ -23,8 +23,6 @@ export const useMessageAuthorize = () => {
 export const useTenorGif = (message: MessageData) => {  
   const [tenorError, setTenorError] = useState<boolean>(false);
 
-  console.log(message);
-
   const { body } = message;
 
   const isTenorGif = !!body

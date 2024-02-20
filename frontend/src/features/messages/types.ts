@@ -32,7 +32,12 @@ export type MessageData = {
     displayName: string;
   };
   type: 'channel' | 'dm';
-  emojis: MessageEmojiDict;
+  emojis: {
+    id: string;
+    custom: boolean;
+    shortcode: string;
+    url?: string;
+  }[];
 };
 
 export type GetMessagesQuery = {
