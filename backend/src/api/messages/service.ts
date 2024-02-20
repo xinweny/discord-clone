@@ -59,44 +59,46 @@ const getMany = async (
 
   const lastMessage = messages[0];
   
-  await Promise.all(messages.map(async (m) => {
-    const body = m.body;
+  const messagesWithEmojis = await Promise.all(messages.map(async (m) => {
+    try {
+      const body = m.body;
   
-    const emojiDict: IMessageEmojiDict = {};
+      const emojiDict: IMessageEmojiDict = {};
 
-    const customEmojiMatches = body.match(/(<:.+?:[a-z0-9]+>)/gu);
+      const customEmojiMatches = body.match(/(<:.+?:[a-z0-9]+>)/gu);
 
-    const customEmojis = customEmojiMatches
-      ? CustomEmoji.find({
-        _id: {
-          $in: customEmojiMatches.map(m => m.split(':').slice(-1)[0].replace('>', '')),
-        },
+      const customEmojis = customEmojiMatches
+        ? CustomEmoji.find({
+          _id: {
+            $in: customEmojiMatches.map(m => m.split(':').slice(-1)[0].replace('>', '')),
+          },
+        })
+        : null;
+      
+      const twemojiMatches = body.match(/(\p{Emoji_Presentation})/gu);
+
+      if (twemojiMatches) await init({ data });
+
+      const twemojis = twemojiMatches
+        ? twemojiMatches.map(async (match) => {
+          return await getEmojiDataFromNative(match).then(emoji => {
+            if (emoji) emojiDict[match] = {
+              shortcode: `:${emoji.id}:`,
+            };
+          });
       })
-      : null;
+      : [];
+      
+      await Promise.all(customEmojis ? [customEmojis, ...twemojis] : twemojis);
     
-    const twemojiMatches = body.match(/(\p{Emoji_Presentation})/gu);
-
-    if (twemojiMatches) await init({ data });
-
-    const twemojis = twemojiMatches
-      ? twemojiMatches.map(async (match) => {
-        return await getEmojiDataFromNative(match).then(emoji => {
-          if (emoji) emojiDict[match] = {
-            shortcode: `:${emoji.id}:`,
-          };
-        });
-    })
-    : [];
-    
-    await Promise.all(customEmojis ? [customEmojis, ...twemojis] : twemojis);
-
-    m.emojis = emojiDict;
-  
-    return;
+      return { ...(m.toObject()), emojis: emojiDict };
+    } catch {
+      return m;
+    }
   }));
 
   return {
-    messages,
+    messages: messagesWithEmojis,
     next: messages.length === limit && lastMessage
       ? lastMessage._id
       : null,
