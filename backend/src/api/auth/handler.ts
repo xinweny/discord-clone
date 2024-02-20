@@ -1,11 +1,10 @@
 import { Socket } from 'socket.io';
-import { ExtendedError } from 'socket.io/dist/namespace';
 
 import { authService } from './service';
 
 const authenticate = async (
   socket: Socket,
-  next: (err?: ExtendedError | undefined) => void,
+  next: (err?: any) => void,
 ) => {
     const token = socket.handshake.auth.token as string | undefined;
 
