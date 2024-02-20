@@ -48,7 +48,7 @@ export function EditMessageForm({
 
   const [editMessage] = useEditMessageMutation();
 
-  const { editor, emojis, setEmojis } = useEditor();
+  const { editor } = useEditor();
 
   const onSubmit = async (data: EditMessageFields) => {
     await editMessage({
@@ -56,7 +56,6 @@ export function EditMessageForm({
       roomId: message.roomId,
       messageId: message._id,
       body: data.body,
-      emojis: emojis,
     }).unwrap();
 
     closeForm();
@@ -80,7 +79,6 @@ export function EditMessageForm({
           authorized={true}
           message={message}
           editor={editor}
-          setEmojis={setEmojis}
           enterSubmit={(e) => {
             enterSubmit(e);
             escapeCancel(e);

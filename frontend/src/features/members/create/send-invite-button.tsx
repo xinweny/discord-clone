@@ -27,7 +27,6 @@ export function SendInviteButton({
       roomId: dmId,
       body: url,
       attachments: [],
-      emojis: [],
     }).unwrap();
     setIsSent(true);
   };

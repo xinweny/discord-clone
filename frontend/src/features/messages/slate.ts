@@ -9,7 +9,7 @@ import {
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
 
-import type { MessageData, MessageEmojiDict } from './types';
+import type { MessageData } from './types';
 
 import type {
   CustomEditor,

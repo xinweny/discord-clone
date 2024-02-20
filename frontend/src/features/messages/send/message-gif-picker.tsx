@@ -30,7 +30,6 @@ export function MessageGifPicker({
       serverId,
       body: gif.url,
       attachments: [],
-      emojis: [],
     }).unwrap();
 
     btnRef.current?.click();
