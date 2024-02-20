@@ -91,12 +91,11 @@ const messageApi = api.injectEndpoints({
         },
       }),
       sendMessage: build.mutation<MessageData, SendMessageFields>({
-        query: ({ serverId, roomId, body, emojis, attachments }) => ({
+        query: ({ serverId, roomId, body, attachments }) => ({
           url: messageBaseUrl({ serverId, roomId }),
           method: 'post',
           data: {
             body,
-            emojis,
             ...(attachments.length > 0 && {
               attachments: attachments.map(file => ({
                 filename: file.name,
@@ -132,10 +131,10 @@ const messageApi = api.injectEndpoints({
         },
       }),
       editMessage: build.mutation<MessageData, EditMessageFields>({
-        query: ({ serverId, roomId, messageId, body, emojis }) => ({
+        query: ({ serverId, roomId, messageId, body }) => ({
           url: messageBaseUrl({ serverId, roomId, messageId }),
           method: 'put',
-          data: { body, emojis },
+          data: { body },
         }),
         onQueryStarted: async ({ serverId, roomId }, { dispatch, queryFulfilled }) => {
           try {

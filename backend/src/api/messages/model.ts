@@ -2,12 +2,12 @@ import mongoose, { Schema, Types, Document } from 'mongoose';
 
 import { attachmentSchema, IAttachment  } from './attachments/schema';
 
-export interface IMessageEmoji extends Document {
-  id: string;
-  shortcode: string;
-  url?: string;
-  custom: boolean;
-}
+export type IMessageEmojiDict = {
+  [key: string]: {
+    shortcode: string;
+    url?: string;
+  }
+};
 
 export interface IMessage extends Document {
   roomId: Types.ObjectId;
@@ -18,21 +18,13 @@ export interface IMessage extends Document {
   createdAt: Date;
   updatedAt?: Date;
   type: 'channel' | 'dm';
-  emojis: IMessageEmoji[];
+  emojis: IMessageEmojiDict;
 }
-
-const emojiSchema = new Schema({
-  id: { type: String, required: true },
-  shortcode: { type: String, required: true },
-  url: { type: String },
-  custom: { type: Boolean, required: true },
-});
 
 const messageSchema = new Schema({
   senderId: { type: Types.ObjectId, required: true, ref: 'User' },
   body: { type: String, required: true },
   attachments: { type: [attachmentSchema], default: [] },
-  emojis: { type: [emojiSchema], default: [] },
   updatedAt: { type: Date },
 },
 {

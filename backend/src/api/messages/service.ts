@@ -1,14 +1,17 @@
 import { Types, } from 'mongoose';
+import data from '@emoji-mart/data';
+import { init, getEmojiDataFromNative } from 'emoji-mart';
 
 import { CustomError } from '@helpers/CustomError';
 import { keepKeys } from '@helpers/keepKeys';
 
-import { IMessageEmoji, Message } from './model';
+import { Message, IMessageEmojiDict, IMessage } from './model';
 import { MessageChannel, MessageDirect } from './discriminators';
 
 import { Reaction } from '../reactions/model';
 import { DM } from '@api/dms/model';
 import { ServerMember } from '@api/serverMembers/model';
+import { CustomEmoji } from '@api/customEmojis/model';
 
 import { cloudinaryService } from '@services/cloudinary';
 
@@ -55,6 +58,42 @@ const getMany = async (
   messages.reverse();
 
   const lastMessage = messages[0];
+  
+  await Promise.all(messages.map(async (m) => {
+    const body = m.body;
+  
+    const emojiDict: IMessageEmojiDict = {};
+
+    const customEmojiMatches = body.match(/(<:.+?:[a-z0-9]+>)/gu);
+
+    const customEmojis = customEmojiMatches
+      ? CustomEmoji.find({
+        _id: {
+          $in: customEmojiMatches.map(m => m.split(':').slice(-1)[0].replace('>', '')),
+        },
+      })
+      : null;
+    
+    const twemojiMatches = body.match(/(\p{Emoji_Presentation})/gu);
+
+    if (twemojiMatches) await init({ data });
+
+    const twemojis = twemojiMatches
+      ? twemojiMatches.map(async (match) => {
+        return await getEmojiDataFromNative(match).then(emoji => {
+          if (emoji) emojiDict[match] = {
+            shortcode: `:${emoji.id}:`,
+          };
+        });
+    })
+    : [];
+    
+    await Promise.all(customEmojis ? [customEmojis, ...twemojis] : twemojis);
+
+    m.emojis = emojiDict;
+  
+    return;
+  }));
 
   return {
     messages,
@@ -69,7 +108,6 @@ const create = async (
     senderId: Types.ObjectId | string,
     roomId: Types.ObjectId | string,
     body: string,
-    emojis: IMessageEmoji[] | undefined,
   },
   attachments?: {
     filename: string;
@@ -121,15 +159,13 @@ const update = async (
   id: string,
   fields: {
     body: string,
-    emojis: IMessageEmoji[]
   },
 ) => {
-  const { body, emojis } = fields;
+  const { body } = fields;
 
   const updatedMessage = await Message.findByIdAndUpdate(id, {
     $set: {
       body,
-      emojis,
       updatedAt: new Date(),
     },
   }, { new: true });

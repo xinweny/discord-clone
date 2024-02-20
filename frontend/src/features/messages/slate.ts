@@ -9,7 +9,6 @@ import {
 import { ReactEditor } from 'slate-react';
 import type { HistoryEditor } from 'slate-history';
 
-import type { MessageEmojiData } from './types';
 import type { MessageData } from './types';
 
 import type {
@@ -143,8 +142,6 @@ export const withEmojis = (editor: CustomEditor) => {
 };
 
 export const serialize = (nodes: Descendant[]) => {
-  const emojis: MessageEmojiData[] = [];
-
   const text = nodes.map(node => {
     if (!('children' in node)) return '';
 
@@ -152,25 +149,9 @@ export const serialize = (nodes: Descendant[]) => {
       if ('type' in n && n.type === 'emoji') {
         const { shortcode, id, emoji } = n;
 
-        if (n.custom) {
-          emojis.push({
-            id,
-            shortcode,
-            url: emoji,
-            custom: true,
-          });
-
-          return `<${shortcode}${id}>`;
-        } else {
-          emojis.push({
-            id: emoji,
-            shortcode,
-            custom: false,
-            url: undefined,
-          });
-
-          return emoji;
-        }
+        return (n.custom)
+          ? `<${shortcode}${id}>`
+          : emoji;
       } else {
         return Node.string(n as Descendant);
       }
@@ -180,10 +161,7 @@ export const serialize = (nodes: Descendant[]) => {
     .join('\n')
     .trim();
 
-  return {
-    text,
-    emojis,
-  };
+  return { text };
 };
 
 export const slateDeserialize = (message: MessageData): Descendant[] => {
@@ -193,6 +171,7 @@ export const slateDeserialize = (message: MessageData): Descendant[] => {
   const lines = body.split('\n');
 
   const emojiRegex = /(<:.+?:[a-z0-9]+>)|(\p{Emoji_Presentation})/gu;
+  const customEmojiRegex = /(<:.+?:[a-z0-9]+>)/gu;
 
   for (const line of lines) {
     const lineNode = {
@@ -216,19 +195,22 @@ export const slateDeserialize = (message: MessageData): Descendant[] => {
 
     for (const str of strs) {
       if (str.match(emojiRegex)) {
-        const emoji = emojis.find(emoji =>
-          (emoji.id === str) ||
-          (emoji.id === str.split(':').slice(-1)[0].replace('>', ''))
-        ) as MessageEmojiData;
+        const custom = !!str.match(customEmojiRegex);
 
-        const { id, custom, shortcode, url } = emoji;
+        const id = custom
+          ? str.split(':').slice(-1)[0].replace('>', '')
+          : str;
+
+        const emoji = emojis[id];
+
+        const { shortcode, url } = emoji;
 
         children.push({
           type: 'emoji',
           id,
           custom,
           shortcode,
-          emoji: url || id,
+          emoji: url || str,
           children: [{ text: '' }],
         } as EmojiElement);
       } else {

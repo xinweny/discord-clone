@@ -38,7 +38,6 @@ export function SendMessageForm({
     roomId,
     attachments: [],
     body: '',
-    emojis: [],
   };
 
   const methods = useForm<SendMessageFields>({
@@ -59,7 +58,7 @@ export function SendMessageForm({
   });
   const { setAllFiles } = fileWatch;
 
-  const { editor, emojis, setEmojis } = useEditor();
+  const { editor } = useEditor();
 
   const [sendMessage] = useSendMessageMutation();
 
@@ -70,7 +69,6 @@ export function SendMessageForm({
       roomId: roomId!,
       serverId,
       body,
-      emojis,
       attachments,
     }).unwrap();
 
@@ -94,7 +92,6 @@ export function SendMessageForm({
             placeholder={placeholder}
             errorPlaceholder={errorPlaceholder}
             editor={editor}
-            setEmojis={setEmojis}
           />
           <MessageOptionsBar editor={editor} />
         </form>

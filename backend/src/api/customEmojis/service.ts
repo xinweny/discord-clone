@@ -21,6 +21,12 @@ const getMany = async (serverIds: Types.ObjectId[] | string[], populate = false)
   return customEmojis;
 };
 
+const getManyByIds = async (emojiIds: Types.ObjectId[] | string[]) => {
+  const customEmojis = await CustomEmoji.find({ _id: { $in: emojiIds } });
+
+  return customEmojis;
+};
+
 const create = async (
   fields: {
     creatorId: Types.ObjectId | string,
@@ -79,6 +85,7 @@ const remove = async (
 
 export const customEmojiService = {
   getMany,
+  getManyByIds,
   create,
   update,
   remove,

@@ -76,8 +76,6 @@ export function MessagesContainer({
     }
   };
 
-  console.log(messages?.next === null)
-
   if (!messages?.items) return null;
 
   return (

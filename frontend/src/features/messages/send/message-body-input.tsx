@@ -13,7 +13,7 @@ import {
 } from 'slate-react';
 
 import type { CustomEditor } from '@config';
-import type { MessageData, MessageEmojiData } from '../types';
+import type { MessageData } from '../types';
 
 import { resetEditor, decorator, serialize, slateDeserialize } from '../slate';
 
@@ -28,7 +28,6 @@ type MessageBodyInputProps = {
   enterSubmit: React.KeyboardEventHandler<HTMLDivElement>;
   editor: CustomEditor;
   message?: MessageData;
-  setEmojis: React.Dispatch<React.SetStateAction<MessageEmojiData[]>>;
   errorPlaceholder?: string;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
@@ -38,7 +37,6 @@ export function MessageBodyInput({
   enterSubmit,
   editor,
   message,
-  setEmojis,
   errorPlaceholder = 'You do not have permission to send messages in this channel.',
   ...props
 }: MessageBodyInputProps) {
@@ -62,12 +60,11 @@ export function MessageBodyInput({
     ];
 
   useEffect(() => {
-    if (body) {
-      const { text, emojis } = serialize(editor.children);
+    if (!body) return;
 
-      if (setEmojis) setEmojis(emojis);
-      setValue(name, text);
-    }
+    const { text } = serialize(editor.children);
+
+    setValue(name, text);
   }, [body]);
 
   useEffect(() => {

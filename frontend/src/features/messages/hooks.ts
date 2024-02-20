@@ -4,7 +4,6 @@ import { withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 
 import type { MessageData } from './types';
-import type { MessageEmojiData } from './types';
 
 import { useMessageContext } from './context';
 
@@ -24,6 +23,8 @@ export const useMessageAuthorize = () => {
 export const useTenorGif = (message: MessageData) => {  
   const [tenorError, setTenorError] = useState<boolean>(false);
 
+  console.log(message);
+
   const { body } = message;
 
   const isTenorGif = !!body
@@ -41,11 +42,6 @@ export const useEditor = () => {
   const [editor] = useState(
     () => withReact(withEmojis(withHistory(createEditor())))
   );
-  const [emojis, setEmojis] = useState<MessageEmojiData[]>([]);
 
-  return {
-    editor,
-    emojis,
-    setEmojis,
-  };
+  return { editor };
 };

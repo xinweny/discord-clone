@@ -6,16 +6,11 @@ export type AttachmentData = {
   bytes: number;
 };
 
-export type MessageEmojiData = {
-  id: string;
-  shortcode: string;
-  url: string;
-  custom: true;
-} | {
-  id: string;
-  shortcode: string;
-  url: undefined;
-  custom: false;
+export type MessageEmojiDict = {
+  [key: string]: {
+    shortcode: string;
+    url?: string;
+  }
 };
 
 export type MessageData = {
@@ -25,7 +20,6 @@ export type MessageData = {
   serverId?: string;
   body: string;
   attachments: AttachmentData[];
-  emojis: MessageEmojiData[];
   createdAt: string;
   updatedAt?: string;
   sender: {
@@ -38,6 +32,7 @@ export type MessageData = {
     displayName: string;
   };
   type: 'channel' | 'dm';
+  emojis: MessageEmojiDict;
 };
 
 export type GetMessagesQuery = {
@@ -51,7 +46,6 @@ export type SendMessageFields = {
   roomId: string;
   attachments: File[];
   body: string;
-  emojis: MessageEmojiData[];
 };
 
 export type EditMessageFields = {
@@ -59,7 +53,6 @@ export type EditMessageFields = {
   roomId: string;
   messageId: string;
   body: string;
-  emojis: MessageEmojiData[];
 };
 
 export type DeleteMessageFields = {

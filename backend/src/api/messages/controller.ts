@@ -61,7 +61,7 @@ const createMessage: RequestHandler[] = [
   tryCatch(
     async (req, res) => {
       const { roomId, serverId } = req.params;
-      const { body, attachments, emojis } = req.body;
+      const { body, attachments } = req.body;
 
       const userId = req.user?._id;
 
@@ -70,7 +70,6 @@ const createMessage: RequestHandler[] = [
           senderId: userId,
           roomId,
           body,
-          emojis,
         },
         attachments,
         serverId,
