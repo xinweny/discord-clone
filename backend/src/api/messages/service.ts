@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
-import data from '@emoji-mart/data';
-import { init, getEmojiDataFromNative } from 'emoji-mart';
+import data from '@emoji-mart/data' assert { type: 'json' };
+import emojiMart from 'emoji-mart';
 
 import { CustomError } from '@helpers/CustomError.js';
 import { keepKeys } from '@helpers/keepKeys.js';
@@ -13,7 +13,9 @@ import { DM } from '@api/dms/model.js';
 import { ServerMember } from '@api/serverMembers/model.js';
 import { CustomEmoji } from '@api/customEmojis/model.js';
 
-import { cloudinaryService } from '@services/cloudinary';
+import { cloudinaryService } from '@services/cloudinary.js';
+
+const { init, getEmojiDataFromNative } = emojiMart;
 
 const getOne = async (id: string) => {
   const message = await Message.findById(id);

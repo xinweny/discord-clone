@@ -6,7 +6,7 @@ import { CustomError } from '@helpers/CustomError.js';
 import { cloudinaryService } from '@services/cloudinary.js';
 import { authService } from '@api/auth/service.js';
 
-import { User } from './model';
+import { User } from './model.js';
 
 const getOne = async (queryObj: {
   _id?: Types.ObjectId | string,

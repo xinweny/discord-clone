@@ -6,7 +6,7 @@ import { authenticate } from '@middleware/authenticate.js';
 import { authorize } from '@middleware/authorize.js';
 import { validateFields } from '@middleware/validateFields.js';
 
-import { customEmojiService } from './service';
+import { customEmojiService } from './service.js';
 
 const getEmojis: RequestHandler[] = [
   authenticate,

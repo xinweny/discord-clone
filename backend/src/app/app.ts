@@ -4,7 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
-import '../types/Request';
+import '../types/Request.js';
 
 import env from '@config/env.js';
 import '@config/db.js';
