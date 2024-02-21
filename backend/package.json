@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=production node dist/src/index.js",
-    "build": "npm install && tsc && tsc-alias",
+    "build": "npm install && tsc -p tsconfig.prod.json && tsc-alias",
     "dev": "NODE_ENV=development concurrently \"tsx watch --ignore ./seed.ts ./src/index.ts\" \"livekit-server --dev --config livekit.config.yaml\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "tsx seed.ts"

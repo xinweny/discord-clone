@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig",
+  "exclude": [
+    "./seed.ts",
+    "./data.json"
+  ]
+}
