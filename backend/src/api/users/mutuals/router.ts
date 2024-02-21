@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { mutualsController } from './controller';
+import { mutualsController } from './controller.js';
 
 const mutualsRouter = Router({ mergeParams: true });
 

@@ -1,13 +1,13 @@
 import { Types } from 'mongoose';
 
-import { keepKeys } from '@helpers/keepKeys';
-import { CustomError } from '@helpers/CustomError';
+import { keepKeys } from '@helpers/keepKeys.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { cloudinaryService } from '@services/cloudinary';
+import { cloudinaryService } from '@services/cloudinary.js';
 
-import { Message } from '@api/messages/model';
-import { DM } from '@api/dms/model';
-import { ReadStatus } from '@api/users/notifications/model';
+import { Message } from '@api/messages/model.js';
+import { DM } from '@api/dms/model.js';
+import { ReadStatus } from '@api/users/notifications/model.js';
 
 const getById = async (dmId: Types.ObjectId | string) => {
   const populateOptions = {

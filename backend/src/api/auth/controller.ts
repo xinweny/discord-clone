@@ -1,19 +1,19 @@
 import { RequestHandler } from 'express';
 import ms from 'ms';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { validateFields } from '@middleware/validateFields';
+import { validateFields } from '@middleware/validateFields.js';
 
-import { passwordResetMail } from '@templates/passwordResetMail';
-import { emailVerificationMail } from '@templates/emailVerificationMail';
+import { passwordResetMail } from '@templates/passwordResetMail.js';
+import { emailVerificationMail } from '@templates/emailVerificationMail.js';
 
-import { mailService } from '@services/mail';
-import { authService } from '@api/auth/service';
-import { userService } from '@api/users/service';
+import { mailService } from '@services/mail.js';
+import { authService } from '@api/auth/service.js';
+import { userService } from '@api/users/service.js';
 
 const signup: RequestHandler[] = [
   ...validateFields(['email', 'username', 'password']),

@@ -1,12 +1,12 @@
 import { Types } from 'mongoose';
 
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { RelationStatus } from '../relations/schema';
+import { RelationStatus } from '../relations/schema.js';
 
-import { User } from '@api/users/model';
-import { Server } from '@api/servers/model';
-import { ServerMember } from '@api/serverMembers/model';
+import { User } from '@api/users/model.js';
+import { Server } from '@api/servers/model.js';
+import { ServerMember } from '@api/serverMembers/model.js';
 
 const getFriends = async (userId1: Types.ObjectId | string, userId2: Types.ObjectId | string) => {
   const userIds = [userId1, userId2].map(id => new Types.ObjectId(id.toString()));

@@ -1,18 +1,18 @@
 import { Types } from 'mongoose';
 
-import { keepKeys } from '@helpers/keepKeys';
-import { CustomError } from '@helpers/CustomError';
+import { keepKeys } from '@helpers/keepKeys.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { User } from '@api/users/model';
-import { Message } from '@api/messages/model';
-import { ReadStatus } from '@api/users/notifications/model';
-import { ServerMember } from '../serverMembers/model';
-import { ServerInvite } from '@api/serverInvites/model';
-import { CustomEmoji } from '@api/customEmojis/model';
-import { Server } from './model';
+import { User } from '@api/users/model.js';
+import { Message } from '@api/messages/model.js';
+import { ReadStatus } from '@api/users/notifications/model.js';
+import { ServerMember } from '../serverMembers/model.js';
+import { ServerInvite } from '@api/serverInvites/model.js';
+import { CustomEmoji } from '@api/customEmojis/model.js';
+import { Server } from './model.js';
 
-import { serverInviteService } from '@api/serverInvites/service';
-import { cloudinaryService } from '@services/cloudinary';
+import { serverInviteService } from '@api/serverInvites/service.js';
+import { cloudinaryService } from '@services/cloudinary.js';
 
 const getPublic = async (
   query?: string,

@@ -1,16 +1,16 @@
 import { RequestHandler } from 'express';
 
-import { RelationStatus } from '@api/users/relations/schema';
+import { RelationStatus } from '@api/users/relations/schema.js';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { statusService } from './service';
-import { relationService } from '@api/users/relations/service';
-import { serverMemberService } from '@api/serverMembers/service';
+import { statusService } from './service.js';
+import { relationService } from '@api/users/relations/service.js';
+import { serverMemberService } from '@api/serverMembers/service.js';
 
 const getUserStatus: RequestHandler[] = [
   authenticate,

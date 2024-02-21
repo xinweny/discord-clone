@@ -1,6 +1,6 @@
 import { createTransport } from 'nodemailer';
 
-import env from './env';
+import env from './env.js';
 
 export const mailTransporter = createTransport({
   service: env.SMTP_SERVICE,

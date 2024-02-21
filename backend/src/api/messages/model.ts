@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types, Document } from 'mongoose';
 
-import { attachmentSchema, IAttachment  } from './attachments/schema';
+import { attachmentSchema, IAttachment  } from './attachments/schema.js';
 
 export type IMessageEmojiDict = {
   [key: string]: {

@@ -1,8 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import env from '@config/env';
-
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
 export interface ICustomEmoji extends Types.Subdocument {
   creatorId: Types.ObjectId;

@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express';
 
-import { authenticate } from '@middleware/authenticate';
-import { tryCatch } from '@helpers/tryCatch';
+import { authenticate } from '@middleware/authenticate.js';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { reactionService } from './service';
+import { reactionService } from './service.js';
 
 const getReactions: RequestHandler[] = [
   authenticate,

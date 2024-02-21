@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
 
-import { formatSetQuery } from '@helpers/formatSetQuery';
-import { CustomError } from '@helpers/CustomError';
+import { formatSetQuery } from '@helpers/formatSetQuery.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { Server } from '@api/servers/model';
+import { Server } from '@api/servers/model.js';
 
 const get = async (serverId: Types.ObjectId | string, categoryId?: Types.ObjectId | string) => {
   const server = await Server.findById(

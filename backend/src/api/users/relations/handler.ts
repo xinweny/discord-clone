@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 
-import { io } from '@app/server';
+import { io } from '@app/server.js';
 
-import { relationService } from './service';
+import { relationService } from './service.js';
 
 export const relationHandler = async (socket: Socket) => {
   socket.on('relation:create', async (recipientId: string) => {

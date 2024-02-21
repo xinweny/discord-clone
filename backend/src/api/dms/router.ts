@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { dmController } from '@api/dms/controller';
+import { dmController } from '@api/dms/controller.js';
 
-import { messageRouter } from '@api/messages/router';
-import { participantRouter } from '@api/dms/participants/router';
+import { messageRouter } from '@api/messages/router.js';
+import { participantRouter } from '@api/dms/participants/router.js';
 
 const dmRouter = Router();
 

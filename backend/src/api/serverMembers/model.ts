@@ -1,8 +1,8 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import { IRole } from '@api/servers/roles/schema';
-import { IServer } from '@api/servers/model';
-import { IUser } from '@api/users/model';
+import { IRole } from '@api/servers/roles/schema.js';
+import { IServer } from '@api/servers/model.js';
+import { IUser } from '@api/users/model.js';
 
 export interface IServerMember extends Document {
   _id: Types.ObjectId;

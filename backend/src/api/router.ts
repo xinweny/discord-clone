@@ -1,14 +1,14 @@
 import { Router } from 'express';
 
-import { authRouter } from '@api/auth/router';
-import { dmRouter } from '@api/dms/router';
-import { serverRouter } from '@api/servers/router';
-import { userRouter } from '@api/users/router';
-import { uploadRouter } from './upload/router';
-import { webRtcRouter } from './webrtc/router';
-import { serverInviteRouter } from './serverInvites/router';
-import { statusRouter } from './statuses/router';
-import { customEmojiRouter } from './customEmojis/router';
+import { authRouter } from '@api/auth/router.js';
+import { dmRouter } from '@api/dms/router.js';
+import { serverRouter } from '@api/servers/router.js';
+import { userRouter } from '@api/users/router.js';
+import { uploadRouter } from './upload/router.js';
+import { webRtcRouter } from './webrtc/router.js';
+import { serverInviteRouter } from './serverInvites/router.js';
+import { statusRouter } from './statuses/router.js';
+import { customEmojiRouter } from './customEmojis/router.js';
 
 const apiRouter = Router();
 

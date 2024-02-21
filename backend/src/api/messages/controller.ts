@@ -1,14 +1,14 @@
 import { Types } from 'mongoose';
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
-import { validateFields } from '@middleware/validateFields';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
+import { validateFields } from '@middleware/validateFields.js';
 
-import { messageService } from '@api/messages/service';
+import { messageService } from '@api/messages/service.js';
 
 const getMessage: RequestHandler[] = [
   authenticate,

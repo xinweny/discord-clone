@@ -1,11 +1,11 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { userService }from '@api/users/service';
+import { userService }from '@api/users/service.js';
 
 export const authenticate = tryCatch(
   async (req, res, next) => {

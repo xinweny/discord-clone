@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import { Reaction, IReaction } from './model';
+import { Reaction, IReaction } from './model.js';
 
 export interface ICustomCount extends IReaction {
   emojiId: Types.ObjectId;

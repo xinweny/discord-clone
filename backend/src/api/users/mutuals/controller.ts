@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { mutualsService } from './service';
+import { mutualsService } from './service.js';
 
 const getMutualFriends: RequestHandler[] = [
   authenticate,

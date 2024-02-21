@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { participantController } from './controller';
+import { participantController } from './controller.js';
 
 const participantRouter = Router({ mergeParams: true });
 

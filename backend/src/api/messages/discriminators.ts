@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import { Message, IMessage } from './model';
+import { Message, IMessage } from './model.js';
 
 Message.discriminator('channel', new Schema({
   roomId: { type: Types.ObjectId, required: true, refPath: 'Server.channels' },

@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
 
-import { formatSetQuery } from '@helpers/formatSetQuery';
-import { CustomError } from '@helpers/CustomError';
+import { formatSetQuery } from '@helpers/formatSetQuery.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { Server } from '@api/servers/model';
-import { ServerMember } from '@api/serverMembers/model';
+import { Server } from '@api/servers/model.js';
+import { ServerMember } from '@api/serverMembers/model.js';
 
 const getById = async (
   serverId: Types.ObjectId | string,

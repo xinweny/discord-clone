@@ -3,11 +3,11 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
 import ms from 'ms';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import type { IUser } from '@api/users/model';
+import type { IUser } from '@api/users/model.js';
 
-import { redisService } from '@services/redis';
+import { redisService } from '@services/redis.js';
 
 const hashPassword = async (password: string) => {
   return bcrypt.hash(password, Number(env.BCRYPT_SALT));

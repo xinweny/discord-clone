@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { channelController } from './controller';
+import { channelController } from './controller.js';
 
-import { messageRouter } from '@api/messages/router';
+import { messageRouter } from '@api/messages/router.js';
 
 const channelRouter = Router({ mergeParams: true });
 

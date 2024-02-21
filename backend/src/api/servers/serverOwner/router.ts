@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { serverOwnerController } from './controller';
+import { serverOwnerController } from './controller.js';
 
 const serverOwnerRouter = Router({ mergeParams: true });
 

@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 
-import { Reaction } from './model';
-import { CustomEmojiReaction, EmojiReaction } from './discriminators';
+import { Reaction } from './model.js';
+import { CustomEmojiReaction, EmojiReaction } from './discriminators.js';
 
 type CreateReactionFields = {
   name: string;

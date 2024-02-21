@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 
-import { io } from '@app/server';
+import { io } from '@app/server.js';
 
-import { notificationService } from './service';
+import { notificationService } from './service.js';
 
 export const notificationHandler = async (socket: Socket) => {
   const userId = socket.user._id;

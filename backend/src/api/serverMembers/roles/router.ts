@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { serverMemberRoleController } from './controller';
+import { serverMemberRoleController } from './controller.js';
 
 const serverMemberRoleRouter = Router({ mergeParams: true });
 

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
 export interface IReadStatus extends Document {
   _id: Types.ObjectId;

@@ -1,10 +1,10 @@
 import path from 'path';
 
-import { cloudinary, cld } from '@config/cloudinary';
+import { cloudinary, cld } from '@config/cloudinary.js';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { getPublicId } from '@helpers/getPublicId';
+import { getPublicId } from '@helpers/getPublicId.js';
 
 const createSignature = (filename: string, folderPath: string, customPublicId?: string) => {
   const timestamp = new Date().getTime();

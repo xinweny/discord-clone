@@ -1,11 +1,9 @@
 import mongoose, { Types, Schema, Document } from 'mongoose';
 
-import env from '@config/env';
+import { IServer } from '@api/servers/model.js';
 
-import { IServer } from '@api/servers/model';
-
-import { CustomError } from '@helpers/CustomError';
-import { relationSchema, IRelation } from './relations/schema';
+import { CustomError } from '@helpers/CustomError.js';
+import { relationSchema, IRelation } from './relations/schema.js';
 
 export interface IUser extends Document {
   username: string;

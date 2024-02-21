@@ -1,13 +1,13 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
-import { validateFields } from '@middleware/validateFields';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
+import { validateFields } from '@middleware/validateFields.js';
 
-import { serverService } from './service';
+import { serverService } from './service.js';
 
 const getPublicServers: RequestHandler[] = [
   authenticate,

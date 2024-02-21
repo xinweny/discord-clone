@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { customEmojiController } from './controller';
+import { customEmojiController } from './controller.js';
 
 const customEmojiRouter = Router({ mergeParams: true });
 

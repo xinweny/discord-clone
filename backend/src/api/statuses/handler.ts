@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 
-import { io } from '@app/server';
+import { io } from '@app/server.js';
 
-import { statusService } from './service';
+import { statusService } from './service.js';
 
 export const statusHandler = async (socket: Socket) => {
   const userId = socket.user._id;

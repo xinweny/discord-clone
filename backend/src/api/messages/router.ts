@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { messageController } from './controller';
+import { messageController } from './controller.js';
 
-import { reactionRouter } from '../reactions/router';
+import { reactionRouter } from '../reactions/router.js';
 
 const messageRouter = Router({ mergeParams: true });
 

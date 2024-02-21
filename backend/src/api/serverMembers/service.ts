@@ -1,11 +1,11 @@
 import { Types } from 'mongoose';
 
-import { keepKeys } from '@helpers/keepKeys';
-import { CustomError } from '@helpers/CustomError';
+import { keepKeys } from '@helpers/keepKeys.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { Server } from '@api/servers/model';
-import { ReadStatus } from '@api/users/notifications/model';
-import { ServerMember } from './model';
+import { Server } from '@api/servers/model.js';
+import { ReadStatus } from '@api/users/notifications/model.js';
+import { ServerMember } from './model.js';
 
 const getById = async (id: Types.ObjectId | string) => {
   const member = await ServerMember

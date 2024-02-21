@@ -1,12 +1,12 @@
 import { RequestHandler } from 'express';
 
-import { CustomError } from '@helpers/CustomError';
-import { tryCatch } from '@helpers/tryCatch';
+import { CustomError } from '@helpers/CustomError.js';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { authenticate } from '@middleware/authenticate';
+import { authenticate } from '@middleware/authenticate.js';
 
-import { notificationService } from './service';
-import { messageService } from '@api/messages/service';
+import { notificationService } from './service.js';
+import { messageService } from '@api/messages/service.js';
 
 const getReadStatuses: RequestHandler[] = [
   authenticate,

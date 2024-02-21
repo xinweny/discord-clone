@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { relationRouter } from './relations/router';
-import { mutualsRouter } from './mutuals/router';
+import { relationRouter } from './relations/router.js';
+import { mutualsRouter } from './mutuals/router.js';
 
-import { userController } from './controller';
-import { userServerRouter } from './servers/router';
-import { userDmRouter } from './dms/router';
-import { notificationRouter } from './notifications/router';
+import { userController } from './controller.js';
+import { userServerRouter } from './servers/router.js';
+import { userDmRouter } from './dms/router.js';
+import { notificationRouter } from './notifications/router.js';
 
 const userRouter = Router();
 

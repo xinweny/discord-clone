@@ -1,15 +1,15 @@
 import { Types } from 'mongoose';
 
-import { formatSetQuery } from '@helpers/formatSetQuery';
-import { CustomError } from '@helpers/CustomError';
+import { formatSetQuery } from '@helpers/formatSetQuery.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { Message } from '@api/messages/model';
-import { Server, IServer } from '@api/servers/model';
-import { ReadStatus } from '@api/users/notifications/model';
-import type { IServerMember } from '@api/serverMembers/model';
-import type { IChannelPermissions } from './schema';
+import { Message } from '@api/messages/model.js';
+import { Server, IServer } from '@api/servers/model.js';
+import { ReadStatus } from '@api/users/notifications/model.js';
+import type { IServerMember } from '@api/serverMembers/model.js';
+import type { IChannelPermissions } from './schema.js';
 
-import { cloudinaryService } from '@services/cloudinary';
+import { cloudinaryService } from '@services/cloudinary.js';
 
 const get = async (serverId: Types.ObjectId | string, channelId?: Types.ObjectId | string) => {
   const server = await Server.findById(

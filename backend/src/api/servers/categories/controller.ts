@@ -1,12 +1,12 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
-import { validateFields } from '@middleware/validateFields';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
+import { validateFields } from '@middleware/validateFields.js';
 
-import { categoryService } from './service';
+import { categoryService } from './service.js';
 
 const getCategory: RequestHandler[] = [
   authenticate,

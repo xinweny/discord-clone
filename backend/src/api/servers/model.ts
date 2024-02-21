@@ -1,13 +1,11 @@
 import mongoose, { Schema, Types, Document } from 'mongoose';
 
-import env from '@config/env';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { CustomError } from '@helpers/CustomError';
-
-import { roleSchema, IRole, IPermissions } from './roles/schema';
-import { categorySchema, ICategory } from './categories/schema';
-import { channelSchema, IChannel } from './channels/schema';
-import { IServerMember } from '../serverMembers/model';
+import { roleSchema, IRole, IPermissions } from './roles/schema.js';
+import { categorySchema, ICategory } from './categories/schema.js';
+import { channelSchema, IChannel } from './channels/schema.js';
+import { IServerMember } from '../serverMembers/model.js';
 export interface IServer extends Document {
   ownerId: Types.ObjectId;
   name: string;

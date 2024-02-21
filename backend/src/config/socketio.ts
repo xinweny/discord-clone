@@ -1,7 +1,7 @@
 import { Server } from 'socket.io';
 
-import { connectionHandler } from '@api/handler';
-import { authHandler } from '@api/auth/handler';
+import { connectionHandler } from '@api/handler.js';
+import { authHandler } from '@api/auth/handler.js';
 
 export const socketIo = (io: Server) => {
   io

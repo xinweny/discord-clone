@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { userMemberRouter } from '../members/router';
+import { userMemberRouter } from '../members/router.js';
 
-import { userServersController } from './controller';
+import { userServersController } from './controller.js';
 
 const userServerRouter = Router({ mergeParams: true });
 

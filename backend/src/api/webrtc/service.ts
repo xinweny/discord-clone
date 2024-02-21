@@ -1,8 +1,8 @@
 import { AccessToken } from 'livekit-server-sdk';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { livekitClient } from '@config/livekit';
+import { livekitClient } from '@config/livekit.js';
 
 const createLivekitToken = (roomId: string, userId: string) => {
   try {

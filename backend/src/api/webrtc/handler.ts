@@ -1,8 +1,8 @@
 import { Socket } from 'socket.io';
 
-import { io } from '@app/server';
+import { io } from '@app/server.js';
 
-import { livekitClient } from '@config/livekit';
+import { livekitClient } from '@config/livekit.js';
 
 export const webRtcHandler = async (socket: Socket) => {
   socket.on('participants:get', async ({

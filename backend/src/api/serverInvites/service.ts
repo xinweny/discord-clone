@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 import { nanoid } from 'nanoid';
 
-import { ServerInvite } from './model';
+import { ServerInvite } from './model.js';
 
 const BASE_SHORT_URL = 'https://discord-clone.gg';
 

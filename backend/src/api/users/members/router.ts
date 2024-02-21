@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { userMemberController } from './controller';
+import { userMemberController } from './controller.js';
 
 const userMemberRouter = Router({ mergeParams: true });
 

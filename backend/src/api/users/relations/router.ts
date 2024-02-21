@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { relationController } from './controller';
+import { relationController } from './controller.js';
 
 const relationRouter = Router({ mergeParams: true });
 

@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import { IServerMember } from './model';
+import { IServerMember } from './model.js';
 
 export const serverMemberHandler = async (socket: Socket) => {
   socket.on('server_member:join', async (member: IServerMember) => {

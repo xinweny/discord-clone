@@ -1,9 +1,9 @@
 import { Types } from 'mongoose';
 
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { ServerMember } from '../model';
-import { Server } from '@api/servers/model';
+import { ServerMember } from '../model.js';
+import { Server } from '@api/servers/model.js';
 
 const getMany = async (serverId: Types.ObjectId | string, memberId: Types.ObjectId | string) => {
   const member = await ServerMember

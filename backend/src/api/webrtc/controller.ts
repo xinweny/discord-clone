@@ -1,14 +1,14 @@
 import { RequestHandler } from 'express';
 
-import { receiver } from '@config/livekit';
+import { receiver } from '@config/livekit.js';
 
-import { io } from '@app/server';
+import { io } from '@app/server.js';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { webRtcService } from './service';
+import { webRtcService } from './service.js';
 
 const generateLivekitToken: RequestHandler[] = [
   authenticate,

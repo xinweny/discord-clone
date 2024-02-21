@@ -2,12 +2,12 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { JwtPayload } from 'jsonwebtoken';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { app } from './app';
+import { app } from './app.js';
 
-import { socketIo } from '@config/socketio';
-import { terminus } from '@config/terminus';
+import { socketIo } from '@config/socketio.js';
+import { terminus } from '@config/terminus.js';
 
 const server = createServer(app);
 

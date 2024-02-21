@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
 
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { User } from '@api/users/model';
-import { DM } from '@api/dms/model';
-import { ReadStatus } from '@api/users/notifications/model';
+import { User } from '@api/users/model.js';
+import { DM } from '@api/dms/model.js';
+import { ReadStatus } from '@api/users/notifications/model.js';
 
 const add = async (
   dmId: string,

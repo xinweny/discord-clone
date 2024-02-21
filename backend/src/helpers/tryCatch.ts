@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
 type MiddlewareWrapperType = (
   fn: (req: Request, res: Response, next: NextFunction) => void

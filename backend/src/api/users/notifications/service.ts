@@ -1,8 +1,8 @@
 import { Types } from 'mongoose';
 
-import { keepKeys } from '@helpers/keepKeys';
+import { keepKeys } from '@helpers/keepKeys.js';
 
-import { ReadStatus } from './model';
+import { ReadStatus } from './model.js';
 
 const getReadStatuses = async (userId: string | Types.ObjectId) => {
   const readStatuses = await ReadStatus.find({ userId: new Types.ObjectId(userId) });

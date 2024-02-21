@@ -1,13 +1,14 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { CustomError } from '@helpers/CustomError';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { relationService } from './service';
-import { RelationStatus } from './schema';
+import { RelationStatus } from './schema.js';
+
+import { relationService } from './service.js';
 
 const getRelations: RequestHandler[] = [
   authenticate,

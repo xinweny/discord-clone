@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import { IMessage } from './model';
+import { IMessage } from './model.js';
 
 export const messageHandler = async (socket: Socket) => {
   socket.on('message:send', async (message: IMessage) => {

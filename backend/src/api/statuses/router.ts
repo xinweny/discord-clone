@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { statusController } from './controller';
+import { statusController } from './controller.js';
 
 const statusRouter = Router({ mergeParams: true });
 

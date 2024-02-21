@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
 
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { cloudinaryService } from '@services/cloudinary';
+import { cloudinaryService } from '@services/cloudinary.js';
 
-import { CustomEmoji } from './model';
+import { CustomEmoji } from './model.js';
 
 const getMany = async (serverIds: Types.ObjectId[] | string[], populate = false) => {
   const customEmojis = populate

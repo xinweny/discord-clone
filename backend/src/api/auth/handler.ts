@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import { authService } from './service';
+import { authService } from './service.js';
 
 const authenticate = async (
   socket: Socket,

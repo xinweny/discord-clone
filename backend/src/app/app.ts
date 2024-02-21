@@ -6,12 +6,12 @@ import rateLimit from 'express-rate-limit';
 
 import '../types/Request';
 
-import env from '@config/env';
-import '@config/db';
+import env from '@config/env.js';
+import '@config/db.js';
 
-import { errorHandler } from '@middleware/errorHandler';
+import { errorHandler } from '@middleware/errorHandler.js';
 
-import { apiRouter } from '@api/router';
+import { apiRouter } from '@api/router.js';
 
 const app = express();
 

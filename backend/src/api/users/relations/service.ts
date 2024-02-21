@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
 
-import { CustomError } from '@helpers/CustomError';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { User } from '@api/users/model';
+import { User } from '@api/users/model.js';
 
-import { RelationStatus } from './schema';
+import { RelationStatus } from './schema.js';
 
 type SendFriendRequestFields = {
   senderId: Types.ObjectId | string,

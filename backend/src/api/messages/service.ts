@@ -2,16 +2,16 @@ import { Types } from 'mongoose';
 import data from '@emoji-mart/data';
 import { init, getEmojiDataFromNative } from 'emoji-mart';
 
-import { CustomError } from '@helpers/CustomError';
-import { keepKeys } from '@helpers/keepKeys';
+import { CustomError } from '@helpers/CustomError.js';
+import { keepKeys } from '@helpers/keepKeys.js';
 
-import { Message, IMessageEmojiDict } from './model';
-import { MessageChannel, MessageDirect } from './discriminators';
+import { Message, IMessageEmojiDict } from './model.js';
+import { MessageChannel, MessageDirect } from './discriminators.js';
 
-import { Reaction } from '../reactions/model';
-import { DM } from '@api/dms/model';
-import { ServerMember } from '@api/serverMembers/model';
-import { CustomEmoji } from '@api/customEmojis/model';
+import { Reaction } from '../reactions/model.js';
+import { DM } from '@api/dms/model.js';
+import { ServerMember } from '@api/serverMembers/model.js';
+import { CustomEmoji } from '@api/customEmojis/model.js';
 
 import { cloudinaryService } from '@services/cloudinary';
 

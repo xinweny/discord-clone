@@ -1,6 +1,6 @@
 import env from '@config/env';
 
-import { mailTransporter } from '@config/mailer';
+import { mailTransporter } from '@config/mailer.js';
 
 const sendMail = async (to: string, subject: string, htmlTemplate: string) => {
   const mailOptions = {

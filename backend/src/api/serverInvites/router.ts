@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { serverInviteController } from './controller';
+import { serverInviteController } from './controller.js';
 
 const serverInviteRouter = Router({ mergeParams: true });
 

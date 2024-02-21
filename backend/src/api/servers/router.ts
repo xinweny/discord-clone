@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { serverController } from './controller';
+import { serverController } from './controller.js';
 
-import { channelRouter } from './channels/router';
-import { categoryRouter } from './categories/router';
-import { roleRouter } from './roles/router';
-import { serverMemberRouter } from '../serverMembers/router';
-import { serverOwnerRouter } from './serverOwner/router';
+import { channelRouter } from './channels/router.js';
+import { categoryRouter } from './categories/router.js';
+import { roleRouter } from './roles/router.js';
+import { serverMemberRouter } from '../serverMembers/router.js';
+import { serverOwnerRouter } from './serverOwner/router.js';
 
 const serverRouter = Router();
 

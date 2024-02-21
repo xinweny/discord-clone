@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { tryCatch } from '@helpers/tryCatch';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { cloudinaryService } from '@services/cloudinary';
+import { cloudinaryService } from '@services/cloudinary.js';
 
 const signServerAvatarUpload: RequestHandler[] = [
   authenticate,

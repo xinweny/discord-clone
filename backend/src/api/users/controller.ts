@@ -1,14 +1,14 @@
 import { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
-import { handleValidationErrors } from '@helpers/handleValidationErrors';
+import { tryCatch } from '@helpers/tryCatch.js';
+import { handleValidationErrors } from '@helpers/handleValidationErrors.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
-import { validateFields } from '@middleware/validateFields';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
+import { validateFields } from '@middleware/validateFields.js';
 
-import { IUser } from './model';
-import { userService } from './service';
+import { IUser } from './model.js';
+import { userService } from './service.js';
 
 const getUser: RequestHandler[] = [
   authenticate,

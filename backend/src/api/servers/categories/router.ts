@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { categoryController } from './controller';
+import { categoryController } from './controller.js';
 
 const categoryRouter = Router({ mergeParams: true });
 

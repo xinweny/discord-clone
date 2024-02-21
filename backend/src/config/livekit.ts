@@ -1,6 +1,6 @@
 import { RoomServiceClient, WebhookReceiver } from 'livekit-server-sdk';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
 export const livekitClient = new RoomServiceClient(
   env.LK_URL,

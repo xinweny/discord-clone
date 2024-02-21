@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { webRtcController } from './controller';
+import { webRtcController } from './controller.js';
 
 const webRtcRouter = Router();
 

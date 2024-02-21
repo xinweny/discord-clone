@@ -1,16 +1,16 @@
 import { Socket } from 'socket.io';
 
-import env from '@config/env';
+import env from '@config/env.js';
 
-import { statusHandler } from './statuses/handler';
-import { messageHandler } from './messages/handler';
-import { webRtcHandler } from './webrtc/handler';
-import { roomHandler } from './socket/handler';
-import { notificationHandler } from './users/notifications/handler';
-import { dmHandler } from './dms/handler';
-import { reactionHandler } from './reactions/handler';
-import { relationHandler } from './users/relations/handler';
-import { serverMemberHandler } from './serverMembers/handler';
+import { statusHandler } from './statuses/handler.js';
+import { messageHandler } from './messages/handler.js';
+import { webRtcHandler } from './webrtc/handler.js';
+import { roomHandler } from './socket/handler.js';
+import { notificationHandler } from './users/notifications/handler.js';
+import { dmHandler } from './dms/handler.js';
+import { reactionHandler } from './reactions/handler.js';
+import { relationHandler } from './users/relations/handler.js';
+import { serverMemberHandler } from './serverMembers/handler.js';
 
 export const connectionHandler = async (socket: Socket) => {
   socket.join(socket.user._id);

@@ -1,11 +1,11 @@
 import type { RequestHandler } from 'express';
 
-import { tryCatch } from '@helpers/tryCatch';
+import { tryCatch } from '@helpers/tryCatch.js';
 
-import { authenticate } from '@middleware/authenticate';
-import { authorize } from '@middleware/authorize';
+import { authenticate } from '@middleware/authenticate.js';
+import { authorize } from '@middleware/authorize.js';
 
-import { serverMemberService } from '@api/serverMembers/service';
+import { serverMemberService } from '@api/serverMembers/service.js';
 
 const getUserServerMember: RequestHandler[] = [
   authenticate,

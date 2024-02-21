@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import { checkEmptyEnv } from '@utils/checkEmptyEnv';
+import { checkEmptyEnv } from '@utils/checkEmptyEnv.js';
 
 dotenv.config({ path: '.env' });
 

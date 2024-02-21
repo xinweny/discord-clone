@@ -1,10 +1,10 @@
 import { Types } from 'mongoose';
 
-import { keepKeys } from '@helpers/keepKeys';
-import { CustomError } from '@helpers/CustomError';
+import { keepKeys } from '@helpers/keepKeys.js';
+import { CustomError } from '@helpers/CustomError.js';
 
-import { cloudinaryService } from '@services/cloudinary';
-import { authService } from '@api/auth/service';
+import { cloudinaryService } from '@services/cloudinary.js';
+import { authService } from '@api/auth/service.js';
 
 import { User } from './model';
 

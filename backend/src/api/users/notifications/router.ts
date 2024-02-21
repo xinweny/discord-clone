@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { notificationController } from './controller';
+import { notificationController } from './controller.js';
 
 const notificationRouter = Router({ mergeParams: true });
 

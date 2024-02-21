@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { reactionController } from './controller';
+import { reactionController } from './controller.js';
 
 const reactionRouter = Router({ mergeParams: true });
 

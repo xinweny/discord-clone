@@ -1,6 +1,4 @@
 import mongoose, { Schema, Types } from 'mongoose';
-
-import env from '@config/env';
 export interface IReaction extends Document {
   _id: Types.ObjectId;
   name: string;
