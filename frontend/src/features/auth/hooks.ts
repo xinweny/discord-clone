@@ -18,7 +18,7 @@ export const useConnect = () => {
 export const useGetUserData = () => {
   const auth = useRefreshTokenQuery();
 
-  console.log(auth);
+  console.log(process.env.VITE_API_URL, process.env.API_URL);
 
   const user = useGetUserQuery(auth.data?.userId || '', { skip: !auth.data });
 
