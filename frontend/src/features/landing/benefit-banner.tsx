@@ -14,7 +14,7 @@ export function BenefitBanner({ benefit }: BenefitBannerProps) {
   const { src, alt } = img;
 
   return (
-    <div className={className}>
+    <div className={`${styles.banner} ${className || ''}`}>
       <div>
         <img src={src} alt={alt} />
         <div className={styles.description}>

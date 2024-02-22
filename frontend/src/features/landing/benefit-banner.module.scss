@@ -7,6 +7,7 @@
   justify-content: center;
   padding: 120px 40px;
   width: 100%;
+  max-width: calc(100vw - 80px);
 
   > div {
     display: grid;
@@ -55,5 +56,35 @@
   img {
     grid-column: 6 / 12;
     order: 1;
+  }
+}
+
+@media (max-width: 992px) {
+  .banner {
+    padding: 60px 20px;
+    min-width: calc(100vw - 40px);
+    width: 100vw !important;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    &.right {
+      > div {
+        flex-direction: column-reverse;
+      }
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
 }
