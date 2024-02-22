@@ -15,6 +15,8 @@ import { apiRouter } from '@api/router.js';
 
 const app = express();
 
+app.enable('trust proxy');
+
 // MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
