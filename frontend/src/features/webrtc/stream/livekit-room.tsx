@@ -2,8 +2,6 @@ import { LiveKitRoom, useLiveKitRoom } from '@livekit/components-react';
 
 import { useLivekitContext, useRoomEventHandlers } from '../hooks';
 
-import { env } from '@config';
-
 import { CallAudio } from './call-audio';
 
 import connectAudio from '@assets/audio/connect.mp3';
@@ -25,7 +23,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
 
   const { room } = useLiveKitRoom({
     token,
-    serverUrl: env.VITE_LK_URL,
+    serverUrl: process.env.VITE_LK_URL,
     connect: isOnCall,
     audio: !isMuted,
     video: initVideo,
@@ -44,7 +42,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
   return (
     <LiveKitRoom
       room={room}
-      serverUrl={env.VITE_WS_URL}
+      serverUrl={process.env.VITE_WS_URL}
       token={token}
     >
       {children}

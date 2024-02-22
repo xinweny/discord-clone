@@ -5,8 +5,6 @@ import { useIntl } from 'react-intl';
 
 import { useSendMessageMutation } from '../api';
 
-import { env } from '@config';
-
 type MessageGifPickerProps = {
   btnRef: React.RefObject<HTMLButtonElement>;
 };
@@ -38,7 +36,7 @@ export function MessageGifPicker({
 
   return (
     <GifPicker
-      tenorApiKey={env.VITE_TENOR_API_KEY}
+      tenorApiKey={process.env.VITE_TENOR_API_KEY as string}
       onGifClick={handleClick}
       theme={Theme.DARK}
       country={locale}
