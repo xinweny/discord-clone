@@ -1,7 +1,7 @@
 # Discord Clone
 A full-stack web application of [Discord](https://discord.com/), created with MongoDB, Express.js, React, Node.js and Typescript.
 
-Check out the live demo [here](#)! 👈
+Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 
 ## Features
 - Real-time messaging, user updates and messaging notifications using Socket.io
