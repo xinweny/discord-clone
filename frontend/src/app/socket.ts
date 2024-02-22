@@ -1,8 +1,6 @@
 import { io } from 'socket.io-client';
 
-import { env } from '@config';
-
-const BASE_URL = env.VITE_API_URL;
+const BASE_URL = process.env.VITE_API_URL as string;
 
 export const socket = io(BASE_URL, {
   autoConnect: false,
