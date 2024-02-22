@@ -18,7 +18,7 @@ export const useConnect = () => {
 export const useGetUserData = () => {
   const auth = useRefreshTokenQuery();
 
-  const user = useGetUserQuery(auth.data!.userId);
+  const user = useGetUserQuery(auth.data!.userId, { skip: !auth.data });
 
   return { auth, user };
 };
