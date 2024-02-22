@@ -17,6 +17,8 @@ export function AppPage() {
 
   useJoinAllRooms(user.data as any);
 
+  console.log(user);
+
   if (!user.isSuccess) return null;
 
   return (

@@ -17,15 +17,15 @@ import styles from './app.module.scss';
 
 const App = () => (
   <div id="app-root" className={styles.app}>
-    <SvgMasks />
     <IntlProvider locale={navigator.language}>
       <Provider store={store}>
+        <SvgMasks />
         <BrowserRouter>
           <Router />
         </BrowserRouter>
+        <Portals numLayers={5} />
       </Provider>
     </IntlProvider>
-    <Portals numLayers={5} />
   </div>
 );
 
