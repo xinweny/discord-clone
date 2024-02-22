@@ -23,7 +23,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
 
   const { room } = useLiveKitRoom({
     token,
-    serverUrl: process.env.VITE_LK_URL,
+    serverUrl: process.env.LK_URL,
     connect: isOnCall,
     audio: !isMuted,
     video: initVideo,
@@ -42,7 +42,7 @@ export function LivekitRoom({ children }: LivekitRoomProps) {
   return (
     <LiveKitRoom
       room={room}
-      serverUrl={process.env.VITE_WS_URL}
+      serverUrl={process.env.LK_URL}
       token={token}
     >
       {children}

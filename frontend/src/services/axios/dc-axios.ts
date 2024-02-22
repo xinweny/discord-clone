@@ -5,7 +5,7 @@ import { store } from '@app';
 import { authApi } from '@services/api';
 
 const DISCORD_CLONE_API_BASE_CONFIG = {
-  baseURL: `${process.env.VITE_API_URL}/api/v1/`,
+  baseURL: `${process.env.API_URL}/api/v1/`,
   headers: {
     'Content-Type': 'application/json',
   },

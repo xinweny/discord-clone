@@ -36,7 +36,7 @@ export function MessageGifPicker({
 
   return (
     <GifPicker
-      tenorApiKey={process.env.VITE_TENOR_API_KEY as string}
+      tenorApiKey={process.env.TENOR_API_KEY as string}
       onGifClick={handleClick}
       theme={Theme.DARK}
       country={locale}
