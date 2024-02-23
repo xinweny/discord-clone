@@ -75,7 +75,6 @@ const getMany = async (
         const customEmojis = await CustomEmoji.find({
           _id: {
             $in: customEmojiMatches.map(m => {
-              console.log(m.split(':').slice(-1)[0].replace('>', ''));
               return new Types.ObjectId(m.split(':').slice(-1)[0].replace('>', ''));
             }),
           },
