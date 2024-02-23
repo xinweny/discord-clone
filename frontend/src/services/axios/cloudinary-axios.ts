@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const CLOUDINARY_API_BASE_CONFIG = {
-  baseURL: `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}`,
+  baseURL: `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}`,
   headers: {
     'Content-Type': 'mulitpart/form-data',
   },
