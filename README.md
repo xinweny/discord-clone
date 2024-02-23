@@ -1,16 +1,18 @@
 # Discord Clone
-A full-stack web application of [Discord](https://discord.com/), created with MongoDB, Express.js, React, Node.js and Typescript.
+A full-stack clone web application of [Discord](https://discord.com/), created with MongoDB, Express.js, React, Node.js and Typescript.
 
 Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
+
+Note: As this project's server is hosted on Render's free tier, please give it a couple of seconds to spin up!
 
 ## Features
 - Real-time messaging, user updates and messaging notifications using Socket.io
 - 1:1 and 1:N voice, video and screen-share with Livekit WebRTC
 - Get live call updates outside of calls with Livekit webhooks
-- React to messages with emojis or upload custom ones with EmojiMart
-- Add attachments to messages and upload profile pictures with Cloudinary
+- React to messages with emojis and upload custom ones with EmojiMart
+- Add file attachments to messages and upload profile pictures with Cloudinary
 - Send GIFs with Tenor GIF API
-- Rich-text editor to parse (custom) emojis, server invites and links with React Slate
+- Rich-text editor to automatically parse (custom) emojis, server invites and links with React Slate
 - Join servers with communities of like-minded individuals, or create and customize your own
 - Organize server discussions and topics into text and voice/video channels and customizable categories
 - Invite others to join servers with unique server invite links
@@ -19,9 +21,9 @@ Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 - Customize your user and server profiles
 - Friend system with friend requesting, blocking and mutual friends/servers
 - Infinite scroll loading for messages and offset pagination for public servers
-- Data fetching and caching with RTK Query
+- Data fetching and client-side caching with RTK Query
 - Server-side caching using Redis
-- Desktop UI responsiveness and UI with SCSS modules
+- UI responsiveness and design with SCSS modules
 - Mongoose ORM with MongoDB Atlas cloud database
 - Authentication with JWT and bcrypt, including auto-refreshing access tokens and password reset emails
 
