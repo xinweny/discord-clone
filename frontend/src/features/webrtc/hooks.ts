@@ -96,8 +96,6 @@ export const useLivekit = (): LivekitContextData => {
 
       const token = await getLivekitToken({ roomId, serverId }).unwrap();
 
-      console.log(token);
-
       setData({
         token: token,
         roomId,
