@@ -11,8 +11,6 @@ const DISCORD_CLONE_API_BASE_CONFIG = {
   },
 };
 
-console.log(DISCORD_CLONE_API_BASE_CONFIG);
-
 const dcAxios = axios.create(DISCORD_CLONE_API_BASE_CONFIG);
 
 // Attach access token to Authorization header

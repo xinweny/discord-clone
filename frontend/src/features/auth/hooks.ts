@@ -20,7 +20,5 @@ export const useGetUserData = () => {
 
   const user = useGetUserQuery(auth.data?.userId || '', { skip: !auth.data });
 
-  console.log(auth, user);
-
   return { auth, user };
 };
