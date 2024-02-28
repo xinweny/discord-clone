@@ -1,12 +1,12 @@
 # Discord Clone
-A full-stack clone web application of [Discord](https://discord.com/), created with MongoDB, Express.js, React, Node.js and Typescript.
+A full-stack ***clone*** web application of [Discord](https://discord.com/), created with **Express.js**, **Typescript** and **React**.
 
 Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 
 ## Packages and Features
-- **[Socket.io](https://socket.io/)** - *Real-time* messaging, user updates and messaging notifications
-- **[Livekit](https://livekit.io/)** WebRTC - 1:1 and 1:N *voice, video and screen-share* and live call updates with webhooks
-- **[EmojiMart](https://github.com/missive/emoji-mart)** - React to messages with *twemojis* and *custom emojis*
+- **[Socket.io](https://socket.io/)** - Real-time messaging, user updates and messaging notifications
+- **[Livekit](https://livekit.io/)** WebRTC - 1:1 and 1:N voice, video and screen-share and live call updates with webhooks
+- **[EmojiMart](https://github.com/missive/emoji-mart)** - Twemojis and custom emojis
 - **[Cloudinary](https://cloudinary.com/documentation)** - *Upload* message attachments, profile pictures and custom emojis
 - **[Tenor GIF API](https://tenor.com/gifapi/documentation)** - Send *GIF* messages
 - **[Slate React](https://docs.slatejs.org)** - *Rich-text editor* to automatically parse emojis from shortcodes and URL links
@@ -19,10 +19,11 @@ Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 - **[Nodemailer](https://nodemailer.com/)** - Password reset and verification emails
 <p></p>
 
-- **Servers** - Join *servers* with communities of like-minded individuals, or create and customize your own
-- **Channels** - *Text and voice/video channels* and *categories* to organize server topics
-- **Server Invite Links** - Invite others to join servers with unique *server invite links*
-- **Server Roles** - Manage and customize server member permissions
+- **Servers** - Join servers with communities of like-minded individuals, or create and customize your own
+- **Channels** - Text and voice/video channels and categories to organize server topics
+- **Invite Links** - Invite others to join servers with unique links
+- **Roles** - Manage and customize server member permissions
+- **Reactions** - Express your feelings with message reactions
 - **DMs** - Create group chats for up to 10 friends
 - **Profiles** - Individually customizable user and server profiles
 - **Friending/Blocking** - Friend requesting, blocking and mutual friends/servers
