@@ -3,27 +3,30 @@ A full-stack clone web application of [Discord](https://discord.com/), created w
 
 Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 
-## Features
-- Real-time messaging, user updates and messaging notifications using Socket.io
-- 1:1 and 1:N voice, video and screen-share with Livekit WebRTC
-- Get live call updates outside of calls with Livekit webhooks
-- React to messages with emojis and upload custom ones with EmojiMart
-- Add file attachments to messages and upload profile pictures with Cloudinary
-- Send GIFs with Tenor GIF API
-- Rich-text editor to automatically parse (custom) emojis, server invites and links with React Slate
-- Join servers with communities of like-minded individuals, or create and customize your own
-- Organize server discussions and topics into text and voice/video channels and customizable categories
-- Invite others to join servers with unique server invite links
-- Manage server member permissions with custom roles
-- Create group chats for up to 10 friends
-- Customize your user and server profiles
-- Friend system with friend requesting, blocking and mutual friends/servers
-- Infinite scroll loading for messages and offset pagination for public servers
-- Data fetching and client-side caching with RTK Query
-- Server-side caching using Redis
-- UI responsiveness and design with SCSS modules
-- Mongoose ORM with MongoDB Atlas cloud database
-- Authentication with JWT and bcrypt, including auto-refreshing access tokens and password reset emails
+## Packages and Features
+- **[Socket.io](https://socket.io/)** - *Real-time* messaging, user updates and messaging notifications
+- **[Livekit](https://livekit.io/)** WebRTC - 1:1 and 1:N *voice, video and screen-share* and live call updates with webhooks
+- **[EmojiMart](https://github.com/missive/emoji-mart)** - React to messages with *twemojis* and *custom emojis*
+- **[Cloudinary](https://cloudinary.com/documentation)** - *Upload* message attachments, profile pictures and custom emojis
+- **[Tenor GIF API](https://tenor.com/gifapi/documentation)** - Send *GIF* messages
+- **[Slate React](https://docs.slatejs.org)** - *Rich-text editor* to automatically parse emojis from shortcodes and URL links
+- **[RTK Query](https://redux-toolkit.js.org/rtk-query/overview)** - Data fetching, state-management and client-side caching
+- **[Axios](https://axios-http.com/docs/intro)** - Data fetching with request/response interceptors
+- **[Redis](https://redis.io/docs/connect/clients/nodejs/)** - Server-side caching
+- **[SCSS](https://sass-lang.com/documentation/syntax/) modules** - UI/UX, layout and responsiveness
+- **[MongoDB](https://www.mongodb.com/docs/) with [Mongoose](https://mongoosejs.com/)** - Database
+- **[JWT](https://jwt.io/) and [bcrypt](https://github.com/kelektiv/node.bcrypt.js)** - Authentication, including auto-refreshing access tokens
+- **[Nodemailer](https://nodemailer.com/)** - Password reset and verification emails
+<p></p>
+
+- **Servers** - Join *servers* with communities of like-minded individuals, or create and customize your own
+- **Channels** - *Text and voice/video channels* and *categories* to organize server topics
+- **Server Invite Links** - Invite others to join servers with unique *server invite links*
+- **Server Roles** - Manage and customize server member permissions
+- **DMs** - Create group chats for up to 10 friends
+- **Profiles** - Individually customizable user and server profiles
+- **Friending/Blocking** - Friend requesting, blocking and mutual friends/servers
+- **Infinite scroll and offset pagination** - Loading messages and public servers
 
 ## Installation
 ### 1. Clone the repository
@@ -47,6 +50,8 @@ cp .env.example .env
 npm run dev
 
 ```
+***NOTE:*** You will also need a secure tunneling service such as [ngrok](https://ngrok.com/product/secure-tunnels) to allow Livekit to access the webhook endpoint - detailed instructions [here](https://docs.livekit.io/realtime/server/webhooks/).
+
 
 ### 3. Front-end setup
 ```
