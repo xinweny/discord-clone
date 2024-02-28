@@ -3,8 +3,6 @@ A full-stack clone web application of [Discord](https://discord.com/), created w
 
 Check out the live demo [here](https://discord-clone-client.onrender.com/)! 👈
 
-Note: As this project's server is hosted on Render's free tier, please give it a couple of seconds to spin up!
-
 ## Features
 - Real-time messaging, user updates and messaging notifications using Socket.io
 - 1:1 and 1:N voice, video and screen-share with Livekit WebRTC
