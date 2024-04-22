@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import '../types/Request.js';
 
@@ -17,7 +19,7 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-app.use(express.static('public'));
+app.use('/', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '../../public')));
 
 // MIDDLEWARES
 app.use(express.json());
