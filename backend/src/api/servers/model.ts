@@ -49,7 +49,7 @@ serverSchema.pre('save', function (next) {
 serverSchema.method(
   'checkPermissions',
   function (member: IServerMember, permissionKeys: string[] = []) {
-    if (this.ownerId.prototype?.equals(member._id)) return true;
+    if (member._id.equals(this.ownerId as Types.ObjectId)) return true;
 
     const roles = this.roles;
 

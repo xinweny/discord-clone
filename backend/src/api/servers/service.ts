@@ -40,7 +40,7 @@ const getPublic = async (
   ]);
 
   return { servers, count };
-}
+};
 
 const getById = async (id: Types.ObjectId | string) => {
   const server = await Server.findById(id);
