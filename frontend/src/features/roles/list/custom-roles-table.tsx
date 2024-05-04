@@ -2,6 +2,8 @@ import { RoleData } from '../types';
 
 import { ServerRoleRow } from './server-role-row';
 
+import MembersIcon from '@assets/icons/members.svg?react';
+
 import styles from './custom-roles-table.module.scss';
 
 type CustomRolesTableProps = {
@@ -36,10 +38,10 @@ export function CustomRolesTable({ roles, searchQuery }: CustomRolesTableProps) 
             />
           ))
           : (
-            <tr>
+            <tr className={styles.noResult}>
               <td>
-                <img src="#" alt="#" />
-                <p>No roles</p>
+                <MembersIcon />
+                <span>No roles</span>
               </td>
             </tr>
           )}

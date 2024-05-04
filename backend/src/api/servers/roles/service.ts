@@ -45,11 +45,12 @@ const getMany = async (
 const create = async (serverId: Types.ObjectId | string, fields: {
   name: string,
   color: string,
-  permissions: { [key: string]: boolean },
 }) => {
   const server = await Server.findById(serverId);
 
   if (!server) return null;
+
+  console.log(fields);
 
   server.roles.push(fields);
 
