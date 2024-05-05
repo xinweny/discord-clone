@@ -11,7 +11,7 @@ const cloudinaryAxios = axios.create(CLOUDINARY_API_BASE_CONFIG);
 
 cloudinaryAxios.interceptors.request.use(config => {
   config.params = {
-    api_key: process.env.VITE_CLOUDINARY_API_KEY,
+    api_key: import.meta.env.VITE_CLOUDINARY_API_KEY,
     ...config.params,
   };
 

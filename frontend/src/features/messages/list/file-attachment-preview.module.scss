@@ -1,14 +1,14 @@
 @use '@styles/colors';
 
 .card {
-  align-self: start;
+  align-self: stretch;
   padding: 16px;
   background-color: colors.$bg-secondary;
   border: 1px solid colors.$bg-secondary-alt;
   border-radius: 8px;
   display: flex;
   gap: 8px;
-  width: 360px;
+  max-width: 360px;
 
   svg {
     width: auto;

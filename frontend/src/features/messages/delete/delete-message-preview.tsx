@@ -15,6 +15,7 @@ export function DeleteMessagePreview() {
       currentDate={new Date()}
       prev={undefined}
       className={styles.preview}
+      isDm={!message.serverId}
     />
   );
 }
