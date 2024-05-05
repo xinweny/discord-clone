@@ -23,6 +23,7 @@ type SendMessageFormProps = {
   placeholder?: string;
   errorPlaceholder?: string;
   anchorRef?: React.RefObject<HTMLDivElement>;
+  next?: string | null | undefined;
 };
 
 export function SendMessageForm({
@@ -30,6 +31,7 @@ export function SendMessageForm({
   placeholder,
   errorPlaceholder,
   anchorRef,
+  next,
 }: SendMessageFormProps) {
   const { roomId, serverId } = useParams();
 
@@ -70,6 +72,7 @@ export function SendMessageForm({
       serverId,
       body,
       attachments,
+      next,
     }).unwrap();
 
     reset();

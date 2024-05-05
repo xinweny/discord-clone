@@ -105,7 +105,7 @@ const messageApi = api.injectEndpoints({
             }),
           },
         }),
-        onQueryStarted: async ({ serverId, roomId, attachments }, { dispatch, queryFulfilled }) => {
+        onQueryStarted: async ({ serverId, roomId, attachments, next }, { dispatch, queryFulfilled }) => {
           try {
             const { data: message } = await queryFulfilled;
 
@@ -116,7 +116,7 @@ const messageApi = api.injectEndpoints({
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: undefined },
+              { serverId, roomId, next },
               (draftMsgs) => {
                 draftMsgs.items.push(message);
 

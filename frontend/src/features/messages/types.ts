@@ -46,6 +46,7 @@ export type SendMessageFields = {
   roomId: string;
   attachments: File[];
   body: string;
+  next?: string | null | undefined;
 };
 
 export type EditMessageFields = {

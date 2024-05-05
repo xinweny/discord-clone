@@ -44,18 +44,26 @@ const deleteByUrl = async (url: string) => {
   return res;
 };
 
-const deleteByFolder = async (folderPath: string) => {
+const deleteByFolder = async (folderPath: string, withRaw = false) => {
   const path = `discord_clone/${folderPath}`;
   const parentDir = path.split('/').slice(0, -1).join('/');
 
-  const dir = await cloudinary.api
+  const res = await cloudinary.api
     .sub_folders(parentDir)
     .catch(() => null);
 
-  if (!dir) return {};
+  if (!res) return null;
 
-  await cloudinary.api.delete_resources_by_prefix(path);
-  await cloudinary.api.delete_folder(path);
+  const folder = res.folders[0].path as string;
+
+  await Promise.all([
+    cloudinary.api.delete_resources_by_prefix(folder),
+    withRaw
+      ? cloudinary.api.delete_resources_by_prefix(folder, { resource_type: 'raw' })
+      : Promise.resolve(),
+  ]);
+
+  await cloudinary.api.delete_folder(folder);
 
   return path;
 };

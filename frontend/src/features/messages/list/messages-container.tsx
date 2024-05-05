@@ -114,6 +114,7 @@ export function MessagesContainer({
         authorized={authorized}
         errorPlaceholder={errorPlaceholder}
         anchorRef={anchorRef}
+        next={next}
       />
     </div>
   );

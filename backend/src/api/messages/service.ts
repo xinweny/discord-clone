@@ -202,7 +202,7 @@ const remove = async (id: string) => {
   if (attachments.length > 0) await cloudinaryService.deleteByFolder(`${message.type === 'channel'
     ? `servers/${message.serverId}/channels`
     : 'dms'
-  }/${message.roomId}/messages/${message.id}/attachments`);
+  }/${message.roomId}/messages/${message.id}/attachments`, true);
 
   await Promise.all([
     message.deleteOne(),
