@@ -107,13 +107,12 @@ async function seedDb() {
   console.log('Connecting to mongoDB...')
   await mongoose.connect(env.MONGODB_URI, {});
 
-  console.log('Dropping database, CDN and Redis cache...');
+  console.log('Clearing Redis cache...');
 
   await Promise.all([
-    // db.dropDatabase(),
     async () => {
-      await cloudinary.api.delete_resources_by_prefix(CLOUDINARY_BASE_FOLDER);
-      await cloudinary.api.delete_folder(CLOUDINARY_BASE_FOLDER);
+      // await cloudinary.api.delete_resources_by_prefix(CLOUDINARY_BASE_FOLDER);
+      // await cloudinary.api.delete_folder(CLOUDINARY_BASE_FOLDER);
     },
     redisClient.flushDb(),
   ])
