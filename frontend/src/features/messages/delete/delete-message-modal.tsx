@@ -11,12 +11,14 @@ import { useDeleteMessageMutation } from '../api';
 
 type DeleteMessageModalProps = {
   afterClose?: () => void;
+  next?: string | null | undefined;
 } & ModalProps;
 
 export function DeleteMessageModal({
   isOpen,
   onClose,
   afterClose,
+  next,
 }: DeleteMessageModalProps) {
   const message = useMessageContext();
 
@@ -31,6 +33,7 @@ export function DeleteMessageModal({
       serverId,
       roomId,
       messageId,
+      next,
     }).unwrap();
   };
 

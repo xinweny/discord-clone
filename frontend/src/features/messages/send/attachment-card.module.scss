@@ -56,6 +56,11 @@
     align-items: center;
     justify-content: center;
 
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
     path {
       fill: colors.$red;
     }

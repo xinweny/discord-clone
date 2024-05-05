@@ -5,17 +5,19 @@ import { DeleteMessageModal } from './delete-message-modal';
 
 type DeleteMessageButtonProps = {
   afterClose?: () => void;
+  next?: string | null | undefined;
 } & ModalButtonProps;
 
 export function DeleteMessageButton({
   children,
   afterClose,
+  next,
   ...props
 }: DeleteMessageButtonProps) {
   return (
     <ModalButton
       modal={DeleteMessageModal}
-      modalProps={{ afterClose }}
+      modalProps={{ afterClose, next }}
       {...props}
     >
       {children}

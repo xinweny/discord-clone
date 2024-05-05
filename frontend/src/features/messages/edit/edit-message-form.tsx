@@ -23,11 +23,13 @@ import styles from './edit-message-form.module.scss';
 type EditMessageFormProps = {
   message: MessageData;
   closeForm: () => void;
+  next?: string | null | undefined;
 };
 
 export function EditMessageForm({
   message,
   closeForm,
+  next,
 }: EditMessageFormProps) {
   const { _id } = message;
 
@@ -56,6 +58,7 @@ export function EditMessageForm({
       roomId: message.roomId,
       messageId: message._id,
       body: data.body,
+      next,
     }).unwrap();
 
     closeForm();

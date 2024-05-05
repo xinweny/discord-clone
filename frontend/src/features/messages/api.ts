@@ -136,13 +136,13 @@ const messageApi = api.injectEndpoints({
           method: 'put',
           data: { body },
         }),
-        onQueryStarted: async ({ serverId, roomId }, { dispatch, queryFulfilled }) => {
+        onQueryStarted: async ({ serverId, roomId, next }, { dispatch, queryFulfilled }) => {
           try {
             const { data: message } = await queryFulfilled;
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: undefined },
+              { serverId, roomId, next },
               (draftMsgs) => {
                 const index = draftMsgs.items.findIndex(
                   msg => msg._id === message._id
@@ -170,13 +170,13 @@ const messageApi = api.injectEndpoints({
           url: messageBaseUrl({ serverId, roomId, messageId }),
           method: 'delete',
         }),
-        onQueryStarted: async ({ serverId, roomId, messageId }, { dispatch, queryFulfilled }) => {
+        onQueryStarted: async ({ serverId, roomId, messageId, next }, { dispatch, queryFulfilled }) => {
           try {
             await queryFulfilled;
 
             dispatch(messageApi.util.updateQueryData(
               'getMessages',
-              { serverId, roomId, next: undefined },
+              { serverId, roomId, next },
               (draftMsgs) => {
                 draftMsgs.items = draftMsgs.items.filter(
                   msg => msg._id !== messageId

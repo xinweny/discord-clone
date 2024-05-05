@@ -103,6 +103,7 @@ export function MessagesContainer({
                 isDm={!serverId}
                 authorized={authorized}
                 prev={prev}
+                next={next}
               />
             </div>
           );

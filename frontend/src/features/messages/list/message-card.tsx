@@ -31,6 +31,7 @@ type MessageCardProps = {
   authorized?: boolean;
   prev: MessageData | undefined;
   className?: string;
+  next?: string | null | undefined;
 };
 
 export function MessageCard({
@@ -40,6 +41,7 @@ export function MessageCard({
   authorized = true,
   prev,
   className,
+  next,
 }: MessageCardProps) {
   const activeTabState = useActiveIds();
 
@@ -80,6 +82,7 @@ export function MessageCard({
             ? <EditMessageForm
                 message={message}
                 closeForm={() => { activeTabState.set(null) }}
+                next={next}
               />
             : <MessageBody message={message} hidden={isTenorGif && !tenorError} />
           }
@@ -103,6 +106,7 @@ export function MessageCard({
         <DeleteMessageButton
           btnRef={deleteMessageBtnRef}
           afterClose={() => { activeTabState.set(null); }}
+          next={next}
         />
       </div>
     </MessageContext.Provider>

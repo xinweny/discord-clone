@@ -54,12 +54,14 @@ export type EditMessageFields = {
   roomId: string;
   messageId: string;
   body: string;
+  next?: string | null | undefined;
 };
 
 export type DeleteMessageFields = {
   serverId?: string;
   roomId: string;
   messageId: string;
+  next?: string | null | undefined;
 };
 
 export enum MessageEvent {
