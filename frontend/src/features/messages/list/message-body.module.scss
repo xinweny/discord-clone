@@ -19,4 +19,12 @@
       text-decoration: underline;
     }
   }
+
+  div {
+    max-width: 100%;
+
+    span {
+      overflow-wrap: break-word;
+    }
+  }
 }
