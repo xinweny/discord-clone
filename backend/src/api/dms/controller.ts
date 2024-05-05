@@ -27,7 +27,7 @@ const createRoom: RequestHandler[] = [
     async (req, res) => {
       const { participantIds } = req.body;
 
-      const dm = await dmService.create(participantIds);
+      const dm = await dmService.create([req.user!.id, ...participantIds]);
 
       res.json({
         data: dm,
