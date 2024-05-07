@@ -1,6 +1,10 @@
 @use '@styles/mixins';
 
 @font-face {
+  @include mixins.font-face(Antique, antique_olive_std_nord, woff2, 300, normal);
+}
+
+@font-face {
   @include mixins.font-face(Whitney, whitney_light, woff2, 300, normal);
 }
 
