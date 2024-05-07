@@ -13,6 +13,7 @@
   font-size: 20px;
 
   h1 {
+    font-family: 'Antique' !important;
     font-size: 56px;
     font-weight: bold;
   }
@@ -72,12 +73,12 @@
   gap: 24px;
 
   .signupButton {
-    background-color: colors.$not-quite-black;
-    color: colors.$white;
+    background-color: colors.$white;
+    color: colors.$not-quite-black;
   }
 
   .demoButton {
-    background-color: colors.$white;
-    color: colors.$not-quite-black;
+    background-color: colors.$not-quite-black;
+    color: colors.$white;
   }
 }
